@@ -1,0 +1,292 @@
+{
+  "appearance": {
+    "Color type": {
+      "description": "Colour categories (medium granularity)",
+      "type": "categorical",
+      "values": [
+        {
+          "id": 1,
+          "label": "SVHNIR",
+          "description": "Strong vegetation with high NIR"
+        },
+        {
+          "id": 2,
+          "label": "SVLNIR",
+          "description": "Strong vegetation with low NIR"
+        },
+        {
+          "id": 3,
+          "label": "AVHNIR",
+          "description": "Average vegetation with high NIR"
+        },
+        {
+          "id": 4,
+          "label": "AVLNIR",
+          "description": "Average vegetation with low NIR"
+        },
+        {
+          "id": 5,
+          "label": "WV",
+          "description": "Weak vegetation"
+        },
+        {
+          "id": 6,
+          "label": "SHV",
+          "description": "Shadow area with vegetation"
+        },
+        {
+          "id": 7,
+          "label": "SHRBRHNIR",
+          "description": "Shrub Rangeland with High NIR"
+        },
+        {
+          "id": 8,
+          "label": "SHRBRLNIR",
+          "description": "Shrub Rangeland with Low"
+        },
+        {
+          "id": 9,
+          "label": "HRBCR",
+          "description": "Herbaceous Rangeland"
+        },
+        {
+          "id": 10,
+          "label": "WR",
+          "description": "Weak Rangeland"
+        },
+        {
+          "id": 11,
+          "label": "PB",
+          "description": "Pit or bog"
+        },
+        {
+          "id": 12,
+          "label": "GH",
+          "description": "Greenhouse"
+        },
+        {
+          "id": 13,
+          "label": "VBBB",
+          "description": "Very bright barren land or built-up"
+        },
+        {
+          "id": 14,
+          "label": "BBB",
+          "description": "Bright barren land or built-up"
+        },
+        {
+          "id": 15,
+          "label": "SBB",
+          "description": "Strong barren land or built-up"
+        },
+        {
+          "id": 16,
+          "label": "ABB",
+          "description": "Average barren land or built-up"
+        },
+        {
+          "id": 17,
+          "label": "DBB",
+          "description": "Dark barren land or built-up"
+        },
+        {
+          "id": 18,
+          "label": "WBBorSHB",
+          "description": "Weak barren land or Shadow area with Barren Land"
+        },
+        {
+          "id": 19,
+          "label": "NIRPBB",
+          "description": "Near InfraRed-Peaked Barren land and Built-up"
+        },
+        {
+          "id": 20,
+          "label": "BA",
+          "description": "Burned area"
+        },
+        {
+          "id": 21,
+          "label": "DPWASH",
+          "description": "Deep water or shadow"
+        },
+        {
+          "id": 22,
+          "label": "SLWASH",
+          "description": "Shallow water or shadow"
+        },
+        {
+          "id": 23,
+          "label": "TWASH",
+          "description": "Turbid water or shadow"
+        },
+        {
+          "id": 24,
+          "label": "SASLWA",
+          "description": "Salty Shallow Water"
+        },
+        {
+          "id": 27,
+          "label": "TNCLV",
+          "description": "Thin clouds over vegetation"
+        },
+        {
+          "id": 28,
+          "label": "TNCLWA_BB",
+          "description": "Thin clouds on water area or Barren land or Built-up areas"
+        },
+        {
+          "id": 29,
+          "label": "SN",
+          "description": "Snow or water ice"
+        },
+        {
+          "id": 30,
+          "label": "SHSN",
+          "description": "Snow shadow"
+        },
+        {
+          "id": 31,
+          "label": "SH",
+          "description": "Shadow areas"
+        },
+        {
+          "id": 32,
+          "label": "FLAME",
+          "description": "Flame"
+        }
+      ],
+      "file": "colortype.geotiff",
+      "times": [
+        "2019-12-15T10:17:33.408715",
+        "2020-09-05T10:17:43.167942",
+        "2020-12-19T10:17:34.610661"
+      ]
+    },
+    "greenness": {
+      "type": "continuous",
+      "description": "Greenness",
+      "values": {
+        "min": 0,
+        "max": null,
+        "precision": 0.1
+      },
+      "file": "greenness.geotiff",
+      "times": [
+        "2019-12-15T10:17:33.408715",
+        "2020-09-05T10:17:43.167942",
+        "2020-12-19T10:17:34.610661"
+      ]
+    },
+    "brightness": {
+      "type": "continuous",
+      "description": "Overall brightness",
+      "values": {
+        "min": 0,
+        "max": null,
+        "precision": 1
+      },
+      "file": "brightness.geotiff",
+      "times": [
+        "2019-12-15T10:17:33.408715",
+        "2020-09-05T10:17:43.167942",
+        "2020-12-19T10:17:34.610661"
+      ]
+    }
+  },
+  "atmosphere": {
+    "Color type": {
+      "description": "Colour categories (medium granularity)",
+      "type": "categorical",
+      "values": [
+        {"id": 25, "label":"CL", "description": "Cloud"},
+        {"id": 26, "label": "SMKPLM", "description": "Smoke Plume"}
+      ],
+      "file": "colortype.geotiff",
+      "times": [
+        "2019-12-15T10:17:33.408715",
+        "2020-09-05T10:17:43.167942",
+        "2020-12-19T10:17:34.610661"
+      ]
+    }
+  },
+  "artifacts": {
+    "Color type": {
+      "description": "Colour categories (medium granularity)",
+      "type": "categorical",
+      "values": [
+        {"id": 33, "label":"UN", "description": "Unknown classification"}
+      ],
+      "file": "colortype.geotiff",
+      "times": [
+        "2019-12-15T10:17:33.408715",
+        "2020-09-05T10:17:43.167942",
+        "2020-12-19T10:17:34.610661"
+      ]
+    }
+  },
+  "reflectance": {
+    "s2_band04": {
+      "description": "Reflectance of Band 4 of Sentinel 2A or Sentinel 2B",
+      "type": "continuous",
+      "values": {
+        "min": 0,
+        "max": 10000,
+        "precision": 1
+      },
+      "role": "red",
+      "file": "red.geotiff",
+      "times": [
+        "2019-12-15T10:17:33.408715",
+        "2020-09-05T10:17:43.167942",
+        "2020-12-19T10:17:34.610661"
+      ]
+    },
+    "s2_band03": {
+      "description": "Reflectance of Band 3 of Sentinel 2A or Sentinel 2B",
+      "type": "continuous",
+      "values": {
+        "min": 0,
+        "max": 10000,
+        "precision": 1
+      },
+      "role": "green",
+      "file": "green.geotiff",
+      "times": [
+        "2019-12-15T10:17:33.408715",
+        "2020-09-05T10:17:43.167942",
+        "2020-12-19T10:17:34.610661"
+      ]
+    },
+    "s2_band02": {
+      "description": "Reflectance of Band 2 of Sentinel 2A or Sentinel 2B",
+      "type": "continuous",
+      "values": {
+        "min": 0,
+        "max": 10000,
+        "precision": 1
+      },
+      "role": "blue",
+      "file": "blue.geotiff",
+      "times": [
+        "2019-12-15T10:17:33.408715",
+        "2020-09-05T10:17:43.167942",
+        "2020-12-19T10:17:34.610661"
+      ]
+    },
+    "s2_band08": {
+      "description": "Reflectance of Band 8 of Sentinel 2A or Sentinel 2B",
+      "type": "continuous",
+      "values": {
+        "min": 0,
+        "max": 10000,
+        "precision": 1
+      },
+      "file": "nir.geotiff",
+      "times": [
+        "2019-12-15T10:17:33.408715",
+        "2020-09-05T10:17:43.167942",
+        "2020-12-19T10:17:34.610661"
+      ]
+    }
+  }
+}

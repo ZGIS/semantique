@@ -1,0 +1,21 @@
+name: semantique
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.7
+  - datacube
+  - geocube
+  - geopandas
+  - numpy
+  - pandas
+  - pyproj
+  - pytz
+  - rasterio
+  - rioxarray
+  - scipy
+  - xarray
+  - pip
+  - pip:
+    - hvplot
+    - .

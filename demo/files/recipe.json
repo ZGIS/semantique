@@ -1,0 +1,137 @@
+{
+  "water_count_map": {
+    "type": "processing_chain",
+    "with": {
+      "type": "concept",
+      "reference": [
+        "entity",
+        "water"
+      ]
+    },
+    "do": [
+      {
+        "type": "verb",
+        "name": "reduce",
+        "params": {
+          "dimension": "time",
+          "reducer": "count"
+        }
+      }
+    ]
+  },
+  "vegetation_count_map": {
+    "type": "processing_chain",
+    "with": {
+      "type": "concept",
+      "reference": [
+        "entity",
+        "vegetation"
+      ]
+    },
+    "do": [
+      {
+        "type": "verb",
+        "name": "reduce",
+        "params": {
+          "dimension": "time",
+          "reducer": "count"
+        }
+      }
+    ]
+  },
+  "water_percentage_time_series": {
+    "type": "processing_chain",
+    "with": {
+      "type": "concept",
+      "reference": [
+        "entity",
+        "water"
+      ]
+    },
+    "do": [
+      {
+        "type": "verb",
+        "name": "reduce",
+        "params": {
+          "dimension": "space",
+          "reducer": "percentage"
+        }
+      }
+    ]
+  },
+  "avg_water_count": {
+    "type": "processing_chain",
+    "with": {
+      "type": "concept",
+      "reference": [
+        "entity",
+        "water"
+      ]
+    },
+    "do": [
+      {
+        "type": "verb",
+        "name": "reduce",
+        "params": {
+          "dimension": "time",
+          "reducer": "count"
+        }
+      },
+      {
+        "type": "verb",
+        "name": "reduce",
+        "params": {
+          "dimension": "space",
+          "reducer": "mean"
+        }
+      }
+    ]
+  },
+  "summed_count": {
+    "type": "processing_chain",
+    "with": {
+      "type": "concept",
+      "reference": [
+        "entity",
+        "water"
+      ]
+    },
+    "do": [
+      {
+        "type": "verb",
+        "name": "reduce",
+        "params": {
+          "dimension": "time",
+          "reducer": "count"
+        }
+      },
+      {
+        "type": "verb",
+        "name": "evaluate",
+        "params": {
+          "operator": "add",
+          "y": {
+            "type": "processing_chain",
+            "with": {
+              "type": "concept",
+              "reference": [
+                "entity",
+                "vegetation"
+              ]
+            },
+            "do": [
+              {
+                "type": "verb",
+                "name": "reduce",
+                "params": {
+                  "dimension": "time",
+                  "reducer": "count"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

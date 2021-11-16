@@ -1,0 +1,135 @@
+{
+  "entity": {
+    "water": {
+      "color": {
+        "type": "processing_chain",
+        "with": {
+          "type": "resource",
+          "reference": [
+            "appearance",
+            "Color type"
+          ]
+        },
+        "do": [
+          {
+            "type": "verb",
+            "name": "evaluate",
+            "params": {
+              "operator": "in",
+              "y": [
+                21,
+                22,
+                23,
+                24
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "vegetation": {
+      "color": {
+        "type": "processing_chain",
+        "with": {
+          "type": "resource",
+          "reference": [
+            "appearance",
+            "Color type"
+          ]
+        },
+        "do": [
+          {
+            "type": "verb",
+            "name": "evaluate",
+            "params": {
+              "operator": "in",
+              "y": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "builtup": {
+      "color": {
+        "type": "processing_chain",
+        "with": {
+          "type": "resource",
+          "reference": [
+            "appearance",
+            "Color type"
+          ]
+        },
+        "do": [
+          {
+            "type": "verb",
+            "name": "evaluate",
+            "params": {
+              "operator": "in",
+              "y": [
+                13,
+                14,
+                15,
+                16,
+                17
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "cloud": {
+      "color": {
+        "type": "processing_chain",
+        "with": {
+          "type": "resource",
+          "reference": [
+            "atmosphere",
+            "Color type"
+          ]
+        },
+        "do": [
+          {
+            "type": "verb",
+            "name": "evaluate",
+            "params": {
+              "operator": "equal",
+              "y": 25
+            }
+          }
+        ]
+      }
+    },
+    "snow": {
+      "color": {
+        "type": "processing_chain",
+        "with": {
+          "type": "resource",
+          "reference": [
+            "appearance",
+            "Color type"
+          ]
+        },
+        "do": [
+          {
+            "type": "verb",
+            "name": "evaluate",
+            "params": {
+              "operator": "in",
+              "y": [
+                29,
+                30
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
