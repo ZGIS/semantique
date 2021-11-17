@@ -33,6 +33,8 @@ There are several notebooks available that present the functionalities of the pa
 - [Advanced usage](demo/advanced.ipynb): Insights in the internal query processing workflow and guidelines for advanced users
 - [Gallery](demo/gallery.ipynb): Some examples of queries and their responses
 
+To explore the package in an interactive way you can make use of [Binder](https://mybinder.org/). Simply click on the *launch binder* badge at the top of this README. Doing so will setup an online environment for you with the package and all its dependencies installed. No installations or complicated system configurations required, you only need a web browser! Inside the environment you will also have access to a tiny demo data cube containing a few resources of data meant for testing purposes. Once the environemnt is build (it make take a few minutes), you will see a Jupyter Notebook which you can use as a starting point for the exploration. You can also create your own notebooks, or adapt the existing documentation notebooks mentioned above. Happy coding!
+
 ## Acknowledgements
 
 This is developed with support by the Austrian Research Promotion Agency (FFG) under the Austrian Space Application Programme (ASAP) within the project [Sen2Cube.at](http://sen2cube.at) (project no.: 866016).
