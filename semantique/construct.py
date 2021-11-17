@@ -50,7 +50,39 @@ class CubeProxy(dict):
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
+  def filter_time(self, component = None, operator, y, **kwargs):
+    eval_obj = CubeProxy({"type": "self"})
+    filterer = eval_obj.extract("time", component).evaluate(operator, y)
+    kwargs.update({"filterer": filterer})
+    return self._append_verb("filter", **kwargs)
+
+  def filter_space(self, component = None, operator, y, **kwargs):
+    eval_obj = CubeProxy({"type": "self"})
+    filterer = eval_obj.extract("space", component).evaluate(operator, y)
+    kwargs.update({"filterer": filterer})
+    return self._append_verb("filter", **kwargs)
+
   def groupby(self, grouper, **kwargs):
+    kwargs.update({"grouper": grouper})
+    return self._append_verb("groupby", collector = True, **kwargs)
+
+  def groupby_time(self, component = None, **kwargs):
+    eval_obj = CubeProxy({"type": "self"})
+    if isinstance(component, list):
+      comps = [eval_obj.extract("time", x) for x in component]
+      grouper = CubeCollectionProxy({"type": "collection", "elements": comps})
+    else:
+      grouper = eval_obj.extract("time", component)
+    kwargs.update({"grouper": grouper})
+    return self._append_verb("groupby", collector = True, **kwargs)
+
+  def groupby_space(self, component = None, **kwargs):
+    eval_obj = CubeProxy({"type": "self"})
+    if isinstance(component, list):
+      comps = [eval_obj.extract("space", x) for x in component]
+      grouper = CubeCollectionProxy({"type": "collection", "elements": comps})
+    else:
+      grouper = eval_obj.extract("space", component)
     kwargs.update({"grouper": grouper})
     return self._append_verb("groupby", collector = True, **kwargs)
 
@@ -106,6 +138,18 @@ class CubeCollectionProxy(dict):
     return self._append_verb("extract", **kwargs)
 
   def filter(self, filterer, **kwargs):
+    kwargs.update({"filterer": filterer})
+    return self._append_verb("filter", **kwargs)
+
+  def filter_time(self, component = None, operator, y, **kwargs):
+    eval_obj = CubeProxy({"type": "self"})
+    filterer = eval_obj.extract("time", component).evaluate(operator, y)
+    kwargs.update({"filterer": filterer})
+    return self._append_verb("filter", **kwargs)
+
+  def filter_space(self, component = None, operator, y, **kwargs):
+    eval_obj = CubeProxy({"type": "self"})
+    filterer = eval_obj.extract("space", component).evaluate(operator, y)
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
