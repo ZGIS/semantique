@@ -153,10 +153,6 @@ class CubeCollectionProxy(dict):
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
-  def groupby(self, grouper, **kwargs):
-    kwargs.update({"grouper": grouper})
-    return self._append_verb("groupby", **kwargs)
-
   def label(self, label, **kwargs):
     kwargs.update({"label": label})
     return self._append_verb("label", **kwargs)
