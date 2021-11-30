@@ -3,9 +3,6 @@ contact_links:
   - name: Q&A
     url: https://github.com/ZGIS/semantique/discussions/new?category=Q-A
     about: Ask a question to the community about the package and its functionalities
-  - name: Idea
+  - name: Discussion
     url: https://github.com/ZGIS/semantique/discussions/new?category=ideas
-    about: Share a broader idea to improve the package, rather than a specific feature request
-  - name: Debate
-    url: https://github.com/ZGIS/semantique/discussions/new?category=debate
-    about: Start a debate about existing functionalities, structures or naming conventions
+    about: Share and discuss a broader idea to improve the package, rather than a specific feature request
