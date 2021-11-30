@@ -38,17 +38,20 @@ class Factbase(dict):
 
 class Opendatacube(Factbase):
 
-  group_by_solar_day = True
-
-  resamplers = {
-    "categorical": "mode",
-    "continuous": "med"
-  }
-
-  def __init__(self, layout = None, connection = None, tz = "UTC"):
+  def __init__(self, layout = None, connection = None, tz = "UTC", **config):
     super(Opendatacube, self).__init__(layout)
     self.connection = connection
     self.tz = tz
+    # Update default configuration parameters with provided ones.
+    params = {
+      "group_by_solar_day": True,
+      "resamplers": {
+        "categorical": "mode",
+        "continuous": "med"
+      }
+    }
+    params.update(config)
+    self.config = params
 
   @property
   def connection(self):
@@ -66,6 +69,20 @@ class Opendatacube(Factbase):
   @tz.setter
   def tz(self, value):
     self._tz = pytz.timezone(value)
+
+  @property
+  def config(self):
+    return self._config
+
+  @config.setter
+  def config(self, value):
+    assert isinstance(value, dict)
+    for param in ["group_by_solar_day", "resamplers"]:
+      if param not in value:
+        raise ValueError(
+          f"Configuration parameter '{param}' should be present"
+        )
+    self._config = param
 
   def retrieve(self, *reference, extent):
     # Get metadata.
@@ -87,8 +104,8 @@ class Opendatacube(Factbase):
       product = metadata["product"],
       measurements = [metadata["name"]],
       like = shape,
-      resampling = self.resamplers[metadata["type"]],
-      group_by = "solar_day" if self.group_by_solar_day else None
+      resampling = self.config["resamplers"][metadata["type"]],
+      group_by = "solar_day" if self.config["group_by_solar_day"] else None
     )
     # Convert to xarray dataarray.
     try:
