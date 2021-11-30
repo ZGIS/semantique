@@ -1,4 +1,5 @@
 import datacube
+import pytz
 
 from datacube.utils import masking
 from abc import abstractmethod
@@ -44,9 +45,10 @@ class Opendatacube(Factbase):
     "continuous": "med"
   }
 
-  def __init__(self, layout = None, connection = None):
+  def __init__(self, layout = None, connection = None, tz = "UTC"):
     super(Opendatacube, self).__init__(layout)
     self.connection = connection
+    self.tz = tz
 
   @property
   def connection(self):
@@ -57,19 +59,29 @@ class Opendatacube(Factbase):
     assert isinstance(value, datacube.Datacube)
     self._connection = value
 
+  @property
+  def tz(self):
+    return self._tz
+
+  @tz.setter
+  def tz(self, value):
+    self._tz = pytz.timezone(value)
+
   def retrieve(self, *reference, extent):
     # Get metadata.
     metadata = self.lookup(*reference)
     # Create a template array that tells ODC the shape of the requested data.
     # This is the given extent modified to be correctly understood by ODC:
-    # --> Time dimension values should be in UTC time zone.
+    # --> Time dimension values should be in the data cubes native time zone.
     # --> Spatial dimensions should be unstacked.
     # --> Class should be `xarray.Dataset` instead of `xarray.DataArray`.
+    # Note that the CRS does not have to be in the data cubes native CRS.
+    # ODC takes care of spatial transformations internally.
     if extent.sq.spatial_dimension is None:
       raise exceptions.MissingDimensionError(
         "Cannot retrieve data in an extent without a spatial dimension"
       )
-    shape = extent.sq.tz_convert("UTC").sq.unstack_spatial_dims().to_dataset()
+    shape = extent.sq.tz_convert(self.tz).sq.unstack_spatial_dims().to_dataset()
     # Load the requested data as xarray dataset.
     data_ds = self._connection.load(
       product = metadata["product"],
@@ -88,7 +100,7 @@ class Opendatacube(Factbase):
         f"spatio-temporal extent"
       )
     # Convert time values back into the original time zone.
-    data = data.sq.write_tz("UTC")
+    data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
     # Stack spatial dimensions back together into a single 'space' dimension.
     data = data.sq.stack_spatial_dims()
