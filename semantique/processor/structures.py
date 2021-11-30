@@ -358,11 +358,11 @@ class Cube():
       dims = [x.dims for x in grouper]
     except AttributeError:
       raise TypeError(
-        "Groupers must be one-dimensional arrays"
+        "Groupers must be arrays"
       )
     if not all([len(x) == 1 for x in dims]):
-      raise TypeError(
-        "Groupers must be one-dimensional arrays"
+      raise exceptions.TooManyDimensionsError(
+        "Groupers must be one-dimensional"
       )
     if not all([x == dims[0] for x in dims]):
       raise exceptions.UnmatchingDimensionsError(
