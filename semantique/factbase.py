@@ -83,7 +83,7 @@ class Opendatacube(Factbase):
         raise ValueError(
           f"Configuration parameter '{param}' should be present"
         )
-    self._config = param
+    self._config = value
 
   def retrieve(self, *reference, extent):
     # Get metadata.
