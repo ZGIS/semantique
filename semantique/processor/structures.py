@@ -128,7 +128,7 @@ class Cube():
     try:
       coords = self._obj[dimension]
     except KeyError:
-      raise exceptions.InvalidReferenceError(
+      raise exceptions.MissingDimensionError(
         f"Dimension '{dimension}' is not defined"
       )
     if component is None:
