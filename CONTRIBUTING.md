@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for taking the time to contribute to `semantique`! Contributions are welcome and greatly appreciated. The following is a set of guidelines for contributing. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+Thanks for taking the time to contribute to semantique! Contributions are welcome and greatly appreciated. The following is a set of guidelines for contributing. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 This project and everyone participating in it is governed by a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to the package maintainers.
 
@@ -29,18 +29,26 @@ In any case, the common code contributing workflow is:
 
 #### 1. Cloning the GitHub repo
 
-Clone this GitHub repo, or alternatively first fork it and then clone your forked version of the repo.
+Clone this GitHub repo, or alternatively first fork it and then clone your forked version of the repo. After cloning, enter the cloned directory.
 
 ```
 git clone git@github.com:ZGIS/semantique.git
+cd semantique
 ```
 
-#### 2. Creating a new local branch
+#### 2. Creating a local development environment
 
-Always create a new branch to work in, instead of working in the main branch (if you have forked the repo first this is less important).
+Always create a new git branch to work in, instead of working in the main branch (if you have forked the repo first this is less important).
 
 ```
 git checkout -b my_new_branch
+```
+
+If you work with conda, it can be helpful to create a new conda environment containing all the dependencies of semantique, without disturbing your base environment. To do so, you can make use the [environment.yml](environment.yml) file contained in this repo.
+
+```
+conda env create -f environment.yml
+conda activate semantique
 ```
 
 #### 3. Writing code
