@@ -7,20 +7,29 @@
 
 ## Installation
 
-At this moment the package can only be installed from source. This can be done in two ways:
+At this moment the package can only be installed from source. This can be done in several ways:
 
-1) Using pip to install directly from GitHub
+1) Using pip to install directly from GitHub:
 
 ```
 pip install git+https://github.com/ZGIS/semantique.git
 ```
 
-2) Cloning the repository first and then install with pip
+2) Cloning the repository first and then install with pip:
 
 ```
 git clone https://github.com/ZGIS/semantique.git
 cd semantique
 pip install .
+```
+
+3) If you prefer to use conda, you can create a `semantique` conda environment with the package itself and all dependencies installed, using the provided [environment.yml](environment.yml) file:
+
+```
+git clone https://github.com/ZGIS/semantique.git
+cd semantique
+conda env create -f environment.yml
+conda activate semantique
 ```
 
 ## Usage
