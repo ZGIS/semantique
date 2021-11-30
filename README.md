@@ -37,13 +37,13 @@ To explore the package in an interactive way you can make use of [Binder](https:
 
 ## Acknowledgements
 
-This is developed with support by the Austrian Research Promotion Agency (FFG) under the Austrian Space Application Programme (ASAP) within the project [Sen2Cube.at](http://sen2cube.at) (project no.: 866016).
+This is developed with support by the Austrian Research Promotion Agency (FFG) under the Austrian Space Application Programme (ASAP) within the projects [Sen2Cube.at](https://projekte.ffg.at/projekt/2975644) and [SemantiX](https://projekte.ffg.at/projekt/3769928).
 
 ## Legal info
 
 Copyright 2021 Department of Geoinformatics – Z_GIS
 
-Licensed under the Apache License, Version 2.0 (the "License"). You may not use any file in the source code of the package except in compliance with the License. You may obtain a copy of the License at:
+Licensed under the Apache License, Version 2.0 (the "License"). You may not use any file in the source code of this package except in compliance with the License. You may obtain a copy of the License at:
 
 [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
