@@ -59,7 +59,8 @@ class Opendatacube(Factbase):
 
   @connection.setter
   def connection(self, value):
-    assert isinstance(value, datacube.Datacube)
+    if value is not None:
+      assert isinstance(value, datacube.Datacube)
     self._connection = value
 
   @property
