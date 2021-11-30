@@ -101,7 +101,7 @@ class Opendatacube(Factbase):
       )
     shape = extent.sq.tz_convert(self.tz).sq.unstack_spatial_dims().to_dataset()
     # Load the requested data as xarray dataset.
-    data_ds = self._connection.load(
+    data_ds = self.connection.load(
       product = metadata["product"],
       measurements = [metadata["name"]],
       like = shape,

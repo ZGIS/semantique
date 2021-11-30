@@ -35,7 +35,7 @@ class Demo(Factbase):
     # Get metadata.
     metadata = self.lookup(*reference)
     # Load the requested data as xarray data array.
-    data = rioxarray.open_rasterio("zip://" + self._src + "!" + metadata["file"])
+    data = rioxarray.open_rasterio("zip://" + self.src + "!" + metadata["file"])
     # Subset temporally.
     bounds = extent.sq.tz_convert(self.tz)[extent.sq.temporal_dimension].values
     times = [np.datetime64(x) for x in metadata["times"]]
