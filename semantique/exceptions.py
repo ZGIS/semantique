@@ -36,3 +36,6 @@ class MissingDimensionError(Exception):
 
 class UnmatchingDimensionsError(Exception):
   pass
+
+class UndefinedDimensionComponentError(Exception):
+  pass
