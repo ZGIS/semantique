@@ -43,11 +43,11 @@ Always create a new branch to work in, instead of working in the main branch (if
 git checkout -b my_new_branch
 ```
 
-#### 3. Write code
+#### 3. Writing code
 
 When writing code we try to follow the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html). However, we indent code blocks with **2 spaces** instead of 4 spaces. Don't forget to actually test your code before commiting.
 
-#### 4. Commit code to your local branch
+#### 4. Commiting code to your local branch
 
 When commiting changes with `git commit` we try to use structured commit messages, adapted from https://www.conventionalcommits.org/. The first line of commit message should have the following format: 
 
@@ -78,7 +78,7 @@ git commit -m 'feat: Add bar parameter to foo(), Refs #10 :gift:'
 git commit -m 'fix: Include type checking in foo(), Fix #12 :wrench:'
 ```
 
-#### 5. Push your branch to the GitHub repo
+#### 5. Pushing your branch to the GitHub repo
 
 Please **never push directly to the main branch**!
 
@@ -86,7 +86,7 @@ Please **never push directly to the main branch**!
 git push origin my_new_branch
 ```
 
-#### 6. Create a pull request
+#### 6. Creating a pull request
 
 Create a request to merge your changes into the main branch using the [Pull Request](https://github.com/ZGIS/semantique/pulls) functionality from GitHub. This should automatically provide you with the [pull request template](https://github.com/ZGIS/semantique/blob/main/.github/pull_request_template.md). Add at least one of the package maintainer as reviewer of your pull request, and make sure the automatic checks done by GitHub pass without errors.
 
