@@ -212,7 +212,7 @@ class QueryProcessor():
     try:
       idx = self._get_eval_obj().sq.categories[label]
     except (KeyError, TypeError):
-      raise exceptions.InvalidReferenceError(
+      raise exceptions.UndefinedCategoryLabelError(
         f"Category label '{label}' is not defined"
       )
     return idx

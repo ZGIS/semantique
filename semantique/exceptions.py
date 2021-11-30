@@ -39,3 +39,6 @@ class UnmatchingDimensionsError(Exception):
 
 class UndefinedDimensionComponentError(Exception):
   pass
+
+class UndefinedCategoryLabelError(Exception):
+  pass
