@@ -52,7 +52,7 @@ Contributions of any kind are very welcome! Please see the [contributing guideli
 
 This is developed with support by the Austrian Research Promotion Agency (FFG) under the Austrian Space Application Programme (ASAP) within the projects [Sen2Cube.at](https://projekte.ffg.at/projekt/2975644) and [SemantiX](https://projekte.ffg.at/projekt/3769928).
 
-## Legal info
+## Copyright
 
 Copyright 2021 Department of Geoinformatics – Z_GIS
 
