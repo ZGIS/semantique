@@ -135,6 +135,8 @@ class QueryProcessor():
 
   def execute(self):
     for x in self._recipe:
+      if x in self._response:
+        continue
       result = self.call_handler(self._recipe[x])
       result.name = x
       self._response[x] = result
@@ -190,7 +192,19 @@ class QueryProcessor():
     )
 
   def handle_result(self, block):
-    return self._response[block["name"]]
+    name = block["name"]
+    if name not in self._response:
+      try:
+        instructions = self._recipe[name]
+      except KeyError:
+        raise exceptions.InvalidReferenceError(
+          f"Recipe does not contain result '{name}'"
+        )
+      result = self.call_handler(instructions)
+      result.name = name
+      self._response[name] = result
+      return result
+    return self._response[name]
 
   def handle_self(self, block):
     return self._get_eval_obj()
