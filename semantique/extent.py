@@ -12,6 +12,20 @@ from pyproj.crs import CRS
 from semantique import exceptions
 
 class SpatialExtent(dict):
+  """Dictionary-like representation of a spatial extent.
+
+  Parameters
+  ----------
+    obj
+      One or more spatial features that together form the boundaries of the
+      spatial extent. Should be given as an object that can be read by the
+      initializer of :obj:`geopandas.GeoDataFrame`. This includes
+      :obj:`geopandas.GeoDataFrame` objects themselves.
+    **kwargs
+      Additional keyword arguments forwarded to the initializer of
+      :obj:`geopandas.GeoDataFrame`.
+
+  """
 
   def __init__(self, obj, **kwargs):
     geodf = gpd.GeoDataFrame(obj, **kwargs)
@@ -30,10 +44,23 @@ class SpatialExtent(dict):
 
   @property
   def crs(self):
+    """:obj:`pyproj.CRS`: Coordinate reference system in which the spatial
+    coordinates are expressed."""
     return self._crs
 
   @classmethod
   def from_geojson(cls, obj, **kwargs):
+    """Alternative initialization from any GeoJSON dictionary.
+
+    Parameters
+    ----------
+      obj : :obj:`dict`
+        Dictionary formatted according to GeoJSON standards.
+      **kwargs
+        Additional keyword arguments forwarded to
+        :obj:`geopandas.GeoDataFrame.from_features`.
+
+    """
     t = obj["type"]
     if t == "FeatureCollection":
       return cls.from_featurecollection(obj, **kwargs)
@@ -49,13 +76,25 @@ class SpatialExtent(dict):
       "GeometryCollection",
     ]
     if not t in geom_types:
-      raise exception.UnknownGeometryTypeError(
+      raise exceptions.UnknownGeometryTypeError(
         f"Geometry type '{t}' is not supported"
       )
     return cls.from_geometry(obj, **kwargs)
 
   @classmethod
   def from_featurecollection(cls, obj, **kwargs):
+    """Alternative initialization from a GeoJSON FeatureCollection object.
+
+    Parameters
+    ----------
+      obj : :obj:`dict`
+        Dictionary formatted according to GeoJSON standards for
+        FeatureCollection objects.
+      **kwargs
+        Additional keyword arguments forwarded to
+        :obj:`geopandas.GeoDataFrame.from_features`.
+
+    """
     geojs = copy.deepcopy(obj)
     def _assure_properties_key(x):
       if "properties" not in x:
@@ -67,6 +106,18 @@ class SpatialExtent(dict):
 
   @classmethod
   def from_feature(cls, obj, **kwargs):
+    """Alternative initialization from a GeoJSON Feature object.
+
+    Parameters
+    ----------
+      obj : :obj:`dict`
+        Dictionary formatted according to GeoJSON standards for Feature
+        objects.
+      **kwargs
+        Additional keyword arguments forwarded to
+        :obj:`geopandas.GeoDataFrame.from_features`.
+
+    """
     geojs = copy.deepcopy(obj)
     if "properties" not in geojs:
       geojs["properties"] = {}
@@ -75,11 +126,55 @@ class SpatialExtent(dict):
 
   @classmethod
   def from_geometry(cls, obj, **kwargs):
+    """Alternative initialization from a GeoJSON Geometry object.
+
+    Parameters
+    ----------
+      obj : :obj:`dict`
+        Dictionary formatted according to GeoJSON standards for Geometry
+        objects.
+      **kwargs
+        Additional keyword arguments forwarded to
+        :obj:`geopandas.GeoDataFrame.from_features`.
+
+    """
     geojs = {"type": "Feature", "geometry": obj, "properties": {}}
     geodf = gpd.GeoDataFrame.from_features([geojs], **kwargs)
     return cls(geodf)
 
   def rasterize(self, crs, resolution):
+    """Rasterize the spatial extent into an array.
+
+    Rasterizing the spatial extent creates a rectangular two-dimensional
+    regular grid that covers the bounding box of the extent. Each grid cell
+    corresponds to a spatial location within this bounding box. Cells whose
+    centroid does not intersect with the extent itself gets assigned a value
+    of 0. All other cells get assigned a positive integer, depending on which
+    of the features in the extent their centroid intersects with, i.e. a 1 if
+    it intersects with the first feature in the extent, a 2 if it intersects
+    with the second feature in the extent, et cetera.
+
+    Parameters
+    ----------
+      crs
+        Coordinate reference system in which the grid should be created. Can be
+        given as any object understood by the initializer of :obj:`pyproj.CRS`.
+        This includes :obj:`pyproj.CRS` objects themselves, as well as EPSG
+        codes and WKT strings.
+      resolution : :obj:`list`
+        Spatial resolution of the grid. Should be given as a list in the format
+        `[y, x]`, where y is the cell size along the y-axis, x is the cell size
+        along the x-axis, and both are given as :obj:`int` or :obj:`float`
+        value expressed in the units of the CRS. These values should include
+        the direction of the axes. For most CRSs, the y-axis has a negative
+        direction, and hence the cell size along the y-axis is given as a
+        negative number.
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+
+    """
     vector_obj = self._geodf.reset_index()
     vector_obj["index"] = vector_obj["index"] + 1
     raster_obj = geocube.api.core.make_geocube(
@@ -98,6 +193,28 @@ class SpatialExtent(dict):
     return raster_obj
 
 class TemporalExtent(dict):
+  """Dictionary-like representation of a temporal extent.
+
+  Parameters
+  ----------
+    *bounds
+      Boundaries of the temporal extent. Should be given as objects that can be
+      read by the initializer of :obj:`pandas.Timestamp`. This includes
+      :obj:`pandas.Timestamp` objects themselves, as well as text
+      representations of time instants in different formats. If the temporal
+      extent is a single time instant, a single boundary may be given. If the
+      temporal extent is a time interval, the boundaries should be provided
+      as `(start, end)`. This interval is assumed to be closed at both sides.
+    **kwargs
+      Additional keyword arguments forwarded to the initializer of
+      :obj:`pandas.Timestamp`.
+
+  Raises
+  -------
+    MixedTimeZonesError
+      If the given boundaries have differing timezone information attached.
+
+  """
 
   def __init__(self, *bounds, **kwargs):
     start = pd.Timestamp(bounds[0], **kwargs)
@@ -132,17 +249,44 @@ class TemporalExtent(dict):
 
   @property
   def tz(self):
+    """:obj:`datetime.tzinfo`: Time zone of the time instants."""
     return self._tz
 
   @property
   def start(self):
+    """:obj:`pandas.Timestamp`: Lower bound of the temporal extent."""
     return self._start
 
   @property
   def end(self):
+    """:obj:`pandas.Timestamp`: Upper bound of the temporal extent."""
     return self._end
 
   def discretize(self, tz, resolution):
+    """Discretize the temporal extent into an array.
+
+    Discretizing the temporal extent creates a one-dimensional regular grid
+    that covers the entire temporal extent. Each grid cell corresponds to a
+    single time instant within this extent, and gets the :obj:`numpy.datetime64`
+    object belonging to that instant assigned as value.
+
+    Parameters
+    ----------
+      tz
+        Time zone of the datetime values in the grid. Can be given as :obj:`str`
+        referring to the name of a time zone in the tz database, or as instance
+        of any class inheriting from :obj:`datetime.tzinfo`.
+      resolution : :obj:`str` or :obj:`pandas.DateOffset`
+        Temporal resolution of the grid. Can be given as offset alias as
+        defined in pandas, e.g. "D" for a daily frequency. These aliases can
+        have multiples, e.g. "5D".
+
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+
+    """
     range_obj = pd.date_range(self._start, self._end, freq = resolution)
     range_obj = range_obj.tz_convert(tz)
     range_obj = [np.datetime64(x) for x in range_obj.tz_localize(None)]

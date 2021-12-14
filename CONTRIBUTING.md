@@ -10,16 +10,16 @@ Contributions can come in many different forms, as we will outline below. You do
 
 Opening [issues](https://github.com/ZGIS/semantique/issues) and [discussions](https://github.com/ZGIS/semantique/discussions) is also a form of contributing. They help us to improve the quality and user-friendliness of the package, as well as to build a community around the package.
 
-Use **Issues** if ..
+Use **Issues** if
 
-- .. you are using the package and something is not working as it should. In that case, use the [bug report template](https://github.com/ZGIS/semantique/issues/new?assignees=&labels=bug+%3Abug%3A&template=bug_report.md&title=). Please first check if its really a bug in `semantique`, and if there are not already open issues reporting the same bug.
-- .. you have a request for a new feature. In that case, use the [feature request template](https://github.com/ZGIS/semantique/issues/new?assignees=&labels=feature+%3Agift%3A&template=feature_request.md&title=). Please first check if the feature is not already present, and if there are not already open issues requesting the same feature. A feature request is meant to be very specific. For broader ideas on improving the package, use *Discusssions* instead.
+- You are using the package and something is not working as it should. In that case, use the [bug report template](https://github.com/ZGIS/semantique/issues/new?assignees=&labels=bug+%3Abug%3A&template=bug_report.md&title=). Please first check if its really a bug in `semantique`, and if there are not already open issues reporting the same bug.
+- You have a request for a new feature. In that case, use the [feature request template](https://github.com/ZGIS/semantique/issues/new?assignees=&labels=feature+%3Agift%3A&template=feature_request.md&title=). Please first check if the feature is not already present, and if there are not already open issues requesting the same feature. A feature request is meant to be very specific. For broader ideas on improving the package, use *Discusssions* instead.
 
-Use **Discussions** if ..
+Use **Discussions** if
 
-- .. you have questions about the package and its functionalities. There might always be someone in the community who is able to help you. Use the [Q&A tag](https://github.com/ZGIS/semantique/discussions/categories/q-a) for this purpose, and don't forget to mark an answer as *accepted* if it was helpful.
-- .. you have broader ideas about improving the package and want to share them, such that they can be discussed with other members of the community. Use the [Ideas tag](https://github.com/ZGIS/semantique/discussions/categories/ideas) for that purpose. For very specific feature requests, use *Issues* instead.
-- .. you have used the package in a cool application and want to share that with other members of the community, such that they can learn from it or give feedback. Use the [Show and Tell tag](https://github.com/ZGIS/semantique/discussions/categories/show-and-tell) for this purpose.
+- You have questions about the package and its functionalities. There might always be someone in the community who is able to help you. Use the [Q&A tag](https://github.com/ZGIS/semantique/discussions/categories/q-a) for this purpose, and don't forget to mark an answer as *accepted* if it was helpful.
+- You have broader ideas about improving the package and want to share them, such that they can be discussed with other members of the community. Use the [Ideas tag](https://github.com/ZGIS/semantique/discussions/categories/ideas) for that purpose. For very specific feature requests, use *Issues* instead.
+- You have used the package in a cool application and want to share that with other members of the community, such that they can learn from it or give feedback. Use the [Show and Tell tag](https://github.com/ZGIS/semantique/discussions/categories/show-and-tell) for this purpose.
 
 ## Solving issues
 
@@ -65,19 +65,19 @@ When commiting changes with `git commit` we try to use structured commit message
 
 The summary should be short (preferably < 50 characters), starting with an upper case, and written in present tense. If the commit references a specific issue, include `Refs #<issue number>` in the summary. If the issue is a bug report, you may also use `Fix #<issue number>` such that the issue gets closed automatically.
 
-The type should be one of the defined types listed below. If you feel artistic, you can end the commit message with the emoji belonging to the type :sunglasses:.
+The type should be one of the defined types listed below. If you feel artistic, you can end the commit message with the emoji belonging to the type |:sunglasses:|.
 
-- **feat**: Implementation of a new feature. Emoji `:gift:` :gift:
-- **fix**: A bug fix. Emoji `:wrench:` :wrench:
-- **style**: Changes to code formatting. No change to program logic. Emoji `:art:` :art:
-- **refactor**: Changes to code which do not change behaviour, e.g. renaming variables or splitting functions. Emoji `:construction:` :construction:
-- **docs**: Adding, removing or updating user documentation or to code comments. Emoji `:books:` :books:
-- **logs**: Adding, removing or updating log messages. Emoji `:sound:` :sound:
-- **test**: Adding, removing or updating tests. No changes to user code. Emoji `:test_tube:` :test_tube:
-- **cicd**: Adding, removing or updating CI/CD workflows. No changes to user code. Emoji `:robot:` :robot:
-- **deps**: Adding, removing or updating dependencies. Emoji `:couple:` :couple:
-- **release**: Preparing a release, e.g. updating version numbers. Emoji `:bookmark` :bookmark:
-- **repo**: Changes to the repository that do not involve code/documentation, e.g. adding templates or community files. Emoji `:package:` :package:
+- **feat**: Implementation of a new feature. `:gift:` |:gift:|
+- **fix**: A bug fix. `:wrench:` |:wrench:|
+- **style**: Changes to code formatting. No change to program logic. `:art:` |:art:|
+- **refactor**: Changes to code which do not change behaviour, e.g. renaming variables or splitting functions. `:construction:` |:construction:|
+- **docs**: Adding, removing or updating user documentation or to code comments. `:books:` |:books:|
+- **logs**: Adding, removing or updating log messages. `:sound:` |:sound:|
+- **test**: Adding, removing or updating tests. No changes to user code. `:test_tube:` |:test_tube:|
+- **cicd**: Adding, removing or updating CI/CD workflows. No changes to user code. `:robot:` |:robot:|
+- **deps**: Adding, removing or updating dependencies. `:couple:` |:couple:|
+- **release**: Preparing a release, e.g. updating version numbers. `:bookmark` |:bookmark:|
+- **repo**: Changes to the repository that do not involve code/documentation, e.g. adding templates or community files. `:package:` |:package:|
 
 Example commit messages are:
 

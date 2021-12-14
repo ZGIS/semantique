@@ -70,6 +70,9 @@ class CubeProxy(dict):
       return CubeCollectionProxy(new) if collector else CubeProxy(new)
 
   def evaluate(self, operator, y = None, **kwargs):
+    """Evaluate an expression for each pixel in a data cube.
+
+    """
     if y is None:
       kwargs.update({"operator": operator})
     else:
@@ -77,6 +80,9 @@ class CubeProxy(dict):
     return self._append_verb("evaluate", **kwargs)
 
   def extract(self, dimension, component = None, **kwargs):
+    """Extract coordinates labels of a dimension as a new data cube.
+
+    """
     if component is None:
       kwargs.update({"dimension": dimension})
     else:
@@ -84,10 +90,16 @@ class CubeProxy(dict):
     return self._append_verb("extract", **kwargs)
 
   def filter(self, filterer, **kwargs):
+    """Filter the values in a data cube.
+
+    """
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
   def filter_time(self, *filterer, **kwargs):
+    """Filter a data cube along the temporal dimension.
+
+    """
     component, operator, y = _parse_filter_expression(*filterer)
     eval_obj = CubeProxy({"type": "self"})
     filterer = eval_obj.extract("time", component).evaluate(operator, y)
@@ -95,6 +107,9 @@ class CubeProxy(dict):
     return self._append_verb("filter", **kwargs)
 
   def filter_space(self, *filterer, **kwargs):
+    """Filter a data cube along the spatial dimension.
+
+    """
     component, operator, y = _parse_filter_expression(*filterer)
     eval_obj = CubeProxy({"type": "self"})
     filterer = eval_obj.extract("space", component).evaluate(operator, y)
@@ -102,10 +117,16 @@ class CubeProxy(dict):
     return self._append_verb("filter", **kwargs)
 
   def groupby(self, grouper, **kwargs):
+    """Group the values in a data cube.
+
+    """
     kwargs.update({"grouper": grouper})
     return self._append_verb("groupby", collector = True, **kwargs)
 
   def groupby_time(self, component = None, **kwargs):
+    """Group a data cube along the temporal dimension.
+
+    """
     eval_obj = CubeProxy({"type": "self"})
     if isinstance(component, list):
       comps = [eval_obj.extract("time", x) for x in component]
@@ -116,6 +137,9 @@ class CubeProxy(dict):
     return self._append_verb("groupby", collector = True, **kwargs)
 
   def groupby_space(self, component = None, **kwargs):
+    """Group a data cube along the spatial dimension.
+
+    """
     eval_obj = CubeProxy({"type": "self"})
     if isinstance(component, list):
       comps = [eval_obj.extract("space", x) for x in component]
@@ -126,14 +150,23 @@ class CubeProxy(dict):
     return self._append_verb("groupby", collector = True, **kwargs)
 
   def label(self, label, **kwargs):
+    """Attach a label to a data cube.
+
+    """
     kwargs.update({"label": label})
     return self._append_verb("label", **kwargs)
 
   def reduce(self, dimension, reducer, **kwargs):
+    """Reduce the dimensionality of a data cube.
+
+    """
     kwargs.update({"dimension": dimension, "reducer": reducer})
     return self._append_verb("reduce", **kwargs)
 
   def replace(self, y, **kwargs):
+    """Replace all values in a data cube.
+
+    """
     kwargs.update({"y": y})
     return self._append_verb("replace", **kwargs)
 
@@ -170,17 +203,29 @@ class CubeCollectionProxy(dict):
       return CubeProxy(new) if combiner else CubeCollectionProxy(new)
 
   def compose(self, **kwargs):
+    """Create a categorical composition from multiple data cubes.
+
+    """
     return self._append_verb("compose", combiner = True)
 
   def concatenate(self, dimension, **kwargs):
+    """Concatenate multiple data cubes along a new or existing dimension.
+
+    """
     kwargs.update({"dimension": dimension})
     return self._append_verb("concatenate", combiner = True, **kwargs)
 
   def merge(self, reducer, **kwargs):
+    """Merge values of multiple data cubes into a single value per pixel.
+
+    """
     kwargs.update({"reducer": reducer})
     return self._append_verb("merge", combiner = True, **kwargs)
 
   def evaluate(self, operator, y = None, **kwargs):
+    """Apply the evaluate verb to each data cube in a collection.
+
+    """
     if y is None:
       kwargs.update({"operator": operator})
     else:
@@ -188,6 +233,9 @@ class CubeCollectionProxy(dict):
     return self._append_verb("evaluate", **kwargs)
 
   def extract(self, dimension, component = None, **kwargs):
+    """Apply the extract verb to each data cube in a collection.
+
+    """
     if component is None:
       kwargs.update({"dimension": dimension})
     else:
@@ -195,10 +243,16 @@ class CubeCollectionProxy(dict):
     return self._append_verb("extract", **kwargs)
 
   def filter(self, filterer, **kwargs):
+    """Apply the filter verb to each data cube in a collection.
+
+    """
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
   def filter_time(self, *filterer, **kwargs):
+    """Apply the filter_time verb to each data cube in a collection.
+
+    """
     component, operator, y = _parse_filter_expression(*filterer)
     eval_obj = CubeProxy({"type": "self"})
     filterer = eval_obj.extract("time", component).evaluate(operator, y)
@@ -206,6 +260,9 @@ class CubeCollectionProxy(dict):
     return self._append_verb("filter", **kwargs)
 
   def filter_space(self, *filterer, **kwargs):
+    """Apply the filter_space verb to each data cube in a collection.
+
+    """
     component, operator, y = _parse_filter_expression(*filterer)
     eval_obj = CubeProxy({"type": "self"})
     filterer = eval_obj.extract("space", component).evaluate(operator, y)
@@ -213,14 +270,23 @@ class CubeCollectionProxy(dict):
     return self._append_verb("filter", **kwargs)
 
   def label(self, label, **kwargs):
+    """Apply the label verb to each data cube in a collection.
+
+    """
     kwargs.update({"label": label})
     return self._append_verb("label", **kwargs)
 
   def reduce(self, dimension, reducer, **kwargs):
+    """Apply the reduce verb to each data cube in a collection.
+
+    """
     kwargs.update({"dimension": dimension, "reducer": reducer})
     return self._append_verb("reduce", **kwargs)
 
   def replace(self, y, **kwargs):
+    """Apply the replace verb to each data cube in a collection.
+
+    """
     kwargs.update({"y": y})
     return self._append_verb("replace", **kwargs)
 
@@ -238,6 +304,17 @@ def concept(*reference):
     :obj:`CubeProxy`
       A textual reference to the concept that can be solved by the query
       processor.
+
+  Examples
+  --------
+  >>> sq.concept("entity", "water")
+  {
+    "type": "concept",
+    "reference": [
+      "entity",
+      "water"
+    ]
+  }
 
   """
   obj = {"type": "concept", "reference": reference}
@@ -257,6 +334,17 @@ def entity(*reference, property = None):
     :obj:`CubeProxy`
       A textual reference to the concept that can be solved by the query
       processor.
+
+  Examples
+  --------
+  >>> sq.entity("water")
+  {
+    "type": "concept",
+    "reference": [
+      "entity",
+      "water"
+    ]
+  }
 
   """
   obj = {"type": "concept", "reference": ("entity",) + reference}
@@ -279,6 +367,17 @@ def event(*reference, property = None):
       A textual reference to the concept that can be solved by the query
       processor.
 
+  Examples
+  --------
+  >>> sq.event("flood")
+  {
+    "type": "concept",
+    "reference": [
+      "event",
+      "flood"
+    ]
+  }
+
   """
   obj = {"type": "concept", "reference": ("event",) + reference}
   if property is not None:
@@ -300,6 +399,17 @@ def resource(*reference):
       A textual reference to the resource that can be solved by the query
       processor.
 
+  Examples
+  --------
+  >>> sq.resource("appearance", "brightness")
+  {
+    "type": "resource",
+    "reference": [
+      "appearance",
+      "brightness"
+    ]
+  }
+
   """
   obj = {"type": "resource", "reference": reference}
   return CubeProxy(obj)
@@ -318,6 +428,17 @@ def appearance(*reference):
     :obj:`CubeProxy`
       A textual reference to the resource that can be solved by the query
       processor.
+
+  Examples
+  --------
+  >>> sq.appearance("brightness")
+  {
+    "type": "resource",
+    "reference": [
+      "appearance",
+      "brightness"
+    ]
+  }
 
   """
   obj = {"type": "resource", "reference": ("appearance",) + reference}
@@ -357,6 +478,17 @@ def atmosphere(*reference):
       A textual reference to the resource that can be solved by the query
       processor.
 
+  Examples
+  --------
+  >>> sq.atmosphere("Color type")
+  {
+    "type": "resource",
+    "reference": [
+      "atmosphere",
+      "Color type"
+    ]
+  }
+
   """
   obj = {"type": "resource", "reference": ("atmosphere",) + reference}
   return CubeProxy(obj)
@@ -375,6 +507,17 @@ def reflectance(*reference):
     :obj:`CubeProxy`
       A textual reference to the resource that can be solved by the query
       processor.
+
+  Examples
+  --------
+  >>> sq.reflectance("s2_band01")
+  {
+    "type": "resource",
+    "reference": [
+      "reflectance",
+      "s2_band01"
+    ]
+  }
 
   """
   obj = {"type": "resource", "reference": ("reflectance",) + reference}
@@ -395,6 +538,17 @@ def topography(*reference):
       A textual reference to the resource that can be solved by the query
       processor.
 
+  Examples
+  --------
+  >>> sq.topography("elevation")
+  {
+    "type": "resource",
+    "reference": [
+      "topography",
+      "elevation"
+    ]
+  }
+
   """
   obj = {"type": "resource", "reference": ("topography",) + reference}
   return CubeProxy(obj)
@@ -413,6 +567,14 @@ def result(name):
       A textual reference to the result that can be solved by the query
       processor.
 
+  Examples
+  --------
+  >>> sq.result("water_count")
+  {
+    "type": "result",
+    "name": "water_count"
+  }
+
   """
   obj = {"type": "result", "name": name}
   return CubeProxy(obj)
@@ -425,6 +587,13 @@ def self():
     :obj:`CubeProxy`
       A textual reference to the active evaluation object that can be
       solved by the query processor.
+
+  Examples
+  --------
+  >>> sq.self()
+  {
+    "type": "self",
+  }
 
   """
   obj = {"type": "self"}
@@ -441,8 +610,31 @@ def collection(*cubes):
   Returns
   -------
     :obj:`CubeCollectionProxy`
-      A textual reference to the cube collection that can be
-      solved by the query processor.
+      A textual reference to the cube collection that can be solved by the
+      query processor.
+
+  Examples
+  --------
+  >>> sq.collection(sq.entity("water"), sq.entity("vegetation"))
+  {
+    "type": "collection",
+    "elements": [
+      {
+        "type": "concept",
+        "reference": [
+          "entity",
+          "water"
+        ]
+      },
+      {
+        "type": "concept",
+        "reference": [
+          "entity",
+          "vegetation"
+        ]
+      }
+    ]
+  }
 
   """
   obj = {"type": "collection", "elements": list(cubes)}
@@ -463,8 +655,8 @@ def category(label):
   Returns
   -------
     :obj:`dict`
-      JSON-serializable object that contains the category label, and
-      can be understood by the query processor as such.
+      JSON-serializable object that contains the category label, and can be
+      understood by the query processor as such.
 
   """
   obj = {"type": "category", "label": label}
@@ -480,18 +672,19 @@ def geometries(value, **kwargs):
   Parameters
   ----------
     value
-      The geometries as any object that can be parsed by the initializer
-      of SpatialExtent. Usually a :obj:`geopandas.GeoDataFrame` containing one
-      spatial feature per row.
+      One or more spatial features containing the geometries. Should be given
+      as an object that can be read by the initializer of
+      :obj:`extent.SpatialExtent`. This includes :obj:`geopandas.GeoDataFrame`
+      objects.
     **kwargs
       Additional keyword arguments passed on to the initializer of
-      SpatialExtent.
+      :obj:`extent.SpatialExtent`.
 
   Returns
   -------
     :obj:`dict`
-      JSON-serializable object that contains the geometries, and
-      can be understood by the query processor as such.
+      JSON-serializable object that contains the geometries, and can be
+      understood by the query processor as such.
 
   """
   obj = {"type": "geometry", "value": SpatialExtent(value, **kwargs)}
@@ -505,11 +698,13 @@ def time_instant(value, **kwargs):
   Parameters
   ----------
     value
-      The time instant as any object that can be parsed by the initializer
-      of TemporalExtent. Usually a :obj:`str` or a :obj:`pandas.Timestamp`.
+      The time instant as object that can be read by the initializer of
+      :obj:`extent.TemporalExtent`. This includes :obj:`pandas.Timestamp`
+      objects, as well as text representations of time instants in different
+      formats.
     **kwargs
       Additional keyword arguments passed on to the initializer of
-      TemporalExtent.
+      :obj:`extent.TemporalExtent`.
 
   Returns
   -------
@@ -530,12 +725,14 @@ def time_interval(*bounds, **kwargs):
   Parameters
   ----------
     *bounds
-      Respectively the lower and upper bound of the time interval as any
-      object that can be parsed by the initializer of TemporalExtent. Usually
-      a :obj:`str` or a :obj:`pandas.Timestamp`.
+      Respectively the start and end of the time interval. Should be given as
+      objects that can be read by the initializer of :obj:`extent.TemporalExtent`.
+      This includes :obj:`pandas.Timestamp` objects, as well as text
+      representations of time instants in different formats. The interval is
+      assumed to be closed at both sides.
     **kwargs
       Additional keyword arguments passed on to the initializer of
-      TemporalExtent.
+      :obj:`extent.TemporalExtent`.
 
   Returns
   -------

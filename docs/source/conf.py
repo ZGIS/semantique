@@ -21,8 +21,8 @@ sys.path.insert(0, os.path.abspath('../../demo'))
 # -- Project information -----------------------------------------------------
 
 project = 'semantique'
-copyright = '2021, Lucas van der Meer'
-author = 'Lucas van der Meer'
+copyright = '2021, Department of Geoinformatics – Z_GIS'
+#author = 'Lucas van der Meer'
 
 # The full version, including alpha/beta/rc tags
 release = '0.1.0'
@@ -39,7 +39,8 @@ extensions = [
   'sphinx.ext.napoleon',
   'nbsphinx',
   'nbsphinx_link',
-  'm2r2'
+  'm2r2',
+  'sphinxemoji.sphinxemoji'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -63,8 +64,24 @@ html_theme = 'sphinx_book_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_theme_options = {
+  "repository_url": "https://github.com/ZGIS/semantique",
+  "repository_branch": "main",
+  "path_to_docs": "docs/source",
+  "use_edit_page_button": True,
+  "use_repository_button": True,
+  "use_issues_button": True,
+  "launch_buttons": {
+    "binderhub_url": "https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo"
+  }
+}
+
 
 # -- Napoleon configuration ---------------------------------------------------
 
 napoleon_use_param = False
 napoleon_use_rtype = False
+
+# -- Autosummary configuration ------------------------------------------------
+
+autosummary_generate = True
