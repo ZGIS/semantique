@@ -108,48 +108,18 @@ class Opendatacube(Factbase):
         "Cannot retrieve data in an extent without a spatial dimension"
       )
     shape = extent.sq.tz_convert(self.tz).sq.unstack_spatial_dims().to_dataset()
-    # Load the requested data as xarray dataset.
-    data_ds = self.connection.load(
-      product = metadata["product"],
-      measurements = [metadata["name"]],
-      like = shape,
-      resampling = self.config["resamplers"][metadata["type"]],
-      group_by = "solar_day" if self.config["group_by_solar_day"] else None
-    )
-    # Convert to xarray dataarray.
-    try:
-      data = data_ds[metadata["name"]]
-    except KeyError:
-      raise exceptions.EmptyDataError(
-        f"Cannot find data for product '{metadata['product']}' and "
-        f"measurement '{metadata['measurement']}' within the given "
-        f"spatio-temporal extent"
-      )
-    # Convert time values back into the original time zone.
-    data = data.sq.write_tz(self.tz)
-    data = data.sq.tz_convert(extent.sq.tz)
-    # Stack spatial dimensions back together into a single 'space' dimension.
-    data = data.sq.stack_spatial_dims()
-    # Add spatial feature indices as coordinates.
-    data.coords["feature"] = ("space", extent["feature"].data)
-    # Clean data.
-    data = self._clean_data(data, metadata)
-    # Add semantique specific attributes.
-    # --> Value types for the data and all dimension coordinates.
-    # --> Mapping from category labels to indices for all categorical data.
-    if metadata["type"] == "continuous":
-     data.sq.value_type = "numerical"
-    else:
-     data.sq.value_type = metadata["type"]
-    if metadata["type"] == "categorical":
-      categories = {}
-      for x in metadata["values"]:
-        categories[x["label"]] = x["id"]
-      data.sq.categories = categories
-    data["space"].sq.value_type = "space"
-    data["time"].sq.value_type = "time"
-    data["feature"].sq.value_type = extent["feature"].sq.value_type
-    data["feature"].sq.categories = extent["feature"].sq.categories
+    # Load data from ODC.
+    data = self._load_data(shape, metadata)
+    # Format data back into the same structure as the given extent.
+    data = self._format_data(data, extent, metadata)
+    # Mask invalid data with nan values.
+    data = self._mask_data(data)
+    # PROVISIONAL FIX: Convert value type to float.
+    # Sentinel-2 data may be loaded as unsigned integers.
+    # This gives problems e.g. with divisions that return negative values.
+    # See https://github.com/whisperingpixel/iq-factbase/issues/19.
+    # TODO: Find a better way to handle this with less memory footprint.
+    data = data.astype("float")
     # Return only if there is still valid data left.
     if data.sq.is_empty:
       raise exceptions.EmptyDataError(
@@ -159,21 +129,61 @@ class Opendatacube(Factbase):
       )
     return data
 
-  @staticmethod
-  def _clean_data(obj, metadata):
+  def _load_data(self, shape, metadata):
+    # Call ODC load function to load data as xarray dataset.
+    data = self.connection.load(
+      product = metadata["product"],
+      measurements = [metadata["name"]],
+      like = shape,
+      resampling = self.config["resamplers"][metadata["type"]],
+      group_by = "solar_day" if self.config["group_by_solar_day"] else None
+    )
+    # Return as xarray dataarray.
+    try:
+      data = data[metadata["name"]]
+    except KeyError:
+      raise exceptions.EmptyDataError(
+        f"Cannot find data for product '{metadata['product']}' and "
+        f"measurement '{metadata['measurement']}' within the given "
+        f"spatio-temporal extent"
+      )
+    return data
+
+  def _format_data(self, data, extent, metadata):
+    # Step I: Convert time coordinates back into the original time zone.
+    data = data.sq.write_tz(self.tz)
+    data = data.sq.tz_convert(extent.sq.tz)
+    # Step II: Stack spatial dimensions back into a single 'space' dimension.
+    data = data.sq.stack_spatial_dims()
+    # Step III: Add spatial feature indices as coordinates.
+    data.coords["feature"] = ("space", extent["feature"].data)
+    # Step IV: Write semantique specific attributes.
+    # --> Value types for the data and all dimension coordinates.
+    # --> Mapping from category labels to indices for all categorical data.
+    vtype = self.config["value_type_mapping"][metadata["type"]]
+    data.sq.value_type = vtype
+    if vtype in ["nominal", "ordinal"]:
+      categories = {}
+      for x in metadata["values"]:
+        categories[x["label"]] = x["id"]
+      data.sq.categories = categories
+    data["space"].sq.value_type = "space"
+    data["time"].sq.value_type = "time"
+    data["feature"].sq.value_type = extent["feature"].sq.value_type
+    data["feature"].sq.categories = extent["feature"].sq.categories
+    return data
+
+  def _mask_data(self, data):
     # Step I: Mask nodata values.
     # What is considered 'nodata' is defined in the datacubes metadata.
-    obj = masking.mask_invalid_data(obj)
+    data = masking.mask_invalid_data(data)
     # Step II: Mask values outside of the spatial extent.
     # This is needed since ODC loads data for the bbox of the extent.
-    obj = obj.where(obj["feature"].notnull())
+    data = data.where(data["feature"].notnull())
     # Step III: Trim the data.
     # This means we drop coordinates if all its values are nodata.
-    obj = obj.sq.trim()
-    # Step IV: Convert value type to float.
-    # See https://github.com/whisperingpixel/iq-factbase/issues/19.
-    obj = obj.astype("float")
-    return obj
+    data = data.sq.trim()
+    return data
 
 class GeotiffArchive(Factbase):
 
@@ -229,15 +239,37 @@ class GeotiffArchive(Factbase):
   def retrieve(self, *reference, extent):
     # Get metadata.
     metadata = self.lookup(*reference)
-    # Load the requested data as xarray data array.
-    data = rioxarray.open_rasterio("zip://" + self.src + "!" + metadata["file"])
+    # Load data.
+    data = self._load_data(metadata)
+    # Take a spatio-temporal subset of the data.
+    data = self._subset_data(data, extent, metadata)
+    # Format data back into the same structure as the given extent.
+    data = self._format_data(data, extent, metadata)
+    # PROVISIONAL FIX: Convert value type to float.
+    # Sentinel-2 data may be loaded as unsigned integers.
+    # This gives problems e.g. with divisions that return negative values.
+    # See https://github.com/whisperingpixel/iq-factbase/issues/19.
+    # TODO: Find a better way to handle this with less memory footprint.
+    data = data.astype("float")
+    # Add name.
+    data.name = os.path.splitext(metadata["file"])[0]
+    return data
+
+  def _load_data(self, metadata):
+    return rioxarray.open_rasterio("zip://" + self.src + "!" + metadata["file"])
+
+  def _subset_data(self, extent, metadata):
     # Subset temporally.
+    if extent.sq.temporal_dimension is None:
+      raise exceptions.MissingDimensionError(
+        "Cannot retrieve data in an extent without a temporal dimension"
+      )
     bounds = extent.sq.tz_convert(self.tz)[extent.sq.temporal_dimension].values
     times = [np.datetime64(x) for x in metadata["times"]]
-    in_bounds = [x >= bounds[0] and x <= bounds[1] for x in times]
-    data = data.sel({"band": in_bounds})
+    keep = [x >= bounds[0] and x <= bounds[1] for x in times]
+    data = data.sel({"band": keep})
     data = data.rename({"band": "time"})
-    data = data.assign_coords({"time": [x for x, y in zip(times, in_bounds) if y]})
+    data = data.assign_coords({"time": [x for x, y in zip(times, keep) if y]})
     # Subset spatially.
     if extent.sq.spatial_dimension is None:
       raise exceptions.MissingDimensionError(
@@ -247,21 +279,22 @@ class GeotiffArchive(Factbase):
     resample_name = self.config["resamplers"][metadata["type"]]
     resample_func = getattr(rasterio.enums.Resampling, resample_name)
     data = data.rio.reproject_match(shape, resampling = resample_func)
-    # Convert to correct timezone.
+    return data
+
+  def _format_data(self, data, extent, metadata):
+    # Step I: Convert time coordinates back into the original time zone.
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
-    # Stack spatial dimensions back together into a single 'space' dimension.
+    # Step II: Stack spatial dimensions back into a single 'space' dimension.
     data = data.sq.stack_spatial_dims()
-    # Add spatial feature indices as coordinates.
+    # Step III: Add spatial feature indices as coordinates.
     data.coords["feature"] = ("space", extent["feature"].data)
-    # Add semantique specific attributes.
+    # Step IV: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
     # --> Mapping from category labels to indices for all categorical data.
-    if metadata["type"] == "continuous":
-     data.sq.value_type = "numerical"
-    else:
-     data.sq.value_type = metadata["type"]
-    if metadata["type"] == "categorical":
+    vtype = self.config["value_type_mapping"][metadata["type"]]
+    data.sq.value_type = vtype
+    if vtype in ["nominal", "ordinal"]:
       categories = {}
       for x in metadata["values"]:
         categories[x["label"]] = x["id"]
@@ -270,6 +303,4 @@ class GeotiffArchive(Factbase):
     data["time"].sq.value_type = "time"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
     data["feature"].sq.categories = extent["feature"].sq.categories
-    # Add name.
-    data.name = os.path.splitext(metadata["file"])[0]
     return data
