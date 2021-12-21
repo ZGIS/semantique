@@ -66,22 +66,10 @@ class SpatialExtent(dict):
     t = obj["type"]
     if t == "FeatureCollection":
       return cls.from_featurecollection(obj, **kwargs)
-    if t == "Feature":
+    else if t == "Feature":
       return cls.from_feature(obj, **kwargs)
-    geom_types = [
-      "Point",
-      "MultiPoint",
-      "LineString",
-      "MultiLineString",
-      "Polygon",
-      "MultiPolygon",
-      "GeometryCollection",
-    ]
-    if not t in geom_types:
-      raise exceptions.UnknownGeometryTypeError(
-        f"Geometry type '{t}' is not supported"
-      )
-    return cls.from_geometry(obj, **kwargs)
+    else:
+      return cls.from_geometry(obj, **kwargs)
 
   @classmethod
   def from_featurecollection(cls, obj, **kwargs):
