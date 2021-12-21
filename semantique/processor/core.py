@@ -233,7 +233,7 @@ class QueryProcessor():
 
   def handle_geometry(self, block):
     feats = block["value"]["features"]
-    crs = pyproj.CRS.from_json_dict(block["value"]["crs"])
+    crs = pyproj.CRS.from_string(block["value"]["crs"])
     geodf = gpd.GeoDataFrame.from_features(feats, crs = crs)
     if crs != self.crs:
       geodf = geodf.to_crs(crs)
