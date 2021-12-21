@@ -58,7 +58,7 @@ TYPE_PROMOTION_TEMPLATES = {
     "ordinal": {
       "ordinal": "binary",
       "i": "binary",
-      "u": "binary"
+      "u": "binary",
       None: None
     },
     "time": {
@@ -98,7 +98,7 @@ TYPE_PROMOTION_TEMPLATES = {
     "ordinal": {
       "ordinal": "binary",
       "i": "binary",
-      "u": "binary"
+      "u": "binary",
       None: None
     },
     "time": {
