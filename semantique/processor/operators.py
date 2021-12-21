@@ -13,21 +13,21 @@ TYPE_PROMOTIONS = {
   "cube_root_": TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"],
   "natural_logarithm_": TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"],
   "square_root_": TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"],
-  "and_": TYPE_PROMOTION_TEMPLATES["logical_multivariate_operators"],
-  "or_": TYPE_PROMOTION_TEMPLATES["logical_multivariate_operators"],
-  "invert_": TYPE_PROMOTION_TEMPLATES["logical_univariate_operators"],
-  "equal_": TYPE_PROMOTION_TEMPLATES["comparison_operators"],
-  "exclusive_or_": TYPE_PROMOTION_TEMPLATES["logical_multivariate_operators"],
-  "greater_": TYPE_PROMOTION_TEMPLATES["comparison_operators"],
-  "greater_equal_": TYPE_PROMOTION_TEMPLATES["comparison_operators"],
-  "in_": TYPE_PROMOTION_TEMPLATES["comparison_operators"],
-  "less_": TYPE_PROMOTION_TEMPLATES["comparison_operators"],
-  "less_equal_": TYPE_PROMOTION_TEMPLATES["comparison_operators"],
-  "not_equal_": TYPE_PROMOTION_TEMPLATES["comparison_operators"],
-  "not_in_": TYPE_PROMOTION_TEMPLATES["comparison_operators"],
-  "after_": TYPE_PROMOTION_TEMPLATES["temporal_operators"],
-  "before_": TYPE_PROMOTION_TEMPLATES["temporal_operators"],
-  "during_": TYPE_PROMOTION_TEMPLATES["temporal_operators"]
+  "and_": TYPE_PROMOTION_TEMPLATES["boolean_multivariate_operators"],
+  "or_": TYPE_PROMOTION_TEMPLATES["boolean_multivariate_operators"],
+  "exclusive_or_": TYPE_PROMOTION_TEMPLATES["boolean_multivariate_operators"],
+  "invert_": TYPE_PROMOTION_TEMPLATES["boolean_univariate_operators"],
+  "equal_": TYPE_PROMOTION_TEMPLATES["equality_operators"],
+  "in_": TYPE_PROMOTION_TEMPLATES["equality_operators"],
+  "not_equal_": TYPE_PROMOTION_TEMPLATES["equality_operators"],
+  "not_in_": TYPE_PROMOTION_TEMPLATES["equality_operators"],
+  "greater_": TYPE_PROMOTION_TEMPLATES["regular_relational_operators"],
+  "greater_equal_": TYPE_PROMOTION_TEMPLATES["regular_relational_operators"],
+  "less_": TYPE_PROMOTION_TEMPLATES["regular_relational_operators"],
+  "less_equal_": TYPE_PROMOTION_TEMPLATES["regular_relational_operators"],
+  "after_": TYPE_PROMOTION_TEMPLATES["temporal_relational_operators"],
+  "before_": TYPE_PROMOTION_TEMPLATES["temporal_relational_operators"],
+  "during_": TYPE_PROMOTION_TEMPLATES["temporal_relational_operators"]
 }
 
 #
@@ -98,7 +98,7 @@ def square_root_(x, **kwargs):
   return out
 
 #
-# LOGICAL MULTIVARIATE OPERATORS
+# BOOLEAN MULTIVARIATE OPERATORS
 #
 
 def and_(x, y, **kwargs):
@@ -116,7 +116,7 @@ def or_(x, y, **kwargs):
   return(out)
 
 #
-# LOGICAL UNIVARIATE OPERATORS
+# BOOLEAN UNIVARIATE OPERATORS
 #
 
 def invert_(x, **kwargs):
@@ -126,7 +126,7 @@ def invert_(x, **kwargs):
   return out
 
 #
-# COMPARSION OPERATORS
+# EQUALITY OPERATORS
 #
 
 def equal_(x, y, **kwargs):
@@ -135,6 +135,29 @@ def equal_(x, y, **kwargs):
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   return(out)
+
+def in_(x, y, **kwargs):
+  def f(x, y, **kwargs):
+    return np.where(np.isfinite(x), np.isin(x, y), np.nan)
+  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  return(out)
+
+def not_equal_(x, y, **kwargs):
+  def f(x, y, **kwargs):
+    return np.where(np.isfinite(x), np.not_equal(x, y), np.nan)
+  y = xr.DataArray(y).sq.align_with(x)
+  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  return(out)
+
+def not_in_(x, y, **kwargs):
+  def f(x, y, **kwargs):
+    return np.where(np.isfinite(x), np.isin(x, y, invert = True), np.nan)
+  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  return(out)
+
+#
+# REGULAR RELATIONAL OPERATORS
+#
 
 def exclusive_or_(x, y, **kwargs):
   def f(x, y, **kwargs):
@@ -157,12 +180,6 @@ def greater_equal_(x, y, **kwargs):
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   return(out)
 
-def in_(x, y, **kwargs):
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.isin(x, y), np.nan)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
-  return(out)
-
 def less_(x, y, **kwargs):
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.less(x, y), np.nan)
@@ -177,21 +194,8 @@ def less_equal_(x, y, **kwargs):
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   return(out)
 
-def not_equal_(x, y, **kwargs):
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.not_equal(x, y), np.nan)
-  y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
-  return(out)
-
-def not_in_(x, y, **kwargs):
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.isin(x, y, invert = True), np.nan)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
-  return(out)
-
 #
-# TEMPORAL OPERATORS
+# TEMPORAL RELATIONAL OPERATORS
 #
 
 def after_(x, y, **kwargs):

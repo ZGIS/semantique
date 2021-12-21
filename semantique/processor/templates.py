@@ -19,7 +19,7 @@ TYPE_PROMOTION_TEMPLATES = {
     "numerical": "numerical",
     None: None
   },
-  "logical_multivariate_operators": {
+  "boolean_multivariate_operators": {
     "binary": {
       "binary": "binary",
       "b": "binary",
@@ -31,11 +31,58 @@ TYPE_PROMOTION_TEMPLATES = {
       None: None
     }
   },
-  "logical_univariate_operators": {
+  "boolean_univariate_operators": {
     "binary": "binary",
     None: None
   },
-  "comparison_operators": {
+  "equality_operators": {
+    "binary": {
+      "binary": "binary",
+      "b": "binary",
+      None: None
+    },
+    "nominal": {
+      "nominal": "binary",
+      "i": "binary",
+      "u": "binary",
+      "U": "binary",
+      None: None
+    },
+    "numerical": {
+      "numerical": "binary",
+      "i": "binary",
+      "u": "binary",
+      "f": "binary",
+      None: None
+    },
+    "ordinal": {
+      "ordinal": "binary",
+      "i": "binary",
+      "u": "binary"
+      None: None
+    },
+    "time": {
+      "time": "binary",
+      "M": "binary",
+      None: None
+    },
+    None: {
+      "binary": None,
+      "ordinal": None,
+      "numerical": None,
+      "time": None,
+      "space": None,
+      "b": None,
+      "i": None,
+      "u": None,
+      "f": None,
+      "M": None,
+      "O": None,
+      "U": None,
+      None: None
+    }
+  },
+  "regular_relational_operators": {
     "binary": {
       "binary": "binary",
       "b": "binary",
@@ -75,7 +122,7 @@ TYPE_PROMOTION_TEMPLATES = {
       None: None
     }
   },
-  "spatial_operators": {
+  "spatial_relational_operators": {
     "space": {
       "space": "binary",
       "O": "binary",
@@ -87,7 +134,7 @@ TYPE_PROMOTION_TEMPLATES = {
       None: None
     }
   },
-  "temporal_operators": {
+  "temporal_relational_operators": {
     "time": {
       "time": "binary",
       "M": "binary",
@@ -99,16 +146,23 @@ TYPE_PROMOTION_TEMPLATES = {
       None: None
     }
   },
-  "algebraic_reducers": {
-    "numerical": "numerical",
+  "boolean_reducers": {
+    "binary": "binary",
     None: None
   },
   "count_reducers": {
     "binary": "numerical",
     None: None
   },
-  "logical_reducers": {
+  "numerical_reducers": {
+    "numerical": "numerical",
+    None: None
+  },
+  "ordered_reducers": {
     "binary": "binary",
+    "numerical": "numerical",
+    "ordinal": "ordinal",
+    "time": "time",
     None: None
   },
   "universal_reducers": {
