@@ -138,7 +138,7 @@ class SpatialExtent(dict):
     geodf = gpd.GeoDataFrame.from_features([geojs], **kwargs)
     return cls(geodf)
 
-  def rasterize(self, crs, resolution):
+  def rasterize(self, resolution, crs = None):
     """Rasterize the spatial extent into an array.
 
     Rasterizing the spatial extent creates a rectangular two-dimensional
@@ -152,11 +152,6 @@ class SpatialExtent(dict):
 
     Parameters
     ----------
-      crs
-        Coordinate reference system in which the grid should be created. Can be
-        given as any object understood by the initializer of :obj:`pyproj.CRS`.
-        This includes :obj:`pyproj.CRS` objects themselves, as well as EPSG
-        codes and WKT strings.
       resolution : :obj:`list`
         Spatial resolution of the grid. Should be given as a list in the format
         `[y, x]`, where y is the cell size along the y-axis, x is the cell size
@@ -165,12 +160,19 @@ class SpatialExtent(dict):
         the direction of the axes. For most CRSs, the y-axis has a negative
         direction, and hence the cell size along the y-axis is given as a
         negative number.
+      crs
+        Coordinate reference system in which the grid should be created. Can be
+        given as any object understood by the initializer of :obj:`pyproj.CRS`.
+        This includes :obj:`pyproj.CRS` objects themselves, as well as EPSG
+        codes and WKT strings. If `None`, the CRS of the extent is used.
 
     Returns
     -------
       :obj:`xarray.DataArray`
 
     """
+    if crs is None:
+      crs = self.crs
     vector_obj = self._features.reset_index()
     vector_obj["index"] = vector_obj["index"] + 1
     raster_obj = geocube.api.core.make_geocube(
@@ -276,7 +278,7 @@ class TemporalExtent(dict):
     """:obj:`pandas.Timestamp`: Upper bound of the temporal extent."""
     return self._end
 
-  def discretize(self, tz, resolution):
+  def discretize(self, resolution, tz = None):
     """Discretize the temporal extent into an array.
 
     Discretizing the temporal extent creates a one-dimensional regular grid
@@ -286,14 +288,15 @@ class TemporalExtent(dict):
 
     Parameters
     ----------
-      tz
-        Time zone of the datetime values in the grid. Can be given as :obj:`str`
-        referring to the name of a time zone in the tz database, or as instance
-        of any class inheriting from :obj:`datetime.tzinfo`.
       resolution : :obj:`str` or :obj:`pandas.DateOffset`
         Temporal resolution of the grid. Can be given as offset alias as
         defined in pandas, e.g. "D" for a daily frequency. These aliases can
         have multiples, e.g. "5D".
+      tz
+        Time zone of the datetime values in the grid. Can be given as :obj:`str`
+        referring to the name of a time zone in the tz database, or as instance
+        of any class inheriting from :obj:`datetime.tzinfo`. If `None`, the
+        timezone of the extent is used.
 
 
     Returns
@@ -301,6 +304,8 @@ class TemporalExtent(dict):
       :obj:`xarray.DataArray`
 
     """
+    if tz is None:
+      tz = self.tz
     range_obj = pd.date_range(self._start, self._end, freq = resolution)
     range_obj = range_obj.tz_convert(tz)
     range_obj = [np.datetime64(x) for x in range_obj.tz_localize(None)]

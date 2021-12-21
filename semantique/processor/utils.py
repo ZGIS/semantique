@@ -11,9 +11,7 @@ def convert_datetime64(obj, tz_from, tz_to, **kwargs):
 def create_extent_cube(space, time, spatial_resolution, crs = None, tz = None):
   ## Spatial extent ##
   # Rasterize spatial extent.
-  if crs is None:
-    crs = space.crs
-  space = space.rasterize(crs, spatial_resolution)
+  space = space.rasterize(spatial_resolution, crs)
   # Update spatial reference.
   # CRS information was already automatically included during rasterizing.
   # In addition we add the GeoTransform attribute.
