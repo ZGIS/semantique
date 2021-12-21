@@ -41,18 +41,17 @@ TYPE_PROMOTION_TEMPLATES = {
       "b": "binary",
       None: None
     },
-    "categorical": {
-      "categorical": "binary",
-      "i": "binary",
-      "u": "binary",
-      "U": "binary",
-      None: None
-    },
     "numerical": {
       "numerical": "binary",
       "i": "binary",
       "u": "binary",
       "f": "binary",
+      None: None
+    },
+    "ordinal": {
+      "ordinal": "binary",
+      "i": "binary",
+      "u": "binary"
       None: None
     },
     "time": {
@@ -62,7 +61,7 @@ TYPE_PROMOTION_TEMPLATES = {
     },
     None: {
       "binary": None,
-      "categorical": None,
+      "ordinal": None,
       "numerical": None,
       "time": None,
       "space": None,
@@ -114,8 +113,9 @@ TYPE_PROMOTION_TEMPLATES = {
   },
   "universal_reducers": {
     "binary": "binary",
-    "categorical": "categorical",
+    "nominal": "nominal",
     "numerical": "numerical",
+    "ordinal": "ordinal",
     "time": "time",
     "space": "space",
     None: None
@@ -123,8 +123,9 @@ TYPE_PROMOTION_TEMPLATES = {
   "replacers": {
     "binary": {
       "binary": "binary",
-      "categorical": "categorical",
+      "nominal": "nominal",
       "numerical": "numerical",
+      "ordinal": "ordinal",
       "time": "time",
       "space": "space",
       "b": "binary",
@@ -132,14 +133,15 @@ TYPE_PROMOTION_TEMPLATES = {
       "u": "numerical",
       "f": "numerical",
       "M": "time",
-      "O": "categorical",
-      "U": "categorical",
+      "O": "nominal",
+      "U": "nominal",
       None: None
     },
-    "categorical": {
+    "nominal": {
       "binary": "binary",
-      "categorical": "categorical",
+      "nominal": "nominal",
       "numerical": "numerical",
+      "ordinal": "ordinal",
       "time": "time",
       "space": "space",
       "b": "binary",
@@ -147,14 +149,15 @@ TYPE_PROMOTION_TEMPLATES = {
       "u": "numerical",
       "f": "numerical",
       "M": "time",
-      "O": "categorical",
-      "U": "categorical",
+      "O": "nominal",
+      "U": "nominal",
       None: None
     },
     "numerical": {
       "binary": "binary",
-      "categorical": "categorical",
+      "nominal": "nominal",
       "numerical": "numerical",
+      "ordinal": "ordinal",
       "time": "time",
       "space": "space",
       "b": "binary",
@@ -162,14 +165,31 @@ TYPE_PROMOTION_TEMPLATES = {
       "u": "numerical",
       "f": "numerical",
       "M": "time",
-      "O": "categorical",
-      "U": "categorical",
+      "O": "nominal",
+      "U": "nominal",
+      None: None
+    },
+    "ordinal": {
+      "binary": "binary",
+      "nominal": "nominal",
+      "numerical": "numerical",
+      "ordinal": "ordinal",
+      "time": "time",
+      "space": "space",
+      "b": "binary",
+      "i": "numerical",
+      "u": "numerical",
+      "f": "numerical",
+      "M": "time",
+      "O": "nominal",
+      "U": "nominal",
       None: None
     },
     "time": {
       "binary": "binary",
-      "categorical": "categorical",
+      "nominal": "nominal",
       "numerical": "numerical",
+      "ordinal": "ordinal",
       "time": "time",
       "space": "space",
       "b": "binary",
@@ -177,14 +197,15 @@ TYPE_PROMOTION_TEMPLATES = {
       "u": "numerical",
       "f": "numerical",
       "M": "time",
-      "O": "categorical",
-      "U": "categorical",
+      "O": "nominal",
+      "U": "nominal",
       None: None
     },
     "space": {
       "binary": "binary",
-      "categorical": "categorical",
+      "nominal": "nominal",
       "numerical": "numerical",
+      "ordinal": "ordinal",
       "time": "time",
       "space": "space",
       "b": "binary",
@@ -192,14 +213,15 @@ TYPE_PROMOTION_TEMPLATES = {
       "u": "numerical",
       "f": "numerical",
       "M": "time",
-      "O": "categorical",
-      "U": "categorical",
+      "O": "nominal",
+      "U": "nominal",
       None: None
     },
     None: {
       "binary": None,
-      "categorical": None,
+      "nominal": None,
       "numerical": None,
+      "ordinal": None,
       "time": None,
       "space": None,
       "b": None,

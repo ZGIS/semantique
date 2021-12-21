@@ -347,7 +347,10 @@ class Cube():
           f"'{name}': '{intypes}'"
         )
     out.sq.value_type = outtype
-    out.sq.categories = self.categories if outtype == "categorical" else None
+    if outtype in ["nominal", "ordinal"]:
+      out.sq.categories = self.categories
+    else:
+      del out.sq.categories
     return out
 
   @staticmethod
@@ -376,7 +379,7 @@ class Cube():
   @staticmethod
   def _parse_datetime_component(obj, name):
     if name in ["dayofweek", "weekday"]:
-      obj.sq.value_type = "categorical"
+      obj.sq.value_type = "ordinal"
       obj.sq.categories = {
         "Monday": 0,
         "Tuesday": 1,
@@ -387,7 +390,7 @@ class Cube():
         "Sunday": 6
       }
     elif name == "quarter":
-      obj.sq.value_type = "categorical"
+      obj.sq.value_type = "ordinal"
       obj.sq.categories = {
         "JFM": 1,
         "AMJ": 2,
@@ -404,7 +407,7 @@ class Cube():
       for k, v in categories.items():
         obj = obj.str.replace(k, str(v))
       obj = obj.astype(int)
-      obj.sq.value_type = "categorical"
+      obj.sq.value_type = "ordinal"
       obj.sq.categories = categories
     else:
       obj.sq.value_type = "numerical"
@@ -442,7 +445,7 @@ class CubeCollection(list):
     for x in indexed[1:]:
       out = out.combine_first(x)
     if track_types:
-      out.sq.value_type = "categorical"
+      out.sq.value_type = "nominal"
       names = [x.name for x in self]
       idxs = range(1, len(names) + 1)
       out.sq.categories = {k:v for k, v in zip(names, idxs)}
@@ -466,9 +469,9 @@ class CubeCollection(list):
       coords = pd.Index(labels, name = dimension, tupleize_cols = False)
       out = xr.concat([x for x in self], coords)
       if track_types:
-        out[dimension].sq.value_type = "categorical" # Thematic dimension.
+        out[dimension].sq.value_type = "nominal" # Thematic dimension.
         out[dimension].sq.categories = {x:x for x in labels}
-    if track_types and out.sq.value_type == "categorical":
+    if track_types and out.sq.value_type == "nominal":
       out.sq.categories = None
     return out
 

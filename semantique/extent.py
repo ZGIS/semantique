@@ -188,7 +188,7 @@ class SpatialExtent(dict):
       names = vector_obj["name"]
     except KeyError:
       names = ["feature_" + str(i) for i in indices]
-    raster_obj.sq.value_type = "categorical"
+    raster_obj.sq.value_type = "nominal"
     raster_obj.sq.categories = {k:v for k, v in zip(names, indices)}
     return raster_obj
 
