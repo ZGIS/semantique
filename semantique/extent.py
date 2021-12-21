@@ -72,7 +72,7 @@ class SpatialExtent(dict):
     t = obj["type"]
     if t == "FeatureCollection":
       return cls.from_featurecollection(obj, **kwargs)
-    else if t == "Feature":
+    elif t == "Feature":
       return cls.from_feature(obj, **kwargs)
     else:
       return cls.from_geometry(obj, **kwargs)
