@@ -49,6 +49,10 @@ class Opendatacube(Factbase):
     # Update default configuration parameters with provided ones.
     params = {
       "group_by_solar_day": True,
+      "value_type_mapping": {
+        "categorical": "ordinal",
+        "continuous": "numerical"
+      },
       "resamplers": {
         "categorical": "mode",
         "continuous": "med"
