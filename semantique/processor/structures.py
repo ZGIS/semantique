@@ -36,20 +36,20 @@ class Cube():
       pass
 
   @property
-  def categories(self):
+  def value_labels(self):
     try:
-      return self._obj.attrs["categories"]
+      return self._obj.attrs["value_labels"]
     except KeyError:
       return None
 
-  @categories.setter
-  def categories(self, value):
-    self._obj.attrs["categories"] = value
+  @value_labels.setter
+  def value_labels(self, value):
+    self._obj.attrs["value_labels"] = value
 
-  @categories.deleter
-  def categories(self):
+  @value_labels.deleter
+  def value_labels(self):
     try:
-      del self._obj.attrs["categories"]
+      del self._obj.attrs["value_labels"]
     except KeyError:
       pass
 
@@ -348,9 +348,9 @@ class Cube():
         )
     out.sq.value_type = outtype
     if outtype in ["nominal", "ordinal"]:
-      out.sq.categories = self.categories
+      out.sq.value_labels = self.value_labels
     else:
-      del out.sq.categories
+      del out.sq.value_labels
     return out
 
   @staticmethod
@@ -380,7 +380,7 @@ class Cube():
   def _parse_datetime_component(obj, name):
     if name in ["dayofweek", "weekday"]:
       obj.sq.value_type = "ordinal"
-      obj.sq.categories = {
+      obj.sq.value_labels = {
         "Monday": 0,
         "Tuesday": 1,
         "Wednesday": 2,
@@ -391,24 +391,24 @@ class Cube():
       }
     elif name == "quarter":
       obj.sq.value_type = "ordinal"
-      obj.sq.categories = {
+      obj.sq.value_labels = {
         "JFM": 1,
         "AMJ": 2,
         "JAS": 3,
         "OND": 4
       }
     elif name == "season":
-      categories = {
+      value_labels = {
         "DJF": 1,
         "MAM": 2,
         "JJA": 3,
         "SON": 4
       }
-      for k, v in categories.items():
+      for k, v in value_labels.items():
         obj = obj.str.replace(k, str(v))
       obj = obj.astype(int)
       obj.sq.value_type = "ordinal"
-      obj.sq.categories = categories
+      obj.sq.value_labels = value_labels
     else:
       obj.sq.value_type = "numerical"
     return obj
@@ -448,7 +448,7 @@ class CubeCollection(list):
       out.sq.value_type = "nominal"
       names = [x.name for x in self]
       idxs = range(1, len(names) + 1)
-      out.sq.categories = {k:v for k, v in zip(names, idxs)}
+      out.sq.value_labels = {k:v for k, v in zip(names, idxs)}
     return out
 
   def concatenate(self, dimension, track_types = True, **kwargs):
@@ -470,9 +470,9 @@ class CubeCollection(list):
       out = xr.concat([x for x in self], coords)
       if track_types:
         out[dimension].sq.value_type = "nominal" # Thematic dimension.
-        out[dimension].sq.categories = {x:x for x in labels}
+        out[dimension].sq.value_labels = {x:x for x in labels}
     if track_types and out.sq.value_type == "nominal":
-      out.sq.categories = None
+      out.sq.value_labels = None
     return out
 
   def merge(self, reducer, track_types = True, type_promotion = None, **kwargs):

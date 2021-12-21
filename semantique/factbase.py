@@ -163,14 +163,14 @@ class Opendatacube(Factbase):
     vtype = self.config["value_type_mapping"][metadata["type"]]
     data.sq.value_type = vtype
     if vtype in ["nominal", "ordinal"]:
-      categories = {}
+      value_labels = {}
       for x in metadata["values"]:
-        categories[x["label"]] = x["id"]
-      data.sq.categories = categories
+        value_labels[x["label"]] = x["id"]
+      data.sq.value_labels = value_labels
     data["space"].sq.value_type = "space"
     data["time"].sq.value_type = "time"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
-    data["feature"].sq.categories = extent["feature"].sq.categories
+    data["feature"].sq.value_labels = extent["feature"].sq.value_labels
     return data
 
   def _mask_data(self, data):
@@ -298,12 +298,12 @@ class GeotiffArchive(Factbase):
     vtype = self.config["value_type_mapping"][metadata["type"]]
     data.sq.value_type = vtype
     if vtype in ["nominal", "ordinal"]:
-      categories = {}
+      value_labels = {}
       for x in metadata["values"]:
-        categories[x["label"]] = x["id"]
-      data.sq.categories = categories
+        value_labels[x["label"]] = x["id"]
+      data.sq.value_labels = value_labels
     data["space"].sq.value_type = "space"
     data["time"].sq.value_type = "time"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
-    data["feature"].sq.categories = extent["feature"].sq.categories
+    data["feature"].sq.value_labels = extent["feature"].sq.value_labels
     return data

@@ -224,7 +224,7 @@ class QueryProcessor():
   def handle_category(self, block):
     label = block["label"]
     try:
-      idx = self._get_eval_obj().sq.categories[label]
+      idx = self._get_eval_obj().sq.value_labels[label]
     except (KeyError, TypeError):
       raise exceptions.UndefinedCategoryLabelError(
         f"Category label '{label}' is not defined"

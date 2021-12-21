@@ -29,7 +29,7 @@ def create_extent_cube(space, time, spatial_resolution, crs = None, tz = None):
   space.coords["feature"] = ("space", space.data)
   space["feature"].name = "feature"
   space["feature"].sq.value_type = space.sq.value_type
-  space["feature"].sq.categories = space.sq.categories
+  space["feature"].sq.value_labels = space.sq.value_labels
   ## Temporal extent ##
   # Define bounds of temporal extent.
   if tz is None:
