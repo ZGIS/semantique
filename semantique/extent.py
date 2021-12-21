@@ -219,34 +219,52 @@ class TemporalExtent(dict):
   """
 
   def __init__(self, *bounds, **kwargs):
-    start = pd.Timestamp(bounds[0], **kwargs)
-    end = pd.Timestamp(bounds[-1], **kwargs)
-    tz = start.tz
-    if tz is None:
-      tz = pytz.utc
-      start = start.tz_localize(tz)
-      end = end.tz_localize(tz)
-    if start == end:
-      timejs = {
-        "type": "Instant",
-        "datetime": start.tz_localize(None).isoformat(),
-        "tz": tz.zone
-      }
+    interval = True # By default assume given bounds form an interval.
+    # Parse bounds.
+    if len(bounds) > 1:
+      if isinstance(bounds[0], TemporalExtent):
+        start = pd.Timestamp(bounds[0].start, **kwargs)
+      else:
+        start = pd.Timestamp(bounds[0], **kwargs)
+      if isinstance(bounds[-1], TemporalExtent):
+        end = pd.Timestamp(bounds[-1].end, **kwargs)
+      else:
+        end = pd.Timestamp(bounds[-1], **kwargs)
     else:
-      if tz != end.tz:
+      if isinstance(bounds[0], TemporalExtent):
+        start = pd.Timestamp(bounds[0].start, **kwargs)
+        end = pd.Timestamp(bounds[0].end, **kwargs)
+      else:
+        start = pd.Timestamp(bounds[0], **kwargs)
+        end = start
+        interval = False
+    # Check if timezones of bounds are matching.
+    if interval and start.tz != end.tz:
         raise exceptions.MixedTimeZonesError(
           f"Time interval has bounds with differing time zones: "
-          f"'{tz.zone}' and '{end.tz.zone}'"
+          f"'{start.tz.zone}' and '{end.tz.zone}'"
         )
+    # Assign default timezone UTC if timezone is not known.
+    if start.tz is None:
+      start = start.tz_localize(pytz.utc)
+      end = end.tz_localize(pytz.utc)
+    # Construct dict representation of the temporal extent.
+    if interval:
       timejs = {
         "type": "Interval",
         "start": start.tz_localize(None).isoformat(),
         "end": end.tz_localize(None).isoformat(),
-        "tz": tz.zone
+        "tz": start.tz.zone
+      }
+    else:
+      timejs = {
+        "type": "Instant",
+        "datetime": start.tz_localize(None).isoformat(),
+        "tz": start.tz.zone
       }
     self._start = start
     self._end = end
-    self._tz = tz
+    self._tz = start.tz
     super(TemporalExtent, self).__init__(timejs)
 
   @property
