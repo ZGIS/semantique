@@ -29,20 +29,26 @@ class SpatialExtent(dict):
 
   def __init__(self, obj, **kwargs):
     if isinstance(obj, SpatialExtent):
-      obj = obj._geodf
+      obj = obj.features
     geodf = gpd.GeoDataFrame(obj, **kwargs)
     geojs = geodf.__geo_interface__
     crs = geodf.crs
     if crs is None:
       crs = CRS.from_epsg(4326)
     geojs["crs"] = crs.to_json_dict()
-    self._geodf = geodf
+    self._features = geodf
     self._crs = crs
     super(SpatialExtent, self).__init__(geojs)
 
   @property
   def __geo_interface__(self):
     return self
+
+  @property
+  def features(self):
+    """:obj:`geopandas.GeoDataFrame`: Spatial features comprising the spatial
+    extent."""
+    return self._features
 
   @property
   def crs(self):
@@ -165,7 +171,7 @@ class SpatialExtent(dict):
       :obj:`xarray.DataArray`
 
     """
-    vector_obj = self._geodf.reset_index()
+    vector_obj = self._features.reset_index()
     vector_obj["index"] = vector_obj["index"] + 1
     raster_obj = geocube.api.core.make_geocube(
       vector_data = vector_obj,
