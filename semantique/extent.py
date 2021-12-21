@@ -278,7 +278,7 @@ class TemporalExtent(dict):
     """:obj:`pandas.Timestamp`: Upper bound of the temporal extent."""
     return self._end
 
-  def discretize(self, resolution, tz = None):
+  def discretize(self, resolution = None, tz = None):
     """Discretize the temporal extent into an array.
 
     Discretizing the temporal extent creates a one-dimensional regular grid
@@ -291,7 +291,8 @@ class TemporalExtent(dict):
       resolution : :obj:`str` or :obj:`pandas.DateOffset`
         Temporal resolution of the grid. Can be given as offset alias as
         defined in pandas, e.g. "D" for a daily frequency. These aliases can
-        have multiples, e.g. "5D".
+        have multiples, e.g. "5D". If `None`, only the start and end instants
+        of the extent will be coordinates in the grid.
       tz
         Time zone of the datetime values in the grid. Can be given as :obj:`str`
         referring to the name of a time zone in the tz database, or as instance
@@ -304,9 +305,12 @@ class TemporalExtent(dict):
       :obj:`xarray.DataArray`
 
     """
+    if resolution is None:
+      range_obj = pd.date_range(self.start, self.end, periods = 2)
+    else:
+      range_obj = pd.date_range(self.start, self.end, freq = resolution)
     if tz is None:
       tz = self.tz
-    range_obj = pd.date_range(self._start, self._end, freq = resolution)
     range_obj = range_obj.tz_convert(tz)
     range_obj = [np.datetime64(x) for x in range_obj.tz_localize(None)]
     array_obj = xr.DataArray(range_obj, dims = ["time"], coords = [range_obj])

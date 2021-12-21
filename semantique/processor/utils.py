@@ -8,8 +8,8 @@ def convert_datetime64(obj, tz_from, tz_to, **kwargs):
   obj_new = pd.Timestamp(obj).tz_localize(tz_from).tz_convert(tz_to, **kwargs)
   return np.datetime64(obj_new.tz_localize(None))
 
-def create_extent_cube(space, time, spatial_resolution, crs = None, tz = None):
-  ## Spatial extent ##
+def create_extent_cube(space, time, spatial_resolution,
+                       temporal_resolution = None, crs = None, tz = None):
   # Rasterize spatial extent.
   space = space.rasterize(spatial_resolution, crs)
   # Update spatial reference.
@@ -28,16 +28,10 @@ def create_extent_cube(space, time, spatial_resolution, crs = None, tz = None):
   space["feature"].name = "feature"
   space["feature"].sq.value_type = space.sq.value_type
   space["feature"].sq.value_labels = space.sq.value_labels
-  ## Temporal extent ##
-  # Define bounds of temporal extent.
-  if tz is None:
-    tz = time.tz.zone
-  start = time.start.tz_convert(tz).tz_localize(None)
-  end = time.end.tz_convert(tz).tz_localize(None)
-  ## Spatio-temporal extent ##
-  # Combine spatial and temporal extent.
-  extent = space.expand_dims({"time": [start, end]})
+  # Discretize temporal extent.
+  time = time.discretize(temporal_resolution, tz)
+  # Combine rasterized spatial extent with discretized temporal extent.
+  extent = space.expand_dims({"time": time})
   extent["time"].sq.value_type = "time"
-  # Add temporal reference (i.e. time zone).
-  extent = extent.sq.write_tz(tz)
+  extent = extent.sq.write_tz(time.sq.tz)
   return extent
