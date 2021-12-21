@@ -35,7 +35,7 @@ class SpatialExtent(dict):
     crs = geodf.crs
     if crs is None:
       crs = CRS.from_epsg(4326)
-    geojs["crs"] = crs.to_json_dict()
+    geojs["crs"] = crs.to_string()
     self._features = geodf
     self._crs = crs
     super(SpatialExtent, self).__init__(geojs)
