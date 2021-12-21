@@ -47,17 +47,7 @@ class Opendatacube(Factbase):
     self.connection = connection
     self.tz = tz
     # Update default configuration parameters with provided ones.
-    params = {
-      "group_by_solar_day": True,
-      "value_type_mapping": {
-        "categorical": "ordinal",
-        "continuous": "numerical"
-      },
-      "resamplers": {
-        "categorical": "mode",
-        "continuous": "med"
-      }
-    }
+    params = self.default_config
     params.update(config)
     self.config = params
 
@@ -80,17 +70,26 @@ class Opendatacube(Factbase):
     self._tz = pytz.timezone(value)
 
   @property
+  def default_config(self):
+    return {
+      "group_by_solar_day": True,
+      "value_type_mapping": {
+        "categorical": "ordinal",
+        "continuous": "numerical"
+      },
+      "resamplers": {
+        "categorical": "mode",
+        "continuous": "med"
+      }
+    }
+
+  @property
   def config(self):
     return self._config
 
   @config.setter
   def config(self, value):
     assert isinstance(value, dict)
-    for param in ["group_by_solar_day", "resamplers"]:
-      if param not in value:
-        raise ValueError(
-          f"Configuration parameter '{param}' should be present"
-        )
     self._config = value
 
   def retrieve(self, *reference, extent):
