@@ -28,6 +28,8 @@ class SpatialExtent(dict):
   """
 
   def __init__(self, obj, **kwargs):
+    if isinstance(obj, SpatialExtent):
+      obj = obj._geodf
     geodf = gpd.GeoDataFrame(obj, **kwargs)
     geojs = geodf.__geo_interface__
     crs = geodf.crs
