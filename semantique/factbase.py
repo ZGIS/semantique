@@ -3,6 +3,7 @@ import numpy as np
 import datacube
 import os
 import pytz
+import rasterio
 import rioxarray
 
 from datacube.utils import masking
@@ -176,10 +177,14 @@ class Opendatacube(Factbase):
 
 class GeotiffArchive(Factbase):
 
-  def __init__(self, layout = None, src = None, tz = "UTC"):
+  def __init__(self, layout = None, src = None, tz = "UTC", **config):
     super(GeotiffArchive, self).__init__(layout)
     self.src = src
     self.tz = tz
+    # Update default configuration parameters with provided ones.
+    params = self.default_config
+    params.update(config)
+    self.config = params
 
   @property
   def src(self):
@@ -199,6 +204,28 @@ class GeotiffArchive(Factbase):
   def tz(self, value):
     self._tz = pytz.timezone(value)
 
+  @property
+  def default_config(self):
+    return {
+      "value_type_mapping": {
+        "categorical": "ordinal",
+        "continuous": "numerical"
+      },
+      "resamplers": {
+        "categorical": "mode",
+        "continuous": "med"
+      }
+    }
+
+  @property
+  def config(self):
+    return self._config
+
+  @config.setter
+  def config(self, value):
+    assert isinstance(value, dict)
+    self._config = value
+
   def retrieve(self, *reference, extent):
     # Get metadata.
     metadata = self.lookup(*reference)
@@ -216,7 +243,10 @@ class GeotiffArchive(Factbase):
       raise exceptions.MissingDimensionError(
         "Cannot retrieve data in an extent without a spatial dimension"
       )
-    data = data.rio.reproject_match(extent.sq.unstack_spatial_dims())
+    shape = extent.sq.unstack_spatial_dims()
+    resample_name = self.config["resamplers"][metadata["type"]]
+    resample_func = getattr(rasterio.enums.Resampling, resample_name)
+    data = data.rio.reproject_match(shape, resampling = resample_func)
     # Convert to correct timezone.
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
