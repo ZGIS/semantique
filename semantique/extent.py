@@ -6,6 +6,7 @@ import xarray as xr
 import copy
 import geocube.api.core
 import pytz
+import rioxarray
 
 from pyproj.crs import CRS
 
@@ -138,7 +139,7 @@ class SpatialExtent(dict):
     geodf = gpd.GeoDataFrame.from_features([geojs], **kwargs)
     return cls(geodf)
 
-  def rasterize(self, resolution, crs = None):
+  def rasterize(self, resolution, crs = None, stack = False):
     """Rasterize the spatial extent into an array.
 
     Rasterizing the spatial extent creates a rectangular two-dimensional
@@ -165,14 +166,19 @@ class SpatialExtent(dict):
         given as any object understood by the initializer of :obj:`pyproj.CRS`.
         This includes :obj:`pyproj.CRS` objects themselves, as well as EPSG
         codes and WKT strings. If `None`, the CRS of the extent is used.
+      stack : :obj:`bool`
+        Boolean defining if the two spatial dimensions of the grid should be
+        stacked into a single, multi-indexed "space" dimension.
 
     Returns
     -------
       :obj:`xarray.DataArray`
 
     """
+    # Use CRS of extent if no output CRS is given.
     if crs is None:
       crs = self.crs
+    # Rasterize.
     vector_obj = self._features.reset_index()
     vector_obj["index"] = vector_obj["index"] + 1
     raster_obj = geocube.api.core.make_geocube(
@@ -181,6 +187,12 @@ class SpatialExtent(dict):
       output_crs = crs,
       resolution = resolution,
     )["index"]
+    # Update spatial reference.
+    # CRS information was already automatically included during rasterizing.
+    # In addition we add the GeoTransform attribute.
+    # See https://gdal.org/tutorials/geotransforms_tut.html
+    raster_obj = raster_obj.rio.write_transform()
+    # Write semantique specific attributes.
     indices = vector_obj["index"]
     try:
       names = vector_obj["name"]
@@ -188,6 +200,10 @@ class SpatialExtent(dict):
       names = ["feature_" + str(i) for i in indices]
     raster_obj.sq.value_type = "nominal"
     raster_obj.sq.value_labels = {k:v for k, v in zip(names, indices)}
+    # Stack the two spatial dimensions into one if requested.
+    if stack:
+      raster_obj = raster_obj.sq.stack_spatial_dims()
+      raster_obj["space"].sq.value_type = "space"
     return raster_obj
 
 class TemporalExtent(dict):
