@@ -126,7 +126,7 @@ class QueryProcessor():
     spatres = config.pop("spatial_resolution", [-10, 10])
     crs = config.pop("output_crs", None)
     tz = config.pop("output_tz", None)
-    extent = utils.create_extent_cube(space, time, spatres, crs, tz)
+    extent = utils.create_extent_cube(space, time, spatres, crs = crs, tz = tz)
     # Initialize the QueryProcessor instance.
     return cls(recipe, factbase, ontology, extent, **config)
 
