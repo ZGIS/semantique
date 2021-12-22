@@ -261,7 +261,7 @@ class GeotiffArchive(Factbase):
   def _load_data(self, metadata):
     return rioxarray.open_rasterio("zip://" + self.src + "!" + metadata["file"])
 
-  def _subset_data(self, extent, metadata):
+  def _subset_data(self, data, extent, metadata):
     # Subset temporally.
     if extent.sq.temporal_dimension is None:
       raise exceptions.MissingDimensionError(
