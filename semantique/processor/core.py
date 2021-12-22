@@ -11,7 +11,7 @@ import warnings
 import semantique.processor.operators
 import semantique.processor.reducers
 from semantique import exceptions
-from semantique.processor import structures, templates, utils
+from semantique.processor import structures, utils
 
 logger = logging.getLogger(__name__)
 
@@ -302,15 +302,15 @@ class QueryProcessor():
           params["y"] = self.call_handler(y)
         except exceptions.InvalidBuildingBlockError:
           pass
-    params.update(self.get_operator(params["operator"]))
-    if not self._track_types:
-      params.pop("type_promotion")
+    params["operator"] = self.get_operator(params["operator"])
+    params["track_types"] = self._track_types
     return params
 
   def update_params_of_filter(self, params):
     params = copy.deepcopy(params)
     filterer = params["filterer"]
     params["filterer"] = getattr(self, "handle_" + filterer["type"])(filterer)
+    params["track_types"] = self._track_types
     return params
 
   def update_params_of_groupby(self, params):
@@ -321,9 +321,8 @@ class QueryProcessor():
 
   def update_params_of_reduce(self, params):
     params = copy.deepcopy(params)
-    params.update(self.get_reducer(params["reducer"]))
-    if not self._track_types:
-      params.pop("type_promotion")
+    params["reducer"] = self.get_reducer(params["reducer"])
+    params["track_types"] = self._track_types
     return params
 
   def update_params_of_replace(self, params):
@@ -336,8 +335,7 @@ class QueryProcessor():
         params["y"] = self.update_list_elements(y)
       else:
         pass
-    if self._track_types:
-      params["type_promotion"] = templates.TYPE_PROMOTION_TEMPLATES["replacers"]
+    params["track_types"] = self._track_types
     return params
 
   def update_params_of_compose(self, params):
@@ -352,10 +350,8 @@ class QueryProcessor():
 
   def update_params_of_merge(self, params):
     params = copy.deepcopy(params)
+    params["reducer"] = self.get_reducer(params["reducer"])
     params["track_types"] = self._track_types
-    params.update(self.get_reducer(params["reducer"]))
-    if not self._track_types:
-      params.pop("type_promotion")
     return params
 
   def update_list_elements(self, obj):
@@ -366,13 +362,8 @@ class QueryProcessor():
         return x
     return [_update(x) for x in obj]
 
-  def add_operator(self, name, function, type_promotion = None):
-    new = {
-      name: {
-        "operator": function,
-        "type_promotion": type_promotion
-      }
-    }
+  def add_operator(self, name, function):
+    new = {name: function}
     self._operators.update(new)
 
   def get_operator(self, name):
@@ -388,22 +379,13 @@ class QueryProcessor():
     src = semantique.processor.operators
     functions = dict(inspect.getmembers(src, inspect.isfunction))
     functions = {k:v for k, v in functions.items() if k[0] != "_"}
-    type_promotions = src.TYPE_PROMOTIONS
     out = {}
     for f in functions:
-      out[f[:-1]] = {
-        "operator": functions[f],
-        "type_promotion": type_promotions[f]
-      }
+      out[f[:-1]] = functions[f]
     self._operators = out
 
-  def add_reducer(self, name, function, type_promotion = None):
-    new = {
-      name: {
-        "reducer": function,
-        "type_promotion": type_promotion
-      }
-    }
+  def add_reducer(self, name, function):
+    new = {name: function}
     self._reducers.update(new)
 
   def get_reducer(self, name):
@@ -419,13 +401,9 @@ class QueryProcessor():
     src = semantique.processor.reducers
     functions = dict(inspect.getmembers(src, inspect.isfunction))
     functions = {k:v for k, v in functions.items() if k[0] != "_"}
-    type_promotions = src.TYPE_PROMOTIONS
     out = {}
     for f in functions:
-      out[f[:-1]] = {
-        "reducer": functions[f],
-        "type_promotion": type_promotions[f]
-      }
+      out[f[:-1]] = functions[f]
     self._reducers = out
 
   def _get_eval_obj(self):

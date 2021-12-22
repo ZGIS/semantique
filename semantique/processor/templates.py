@@ -13,11 +13,13 @@ TYPE_PROMOTION_TEMPLATES = {
       "u": None,
       "f": None,
       None: None
-    }
+    },
+    "__preserve_labels__": False
   },
   "algebraic_univariate_operators": {
     "numerical": "numerical",
-    None: None
+    None: None,
+    "__preserve_labels__": False
   },
   "boolean_multivariate_operators": {
     "binary": {
@@ -29,11 +31,13 @@ TYPE_PROMOTION_TEMPLATES = {
       "binary": None,
       "b": None,
       None: None
-    }
+    },
+    "__preserve_labels__": True
   },
   "boolean_univariate_operators": {
     "binary": "binary",
-    None: None
+    None: None,
+    "__preserve_labels__": True
   },
   "equality_operators": {
     "binary": {
@@ -80,7 +84,8 @@ TYPE_PROMOTION_TEMPLATES = {
       "O": None,
       "U": None,
       None: None
-    }
+    },
+    "__preserve_labels__": False
   },
   "regular_relational_operators": {
     "binary": {
@@ -120,7 +125,8 @@ TYPE_PROMOTION_TEMPLATES = {
       "O": None,
       "U": None,
       None: None
-    }
+    },
+    "__preserve_labels__": False
   },
   "spatial_relational_operators": {
     "space": {
@@ -132,7 +138,8 @@ TYPE_PROMOTION_TEMPLATES = {
       "space": None,
       "O": None,
       None: None
-    }
+    },
+    "__preserve_labels__": False
   },
   "temporal_relational_operators": {
     "time": {
@@ -144,26 +151,31 @@ TYPE_PROMOTION_TEMPLATES = {
       "time": None,
       "M": None,
       None: None
-    }
+    },
+    "__preserve_labels__": False
   },
   "boolean_reducers": {
     "binary": "binary",
-    None: None
+    None: None,
+    "__preserve_labels__": True
   },
   "count_reducers": {
     "binary": "numerical",
-    None: None
+    None: None,
+    "__preserve_labels__": False
   },
   "numerical_reducers": {
     "numerical": "numerical",
-    None: None
+    None: None,
+    "__preserve_labels__": False
   },
   "ordered_reducers": {
     "binary": "binary",
     "numerical": "numerical",
     "ordinal": "ordinal",
     "time": "time",
-    None: None
+    None: None,
+    "__preserve_labels__": True
   },
   "universal_reducers": {
     "binary": "binary",
@@ -172,7 +184,8 @@ TYPE_PROMOTION_TEMPLATES = {
     "ordinal": "ordinal",
     "time": "time",
     "space": "space",
-    None: None
+    None: None,
+    "__preserve_labels__": True
   },
   "replacers": {
     "binary": {
@@ -286,6 +299,7 @@ TYPE_PROMOTION_TEMPLATES = {
       "O": None,
       "U": None,
       None: None
-    }
+    },
+    "__preserve_labels__": False
   }
 }

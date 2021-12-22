@@ -10,6 +10,7 @@ import warnings
 
 from semantique import exceptions
 from semantique.processor import utils
+from semantique.processor.templates import TYPE_PROMOTION_TEMPLATES
 
 @xr.register_dataarray_accessor("sq")
 class Cube():
@@ -116,12 +117,9 @@ class Cube():
         return xy
     return None
 
-  def evaluate(self, operator, y = None, type_promotion = None, **kwargs):
+  def evaluate(self, operator, y = None, track_types = False, **kwargs):
     operands = tuple([self._obj]) if y is None else tuple([self._obj, y])
-    out = operator(*operands, **kwargs)
-    if type_promotion is not None:
-      func = operator.__name__[:-1]
-      out.sq._promote_types(*operands, manual = type_promotion, name = func)
+    out = operator(*operands, track_types = track_types, **kwargs)
     return out
 
   def extract(self, dimension, component = None, **kwargs):
@@ -151,7 +149,13 @@ class Cube():
           out.sq.value_type = "numerical"
     return out
 
-  def filter(self, filterer, trim = True, **kwargs):
+  def filter(self, filterer, trim = True, track_types = False, **kwargs):
+    if track_types:
+      vtype = filterer.sq.value_type
+      if vtype != "binary":
+        raise InvalidValueTypeError(
+          f"Filterer must be of value type 'binary', not '{vtype}'"
+        )
     out = self._obj.where(filterer.sq.align_with(self._obj))
     if trim:
       out = out.sq.trim()
@@ -172,23 +176,22 @@ class Cube():
     out = self._obj.rename(label)
     return out
 
-  def reduce(self, dimension, reducer, type_promotion = None, **kwargs):
-    out = reducer(self._obj, dimension, **kwargs)
-    if type_promotion is not None:
-      func = reducer.__name__[:-1]
-      out.sq._promote_types(self._obj, manual = type_promotion, name = func)
+  def reduce(self, dimension, reducer, track_types = False, **kwargs):
+    out = reducer(self._obj, dimension, track_types = track_types, **kwargs)
     return out
 
-  def replace(self, y, type_promotion = None, **kwargs):
+  def replace(self, y, track_types = False, **kwargs):
     try:
       y = y.sq.align_with(self._obj)
     except AttributeError:
       y = np.array(y)
     nodata = np.datetime64("NaT") if y.dtype.kind == "M" else np.nan
     out = xr.where(np.isfinite(self._obj), y, nodata)
-    if type_promotion is not None:
-      func = "replace"
-      out.sq._promote_types(self._obj, y, manual = type_promotion, name = func)
+    if track_types:
+      manual = TYPE_PROMOTION_TEMPLATES["replacers"]
+      out.sq.promote_value_type(self._obj, y, func = "replace", manual = manual)
+      if y.sq.value_labels is not None:
+        out.sq.value_labels = y.sq.value_labels
     return out
 
   def align_with(self, other):
@@ -272,6 +275,42 @@ class Cube():
       drop = set(self._obj.coords) - set(self._obj.dims) - set(keep)
     return self._obj.reset_coords(drop, drop = True)
 
+  def promote_value_type(self, *operands, func, manual, inplace = True):
+    out = self._obj if inplace else copy.deepcopy(self._obj)
+    if manual is None:
+      out.sq.value_type = None
+      out.sq.value_labels = None
+      return out
+    # Update value type.
+    # Based on value types of the operands and the type promotion manual.
+    def _get_type(x):
+      try:
+        return x.sq.value_type
+      except AttributeError:
+        return np.array(x).dtype.kind
+    intypes = [_get_type(x) for x in operands]
+    outtype = manual # Initialize before scanning.
+    for x in intypes:
+      try:
+        outtype = outtype[x]
+      except KeyError:
+        raise exceptions.InvalidValueTypeError(
+          f"Unsupported operand value type(s) for '{func}': '{intypes}'"
+        )
+    out.sq.value_type = outtype
+    # Update value labels.
+    # The manual has a special key to define if labels should be preserved.
+    # If True the labels of the first operand should be preserved.
+    try:
+      preserve_labels = manual["__preserve_labels__"]
+    except KeyError:
+      preserve_labels = False
+    if preserve_labels:
+      out.sq.value_labels = operands[0].sq.value_labels
+    else:
+      del out.sq.value_labels
+    return out
+
   def to_csv(self, file, **kwargs):
     obj = self.drop_non_dimension_coords()
     # to_dataframe method does not work for zero-dimensional arrays.
@@ -328,31 +367,6 @@ class Cube():
       )
     return file
 
-  def _promote_types(self, *vars, manual, name, inplace = True):
-    out = self._obj if inplace else copy.deepcopy(self._obj)
-    def _get_type(x):
-      try:
-        vtype = x.sq.value_type
-      except AttributeError:
-        vtype = None
-      return np.array(x).dtype.kind if vtype is None else vtype
-    intypes = [_get_type(x) for x in vars]
-    outtype = manual # Initialize before scanning.
-    for x in intypes:
-      try:
-        outtype = outtype[x]
-      except KeyError:
-        raise exceptions.InvalidTypePromotionError(
-          f"Unsupported operand value type(s) for "
-          f"'{name}': '{intypes}'"
-        )
-    out.sq.value_type = outtype
-    if outtype in ["nominal", "ordinal"]:
-      out.sq.value_labels = self.value_labels
-    else:
-      del out.sq.value_labels
-    return out
-
   @staticmethod
   def _validate_grouper(grouper, obj):
     if not isinstance(grouper, list):
@@ -392,23 +406,24 @@ class Cube():
     elif name == "quarter":
       obj.sq.value_type = "ordinal"
       obj.sq.value_labels = {
-        "JFM": 1,
-        "AMJ": 2,
-        "JAS": 3,
-        "OND": 4
+        "First": 1,
+        "Second": 2,
+        "Third": 3,
+        "Fourth": 4
       }
     elif name == "season":
-      value_labels = {
-        "DJF": 1,
-        "MAM": 2,
-        "JJA": 3,
-        "SON": 4
-      }
-      for k, v in value_labels.items():
+      # In xarray seasons get stored as strings.
+      # We want to store them as integers instead.
+      for k, v in zip(["MAM", "JJA", "SON", "DJF"], [1, 2, 3, 4]):
         obj = obj.str.replace(k, str(v))
       obj = obj.astype(int)
       obj.sq.value_type = "ordinal"
-      obj.sq.value_labels = value_labels
+      obj.sq.value_labels = {
+        "Spring": 1,
+        "Summer": 2,
+        "Autumn": 3,
+        "Winter": 4
+      }
     else:
       obj.sq.value_type = "numerical"
     return obj
@@ -428,14 +443,13 @@ class CubeCollection(list):
   def is_empty(self):
     return all([x.sq.is_empty for x in self])
 
-  def compose(self, track_types = True, **kwargs):
+  def compose(self, track_types = False, **kwargs):
     if track_types:
       value_types = [x.sq.value_type for x in self]
       if not all([x == "binary" for x in value_types]):
-        raise exceptions.InvalidTypePromotionError(
-          f"Unsupported operand value type(s) for 'compose': "
-          f"{np.unique(value_types).tolist()} "
-          f"Should all be binary"
+        raise exceptions.InvalidValueTypeError(
+          f"Element value types for 'compose' should all be 'binary', "
+          f"not {np.unique(value_types).tolist()} "
         )
     def index_(idx, obj):
       return xr.where(obj, idx + 1, np.nan).where(obj.notnull())
@@ -444,50 +458,57 @@ class CubeCollection(list):
     out = indexed[0]
     for x in indexed[1:]:
       out = out.combine_first(x)
-    if track_types:
-      out.sq.value_type = "nominal"
-      names = [x.name for x in self]
-      idxs = range(1, len(names) + 1)
-      out.sq.value_labels = {k:v for k, v in zip(names, idxs)}
+    labels = [x.name for x in self]
+    idxs = range(1, len(labels) + 1)
+    out.sq.value_type = "nominal"
+    out.sq.value_labels = {k:v for k, v in zip(labels, idxs)}
     return out
 
-  def concatenate(self, dimension, track_types = True, **kwargs):
+  def concatenate(self, dimension, track_types = False,
+                  vtype = "nominal", **kwargs):
     if track_types:
       value_types = [x.sq.value_type for x in self]
       if not all([x == value_types[0] for x in value_types]):
-        raise exceptions.MixedValueTypesError(
-          f"Cubes to be concatenated have differing value types: "
-          f"{np.unique(value_types).tolist()}"
+        raise exceptions.InvalidValueTypeError(
+          f"Element value types for 'concatenate' should all be the same, "
+          f"not {np.unique(value_types).tolist()} "
         )
     if dimension in self[0].dims:
+      # Concatenate over existing dimension.
       raw = xr.concat([x for x in self], dimension)
       coords = raw.get_index(dimension)
       clean = raw.isel({dimension: np.invert(coords.duplicated())})
       out = clean.sortby(dimension)
     else:
+      # Concatenate over new dimension.
       labels = [x.name for x in self]
       coords = pd.Index(labels, name = dimension, tupleize_cols = False)
       out = xr.concat([x for x in self], coords)
-      if track_types:
-        out[dimension].sq.value_type = "nominal" # Thematic dimension.
-        out[dimension].sq.value_labels = {x:x for x in labels}
-    if track_types and out.sq.value_type == "nominal":
-      out.sq.value_labels = None
+      out[dimension].sq.value_type = vtype
+      out[dimension].sq.value_labels = {x:x for x in labels}
+    # PROVISIONAL FIX: Always drop value labels of the concatenated cube.
+    # Value labels are preserved from the first element in the collection.
+    # These may not be accurate anymore for the concatenated cube.
+    # TODO: Find a way to merge value labels. But how to handle duplicates?
+    del out.sq.value_labels
     return out
 
-  def merge(self, reducer, track_types = True, type_promotion = None, **kwargs):
-    concatenated = self.concatenate("__sq__", track_types = track_types)
-    out = concatenated.sq.reduce("__sq__", reducer, type_promotion, **kwargs)
+  def merge(self, reducer, track_types = False, **kwargs):
+    dim = "__sq__" # Temporary dimension.
+    concat = self.concatenate(dim, track_types)
+    out = concat.sq.reduce(dim, reducer, track_types, **kwargs)
     return out
 
-  def evaluate(self, operator, y = None, type_promotion = None, **kwargs):
+  def evaluate(self, operator, y = None, track_types = False, **kwargs):
+    args = tuple(operator, y, track_types)
     out = copy.deepcopy(self)
-    out[:] = [x.sq.evaluate(operator, y, type_promotion, **kwargs) for x in out]
+    out[:] = [x.sq.evaluate(*args, **kwargs) for x in out]
     return out
 
-  def filter(self, filterer, trim = True, **kwargs):
+  def filter(self, filterer, trim = True, track_types = False, **kwargs):
+    args = tuple(filterer, trim, track_types)
     out = copy.deepcopy(self)
-    out[:] = [x.sq.filter(filterer, trim, **kwargs) for x in out]
+    out[:] = [x.sq.filter(*args, **kwargs) for x in out]
     return out
 
   def groupby(self, grouper, **kwargs):
@@ -495,19 +516,22 @@ class CubeCollection(list):
     out[:] = [x.sq.groupby(grouper, **kwargs) for x in out]
     return out
 
-  def reduce(self, dimension, reducer, type_promotion = None, **kwargs):
+  def reduce(self, dimension, reducer, track_types = False, **kwargs):
+    args = tuple(dimension, reducer, track_types)
     out = copy.deepcopy(self)
-    out[:] = [x.sq.reduce(dimension, reducer, type_promotion, **kwargs) for x in out]
+    out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
     return out
 
-  def replace(self, y, type_promotion = None, **kwargs):
+  def replace(self, y, track_types = False, **kwargs):
+    args = tuple(y, track_types)
     out = copy.deepcopy(self)
-    out[:] = [x.sq.replace(y, type_promotion, **kwargs) for x in out]
+    out[:] = [x.sq.replace(*args, **kwargs) for x in out]
     return out
 
   def extract(self, dimension, component = None, **kwargs):
+    args = tuple(dimension, component)
     out = copy.deepcopy(self)
-    out[:] = [x.sq.extract(dimension, component, **kwargs) for x in out]
+    out[:] = [x.sq.extract(*args, **kwargs) for x in out]
     return out
 
   def regularize(self):
