@@ -162,7 +162,12 @@ class Cube():
 
   def groupby(self, grouper, **kwargs):
     # Validate grouper.
-    dims = [x.dims for x in list(grouper)]
+    if isinstance(grouper, list):
+      multiple = True
+      dims = [x.dims for x in grouper]
+    else:
+      multiple = False
+      dims = [grouper.dims]
     if not all([len(x) == 1 for x in dims]):
       raise exceptions.TooManyDimensionsError(
         "Groupers must be one-dimensional"
@@ -171,12 +176,12 @@ class Cube():
       raise exceptions.UnmatchingDimensionsError(
         "Dimensions of grouper arrays do not match"
       )
-    if not dims[0][0] in obj.dims:
+    if not dims[0][0] in self._obj.dims:
       raise exceptions.MissingDimensionError(
         f"Grouper dimension '{dims[0]}' does not exist in the input object"
       )
     # Split input object into groups.
-    if isinstance(grouper, list):
+    if multiple:
       idx = pd.MultiIndex.from_arrays([x.data for x in grouper])
       dim = grouper[0].dims
       partition = list(self._obj.groupby(xr.IndexVariable(dim, idx)))
