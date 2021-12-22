@@ -451,11 +451,6 @@ class CubeCollection(list):
     out[:] = [x.sq.filter(*args, **kwargs) for x in out]
     return out
 
-  def groupby(self, grouper, **kwargs):
-    out = copy.deepcopy(self)
-    out[:] = [x.sq.groupby(grouper, **kwargs) for x in out]
-    return out
-
   def reduce(self, dimension, reducer, track_types = False, **kwargs):
     args = tuple(dimension, reducer, track_types)
     out = copy.deepcopy(self)
