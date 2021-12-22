@@ -152,7 +152,7 @@ class Cube():
   def filter(self, filterer, trim = True, track_types = False, **kwargs):
     if track_types:
       vtype = filterer.sq.value_type
-      if vtype != "binary":
+      if vtype is not None and vtype != "binary":
         raise exceptions.InvalidValueTypeError(
           f"Filterer must be of value type 'binary', not '{vtype}'"
         )
@@ -285,10 +285,11 @@ class Cube():
     # Based on value types of the operands and the type promotion manual.
     def _get_type(x):
       try:
-        vtype = x.sq.value_type
+        return x.attrs["value_type"]
       except AttributeError:
-        vtype = None
-      return np.array(x).dtype.kind if vtype is None else vtype
+        return np.array(x).dtype.kind
+      except KeyError:
+        return x.dtype.kind
     intypes = [_get_type(x) for x in operands]
     outtype = manual # Initialize before scanning.
     for x in intypes:
@@ -447,7 +448,7 @@ class CubeCollection(list):
   def compose(self, track_types = False, **kwargs):
     if track_types:
       value_types = [x.sq.value_type for x in self]
-      if not all([x == "binary" for x in value_types]):
+      if not all([x is None or x == "binary" for x in value_types]):
         raise exceptions.InvalidValueTypeError(
           f"Element value types for 'compose' should all be 'binary', "
           f"not {np.unique(value_types).tolist()} "
@@ -469,7 +470,7 @@ class CubeCollection(list):
                   vtype = "nominal", **kwargs):
     if track_types:
       value_types = [x.sq.value_type for x in self]
-      if not all([x == value_types[0] for x in value_types]):
+      if not all([x is None or x == value_types[0] for x in value_types]):
         raise exceptions.InvalidValueTypeError(
           f"Element value types for 'concatenate' should all be the same, "
           f"not {np.unique(value_types).tolist()} "
