@@ -231,7 +231,7 @@ class QueryProcessor():
       )
     return idx
 
-  def handle_geometry(self, block):
+  def handle_geometries(self, block):
     feats = block["value"]["features"]
     crs = pyproj.CRS.from_string(block["value"]["crs"])
     geodf = gpd.GeoDataFrame.from_features(feats, crs = crs)
