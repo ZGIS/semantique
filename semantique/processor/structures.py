@@ -445,6 +445,12 @@ class CubeCollection(list):
     out[:] = [x.sq.evaluate(*args, **kwargs) for x in out]
     return out
 
+  def extract(self, dimension, component = None, **kwargs):
+    args = tuple(dimension, component)
+    out = copy.deepcopy(self)
+    out[:] = [x.sq.extract(*args, **kwargs) for x in out]
+    return out
+
   def filter(self, filterer, trim = True, track_types = False, **kwargs):
     args = tuple(filterer, trim, track_types)
     out = copy.deepcopy(self)
@@ -461,12 +467,6 @@ class CubeCollection(list):
     args = tuple(dimension, reducer, track_types)
     out = copy.deepcopy(self)
     out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
-    return out
-
-  def extract(self, dimension, component = None, **kwargs):
-    args = tuple(dimension, component)
-    out = copy.deepcopy(self)
-    out[:] = [x.sq.extract(*args, **kwargs) for x in out]
     return out
 
   def regularize(self):
