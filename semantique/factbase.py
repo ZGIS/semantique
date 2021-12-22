@@ -79,8 +79,8 @@ class Opendatacube(Factbase):
         "continuous": "numerical"
       },
       "resamplers": {
-        "categorical": "mode",
-        "continuous": "med"
+        "categorical": "nearest",
+        "continuous": "nearest"
       }
     }
 
@@ -219,8 +219,8 @@ class GeotiffArchive(Factbase):
         "continuous": "numerical"
       },
       "resamplers": {
-        "categorical": "mode",
-        "continuous": "med"
+        "categorical": "nearest",
+        "continuous": "nearest"
       }
     }
 
