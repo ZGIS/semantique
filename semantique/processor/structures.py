@@ -162,7 +162,21 @@ class Cube():
     return out
 
   def groupby(self, grouper, **kwargs):
-    self._validate_grouper(grouper, self._obj)
+    # Validate grouper.
+    dims = [x.dims for x in list(grouper)]
+    if not all([len(x) == 1 for x in dims]):
+      raise exceptions.TooManyDimensionsError(
+        "Groupers must be one-dimensional"
+      )
+    if not all([x == dims[0] for x in dims]):
+      raise exceptions.UnmatchingDimensionsError(
+        "Dimensions of grouper arrays do not match"
+      )
+    if not dims[0][0] in obj.dims:
+      raise exceptions.MissingDimensionError(
+        f"Grouper dimension '{dims[0]}' does not exist in the input object"
+      )
+    # Split input object into groups.
     if isinstance(grouper, list):
       idx = pd.MultiIndex.from_arrays([x.data for x in grouper])
       dim = grouper[0].dims
@@ -368,29 +382,6 @@ class Cube():
         f"GeoTIFF export is only supported for 2D or 3D arrays, not {ndims}D"
       )
     return file
-
-  @staticmethod
-  def _validate_grouper(grouper, obj):
-    if not isinstance(grouper, list):
-      grouper = [grouper]
-    try:
-      dims = [x.dims for x in grouper]
-    except AttributeError:
-      raise TypeError(
-        "Groupers must be arrays"
-      )
-    if not all([len(x) == 1 for x in dims]):
-      raise exceptions.TooManyDimensionsError(
-        "Groupers must be one-dimensional"
-      )
-    if not all([x == dims[0] for x in dims]):
-      raise exceptions.UnmatchingDimensionsError(
-        "Dimensions of grouper arrays do not match"
-      )
-    if not dims[0][0] in obj.dims:
-      raise exceptions.MissingDimensionError(
-        f"Grouper dimension '{dims[0]}' does not exist in the input object"
-      )
 
   @staticmethod
   def _parse_datetime_component(obj, name):
