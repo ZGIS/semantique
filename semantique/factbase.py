@@ -180,9 +180,6 @@ class Opendatacube(Factbase):
     # Step II: Mask values outside of the spatial extent.
     # This is needed since ODC loads data for the bbox of the extent.
     data = data.where(data["feature"].notnull())
-    # Step III: Trim the data.
-    # This means we drop coordinates if all its values are nodata.
-    data = data.sq.trim()
     return data
 
 class GeotiffArchive(Factbase):

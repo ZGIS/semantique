@@ -19,7 +19,7 @@ class QueryProcessor():
 
   def __init__(self, recipe, factbase, ontology, extent, operators = None,
                extra_operators = None, reducers = None, extra_reducers = None,
-               track_types = True, regularize_results = True):
+               track_types = True, trim_data = True, regularize_results = True):
     self._eval_obj = [None]
     self._response = {}
     self.recipe = recipe
@@ -27,6 +27,7 @@ class QueryProcessor():
     self.ontology = ontology
     self.extent = extent
     self.track_types = track_types
+    self.trim_data = trim_data
     self.regularize_results = regularize_results
     if operators is None:
       self.store_default_operators()
@@ -111,6 +112,14 @@ class QueryProcessor():
     self._track_types = value
 
   @property
+  def trim_data(self):
+    return self._trim_data
+
+  @trim_data.setter
+  def trim_data(self, value):
+    self._trim_data = value
+
+  @property
   def regularize_results(self):
     return self._regularize_results
 
@@ -126,7 +135,18 @@ class QueryProcessor():
     spatres = config.pop("spatial_resolution", [-10, 10])
     crs = config.pop("output_crs", None)
     tz = config.pop("output_tz", None)
-    extent = utils.create_extent_cube(space, time, spatres, crs = crs, tz = tz)
+    try:
+      trim = config["trim_data"]
+    except KeyError:
+      trim = True
+    extent = utils.create_extent_cube(
+      spatial_extent = space,
+      temporal_extent = time,
+      spatial_resolution = spatres,
+      crs = crs,
+      tz = tz,
+      trim = trim
+    )
     # Initialize the QueryProcessor instance.
     return cls(recipe, factbase, ontology, extent, **config)
 
@@ -174,7 +194,7 @@ class QueryProcessor():
     return out
 
   def handle_concept(self, block):
-    return self._ontology.translate(
+    out = self._ontology.translate(
       *block["reference"],
       property = block["property"] if "property" in block else None,
       extent = self._extent,
@@ -182,14 +202,19 @@ class QueryProcessor():
       eval_obj = self._get_eval_obj(),
       operators = self._operators,
       reducers = self._reducers,
-      track_types = self._track_types
+      track_types = self._track_types,
+      trim_data = self._trim_data
     )
+    return out
 
   def handle_resource(self, block):
-    return self._factbase.retrieve(
+    out = self._factbase.retrieve(
       *block["reference"],
       extent = self._extent
     )
+    if self._trim_data:
+      out = out.sq.trim()
+    return out
 
   def handle_result(self, block):
     name = block["name"]
@@ -310,6 +335,7 @@ class QueryProcessor():
     params = copy.deepcopy(params)
     filterer = params["filterer"]
     params["filterer"] = getattr(self, "handle_" + filterer["type"])(filterer)
+    params["trim"] = self._trim_data
     params["track_types"] = self._track_types
     return params
 

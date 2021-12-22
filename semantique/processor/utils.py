@@ -7,7 +7,8 @@ def convert_datetime64(obj, tz_from, tz_to, **kwargs):
   return np.datetime64(obj_new.tz_localize(None))
 
 def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
-                       temporal_resolution = None, crs = None, tz = None):
+                       temporal_resolution = None, crs = None, tz = None,
+                       trim = True):
   # Rasterize spatial extent.
   space = spatial_extent.rasterize(spatial_resolution, crs, stack = True)
   # Add spatial feature indices as coordinates.
@@ -22,9 +23,10 @@ def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
   # Add temporal reference.
   extent["time"].sq.value_type = "time"
   extent = extent.sq.write_tz(time.sq.tz)
-  # Trim the extent cube.
+  # Trim the extent cube if requested.
   # This means we drop all X and Y slices for which all values are nan.
-  extent = extent.sq.trim()
+  if trim:
+    extent = extent.sq.trim()
   return extent
 
 def parse_datetime_component(name, obj):
