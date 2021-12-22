@@ -197,7 +197,7 @@ class QueryProcessor():
       try:
         instructions = self._recipe[name]
       except KeyError:
-        raise exceptions.InvalidReferenceError(
+        raise exceptions.UnknownReferenceError(
           f"Recipe does not contain result '{name}'"
         )
       result = self.call_handler(instructions)
