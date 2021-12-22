@@ -67,7 +67,7 @@ def absolute_(x, track_types = False, **kwargs):
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
     manual = TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"]
-    out.sq.promote_value_type(x, y, func = "absolute", manual = manual)
+    out.sq.promote_value_type(x, func = "absolute", manual = manual)
   return out
 
 def cube_root_(x, track_types = False, **kwargs):
@@ -76,7 +76,7 @@ def cube_root_(x, track_types = False, **kwargs):
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
     manual = TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"]
-    out.sq.promote_value_type(x, y, func = "cube_root", manual = manual)
+    out.sq.promote_value_type(x, func = "cube_root", manual = manual)
   return out
 
 def natural_logarithm_(x, track_types = False, **kwargs):
@@ -85,7 +85,7 @@ def natural_logarithm_(x, track_types = False, **kwargs):
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
     manual = TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"]
-    out.sq.promote_value_type(x, y, func = "natural_logarithm", manual = manual)
+    out.sq.promote_value_type(x, func = "natural_logarithm", manual = manual)
   return out
 
 def square_root_(x, track_types = False, **kwargs):
@@ -94,7 +94,7 @@ def square_root_(x, track_types = False, **kwargs):
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
     manual = TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"]
-    out.sq.promote_value_type(x, y, func = "square_root", manual = manual)
+    out.sq.promote_value_type(x, func = "square_root", manual = manual)
   return out
 
 #
@@ -141,7 +141,7 @@ def invert_(x, track_types = False, **kwargs):
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
     manual = TYPE_PROMOTION_TEMPLATES["boolean_univariate_operators"]
-    out.sq.promote_value_type(x, y, func = "invert", manual = manual)
+    out.sq.promote_value_type(x, func = "invert", manual = manual)
   return out
 
 #
