@@ -209,12 +209,19 @@ class Cube():
     return out
 
   def trim(self):
-    out = self._obj
+    space = self.spatial_dimension
+    if space is None:
+      out = self._obj
+    else:
+      out = self._obj.unstack(space)
     all_dims = out.dims
     for dim in all_dims:
       other_dims = [d for d in all_dims if d != dim]
       out = out.isel({dim: out.count(other_dims) > 0})
-    return out
+    if space is None:
+      return out
+    else:
+      return out.sq.stack_spatial_dims()
 
   def regularize(self):
     space = self.spatial_dimension
