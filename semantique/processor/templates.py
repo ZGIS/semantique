@@ -154,40 +154,7 @@ TYPE_PROMOTION_TEMPLATES = {
     },
     "__preserve_labels__": False
   },
-  "boolean_reducers": {
-    "binary": "binary",
-    None: None,
-    "__preserve_labels__": True
-  },
-  "count_reducers": {
-    "binary": "numerical",
-    None: None,
-    "__preserve_labels__": False
-  },
-  "numerical_reducers": {
-    "numerical": "numerical",
-    None: None,
-    "__preserve_labels__": False
-  },
-  "ordered_reducers": {
-    "binary": "binary",
-    "numerical": "numerical",
-    "ordinal": "ordinal",
-    "time": "time",
-    None: None,
-    "__preserve_labels__": True
-  },
-  "universal_reducers": {
-    "binary": "binary",
-    "nominal": "nominal",
-    "numerical": "numerical",
-    "ordinal": "ordinal",
-    "time": "time",
-    "space": "space",
-    None: None,
-    "__preserve_labels__": True
-  },
-  "replacers": {
+  "assignment_operators": {
     "binary": {
       "binary": "binary",
       "nominal": "nominal",
@@ -301,5 +268,38 @@ TYPE_PROMOTION_TEMPLATES = {
       None: None
     },
     "__preserve_labels__": False
+  },
+  "boolean_reducers": {
+    "binary": "binary",
+    None: None,
+    "__preserve_labels__": True
+  },
+  "count_reducers": {
+    "binary": "numerical",
+    None: None,
+    "__preserve_labels__": False
+  },
+  "numerical_reducers": {
+    "numerical": "numerical",
+    None: None,
+    "__preserve_labels__": False
+  },
+  "ordered_reducers": {
+    "binary": "binary",
+    "numerical": "numerical",
+    "ordinal": "ordinal",
+    "time": "time",
+    None: None,
+    "__preserve_labels__": True
+  },
+  "universal_reducers": {
+    "binary": "binary",
+    "nominal": "nominal",
+    "numerical": "numerical",
+    "ordinal": "ordinal",
+    "time": "time",
+    "space": "space",
+    None: None,
+    "__preserve_labels__": True
   }
 }

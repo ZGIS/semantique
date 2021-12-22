@@ -262,3 +262,18 @@ def during_(x, y, track_types = False, **kwargs):
     manual = TYPE_PROMOTION_TEMPLATES["temporal_relational_operators"]
     out.sq.promote_value_type(x, y, func = "during", manual = manual)
   return out
+
+#
+# ASSIGNMENT OPERATORS
+#
+
+def assign_(x, y, track_types = False, **kwargs):
+  y = xr.DataArray(y).sq.align_with(x)
+  nodata = np.datetime64("NaT") if y.dtype.kind == "M" else np.nan
+  out = xr.where(np.isfinite(x), y, nodata)
+  if track_types:
+    manual = TYPE_PROMOTION_TEMPLATES["assignment_operators"]
+    out.sq.promote_value_type(x, y, func = "assign", manual = manual)
+    if y.sq.value_labels is not None:
+      out.sq.value_labels = y.sq.value_labels
+  return out

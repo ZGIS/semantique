@@ -10,7 +10,6 @@ import warnings
 
 from semantique import exceptions
 from semantique.processor import utils
-from semantique.processor.templates import TYPE_PROMOTION_TEMPLATES
 
 @xr.register_dataarray_accessor("sq")
 class Cube():
@@ -192,20 +191,6 @@ class Cube():
 
   def reduce(self, dimension, reducer, track_types = False, **kwargs):
     out = reducer(self._obj, dimension, track_types = track_types, **kwargs)
-    return out
-
-  def replace(self, y, track_types = False, **kwargs):
-    try:
-      y = y.sq.align_with(self._obj)
-    except AttributeError:
-      y = np.array(y)
-    nodata = np.datetime64("NaT") if y.dtype.kind == "M" else np.nan
-    out = xr.where(np.isfinite(self._obj), y, nodata)
-    if track_types:
-      manual = TYPE_PROMOTION_TEMPLATES["replacers"]
-      out.sq.promote_value_type(self._obj, y, func = "replace", manual = manual)
-      if y.sq.value_labels is not None:
-        out.sq.value_labels = y.sq.value_labels
     return out
 
   def align_with(self, other):

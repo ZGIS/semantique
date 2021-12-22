@@ -163,13 +163,6 @@ class CubeProxy(dict):
     kwargs.update({"dimension": dimension, "reducer": reducer})
     return self._append_verb("reduce", **kwargs)
 
-  def replace(self, y, **kwargs):
-    """Replace all values in a data cube.
-
-    """
-    kwargs.update({"y": y})
-    return self._append_verb("replace", **kwargs)
-
 class CubeCollectionProxy(dict):
   """Proxy object of a data cube collection.
 
@@ -282,13 +275,6 @@ class CubeCollectionProxy(dict):
     """
     kwargs.update({"dimension": dimension, "reducer": reducer})
     return self._append_verb("reduce", **kwargs)
-
-  def replace(self, y, **kwargs):
-    """Apply the replace verb to each data cube in a collection.
-
-    """
-    kwargs.update({"y": y})
-    return self._append_verb("replace", **kwargs)
 
 def concept(*reference):
   """Reference to a semantic concept.
