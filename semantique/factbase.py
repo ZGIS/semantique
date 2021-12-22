@@ -242,9 +242,6 @@ class GeotiffArchive(Factbase):
     data = self._subset_data(data, extent, metadata)
     # Format data back into the same structure as the given extent.
     data = self._format_data(data, extent, metadata)
-    # Trim the data.
-    # This means we drop coordinates if all its values are nodata.
-    data = data.sq.trim()
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
