@@ -137,7 +137,7 @@ class Cube():
         try:
           out = getattr(coords.dt, component)
         except AttributeError:
-          raise exceptions.UndefinedDimensionComponentError(
+          raise exceptions.UnknownComponentError(
             f"Component '{component}' "
             f"is not defined for dimension '{dimension}'"
           )

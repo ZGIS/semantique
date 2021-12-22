@@ -7,10 +7,10 @@ class EmptyDataError(Exception):
 class InvalidValueTypeError(Exception):
   pass
 
-class InvalidReferenceError(Exception):
+class InvalidBuildingBlockError(Exception):
   pass
 
-class InvalidBuildingBlockError(Exception):
+class UnknownReferenceError(Exception):
   pass
 
 class UnknownReducerError(Exception):
@@ -19,10 +19,10 @@ class UnknownReducerError(Exception):
 class UnknownOperatorError(Exception):
   pass
 
-class UnknownGeometryTypeError(Exception):
+class UnknownComponentError(Exception):
   pass
 
-class MixedTimeZonesError(Exception):
+class UnknownLabelError(Exception):
   pass
 
 class TooManyDimensionsError(Exception):
@@ -34,8 +34,6 @@ class MissingDimensionError(Exception):
 class UnmatchingDimensionsError(Exception):
   pass
 
-class UndefinedDimensionComponentError(Exception):
+class MixedTimeZonesError(Exception):
   pass
 
-class UnknownLabelError(Exception):
-  pass

@@ -25,7 +25,7 @@ class Ontology(dict):
       try:
         obj = obj[key]
       except KeyError:
-        raise exceptions.InvalidReferenceError(
+        raise exceptions.UnknownReferenceError(
           f"Ontology does not contain concept '{reference}'"
         )
     return obj
@@ -56,7 +56,7 @@ class Semantique(Ontology):
       try:
         property = ruleset[property]
       except KeyError:
-        raise exceptions.InvalidReferenceError(
+        raise exceptions.UnknownReferenceError(
           f"Property '{property}' is not defined for concept '{reference}'"
         )
       out = processor.call_handler(property)

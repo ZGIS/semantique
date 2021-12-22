@@ -32,7 +32,7 @@ class Factbase(dict):
       try:
         obj = obj[key]
       except KeyError:
-        raise exceptions.InvalidReferenceError(
+        raise exceptions.UnknownReferenceError(
           f"Factbase does not contain resource '{reference}'"
         )
     return obj
