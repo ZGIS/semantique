@@ -440,31 +440,30 @@ class CubeCollection(list):
     return out
 
   def evaluate(self, operator, y = None, track_types = False, **kwargs):
-    args = tuple(operator, y, track_types)
+    args = tuple([operator, y, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.evaluate(*args, **kwargs) for x in out]
     return out
 
   def extract(self, dimension, component = None, **kwargs):
-    args = tuple(dimension, component)
+    args = tuple([dimension, component])
     out = copy.deepcopy(self)
     out[:] = [x.sq.extract(*args, **kwargs) for x in out]
     return out
 
   def filter(self, filterer, trim = True, track_types = False, **kwargs):
-    args = tuple(filterer, trim, track_types)
+    args = tuple([filterer, trim, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.filter(*args, **kwargs) for x in out]
     return out
 
   def label(self, label, **kwargs):
-    args = tuple(label)
     out = copy.deepcopy(self)
-    out[:] = [x.sq.label(*args, **kwargs) for x in out]
+    out[:] = [x.sq.label(label, **kwargs) for x in out]
     return out
 
   def reduce(self, dimension, reducer, track_types = False, **kwargs):
-    args = tuple(dimension, reducer, track_types)
+    args = tuple([dimension, reducer, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
     return out
