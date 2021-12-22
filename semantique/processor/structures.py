@@ -285,9 +285,10 @@ class Cube():
     # Based on value types of the operands and the type promotion manual.
     def _get_type(x):
       try:
-        return x.sq.value_type
+        vtype = x.sq.value_type
       except AttributeError:
-        return np.array(x).dtype.kind
+        vtype = None
+      return np.array(x).dtype.kind if vtype is None else vtype
     intypes = [_get_type(x) for x in operands]
     outtype = manual # Initialize before scanning.
     for x in intypes:
