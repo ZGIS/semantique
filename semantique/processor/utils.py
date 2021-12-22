@@ -26,3 +26,40 @@ def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
   # This means we drop all X and Y slices for which all values are nan.
   extent = extent.sq.trim()
   return extent
+
+def parse_datetime_component(name, obj):
+  if name in ["dayofweek", "weekday"]:
+    obj.sq.value_type = "ordinal"
+    obj.sq.value_labels = {
+      "Monday": 0,
+      "Tuesday": 1,
+      "Wednesday": 2,
+      "Thursday": 3,
+      "Friday": 4,
+      "Saturday": 5,
+      "Sunday": 6
+    }
+  elif name == "quarter":
+    obj.sq.value_type = "ordinal"
+    obj.sq.value_labels = {
+      "First": 1,
+      "Second": 2,
+      "Third": 3,
+      "Fourth": 4
+    }
+  elif name == "season":
+    # In xarray seasons get stored as strings.
+    # We want to store them as integers instead.
+    for k, v in zip(["MAM", "JJA", "SON", "DJF"], [1, 2, 3, 4]):
+      obj = obj.str.replace(k, str(v))
+    obj = obj.astype(int)
+    obj.sq.value_type = "ordinal"
+    obj.sq.value_labels = {
+      "Spring": 1,
+      "Summer": 2,
+      "Autumn": 3,
+      "Winter": 4
+    }
+  else:
+    obj.sq.value_type = "numerical"
+  return obj
