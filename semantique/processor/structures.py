@@ -462,12 +462,6 @@ class CubeCollection(list):
     out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
     return out
 
-  def replace(self, y, track_types = False, **kwargs):
-    args = tuple(y, track_types)
-    out = copy.deepcopy(self)
-    out[:] = [x.sq.replace(*args, **kwargs) for x in out]
-    return out
-
   def extract(self, dimension, component = None, **kwargs):
     args = tuple(dimension, component)
     out = copy.deepcopy(self)
