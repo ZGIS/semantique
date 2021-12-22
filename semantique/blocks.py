@@ -11,7 +11,7 @@ __all__ = [
   "result",
   "self",
   "collection",
-  "category",
+  "value_label",
   "geometries",
   "time_instant",
   "time_interval",
@@ -626,26 +626,26 @@ def collection(*cubes):
   obj = {"type": "collection", "elements": list(cubes)}
   return CubeCollectionProxy(obj)
 
-def category(label):
-  """Category label.
+def value_label(label):
+  """Label of a numeric index.
 
-  Special value representing a label of a numeric category index. Can be used
-  to query categorical data cubes by category labels rather than category
-  indices, which are the actual pixel values stored in such cubes.
+  Special value representing a label of a numeric index. Can be used to query
+  data cubes by character labels rather than numerical indices, which are the
+  actual pixel values.
 
   Parameters
   ----------
     label : :obj:`str`
-      The category label.
+      The label.
 
   Returns
   -------
     :obj:`dict`
-      JSON-serializable object that contains the category label, and can be
+      JSON-serializable object that contains the value label, and can be
       understood by the query processor as such.
 
   """
-  obj = {"type": "category", "label": label}
+  obj = {"type": "value_label", "label": label}
   return obj
 
 def geometries(value, **kwargs):

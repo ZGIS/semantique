@@ -221,12 +221,12 @@ class QueryProcessor():
     out = [self.call_handler(x) for x in block["elements"]]
     return structures.CubeCollection(out)
 
-  def handle_category(self, block):
+  def handle_value_label(self, block):
     label = block["label"]
     try:
       idx = self._get_eval_obj().sq.value_labels[label]
     except (KeyError, TypeError):
-      raise exceptions.UndefinedCategoryLabelError(
+      raise exceptions.UnknownLabelError(
         f"Category label '{label}' is not defined"
       )
     return idx
