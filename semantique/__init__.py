@@ -1,4 +1,4 @@
-from semantique.construct import *
+from semantique.blocks import *
 from semantique.extent import SpatialExtent, TemporalExtent
 from semantique.recipe import QueryRecipe
 
