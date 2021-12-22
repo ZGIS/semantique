@@ -153,7 +153,7 @@ class Cube():
     if track_types:
       vtype = filterer.sq.value_type
       if vtype != "binary":
-        raise InvalidValueTypeError(
+        raise exceptions.InvalidValueTypeError(
           f"Filterer must be of value type 'binary', not '{vtype}'"
         )
     out = self._obj.where(filterer.sq.align_with(self._obj))
