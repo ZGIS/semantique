@@ -378,9 +378,9 @@ class Cube():
   def to_geotiff(self, file, cloud_optimized = True, compress = True,
                  output_crs = None, **kwargs):
     # Make sure spatial dimensions are present.
-    if self.spatial_dimension is None:
+    if self.xy_dimensions is None:
       raise exceptions.MissingDimensionError(
-        "GeoTIFF export requires a spatial dimension"
+        "GeoTIFF export requires spatial dimensions"
       )
     obj = self.unstack_spatial_dims()
     # Remove non-dimension coordinates but not 'spatial_ref'.
