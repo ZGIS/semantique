@@ -19,7 +19,8 @@ class QueryProcessor():
 
   def __init__(self, recipe, factbase, ontology, extent, operators = None,
                extra_operators = None, reducers = None, extra_reducers = None,
-               track_types = True, trim_data = False, unstack_results = True):
+               track_types = True, trim_filter = False, trim_results = True,
+               unstack_results = True):
     self._eval_obj = [None]
     self._response = {}
     self.recipe = recipe
@@ -27,7 +28,8 @@ class QueryProcessor():
     self.ontology = ontology
     self.extent = extent
     self.track_types = track_types
-    self.trim_data = trim_data
+    self.trim_filter = trim_filter
+    self.trim_results = trim_results
     self.unstack_results = unstack_results
     if operators is None:
       self.store_default_operators()
@@ -112,12 +114,20 @@ class QueryProcessor():
     self._track_types = value
 
   @property
-  def trim_data(self):
-    return self._trim_data
+  def trim_filter(self):
+    return self._trim_filter
 
-  @trim_data.setter
-  def trim_data(self, value):
-    self._trim_data = value
+  @trim_filter.setter
+  def trim_filter(self, value):
+    self._trim_filter = value
+
+  @property
+  def trim_results(self):
+    return self._trim_results
+
+  @trim_results.setter
+  def trim_results(self, value):
+    self._trim_results = value
 
   @property
   def unstack_results(self):
@@ -136,11 +146,6 @@ class QueryProcessor():
     spatres = config.pop("spatial_resolution", [-10, 10])
     crs = config.pop("output_crs", None)
     tz = config.pop("output_tz", None)
-    # Define if the extent cube should be trimmed.
-    try:
-      trim = config["trim_data"]
-    except KeyError:
-      trim = False
     # Create the extent cube.
     extent = utils.create_extent_cube(
       spatial_extent = space,
@@ -165,17 +170,16 @@ class QueryProcessor():
       result.name = x
       self._response[x] = result
     # Step II: Return the response.
-    # If data where trimmed:
-    # This means the spatial dimension may not be regular anymore.
-    # We need to regularize the spatial dimension before returning.
-    if self._trim_data:
-      def regularize(obj):
+    # Trim result arrays if requested.
+    # This means we drop all coordinates for which all values are nan.
+    if self._trim_results:
+      def trim(obj):
         try:
           obj = obj.sq
         except AttributeError:
           pass
-        return obj.regularize()
-      self._response = {k: regularize(v) for k, v in self._response.items()}
+        return obj.trim(trim_space = True, force_regular = True)
+      self._response = {k: trim(v) for k, v in self._response.items()}
     # Unstack spatial dimensions if requested.
     if self._unstack_results:
       def unstack(obj):
@@ -218,7 +222,7 @@ class QueryProcessor():
       operators = self._operators,
       reducers = self._reducers,
       track_types = self._track_types,
-      trim_data = self._trim_data
+      trim_filter = self._trim_filter
     )
     return out
 
@@ -227,8 +231,6 @@ class QueryProcessor():
       *block["reference"],
       extent = self._extent
     )
-    if self._trim_data:
-      out = out.sq.trim()
     return out
 
   def handle_result(self, block):
@@ -350,7 +352,7 @@ class QueryProcessor():
     params = copy.deepcopy(params)
     filterer = params["filterer"]
     params["filterer"] = getattr(self, "handle_" + filterer["type"])(filterer)
-    params["trim"] = self._trim_data
+    params["trim"] = self._trim_filter
     params["track_types"] = self._track_types
     return params
 
