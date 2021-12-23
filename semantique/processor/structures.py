@@ -524,7 +524,7 @@ class CubeCollection(list):
 
   def trim(self, trim_space = True, force_regular = True):
     out = copy.deepcopy(self)
-    out[:] = [x.sq.regularize(trim_space, force_regular) for x in out]
+    out[:] = [x.sq.trim(trim_space, force_regular) for x in out]
     return out
 
   def regularize(self):
