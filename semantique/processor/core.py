@@ -22,7 +22,7 @@ class QueryProcessor():
                track_types = True, trim_filter = False, trim_results = True,
                unstack_results = True):
     self._eval_obj = [None]
-    self.response = {}
+    self._response = {}
     self.recipe = recipe
     self.factbase = factbase
     self.ontology = ontology
