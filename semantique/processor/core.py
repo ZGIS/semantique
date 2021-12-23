@@ -171,6 +171,7 @@ class QueryProcessor():
       result = self.call_handler(self._recipe[x])
       result.name = x
       self._response[x] = result
+    return self
 
   def respond(self):
     # Trim result arrays if requested.
@@ -196,7 +197,7 @@ class QueryProcessor():
 
   def call_handler(self, block):
     out = self.get_handler(block)(block)
-    logger.debug(f"Handled {block["type"]}:\n{out}")
+    logger.debug(f"Handled {block['type']}:\n{out}")
     return out
 
   def get_handler(self, block):
