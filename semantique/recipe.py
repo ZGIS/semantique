@@ -43,4 +43,4 @@ class QueryRecipe(dict):
 
     """
     qp = QueryProcessor.parse(self, factbase, ontology, space, time, **config)
-    return qp.optimize().execute()
+    return qp.optimize().execute().respond()

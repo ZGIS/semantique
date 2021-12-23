@@ -162,14 +162,14 @@ class QueryProcessor():
     return self
 
   def execute(self):
-    # Step I: Execute the instructions for each result iteratively.
     for x in self._recipe:
       if x in self._response:
         continue
       result = self.call_handler(self._recipe[x])
       result.name = x
       self._response[x] = result
-    # Step II: Return the response.
+
+  def respond(self):
     # Trim result arrays if requested.
     # This means we drop all coordinates for which all values are nan.
     if self._trim_results:
