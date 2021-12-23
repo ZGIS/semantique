@@ -93,7 +93,6 @@ Verbs for single data cubes
    CubeProxy.groupby_space
    CubeProxy.label
    CubeProxy.reduce
-   CubeProxy.replace
 
 Verbs for data cube collections
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -112,7 +111,6 @@ Verbs for data cube collections
    CubeCollectionProxy.filter_space
    CubeCollectionProxy.label
    CubeCollectionProxy.reduce
-   CubeCollectionProxy.replace
 
 Special values
 ---------------
@@ -121,7 +119,7 @@ Special values
    :toctree: _generated/
    :nosignatures:
 
-   category
+   value_label
    geometries
    time_instant
    time_interval
@@ -151,8 +149,8 @@ Data structures
 Operator functions
 -------------------
 
-Algebraic unary operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Numerical univariate operators
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
    :toctree: _generated/
@@ -163,8 +161,17 @@ Algebraic unary operators
    processor.operators.natural_logarithm_
    processor.operators.square_root_
 
-Algebraic binary operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Boolean univariate operators
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   processor.operators.invert_
+
+Algebraic operators
+~~~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
    :toctree: _generated/
@@ -176,17 +183,8 @@ Algebraic binary operators
    processor.operators.power_
    processor.operators.subtract_
 
-Boolean unary operators
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. autosummary::
-   :toctree: _generated/
-   :nosignatures:
-
-   processor.operators.invert_
-
-Boolean binary operators
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Boolean operators
+~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
    :toctree: _generated/
@@ -195,8 +193,8 @@ Boolean binary operators
    processor.operators.and_
    processor.operators.or_
 
-Regular relational operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Relational operators
+~~~~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
    :toctree: _generated/
@@ -223,6 +221,15 @@ Temporal relational operators
    processor.operators.before_
    processor.operators.during_
 
+Assignment operators
+~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   processor.operators.assign_
+
 Reducer functions
 ------------------
 
@@ -248,6 +255,14 @@ Boolean reducers
 
    processor.reducers.all_
    processor.reducers.any_
+
+Count reducers
+~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
    processor.reducers.count_
    processor.reducers.percentage_
 
@@ -260,10 +275,18 @@ Universal reducers
 
    processor.reducers.first_
    processor.reducers.last_
+   processor.reducers.mode_
+
+Ordered reducers
+~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
    processor.reducers.max_
    processor.reducers.median_
    processor.reducers.min_
-   processor.reducers.mode_
 
 Utils
 ------
@@ -274,6 +297,7 @@ Utils
 
    processor.utils.convert_datetime64
    processor.utils.create_extent_cube
+   processor.utils.parse_datetime_component
 
 Templates
 ----------
@@ -293,16 +317,14 @@ Exceptions
 
    exceptions.AlignmentError
    exceptions.EmptyDataError
-   exceptions.InvalidTypePromotionError
-   exceptions.InvalidReferenceError
+   exceptions.InvalidValueTypeError
    exceptions.InvalidBuildingBlockError
+   exceptions.UnknownReferenceError
    exceptions.UnknownReducerError
    exceptions.UnknownOperatorError
-   exceptions.UnknownGeometryTypeError
-   exceptions.MixedTimeZonesError
-   exceptions.MixedValueTypesError
+   exceptions.UnknownComponentError
+   exceptions.UnknownLabelError
    exceptions.TooManyDimensionsError
    exceptions.MissingDimensionError
    exceptions.UnmatchingDimensionsError
-   exceptions.UndefinedDimensionComponentError
-   exceptions.UndefinedCategoryLabelError
+   exceptions.MixedTimeZonesError

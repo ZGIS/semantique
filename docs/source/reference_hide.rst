@@ -17,6 +17,7 @@
 .. autosummary::
    :toctree: _generated/
 
+   extent.SpatialExtent.features
    extent.SpatialExtent.crs
    extent.SpatialExtent.from_geojson
    extent.SpatialExtent.from_featurecollection
