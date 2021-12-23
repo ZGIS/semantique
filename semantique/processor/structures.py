@@ -256,7 +256,7 @@ class Cube():
       out = out.isel({dim: out.count(other_dims) > 0})
     # If spatial dimensions where unstacked stack them back together.
     if space is not None and trim_space and not force_regular:
-      out = out.sq.stack_spatial_dims()
+      out = out.sq.stack_spatial_dims(name = space)
     return out
 
   def regularize(self):
@@ -278,16 +278,22 @@ class Cube():
     return out.stack({space: [yname, xname]})
 
   def reproject(self, crs, **kwargs):
-    obj = self.unstack_spatial_dims()
+    space = self.spatial_dimension
+    if space is None:
+      return self._obj
+    obj = self.unstack(space)
     obj = obj.sq.drop_non_dimension_coords(keep = ["spatial_ref"])
-    out = obj.rio.reproject(crs, **kwargs).sq.stack_spatial_dims()
-    return out.sq.write_tz(self.tz)
+    out = obj.rio.reproject(crs, **kwargs)
+    out = out.sq.stack_spatial_dims(name = space).sq.write_tz(self.tz)
+    return out
 
   def tz_convert(self, tz, **kwargs):
-    dim = self.temporal_dimension
-    src = self._obj[dim].data
+    time = self.temporal_dimension
+    if time is None:
+      return self._obj
+    src = self._obj[time].data
     trg = [utils.convert_datetime64(x, self.tz, tz, **kwargs) for x in src]
-    out = self._obj.assign_coords({dim: trg}).sq.write_tz(tz)
+    out = self._obj.assign_coords({time: trg}).sq.write_tz(tz)
     return out
 
   def write_crs(self, crs, inplace = False):
@@ -303,11 +309,11 @@ class Cube():
     obj["temporal_ref"].attrs["zone"] = zone
     return obj
 
-  def stack_spatial_dims(self):
+  def stack_spatial_dims(self, name = "space"):
     xy_dims = self.xy_dimensions
     if xy_dims is None:
       return self._obj
-    return self._obj.stack(space = xy_dims[::-1])
+    return self._obj.stack({name: xy_dims[::-1]})
 
   def unstack_spatial_dims(self):
     dim = self.spatial_dimension
@@ -526,9 +532,9 @@ class CubeCollection(list):
     out[:] = [x.sq.regularize() for x in out]
     return out
 
-  def stack_spatial_dims(self):
+  def stack_spatial_dims(self, name = "space"):
     out = copy.deepcopy(self)
-    out[:] = [x.sq.stack_spatial_dims() for x in out]
+    out[:] = [x.sq.stack_spatial_dims(name) for x in out]
     return out
 
   def unstack_spatial_dims(self):
