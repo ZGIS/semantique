@@ -192,6 +192,11 @@ class QueryProcessor():
     return self._response
 
   def call_handler(self, block):
+    out = self.get_handler(block)(block)
+    logger.debug(f"Handled {btype}:\n{out}")
+    return out
+
+  def get_handler(self, block):
     try:
       btype = block["type"]
     except TypeError:
@@ -203,13 +208,11 @@ class QueryProcessor():
         "Block has no 'type' key"
       )
     try:
-      handler = getattr(self, "handle_" + btype)
+      out = getattr(self, "handle_" + btype)
     except AttributeError:
       raise exceptions.InvalidBuildingBlockError(
         f"Unknown block type: '{btype}'"
       )
-    out = handler(block)
-    logger.debug(f"Handled {btype}:\n{out}")
     return out
 
   def handle_concept(self, block):
