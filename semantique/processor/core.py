@@ -196,7 +196,7 @@ class QueryProcessor():
 
   def call_handler(self, block):
     out = self.get_handler(block)(block)
-    logger.debug(f"Handled {btype}:\n{out}")
+    logger.debug(f"Handled {block["type"]}:\n{out}")
     return out
 
   def get_handler(self, block):
