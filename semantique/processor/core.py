@@ -19,7 +19,7 @@ class QueryProcessor():
 
   def __init__(self, recipe, factbase, ontology, extent, operators = None,
                extra_operators = None, reducers = None, extra_reducers = None,
-               track_types = True, trim_data = True, regularize_results = True):
+               track_types = True, trim_data = False):
     self._eval_obj = [None]
     self._response = {}
     self.recipe = recipe
@@ -28,7 +28,6 @@ class QueryProcessor():
     self.extent = extent
     self.track_types = track_types
     self.trim_data = trim_data
-    self.regularize_results = regularize_results
     if operators is None:
       self.store_default_operators()
     else:
@@ -119,26 +118,21 @@ class QueryProcessor():
   def trim_data(self, value):
     self._trim_data = value
 
-  @property
-  def regularize_results(self):
-    return self._regularize_results
-
-  @regularize_results.setter
-  def regularize_results(self, value):
-    self._regularize_results = value
-
   @classmethod
   def parse(cls, recipe, factbase, ontology, space, time, **config):
-    # Parse the spatio-temporal extent.
+    # Step I: Parse the spatio-temporal extent.
     # It needs to be stored as a 2D array with dimensions space and time.
+    # First extract the relevant configuration parameters.
     config = copy.deepcopy(config)
     spatres = config.pop("spatial_resolution", [-10, 10])
     crs = config.pop("output_crs", None)
     tz = config.pop("output_tz", None)
+    # Define if the extent cube should be trimmed.
     try:
       trim = config["trim_data"]
     except KeyError:
       trim = True
+    # Create the extent cube.
     extent = utils.create_extent_cube(
       spatial_extent = space,
       temporal_extent = time,
@@ -147,20 +141,25 @@ class QueryProcessor():
       tz = tz,
       trim = trim
     )
-    # Initialize the QueryProcessor instance.
+    # Step II: Initialize the QueryProcessor instance.
     return cls(recipe, factbase, ontology, extent, **config)
 
   def optimize(self):
     return self
 
   def execute(self):
+    # Step I: Execute the instructions for each result iteratively.
     for x in self._recipe:
       if x in self._response:
         continue
       result = self.call_handler(self._recipe[x])
       result.name = x
       self._response[x] = result
-    if self._regularize_results:
+    # Step II: Return the response.
+    # If data where trimmed:
+    # This means the spatial dimension may not be regular anymore.
+    # We need to regularize the spatial dimension before returning.
+    if self._trim_data:
       def regularize(obj):
         try:
           obj = obj.sq

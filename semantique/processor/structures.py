@@ -148,7 +148,7 @@ class Cube():
           out.sq.value_type = "numerical"
     return out
 
-  def filter(self, filterer, trim = True, track_types = False, **kwargs):
+  def filter(self, filterer, trim = False, track_types = False, **kwargs):
     if track_types:
       vtype = filterer.sq.value_type
       if vtype is not None and vtype != "binary":
