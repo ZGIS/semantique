@@ -19,7 +19,7 @@ class QueryProcessor():
 
   def __init__(self, recipe, factbase, ontology, extent, operators = None,
                extra_operators = None, reducers = None, extra_reducers = None,
-               track_types = True, trim_data = False):
+               track_types = True, trim_data = False, unstack_results = True):
     self._eval_obj = [None]
     self._response = {}
     self.recipe = recipe
@@ -28,6 +28,7 @@ class QueryProcessor():
     self.extent = extent
     self.track_types = track_types
     self.trim_data = trim_data
+    self.unstack_results = unstack_results
     if operators is None:
       self.store_default_operators()
     else:
@@ -118,6 +119,14 @@ class QueryProcessor():
   def trim_data(self, value):
     self._trim_data = value
 
+  @property
+  def unstack_results(self):
+    return self._unstack_results
+
+  @unstack_results.setter
+  def unstack_results(self, value):
+    self._unstack_results = value
+
   @classmethod
   def parse(cls, recipe, factbase, ontology, space, time, **config):
     # Step I: Parse the spatio-temporal extent.
@@ -166,10 +175,17 @@ class QueryProcessor():
         except AttributeError:
           pass
         return obj.regularize()
-      out = {k: regularize(v) for k, v in self._response.items()}
-    else:
-      out = self._response
-    return out
+      self._response = {k: regularize(v) for k, v in self._response.items()}
+    # Unstack spatial dimensions if requested.
+    if self._unstack_results:
+      def unstack(obj):
+        try:
+          obj = obj.sq
+        except AttributeError:
+          pass
+        return obj.unstack_spatial_dims()
+      self._response = {k: unstack(v) for k, v in self._response.items()}
+    return self._response
 
   def call_handler(self, block):
     try:

@@ -484,3 +484,13 @@ class CubeCollection(list):
     out = copy.deepcopy(self)
     out[:] = [x.sq.regularize() for x in out]
     return out
+
+  def stack_spatial_dims(self):
+    out = copy.deepcopy(self)
+    out[:] = [x.sq.stack_spatial_dims() for x in out]
+    return out
+
+  def unstack_spatial_dims(self):
+    out = copy.deepcopy(self)
+    out[:] = [x.sq.unstack_spatial_dims() for x in out]
+    return out
