@@ -140,7 +140,7 @@ class QueryProcessor():
     try:
       trim = config["trim_data"]
     except KeyError:
-      trim = True
+      trim = False
     # Create the extent cube.
     extent = utils.create_extent_cube(
       spatial_extent = space,
