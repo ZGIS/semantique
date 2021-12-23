@@ -152,8 +152,7 @@ class QueryProcessor():
       temporal_extent = time,
       spatial_resolution = spatres,
       crs = crs,
-      tz = tz,
-      trim = trim
+      tz = tz
     )
     # Step II: Initialize the QueryProcessor instance.
     return cls(recipe, factbase, ontology, extent, **config)

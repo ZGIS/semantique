@@ -8,7 +8,7 @@ def convert_datetime64(obj, tz_from, tz_to, **kwargs):
 
 def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
                        temporal_resolution = None, crs = None, tz = None,
-                       trim = False):
+                       trim = True):
   # Rasterize spatial extent.
   space = spatial_extent.rasterize(spatial_resolution, crs, stack = True)
   # Add spatial feature indices as coordinates.
