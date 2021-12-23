@@ -22,7 +22,7 @@ class QueryProcessor():
                track_types = True, trim_filter = False, trim_results = True,
                unstack_results = True):
     self._eval_obj = [None]
-    self._response = {}
+    self.response = {}
     self.recipe = recipe
     self.factbase = factbase
     self.ontology = ontology
@@ -43,6 +43,10 @@ class QueryProcessor():
       self.reducers = reducers
     if extra_reducers is not None:
       self.reducers.update(extra_reducers)
+
+  @property
+  def response(self):
+    return self._response
 
   @property
   def recipe(self):
