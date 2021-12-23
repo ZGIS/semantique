@@ -25,12 +25,12 @@ def _parse_filter_expression(*args):
   n_args = len(args)
   if n_args == 2:
     component = None
+    operator = args[0]
+    y = args[1]
+  elif n_args == 3:
+    component = args[0]
     operator = args[1]
     y = args[2]
-  elif n_args == 3:
-    component = args[1]
-    operator = args[2]
-    y = args[3]
   else:
     raise ValueError(
       f"Filter expression should be of length 3 (component, operator, y) "
