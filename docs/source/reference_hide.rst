@@ -72,8 +72,6 @@
    processor.core.QueryProcessor.optimize
    processor.core.QueryProcessor.execute
    processor.core.QueryProcessor.respond
-   processor.core.QueryProcessor.trim
-   processor.core.QueryProcessor.unstack
    processor.core.QueryProcessor.call_handler
    processor.core.QueryProcessor.get_handler
    processor.core.QueryProcessor.handle_concept
