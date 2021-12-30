@@ -11,7 +11,7 @@ from abc import abstractmethod
 
 from semantique import exceptions
 
-class Factbase(dict):
+class Factbase():
   """Base class for factbase formats.
 
   The factbase is the place where the available resources of earth observation
@@ -45,9 +45,7 @@ class Factbase(dict):
   """
 
   def __init__(self, layout = None):
-    obj = {} if layout is None else layout
-    super(Factbase, self).__init__(obj)
-    self._layout = obj
+    self.layout = layout
 
   @property
   def layout(self):
@@ -56,7 +54,7 @@ class Factbase(dict):
 
   @layout.setter
   def layout(self, value):
-    self._layout = value
+    self._layout = {} if value is None else value
 
   def lookup(self, *reference):
     """Lookup the metadata of a referenced data resource.
