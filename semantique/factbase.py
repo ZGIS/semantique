@@ -91,8 +91,8 @@ class Factbase(dict):
         Spatio-temporal extent in which the data should be retrieved. Should be
         given as an array with a temporal dimension as well as a stacked
         spatial dimension, such as returned by
-        :func:`processor.utils.create_extent_cube`. The retrieved data cube
-        will have the same extent.
+        :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
+        The retrieved data cube will have the same extent.
 
     """
     pass
@@ -212,8 +212,8 @@ class Opendatacube(Factbase):
         Spatio-temporal extent in which the data should be retrieved. Should be
         given as an array with a temporal dimension as well as a stacked
         spatial dimension, such as returned by
-        :func:`processor.utils.create_extent_cube`. The retrieved data cube
-        will have the same extent.
+        :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
+        The retrieved data cube will have the same extent.
 
     Returns
     -------
@@ -415,8 +415,8 @@ class GeotiffArchive(Factbase):
         Spatio-temporal extent in which the data should be retrieved. Should be
         given as an array with a temporal dimension as well as a stacked
         spatial dimension, such as returned by
-        :func:`processor.utils.create_extent_cube`. The retrieved data cube
-        will have the same extent.
+        :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
+        The retrieved data cube will have the same extent.
 
     Returns
     -------

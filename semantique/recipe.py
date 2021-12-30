@@ -33,17 +33,17 @@ class QueryRecipe(dict):
 
     Parameters
     ----------
-      factbase : :obj:`factbase.Factbase`
+      factbase : Factbase
         The factbase instance to process the query against.
-      ontology : :obj:`ontology.Ontology`
+      ontology : Ontology
         The ontology instance to process the query against.
-      space : :obj:`extent.SpatialExtent`
+      space : SpatialExtent
         The spatial extent in which the query should be processed.
-      time : :obj:`extent.TemporalExtent`
+      time : TemporalExtent
         The temporal extent in which the query should be processed.
       **config:
         Additional configuration parameters forwarded to
-        :func:`processor.core.QueryProcessor.parse`.
+        :func:`QueryProcessor.parse <processor.core.QueryProcessor.parse>`.
 
     Returns
     -------

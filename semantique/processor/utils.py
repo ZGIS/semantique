@@ -44,9 +44,9 @@ def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
 
   Parameters
   -----------
-    spatial_extent : :obj:`extent.SpatialExtent`
+    spatial_extent : SpatialExtent
       Spatial extent.
-    temporal_extent : :obj:`extent.TemporalExtent`
+    temporal_extent : TemporalExtent
       Temporal extent.
     spatial_resolution : :obj:`list`
       Spatial resolution of the cube. Should be given as a list in the format
@@ -56,7 +56,7 @@ def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
       the direction of the axes. For most CRSs, the y-axis has a negative
       direction, and hence the cell size along the y-axis is given as a
       negative number.
-    temporal_resolution : :obj:`str` or :obj:`pandas.DateOffset`
+    temporal_resolution : :obj:`str` or :obj:`pandas.tseries.offsets.DateOffset`
         Temporal resolution of the cube. Can be given as offset alias as
         defined in pandas, e.g. "D" for a daily frequency. These aliases can
         have multiples, e.g. "5D". If :obj:`None`, only the start and end
@@ -113,8 +113,9 @@ def parse_datetime_component(name, obj):
 
   The `datetime accessors`_ of :obj:`xarray.DataArray` objects are treated in
   semantique as a component of the temporal dimension. Parsing them includes
-  adding ``value_type`` and ``value_label`` properties as well as in some
-  cases re-organize the values in the array.
+  adding :attr:`value_type <semantique.processor.structures.Cube.value_type>`
+  and :attr:`value_label <semantique.processor.structures.Cube.value_labels>`
+  properties as well as in some cases re-organize the values in the array.
 
   Parameters
   -----------

@@ -584,7 +584,7 @@ class Cube():
         from :class:`datetime.tzinfo`.
       **kwargs:
         Additional keyword arguments passed on to
-        :func:`processor.utils.convert_datetime64`.
+        :func:`convert_datetime64 <semantique.processor.utils.convert_datetime64>`.
 
     Returns
     -------

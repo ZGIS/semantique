@@ -83,6 +83,19 @@ html_theme_options = {
 
 napoleon_use_param = False
 napoleon_use_rtype = False
+napoleon_preprocess_types = True
+napoleon_type_aliases = {
+    # objects without namespace
+    "QueryRecipe": "~semantique.QueryRecipe",
+    "Factbase": "~semantique.factbase.Factbase",
+    "Ontology": "~semantique.ontology.Ontology",
+    "SpatialExtent": "~semantique.extent.SpatialExtent",
+    "TemporalExtent": "~semantique.extent.TemporalExtent",
+    "QueryProcessor": "~semantique.processor.core.QueryProcessor",
+    "Cube": "~semantique.processor.structures.Cube",
+    "CubeCollection": "~semantique.processor.structures.CubeCollection",
+    "create_extent_cube": "~semantique.processor.utils.create_extent_cube"
+}
 
 # -- Autosummary configuration ------------------------------------------------
 

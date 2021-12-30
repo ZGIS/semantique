@@ -89,7 +89,7 @@ class CubeProxy(dict):
         univariate.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.Cube.evaluate`.
+        :obj:`Cube.evaluate> <processor.structures.Cube.evaluate>>`.
 
     Returns
     --------
@@ -115,7 +115,7 @@ class CubeProxy(dict):
         coordinates.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.Cube.extract`.
+        :obj:`Cube.extract <processor.structures.Cube.extract>`.
 
     Returns
     --------
@@ -140,7 +140,7 @@ class CubeProxy(dict):
         and dropped otherwise.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.Cube.filter`.
+        :obj:`Cube.filter <processor.structures.Cube.filter>`.
 
     Returns
     --------
@@ -170,7 +170,7 @@ class CubeProxy(dict):
         side operand to be used in the expression.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.Cube.filter`.
+        :obj:`Cube.filter <processor.structures.Cube.filter>`.
 
     Returns
     --------
@@ -203,7 +203,7 @@ class CubeProxy(dict):
         side operand to be used in the expression.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.Cube.filter`.
+        :obj:`Cube.filter <processor.structures.Cube.filter>`.
 
     Returns
     --------
@@ -231,7 +231,7 @@ class CubeProxy(dict):
         corresponding values in all collection members.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.Cube.groupby`.
+        :obj:`Cube.groupby <processor.structures.Cube.groupby>`.
 
     Returns
     --------
@@ -256,7 +256,7 @@ class CubeProxy(dict):
         coordinates.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.Cube.groupby`.
+        :obj:`Cube.groupby <processor.structures.Cube.groupby>`.
 
     Returns
     --------
@@ -287,7 +287,7 @@ class CubeProxy(dict):
         coordinates.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.Cube.groupby`.
+        :obj:`Cube.groupby <processor.structures.Cube.groupby>`.
 
     Returns
     --------
@@ -312,7 +312,7 @@ class CubeProxy(dict):
         Character label to be attached to the input cube.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.Cube.label`.
+        :obj:`Cube.label <processor.structures.Cube.label>`.
 
     Returns
     --------
@@ -336,7 +336,7 @@ class CubeProxy(dict):
         recipe.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.Cube.reduce`.
+        :obj:`Cube.reduce <processor.structures.Cube.reduce>`.
 
     Returns
     --------
@@ -385,7 +385,7 @@ class CubeCollectionProxy(dict):
     -----------
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.CubeCollection.compose`.
+        :obj:`CubeCollection.compose <processor.structures.CubeCollection.compose>`.
 
     Returns
     --------
@@ -406,7 +406,7 @@ class CubeCollectionProxy(dict):
         a dimension that does not exist in any of the collection members.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.CubeCollection.concatenate`.
+        :obj:`CubeCollection.concatenate <processor.structures.CubeCollection.concatenate>`.
 
     Returns
     --------
@@ -428,7 +428,7 @@ class CubeCollectionProxy(dict):
         be provided to the query processor when executing the query recipe.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.structures.CubeCollection.merge`.
+        :obj:`CubeCollection.merge <processor.structures.CubeCollection.merge>`.
 
     Returns
     --------
@@ -925,11 +925,11 @@ def geometries(value, **kwargs):
     value
       One or more spatial features containing the geometries. Should be given
       as an object that can be understood by the initializer of
-      :class:`extent.SpatialExtent`. This includes
+      :class:`SpatialExtent <extent.SpatialExtent>`. This includes
       :obj:`geopandas.GeoDataFrame` objects.
     **kwargs
       Additional keyword arguments passed on to the initializer of
-      :class:`extent.SpatialExtent`.
+      :class:`SpatialExtent <extent.SpatialExtent>`.
 
   Returns
   -------
@@ -950,12 +950,12 @@ def time_instant(value, **kwargs):
   ----------
     value
       The time instant as object that can be understood by the initializer of
-      :class:`extent.TemporalExtent`. This includes :obj:`pandas.Timestamp`
-      objects, as well as text representations of time instants in different
-      formats.
+      :class:`TemporalExtent <extent.TemporalExtent>`. This includes
+      :obj:`pandas.Timestamp` objects, as well as text representations of time
+      instants in different formats.
     **kwargs
       Additional keyword arguments passed on to the initializer of
-      :class:`extent.TemporalExtent`.
+      :class:`TemporalExtent <extent.TemporalExtent>`.
 
   Returns
   -------
@@ -978,12 +978,13 @@ def time_interval(*bounds, **kwargs):
     *bounds
       Respectively the start and end of the time interval. Should be given as
       objects that can be understood by the initializer of
-      :class:`extent.TemporalExtent`. This includes :obj:`pandas.Timestamp`
-      objects, as well as text representations of time instants in different
-      formats. The interval is assumed to be closed at both sides.
+      :class:`TemporalExtent <extent.TemporalExtent>`. This includes
+      :obj:`pandas.Timestamp` objects, as well as text representations of time
+      instants in different formats. The interval is assumed to be closed at
+      both sides.
     **kwargs
       Additional keyword arguments passed on to the initializer of
-      :class:`extent.TemporalExtent`.
+      :class:`TemporalExtent <extent.TemporalExtent>`.
 
   Returns
   -------

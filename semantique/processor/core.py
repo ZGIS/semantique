@@ -20,17 +20,17 @@ class QueryProcessor():
 
   Parameters
   ----------
-    recipe : :obj:`QueryRecipe`
+    recipe : QueryRecipe
       The query recipe to be processed.
-    factbase : :obj:`factbase.Factbase`
+    factbase : Factbase
       The factbase instance to process the query against.
-    ontology : :obj:`ontology.Ontology`
+    ontology : Ontology
       The ontology instance to process the query against.
     extent : :obj:`xarray.DataArray`
-      The spatio-temporal extent in which the query should be processed.
-      Should be given as an array with a temporal dimension as well as a
-      stacked spatial dimension, such as returned by
-      :func:`utils.create_extent_cube`.
+      The spatio-temporal extent in which the query should be processed. Should
+      be given as an array with a temporal dimension as well as a stacked
+      spatial dimension, such as returned by
+      :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
     operators : :obj:`dict`
       Operator functions that may be used when evaluating expressions with the
       evaluate verb. If :obj:`None`, all built-in operators in semantique will
@@ -104,7 +104,7 @@ class QueryProcessor():
 
   @property
   def recipe(self):
-    """:obj:`QueryRecipe`: The query recipe to be processed."""
+    """QueryRecipe: The query recipe to be processed."""
     return self._recipe
 
   @recipe.setter
@@ -113,7 +113,7 @@ class QueryProcessor():
 
   @property
   def factbase(self):
-    """:obj:`factbase.Factbase`: The factbase instance to process the query
+    """Factbase: The factbase instance to process the query
     against."""
     return self._factbase
 
@@ -123,7 +123,7 @@ class QueryProcessor():
 
   @property
   def ontology(self):
-    """:obj:`ontology.Ontology`: The ontology instance to process the query
+    """Ontology: The ontology instance to process the query
     against."""
     return self._ontology
 
@@ -150,19 +150,19 @@ class QueryProcessor():
 
   @property
   def spatial_resolution(self):
-    """obj:`list`: Spatial resolution in which the query should be
+    """:obj:`list`: Spatial resolution in which the query should be
     processed."""
     return self._extent.sq.spatial_resolution
 
   @property
   def tz(self):
-    """obj:`datetime.tzinfo`: Time zone in which the query should be
+    """:obj:`datetime.tzinfo`: Time zone in which the query should be
     processed."""
     return self._extent.sq.tz
 
   @property
   def operators(self):
-    """obj:`dict`: Supported operator functions for the evaluate verb."""
+    """:obj:`dict`: Supported operator functions for the evaluate verb."""
     return self._operators
 
   @operators.setter
@@ -227,15 +227,15 @@ class QueryProcessor():
 
     Parameters
     ----------
-      recipe : :obj:`QueryRecipe`:
+      recipe : QueryRecipe
         The query recipe to be processed.
-      factbase : :obj:`factbase.Factbase`
+      factbase : Factbase
         The factbase instance to process the query against.
-      ontology : :obj:`ontology.Ontology`
+      ontology : Ontology
         The ontology instance to process the query against.
-      space : :obj:`extent.SpatialExtent`
+      space : SpatialExtent
         The spatial extent in which the query should be processed.
-      time : :obj:`extent.TemporalExtent`
+      time : TemporalExtent
         The temporal extent in which the query should be processed.
       **config:
         Additional configuration parameters forwarded to
@@ -323,7 +323,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`dict` of `xarray.DataArray`
+      :obj:`dict` of :obj:`xarray.DataArray`
         Dictionary containing result names as keys and result arrays as values.
 
     """
@@ -358,7 +358,7 @@ class QueryProcessor():
 
     Returns
     --------
-      :obj:`xarray.DataArray` or :obj:`processor.structures.CubeCollection`
+      :obj:`xarray.DataArray` or :obj:`Cube Collection <semantique.processor.strctures.CubeCollection>`
         The processed building block.
 
     """
@@ -458,7 +458,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`processor.structures.CubeCollection`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     name = block["name"]
@@ -485,7 +485,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`processor.structures.CubeCollection`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     return self._get_eval_obj()
@@ -516,7 +516,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`processor.structures.CubeCollection`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     obj = self.call_handler(block["with"])
@@ -625,7 +625,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`processor.structures.CubeCollection`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     name = block["name"]

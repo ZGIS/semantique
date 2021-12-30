@@ -757,7 +757,8 @@ def after_(x, y, track_types = False, **kwargs):
   """Test if x comes after y.
 
   This is a specific temporal relational operator meant to be evaluated with
-  time instants and/or time intervals as operands.
+  `time instants <semantique.time_instant>` and/or
+  `time intervals <semantique.time_interval>` as operands.
 
   Parameters
   ----------
@@ -796,7 +797,8 @@ def before_(x, y, track_types = False, **kwargs):
   """Test if x comes before y.
 
   This is a specific temporal relational operator meant to be evaluated with
-  time instants and/or time intervals as operands.
+  `time instants <semantique.time_instant>` and/or
+  `time intervals <semantique.time_interval>` as operands.
 
   Parameters
   ----------
@@ -835,7 +837,8 @@ def during_(x, y, track_types = False, **kwargs):
   """Test if x is during interval y.
 
   This is a specific temporal relational operator meant to be evaluated with
-  time instants and/or time intervals as operands.
+  `time instants <semantique.time_instant>` and/or
+  `time intervals <semantique.time_interval>` as operands.
 
   Parameters
   ----------
