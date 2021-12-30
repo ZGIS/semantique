@@ -83,8 +83,18 @@ class UnknownOperatorError(Exception):
   """
   pass
 
+class UnknownDimensionError(Exception):
+  """Raised when an unexisting dimension is referenced.
+
+  This occurs for example when one wants to extract coordinates of a specific
+  dimension from a data cube that does not contain this dimension, or try to
+  reduce a data cube along an unexisting dimension.
+
+  """
+  pass
+
 class UnknownComponentError(Exception):
-  """Raised when a dimension component does not exist for the given dimension.
+  """Raised when an unexisting dimension component is referenced.
 
   This occurs when one wants to extract a specific component from a dimension
   that does not contain this component, for example when trying to extract
@@ -95,7 +105,7 @@ class UnknownComponentError(Exception):
   pass
 
 class UnknownLabelError(Exception):
-  """Raised when a value label is not used for any value in a data cube.
+  """Raised when a referenced value label is not used for any value in a cube.
 
   This occurs when one tries to query values in a data cube by their label
   instead of actual stored data value (using the obj:`value_label` block)
@@ -119,7 +129,10 @@ class MissingDimensionError(Exception):
   """Raised when a data cube does not contain a required dimension.
 
   This occurs in functions that require one or more specific dimensions to be
-  present in a data cube.
+  present in a data cube. This includes grouping with the groupby verb, which
+  requires the dimension of the grouper to be present in the input data cube,
+  and retrieving data from a factbase, which requires often that at least a
+  spatial dimension is present.
 
   """
   pass

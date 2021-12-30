@@ -207,7 +207,7 @@ class Cube():
 
     Raises
     -------
-      :obj:`exceptions.MissingDimensionError`
+      :obj:`exceptions.UnknownDimensionError`
         If a dimension with the given name is not present in the data cube.
       :obj:`exceptions.UnknownComponentError`
         If the given dimension does not contain the given component.
@@ -216,8 +216,8 @@ class Cube():
     try:
       coords = self._obj[dimension]
     except KeyError:
-      raise exceptions.MissingDimensionError(
-        f"Dimension '{dimension}' is not defined"
+      raise exceptions.UnknownDimensionError(
+        f"Dimension '{dimension}' is not present in the input object"
       )
     if component is None:
       out = coords
@@ -387,7 +387,16 @@ class Cube():
     --------
       :obj:`xarray.DataArray`
 
+    Raises
+    ------
+      :obj:`exceptions.UnknownDimensionError`
+        If a dimension with the given name is not present in the data cube.
+
     """
+    if dimension not in self._obj.dims:
+      raise exceptions.UnknownDimensionError(
+        f"Dimension '{dimension}' is not present in the input object"
+      )
     out = reducer(self._obj, dimension, track_types = track_types, **kwargs)
     return out
 

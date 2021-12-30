@@ -323,6 +323,7 @@ Exceptions
    exceptions.UnknownReferenceError
    exceptions.UnknownReducerError
    exceptions.UnknownOperatorError
+   exceptions.UnknownDimensionError
    exceptions.UnknownComponentError
    exceptions.UnknownLabelError
    exceptions.TooManyDimensionsError
