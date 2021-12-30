@@ -647,7 +647,7 @@ class QueryProcessor():
     except KeyError:
       params = {}
     try:
-      params = getattr(self, "update_params_of_" + name)(params)
+      params = getattr(self, "parse_params_of_" + name)(params)
     except AttributeError:
       pass
     obj = self._get_eval_obj()
@@ -667,7 +667,7 @@ class QueryProcessor():
     self._replace_eval_obj(out)
     return out
 
-  def update_params_of_evaluate(self, params):
+  def parse_params_of_evaluate(self, params):
     """Parse the parameters of the evaluate verb.
 
     Processes the building blocks attached to the ``y`` parameter (if present)
@@ -695,7 +695,7 @@ class QueryProcessor():
       pass
     else:
       if isinstance(y, (list, tuple)):
-        params["y"] = self.update_list_elements(y)
+        params["y"] = self.parse_list_elements(y)
       else:
         try:
           params["y"] = self.call_handler(y)
@@ -705,7 +705,7 @@ class QueryProcessor():
     params["track_types"] = self._track_types
     return params
 
-  def update_params_of_filter(self, params):
+  def parse_params_of_filter(self, params):
     """Parse the parameters of the filter verb.
 
     Processes the building blocks attached to the ``filterer`` parameter into a
@@ -731,7 +731,7 @@ class QueryProcessor():
     params["track_types"] = self._track_types
     return params
 
-  def update_params_of_groupby(self, params):
+  def parse_params_of_groupby(self, params):
     """Parse the parameters of the groupby verb.
 
     Processes the building blocks attached to the ``grouper`` parameter
@@ -754,7 +754,7 @@ class QueryProcessor():
     params["grouper"] = getattr(self, "handle_" + grouper["type"])(grouper)
     return params
 
-  def update_params_of_reduce(self, params):
+  def parse_params_of_reduce(self, params):
     """Parse the parameters of the reduce verb.
 
     Obtains the reducer function corresponding to the reducer name given as
@@ -778,20 +778,7 @@ class QueryProcessor():
     params["track_types"] = self._track_types
     return params
 
-  def update_params_of_replace(self, params):
-    params = copy.deepcopy(params)
-    y = params["y"]
-    try:
-      params["y"] = self.call_handler(y)
-    except ValueError:
-      if isinstance(y, (list, tuple)):
-        params["y"] = self.update_list_elements(y)
-      else:
-        pass
-    params["track_types"] = self._track_types
-    return params
-
-  def update_params_of_compose(self, params):
+  def parse_params_of_compose(self, params):
     """Parse the parameters of the compose verb.
 
     Adds the boolean ``track_types`` parameter according to the processor
@@ -813,7 +800,7 @@ class QueryProcessor():
     params["track_types"] = self._track_types
     return params
 
-  def update_params_of_concatenate(self, params):
+  def parse_params_of_concatenate(self, params):
     """Parse the parameters of the concatenate verb.
 
     Adds the boolean ``track_types`` parameter according to the processor
@@ -835,7 +822,7 @@ class QueryProcessor():
     params["track_types"] = self._track_types
     return params
 
-  def update_params_of_merge(self, params):
+  def parse_params_of_merge(self, params):
     """Parse the parameters of the merge verb.
 
     Obtains the reducer function corresponding to the reducer name given as
@@ -859,7 +846,7 @@ class QueryProcessor():
     params["track_types"] = self._track_types
     return params
 
-  def update_list_elements(self, obj):
+  def parse_list_elements(self, obj):
     """Parse the elements of a list.
 
     If an element in a list is a valid building block with a corresponding
@@ -877,12 +864,12 @@ class QueryProcessor():
         The same list with parsed elements.
 
     """
-    def _update(x):
+    def _parse(x):
       try:
         return self.call_handler(x)
       except exceptions.InvalidBuildingBlockError:
         return x
-    return [_update(x) for x in obj]
+    return [_parse(x) for x in obj]
 
   def add_operator(self, name, function):
     """Add a new operator to the set of supported operators.

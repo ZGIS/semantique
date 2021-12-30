@@ -87,15 +87,14 @@
    processor.core.QueryProcessor.handle_time_instant
    processor.core.QueryProcessor.handle_time_interval
    processor.core.QueryProcessor.handle_verb
-   processor.core.QueryProcessor.update_params_of_evaluate
-   processor.core.QueryProcessor.update_params_of_filter
-   processor.core.QueryProcessor.update_params_of_groupby
-   processor.core.QueryProcessor.update_params_of_reduce
-   processor.core.QueryProcessor.update_params_of_replace
-   processor.core.QueryProcessor.update_params_of_compose
-   processor.core.QueryProcessor.update_params_of_concatenate
-   processor.core.QueryProcessor.update_params_of_merge
-   processor.core.QueryProcessor.update_list_elements
+   processor.core.QueryProcessor.parse_params_of_evaluate
+   processor.core.QueryProcessor.parse_params_of_filter
+   processor.core.QueryProcessor.parse_params_of_groupby
+   processor.core.QueryProcessor.parse_params_of_reduce
+   processor.core.QueryProcessor.parse_params_of_compose
+   processor.core.QueryProcessor.parse_params_of_concatenate
+   processor.core.QueryProcessor.parse_params_of_merge
+   processor.core.QueryProcessor.parse_list_elements
    processor.core.QueryProcessor.add_operator
    processor.core.QueryProcessor.get_operator
    processor.core.QueryProcessor.store_default_operators
