@@ -782,7 +782,7 @@ class Cube():
       del out.sq.value_labels
     return out
 
-  def to_csv(self, file, **kwargs):
+  def to_csv(self, file, unstack = True, **kwargs):
     """Write the content of the cube to a CSV file on disk.
 
     The CSV file will contain one column per dimension, and a column containing
@@ -792,6 +792,10 @@ class Cube():
     ----------
       file : :obj:`str`
         Path to the CSV file to be written.
+      unstack : :obj:`bool`
+        Should the spatial dimension (if present) in of the input cube be
+        unstacked into respectively the separate x and y dimensions before
+        writing to the CSV file?
       **kwargs
         Ignored.
 
@@ -802,6 +806,8 @@ class Cube():
 
     """
     obj = self.drop_non_dimension_coords()
+    if unstack:
+      obj = obj.sq.unstack_spatial_dims()
     # to_dataframe method does not work for zero-dimensional arrays.
     if len(self.dims) == 0:
       pd.DataFrame([obj.values]).to_csv(file, header = False, index = False)
