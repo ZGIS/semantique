@@ -29,12 +29,14 @@
    factbase.Factbase.lookup
    factbase.Factbase.retrieve
 
+   factbase.Opendatacube.layout
    factbase.Opendatacube.connection
    factbase.Opendatacube.tz
    factbase.Opendatacube.config
    factbase.Opendatacube.lookup
    factbase.Opendatacube.retrieve
 
+   factbase.GeotiffArchive.layout
    factbase.GeotiffArchive.src
    factbase.GeotiffArchive.tz
    factbase.GeotiffArchive.config
