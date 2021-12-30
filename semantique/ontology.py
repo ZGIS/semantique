@@ -40,14 +40,6 @@ class Ontology(dict):
     super(Ontology, self).__init__(obj)
     self._rules = obj
 
-  @property
-  def rules(self):
-    return self._rules
-
-  @rules.setter
-  def rules(self, value):
-    self._rules = value
-
   def lookup(self, *reference):
     """Lookup the ruleset of a referenced semantic concept.
 
