@@ -312,7 +312,7 @@ class Cube():
         If the grouper dimension is not present in the input object.
       :obj:`exceptions.TooManyDimensionsError`
         If the grouper has more than one dimension.
-      :obj:`exceptions.UnmatchingDimensionsError`
+      :obj:`exceptions.MixedDimensionsError`
         If the grouper is a collection and its elements don't all have the same
         dimensions.
 
@@ -329,7 +329,7 @@ class Cube():
         "Groupers must be one-dimensional"
       )
     if not all([x == dims[0] for x in dims]):
-      raise exceptions.UnmatchingDimensionsError(
+      raise exceptions.MixedDimensionsError(
         "Dimensions of grouper arrays do not match"
       )
     if not dims[0][0] in self._obj.dims:

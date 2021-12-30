@@ -327,5 +327,5 @@ Exceptions
    exceptions.UnknownLabelError
    exceptions.TooManyDimensionsError
    exceptions.MissingDimensionError
-   exceptions.UnmatchingDimensionsError
+   exceptions.MixedDimensionsError
    exceptions.MixedTimeZonesError

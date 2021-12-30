@@ -124,7 +124,7 @@ class MissingDimensionError(Exception):
   """
   pass
 
-class UnmatchingDimensionsError(Exception):
+class MixedDimensionsError(Exception):
   """Raised when the data cubes in a cube collection have differing dimensions.
 
   This occurs in functions that require all cubes in a cube collection to have
