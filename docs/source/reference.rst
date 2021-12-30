@@ -141,6 +141,7 @@ Data structures
 
 .. autosummary::
    :toctree: _generated/
+   :template: inherited.rst
    :nosignatures:
 
    processor.structures.Cube
