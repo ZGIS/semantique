@@ -14,6 +14,26 @@ def _nodata_as_zero(x):
 #
 
 def mean_(x, dimension, track_types = False, **kwargs):
+  """Calculate the mean of a set of values.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     return np.nanmean(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
@@ -23,6 +43,26 @@ def mean_(x, dimension, track_types = False, **kwargs):
   return out
 
 def product_(x, dimension, track_types = False, **kwargs):
+  """Calculate the product of a set of values.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     values = np.nanprod(x, axis = axis)
     return np.where(_is_all_nodata(x, axis), np.nan, values)
@@ -33,6 +73,26 @@ def product_(x, dimension, track_types = False, **kwargs):
   return out
 
 def standard_deviation_(x, dimension, track_types = False, **kwargs):
+  """Calculate the standard deviation of a set of values.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     return np.nanstd(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
@@ -42,6 +102,26 @@ def standard_deviation_(x, dimension, track_types = False, **kwargs):
   return out
 
 def sum_(x, dimension, track_types = False, **kwargs):
+  """Calculate the sum of a set of values.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     values = np.nansum(x, axis = axis)
     return np.where(_is_all_nodata(x, axis), np.nan, values)
@@ -52,6 +132,26 @@ def sum_(x, dimension, track_types = False, **kwargs):
   return out
 
 def variance_(x, dimension, track_types = False, **kwargs):
+  """Calculate the variance of a set of values.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     return np.nanvar(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
@@ -65,6 +165,26 @@ def variance_(x, dimension, track_types = False, **kwargs):
 #
 
 def all_(x, dimension, track_types = False, **kwargs):
+  """Test if all values in a set are true.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     values = np.all(x, axis = axis)
     return np.where(_is_all_nodata(x, axis), np.nan, values)
@@ -75,6 +195,26 @@ def all_(x, dimension, track_types = False, **kwargs):
   return out
 
 def any_(x, dimension, track_types = False, **kwargs):
+  """Test if at least one value in a set is true.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     return np.any(_nodata_as_zero(x), axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
@@ -88,6 +228,26 @@ def any_(x, dimension, track_types = False, **kwargs):
 #
 
 def count_(x, dimension, track_types = False, **kwargs):
+  """Count the number of true values in a set.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     values = np.count_nonzero(_nodata_as_zero(x), axis = axis)
     return np.where(_is_all_nodata(x, axis), np.nan, values)
@@ -98,6 +258,26 @@ def count_(x, dimension, track_types = False, **kwargs):
   return out
 
 def percentage_(x, dimension, track_types = False, **kwargs):
+  """Calculate the percentage of true values in a set.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     part = np.count_nonzero(_nodata_as_zero(x), axis = axis)
     part = np.where(_is_all_nodata(x, axis), np.nan, part)
@@ -114,6 +294,26 @@ def percentage_(x, dimension, track_types = False, **kwargs):
 #
 
 def max_(x, dimension, track_types = False, **kwargs):
+  """Return the maximum value in a set.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     return np.nanmax(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
@@ -123,6 +323,26 @@ def max_(x, dimension, track_types = False, **kwargs):
   return out
 
 def median_(x, dimension, track_types = False, **kwargs):
+  """Return the median value in a set.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     return np.nanmedian(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
@@ -132,6 +352,26 @@ def median_(x, dimension, track_types = False, **kwargs):
   return out
 
 def min_(x, dimension, track_types = False, **kwargs):
+  """Return the minimum value in a set.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     return np.nanmin(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
@@ -145,6 +385,26 @@ def min_(x, dimension, track_types = False, **kwargs):
 #
 
 def first_(x, dimension, track_types = False, **kwargs):
+  """Return the first value in a set.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     is_value = np.isfinite(x)
     is_last = np.equal(np.cumsum(np.cumsum(is_value, axis = axis), axis = axis), 1)
@@ -156,6 +416,26 @@ def first_(x, dimension, track_types = False, **kwargs):
   return out
 
 def last_(x, dimension, track_types = False, **kwargs):
+  """Return the last value in a set.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     return first(np.flip(x, axis = axis), axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
@@ -165,6 +445,26 @@ def last_(x, dimension, track_types = False, **kwargs):
   return out
 
 def mode_(x, dimension, track_types = False, **kwargs):
+  """Return the most occuring value in a set.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  """
   def f(x, axis, **kwargs):
     values = stats.mode(x, axis = axis, nan_policy = "omit")[0].squeeze(axis = axis)
     return np.where(_is_all_nodata(x, axis), np.nan, values)

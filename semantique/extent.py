@@ -13,18 +13,18 @@ from pyproj.crs import CRS
 from semantique import exceptions
 
 class SpatialExtent(dict):
-  """Dictionary-like representation of a spatial extent.
+  """Dict-like representation of a spatial extent.
 
   Parameters
   ----------
     obj
       One or more spatial features that together form the boundaries of the
       spatial extent. Should be given as an object that can be read by the
-      initializer of :obj:`geopandas.GeoDataFrame`. This includes
+      initializer of :class:`geopandas.GeoDataFrame`. This includes
       :obj:`geopandas.GeoDataFrame` objects themselves.
     **kwargs
       Additional keyword arguments forwarded to the initializer of
-      :obj:`geopandas.GeoDataFrame`.
+      :class:`geopandas.GeoDataFrame`.
 
   """
 
@@ -67,7 +67,7 @@ class SpatialExtent(dict):
         Dictionary formatted according to GeoJSON standards.
       **kwargs
         Additional keyword arguments forwarded to
-        :obj:`geopandas.GeoDataFrame.from_features`.
+        :meth:`geopandas.GeoDataFrame.from_features`.
 
     """
     t = obj["type"]
@@ -89,7 +89,7 @@ class SpatialExtent(dict):
         FeatureCollection objects.
       **kwargs
         Additional keyword arguments forwarded to
-        :obj:`geopandas.GeoDataFrame.from_features`.
+        :meth:`geopandas.GeoDataFrame.from_features`.
 
     """
     geojs = copy.deepcopy(obj)
@@ -112,7 +112,7 @@ class SpatialExtent(dict):
         objects.
       **kwargs
         Additional keyword arguments forwarded to
-        :obj:`geopandas.GeoDataFrame.from_features`.
+        :meth:`geopandas.GeoDataFrame.from_features`.
 
     """
     geojs = copy.deepcopy(obj)
@@ -132,7 +132,7 @@ class SpatialExtent(dict):
         objects.
       **kwargs
         Additional keyword arguments forwarded to
-        :obj:`geopandas.GeoDataFrame.from_features`.
+        :meth:`geopandas.GeoDataFrame.from_features`.
 
     """
     geojs = {"type": "Feature", "geometry": obj, "properties": {}}
@@ -161,11 +161,12 @@ class SpatialExtent(dict):
         the direction of the axes. For most CRSs, the y-axis has a negative
         direction, and hence the cell size along the y-axis is given as a
         negative number.
-      crs
+      crs : optional
         Coordinate reference system in which the grid should be created. Can be
-        given as any object understood by the initializer of :obj:`pyproj.CRS`.
-        This includes :obj:`pyproj.CRS` objects themselves, as well as EPSG
-        codes and WKT strings. If `None`, the CRS of the extent is used.
+        given as any object understood by the initializer of
+        :class:`pyproj.CRS`. This includes :obj:`pyproj.CRS` objects
+        themselves, as well as EPSG codes and WKT strings. If ``None``, the CRS
+        of the extent itself is used.
       stack : :obj:`bool`
         Boolean defining if the two spatial dimensions of the grid should be
         stacked into a single, multi-indexed "space" dimension.
@@ -207,13 +208,13 @@ class SpatialExtent(dict):
     return raster_obj
 
 class TemporalExtent(dict):
-  """Dictionary-like representation of a temporal extent.
+  """Dict-like representation of a temporal extent.
 
   Parameters
   ----------
     *bounds
       Boundaries of the temporal extent. Should be given as objects that can be
-      read by the initializer of :obj:`pandas.Timestamp`. This includes
+      read by the initializer of :class:`pandas.Timestamp`. This includes
       :obj:`pandas.Timestamp` objects themselves, as well as text
       representations of time instants in different formats. If the temporal
       extent is a single time instant, a single boundary may be given. If the
@@ -221,11 +222,11 @@ class TemporalExtent(dict):
       as `(start, end)`. This interval is assumed to be closed at both sides.
     **kwargs
       Additional keyword arguments forwarded to the initializer of
-      :obj:`pandas.Timestamp`.
+      :class:`pandas.Timestamp`.
 
   Raises
   -------
-    MixedTimeZonesError
+    :obj:`exceptions.MixedTimeZonesError`
       If the given boundaries have differing timezone information attached.
 
   """
@@ -253,7 +254,7 @@ class TemporalExtent(dict):
     # Check if timezones of bounds are matching.
     if interval and start.tz != end.tz:
         raise exceptions.MixedTimeZonesError(
-          f"Time interval has bounds with differing time zones: "
+          f"Time interval has bounds with differing timezones: "
           f"'{start.tz.zone}' and '{end.tz.zone}'"
         )
     # Assign default timezone UTC if timezone is not known.
@@ -281,7 +282,7 @@ class TemporalExtent(dict):
 
   @property
   def tz(self):
-    """:obj:`datetime.tzinfo`: Time zone of the time instants."""
+    """:obj:`datetime.tzinfo`: Timezone of the time instants."""
     return self._tz
 
   @property
@@ -306,19 +307,21 @@ class TemporalExtent(dict):
     ----------
       resolution : :obj:`str` or :obj:`pandas.DateOffset`
         Temporal resolution of the grid. Can be given as offset alias as
-        defined in pandas, e.g. "D" for a daily frequency. These aliases can
-        have multiples, e.g. "5D". If `None`, only the start and end instants
+        defined in `pandas`_, e.g. "D" for a daily frequency. These aliases can
+        have multiples, e.g. "5D". If ``None``, only the start and end instants
         of the extent will be coordinates in the grid.
-      tz
-        Time zone of the datetime values in the grid. Can be given as :obj:`str`
-        referring to the name of a time zone in the tz database, or as instance
-        of any class inheriting from :obj:`datetime.tzinfo`. If `None`, the
+      tz : optional
+        Timezone of the datetime values in the grid. Can be given as :obj:`str`
+        referring to the name of a timezone in the tz database, or as instance
+        of any class inheriting from :class:`datetime.tzinfo`. If ``None``, the
         timezone of the extent is used.
-
 
     Returns
     -------
       :obj:`xarray.DataArray`
+
+    .. _pandas
+      https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html
 
     """
     if resolution is None:

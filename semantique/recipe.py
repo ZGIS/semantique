@@ -3,11 +3,21 @@ from semantique.processor.core import QueryProcessor
 class QueryRecipe(dict):
   """Dict-like container to store result instructions.
 
+  In semantique, a query recipe is a dict-like container storing instructions
+  that can be executed by a query processor in order to infer new knowledge
+  from earth observation data. Each distinct piece of knowledge, called a query
+  result, has its own set of instructions, which are constructed by chaining
+  together several building blocks offered by semantique.
+
+  In these instructions, one can refer directly to real-world semantic concepts
+  by their name, without having to be aware how these concepts are actually
+  represented by the earth observations data.
+
   Parameters
   ----------
     results : :obj:`dict` of :obj:`CubeProxy`
       Dictionary containing result names as keys and result instructions as
-      values. If `None`, an empty recipe is constructed.
+      values. If ``None``, an empty recipe is constructed.
 
   """
   def __init__(self, results = None):
@@ -38,8 +48,8 @@ class QueryRecipe(dict):
     Returns
     -------
       :obj:`dict` of :obj:`xarray.DataArray`:
-        Dictionary containing result names as keys and processed results as
-        values.
+        The response of the query processor as a dictionary containing result
+        names as keys and result arrays as values.
 
     """
     qp = QueryProcessor.parse(self, factbase, ontology, space, time, **config)

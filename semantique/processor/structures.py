@@ -13,12 +13,38 @@ from semantique.processor import utils
 
 @xr.register_dataarray_accessor("sq")
 class Cube():
+  """Internal representation of a data cube.
+
+  This data structure is modelled as an accessor of :class:`xarray.DataArray`.
+  Using accessors instead of the common class inheritance is recommended by the
+  developers of xarray, see `here`_. In practice, this means that each method
+  of this class can be called as method of :obj:`xarray.DataArray` objects by
+  using the ``.sq`` prefix: ::
+
+    xarray_obj.sq.method
+
+  Parameters
+  ----------
+    xarray_obj : :obj:`xarray.DataArray`
+      The content of the data cube.
+
+  .. _here:
+    https://xarray.pydata.org/en/stable/internals/extending-xarray.html
+
+  """
 
   def __init__(self, xarray_obj):
     self._obj = xarray_obj
 
   @property
   def value_type(self):
+    """:obj:`str`: The value type of the data cube.
+
+    Valid options are: ::
+
+      'numerical', 'nominal', 'ordinal', 'boolean'
+
+    """
     try:
       return self._obj.attrs["value_type"]
     except KeyError:
@@ -37,6 +63,7 @@ class Cube():
 
   @property
   def value_labels(self):
+    """:obj:`dict`: Character labels of data values."""
     try:
       return self._obj.attrs["value_labels"]
     except KeyError:
@@ -55,14 +82,19 @@ class Cube():
 
   @property
   def crs(self):
+    """:obj:`pyproj.CRS`: Coordinate reference system in which the spatial
+    coordinates of the cube are expressed."""
     return self._obj.rio.crs
 
   @property
   def spatial_resolution(self):
+    """:obj:`list`: Spatial resolution of the cube in units of the CRS."""
     return self._obj.sq.unstack_spatial_dims().rio.resolution()[::-1]
 
   @property
   def tz(self):
+    """:obj:`datetime.tzinfo`: Time zone in which the temporal coordinates of
+    the cube are expressed."""
     try:
       return pytz.timezone(self._obj["temporal_ref"].attrs["zone"])
     except KeyError:
@@ -70,6 +102,7 @@ class Cube():
 
   @property
   def extent(self):
+    """:obj:`xarray.DataArray`: Spatio-temporal extent of the cube."""
     time = self.temporal_dimension
     space = self.spatial_dimension
     if time is None:
@@ -87,10 +120,12 @@ class Cube():
 
   @property
   def is_empty(self):
+    """:obj:`bool`: Is the data cube empty."""
     return self._obj.values.size == 0 or self._obj.max() != self._obj.max()
 
   @ property
   def temporal_dimension(self):
+    """:obj:`str`: Name of the temporal dimension of the cube."""
     if "time" in self._obj.dims:
       return "time"
     else:
@@ -98,6 +133,7 @@ class Cube():
 
   @property
   def spatial_dimension(self):
+    """:obj:`str`: Name of the spatial dimension of the cube."""
     if "space" in self._obj.dims:
       return "space"
     else:
@@ -105,6 +141,7 @@ class Cube():
 
   @property
   def xy_dimensions(self):
+    """:obj:`list`: Names of respectively the X and Y dimensions of the cube."""
     candidates = [
       ["x", "y"],
       ["X", "Y"],
@@ -117,11 +154,65 @@ class Cube():
     return None
 
   def evaluate(self, operator, y = None, track_types = False, **kwargs):
+    """Apply the evaluate verb to the cube.
+
+    The evaluate verb evaluates an expression for each pixel in a data cube.
+
+    Parameters
+    ----------
+    operator : :obj:`callable`
+      Operator function to be used in the expression.
+    y : optional
+      Right-hand side of the expression. May be a constant, meaning that the
+      same value is used in each expression. May also be another data cube
+      which can be aligned to the same shape as the input cube. In the latter
+      case, when evaluating the expression for a pixel in the input cube the
+      second operand is the value of the pixel in cube ``y`` that has the same
+      dimension coordinates. Ignored when the operator is univariate.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type(s) of the operand(s)?
+    **kwargs:
+      Additional keyword arguments passed on to the operator function.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    """
     operands = tuple([self._obj]) if y is None else tuple([self._obj, y])
     out = operator(*operands, track_types = track_types, **kwargs)
     return out
 
   def extract(self, dimension, component = None, **kwargs):
+    """Apply the extract verb to the cube.
+
+    The extract verb extracts coordinate labels of a dimension as a new data
+    cube.
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension to be extracted.
+      component : :obj:`str`, optional
+        Name of a specific component of the dimension coordinates to be
+        extracted, e.g. *year*, *month* or *day* for temporal dimension
+        coordinates.
+      **kwargs:
+        Ignored.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    Raises
+    -------
+      :obj:`exceptions.MissingDimensionError`
+        If a dimension with the given name is not present in the data cube.
+      :obj:`exceptions.UnknownComponentError`
+        If the given dimension does not contain the given component.
+
+    """
     try:
       coords = self._obj[dimension]
     except KeyError:
@@ -149,6 +240,39 @@ class Cube():
     return out
 
   def filter(self, filterer, trim = False, track_types = False, **kwargs):
+    """Apply the filter verb to the cube.
+
+    The filter verb filters the values in a data cube.
+
+    Parameters
+    -----------
+      filterer : :obj:`xarray.DataArray`
+        Data cube which can be aligned to the same shape as the input cube.
+        Each pixel in the input cube will be kept if the pixel in the
+        filterer with the same dimension coordinates has true as value, and
+        dropped otherwise.
+      trim : :obj:`bool`
+        Should the filtered cube be trimmed before returning?
+        Trimming means that all coordinates for which all values are nodata, are
+        dropped from the array. The spatial dimension (if present) is treated
+        differently, by trimming it only at the edges, and thus maintaining the
+        regularity of the spatial dimension.
+      track_types : :obj:`bool`
+        Should it be checked if the filterer has value type *binary*?
+      **kwargs:
+        Ignored.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    Raises
+    -------
+      :obj:`exceptions.InvalidValueTypeError`
+        If ``track_types = True`` and the value type of ``filterer`` is not
+        *binary*.
+
+    """
     if track_types:
       vtype = filterer.sq.value_type
       if vtype is not None and vtype != "binary":
@@ -161,6 +285,38 @@ class Cube():
     return out
 
   def groupby(self, grouper, **kwargs):
+    """Apply the groupby verb to the cube.
+
+    The groupby verb groups the values in a data cube.
+
+    Parameters
+    -----------
+      grouper : :obj:`xarray.DataArray` or :obj:`CubeCollection`
+        Data cube containing a single dimension that is also present in the
+        input cube. The group to which each pixel in the input cube will be
+        assigned depends on the value of the grouper that has the same
+        coordinate for that dimension. Alternatively it may be a cube
+        collection in which each cube meets the requirements above. In that
+        case, groups are defined by the unique combinations of corresponding
+        values in all collection members.
+      **kwargs:
+        Ignored.
+
+    Returns
+    --------
+      :obj:`CubeCollection`
+
+    Raises
+    -------
+      :obj:`exceptions.MissingDimensionError`
+        If the grouper dimension is not present in the input object.
+      :obj:`exceptions.TooManyDimensionsError`
+        If the grouper has more than one dimension.
+      :obj:`exceptions.UnmatchingDimensionsError`
+        If the grouper is a collection and its elements don't all have the same
+        dimensions.
+
+    """
     # Validate grouper.
     if isinstance(grouper, list):
       multiple = True
@@ -191,14 +347,93 @@ class Cube():
     return out
 
   def label(self, label, **kwargs):
+    """Apply the label verb to the cube.
+
+    The label verb labels a data cube with a word or phrase.
+
+    Parameters
+    -----------
+      label : :obj:`str`
+        Character label to be attached to the input cube.
+      **kwargs:
+        Ignored.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    """
     out = self._obj.rename(label)
     return out
 
   def reduce(self, dimension, reducer, track_types = False, **kwargs):
+    """Apply the reduce verb to the cube.
+
+    The reduce verb reduces the dimensionality of a data cube.
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension to apply the reduction function to.
+      operator : :obj:`callable`
+        The reducer function to be applied.
+      track_types : :obj:`bool`
+        Should the reducer promote the value type of the output object, based
+        on the value type of the input object?
+      **kwargs:
+        Additional keyword arguments passed on to the reducer function.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    """
     out = reducer(self._obj, dimension, track_types = track_types, **kwargs)
     return out
 
   def align_with(self, other):
+    """Align the cube to the shape of another data cube.
+
+    An input cube is alinged to another cube if the pixel at position *i* in
+    the input cube has the same coordinates as the pixel at position *i* in the
+    other cube. Aligning can be done in several ways:
+
+    * Consider the case where the input cube has exactly the same dimensions
+      and coordinates as the other cube, but the order of them is different.
+      In that case, the input cube is simply re-ordered to match the other
+      cube.
+
+    * Consider the case where the input cube has the same dimensions as the
+      other cube, but not all coordinates match. In that case, the coordinates
+      that are in the input cube but not in the other cube are removed from the
+      input cube, and at the same time the coordinates that are in the other
+      cube but not in the input cube are added to the input cube.
+
+    * Consider the case where all dimensions of the input cube are also present
+      in the other cube, but not all dimensions of the other cube are present
+      in the input cube. In that case, the pixels of the input cube are
+      duplicated along those dimensions that are missing.
+
+    Alignment may also be a combination of more than one of these ways.
+
+    Parameters
+    -----------
+      other : :obj:`xarray.DataArray`
+        Data cube to which the input cube should be aligned.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+        The aligned input cube.
+
+    Raises
+    -------
+      :obj:`exceptions.AlignmentError`
+        If the input cube cannot be aligned to the other cube, for example when
+        the two cubes have no dimensions in common at all, or when the input
+        cube has dimensions that are not present in the other cube.
+
+    """
     out = xr.align(other, self._obj, join = "left")[1].broadcast_like(other)
     if not out.shape == other.shape:
       raise exceptions.AlignmentError(
@@ -209,6 +444,26 @@ class Cube():
     return out
 
   def trim(self, trim_space = True, force_regular = True):
+    """Trim the dimensions of the cube.
+
+    Trimming means that all coordinates for which all values are nodata, are
+    dropped from the array.
+
+    Parameters
+    ----------
+      trim_space : :obj:`bool`
+        Should the spatial dimensions be trimmed?
+      force_regular : :obj:`bool`
+        If the spatial dimensions should be trimmed, should the regularity of
+        these dimensions be preserved? If ``True`` the spatial dimensions are
+        trimmed only at their edges. Ignored when ``trim_space = False``.
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+        The trimmed input cube.
+
+    """
     space = self.spatial_dimension
     if space is None:
       # Trim all dimensions normally.
@@ -260,6 +515,18 @@ class Cube():
     return out
 
   def regularize(self):
+    """Regularize the spatial dimension of the cube.
+
+    Regularizing makes sure that the steps between subsequent coordinates of
+    the spatial dimensions are always equal to the resolution of that
+    dimensions.
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+        The regularized input cube.
+
+    """
     space = self.spatial_dimension
     if space is None:
       return self._obj
@@ -278,6 +545,25 @@ class Cube():
     return out.stack({space: [yname, xname]})
 
   def reproject(self, crs, **kwargs):
+    """Reproject the spatial coordinates of the cube into a different CRS.
+
+    Parameters
+    ----------
+      crs:
+        Target coordinate reference system. Can be given as any object
+        understood by the initializer of :class:`pyproj.CRS`. This includes
+        :obj:`pyproj.CRS` objects themselves, as well as EPSG codes and WKT
+        strings.
+      **kwargs:
+        Additional keyword argument passed on to
+        :meth:`rioxarray.RasterArray.reproject`.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+        The input cube with reprojected spatial coordinates.
+
+    """
     space = self.spatial_dimension
     if space is None:
       return self._obj
@@ -288,6 +574,24 @@ class Cube():
     return out
 
   def tz_convert(self, tz, **kwargs):
+    """Convert the temporal coordinates of the cube into a different timezone.
+
+    Parameters
+    ----------
+      tz:
+        Target timezone. Can be given as :obj:`str` referring to the name of a
+        timezone in the tz database, or as instance of any class inheriting
+        from :class:`datetime.tzinfo`.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :func:`processor.utils.convert_datetime64`.
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+        The input cube with converted temporal coordinates.
+
+    """
     time = self.temporal_dimension
     if time is None:
       return self._obj
@@ -297,9 +601,57 @@ class Cube():
     return out
 
   def write_crs(self, crs, inplace = False):
+    """Store the CRS of the cube as non-dimension coordinate.
+
+    The coordinate reference system of the spatial coordinates is stored as
+    attribute of a specific non-dimension coordinate named "spatial_ref".
+    Storing this inside a non-dimension coordinate rather than as direct
+    attribute of the array guarantees that this information is preserved
+    during any kind of operation. The coordinate itself serves merely as a
+    placeholder.
+
+    Parameters
+    ----------
+      crs:
+        The spatial coordinate reference system to store. Can be given as any
+        object understood by the initializer of :class:`pyproj.CRS`. This
+        includes :obj:`pyproj.CRS` objects themselves, as well as EPSG codes
+        and WKT strings.
+      inplace : :obj:`bool`
+        Should the cube be modified inplace?
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+        The input cube with the CRS stored in a non-dimension coordinate.
+
+    """
     return self._obj.rio.write_crs(crs, inplace = inplace)
 
   def write_tz(self, tz, inplace = False):
+    """Store the timezone of the cube as non-dimension coordinate.
+
+    The timezone of the temporal coordinates is stored as attribute of a
+    specific non-dimension coordinate named "temporal_ref". Storing this inside
+    a non-dimension coordinate rather than as direct attribute of the array
+    guarantees that this information is preserved during any kind of operation.
+    The coordinate itself serves merely as a placeholder.
+
+    Parameters
+    ----------
+      tz:
+        The timezone to store. Can be given as :obj:`str` referring to the name
+        of a timezone in the tz database, or as instance of any class
+        inheriting from :class:`datetime.tzinfo`.
+      inplace : :obj:`bool`
+        Should the cube be modified inplace?
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+        The input cube with the timezone stored in a non-dimension coordinate.
+
+    """
     obj = self._obj if inplace else copy.deepcopy(self._obj)
     try:
       zone = tz.zone
@@ -310,18 +662,58 @@ class Cube():
     return obj
 
   def stack_spatial_dims(self, name = "space"):
+    """Stack the spatial X and Y dimensions into a single spatial dimension.
+
+    Parameters
+    -----------
+    name : :obj:`str`
+      Name that should be given to the stacked dimension.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+        The input cube with stacked spatial dimensions.
+
+    """
     xy_dims = self.xy_dimensions
     if xy_dims is None:
       return self._obj
     return self._obj.stack({name: xy_dims[::-1]})
 
   def unstack_spatial_dims(self):
+    """Unstack the spatial dimension into separate X and Y dimensions.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+        The input cube with unstacked spatial dimensions.
+
+    """
     dim = self.spatial_dimension
     if dim is None:
       return self._obj
     return self._obj.unstack(dim)
 
   def drop_non_dimension_coords(self, keep = None):
+    """Drop non-dimension coordinates from the cube.
+
+    Non-dimension coordinates are coordinates that are used for e.g. auxilary
+    labeling or metadata storage. See the `xarray documentation`_.
+
+    Parameters
+    -----------
+      keep : :obj:`list`, optional
+        List of non-dimension coordinate names that should not be dropped.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+        The input cube without non-dimension coordinates
+
+    .. _xarray documentation:
+      https://xarray.pydata.org/en/stable/user-guide/terminology.html#term-Non-dimension-coordinate
+
+    """
     if keep is None:
       drop = set(self._obj.coords) - set(self._obj.dims)
     else:
@@ -329,6 +721,30 @@ class Cube():
     return self._obj.reset_coords(drop, drop = True)
 
   def promote_value_type(self, *operands, func, manual, inplace = True):
+    """Promote the value type of the output cube of an operation.
+
+    Operations in which value type promotion is needed include evaluating
+    expressions for each pixel in a cube with the evaluate verb and reducing
+    dimensionality of a cube with the reduce verb.
+
+    Parameters
+    ----------
+      *operands:
+        The operands used in the operation.
+      func : :obj:`str`
+        The name of the function used in the operation.
+      manual : :obj:`dict`
+        Type promotion manual for the operation.
+      inplace : :obj:`bool`
+        Should the object be modified inplace?
+
+    Raises
+    -------
+      :obj:`exceptions.InvalidValueTypeError`
+        If the (combination of) operand value type(s) is not supported
+        according to the type promotion manual of the operation.
+
+    """
     out = self._obj if inplace else copy.deepcopy(self._obj)
     if manual is None:
       out.sq.value_type = None
@@ -367,6 +783,24 @@ class Cube():
     return out
 
   def to_csv(self, file, **kwargs):
+    """Write the content of the cube to a CSV file on disk.
+
+    The CSV file will contain one column per dimension, and a column containing
+    the data values.
+
+    Parameters
+    ----------
+      file : :obj:`str`
+        Path to the CSV file to be written.
+      **kwargs
+        Ignored.
+
+    Returns
+    --------
+      :obj:`str`
+        Path to the written CSV file.
+
+    """
     obj = self.drop_non_dimension_coords()
     # to_dataframe method does not work for zero-dimensional arrays.
     if len(self.dims) == 0:
@@ -377,6 +811,44 @@ class Cube():
 
   def to_geotiff(self, file, cloud_optimized = True, compress = True,
                  output_crs = None, **kwargs):
+    """Write the content of the cube to a GeoTIFF file on disk.
+
+    Parameters
+    ----------
+      file : :obj:`str`
+        Path to the GeoTIFF file to be written.
+      cloud_optimized : :obj:`bool`
+        Should the written file be a Cloud Optimized GeoTIFF (COG) instead of a
+        regular GeoTIFF? Ignored when a GDAL version < 3.1 is used. These GDAL
+        versions do not have a COG driver, and the written GeoTIFF will always
+        be a regular GeoTIFF.
+      compress : :obj:`bool`
+        Should the written file be compressed? If ``True``, LZW compression is
+        used.
+      output_crs : optional
+        Spatial coordinate reference system of the written GeoTIFF. Can be
+        given as any object understood by the initializer of
+        :class:`pyproj.CRS`. This includes :obj:`pyproj.CRS` objects
+        themselves, as well as EPSG codes and WKT strings. If ``None``, the
+        CRS of the cube itself is used.
+      **kwargs:
+        Ignored.
+
+    Returns
+    -------
+      :obj:`str`
+        Path to the written GeoTIFF file.
+
+    Raises
+    ------
+      :obj:`exceptions.MissingDimensionError`
+        If the cube does not have spatial dimensions.
+      :obj:`exceptions.TooManyDimensionsError`
+        If the cube has more than three dimensions, including the two unstacked
+        spatial dimensions. More than three dimensions is currently not
+        supported by the export functionality of rasterio.
+
+    """
     # Make sure spatial dimensions are present.
     if self.xy_dimensions is None:
       raise exceptions.MissingDimensionError(
@@ -423,21 +895,56 @@ class Cube():
     return file
 
 class CubeCollection(list):
+  """Internal representation of a data cube collection.
+
+  Parameters
+  ----------
+    list_obj : :obj:`list` of :obj:`xarray.DataArray`
+      The elements of the data cube collection stored in a list.
+
+  """
 
   def __init__(self, list_obj):
     super(CubeCollection, self).__init__(list_obj)
 
   @property
   def extent(self):
+    """:obj:`xarray.DataArray`: Combined spatio-temporal extent of the elements
+    in the collection."""
     named = [xr.DataArray(self[i], name = i) for i in range(len(self))]
     merged = xr.merge(named, compat = "override", join = "outer")
     return merged[0].sq.extent
 
   @property
   def is_empty(self):
+    """:obj:`bool`: Are all elements of the collection empty data cubes."""
     return all([x.sq.is_empty for x in self])
 
   def compose(self, track_types = False, **kwargs):
+    """Apply the compose verb to the collection.
+
+    The compose verb creates a categorical composition from the cubes in the
+    collection.
+
+    Parameters
+    -----------
+      track_types : :obj:`bool`
+        Should it be checked if all cubes in the collection have value type
+        *binary*?
+      **kwargs:
+        Ignored.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    Raises
+    ------
+      :obj:`exceptions.InvalidValueTypeError`
+        If ``track_types = True`` and the value type of at least one of the
+        cubes in the collection is not *binary*.
+
+    """
     if track_types:
       value_types = [x.sq.value_type for x in self]
       if not all([x is None or x == "binary" for x in value_types]):
@@ -460,6 +967,39 @@ class CubeCollection(list):
 
   def concatenate(self, dimension, track_types = False,
                   vtype = "nominal", **kwargs):
+    """Apply the concatenate verb to the collection.
+
+    The concatenate verb concatenates the cubes in the collection along a new
+    or existing dimension.
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension to concatenate along. To concatenate along an
+        existing dimension, it should be a dimension that exists in all
+        collection members. To concatenate along a new dimension, it should be
+        a dimension that does not exist in any of the collection members.
+      track_types : :obj:`bool`
+        Should it be checked if all cubes in the collection have the same value
+        type?
+      vtype : :obj:`str`:
+        If the cubes are concatenated along a new dimension, what should the
+        value type of its dimension coordinates be? Valid options are
+        "numerical", "nominal", "ordinal" and "boolean".
+      **kwargs:
+        Ignored.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    Raises
+    ------
+      :obj:`exceptions.InvalidValueTypeError`
+        If ``track_types = True`` and the value types of the cubes in the
+        collection are not all equal to each other.
+
+    """
     if track_types:
       value_types = [x.sq.value_type for x in self]
       if not all([x is None or x == value_types[0] for x in value_types]):
@@ -488,56 +1028,167 @@ class CubeCollection(list):
     return out
 
   def merge(self, reducer, track_types = False, **kwargs):
+    """Apply the merge verb to the collection.
+
+    The merge verb merges the pixel values of all cubes in the collection into
+    a single value per pixel.
+
+    Parameters
+    -----------
+      reducer : :obj:`str`
+        Name of the reducer function to be applied in order to reduce multiple
+        values per pixel into a single value. Should either be one of the
+        built-in reducers of semantique, or a user-defined reducer which will
+        be provided to the query processor when executing the query recipe.
+      track_types : :obj:`bool`
+        Should it be checked if all cubes in the collection have the same value
+        type, and should the reducer promote the value type of the output
+        object, based on the value type of the input objects?
+      **kwargs:
+        Additional keyword arguments passed on to the reducer function.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    Raises
+    ------
+      :obj:`exceptions.InvalidValueTypeError`
+        If ``track_types = True`` and the value types of the cubes in the
+        collection are not all equal to each other.
+
+    """
     dim = "__sq__" # Temporary dimension.
     concat = self.concatenate(dim, track_types)
     out = concat.sq.reduce(dim, reducer, track_types, **kwargs)
     return out
 
   def evaluate(self, operator, y = None, track_types = False, **kwargs):
+    """Apply the evaluate verb to all cubes in the collection.
+
+    See :meth:`Cube.evaluate`
+
+    Returns
+    -------
+      :obj:`CubeCollection`
+
+    """
     args = tuple([operator, y, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.evaluate(*args, **kwargs) for x in out]
     return out
 
   def extract(self, dimension, component = None, **kwargs):
+    """Apply the extract verb to all cubes in the collection.
+
+    See :meth:`Cube.extract`
+
+    Returns
+    -------
+      :obj:`CubeCollection`
+
+    """
     args = tuple([dimension, component])
     out = copy.deepcopy(self)
     out[:] = [x.sq.extract(*args, **kwargs) for x in out]
     return out
 
   def filter(self, filterer, trim = True, track_types = False, **kwargs):
+    """Apply the filter verb to all cubes in the collection.
+
+    See :meth:`Cube.filter`
+
+    Returns
+    -------
+      :obj:`CubeCollection`
+
+    """
     args = tuple([filterer, trim, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.filter(*args, **kwargs) for x in out]
     return out
 
   def label(self, label, **kwargs):
+    """Apply the label verb to all cubes in the collection.
+
+    See :meth:`Cube.label`
+
+    Returns
+    -------
+      :obj:`CubeCollection`
+
+    """
     out = copy.deepcopy(self)
     out[:] = [x.sq.label(label, **kwargs) for x in out]
     return out
 
   def reduce(self, dimension, reducer, track_types = False, **kwargs):
+    """Apply the reduce verb to all cubes in the collection.
+
+    See :meth:`Cube.reduce`
+
+    Returns
+    -------
+      :obj:`CubeCollection`
+
+    """
     args = tuple([dimension, reducer, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
     return out
 
   def trim(self, trim_space = True, force_regular = True):
+    """Trim the dimensions of all cubes in the collection.
+
+    See :meth:`Cube.trim`
+
+    Returns
+    -------
+      :obj:`CubeCollection`
+
+    """
     out = copy.deepcopy(self)
     out[:] = [x.sq.trim(trim_space, force_regular) for x in out]
     return out
 
   def regularize(self):
+    """Regularize the spatial dimension of all cubes in the collection.
+
+    See :meth:`Cube.regularize`
+
+    Returns
+    -------
+      :obj:`CubeCollection`
+
+    """
     out = copy.deepcopy(self)
     out[:] = [x.sq.regularize() for x in out]
     return out
 
   def stack_spatial_dims(self, name = "space"):
+    """Stack the spatial dimensions for all cubes in the collection.
+
+    See :meth:`Cube.stack_spatial_dims`
+
+    Returns
+    -------
+      :obj:`CubeCollection`
+
+    """
     out = copy.deepcopy(self)
     out[:] = [x.sq.stack_spatial_dims(name) for x in out]
     return out
 
   def unstack_spatial_dims(self):
+    """Unstack the spatial dimensions for all cubes in the collection.
+
+    See :meth:`Cube.unstack_spatial_dims`
+
+    Returns
+    -------
+      :obj:`CubeCollection`
+
+    """
     out = copy.deepcopy(self)
     out[:] = [x.sq.unstack_spatial_dims() for x in out]
     return out

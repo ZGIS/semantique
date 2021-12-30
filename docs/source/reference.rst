@@ -13,7 +13,7 @@ Recipe
 
 .. autosummary::
    :toctree: _generated/
-   :template: dictlike.rst
+   :template: inherited.rst
    :nosignatures:
 
    QueryRecipe
@@ -23,7 +23,7 @@ Ontology
 
 .. autosummary::
    :toctree: _generated/
-   :template: dictlike.rst
+   :template: inherited.rst
    :nosignatures:
 
    ontology.Ontology
@@ -34,7 +34,7 @@ Factbase
 
 .. autosummary::
    :toctree: _generated/
-   :template: dictlike.rst
+   :template: inherited.rst
    :nosignatures:
 
    factbase.Factbase
@@ -46,7 +46,7 @@ Extent
 
 .. autosummary::
    :toctree: _generated/
-   :template: dictlike.rst
+   :template: inherited.rst
    :nosignatures:
 
    extent.SpatialExtent
@@ -306,7 +306,7 @@ Templates
    :toctree: _generated/
    :nosignatures:
 
-   processor.templates.TYPE_PROMOTION_TEMPLATES
+   processor.templates
 
 Exceptions
 ===========

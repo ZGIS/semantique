@@ -1,3 +1,29 @@
+"""Various templates used by the query processor.
+
+Attributes
+----------
+  TYPE_PROMOTION_TEMPLATES : :obj:`dict`
+    Whenever applying actions to a data cube, its value type might change.
+    For example, when evaluating an expression (e.g. when evaluating an
+    expression involving a comparison operator the resulting values are
+    always binary) or applying a reducer (e.g. when counting the number of
+    "true" values in a binary data cube the resulting values are numerical).
+    This is called type promotion. Each implemented operator and reducer
+    function is able to promote the type of the output given the type(s)
+    of the input(s) by using a type promotion manual. Different templates
+    for type promotion manuals exist for different types of operator and
+    reducer functions.
+
+    For reducers and univariate operators, a type promotion manual is always a
+    dictionary as keys the supported input value types and as values the output
+    value type. For multivariate operators, the type promotion manuals have an
+    extra "layer" per additional operand. For expressions with two operands
+    that means that the first layer of keys refers to the value type of the
+    first operand and the second layer of keys to the value type of the second
+    operand.
+
+"""
+
 TYPE_PROMOTION_TEMPLATES = {
   "algebraic_multivariate_operators": {
     "numerical": {

@@ -72,6 +72,29 @@ class CubeProxy(dict):
   def evaluate(self, operator, y = None, **kwargs):
     """Evaluate an expression for each pixel in a data cube.
 
+    Parameters
+    -----------
+      operator : :obj:`str`
+        Name of the operator to be used in the expression. Should either be one
+        of the built-in operators of semantique, or a user-defined operator
+        which will be provided to the query processor when executing the query
+        recipe.
+      y : optional
+        Right-hand side of the expression. May be a constant, meaning that the
+        same value is used in each expression. May also be a proxy of another
+        data cube which can be aligned to the same shape as the input cube. In
+        the latter case, when evaluating the expression for a pixel in the
+        input cube the second operand is the value of the pixel in cube ``y``
+        that has the same dimension coordinates. Ignored when the operator is
+        univariate.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.Cube.evaluate`.
+
+    Returns
+    --------
+      :obj:`CubeProxy`
+
     """
     if y is None:
       kwargs.update({"operator": operator})
@@ -80,7 +103,23 @@ class CubeProxy(dict):
     return self._append_verb("evaluate", **kwargs)
 
   def extract(self, dimension, component = None, **kwargs):
-    """Extract coordinates labels of a dimension as a new data cube.
+    """Extract coordinate labels of a dimension as a new data cube.
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension to be extracted.
+      component : :obj:`str`, optional
+        Name of a specific component of the dimension coordinates to be
+        extracted, e.g. *year*, *month* or *day* for temporal dimension
+        coordinates.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.Cube.extract`.
+
+    Returns
+    --------
+      :obj:`CubeProxy`
 
     """
     if component is None:
@@ -92,12 +131,50 @@ class CubeProxy(dict):
   def filter(self, filterer, **kwargs):
     """Filter the values in a data cube.
 
+    Parameters
+    -----------
+      filterer : :obj:`CubeProxy`
+        Proxy of a data cube which can be aligned to the same shape as the
+        input cube. Each pixel in the input cube will be kept if the pixel in
+        the filterer with the same dimension coordinates has true as value,
+        and dropped otherwise.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.Cube.filter`.
+
+    Returns
+    --------
+      :obj:`CubeProxy`
+
     """
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
   def filter_time(self, *filterer, **kwargs):
     """Filter a data cube along the temporal dimension.
+
+    This verb is a shortcut for first extracting the temporal dimension with
+    the extract verb (optionally only a specific component of that dimension),
+    then evaluating a relational operator to this dimension using the evaluate
+    verb, and finally using the output of that operation as filterer in the
+    filter verb.
+
+    Parameters
+    -----------
+      *filterer :
+        Either two positional arguments consisting of respectively the name of
+        the relational operator and value of the right-hand side operand to be
+        used in the expression, or three positional arguments consisting of
+        respectively the name of the component to be extracted from the
+        temporal dimension, the relational operator and value of the right-hand
+        side operand to be used in the expression.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.Cube.filter`.
+
+    Returns
+    --------
+      :obj:`CubeProxy`
 
     """
     component, operator, y = _parse_filter_expression(*filterer)
@@ -109,6 +186,29 @@ class CubeProxy(dict):
   def filter_space(self, *filterer, **kwargs):
     """Filter a data cube along the spatial dimension.
 
+    This verb is a shortcut for first extracting the spatial dimension with
+    the extract verb (optionally only a specific component of that dimension),
+    then evaluating a relational operator to this dimension using the evaluate
+    verb, and finally using the output of that operation as filterer in the
+    filter verb.
+
+    Parameters
+    -----------
+      *filterer :
+        Either two positional arguments consisting of respectively the name of
+        the relational operator and value of the right-hand side operand to be
+        used in the expression, or three positional arguments consisting of
+        respectively the name of the component to be extracted from the
+        spatial dimension, the relational operator and value of the right-hand
+        side operand to be used in the expression.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.Cube.filter`.
+
+    Returns
+    --------
+      :obj:`CubeProxy`
+
     """
     component, operator, y = _parse_filter_expression(*filterer)
     eval_obj = CubeProxy({"type": "self"})
@@ -119,12 +219,48 @@ class CubeProxy(dict):
   def groupby(self, grouper, **kwargs):
     """Group the values in a data cube.
 
+    Parameters
+    -----------
+      grouper : :obj:`CubeProxy` or :obj:`CubeCollection`
+        Proxy of a data cube containing a single dimension that is also
+        present in the input cube. The group to which each pixel in the input
+        cube will be assigned depends on the value of the grouper that has the
+        same coordinate for that dimension. Alternatively it may be a proxy
+        of a cube collection in which each cube meets the requirements above.
+        In that case, groups are defined by the unique combinations of
+        corresponding values in all collection members.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.Cube.groupby`.
+
+    Returns
+    --------
+      :obj:`CubeCollectionProxy`
+
     """
     kwargs.update({"grouper": grouper})
     return self._append_verb("groupby", collector = True, **kwargs)
 
   def groupby_time(self, component = None, **kwargs):
     """Group a data cube along the temporal dimension.
+
+    This verb is a shortcut for first extracting the temporal dimension with
+    the extract verb (usually only a specific component of that dimension),
+    and then using that as grouper in the groupby verb.
+
+    Parameters
+    -----------
+      component : :obj:`str`, optional
+        Name of a specific component of the dimension coordinates to be
+        extracted, e.g. *year*, *month* or *day* for temporal dimension
+        coordinates.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.Cube.groupby`.
+
+    Returns
+    --------
+      :obj:`CubeCollectionProxy`
 
     """
     eval_obj = CubeProxy({"type": "self"})
@@ -139,6 +275,24 @@ class CubeProxy(dict):
   def groupby_space(self, component = None, **kwargs):
     """Group a data cube along the spatial dimension.
 
+    This verb is a shortcut for first extracting the spatial dimension with
+    the extract verb (usually only a specific component of that dimension),
+    and then using that as grouper in the groupby verb.
+
+    Parameters
+    -----------
+      component : :obj:`str`, optional
+        Name of a specific component of the dimension coordinates to be
+        extracted, e.g. *year*, *month* or *day* for spatial dimension
+        coordinates.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.Cube.groupby`.
+
+    Returns
+    --------
+      :obj:`CubeCollectionProxy`
+
     """
     eval_obj = CubeProxy({"type": "self"})
     if isinstance(component, list):
@@ -150,7 +304,19 @@ class CubeProxy(dict):
     return self._append_verb("groupby", collector = True, **kwargs)
 
   def label(self, label, **kwargs):
-    """Attach a label to a data cube.
+    """Label a data cube with a word or phrase.
+
+    Parameters
+    -----------
+      label : :obj:`str`
+        Character label to be attached to the input cube.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.Cube.label`.
+
+    Returns
+    --------
+      :obj:`CubeProxy`
 
     """
     kwargs.update({"label": label})
@@ -158,6 +324,23 @@ class CubeProxy(dict):
 
   def reduce(self, dimension, reducer, **kwargs):
     """Reduce the dimensionality of a data cube.
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension to apply the reduction function to.
+      operator : :obj:`str`
+        Name of the reducer function to be applied. Should either be one
+        of the built-in reducers of semantique, or a user-defined reducer
+        which will be provided to the query processor when executing the query
+        recipe.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.Cube.reduce`.
+
+    Returns
+    --------
+      :obj:`CubeProxy`
 
     """
     kwargs.update({"dimension": dimension, "reducer": reducer})
@@ -198,11 +381,36 @@ class CubeCollectionProxy(dict):
   def compose(self, **kwargs):
     """Create a categorical composition from multiple data cubes.
 
+    Parameters
+    -----------
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.CubeCollection.compose`.
+
+    Returns
+    --------
+      :obj:`CubeProxy`
+
     """
     return self._append_verb("compose", combiner = True)
 
   def concatenate(self, dimension, **kwargs):
     """Concatenate multiple data cubes along a new or existing dimension.
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension to concatenate along. To concatenate along an
+        existing dimension, it should be a dimension that exists in all
+        collection members. To concatenate along a new dimension, it should be
+        a dimension that does not exist in any of the collection members.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.CubeCollection.concatenate`.
+
+    Returns
+    --------
+      :obj:`CubeProxy`
 
     """
     kwargs.update({"dimension": dimension})
@@ -211,12 +419,33 @@ class CubeCollectionProxy(dict):
   def merge(self, reducer, **kwargs):
     """Merge values of multiple data cubes into a single value per pixel.
 
+    Parameters
+    -----------
+      reducer : :obj:`str`
+        Name of the reducer function to be applied in order to reduce multiple
+        values per pixel into a single value. Should either be one of the
+        built-in reducers of semantique, or a user-defined reducer which will
+        be provided to the query processor when executing the query recipe.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`processor.core.structure.CubeCollection.merge`.
+
+    Returns
+    --------
+      :obj:`CubeProxy`
+
     """
     kwargs.update({"reducer": reducer})
     return self._append_verb("merge", combiner = True, **kwargs)
 
   def evaluate(self, operator, y = None, **kwargs):
     """Apply the evaluate verb to each data cube in a collection.
+
+    See :meth:`CubeProxy.evaluate`.
+
+    Returns
+    --------
+      :obj:`CubeCollectionProxy`
 
     """
     if y is None:
@@ -228,6 +457,12 @@ class CubeCollectionProxy(dict):
   def extract(self, dimension, component = None, **kwargs):
     """Apply the extract verb to each data cube in a collection.
 
+    See :meth:`CubeProxy.extract`.
+
+    Returns
+    --------
+      :obj:`CubeCollectionProxy`
+
     """
     if component is None:
       kwargs.update({"dimension": dimension})
@@ -238,12 +473,24 @@ class CubeCollectionProxy(dict):
   def filter(self, filterer, **kwargs):
     """Apply the filter verb to each data cube in a collection.
 
+    See :meth:`CubeProxy.filter`.
+
+    Returns
+    --------
+      :obj:`CubeCollectionProxy`
+
     """
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
   def filter_time(self, *filterer, **kwargs):
     """Apply the filter_time verb to each data cube in a collection.
+
+    See :meth:`CubeProxy.filter_time`.
+
+    Returns
+    --------
+      :obj:`CubeCollectionProxy`
 
     """
     component, operator, y = _parse_filter_expression(*filterer)
@@ -255,6 +502,12 @@ class CubeCollectionProxy(dict):
   def filter_space(self, *filterer, **kwargs):
     """Apply the filter_space verb to each data cube in a collection.
 
+    See :meth:`CubeProxy.filter_space`.
+
+    Returns
+    --------
+      :obj:`CubeCollectionProxy`
+
     """
     component, operator, y = _parse_filter_expression(*filterer)
     eval_obj = CubeProxy({"type": "self"})
@@ -265,12 +518,24 @@ class CubeCollectionProxy(dict):
   def label(self, label, **kwargs):
     """Apply the label verb to each data cube in a collection.
 
+    See :meth:`CubeProxy.label`.
+
+    Returns
+    --------
+      :obj:`CubeCollectionProxy`
+
     """
     kwargs.update({"label": label})
     return self._append_verb("label", **kwargs)
 
   def reduce(self, dimension, reducer, **kwargs):
     """Apply the reduce verb to each data cube in a collection.
+
+    See :meth:`CubeProxy.reduce`.
+
+    Returns
+    --------
+      :obj:`CubeCollectionProxy`
 
     """
     kwargs.update({"dimension": dimension, "reducer": reducer})
@@ -659,12 +924,12 @@ def geometries(value, **kwargs):
   ----------
     value
       One or more spatial features containing the geometries. Should be given
-      as an object that can be read by the initializer of
-      :obj:`extent.SpatialExtent`. This includes :obj:`geopandas.GeoDataFrame`
-      objects.
+      as an object that can be understood by the initializer of
+      :class:`extent.SpatialExtent`. This includes
+      :obj:`geopandas.GeoDataFrame` objects.
     **kwargs
       Additional keyword arguments passed on to the initializer of
-      :obj:`extent.SpatialExtent`.
+      :class:`extent.SpatialExtent`.
 
   Returns
   -------
@@ -684,13 +949,13 @@ def time_instant(value, **kwargs):
   Parameters
   ----------
     value
-      The time instant as object that can be read by the initializer of
-      :obj:`extent.TemporalExtent`. This includes :obj:`pandas.Timestamp`
+      The time instant as object that can be understood by the initializer of
+      :class:`extent.TemporalExtent`. This includes :obj:`pandas.Timestamp`
       objects, as well as text representations of time instants in different
       formats.
     **kwargs
       Additional keyword arguments passed on to the initializer of
-      :obj:`extent.TemporalExtent`.
+      :class:`extent.TemporalExtent`.
 
   Returns
   -------
@@ -712,13 +977,13 @@ def time_interval(*bounds, **kwargs):
   ----------
     *bounds
       Respectively the start and end of the time interval. Should be given as
-      objects that can be read by the initializer of :obj:`extent.TemporalExtent`.
-      This includes :obj:`pandas.Timestamp` objects, as well as text
-      representations of time instants in different formats. The interval is
-      assumed to be closed at both sides.
+      objects that can be understood by the initializer of
+      :class:`extent.TemporalExtent`. This includes :obj:`pandas.Timestamp`
+      objects, as well as text representations of time instants in different
+      formats. The interval is assumed to be closed at both sides.
     **kwargs
       Additional keyword arguments passed on to the initializer of
-      :obj:`extent.TemporalExtent`.
+      :class:`extent.TemporalExtent`.
 
   Returns
   -------

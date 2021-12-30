@@ -3,12 +3,91 @@ import pandas as pd
 import xarray as xr
 
 def convert_datetime64(obj, tz_from, tz_to, **kwargs):
+  """Convert a numpy datetime object to a different timezone.
+
+  Numpy datetime objects do not have native support for timezones anymore.
+  Therefore pandas is used to convert between different timezones.
+
+  Parameters
+  ----------
+    obj : :obj:`numpy.datetime64`
+      Object to be converted.
+    tz_from:
+      Timezone of the object to be converted. Can be given as :obj:`str`
+      referring to the name of a timezone in the tz database, or as instance
+      of any class inheriting from :class:`datetime.tzinfo`.
+    tz_to:
+      Timezone the object should be converted to. Can be given as :obj:`str`
+      referring to the name of a timezone in the tz database, or as instance
+      of any class inheriting from :class:`datetime.tzinfo`.
+    **kwargs:
+      Additional keyword arguments passed on to
+      :meth:`pandas.Timestamp.tz_convert`.
+
+  Returns
+  -------
+    :obj:`numpy.datetime64`
+
+  """
   obj_new = pd.Timestamp(obj).tz_localize(tz_from).tz_convert(tz_to, **kwargs)
   return np.datetime64(obj_new.tz_localize(None))
 
 def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
                        temporal_resolution = None, crs = None, tz = None,
                        trim = True):
+  """Create a spatio-temporal extent cube.
+
+  Internally the query processor uses a multi-dimensional array to represent
+  the spatio-temporal extent of the query. This is an :obj:`xarray.DataArray`
+  and forms the base template for all cubes that are fetched from the factbase
+  during query processing.
+
+  Parameters
+  -----------
+    spatial_extent : :obj:`extent.SpatialExtent`
+      Spatial extent.
+    temporal_extent : :obj:`extent.TemporalExtent`
+      Temporal extent.
+    spatial_resolution : :obj:`list`
+      Spatial resolution of the cube. Should be given as a list in the format
+      `[y, x]`, where y is the cell size along the y-axis, x is the cell size
+      along the x-axis, and both are given as :obj:`int` or :obj:`float`
+      value expressed in the units of the CRS. These values should include
+      the direction of the axes. For most CRSs, the y-axis has a negative
+      direction, and hence the cell size along the y-axis is given as a
+      negative number.
+    temporal_resolution : :obj:`str` or :obj:`pandas.DateOffset`
+        Temporal resolution of the cube. Can be given as offset alias as
+        defined in pandas, e.g. "D" for a daily frequency. These aliases can
+        have multiples, e.g. "5D". If ``None``, only the start and end instants
+        of the extent will be temporal coordinates in the cube.
+    crs : optional
+      Coordinate reference system in which the spatial coordinates of the cube
+      should be expressed. Can be given as any object understood by the
+      initializer of :class:`pyproj.CRS`. This includes :obj:`pyproj.CRS`
+      objects themselves, as well as EPSG codes and WKT strings. If ``None``,
+      the CRS of the provided spatial extent is used.
+    tz : optional
+      Timezone in which the temporal coordinates of the cube should be
+      expressed. Can be given as :obj:`str` referring to the name of a time
+      zone in the tz database, or as instance of any class inheriting from
+      :class:`datetime.tzinfo`. If ``None``, the timezone of the provided
+      temporal extent is used.
+    trim : :obj:`bool`
+      Should the cube be trimmed before returning? Trimming means that all
+      coordinates for which all values are nodata, are dropped from the array.
+      The spatial dimension (if present) is treated differently, by trimming
+      it only at the edges, and thus maintaining the regularity of the spatial
+      dimension.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      A two-dimensional data cube with a spatial and temporal dimension. The
+      spatial dimension is a stacked dimension with each coordinate value
+      being a tuple of the x and y coordinate of the corresponding cell.
+
+  """
   # Rasterize spatial extent.
   space = spatial_extent.rasterize(spatial_resolution, crs, stack = True)
   # Add spatial feature indices as coordinates.
@@ -30,6 +109,27 @@ def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
   return extent
 
 def parse_datetime_component(name, obj):
+  """Parse datetime accessor arrays.
+
+  The `datetime accessors`_ of :obj:`xarray.DataArray` objects are treated in
+  semantique as a component of the temporal dimension. Parsing them includes
+  adding ``value_type`` and ``value_label`` properties as well as in some
+  cases re-organize the values in the array.
+
+  Parameters
+  -----------
+    obj : :obj:`xarray.DataArray`
+      Xarray datetime accessor.
+
+  Returns
+  --------
+    :obj:`xarray.DataArray`
+      Parsed datetime accessor.
+
+  .. _datetime accessors:
+    https://xarray.pydata.org/en/stable/user-guide/time-series.html#datetime-components
+
+  """
   if name in ["dayofweek", "weekday"]:
     obj.sq.value_type = "ordinal"
     obj.sq.value_labels = {

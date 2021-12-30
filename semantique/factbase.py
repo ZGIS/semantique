@@ -12,6 +12,37 @@ from abc import abstractmethod
 from semantique import exceptions
 
 class Factbase(dict):
+  """Base class for factbase formats.
+
+  The factbase is the place where the available resources of earth observation
+  data are stored. In semantique, a factbase is represented by an object that
+  does not contain the actual data values themselves, but instead serves as an
+  interface that allows to access them. This interface contains the layout of
+  the factbase, which is a dict-like container storing a metadata object for
+  each resource.
+
+  A factbase instance in semantique always has a :meth:`retrieve` method. This
+  function is able to read a to read a reference to a specific resource, lookup
+  its metadata object in the layout file, and use these metadata to retrieve
+  the corresponding data values as a data cube from the actual data storage
+  location. There are no strict requirements on how data should be stored and
+  accessed, and therefore there is not a single way to retrieve them. For each
+  different format of storing and accessing data resources, a separate class
+  should be created with a :meth:`retrieve` method specific to that format.
+  Such a class should always inherit from this base class.
+
+  Usually a factbase instance also has some kind of connection object that
+  allows the retriever function to access the actual data values, but how this
+  object looks like can be very different between different formats, and is
+  therefore not a method in the base class itself.
+
+  Parameters
+  ----------
+    layout : :obj:`dict`
+      The layout file describing the factbase. If ``None``, an empty factbase
+      is constructed.
+
+  """
 
   def __init__(self, layout = None):
     obj = {} if layout is None else layout
@@ -20,6 +51,7 @@ class Factbase(dict):
 
   @property
   def layout(self):
+    """:obj:`dict`: The layout file of the factbase."""
     return self._layout
 
   @layout.setter
@@ -27,6 +59,15 @@ class Factbase(dict):
     self._layout = value
 
   def lookup(self, *reference):
+    """Lookup the metadata of a referenced data resource.
+
+    Parameters
+    ----------
+      *reference:
+        One or more keys that specify the location of a metadata object in the
+        layout of the factbase.
+
+    """
     obj = self._layout
     for key in reference:
       try:
@@ -39,9 +80,70 @@ class Factbase(dict):
 
   @abstractmethod
   def retrieve(self, *reference, extent):
+    """Abstract method for the retriever function.
+
+    Parameters
+    ----------
+      *reference:
+        One or more keys that specify the location of a metadata object in the
+        layout of the factbase.
+      extent : :obj:`xarray.DataArray`
+        Spatio-temporal extent in which the data should be retrieved. Should be
+        given as an array with a temporal dimension as well as a stacked
+        spatial dimension, such as returned by
+        :func:`processor.utils.create_extent_cube`. The retrieved data cube
+        will have the same extent.
+
+    """
     pass
 
 class Opendatacube(Factbase):
+  """Opendatacube specific factbase format.
+
+  This factbase format is an interface to Opendatacube backends. See the
+  `Opendatacube manual`_ for details.
+
+  Parameters
+  ----------
+    layout : :obj:`dict`
+      The layout file describing the factbase. If ``None``, an empty factbase
+      is constructed.
+    connection : :obj:`datacube.Datacube`
+      Opendatacube interface object allowing to read from the data cube.
+    tz
+      Timezone of the temporal coordinates in the factbase. Can be given as
+      :obj:`str` referring to the name of a timezone in the tz database, or
+      as instance of any class inheriting from :class:`datetime.tzinfo`.
+    **config:
+      Additional keyword arguments tuning the data retrieval configuration.
+      Valid options are:
+
+      * **group_by_solar_day** (:obj:`bool`): Should the time dimension be
+        resampled to the day level, using solar day to keep scenes together?
+        Defaults to ``True``.
+
+      * **value_type_mapping** (:obj:`dict`): How do value type encodings in
+        the metadata objects map to the value types used by semantique?
+        Defaults to: ::
+
+          {"categorical": "ordinal", "continuous": "numerical"}
+
+      * **resamplers** (:obj:`dict`): When data need to be resampled to a
+        different spatial and/or temporal resolution, what resampling technique
+        should be used? Should be specified separately for each possible value
+        type in the layout file. Valid techniques are: ::
+
+          'nearest', 'average', 'bilinear', 'cubic', 'cubic_spline',
+          'lanczos', 'mode', 'gauss',  'max', 'min', 'med', 'q1', 'q3'
+
+        Defaults to: ::
+
+          {"categorical": "nearest", "continuous": "nearest"}
+
+  .. _Opendatacube manual:
+    https://datacube-core.readthedocs.io/en/latest/index.html
+
+  """
 
   def __init__(self, layout = None, connection = None, tz = "UTC", **config):
     super(Opendatacube, self).__init__(layout)
@@ -54,6 +156,8 @@ class Opendatacube(Factbase):
 
   @property
   def connection(self):
+    """:obj:`datacube.Datacube`: Opendatacube interface object allowing to read
+    from the data cube."""
     return self._connection
 
   @connection.setter
@@ -64,6 +168,8 @@ class Opendatacube(Factbase):
 
   @property
   def tz(self):
+    """:obj:`datetime.tzinfo`: Timezone of the temporal coordinates in the
+    factbase."""
     return self._tz
 
   @tz.setter
@@ -86,6 +192,7 @@ class Opendatacube(Factbase):
 
   @property
   def config(self):
+    """:obj:`dict`: Configuration settings for data retrieval."""
     return self._config
 
   @config.setter
@@ -94,11 +201,31 @@ class Opendatacube(Factbase):
     self._config = value
 
   def retrieve(self, *reference, extent):
+    """Retrieve a data resource from the factbase.
+
+    Parameters
+    ----------
+      *reference:
+        One or more keys that specify the location of a metadata object in the
+        layout of the factbase.
+      extent : :obj:`xarray.DataArray`
+        Spatio-temporal extent in which the data should be retrieved. Should be
+        given as an array with a temporal dimension as well as a stacked
+        spatial dimension, such as returned by
+        :func:`processor.utils.create_extent_cube`. The retrieved data cube
+        will have the same extent.
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+        The retrieved data in a data cube.
+
+    """
     # Get metadata.
     metadata = self.lookup(*reference)
     # Create a template array that tells ODC the shape of the requested data.
     # This is the given extent modified to be correctly understood by ODC:
-    # --> Time dimension values should be in the data cubes native time zone.
+    # --> Time dimension values should be in the data cubes native timezone.
     # --> Spatial dimensions should be unstacked.
     # --> Class should be `xarray.Dataset` instead of `xarray.DataArray`.
     # Note that the CRS does not have to be in the data cubes native CRS.
@@ -150,7 +277,7 @@ class Opendatacube(Factbase):
     return data
 
   def _format_data(self, data, extent, metadata):
-    # Step I: Convert time coordinates back into the original time zone.
+    # Step I: Convert time coordinates back into the original timezone.
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
     # Step II: Stack spatial dimensions back into a single 'space' dimension.
@@ -183,6 +310,45 @@ class Opendatacube(Factbase):
     return data
 
 class GeotiffArchive(Factbase):
+  """Factbase format for zipped GeoTIFF files.
+
+  This simple factbase format assumes each data resource is a GeoTIFF file, and
+  that all resources together are bundled in a ZIP archive.
+
+  Parameters
+  ----------
+    layout : :obj:`dict`
+      The layout file describing the factbase. If ``None``, an empty factbase
+      is constructed.
+    src : :obj:`str`
+      Path to the ZIP archive containing the data resources.
+    tz
+      Timezone of the temporal coordinates in the factbase. Can be given as
+      :obj:`str` referring to the name of a timezone in the tz database, or
+      as instance of any class inheriting from :class:`datetime.tzinfo`.
+    **config:
+      Additional keyword arguments tuning the data retrieval configuration.
+      Valid options are:
+
+      * **value_type_mapping** (:obj:`dict`): How do value type encodings in
+        the metadata objects map to the value types used by semantique?
+        Defaults to: ::
+
+          {"categorical": "ordinal", "continuous": "numerical"}
+
+      * **resamplers** (:obj:`dict`): When data need to be resampled to a
+        different spatial and/or temporal resolution, what resampling technique
+        should be used? Should be specified separately for each possible value
+        type in the layout file. Valid techniques are: ::
+
+          'nearest', 'average', 'bilinear', 'cubic', 'cubic_spline',
+          'lanczos', 'mode', 'gauss',  'max', 'min', 'med', 'q1', 'q3'
+
+        Defaults to: ::
+
+          {"categorical": "nearest", "continuous": "nearest"}
+
+  """
 
   def __init__(self, layout = None, src = None, tz = "UTC", **config):
     super(GeotiffArchive, self).__init__(layout)
@@ -195,6 +361,7 @@ class GeotiffArchive(Factbase):
 
   @property
   def src(self):
+    """:obj:`str`: Path to the ZIP archive containing the data resources."""
     return self._src
 
   @src.setter
@@ -205,6 +372,8 @@ class GeotiffArchive(Factbase):
 
   @property
   def tz(self):
+    """:obj:`datetime.tzinfo`: Timezone of the temporal coordinates in the
+    factbase."""
     return self._tz
 
   @tz.setter
@@ -226,6 +395,7 @@ class GeotiffArchive(Factbase):
 
   @property
   def config(self):
+    """:obj:`dict`: Configuration settings for data retrieval."""
     return self._config
 
   @config.setter
@@ -234,6 +404,26 @@ class GeotiffArchive(Factbase):
     self._config = value
 
   def retrieve(self, *reference, extent):
+    """Retrieve a data resource from the factbase.
+
+    Parameters
+    ----------
+      *reference:
+        One or more keys that specify the location of a metadata object in the
+        layout of the factbase.
+      extent : :obj:`xarray.DataArray`
+        Spatio-temporal extent in which the data should be retrieved. Should be
+        given as an array with a temporal dimension as well as a stacked
+        spatial dimension, such as returned by
+        :func:`processor.utils.create_extent_cube`. The retrieved data cube
+        will have the same extent.
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+        The retrieved data in a data cube.
+
+    """
     # Get metadata.
     metadata = self.lookup(*reference)
     # Load data.
@@ -279,7 +469,7 @@ class GeotiffArchive(Factbase):
     return data
 
   def _format_data(self, data, extent, metadata):
-    # Step I: Convert time coordinates back into the original time zone.
+    # Step I: Convert time coordinates back into the original timezone.
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
     # Step II: Stack spatial dimensions back into a single 'space' dimension.
