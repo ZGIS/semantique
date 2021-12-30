@@ -221,7 +221,7 @@ class CubeProxy(dict):
 
     Parameters
     -----------
-      grouper : :obj:`CubeProxy` or :obj:`CubeCollection`
+      grouper : :obj:`CubeProxy` or :obj:`CubeCollectionProxy`
         Proxy of a data cube containing a single dimension that is also
         present in the input cube. The group to which each pixel in the input
         cube will be assigned depends on the value of the grouper that has the

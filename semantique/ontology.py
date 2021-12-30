@@ -31,7 +31,7 @@ class Ontology(dict):
       Dictionary containing the names of semantic concepts as keys and the
       rulesets defining the semantic concepts as values. May have a nested
       structure formalizing a categorization of semantic concepts.
-      If ``None``, an empty ontology is constructed.
+      If :obj:`None`, an empty ontology is constructed.
 
   """
 
@@ -80,7 +80,7 @@ class Ontology(dict):
         ontology.
       property : :obj:`str`
         Name of a property of the referenced semantic concept. If given, only
-        the ruleset for this property is translated. If ``None``, the full
+        the ruleset for this property is translated. If :obj:`None`, the full
         ruleset of the semantic concept is translated.
       extent : :obj:`xarray.DataArray`
         Spatio-temporal extent in which the semantic concept should be
@@ -115,7 +115,7 @@ class Semantique(Ontology):
       Dictionary containing the names of semantic concepts as keys and the
       rulesets defining the semantic concepts as values. May have a nested
       structure formalizing a categorization of semantic concepts.
-      If ``None``, an empty ontology is constructed.
+      If :obj:`None`, an empty ontology is constructed.
 
   """
 
@@ -133,7 +133,7 @@ class Semantique(Ontology):
         ontology.
       property : :obj:`str`
         Name of a property of the referenced semantic concept. If given, only
-        the ruleset for this property is translated. If ``None``, the full
+        the ruleset for this property is translated. If :obj:`None`, the full
         ruleset of the semantic concept is translated.
       extent : :obj:`xarray.DataArray`
         Spatio-temporal extent in which the semantic concept should be

@@ -82,7 +82,7 @@ class Cube():
 
   @property
   def crs(self):
-    """:obj:`pyproj.CRS`: Coordinate reference system in which the spatial
+    """:obj:`pyproj.crs.CRS`: Coordinate reference system in which the spatial
     coordinates of the cube are expressed."""
     return self._obj.rio.crs
 
@@ -551,12 +551,12 @@ class Cube():
     ----------
       crs:
         Target coordinate reference system. Can be given as any object
-        understood by the initializer of :class:`pyproj.CRS`. This includes
-        :obj:`pyproj.CRS` objects themselves, as well as EPSG codes and WKT
+        understood by the initializer of :class:`pyproj.crs.CRS`. This includes
+        :obj:`pyproj.crs.CRS` objects themselves, as well as EPSG codes and WKT
         strings.
       **kwargs:
         Additional keyword argument passed on to
-        :meth:`rioxarray.RasterArray.reproject`.
+        :meth:`rioxarray.rioxarray.XRasterBase.reproject`.
 
     Returns
     --------
@@ -614,9 +614,9 @@ class Cube():
     ----------
       crs:
         The spatial coordinate reference system to store. Can be given as any
-        object understood by the initializer of :class:`pyproj.CRS`. This
-        includes :obj:`pyproj.CRS` objects themselves, as well as EPSG codes
-        and WKT strings.
+        object understood by the initializer of :class:`pyproj.crs.CRS`. This
+        includes :obj:`pyproj.crs.CRS` objects themselves, as well as EPSG
+        codes and WKT strings.
       inplace : :obj:`bool`
         Should the cube be modified inplace?
 
@@ -828,8 +828,8 @@ class Cube():
       output_crs : optional
         Spatial coordinate reference system of the written GeoTIFF. Can be
         given as any object understood by the initializer of
-        :class:`pyproj.CRS`. This includes :obj:`pyproj.CRS` objects
-        themselves, as well as EPSG codes and WKT strings. If ``None``, the
+        :class:`pyproj.crs.CRS`. This includes :obj:`pyproj.crs.CRS` objects
+        themselves, as well as EPSG codes and WKT strings. If :obj:`None`, the
         CRS of the cube itself is used.
       **kwargs:
         Ignored.

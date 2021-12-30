@@ -39,8 +39,8 @@ class Factbase(dict):
   Parameters
   ----------
     layout : :obj:`dict`
-      The layout file describing the factbase. If ``None``, an empty factbase
-      is constructed.
+      The layout file describing the factbase. If :obj:`None`, an empty
+      factbase is constructed.
 
   """
 
@@ -106,8 +106,8 @@ class Opendatacube(Factbase):
   Parameters
   ----------
     layout : :obj:`dict`
-      The layout file describing the factbase. If ``None``, an empty factbase
-      is constructed.
+      The layout file describing the factbase. If :obj:`None`, an empty
+      factbase is constructed.
     connection : :obj:`datacube.Datacube`
       Opendatacube interface object allowing to read from the data cube.
     tz
@@ -318,8 +318,8 @@ class GeotiffArchive(Factbase):
   Parameters
   ----------
     layout : :obj:`dict`
-      The layout file describing the factbase. If ``None``, an empty factbase
-      is constructed.
+      The layout file describing the factbase. If :obj:`None`, an empty
+      factbase is constructed.
     src : :obj:`str`
       Path to the ZIP archive containing the data resources.
     tz

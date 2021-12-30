@@ -17,7 +17,7 @@ class QueryRecipe(dict):
   ----------
     results : :obj:`dict` of :obj:`CubeProxy`
       Dictionary containing result names as keys and result instructions as
-      values. If ``None``, an empty recipe is constructed.
+      values. If :obj:`None`, an empty recipe is constructed.
 
   """
   def __init__(self, results = None):

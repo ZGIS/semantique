@@ -59,19 +59,19 @@ def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
     temporal_resolution : :obj:`str` or :obj:`pandas.DateOffset`
         Temporal resolution of the cube. Can be given as offset alias as
         defined in pandas, e.g. "D" for a daily frequency. These aliases can
-        have multiples, e.g. "5D". If ``None``, only the start and end instants
-        of the extent will be temporal coordinates in the cube.
+        have multiples, e.g. "5D". If :obj:`None`, only the start and end
+        instants of the extent will be temporal coordinates in the cube.
     crs : optional
       Coordinate reference system in which the spatial coordinates of the cube
       should be expressed. Can be given as any object understood by the
-      initializer of :class:`pyproj.CRS`. This includes :obj:`pyproj.CRS`
-      objects themselves, as well as EPSG codes and WKT strings. If ``None``,
-      the CRS of the provided spatial extent is used.
+      initializer of :class:`pyproj.crs.CRS`. This includes
+      :obj:`pyproj.crs.CRS` objects themselves, as well as EPSG codes and WKT
+      strings. If :obj:`None`, the CRS of the provided spatial extent is used.
     tz : optional
       Timezone in which the temporal coordinates of the cube should be
       expressed. Can be given as :obj:`str` referring to the name of a time
       zone in the tz database, or as instance of any class inheriting from
-      :class:`datetime.tzinfo`. If ``None``, the timezone of the provided
+      :class:`datetime.tzinfo`. If :obj:`None`, the timezone of the provided
       temporal extent is used.
     trim : :obj:`bool`
       Should the cube be trimmed before returning? Trimming means that all

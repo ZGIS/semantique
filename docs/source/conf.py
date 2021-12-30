@@ -37,6 +37,7 @@ release = '0.1.0'
 extensions = [
   'sphinx.ext.autodoc',
   'sphinx.ext.autosummary',
+  'sphinx.ext.intersphinx',
   'sphinx.ext.linkcode',
   'sphinx.ext.napoleon',
   'nbsphinx',
@@ -78,7 +79,6 @@ html_theme_options = {
   }
 }
 
-
 # -- Napoleon configuration ---------------------------------------------------
 
 napoleon_use_param = False
@@ -87,6 +87,19 @@ napoleon_use_rtype = False
 # -- Autosummary configuration ------------------------------------------------
 
 autosummary_generate = True
+
+# -- Intersphinx configuration ------------------------------------------------
+
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3/", None),
+    "numpy": ("https://numpy.org/doc/stable", None),
+    "pandas": ("https://pandas.pydata.org/pandas-docs/stable", None),
+    "xarray": ("https://xarray.pydata.org/en/stable/", None),
+    "rioxarray": ("https://corteva.github.io/rioxarray/stable/", None),
+    "geopandas": ("https://geopandas.org/en/stable/", None),
+    "pyproj": ("https://pyproj4.github.io/pyproj/stable/", None),
+    "datacube": ("https://datacube-core.readthedocs.io/en/latest/", None)
+}
 
 # -- Linkcode configuration ---------------------------------------------------
 

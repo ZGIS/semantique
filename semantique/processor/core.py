@@ -20,7 +20,7 @@ class QueryProcessor():
 
   Parameters
   ----------
-    recipe : :obj:`QueryRecipe`:
+    recipe : :obj:`QueryRecipe`
       The query recipe to be processed.
     factbase : :obj:`factbase.Factbase`
       The factbase instance to process the query against.
@@ -30,17 +30,17 @@ class QueryProcessor():
       The spatio-temporal extent in which the query should be processed.
       Should be given as an array with a temporal dimension as well as a
       stacked spatial dimension, such as returned by
-      :func:`processor.utils.create_extent_cube`.
+      :func:`utils.create_extent_cube`.
     operators : :obj:`dict`
       Operator functions that may be used when evaluating expressions with the
-      evaluate verb. If ``None``, all built-in operators in semantique will be
-      provided automatically.
+      evaluate verb. If :obj:`None`, all built-in operators in semantique will
+      be provided automatically.
     extra_operators : :obj:`dict`, optional
       Operator functions that may be used when evaluating expressions with the
       evaluate verb *in addition* to the built-in operators in semantique.
     reducers : :obj:`dict`
       Reducer functions that may be used when reducing data cube dimensions
-      with the reduce verb. If ``None``, all built-in reducers in semantique
+      with the reduce verb. If :obj:`None`, all built-in reducers in semantique
       will be provided automatically.
     extra_reducers : :obj:`dict`, optional
       Reducer functions that may be used when reducing data cube dimensions
@@ -144,7 +144,7 @@ class QueryProcessor():
 
   @property
   def crs(self):
-    """:obj:`pyproj.CRS`: Spatial coordinate reference system in which the
+    """:obj:`pyproj.crs.CRS`: Spatial coordinate reference system in which the
     query should be processed."""
     return self._extent.sq.crs
 
