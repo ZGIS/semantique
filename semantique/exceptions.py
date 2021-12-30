@@ -54,13 +54,29 @@ class InvalidBuildingBlockError(Exception):
   """
   pass
 
-class UnknownReferenceError(Exception):
-  """Raised when a reference points to an unexisting object.
+class UnknownConceptError(Exception):
+  """Raised when an unexisting semantic concept is referenced.
 
   This occurs when a referenced semantic concept is not defined in the
-  ontology against which the query is processed, when a referenced data
-  resource is not present in the factbase against which the query is processed,
-  or when a referenced result is not present in the same query recipe.
+  ontology against which the query is processed, or when a referenced
+  property of a semantic concept is not defined for that concept.
+
+  """
+  pass
+
+class UnknownResourceError(Exception):
+  """Raised when an unexisting data resource is referenced.
+
+  This occurs when a referenced data resource is not present in the factbase
+  against which the query is processed.
+
+  """
+  pass
+
+class UnknownResultError(Exception):
+  """Raised when an unexisting query result is referenced.
+
+  This occurs when a referenced result is not present in the same query recipe.
 
   """
   pass

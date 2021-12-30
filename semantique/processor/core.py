@@ -473,13 +473,18 @@ class QueryProcessor():
     -------
       :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
+    Raises
+    ------
+      :obj:`exceptions.UnknownResultError`
+        If the referenced result is not present in the query recipe.
+
     """
     name = block["name"]
     if name not in self._response:
       try:
         instructions = self._recipe[name]
       except KeyError:
-        raise exceptions.UnknownReferenceError(
+        raise exceptions.UnknownResultError(
           f"Recipe does not contain result '{name}'"
         )
       result = self.call_handler(instructions)
@@ -551,6 +556,12 @@ class QueryProcessor():
     -------
       :obj:`int` or :obj:`float`
         The value belonging to the label.
+
+    Raises
+    -------
+      :obj:`exceptions.UnknownLabelError`
+        If the value label is not used for any value in the active evaluation
+        object.
 
     """
     label = block["label"]

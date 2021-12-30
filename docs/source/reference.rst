@@ -320,7 +320,9 @@ Exceptions
    exceptions.EmptyDataError
    exceptions.InvalidValueTypeError
    exceptions.InvalidBuildingBlockError
-   exceptions.UnknownReferenceError
+   exceptions.UnknownConceptError
+   exceptions.UnknownResourceError
+   exceptions.UnknownResultError
    exceptions.UnknownReducerError
    exceptions.UnknownOperatorError
    exceptions.UnknownDimensionError

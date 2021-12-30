@@ -65,13 +65,19 @@ class Factbase():
         One or more keys that specify the location of a metadata object in the
         layout of the factbase.
 
+    Raises
+    -------
+      :obj:`exceptions.UnknownResourceError`
+        If the referenced data resource does not have a metadata object in the
+        layout of the factbase.
+
     """
     obj = self._layout
     for key in reference:
       try:
         obj = obj[key]
       except KeyError:
-        raise exceptions.UnknownReferenceError(
+        raise exceptions.UnknownResourceError(
           f"Factbase does not contain resource '{reference}'"
         )
     return obj

@@ -48,13 +48,18 @@ class Ontology(dict):
         One or more keys that specify the location of a ruleset in the
         ontology.
 
+    Raises
+    -------
+      :obj:`exceptions.UnknownConceptError`
+        If the referenced semantic concept is not defined in the ontology.
+
     """
     obj = self
     for key in reference:
       try:
         obj = obj[key]
       except KeyError:
-        raise exceptions.UnknownReferenceError(
+        raise exceptions.UnknownConceptError(
           f"Ontology does not contain concept '{reference}'"
         )
     return obj
@@ -163,7 +168,7 @@ class Semantique(Ontology):
       try:
         property = ruleset[property]
       except KeyError:
-        raise exceptions.UnknownReferenceError(
+        raise exceptions.UnknownConceptError(
           f"Property '{property}' is not defined for concept '{reference}'"
         )
       out = processor.call_handler(property)
