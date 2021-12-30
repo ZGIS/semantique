@@ -89,7 +89,7 @@ class CubeProxy(dict):
         univariate.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.Cube.evaluate`.
+        :obj:`processor.structures.Cube.evaluate`.
 
     Returns
     --------
@@ -115,7 +115,7 @@ class CubeProxy(dict):
         coordinates.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.Cube.extract`.
+        :obj:`processor.structures.Cube.extract`.
 
     Returns
     --------
@@ -140,7 +140,7 @@ class CubeProxy(dict):
         and dropped otherwise.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.Cube.filter`.
+        :obj:`processor.structures.Cube.filter`.
 
     Returns
     --------
@@ -170,7 +170,7 @@ class CubeProxy(dict):
         side operand to be used in the expression.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.Cube.filter`.
+        :obj:`processor.structures.Cube.filter`.
 
     Returns
     --------
@@ -203,7 +203,7 @@ class CubeProxy(dict):
         side operand to be used in the expression.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.Cube.filter`.
+        :obj:`processor.structures.Cube.filter`.
 
     Returns
     --------
@@ -231,7 +231,7 @@ class CubeProxy(dict):
         corresponding values in all collection members.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.Cube.groupby`.
+        :obj:`processor.structures.Cube.groupby`.
 
     Returns
     --------
@@ -256,7 +256,7 @@ class CubeProxy(dict):
         coordinates.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.Cube.groupby`.
+        :obj:`processor.structures.Cube.groupby`.
 
     Returns
     --------
@@ -287,7 +287,7 @@ class CubeProxy(dict):
         coordinates.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.Cube.groupby`.
+        :obj:`processor.structures.Cube.groupby`.
 
     Returns
     --------
@@ -312,7 +312,7 @@ class CubeProxy(dict):
         Character label to be attached to the input cube.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.Cube.label`.
+        :obj:`processor.structures.Cube.label`.
 
     Returns
     --------
@@ -336,7 +336,7 @@ class CubeProxy(dict):
         recipe.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.Cube.reduce`.
+        :obj:`processor.structures.Cube.reduce`.
 
     Returns
     --------
@@ -385,7 +385,7 @@ class CubeCollectionProxy(dict):
     -----------
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.CubeCollection.compose`.
+        :obj:`processor.structures.CubeCollection.compose`.
 
     Returns
     --------
@@ -406,7 +406,7 @@ class CubeCollectionProxy(dict):
         a dimension that does not exist in any of the collection members.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.CubeCollection.concatenate`.
+        :obj:`processor.structures.CubeCollection.concatenate`.
 
     Returns
     --------
@@ -428,7 +428,7 @@ class CubeCollectionProxy(dict):
         be provided to the query processor when executing the query recipe.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`processor.core.structure.CubeCollection.merge`.
+        :obj:`processor.structures.CubeCollection.merge`.
 
     Returns
     --------

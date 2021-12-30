@@ -38,7 +38,7 @@ class InvalidValueTypeError(Exception):
 
   Note
   -----
-    You may disable value type tracking by setting `track_types = False` when
+    You may disable value type tracking by setting ``track_types = False`` when
     executing a query recipe.
 
   """

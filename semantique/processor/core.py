@@ -240,11 +240,11 @@ class QueryProcessor():
       **config:
         Additional configuration parameters forwarded to
         the initializer of the QueryProcessor instance. See
-        :class:`processor.core.QueryProcessor`.
+        :class:`QueryProcessor`.
 
     Returns
     -------
-      :obj:`processor.core.QueryProcessor`
+      :obj:`QueryProcessor`
         A query processor instance.
 
     Note
@@ -283,7 +283,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`processor.core.QueryProcessor`
+      :obj:`QueryProcessor`
         An updated query processor instance.
 
     Note
@@ -305,7 +305,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`processor.core.QueryProcessor`
+      :obj:`QueryProcessor`
         An updated query processor instance, with a :attr:`response` property
         containing the resulting data cubes.
 
