@@ -150,7 +150,7 @@ class Opendatacube(Factbase):
     self.connection = connection
     self.tz = tz
     # Update default configuration parameters with provided ones.
-    params = self.default_config
+    params = self._default_config
     params.update(config)
     self.config = params
 
@@ -177,7 +177,7 @@ class Opendatacube(Factbase):
     self._tz = pytz.timezone(value)
 
   @property
-  def default_config(self):
+  def _default_config(self):
     return {
       "group_by_solar_day": True,
       "value_type_mapping": {
@@ -355,7 +355,7 @@ class GeotiffArchive(Factbase):
     self.src = src
     self.tz = tz
     # Update default configuration parameters with provided ones.
-    params = self.default_config
+    params = self._default_config
     params.update(config)
     self.config = params
 
@@ -381,7 +381,7 @@ class GeotiffArchive(Factbase):
     self._tz = pytz.timezone(value)
 
   @property
-  def default_config(self):
+  def _default_config(self):
     return {
       "value_type_mapping": {
         "categorical": "ordinal",
