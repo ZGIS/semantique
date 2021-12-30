@@ -38,7 +38,6 @@ class Ontology(dict):
   def __init__(self, rules = None):
     obj = {} if rules is None else rules
     super(Ontology, self).__init__(obj)
-    self._rules = obj
 
   def lookup(self, *reference):
     """Lookup the ruleset of a referenced semantic concept.
