@@ -1058,8 +1058,15 @@ class CubeCollection(list):
         collection are not all equal to each other.
 
     """
+    if track_types:
+      value_types = [x.sq.value_type for x in self]
+      if not all([x is None or x == value_types[0] for x in value_types]):
+        raise exceptions.InvalidValueTypeError(
+          f"Element value types for 'merge' should all be the same, "
+          f"not {np.unique(value_types).tolist()} "
+        )
     dim = "__sq__" # Temporary dimension.
-    concat = self.concatenate(dim, track_types)
+    concat = self.concatenate(dim, track_types = False)
     out = concat.sq.reduce(dim, reducer, track_types, **kwargs)
     return out
 
