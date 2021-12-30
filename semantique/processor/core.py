@@ -215,7 +215,8 @@ class QueryProcessor():
     self._unstack_results = value
 
   @classmethod
-  def parse(cls, recipe, factbase, ontology, space, time, **config):
+  def parse(cls, recipe, factbase, ontology, space, time,
+            spatial_resolution, crs = None, tz = None, **config):
     """Parse a semantic query.
 
     During query parsing, the required components for processing are read and
@@ -237,10 +238,28 @@ class QueryProcessor():
         The spatial extent in which the query should be processed.
       time : TemporalExtent
         The temporal extent in which the query should be processed.
+      spatial_resolution : :obj:`list`
+        Spatial resolution in which the query should be processed. Should be
+        given as a list in the format `[y, x]`, where y is the cell size along
+        the y-axis, x is the cell size along the x-axis, and both are given as
+        :obj:`int` or :obj:`float` value expressed in the units of the CRS.
+        These values should include the direction of the axes. For most CRSs,
+        the y-axis has a negative direction, and hence the cell size along the
+        y-axis is given as a negative number.
+      crs : optional
+        Spatial coordinate reference system in which the query should be
+        processed. Can be given as any object understood by the initializer of
+        :class:`pyproj.crs.CRS`. This includes :obj:`pyproj.crs.CRS` objects
+        themselves, as well as EPSG codes and WKT strings. If :obj:`None`, the
+        CRS of the provided spatial extent is used.
+      tz : optional
+        Time zone in which the query should be processed. Can be given as
+        :obj:`str` referring to the name of a time zone in the tz database, or
+        as instance of any class inheriting from :class:`datetime.tzinfo`. If
+        :obj:`None`, the timezone of the provided temporal extent is used.
       **config:
-        Additional configuration parameters forwarded to
-        the initializer of the QueryProcessor instance. See
-        :class:`QueryProcessor`.
+        Additional configuration parameters forwarded to the initializer of the
+        QueryProcessor instance. See :class:`QueryProcessor`.
 
     Returns
     -------
@@ -256,16 +275,10 @@ class QueryProcessor():
     """
     # Step I: Parse the spatio-temporal extent.
     # It needs to be stored as a 2D array with dimensions space and time.
-    # First extract the relevant configuration parameters.
-    config = copy.deepcopy(config)
-    spatres = config.pop("spatial_resolution", [-10, 10])
-    crs = config.pop("output_crs", None)
-    tz = config.pop("output_tz", None)
-    # Create the extent cube.
     extent = utils.create_extent_cube(
       spatial_extent = space,
       temporal_extent = time,
-      spatial_resolution = spatres,
+      spatial_resolution = spatial_resolution,
       crs = crs,
       tz = tz
     )
