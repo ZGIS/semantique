@@ -4,3 +4,4 @@ nbsphinx-link
 m2r2
 sphinxemoji
 sphinx-book-theme
+-e .
