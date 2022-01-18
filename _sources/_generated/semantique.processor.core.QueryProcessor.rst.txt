@@ -1,0 +1,72 @@
+﻿semantique.processor.core.QueryProcessor
+========================================
+
+.. currentmodule:: semantique.processor.core
+
+.. autoclass:: QueryProcessor
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~QueryProcessor.__init__
+      ~QueryProcessor.add_operator
+      ~QueryProcessor.add_reducer
+      ~QueryProcessor.call_handler
+      ~QueryProcessor.execute
+      ~QueryProcessor.get_handler
+      ~QueryProcessor.get_operator
+      ~QueryProcessor.get_reducer
+      ~QueryProcessor.handle_collection
+      ~QueryProcessor.handle_concept
+      ~QueryProcessor.handle_geometries
+      ~QueryProcessor.handle_processing_chain
+      ~QueryProcessor.handle_resource
+      ~QueryProcessor.handle_result
+      ~QueryProcessor.handle_self
+      ~QueryProcessor.handle_time_instant
+      ~QueryProcessor.handle_time_interval
+      ~QueryProcessor.handle_value_label
+      ~QueryProcessor.handle_verb
+      ~QueryProcessor.optimize
+      ~QueryProcessor.parse
+      ~QueryProcessor.respond
+      ~QueryProcessor.store_default_operators
+      ~QueryProcessor.store_default_reducers
+      ~QueryProcessor.update_list_elements
+      ~QueryProcessor.update_params_of_compose
+      ~QueryProcessor.update_params_of_concatenate
+      ~QueryProcessor.update_params_of_evaluate
+      ~QueryProcessor.update_params_of_filter
+      ~QueryProcessor.update_params_of_groupby
+      ~QueryProcessor.update_params_of_merge
+      ~QueryProcessor.update_params_of_reduce
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~QueryProcessor.crs
+      ~QueryProcessor.extent
+      ~QueryProcessor.factbase
+      ~QueryProcessor.ontology
+      ~QueryProcessor.operators
+      ~QueryProcessor.recipe
+      ~QueryProcessor.reducers
+      ~QueryProcessor.response
+      ~QueryProcessor.spatial_resolution
+      ~QueryProcessor.track_types
+      ~QueryProcessor.trim_filter
+      ~QueryProcessor.trim_results
+      ~QueryProcessor.tz
+      ~QueryProcessor.unstack_results
+   
+   

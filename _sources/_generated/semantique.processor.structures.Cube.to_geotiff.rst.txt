@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.to\_geotiff
+================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: Cube.to_geotiff

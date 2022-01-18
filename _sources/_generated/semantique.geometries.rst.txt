@@ -1,0 +1,6 @@
+﻿semantique.geometries
+=====================
+
+.. currentmodule:: semantique
+
+.. autofunction:: geometries

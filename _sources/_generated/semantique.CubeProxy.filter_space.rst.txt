@@ -1,0 +1,6 @@
+﻿semantique.CubeProxy.filter\_space
+==================================
+
+.. currentmodule:: semantique
+
+.. automethod:: CubeProxy.filter_space

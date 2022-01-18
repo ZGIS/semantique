@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.stack\_spatial\_dims
+=========================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: Cube.stack_spatial_dims

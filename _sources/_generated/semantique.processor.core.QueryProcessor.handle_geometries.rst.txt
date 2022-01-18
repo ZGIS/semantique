@@ -1,0 +1,6 @@
+﻿semantique.processor.core.QueryProcessor.handle\_geometries
+===========================================================
+
+.. currentmodule:: semantique.processor.core
+
+.. automethod:: QueryProcessor.handle_geometries

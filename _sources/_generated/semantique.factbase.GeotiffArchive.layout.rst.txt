@@ -1,0 +1,6 @@
+﻿semantique.factbase.GeotiffArchive.layout
+=========================================
+
+.. currentmodule:: semantique.factbase
+
+.. autoproperty:: GeotiffArchive.layout

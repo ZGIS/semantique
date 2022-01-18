@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.CubeCollection.concatenate
+==========================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: CubeCollection.concatenate

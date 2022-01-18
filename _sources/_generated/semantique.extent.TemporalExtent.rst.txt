@@ -1,0 +1,31 @@
+﻿semantique.extent.TemporalExtent
+================================
+
+.. currentmodule:: semantique.extent
+
+.. autoclass:: TemporalExtent
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TemporalExtent.__init__
+      ~TemporalExtent.discretize
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TemporalExtent.end
+      ~TemporalExtent.start
+      ~TemporalExtent.tz
+   
+   

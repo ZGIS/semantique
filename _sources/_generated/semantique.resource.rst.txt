@@ -1,0 +1,6 @@
+﻿semantique.resource
+===================
+
+.. currentmodule:: semantique
+
+.. autofunction:: resource

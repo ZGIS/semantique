@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.crs
+========================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. autoproperty:: Cube.crs

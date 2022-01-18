@@ -1,0 +1,6 @@
+﻿semantique.CubeProxy.extract
+============================
+
+.. currentmodule:: semantique
+
+.. automethod:: CubeProxy.extract

@@ -1,0 +1,6 @@
+﻿semantique.processor.core.QueryProcessor.unstack\_results
+=========================================================
+
+.. currentmodule:: semantique.processor.core
+
+.. autoproperty:: QueryProcessor.unstack_results

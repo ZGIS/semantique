@@ -1,0 +1,1857 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>References &#8212; semantique 0.1.0 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Verbs" href="verbs.html" />
+    <link rel="prev" title="Semantic querying" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">semantique 0.1.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Documentation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../guide.html">
+   User Guide
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="intro.html">
+     Intro
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     References
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="verbs.html">
+     Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="advanced.html">
+     Advanced usage
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../reference.html">
+   API Reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.QueryRecipe.html">
+     semantique.QueryRecipe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ontology.Ontology.html">
+     semantique.ontology.Ontology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ontology.Semantique.html">
+     semantique.ontology.Semantique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.factbase.Factbase.html">
+     semantique.factbase.Factbase
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.factbase.Opendatacube.html">
+     semantique.factbase.Opendatacube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.factbase.GeotiffArchive.html">
+     semantique.factbase.GeotiffArchive
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.extent.SpatialExtent.html">
+     semantique.extent.SpatialExtent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.extent.TemporalExtent.html">
+     semantique.extent.TemporalExtent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.concept.html">
+     semantique.concept
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.entity.html">
+     semantique.entity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.event.html">
+     semantique.event
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.resource.html">
+     semantique.resource
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.appearance.html">
+     semantique.appearance
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.artifacts.html">
+     semantique.artifacts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.atmosphere.html">
+     semantique.atmosphere
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.reflectance.html">
+     semantique.reflectance
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.topography.html">
+     semantique.topography
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.collection.html">
+     semantique.collection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.evaluate.html">
+     semantique.CubeProxy.evaluate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.extract.html">
+     semantique.CubeProxy.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.filter.html">
+     semantique.CubeProxy.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.filter_time.html">
+     semantique.CubeProxy.filter_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.filter_space.html">
+     semantique.CubeProxy.filter_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.groupby.html">
+     semantique.CubeProxy.groupby
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.groupby_time.html">
+     semantique.CubeProxy.groupby_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.groupby_space.html">
+     semantique.CubeProxy.groupby_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.label.html">
+     semantique.CubeProxy.label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.reduce.html">
+     semantique.CubeProxy.reduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.compose.html">
+     semantique.CubeCollectionProxy.compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.concatenate.html">
+     semantique.CubeCollectionProxy.concatenate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.merge.html">
+     semantique.CubeCollectionProxy.merge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.evaluate.html">
+     semantique.CubeCollectionProxy.evaluate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.extract.html">
+     semantique.CubeCollectionProxy.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.filter.html">
+     semantique.CubeCollectionProxy.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.filter_time.html">
+     semantique.CubeCollectionProxy.filter_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.filter_space.html">
+     semantique.CubeCollectionProxy.filter_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.label.html">
+     semantique.CubeCollectionProxy.label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.reduce.html">
+     semantique.CubeCollectionProxy.reduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.value_label.html">
+     semantique.value_label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.geometries.html">
+     semantique.geometries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.time_instant.html">
+     semantique.time_instant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.time_interval.html">
+     semantique.time_interval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.core.QueryProcessor.html">
+     semantique.processor.core.QueryProcessor
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.structures.Cube.html">
+     semantique.processor.structures.Cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.structures.CubeCollection.html">
+     semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.absolute_.html">
+     semantique.processor.operators.absolute_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.cube_root_.html">
+     semantique.processor.operators.cube_root_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.natural_logarithm_.html">
+     semantique.processor.operators.natural_logarithm_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.square_root_.html">
+     semantique.processor.operators.square_root_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.invert_.html">
+     semantique.processor.operators.invert_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.add_.html">
+     semantique.processor.operators.add_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.divide_.html">
+     semantique.processor.operators.divide_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.multiply_.html">
+     semantique.processor.operators.multiply_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.power_.html">
+     semantique.processor.operators.power_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.subtract_.html">
+     semantique.processor.operators.subtract_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.and_.html">
+     semantique.processor.operators.and_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.or_.html">
+     semantique.processor.operators.or_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.equal_.html">
+     semantique.processor.operators.equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.exclusive_or_.html">
+     semantique.processor.operators.exclusive_or_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.greater_.html">
+     semantique.processor.operators.greater_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.greater_equal_.html">
+     semantique.processor.operators.greater_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.in_.html">
+     semantique.processor.operators.in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.less_.html">
+     semantique.processor.operators.less_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.less_equal_.html">
+     semantique.processor.operators.less_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.not_equal_.html">
+     semantique.processor.operators.not_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.not_in_.html">
+     semantique.processor.operators.not_in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.after_.html">
+     semantique.processor.operators.after_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.before_.html">
+     semantique.processor.operators.before_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.during_.html">
+     semantique.processor.operators.during_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.assign_.html">
+     semantique.processor.operators.assign_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.mean_.html">
+     semantique.processor.reducers.mean_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.product_.html">
+     semantique.processor.reducers.product_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.standard_deviation_.html">
+     semantique.processor.reducers.standard_deviation_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.sum_.html">
+     semantique.processor.reducers.sum_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.variance_.html">
+     semantique.processor.reducers.variance_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.all_.html">
+     semantique.processor.reducers.all_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.any_.html">
+     semantique.processor.reducers.any_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.count_.html">
+     semantique.processor.reducers.count_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.percentage_.html">
+     semantique.processor.reducers.percentage_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.first_.html">
+     semantique.processor.reducers.first_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.last_.html">
+     semantique.processor.reducers.last_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.mode_.html">
+     semantique.processor.reducers.mode_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.max_.html">
+     semantique.processor.reducers.max_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.median_.html">
+     semantique.processor.reducers.median_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.min_.html">
+     semantique.processor.reducers.min_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.templates.html">
+     semantique.processor.templates
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.AlignmentError.html">
+     semantique.exceptions.AlignmentError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.EmptyDataError.html">
+     semantique.exceptions.EmptyDataError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.InvalidValueTypeError.html">
+     semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.InvalidBuildingBlockError.html">
+     semantique.exceptions.InvalidBuildingBlockError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownConceptError.html">
+     semantique.exceptions.UnknownConceptError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownResourceError.html">
+     semantique.exceptions.UnknownResourceError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownResultError.html">
+     semantique.exceptions.UnknownResultError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownReducerError.html">
+     semantique.exceptions.UnknownReducerError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownOperatorError.html">
+     semantique.exceptions.UnknownOperatorError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownDimensionError.html">
+     semantique.exceptions.UnknownDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownComponentError.html">
+     semantique.exceptions.UnknownComponentError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownLabelError.html">
+     semantique.exceptions.UnknownLabelError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.TooManyDimensionsError.html">
+     semantique.exceptions.TooManyDimensionsError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.MissingDimensionError.html">
+     semantique.exceptions.MissingDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.MixedDimensionsError.html">
+     semantique.exceptions.MixedDimensionsError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.MixedTimeZonesError.html">
+     semantique.exceptions.MixedTimeZonesError
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gallery.html">
+   Gallery
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../changelog.html">
+   Changelog
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Community
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../code_of_conduct.html">
+   Code of Conduct
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing.html">
+   Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/ZGIS/semantique">
+   GitHub repository
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/_notebooks/references.nblink.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.nblink</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ZGIS/semantique"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_notebooks/references.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/_notebooks/references.nblink"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Content">
+   Content
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Prepare">
+   Prepare
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Referencing-single-data-cubes">
+   Referencing single data cubes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Referencing-semantic-concepts">
+     Referencing semantic concepts
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Referencing-factbase-resources">
+     Referencing factbase resources
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Referencing-results">
+     Referencing results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Referencing-the-active-evaluation-object">
+     Referencing the active evaluation object
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Referencing-collections-of-data-cubes">
+   Referencing collections of data cubes
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="References">
+<h1>References<a class="headerlink" href="#References" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook we will show several types of references that can be used as the start of a processing chain. Remember from the <a class="reference internal" href="intro.html"><span class="doc">Intro notebook</span></a> that result instructions are formulated by combining basic building blocks into processing chains. These processing chains start with a <em>reference</em>. At the query recipe construction stage, such a reference is nothing more than a small piece of text. When executing the recipe, the query processor solves this reference and evaluates it
+internally into a multi-dimensional array filled with data values, i.e. into a <em>data cube</em>. Several actions can then be applied to this data cube. For a description of those, see the <a class="reference internal" href="verbs.html"><span class="doc">Verbs notebook</span></a>.</p>
+<div class="section" id="Content">
+<h2>Content<a class="headerlink" href="#Content" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#Referencing-single-data-cubes">Referencing single data cubes</a></p>
+<ul>
+<li><p><a class="reference external" href="#Referencing-semantic-concepts">Referencing semantic concepts</a></p></li>
+<li><p><a class="reference external" href="#Referencing-factbase-resources">Referencing factbase resources</a></p></li>
+<li><p><a class="reference external" href="#Referencing-results">Referencing results</a></p></li>
+<li><p><a class="reference external" href="#Referencing-the-active-evaluation-object">Referencing the active evaluation object</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#Referencing-collections-of-data-cubes">Referencing collections of data cubes</a></p></li>
+</ul>
+</div>
+<div class="section" id="Prepare">
+<h2>Prepare<a class="headerlink" href="#Prepare" title="Permalink to this headline">¶</a></h2>
+<p>Import the semantique package:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import semantique as sq
+</pre></div>
+</div>
+</div>
+<p>Import other packages we will use in this notebook:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import geopandas as gpd
+import json
+</pre></div>
+</div>
+</div>
+<p>Create the components for query processing (except the query recipe itself). See the <a class="reference internal" href="intro.html"><span class="doc">Intro notebook</span></a> for details.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># Ontology.
+with open(&quot;files/ontology.json&quot;, &quot;r&quot;) as file:
+    ontology = sq.ontology.Semantique(json.load(file))
+
+# Factbase.
+with open(&quot;files/factbase.json&quot;, &quot;r&quot;) as file:
+    factbase = sq.factbase.GeotiffArchive(json.load(file), src = &quot;files/resources.zip&quot;)
+
+# Extent.
+space = sq.SpatialExtent(gpd.read_file(&quot;files/footprint.geojson&quot;))
+time = sq.TemporalExtent(&quot;2019-01-01&quot;, &quot;2020-12-31&quot;)
+
+# Additional configuration.
+config = {&quot;crs&quot;: 3035, &quot;tz&quot;: &quot;UTC&quot;, &quot;spatial_resolution&quot;: [-10, 10]}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Referencing-single-data-cubes">
+<h2>Referencing single data cubes<a class="headerlink" href="#Referencing-single-data-cubes" title="Permalink to this headline">¶</a></h2>
+<p>Most references are a reference that will be evaluated into a <em>single</em> data cube during query processing. At the stage of query construction, all these references are just textual references in a dictionary-like structure. More specifically, they are objects of class <code class="docutils literal notranslate"><span class="pre">CubeProxy</span></code>, meaning that it will be evaluated into a data cube, but only when executing the query recipe. There are several types of single-cube references, which we will discuss one-by-one below.</p>
+<div class="section" id="Referencing-semantic-concepts">
+<h3>Referencing semantic concepts<a class="headerlink" href="#Referencing-semantic-concepts" title="Permalink to this headline">¶</a></h3>
+<p>The most common reference at the start of a processing chain is a reference to a semantic concept that is defined in the ontology. You can refer to any semantic concept by using the <code class="docutils literal notranslate"><span class="pre">sq.concept</span></code> function. How to specify the reference, depends on the structure of the ontology. Usually, an ontology does not only list rulesets of semantic concepts, but also formalizes a categorization of these concepts. That is, a reference to a specific semantic concept usually consists of the name of that
+concept, <em>and</em> the name of the category it belongs to. Optionally there can be multiple hierarchies of categories, for example to group concepts of different semantic levels (e.g. an entity <em>water body</em> is of a lower semantic level than an entity <em>lake</em>, since lake is by definition always a water body, but a water body not necessarily a lake). The <code class="docutils literal notranslate"><span class="pre">sq.concept</span></code> function lets you specify as many levels as you need, starting with the lowest-level category, and ending with the name of the semantic
+concept itself.</p>
+<p>The common lowest-level categorization groups the semantic concepts into very abstract types. For example, a semantic concept might be an <em>entity</em> (a phenonemon with a distinct and independent <em>existence</em>, e.g. a forest or a lake) or an <em>event</em> (a phenonemon that <em>takes place</em>, e.g. a fire or a flood). If the semantic concepts are stored as direct element of these lowest-level categories without any further subdivision (as is the case in our example ontology we use here), we can refer to a
+semantic concept such as <em>water</em> as follows.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>ref = sq.concept(&quot;entity&quot;, &quot;water&quot;)
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;concept&#34;,
+  &#34;reference&#34;: [
+    &#34;entity&#34;,
+    &#34;water&#34;
+  ]
+}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>type(ref)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+semantique.blocks.CubeProxy
+</pre></div></div>
+</div>
+<p>If you use ontologies that include sub-categories, you can simply use the same function to refer to them, in a form as below. There is no limit on how many sub-categories you can use in a reference. Of course, this all depends on the categorization of the ontology that you will use.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>ref = sq.concept(&quot;entity&quot;, &quot;natural_entities&quot;, &quot;water_bodies&quot;, &quot;lake&quot;)
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;concept&#34;,
+  &#34;reference&#34;: [
+    &#34;entity&#34;,
+    &#34;natural_entities&#34;,
+    &#34;water_bodies&#34;,
+    &#34;lake&#34;
+  ]
+}
+</pre></div></div>
+</div>
+<p>For convenience, commonly used lowest-level semantic concept categories are also implemented as separate construction functions, such that you can call them directly. Currently, you can refer directly to the following common categories:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">entity</span></code>: A phenonemon with a distinct and independent <em>existence</em>, e.g. a forest or a lake. We also use this category for broader, lower-level concepts such as vegetated areas (i.e. <em>vegetation</em>) and water bodies (i.e. <em>water</em>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">event</span></code>: A phenonemon that <em>takes place</em>, e.g. a fire or a flood.</p></li>
+</ul>
+<p>Hence, the code below produces the same output as above.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>ref = sq.entity(&quot;water&quot;)
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;concept&#34;,
+  &#34;reference&#34;: [
+    &#34;entity&#34;,
+    &#34;water&#34;
+  ]
+}
+</pre></div></div>
+</div>
+<p>The query processor will solve these kind of references by looking up the textual reference in the ontology, obtaining the corresponding ruleset, and evualate these rules into a set of data values. If the rules describe <em>binary relationships</em> between the semantic concepts and the pixel values, the query processor will translate a semantic concept reference into a <em>boolean</em> data cube, with “true” values (i.e. 1) for those pixels that are identified as being an observation of the referenced
+concept, and “false” values (i.e. 0) for all other pixels in the spatio-temporal extent.</p>
+<p>To show this, we execute a query recipe that only contains a single semantic concept reference.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>print(sq.QueryRecipe({&quot;water&quot;: ref}).execute(factbase, ontology, space, time, **config)[&quot;water&quot;])
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.DataArray &#39;water&#39; (time: 3, y: 563, x: 576)&gt;
+array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])
+Coordinates:
+  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
+    spatial_ref   int64 0
+    temporal_ref  int64 0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    value_type:  binary
+</pre></div></div>
+</div>
+<p>Each semantic concept is defined by one or more named <em>properties</em> it has. For example, a entity <em>lake</em> may be defined by its <em>color</em> (a blueish, water-like color) in combination with its <em>texture</em> (it has an approximately flat surface). In the case of modelling binary relationships, the rules belonging to a property then define for each pixel in the data if it meets a specific property (“true”), or not (“false”). A pixel is identified as part of a semantic concept only if <em>all</em> properties are
+met.</p>
+<p>If you are only interested in a single property of a semantic concept, you can specify that through the <code class="docutils literal notranslate"><span class="pre">property</span></code> argument of the <code class="docutils literal notranslate"><span class="pre">sq.concept</span></code> function.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>ref = sq.entity(&quot;water&quot;, property = &quot;color&quot;)
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;concept&#34;,
+  &#34;reference&#34;: [
+    &#34;entity&#34;,
+    &#34;water&#34;
+  ],
+  &#34;property&#34;: &#34;color&#34;
+}
+</pre></div></div>
+</div>
+<p>Since in our ontology the “water” concept is <em>exclusively</em> defined by its “color” property, the resulting data cube will in this case be equal to the full “water” cube we obtained before.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>cube = sq.QueryRecipe({&quot;color&quot;: ref}).execute(factbase, ontology, space, time, **config)[&quot;color&quot;]
+print(cube)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.DataArray &#39;color&#39; (time: 3, y: 563, x: 576)&gt;
+array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])
+Coordinates:
+  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
+    spatial_ref   int64 0
+    temporal_ref  int64 0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    value_type:  binary
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Referencing-factbase-resources">
+<h3>Referencing factbase resources<a class="headerlink" href="#Referencing-factbase-resources" title="Permalink to this headline">¶</a></h3>
+<p>Normally, the semantic querying structure should allow you to not worry at all about the data stored in the factbase (i.e. the <em>image domain</em>). It is the role of the ontology to combine these resources into meaningful real-world concepts (i.e. a mapping from the <em>image domain</em> to the <em>real-world domain</em>). However, especially when you are an expert user, you don’t want to be limited by this structure. There are still cases in which it is useful to directly refer to factbase resources in your
+result instructions.</p>
+<p>Just as with ontologies, layout files of factbases usually formalize a categorization of resources. Such categories group resources based on what property of the observed phenonemon they describe. For example, there are often resources that tell you something about the <em>reflectance</em> of radiation from the Earth surface. When data are semantically enriched, they also contain information layers that tell you something about the <em>appearance</em> of the observed phenonemen. Hence, what does it look like?</p>
+<p>Because of this categorization, a reference to a specific resource of data usually consists of the name of that resource, <em>and</em> the name of the category it belongs to. Optionally there can be multiple hierarchies of categories. The <code class="docutils literal notranslate"><span class="pre">sq.resource</span></code> function lets you specify as many levels as you need, starting with the lowest-level category, and ending with the name of the resource itself. For example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>ref = sq.resource(&quot;appearance&quot;, &quot;Color type&quot;)
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;resource&#34;,
+  &#34;reference&#34;: [
+    &#34;appearance&#34;,
+    &#34;Color type&#34;
+  ]
+}
+</pre></div></div>
+</div>
+<p>If you use factbase layout files that include sub-categories, you can simply use the same function to refer to them, in a form as below. There is no limit on how many sub-categories you can use in a reference. Of course, this all depends on the categorization of the factbase layout that you will use.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>ref = sq.resource(&quot;appearance&quot;, &quot;categorical_layers&quot;, &quot;colors&quot;, &quot;Color type&quot;)
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;resource&#34;,
+  &#34;reference&#34;: [
+    &#34;appearance&#34;,
+    &#34;categorical_layers&#34;,
+    &#34;colors&#34;,
+    &#34;Color type&#34;
+  ]
+}
+</pre></div></div>
+</div>
+<p>For convenience, commonly used factbase categories are also implemented as separate construction functions, such that you can call them directly. Currently, you can refer directly to the following common categories:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">appearance</span></code>: Resources that contain information on what the observed phenonemon looks like.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reflectance</span></code>: Resources that contain information on how intensely certain types of radiation are reflected by the observed phenonemon.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topography</span></code>: Resources that contain information on the surface form of the observed phenonemon.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">atmosphere</span></code>: Resources that contain information on what the atmosphere above the observed phenonemon looks like.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">artifacts</span></code>: Resources that label erroneous observations.</p></li>
+</ul>
+<p>Hence, the code below produces the same output as above.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>ref = sq.appearance(&quot;Color type&quot;)
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;resource&#34;,
+  &#34;reference&#34;: [
+    &#34;appearance&#34;,
+    &#34;Color type&#34;
+  ]
+}
+</pre></div></div>
+</div>
+<p>The query processor will solve these kind of references by looking up the textual reference in the layout file of the factbase, obtaining the corresponding metadata object, and using the information in there to retrieve the corresponding data values from the factbase.</p>
+<p>To show this, we execute a query recipe that only contains a single factbase resource reference.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>cube = sq.QueryRecipe({&quot;colortype&quot;: ref}).execute(factbase, ontology, space, time, **config)[&quot;colortype&quot;]
+print(cube)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.DataArray &#39;colortype&#39; (time: 3, y: 563, x: 576)&gt;
+array([[[29., 29., 29., ..., 29., 29., 29.],
+        [29., 29., 29., ..., 29., 29., 29.],
+        [29., 29., 29., ...,  5., 29., 29.],
+        ...,
+        [ 5.,  5.,  5., ..., 29., 29., 29.],
+        [ 5.,  5.,  5., ..., 29., 29., 29.],
+        [ 5., 29., 29., ..., 29., 29., 29.]],
+
+       [[ 4.,  4.,  4., ...,  4.,  1.,  1.],
+        [ 6.,  4.,  4., ...,  3.,  1.,  4.],
+        [ 6.,  4.,  4., ...,  4.,  4.,  4.],
+        ...,
+        [ 1.,  1.,  1., ...,  1.,  1.,  1.],
+        [ 1.,  1.,  1., ...,  1.,  1.,  1.],
+        [ 1.,  1.,  1., ...,  1.,  1.,  1.]],
+
+       [[21., 21., 21., ...,  4.,  5.,  4.],
+        [21., 21., 21., ...,  3.,  6.,  4.],
+        [21., 21., 21., ...,  3.,  4.,  4.],
+        ...,
+        [ 3.,  3.,  3., ...,  3., 27., 27.],
+        [ 3., 27.,  3., ..., 27., 27., 27.],
+        [27.,  3.,  7., ..., 27., 27., 27.]]])
+Coordinates:
+  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
+    spatial_ref   int64 0
+    temporal_ref  int64 0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    scale_factor:  1.0
+    add_offset:    0.0
+    long_name:     33SharedSpCt
+    _FillValue:    1.7976931348623157e+308
+    value_type:    ordinal
+    value_labels:  {&#39;SVHNIR&#39;: 1, &#39;SVLNIR&#39;: 2, &#39;AVHNIR&#39;: 3, &#39;AVLNIR&#39;: 4, &#39;WV&#39;:...
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Referencing-results">
+<h3>Referencing results<a class="headerlink" href="#Referencing-results" title="Permalink to this headline">¶</a></h3>
+<p>A semantic query recipe can contain multiple result instructions. Whenever a result instruction you are constructing gets too long or complicated to be defined in one line, you can of course break it up in several assignment operations. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">water_count</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">vegetation_count</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;vegetation&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">recipe</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">QueryRecipe</span><span class="p">({</span><span class="s2">&quot;summed_count&quot;</span><span class="p">:</span> <span class="n">water_count</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">vegetation_count</span><span class="p">)})</span>
+</pre></div>
+</div>
+<p>After executing this recipe, the response will contain a single result, i.e. “summed_count”. However, you might also want to obtain the water count and vegetation count maps as separate results themselves. At that point, it is good to know that you can start processing chains with a reference to a previously defined result, using the <code class="docutils literal notranslate"><span class="pre">sq.result</span></code> function. This allows you to re-use other result definitions inside a new result definition. The only thing you have to use as a reference is the name
+of the result.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>ref = sq.result(&quot;water_count&quot;)
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;result&#34;,
+  &#34;name&#34;: &#34;water_count&#34;
+}
+</pre></div></div>
+</div>
+<p>The same “summed_count” result as we showed above can in this way also be formulated as shown below. The only difference here is that next to “summed_count”, the response will also contain “water_count” and “vegetation_count” as separate results. When that is what you want, use the structure below. If not, use the structure above.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recipe</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">QueryRecipe</span><span class="p">()</span>
+<span class="n">recipe</span><span class="p">[</span><span class="s2">&quot;water_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">recipe</span><span class="p">[</span><span class="s2">&quot;vegetation_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;vegetation&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">recipe</span><span class="p">[</span><span class="s2">&quot;summed_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="s2">&quot;water_count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="s2">&quot;vegetation_count&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Referencing-the-active-evaluation-object">
+<h3>Referencing the active evaluation object<a class="headerlink" href="#Referencing-the-active-evaluation-object" title="Permalink to this headline">¶</a></h3>
+<p>Before explaining these type of references, we need to introduce some slightly more advanced processing chain structures. Remember that a processing chain starts with a reference, and that this reference will internally be evaluated into a data cube. Specific actions (i.e. the <a class="reference internal" href="verbs.html"><span class="doc">verbs</span></a>) can then be applied to this data cube. This can be a single action, but also a chain of multiple actions. The data cube constantly changes when moving through the processing chain. It starts as the
+evaluated reference. This object will be the input to the first action, which wrangles it into a different cube. That different cube will then be the input to the second action, which again wrangles it into a different cube, etcetera. We use the term <strong>active evaluation object</strong> to refer to the input object at each stage of the processing chain. Hence, at the first action, the active evaluation object is the evaluated reference. At the second action, the active evaluation object is the output of
+the first action, etcetera.</p>
+<p>Some actions combine information of multiple inputs. For example, the evaluate verb lets you evaluate multivariate expressions where the left-hand side of the expression is the active evaluation object, and the right-hand side of the expression is either a single value or another data cube. For example, adding a vegetation count to a water count:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;vegetation&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The processing chain <code class="docutils literal notranslate"><span class="pre">sq.entity(&quot;vegetation&quot;).reduce(&quot;time&quot;,</span> <span class="pre">&quot;count&quot;)</span></code> here is nested into the main processing chain that starts with the reference to water. Since <code class="docutils literal notranslate"><span class="pre">sq.entity(&quot;water&quot;).reduce(&quot;time&quot;,</span> <span class="pre">&quot;count&quot;)</span></code> is the active evaluation object of the main processing chain at the stage of the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> verb, the final outcome of the line above is the vegetation count added to the water count, i.e. the sum of both counts.</p>
+<p>But now what if we want to add the water count to itself? Our recipe would look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Here you see that the <em>same</em> processing chain <code class="docutils literal notranslate"><span class="pre">sq.entity(&quot;water&quot;).reduce(&quot;time&quot;,</span> <span class="pre">&quot;count&quot;)</span></code> occurs twice in the recipe. This does not only make the code longer and less readable, it also decreases processing time since solving the water reference and reducing the resulting cube has to be done twice instead of once. Now we came at the point where we can show that it is useful to reference the active evaluation object itself. You can use the <code class="docutils literal notranslate"><span class="pre">sq.self</span></code> function for that, without the need to
+provide any arguments.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>ref = sq.self()
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;self&#34;
+}
+</pre></div></div>
+</div>
+<p>This allows us to simplify the recipe above (and improve processing speed!):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">self</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Of course, the example above is trivial. Why would you add the active evaluation object to itself, when you can also just multiply it by 2. However, there are cases where the self-reference can be of real use. For example, when applying a self-filter (see here), when applying a filter based on dimension coordinates (see here), or when grouping a data cube along one of its dimensions (see here.</p>
+<p>It may be clear now that references to the active evaluation object itself are only meant to be used at the start of <em>nested</em> processing chains. It is of no use to start a main processing chain with a self reference, since there is no active evaluation object yet. Although, technically there is. The query processor stores the <a class="reference external" href="internals.ipynb#Creating-a-spatio-temporal-extent-cube">spatio-temporal extent cube</a> of the query as the “default” active evaluation object. That is, when you refer to
+the active evaluation object outside of a nested structure, you will obtain the spatio-temporal extent cube:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>cube = sq.QueryRecipe({&quot;self&quot;: ref}).execute(factbase, ontology, space, time, **config)[&quot;self&quot;]
+print(cube)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.DataArray &#39;self&#39; (time: 2, y: 563, x: 576)&gt;
+array([[[1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.],
+        ...,
+        [1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.]],
+
+       [[1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.],
+        ...,
+        [1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.]]])
+Coordinates:
+  * time          (time) datetime64[ns] 2019-01-01 2020-12-31
+    spatial_ref   int64 0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    temporal_ref  int64 0
+  * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    name:          index
+    long_name:     index
+    _FillValue:    nan
+    value_type:    nominal
+    value_labels:  {&#39;feature_1&#39;: 1}
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="Referencing-collections-of-data-cubes">
+<h2>Referencing collections of data cubes<a class="headerlink" href="#Referencing-collections-of-data-cubes" title="Permalink to this headline">¶</a></h2>
+<p>Up to now we have only talked about references that are evaluated into a <em>single</em> data cube. It is also possible to reference a <em>collection</em> of multiple data cubes at once. Such data cube collections have dedicated verbs that can be applied to them, which will all in some way combine all collection members into a single data cube.</p>
+<p>Consider for example a case where you want to sum five data cubes together. You could do this by starting a processing chain with the first of those cubes, and calling four times the evaluate verb to add each of the other cubes step-by-step. It is much easier to reference all the five cubes together in a collection, and call the merge verb to add them together in a single step. Another reason to use collections is related to style. A chained
+structure always implies some kind of a hierarchy, in which you start with a main input object, and add the other objects along the way. This might not feel fitting for every use-case.</p>
+<p>To reference a collection of data cubes, you can use the <code class="docutils literal notranslate"><span class="pre">sq.collection</span></code> function. As arguments you give it as many single-cube references as you want. For example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>ref = sq.collection(sq.entity(&quot;water&quot;), sq.entity(&quot;vegetation&quot;))
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;collection&#34;,
+  &#34;elements&#34;: [
+    {
+      &#34;type&#34;: &#34;concept&#34;,
+      &#34;reference&#34;: [
+        &#34;entity&#34;,
+        &#34;water&#34;
+      ]
+    },
+    {
+      &#34;type&#34;: &#34;concept&#34;,
+      &#34;reference&#34;: [
+        &#34;entity&#34;,
+        &#34;vegetation&#34;
+      ]
+    }
+  ]
+}
+</pre></div></div>
+</div>
+<p>Where all single-cube references return an object of class <code class="docutils literal notranslate"><span class="pre">CubeProxy</span></code>, a collection reference returns an object of class <code class="docutils literal notranslate"><span class="pre">CubeCollectionProxy</span></code>. This allows you to call the collection-specific verbs on the reference.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>type(ref)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+semantique.blocks.CubeCollectionProxy
+</pre></div></div>
+</div>
+<p>Normally a query recipe that involves collections will combine collections members into a single cube, using the dedicated collection verbs. However, it is technically also possible to return a data cube collection as a result.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>cubes = sq.QueryRecipe({&quot;collection&quot;: ref}).execute(factbase, ontology, space, time, **config)[&quot;collection&quot;]
+
+for cube in cubes:
+    print(cube)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.DataArray &#39;water&#39; (time: 3, y: 563, x: 576)&gt;
+array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])
+Coordinates:
+  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
+    spatial_ref   int64 0
+    temporal_ref  int64 0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    value_type:  binary
+&lt;xarray.DataArray &#39;vegetation&#39; (time: 3, y: 563, x: 576)&gt;
+array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 1., 0., 0.],
+        ...,
+        [1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        [1., 0., 0., ..., 0., 0., 0.]],
+
+       [[1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.],
+        ...,
+        [1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.],
+        [1., 1., 1., ..., 1., 1., 1.]],
+
+       [[0., 0., 0., ..., 1., 1., 1.],
+        [0., 0., 0., ..., 1., 1., 1.],
+        [0., 0., 0., ..., 1., 1., 1.],
+        ...,
+        [1., 1., 1., ..., 1., 0., 0.],
+        [1., 0., 1., ..., 0., 0., 0.],
+        [0., 1., 0., ..., 0., 0., 0.]]])
+Coordinates:
+  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
+    spatial_ref   int64 0
+    temporal_ref  int64 0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    value_type:  binary
+</pre></div></div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Semantic querying</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="verbs.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Verbs</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright 2021, Department of Geoinformatics – Z_GIS.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

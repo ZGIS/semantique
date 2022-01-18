@@ -1,0 +1,6 @@
+﻿semantique.factbase.Opendatacube.connection
+===========================================
+
+.. currentmodule:: semantique.factbase
+
+.. autoproperty:: Opendatacube.connection

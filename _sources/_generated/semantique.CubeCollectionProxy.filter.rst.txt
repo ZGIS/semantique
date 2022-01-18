@@ -1,0 +1,6 @@
+﻿semantique.CubeCollectionProxy.filter
+=====================================
+
+.. currentmodule:: semantique
+
+.. automethod:: CubeCollectionProxy.filter

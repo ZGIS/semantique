@@ -1,0 +1,6 @@
+﻿semantique.processor.core.QueryProcessor.update\_params\_of\_compose
+====================================================================
+
+.. currentmodule:: semantique.processor.core
+
+.. automethod:: QueryProcessor.update_params_of_compose

@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.CubeCollection.merge
+====================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: CubeCollection.merge

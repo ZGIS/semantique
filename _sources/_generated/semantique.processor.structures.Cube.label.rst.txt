@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.label
+==========================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: Cube.label

@@ -1,0 +1,6 @@
+﻿semantique.ontology.Semantique.lookup
+=====================================
+
+.. currentmodule:: semantique.ontology
+
+.. automethod:: Semantique.lookup

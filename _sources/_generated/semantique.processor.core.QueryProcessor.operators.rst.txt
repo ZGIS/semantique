@@ -1,0 +1,6 @@
+﻿semantique.processor.core.QueryProcessor.operators
+==================================================
+
+.. currentmodule:: semantique.processor.core
+
+.. autoproperty:: QueryProcessor.operators

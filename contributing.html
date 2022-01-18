@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contributing &#8212; semantique 0.1.0 documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Contributor Covenant Code of Conduct" href="code_of_conduct.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">semantique 0.1.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Documentation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="guide.html">
+   User Guide
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_notebooks/intro.html">
+     Intro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_notebooks/references.html">
+     References
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_notebooks/verbs.html">
+     Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_notebooks/advanced.html">
+     Advanced usage
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="reference.html">
+   API Reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.QueryRecipe.html">
+     semantique.QueryRecipe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.ontology.Ontology.html">
+     semantique.ontology.Ontology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.ontology.Semantique.html">
+     semantique.ontology.Semantique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.factbase.Factbase.html">
+     semantique.factbase.Factbase
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.factbase.Opendatacube.html">
+     semantique.factbase.Opendatacube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.factbase.GeotiffArchive.html">
+     semantique.factbase.GeotiffArchive
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.extent.SpatialExtent.html">
+     semantique.extent.SpatialExtent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.extent.TemporalExtent.html">
+     semantique.extent.TemporalExtent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.concept.html">
+     semantique.concept
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.entity.html">
+     semantique.entity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.event.html">
+     semantique.event
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.resource.html">
+     semantique.resource
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.appearance.html">
+     semantique.appearance
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.artifacts.html">
+     semantique.artifacts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.atmosphere.html">
+     semantique.atmosphere
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.reflectance.html">
+     semantique.reflectance
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.topography.html">
+     semantique.topography
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.collection.html">
+     semantique.collection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeProxy.evaluate.html">
+     semantique.CubeProxy.evaluate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeProxy.extract.html">
+     semantique.CubeProxy.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeProxy.filter.html">
+     semantique.CubeProxy.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeProxy.filter_time.html">
+     semantique.CubeProxy.filter_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeProxy.filter_space.html">
+     semantique.CubeProxy.filter_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeProxy.groupby.html">
+     semantique.CubeProxy.groupby
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeProxy.groupby_time.html">
+     semantique.CubeProxy.groupby_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeProxy.groupby_space.html">
+     semantique.CubeProxy.groupby_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeProxy.label.html">
+     semantique.CubeProxy.label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeProxy.reduce.html">
+     semantique.CubeProxy.reduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.compose.html">
+     semantique.CubeCollectionProxy.compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.concatenate.html">
+     semantique.CubeCollectionProxy.concatenate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.merge.html">
+     semantique.CubeCollectionProxy.merge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.evaluate.html">
+     semantique.CubeCollectionProxy.evaluate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.extract.html">
+     semantique.CubeCollectionProxy.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.filter.html">
+     semantique.CubeCollectionProxy.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.filter_time.html">
+     semantique.CubeCollectionProxy.filter_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.filter_space.html">
+     semantique.CubeCollectionProxy.filter_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.label.html">
+     semantique.CubeCollectionProxy.label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.reduce.html">
+     semantique.CubeCollectionProxy.reduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.value_label.html">
+     semantique.value_label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.geometries.html">
+     semantique.geometries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.time_instant.html">
+     semantique.time_instant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.time_interval.html">
+     semantique.time_interval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.core.QueryProcessor.html">
+     semantique.processor.core.QueryProcessor
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.structures.Cube.html">
+     semantique.processor.structures.Cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.html">
+     semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.absolute_.html">
+     semantique.processor.operators.absolute_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.cube_root_.html">
+     semantique.processor.operators.cube_root_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.natural_logarithm_.html">
+     semantique.processor.operators.natural_logarithm_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.square_root_.html">
+     semantique.processor.operators.square_root_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.invert_.html">
+     semantique.processor.operators.invert_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.add_.html">
+     semantique.processor.operators.add_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.divide_.html">
+     semantique.processor.operators.divide_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.multiply_.html">
+     semantique.processor.operators.multiply_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.power_.html">
+     semantique.processor.operators.power_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.subtract_.html">
+     semantique.processor.operators.subtract_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.and_.html">
+     semantique.processor.operators.and_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.or_.html">
+     semantique.processor.operators.or_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.equal_.html">
+     semantique.processor.operators.equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.exclusive_or_.html">
+     semantique.processor.operators.exclusive_or_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.greater_.html">
+     semantique.processor.operators.greater_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.greater_equal_.html">
+     semantique.processor.operators.greater_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.in_.html">
+     semantique.processor.operators.in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.less_.html">
+     semantique.processor.operators.less_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.less_equal_.html">
+     semantique.processor.operators.less_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.not_equal_.html">
+     semantique.processor.operators.not_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.not_in_.html">
+     semantique.processor.operators.not_in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.after_.html">
+     semantique.processor.operators.after_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.before_.html">
+     semantique.processor.operators.before_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.during_.html">
+     semantique.processor.operators.during_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.assign_.html">
+     semantique.processor.operators.assign_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.mean_.html">
+     semantique.processor.reducers.mean_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.product_.html">
+     semantique.processor.reducers.product_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.standard_deviation_.html">
+     semantique.processor.reducers.standard_deviation_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.sum_.html">
+     semantique.processor.reducers.sum_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.variance_.html">
+     semantique.processor.reducers.variance_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.all_.html">
+     semantique.processor.reducers.all_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.any_.html">
+     semantique.processor.reducers.any_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.count_.html">
+     semantique.processor.reducers.count_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.percentage_.html">
+     semantique.processor.reducers.percentage_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.first_.html">
+     semantique.processor.reducers.first_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.last_.html">
+     semantique.processor.reducers.last_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.mode_.html">
+     semantique.processor.reducers.mode_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.max_.html">
+     semantique.processor.reducers.max_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.median_.html">
+     semantique.processor.reducers.median_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.min_.html">
+     semantique.processor.reducers.min_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.templates.html">
+     semantique.processor.templates
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.AlignmentError.html">
+     semantique.exceptions.AlignmentError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.EmptyDataError.html">
+     semantique.exceptions.EmptyDataError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.InvalidValueTypeError.html">
+     semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.InvalidBuildingBlockError.html">
+     semantique.exceptions.InvalidBuildingBlockError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.UnknownConceptError.html">
+     semantique.exceptions.UnknownConceptError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.UnknownResourceError.html">
+     semantique.exceptions.UnknownResourceError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.UnknownResultError.html">
+     semantique.exceptions.UnknownResultError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.UnknownReducerError.html">
+     semantique.exceptions.UnknownReducerError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.UnknownOperatorError.html">
+     semantique.exceptions.UnknownOperatorError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.UnknownDimensionError.html">
+     semantique.exceptions.UnknownDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.UnknownComponentError.html">
+     semantique.exceptions.UnknownComponentError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.UnknownLabelError.html">
+     semantique.exceptions.UnknownLabelError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.TooManyDimensionsError.html">
+     semantique.exceptions.TooManyDimensionsError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.MissingDimensionError.html">
+     semantique.exceptions.MissingDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.MixedDimensionsError.html">
+     semantique.exceptions.MixedDimensionsError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.MixedTimeZonesError.html">
+     semantique.exceptions.MixedTimeZonesError
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="_notebooks/gallery.html">
+   Gallery
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="changelog.html">
+   Changelog
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Community
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="code_of_conduct.html">
+   Code of Conduct
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/ZGIS/semantique">
+   GitHub repository
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/contributing.rst.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ZGIS/semantique"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2Fcontributing.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/contributing.rst"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-issues-and-discussions">
+   Creating issues and discussions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-issues">
+   Solving issues
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cloning-the-github-repo">
+     1. Cloning the GitHub repo
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-local-development-environment">
+     2. Creating a local development environment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-code">
+     3. Writing code
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#commiting-code-to-your-local-branch">
+     4. Commiting code to your local branch
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pushing-your-branch-to-the-github-repo">
+     5. Pushing your branch to the GitHub repo
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-pull-request">
+     6. Creating a pull request
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>Thanks for taking the time to contribute to semantique! Contributions are welcome and greatly appreciated. The following is a set of guidelines for contributing. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.</p>
+<p>This project and everyone participating in it is governed by a <a class="reference external" href="CODE_OF_CONDUCT.md">Code of Conduct</a>. By participating, you are expected to uphold this code. Please report unacceptable behavior to the package maintainers.</p>
+<p>Contributions can come in many different forms, as we will outline below. You don’t even have to know Python to be able to contribute!</p>
+<div class="section" id="creating-issues-and-discussions">
+<h2>Creating issues and discussions<a class="headerlink" href="#creating-issues-and-discussions" title="Permalink to this headline">¶</a></h2>
+<p>Opening <a class="reference external" href="https://github.com/ZGIS/semantique/issues">issues</a> and <a class="reference external" href="https://github.com/ZGIS/semantique/discussions">discussions</a> is also a form of contributing. They help us to improve the quality and user-friendliness of the package, as well as to build a community around the package.</p>
+<p>Use <strong>Issues</strong> if</p>
+<ul class="simple">
+<li><p>You are using the package and something is not working as it should. In that case, use the <a class="reference external" href="https://github.com/ZGIS/semantique/issues/new?assignees=&amp;labels=bug+%3Abug%3A&amp;template=bug_report.md&amp;title=">bug report template</a>. Please first check if its really a bug in <code class="docutils literal notranslate"><span class="pre">semantique</span></code>, and if there are not already open issues reporting the same bug.</p></li>
+<li><p>You have a request for a new feature. In that case, use the <a class="reference external" href="https://github.com/ZGIS/semantique/issues/new?assignees=&amp;labels=feature+%3Agift%3A&amp;template=feature_request.md&amp;title=">feature request template</a>. Please first check if the feature is not already present, and if there are not already open issues requesting the same feature. A feature request is meant to be very specific. For broader ideas on improving the package, use <em>Discusssions</em> instead.</p></li>
+</ul>
+<p>Use <strong>Discussions</strong> if</p>
+<ul class="simple">
+<li><p>You have questions about the package and its functionalities. There might always be someone in the community who is able to help you. Use the <a class="reference external" href="https://github.com/ZGIS/semantique/discussions/categories/q-a">Q&amp;A tag</a> for this purpose, and don’t forget to mark an answer as <em>accepted</em> if it was helpful.</p></li>
+<li><p>You have broader ideas about improving the package and want to share them, such that they can be discussed with other members of the community. Use the <a class="reference external" href="https://github.com/ZGIS/semantique/discussions/categories/ideas">Ideas tag</a> for that purpose. For very specific feature requests, use <em>Issues</em> instead.</p></li>
+<li><p>You have used the package in a cool application and want to share that with other members of the community, such that they can learn from it or give feedback. Use the <a class="reference external" href="https://github.com/ZGIS/semantique/discussions/categories/show-and-tell">Show and Tell tag</a> for this purpose.</p></li>
+</ul>
+</div>
+<div class="section" id="solving-issues">
+<h2>Solving issues<a class="headerlink" href="#solving-issues" title="Permalink to this headline">¶</a></h2>
+<p>If you know how to write Python you are welcome to contribute by solving open issues, for example by implementing new <a class="reference external" href="https://github.com/ZGIS/semantique/labels/feature%20%3Agift%3A">features</a> or fixing <a class="reference external" href="https://github.com/ZGIS/semantique/labels/bug%20%3Abug%3A">bugs</a>. Especially those issues labelled with <a class="reference external" href="https://github.com/ZGIS/semantique/labels/help%20wanted%20%3Asos%3A">help wanted</a> are desperately begging for contribution. Solving issues does not always involve writing code, you can also help by improving and extending <a class="reference external" href="https://github.com/ZGIS/semantique/labels/documentation%20%3Abooks%3A">documentation</a>.</p>
+<p>In any case, the common code contributing workflow is:</p>
+<div class="section" id="cloning-the-github-repo">
+<h3>1. Cloning the GitHub repo<a class="headerlink" href="#cloning-the-github-repo" title="Permalink to this headline">¶</a></h3>
+<p>Clone this GitHub repo, or alternatively first fork it and then clone your forked version of the repo. After cloning, enter the cloned directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">ZGIS</span><span class="o">/</span><span class="n">semantique</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">semantique</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-local-development-environment">
+<h3>2. Creating a local development environment<a class="headerlink" href="#creating-a-local-development-environment" title="Permalink to this headline">¶</a></h3>
+<p>Always create a new git branch to work in, instead of working in the main branch (if you have forked the repo first this is less important).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">my_new_branch</span>
+</pre></div>
+</div>
+<p>If you work with conda, it can be helpful to create a new conda environment containing all the dependencies of semantique, without disturbing your base environment. To do so, you can make use the <a class="reference external" href="environment.yml">environment.yml</a> file contained in this repo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">semantique</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-code">
+<h3>3. Writing code<a class="headerlink" href="#writing-code" title="Permalink to this headline">¶</a></h3>
+<p>When writing code we try to follow the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">Google Python Style Guide</a>. However, we indent code blocks with <strong>2 spaces</strong> instead of 4 spaces. Don’t forget to actually test your code before commiting.</p>
+</div>
+<div class="section" id="commiting-code-to-your-local-branch">
+<h3>4. Commiting code to your local branch<a class="headerlink" href="#commiting-code-to-your-local-branch" title="Permalink to this headline">¶</a></h3>
+<p>When commiting changes with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> we try to use structured commit messages, adapted from <a class="reference external" href="https://www.conventionalcommits.org/">https://www.conventionalcommits.org/</a>. The first line of commit message should have the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nb">type</span><span class="o">&gt;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">summary</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The summary should be short (preferably &lt; 50 characters), starting with an upper case, and written in present tense. If the commit references a specific issue, include <code class="docutils literal notranslate"><span class="pre">Refs</span> <span class="pre">#&lt;issue</span> <span class="pre">number&gt;</span></code> in the summary. If the issue is a bug report, you may also use <code class="docutils literal notranslate"><span class="pre">Fix</span> <span class="pre">#&lt;issue</span> <span class="pre">number&gt;</span></code> such that the issue gets closed automatically.</p>
+<p>The type should be one of the defined types listed below. If you feel artistic, you can end the commit message with the emoji belonging to the type 😎.</p>
+<ul class="simple">
+<li><p><strong>feat</strong>: Implementation of a new feature. <code class="docutils literal notranslate"><span class="pre">:gift:</span></code> 🎁</p></li>
+<li><p><strong>fix</strong>: A bug fix. <code class="docutils literal notranslate"><span class="pre">:wrench:</span></code> 🔧</p></li>
+<li><p><strong>style</strong>: Changes to code formatting. No change to program logic. <code class="docutils literal notranslate"><span class="pre">:art:</span></code> 🎨</p></li>
+<li><p><strong>refactor</strong>: Changes to code which do not change behaviour, e.g. renaming variables or splitting functions. <code class="docutils literal notranslate"><span class="pre">:construction:</span></code> 🚧</p></li>
+<li><p><strong>docs</strong>: Adding, removing or updating user documentation or to code comments. <code class="docutils literal notranslate"><span class="pre">:books:</span></code> 📚</p></li>
+<li><p><strong>logs</strong>: Adding, removing or updating log messages. <code class="docutils literal notranslate"><span class="pre">:sound:</span></code> 🔉</p></li>
+<li><p><strong>test</strong>: Adding, removing or updating tests. No changes to user code. <code class="docutils literal notranslate"><span class="pre">:test_tube:</span></code> 🧪</p></li>
+<li><p><strong>cicd</strong>: Adding, removing or updating CI/CD workflows. No changes to user code. <code class="docutils literal notranslate"><span class="pre">:robot:</span></code> 🤖</p></li>
+<li><p><strong>deps</strong>: Adding, removing or updating dependencies. <code class="docutils literal notranslate"><span class="pre">:couple:</span></code> 👫</p></li>
+<li><p><strong>release</strong>: Preparing a release, e.g. updating version numbers. <code class="docutils literal notranslate"><span class="pre">:bookmark</span></code> 🔖</p></li>
+<li><p><strong>repo</strong>: Changes to the repository that do not involve code/documentation, e.g. adding templates or community files. <code class="docutils literal notranslate"><span class="pre">:package:</span></code> 📦</p></li>
+</ul>
+<p>Example commit messages are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;feat: Add bar parameter to foo(), Refs #10 :gift:&#39;</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;fix: Include type checking in foo(), Fix #12 :wrench:&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pushing-your-branch-to-the-github-repo">
+<h3>5. Pushing your branch to the GitHub repo<a class="headerlink" href="#pushing-your-branch-to-the-github-repo" title="Permalink to this headline">¶</a></h3>
+<p>Please <strong>never push directly to the main branch</strong>!</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">my_new_branch</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-pull-request">
+<h3>6. Creating a pull request<a class="headerlink" href="#creating-a-pull-request" title="Permalink to this headline">¶</a></h3>
+<p>Create a request to merge your changes into the main branch using the <a class="reference external" href="https://github.com/ZGIS/semantique/pulls">Pull Request</a> functionality from GitHub. This should automatically provide you with the <a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/.github/pull_request_template.md">pull request template</a>. Add at least one of the package maintainer as reviewer of your pull request, and make sure the automatic checks done by GitHub pass without errors.</p>
+<p>Happy coding!</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="code_of_conduct.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Contributor Covenant Code of Conduct</p>
+        </div>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright 2021, Department of Geoinformatics – Z_GIS.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

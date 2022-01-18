@@ -1,0 +1,6 @@
+﻿semantique.CubeCollectionProxy
+==============================
+
+.. currentmodule:: semantique
+
+.. autoclass:: CubeCollectionProxy

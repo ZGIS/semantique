@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.value\_labels
+==================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. autoproperty:: Cube.value_labels

@@ -1,0 +1,6 @@
+﻿semantique.processor.operators.invert\_
+=======================================
+
+.. currentmodule:: semantique.processor.operators
+
+.. autofunction:: invert_

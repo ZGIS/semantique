@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.temporal\_dimension
+========================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. autoproperty:: Cube.temporal_dimension

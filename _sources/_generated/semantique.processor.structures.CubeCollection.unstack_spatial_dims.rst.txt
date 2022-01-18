@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.CubeCollection.unstack\_spatial\_dims
+=====================================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: CubeCollection.unstack_spatial_dims

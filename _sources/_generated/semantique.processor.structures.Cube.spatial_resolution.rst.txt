@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.spatial\_resolution
+========================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. autoproperty:: Cube.spatial_resolution

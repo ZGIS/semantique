@@ -1,0 +1,6 @@
+﻿semantique.CubeCollectionProxy.merge
+====================================
+
+.. currentmodule:: semantique
+
+.. automethod:: CubeCollectionProxy.merge

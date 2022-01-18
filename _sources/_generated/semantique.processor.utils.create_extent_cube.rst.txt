@@ -1,0 +1,6 @@
+﻿semantique.processor.utils.create\_extent\_cube
+===============================================
+
+.. currentmodule:: semantique.processor.utils
+
+.. autofunction:: create_extent_cube

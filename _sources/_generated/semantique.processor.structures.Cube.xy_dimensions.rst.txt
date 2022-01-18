@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.xy\_dimensions
+===================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. autoproperty:: Cube.xy_dimensions

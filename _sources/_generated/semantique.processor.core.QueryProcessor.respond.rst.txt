@@ -1,0 +1,6 @@
+﻿semantique.processor.core.QueryProcessor.respond
+================================================
+
+.. currentmodule:: semantique.processor.core
+
+.. automethod:: QueryProcessor.respond

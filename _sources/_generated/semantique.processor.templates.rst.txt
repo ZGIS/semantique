@@ -1,0 +1,23 @@
+﻿semantique.processor.templates
+==============================
+
+.. automodule:: semantique.processor.templates
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

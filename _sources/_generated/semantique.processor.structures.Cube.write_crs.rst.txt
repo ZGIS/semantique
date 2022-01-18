@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.write\_crs
+===============================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: Cube.write_crs

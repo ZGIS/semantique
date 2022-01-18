@@ -1,0 +1,6 @@
+﻿semantique.factbase.Factbase.lookup
+===================================
+
+.. currentmodule:: semantique.factbase
+
+.. automethod:: Factbase.lookup

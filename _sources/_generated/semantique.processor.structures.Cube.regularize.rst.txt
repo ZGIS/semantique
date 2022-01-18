@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.regularize
+===============================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: Cube.regularize

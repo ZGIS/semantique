@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.align\_with
+================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: Cube.align_with

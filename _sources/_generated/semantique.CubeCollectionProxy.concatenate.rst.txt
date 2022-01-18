@@ -1,0 +1,6 @@
+﻿semantique.CubeCollectionProxy.concatenate
+==========================================
+
+.. currentmodule:: semantique
+
+.. automethod:: CubeCollectionProxy.concatenate

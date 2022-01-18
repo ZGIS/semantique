@@ -1,0 +1,6 @@
+﻿semantique.CubeCollectionProxy.reduce
+=====================================
+
+.. currentmodule:: semantique
+
+.. automethod:: CubeCollectionProxy.reduce

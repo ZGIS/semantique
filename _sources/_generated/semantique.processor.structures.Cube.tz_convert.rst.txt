@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.tz\_convert
+================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: Cube.tz_convert

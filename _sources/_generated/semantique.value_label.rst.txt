@@ -1,0 +1,6 @@
+﻿semantique.value\_label
+=======================
+
+.. currentmodule:: semantique
+
+.. autofunction:: value_label

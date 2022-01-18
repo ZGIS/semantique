@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.CubeCollection.extract
+======================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: CubeCollection.extract

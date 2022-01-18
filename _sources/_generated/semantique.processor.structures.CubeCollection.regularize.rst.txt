@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.CubeCollection.regularize
+=========================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: CubeCollection.regularize

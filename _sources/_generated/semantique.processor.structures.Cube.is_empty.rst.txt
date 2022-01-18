@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.is\_empty
+==============================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. autoproperty:: Cube.is_empty

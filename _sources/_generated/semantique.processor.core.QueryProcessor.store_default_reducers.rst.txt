@@ -1,0 +1,6 @@
+﻿semantique.processor.core.QueryProcessor.store\_default\_reducers
+=================================================================
+
+.. currentmodule:: semantique.processor.core
+
+.. automethod:: QueryProcessor.store_default_reducers

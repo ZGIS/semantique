@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.tz
+=======================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. autoproperty:: Cube.tz

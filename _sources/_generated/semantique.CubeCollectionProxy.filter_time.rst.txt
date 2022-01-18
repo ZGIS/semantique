@@ -1,0 +1,6 @@
+﻿semantique.CubeCollectionProxy.filter\_time
+===========================================
+
+.. currentmodule:: semantique
+
+.. automethod:: CubeCollectionProxy.filter_time

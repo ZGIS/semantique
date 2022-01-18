@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.CubeCollection.compose
+======================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: CubeCollection.compose

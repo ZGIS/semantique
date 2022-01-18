@@ -1,0 +1,2857 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced usage &#8212; semantique 0.1.0 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Reference" href="../reference.html" />
+    <link rel="prev" title="Verbs" href="verbs.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">semantique 0.1.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Documentation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../guide.html">
+   User Guide
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="intro.html">
+     Intro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="references.html">
+     References
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="verbs.html">
+     Verbs
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Advanced usage
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../reference.html">
+   API Reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.QueryRecipe.html">
+     semantique.QueryRecipe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ontology.Ontology.html">
+     semantique.ontology.Ontology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ontology.Semantique.html">
+     semantique.ontology.Semantique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.factbase.Factbase.html">
+     semantique.factbase.Factbase
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.factbase.Opendatacube.html">
+     semantique.factbase.Opendatacube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.factbase.GeotiffArchive.html">
+     semantique.factbase.GeotiffArchive
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.extent.SpatialExtent.html">
+     semantique.extent.SpatialExtent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.extent.TemporalExtent.html">
+     semantique.extent.TemporalExtent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.concept.html">
+     semantique.concept
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.entity.html">
+     semantique.entity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.event.html">
+     semantique.event
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.resource.html">
+     semantique.resource
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.appearance.html">
+     semantique.appearance
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.artifacts.html">
+     semantique.artifacts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.atmosphere.html">
+     semantique.atmosphere
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.reflectance.html">
+     semantique.reflectance
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.topography.html">
+     semantique.topography
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.collection.html">
+     semantique.collection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.evaluate.html">
+     semantique.CubeProxy.evaluate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.extract.html">
+     semantique.CubeProxy.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.filter.html">
+     semantique.CubeProxy.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.filter_time.html">
+     semantique.CubeProxy.filter_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.filter_space.html">
+     semantique.CubeProxy.filter_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.groupby.html">
+     semantique.CubeProxy.groupby
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.groupby_time.html">
+     semantique.CubeProxy.groupby_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.groupby_space.html">
+     semantique.CubeProxy.groupby_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.label.html">
+     semantique.CubeProxy.label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeProxy.reduce.html">
+     semantique.CubeProxy.reduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.compose.html">
+     semantique.CubeCollectionProxy.compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.concatenate.html">
+     semantique.CubeCollectionProxy.concatenate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.merge.html">
+     semantique.CubeCollectionProxy.merge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.evaluate.html">
+     semantique.CubeCollectionProxy.evaluate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.extract.html">
+     semantique.CubeCollectionProxy.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.filter.html">
+     semantique.CubeCollectionProxy.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.filter_time.html">
+     semantique.CubeCollectionProxy.filter_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.filter_space.html">
+     semantique.CubeCollectionProxy.filter_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.label.html">
+     semantique.CubeCollectionProxy.label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CubeCollectionProxy.reduce.html">
+     semantique.CubeCollectionProxy.reduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.value_label.html">
+     semantique.value_label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.geometries.html">
+     semantique.geometries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.time_instant.html">
+     semantique.time_instant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.time_interval.html">
+     semantique.time_interval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.core.QueryProcessor.html">
+     semantique.processor.core.QueryProcessor
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.structures.Cube.html">
+     semantique.processor.structures.Cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.structures.CubeCollection.html">
+     semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.absolute_.html">
+     semantique.processor.operators.absolute_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.cube_root_.html">
+     semantique.processor.operators.cube_root_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.natural_logarithm_.html">
+     semantique.processor.operators.natural_logarithm_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.square_root_.html">
+     semantique.processor.operators.square_root_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.invert_.html">
+     semantique.processor.operators.invert_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.add_.html">
+     semantique.processor.operators.add_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.divide_.html">
+     semantique.processor.operators.divide_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.multiply_.html">
+     semantique.processor.operators.multiply_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.power_.html">
+     semantique.processor.operators.power_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.subtract_.html">
+     semantique.processor.operators.subtract_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.and_.html">
+     semantique.processor.operators.and_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.or_.html">
+     semantique.processor.operators.or_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.equal_.html">
+     semantique.processor.operators.equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.exclusive_or_.html">
+     semantique.processor.operators.exclusive_or_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.greater_.html">
+     semantique.processor.operators.greater_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.greater_equal_.html">
+     semantique.processor.operators.greater_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.in_.html">
+     semantique.processor.operators.in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.less_.html">
+     semantique.processor.operators.less_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.less_equal_.html">
+     semantique.processor.operators.less_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.not_equal_.html">
+     semantique.processor.operators.not_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.not_in_.html">
+     semantique.processor.operators.not_in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.after_.html">
+     semantique.processor.operators.after_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.before_.html">
+     semantique.processor.operators.before_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.during_.html">
+     semantique.processor.operators.during_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.assign_.html">
+     semantique.processor.operators.assign_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.mean_.html">
+     semantique.processor.reducers.mean_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.product_.html">
+     semantique.processor.reducers.product_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.standard_deviation_.html">
+     semantique.processor.reducers.standard_deviation_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.sum_.html">
+     semantique.processor.reducers.sum_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.variance_.html">
+     semantique.processor.reducers.variance_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.all_.html">
+     semantique.processor.reducers.all_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.any_.html">
+     semantique.processor.reducers.any_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.count_.html">
+     semantique.processor.reducers.count_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.percentage_.html">
+     semantique.processor.reducers.percentage_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.first_.html">
+     semantique.processor.reducers.first_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.last_.html">
+     semantique.processor.reducers.last_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.mode_.html">
+     semantique.processor.reducers.mode_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.max_.html">
+     semantique.processor.reducers.max_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.median_.html">
+     semantique.processor.reducers.median_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.min_.html">
+     semantique.processor.reducers.min_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.templates.html">
+     semantique.processor.templates
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.AlignmentError.html">
+     semantique.exceptions.AlignmentError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.EmptyDataError.html">
+     semantique.exceptions.EmptyDataError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.InvalidValueTypeError.html">
+     semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.InvalidBuildingBlockError.html">
+     semantique.exceptions.InvalidBuildingBlockError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownConceptError.html">
+     semantique.exceptions.UnknownConceptError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownResourceError.html">
+     semantique.exceptions.UnknownResourceError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownResultError.html">
+     semantique.exceptions.UnknownResultError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownReducerError.html">
+     semantique.exceptions.UnknownReducerError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownOperatorError.html">
+     semantique.exceptions.UnknownOperatorError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownDimensionError.html">
+     semantique.exceptions.UnknownDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownComponentError.html">
+     semantique.exceptions.UnknownComponentError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownLabelError.html">
+     semantique.exceptions.UnknownLabelError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.TooManyDimensionsError.html">
+     semantique.exceptions.TooManyDimensionsError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.MissingDimensionError.html">
+     semantique.exceptions.MissingDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.MixedDimensionsError.html">
+     semantique.exceptions.MixedDimensionsError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.MixedTimeZonesError.html">
+     semantique.exceptions.MixedTimeZonesError
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gallery.html">
+   Gallery
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../changelog.html">
+   Changelog
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Community
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../code_of_conduct.html">
+   Code of Conduct
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing.html">
+   Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/ZGIS/semantique">
+   GitHub repository
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/_notebooks/advanced.nblink.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.nblink</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ZGIS/semantique"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_notebooks/advanced.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/_notebooks/advanced.nblink"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Content">
+   Content
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Prepare">
+   Prepare
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#The-query-processor-class">
+   The query processor class
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Query-parsing">
+     Query parsing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Query-optimization">
+     Query optimization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Query-execution">
+     Query execution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Query-response">
+     Query response
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Creating-a-spatio-temporal-extent-cube">
+   Creating a spatio-temporal extent cube
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Tracking-value-types">
+   Tracking value types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Adding-custom-operators">
+   Adding custom operators
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Adding-custom-reducers">
+   Adding custom reducers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Tuning-factbase-configuration-settings">
+   Tuning factbase configuration settings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Creating-custom-factbase-classes">
+   Creating custom factbase classes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Creating-custom-ontology-classes">
+   Creating custom ontology classes
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Advanced-usage">
+<h1>Advanced usage<a class="headerlink" href="#Advanced-usage" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook we will go a bit deeped into internal structures of the <code class="docutils literal notranslate"><span class="pre">semantique</span></code> package. We will also show some common operations for advanced users, that want more control over the behaviour of the query processor, and extend built-in structures of the package. It is assumed that you are already quite familiar with the structure and contents of the package, for example by reading the other provided notebooks.</p>
+<div class="section" id="Content">
+<h2>Content<a class="headerlink" href="#Content" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#The-query-processor-class">The query processor class</a></p></li>
+<li><p><a class="reference external" href="#Creating-a-spatio-temporal-extent-cube">Creating a spatio-temporal extent cube</a></p></li>
+<li><p><a class="reference external" href="#Tracking-value-types">Tracking value types</a></p></li>
+<li><p><a class="reference external" href="#Adding-custom-operators">Adding custom operators</a></p></li>
+<li><p><a class="reference external" href="#Adding-custom-reducers">Adding custom reducers</a></p></li>
+<li><p><a class="reference external" href="#Tuning-factbase-configuration-settings">Tuning factbase configuration settings</a></p></li>
+<li><p><a class="reference external" href="#Creating-custom-factbase-classes">Creating custom factbase classes</a></p></li>
+<li><p><a class="reference external" href="#Creating-custom-ontology-classes">Creating custom ontology classes</a></p></li>
+</ul>
+</div>
+<div class="section" id="Prepare">
+<h2>Prepare<a class="headerlink" href="#Prepare" title="Permalink to this headline">¶</a></h2>
+<p>Import the <code class="docutils literal notranslate"><span class="pre">semantique</span></code> package:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import semantique as sq
+</pre></div>
+</div>
+</div>
+<p>Import other packages we will use in this demo:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import geopandas as gpd
+import matplotlib.pyplot as plt
+import numpy as np
+import xarray as xr
+import copy
+import json
+import inspect
+</pre></div>
+</div>
+</div>
+<p>Create the components for query processing. See the <a class="reference internal" href="intro.html"><span class="doc">Intro notebook</span></a> for details.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># Query recipe.
+with open(&quot;files/recipe.json&quot;, &quot;r&quot;) as file:
+    recipe = sq.QueryRecipe(json.load(file))
+
+# Ontology.
+with open(&quot;files/ontology.json&quot;, &quot;r&quot;) as file:
+    ontology = sq.ontology.Semantique(json.load(file))
+
+# Factbase.
+with open(&quot;files/factbase.json&quot;, &quot;r&quot;) as file:
+    factbase = sq.factbase.GeotiffArchive(json.load(file), src = &quot;files/resources.zip&quot;)
+
+# Extent.
+space = sq.SpatialExtent(gpd.read_file(&quot;files/footprint.geojson&quot;))
+time = sq.TemporalExtent(&quot;2019-01-01&quot;, &quot;2020-12-31&quot;)
+
+# Additional configuration.
+config = {&quot;crs&quot;: 3035, &quot;tz&quot;: &quot;UTC&quot;, &quot;spatial_resolution&quot;: [-10, 10]}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="The-query-processor-class">
+<h2>The query processor class<a class="headerlink" href="#The-query-processor-class" title="Permalink to this headline">¶</a></h2>
+<p>A semantic query is processed by a query processor. In <code class="docutils literal notranslate"><span class="pre">semantique</span></code>, this query processor is internally modelled as an object of class <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code>. An instance of this class is initialized whenever a query recipe is executed with respect to a given factbase, ontology and spatio-temporal extent. That is, whenever you call the execute method of a <code class="docutils literal notranslate"><span class="pre">QueryRecipe</span></code> instance, semantique internally creates a <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code> object to take care of all processing tasks.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from semantique.processor.core import QueryProcessor
+</pre></div>
+</div>
+</div>
+<p>The query processor processes a query in three three core phases: query parsing, query optimization and query execution. These align with the common phases in regular relational database querying (see for example <a class="reference external" href="https://dsf.berkeley.edu/papers/fntdb07-architecture.pdf">this paper</a>). Each of these phases has their own, dedicated method. Below we will explain in more detail how each phase is implemented in <code class="docutils literal notranslate"><span class="pre">semantique</span></code>.</p>
+<div class="section" id="Query-parsing">
+<h3>Query parsing<a class="headerlink" href="#Query-parsing" title="Permalink to this headline">¶</a></h3>
+<p>During query parsing, the required components for processing (i.e., the query recipe, the spatial and temporal extents, the ontology, the factbase and the additional configuration parameters) are read and converted all together into a single object which will be used internally for further processing of the query. This object is called the query processor. Parsing should take care of validating the components and their interrelations. For example, it will check if referenced concepts in the
+query statement are actually defined in the ontology. A specific task of the query parser in <code class="docutils literal notranslate"><span class="pre">semantique</span></code> is also to combine the spatial and temporal extent of the query into a single spatio-temporal extent cube, see <a class="reference external" href="#Creating-a-spatio-temporal-extent-cube">here</a> for details.</p>
+<p>Parsing is implemented as a <a class="reference external" href="https://www.programiz.com/python-programming/methods/built-in/classmethod">classmethod</a> of the <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code> class. Hence, it can be used directly to construct a <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code> instance given the components mentioned above.</p>
+<blockquote>
+<div><p><strong>NOTE</strong> Currently the actual implementation of the query parsing phase is still very basic in its functionalities. It initializes the internal query processor object, but does not validate the query components yet.</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>processor = QueryProcessor.parse(recipe, factbase, ontology, space, time, **config)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>type(processor)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+semantique.processor.core.QueryProcessor
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Query-optimization">
+<h3>Query optimization<a class="headerlink" href="#Query-optimization" title="Permalink to this headline">¶</a></h3>
+<p>During query optimization, the query processor is scanned and an execution plan is written. The execution plan is a step-by-step guide of how the query should be executed during the execution phase that follows. Creating this causes some overhead, but that should be balanced out by considerably faster execution times. For example, if the given spatial extent consists of multiple dispersed sub-areas, the execution plan might instruct the execution phase to load data separately for each sub-area,
+instead of loading data for the full extent and then subset it afterwards.</p>
+<p>Optimization is implemented as a method of the <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code> class, and returns the same instance, but with a query execution plan added to it.</p>
+<blockquote>
+<div><p><strong>NOTE</strong> Currently the actual implementation of the query optimization phase is still very basic in its functionalities. To be honest, it currently does exactly nothing. That is, the query will be executed ‘as-is’, and not yet according to an optimized query execution plan. The function is merely provided as a placeholder for a future implementation of query optimization.</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>processor = processor.optimize()
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>type(processor)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+semantique.processor.core.QueryProcessor
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Query-execution">
+<h3>Query execution<a class="headerlink" href="#Query-execution" title="Permalink to this headline">¶</a></h3>
+<p>Finally, the execution phase follows the execution plan and executes all result instructions. The query processor instance contains specific handlers for all kind of operations that may be specified in the execution plan. Internally it will take care of the interaction with (and between) the given ontology and factbase, and forward required parameters to their translator and retriever accordingly.</p>
+<p>Execution is modelled as a method of the <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code> class, and returns the same instance, but with a filled response property containing all executed result instructions as <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> objects.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># Before execution the response property is empty.
+processor.response
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>processor = processor.execute()
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>type(processor)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+semantique.processor.core.QueryProcessor
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># After execution the response property is filled.
+processor.response
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;water_count_map&#39;: &lt;xarray.DataArray &#39;water_count_map&#39; (space: 324288)&gt;
+ array([1., 1., 1., ..., 0., 0., 0.])
+ Coordinates:
+     spatial_ref   int64 0
+     temporal_ref  int64 0
+   * space         (space) MultiIndex
+   - y             (space) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+   - x             (space) float64 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+     feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+ Attributes:
+     value_type:  numerical,
+ &#39;vegetation_count_map&#39;: &lt;xarray.DataArray &#39;vegetation_count_map&#39; (space: 324288)&gt;
+ array([1., 1., 1., ..., 1., 1., 1.])
+ Coordinates:
+     spatial_ref   int64 0
+     temporal_ref  int64 0
+   * space         (space) MultiIndex
+   - y             (space) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+   - x             (space) float64 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+     feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+ Attributes:
+     value_type:  numerical,
+ &#39;water_percentage_time_series&#39;: &lt;xarray.DataArray &#39;water_percentage_time_series&#39; (time: 3)&gt;
+ array([ 0.        , 13.81611407, 24.2398732 ])
+ Coordinates:
+   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
+     spatial_ref   int64 0
+     temporal_ref  int64 0
+ Attributes:
+     value_type:  numerical,
+ &#39;avg_water_count&#39;: &lt;xarray.DataArray &#39;avg_water_count&#39; ()&gt;
+ array(0.38055987)
+ Coordinates:
+     spatial_ref   int64 0
+     temporal_ref  int64 0
+ Attributes:
+     value_type:  numerical,
+ &#39;summed_count&#39;: &lt;xarray.DataArray &#39;summed_count&#39; (space: 324288)&gt;
+ array([2., 2., 2., ..., 1., 1., 1.])
+ Coordinates:
+     spatial_ref   int64 0
+     temporal_ref  int64 0
+   * space         (space) MultiIndex
+   - y             (space) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+   - x             (space) float64 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+     feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+ Attributes:
+     value_type:  numerical}
+</pre></div></div>
+</div>
+<p>When executing a query recipe, the <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code> moves through the building blocks of the result instructions. For each building block, it has a specific <strong>handler function</strong> implemented as a method. Whenever the processor reaches a new block, it looks up its type and then calls its handler with the <code class="docutils literal notranslate"><span class="pre">call_handler</span></code> method.</p>
+<p>For example, when the processor stumbles upon a reference to a semantic concept, it forwards it to the <code class="docutils literal notranslate"><span class="pre">call_handler</span></code> function, which will notice this is a block of type “concept”, and therefore call the handler <code class="docutils literal notranslate"><span class="pre">handle_concept</span></code>. This handler knows exactly what to do with this type of block. In this specific example, it calls the translator function of the provided ontology to obtain the boolean data cube belonging to the referenced concept. Note that this example makes it extra clear that
+the query processor does not care <em>how</em> the reference is translated. It only cares about the parameters the translator function accepts, and about the type of object it returns (which should be an <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>print(inspect.getsource(processor.handle_concept))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  def handle_concept(self, block):
+    &#34;&#34;&#34;Handler for semantic concept references.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type &#34;concept&#34;.
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+
+    &#34;&#34;&#34;
+    out = self._ontology.translate(
+      *block[&#34;reference&#34;],
+      property = block[&#34;property&#34;] if &#34;property&#34; in block else None,
+      extent = self._extent,
+      factbase = self._factbase,
+      eval_obj = self._get_eval_obj(),
+      operators = self._operators,
+      reducers = self._reducers,
+      track_types = self._track_types,
+      trim_filter = self._trim_filter
+    )
+    return out
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>water = processor.handle_concept(sq.entity(&quot;water&quot;))
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>values = [0, 1]
+levels = [x - 0.5 for x in values + [max(values) + 1]]
+colors = [&quot;#d3d3d3&quot;, &quot;#77abb7&quot;]
+legend = {&quot;ticks&quot;: values, &quot;label&quot;: &quot;IsWater&quot;}
+water.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cbar_kwargs = legend)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fb8b3c20df0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/_notebooks_advanced_22_1.png" src="../_images/_notebooks_advanced_22_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>vegetation = processor.handle_concept(sq.entity(&quot;vegetation&quot;))
+legend = {&quot;ticks&quot;: values, &quot;label&quot;: &quot;IsVegetation&quot;}
+vegetation.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cbar_kwargs = legend)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fb8aa170fa0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/_notebooks_advanced_23_1.png" src="../_images/_notebooks_advanced_23_1.png" />
+</div>
+</div>
+<p>Another example: when the processor stumbles upon a processing chain, it forwards it to the <code class="docutils literal notranslate"><span class="pre">call_handler</span></code> function, which will notice this is a block of type “chain”, and therefore call the handler <code class="docutils literal notranslate"><span class="pre">handle_chain</span></code>. This handler knows exactly what to do with this type of block. It first moves into the <em>with</em> part of the chain, and processes the reference (or a nested processing chain) it finds there by calling the corresponding handler. Then, it sets the obtained data cube (represented as
+<code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> object) as the new active evaluation object, and moves into the <em>do</em> part of the chain. For each verb, it calls the handler corresponding to that verb, which knows exactly how to apply that verb to a data cube (this is explained in more detail in the <a class="reference internal" href="verbs.html"><span class="doc">Verbs notebook</span></a>). Et cetera.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>print(inspect.getsource(processor.handle_processing_chain))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  def handle_processing_chain(self, block):
+    &#34;&#34;&#34;Handler for processing chains.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type &#34;processing_chain&#34;.
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or :obj:`CubeCollection &lt;semantique.processor.structures.CubeCollection&gt;`
+
+    &#34;&#34;&#34;
+    obj = self.call_handler(block[&#34;with&#34;])
+    self._set_eval_obj(obj)
+    for i in block[&#34;do&#34;]:
+      out = self.call_handler(i)
+    self._reset_eval_obj()
+    return out
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>chain = sq.entity(&quot;water&quot;).\
+    filter_time(&quot;year&quot;, &quot;equal&quot;, 2020).\
+    evaluate(&quot;or&quot;, sq.entity(&quot;vegetation&quot;))
+
+out = processor.handle_processing_chain(chain)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>values = [0, 1]
+levels = [x - 0.5 for x in values + [max(values) + 1]]
+legend = {&quot;ticks&quot;: values, &quot;label&quot;: &quot;IsWaterOrVegetation&quot;}
+out.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cbar_kwargs = legend)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fb8aa055040&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/_notebooks_advanced_27_1.png" src="../_images/_notebooks_advanced_27_1.png" />
+</div>
+</div>
+<p>Some of the verbs accept other building blocks as their parameters. For example, the <code class="docutils literal notranslate"><span class="pre">filter</span></code> verb, as shown above, requires the <code class="docutils literal notranslate"><span class="pre">filterer</span></code> parameter to be a binary data cube, which can be constructed inside a nested processing chain. However, in the block structure, this is still nothing more than a textual reference. Hence, for some verbs, its parameters need to be updated before applying the actual verb to the input data cube. The query processor uses the <code class="docutils literal notranslate"><span class="pre">update_params_of_*</span></code> set of
+functions to take care of this. It also specifies additional parameters to be forwarded to the filter function, such as if it needs to keep track of value types or not (see <a class="reference external" href="#Tracking-value-types">Tracking value types</a>).</p>
+<p>For example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>verb = sq.entity(&quot;water&quot;).filter(sq.self().extract(&quot;time&quot;, &quot;year&quot;).evaluate(&quot;equal&quot;, 2020))[&quot;do&quot;][0]
+verb
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;type&#39;: &#39;verb&#39;,
+ &#39;name&#39;: &#39;filter&#39;,
+ &#39;params&#39;: {&#39;filterer&#39;: {&#39;type&#39;: &#39;processing_chain&#39;,
+   &#39;with&#39;: {&#39;type&#39;: &#39;self&#39;},
+   &#39;do&#39;: [{&#39;type&#39;: &#39;verb&#39;,
+     &#39;name&#39;: &#39;extract&#39;,
+     &#39;params&#39;: {&#39;dimension&#39;: &#39;time&#39;, &#39;component&#39;: &#39;year&#39;}},
+    {&#39;type&#39;: &#39;verb&#39;,
+     &#39;name&#39;: &#39;evaluate&#39;,
+     &#39;params&#39;: {&#39;operator&#39;: &#39;equal&#39;, &#39;y&#39;: 2020}}]}}}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>verb[&quot;params&quot;] = processor.update_params_of_filter(verb[&quot;params&quot;])
+verb
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;type&#39;: &#39;verb&#39;,
+ &#39;name&#39;: &#39;filter&#39;,
+ &#39;params&#39;: {&#39;filterer&#39;: &lt;xarray.DataArray (time: 2)&gt;
+  array([0., 1.])
+  Coordinates:
+    * time          (time) datetime64[ns] 2019-01-01 2020-12-31
+      spatial_ref   int64 0
+      temporal_ref  int64 0
+  Attributes:
+      value_type:  binary,
+  &#39;trim&#39;: False,
+  &#39;track_types&#39;: True}}
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Query-response">
+<h3>Query response<a class="headerlink" href="#Query-response" title="Permalink to this headline">¶</a></h3>
+<p>To actually make the query processor return the response, you have to call the <code class="docutils literal notranslate"><span class="pre">respond</span></code> method of the <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code> instance. Before returning the result arrays, this method will first post-process them.</p>
+<p>One of the post-processing steps is <em>trimming</em> the result arrays. This means that all coordinates for which all values are nodata, are dropped from the array. The spatial dimension (if present) is treated differently, by trimming it only at the edges, and thus maintaining the regularity of the spatial dimension.</p>
+<p>Trimming results can be disabled by adding the configuration parameter “trim_results” when initializing the query processor, and set its value to “False”.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;trim_results&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Note the difference:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new_recipe = sq.QueryRecipe()
+new_config = copy.deepcopy(config)
+
+new_recipe[&quot;foo&quot;] = sq.entity(&quot;water&quot;).filter_time(&quot;year&quot;, &quot;equal&quot;, 2020)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>out = new_recipe.execute(factbase, ontology, space, time, **new_config)[&quot;foo&quot;]
+
+values = [0, 1]
+levels = [x - 0.5 for x in values + [max(values) + 1]]
+legend = {&quot;ticks&quot;: values, &quot;label&quot;: &quot;IsWater&quot;}
+out.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cbar_kwargs = legend)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fb8aa1656d0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/_notebooks_advanced_33_1.png" src="../_images/_notebooks_advanced_33_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new_config[&quot;trim_results&quot;] = False
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>out = new_recipe.execute(factbase, ontology, space, time, **new_config)[&quot;foo&quot;]
+
+values = [0, 1]
+levels = [x - 0.5 for x in values + [max(values) + 1]]
+legend = {&quot;ticks&quot;: values, &quot;label&quot;: &quot;IsWater&quot;}
+out.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cbar_kwargs = legend)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fb8a8039f40&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/_notebooks_advanced_35_1.png" src="../_images/_notebooks_advanced_35_1.png" />
+</div>
+</div>
+<p>Another post-processing step is <em>unstacking</em> the result arrays. Internally the query processor always works with arrays that have a stacked spatial dimension, meaning the the x and y dimension are stacked together into a single multi-indexed space dimension. Before responding, the query processor unstacks the space dimension, such that the returned arrays have separate x and y dimensions again.</p>
+<p>Unstacking results can be disabled by adding the configuration parameter “unstack_results” when initializing the query processor, and set its value to “False”.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;unstack_results&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Note the difference:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new_recipe = sq.QueryRecipe()
+new_config = copy.deepcopy(config)
+
+new_recipe[&quot;foo&quot;] = sq.entity(&quot;water&quot;).filter_time(&quot;year&quot;, &quot;equal&quot;, 2020)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>out = new_recipe.execute(factbase, ontology, space, time, **new_config)[&quot;foo&quot;]
+print(out)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.DataArray &#39;foo&#39; (time: 2, y: 563, x: 576)&gt;
+array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])
+Coordinates:
+  * time          (time) datetime64[ns] 2020-09-05T10:17:43.167942 2020-12-19...
+    spatial_ref   int64 0
+    temporal_ref  int64 0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    value_type:  binary
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new_config[&quot;unstack_results&quot;] = False
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>out = new_recipe.execute(factbase, ontology, space, time, **new_config)[&quot;foo&quot;]
+print(out)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.DataArray &#39;foo&#39; (time: 2, space: 324288)&gt;
+array([[0., 0., 0., ..., 0., 0., 0.],
+       [1., 1., 1., ..., 0., 0., 0.]])
+Coordinates:
+  * time          (time) datetime64[ns] 2020-09-05T10:17:43.167942 2020-12-19...
+    spatial_ref   int64 0
+    temporal_ref  int64 0
+    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * space         (space) MultiIndex
+  - y             (space) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  - x             (space) float64 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    value_type:  binary
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="Creating-a-spatio-temporal-extent-cube">
+<h2>Creating a spatio-temporal extent cube<a class="headerlink" href="#Creating-a-spatio-temporal-extent-cube" title="Permalink to this headline">¶</a></h2>
+<p>Internally the query processor uses a single multi-dimensional array to represent the spatio-temporal extent of the query. This is an <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> object and forms the base template for all cubes that are fetched from the factbase during query processing. It is created during the <a class="reference external" href="#Query-parsing">query parsing</a> phase, using a specific function named <code class="docutils literal notranslate"><span class="pre">create_extent_cube</span></code>.</p>
+<p>The array is constructed as follows:</p>
+<ol class="arabic simple">
+<li><p>The spatial extent is <em>reprojected</em> and <em>rasterized</em> given the specified coordinate reference system and spatial resolution in the configuration parameters. The resulting array is always rectangular and therefore covers the full <em>bounding box</em> of the area that was orginally given as spatial extent. Cells that don’t overlap with the area boundaries itself are filled with nodata values (i.e. <code class="docutils literal notranslate"><span class="pre">nan</span></code>). Others are filled with an integer. If the given area consisted of a single feature, they are
+all filled with a value of <code class="docutils literal notranslate"><span class="pre">1</span></code>. If the given area consisted of multiple disconnected features, each feature gets a different index value.</p></li>
+<li><p>The two spatial dimensions are <em>stacked</em> together into a single “space” dimension. This dimension has as many coordinates as the number of cells in the trimmed spatial array. Each coordinate value is a tuple of the x and y coordinate of the corresponding cell.</p></li>
+<li><p>This stacked spatial array is <em>expanded</em> over a time dimension. The time dimension has two coordinates: the first coordinate value corresponds to the timestamp at the start of the given time interval, and the second coordinate value corresponds to the timestamp at the end of the given time interval. The time values are <em>converted</em> into the specified time zone in the configuration parameters.</p></li>
+<li><p>The spatio-temporal array is <em>trimmed</em>, meaning that all coordinates for which all pixel values are nodata, are removed from the array. The spatial dimension (if present) is treated differently, by trimming it only at the edges, and thus maintaining the regularity of the spatial dimension.</p></li>
+</ol>
+<p>You can call the <code class="docutils literal notranslate"><span class="pre">create_extent_cube</span></code> function directly to create a spatio-temporal extent cube from respectively a spatial and temporal extent. It may occur that due to the reprojection of the provided spatial extent, some pixels at the edges of the extent get a nodata value.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from semantique.processor.utils import create_extent_cube
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>crs = config[&quot;crs&quot;]
+tz = config[&quot;tz&quot;]
+res = config[&quot;spatial_resolution&quot;]
+extent = create_extent_cube(space, time, res, crs = crs, tz = tz)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>print(extent)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.DataArray &#39;index&#39; (time: 2, space: 324288)&gt;
+array([[1., 1., 1., ..., 1., 1., 1.],
+       [1., 1., 1., ..., 1., 1., 1.]])
+Coordinates:
+  * time          (time) datetime64[ns] 2019-01-01 2020-12-31
+    spatial_ref   int64 0
+    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    temporal_ref  int64 0
+  * space         (space) MultiIndex
+  - y             (space) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  - x             (space) float64 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    name:          index
+    long_name:     index
+    _FillValue:    nan
+    value_type:    nominal
+    value_labels:  {&#39;feature_1&#39;: 1}
+</pre></div></div>
+</div>
+<p>Complying with common standards (see e.g. the discussion <a class="reference external" href="https://github.com/opendatacube/datacube-core/issues/837">here</a>), the coordinate reference system of the spatial coordinates is stored as attribute of a specific non-dimension coordinate named “spatial_ref”. Storing this inside a non-dimension coordinate instead of as direct attribute of the array guarantees that this information is preserved during any kind of operation. The coordinate itself serves merely as a placeholder.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>print(extent[&quot;spatial_ref&quot;].attrs)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;crs_wkt&#39;: &#39;PROJCS[&#34;ETRS89-extended / LAEA Europe&#34;,GEOGCS[&#34;ETRS89&#34;,DATUM[&#34;European_Terrestrial_Reference_System_1989&#34;,SPHEROID[&#34;GRS 1980&#34;,6378137,298.257222101,AUTHORITY[&#34;EPSG&#34;,&#34;7019&#34;]],AUTHORITY[&#34;EPSG&#34;,&#34;6258&#34;]],PRIMEM[&#34;Greenwich&#34;,0,AUTHORITY[&#34;EPSG&#34;,&#34;8901&#34;]],UNIT[&#34;degree&#34;,0.0174532925199433,AUTHORITY[&#34;EPSG&#34;,&#34;9122&#34;]],AUTHORITY[&#34;EPSG&#34;,&#34;4258&#34;]],PROJECTION[&#34;Lambert_Azimuthal_Equal_Area&#34;],PARAMETER[&#34;latitude_of_center&#34;,52],PARAMETER[&#34;longitude_of_center&#34;,10],PARAMETER[&#34;false_easting&#34;,4321000],PARAMETER[&#34;false_northing&#34;,3210000],UNIT[&#34;metre&#34;,1,AUTHORITY[&#34;EPSG&#34;,&#34;9001&#34;]],AXIS[&#34;Northing&#34;,NORTH],AXIS[&#34;Easting&#34;,EAST],AUTHORITY[&#34;EPSG&#34;,&#34;3035&#34;]]&#39;, &#39;semi_major_axis&#39;: 6378137.0, &#39;semi_minor_axis&#39;: 6356752.314140356, &#39;inverse_flattening&#39;: 298.257222101, &#39;reference_ellipsoid_name&#39;: &#39;GRS 1980&#39;, &#39;longitude_of_prime_meridian&#39;: 0.0, &#39;prime_meridian_name&#39;: &#39;Greenwich&#39;, &#39;geographic_crs_name&#39;: &#39;ETRS89&#39;, &#39;horizontal_datum_name&#39;: &#39;European Terrestrial Reference System 1989&#39;, &#39;projected_crs_name&#39;: &#39;ETRS89-extended / LAEA Europe&#39;, &#39;grid_mapping_name&#39;: &#39;lambert_azimuthal_equal_area&#39;, &#39;latitude_of_projection_origin&#39;: 52.0, &#39;longitude_of_projection_origin&#39;: 10.0, &#39;false_easting&#39;: 4321000.0, &#39;false_northing&#39;: 3210000.0, &#39;spatial_ref&#39;: &#39;PROJCS[&#34;ETRS89-extended / LAEA Europe&#34;,GEOGCS[&#34;ETRS89&#34;,DATUM[&#34;European_Terrestrial_Reference_System_1989&#34;,SPHEROID[&#34;GRS 1980&#34;,6378137,298.257222101,AUTHORITY[&#34;EPSG&#34;,&#34;7019&#34;]],AUTHORITY[&#34;EPSG&#34;,&#34;6258&#34;]],PRIMEM[&#34;Greenwich&#34;,0,AUTHORITY[&#34;EPSG&#34;,&#34;8901&#34;]],UNIT[&#34;degree&#34;,0.0174532925199433,AUTHORITY[&#34;EPSG&#34;,&#34;9122&#34;]],AUTHORITY[&#34;EPSG&#34;,&#34;4258&#34;]],PROJECTION[&#34;Lambert_Azimuthal_Equal_Area&#34;],PARAMETER[&#34;latitude_of_center&#34;,52],PARAMETER[&#34;longitude_of_center&#34;,10],PARAMETER[&#34;false_easting&#34;,4321000],PARAMETER[&#34;false_northing&#34;,3210000],UNIT[&#34;metre&#34;,1,AUTHORITY[&#34;EPSG&#34;,&#34;9001&#34;]],AXIS[&#34;Northing&#34;,NORTH],AXIS[&#34;Easting&#34;,EAST],AUTHORITY[&#34;EPSG&#34;,&#34;3035&#34;]]&#39;, &#39;GeoTransform&#39;: &#39;4530110.0 10.0 0.0 2696640.0 0.0 -10.0&#39;}
+</pre></div></div>
+</div>
+<p>In the same style, <code class="docutils literal notranslate"><span class="pre">semantique</span></code> stores time zone information as attribute of a non-dimension coordinate named “temporal_ref”. Note that time coordinates themselves are stored as <code class="docutils literal notranslate"><span class="pre">numpy.datetime64</span></code> objects, which in itself don’t support timezone information anymore. Therefore, the “temporal_ref” coordinate is an important piece of information in the spatio-temporal extent cube.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>print(extent[&quot;temporal_ref&quot;].attrs)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;zone&#39;: &#39;UTC&#39;}
+</pre></div></div>
+</div>
+<p>The query processor obtains such spatio-temporal information by calling specific properties of the array, rather than scanning the above-mentioned non-dimension coordinates directly.</p>
+<blockquote>
+<div><p><strong>NOTE</strong> <code class="docutils literal notranslate"><span class="pre">semantique</span></code> extends regular <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> objects with an accessor named <code class="docutils literal notranslate"><span class="pre">sq</span></code>. Therefore, <code class="docutils literal notranslate"><span class="pre">semantique</span></code> specific array methods are always called as <code class="docutils literal notranslate"><span class="pre">sq.methodname</span></code>. Using accessors instead of the common class inheritance is recommended by the developers of <code class="docutils literal notranslate"><span class="pre">xarray</span></code>. Read more about it <a class="reference external" href="http://xarray.pydata.org/en/stable/internals/extending-xarray.html">here</a>.</p>
+</div></blockquote>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>extent.sq.crs
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CRS.from_epsg(3035)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>type(extent.sq.crs)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+rasterio.crs.CRS
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>extent.sq.tz
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;UTC&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>type(extent.sq.tz)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+pytz.UTC
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>extent.sq.spatial_resolution
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(-10.0, 10.0)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Tracking-value-types">
+<h2>Tracking value types<a class="headerlink" href="#Tracking-value-types" title="Permalink to this headline">¶</a></h2>
+<p>During query processing references get translated into data cubes, and these data cubes are wrangled by specified actions. Along this road, the query processor keeps track of the <em>value type</em> of each data cube. Such a value type describes what kind of data the cube contains. It differs from the very technical, computer-oriented <code class="docutils literal notranslate"><span class="pre">numpy.dtype</span></code> categorization, which contains e.g. <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, etc. Instead, the <em>value type</em> describes data on a more general, statistical level. Currently it
+makes a distinction between three main value types:</p>
+<ul class="simple">
+<li><p>Numerical</p></li>
+<li><p>Nominal</p></li>
+<li><p>Ordinal</p></li>
+<li><p>Binary</p></li>
+</ul>
+<p>It is expected that whenever a data cube is retrieved from the factbase, the corresponding value type is stored as an array attribute named “value_type”. Even when the data are not qualitative, they are usually stored as numbers. In these cases, an additional attribute named “value_labels” may be used to define the mapping between character-encoded <em>labels</em> and integer-encoded <em>indices</em>.</p>
+<p>If a data cube does not contain these attributes, the value type is considered to be <code class="docutils literal notranslate"><span class="pre">None</span></code>, which in practice means that the query processor assumes it can be any of the supported value types.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>colors = factbase.retrieve(&quot;appearance&quot;, &quot;Color type&quot;, extent = extent)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>colors.sq.value_type
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;ordinal&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>colors.sq.value_labels
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;SVHNIR&#39;: 1,
+ &#39;SVLNIR&#39;: 2,
+ &#39;AVHNIR&#39;: 3,
+ &#39;AVLNIR&#39;: 4,
+ &#39;WV&#39;: 5,
+ &#39;SHV&#39;: 6,
+ &#39;SHRBRHNIR&#39;: 7,
+ &#39;SHRBRLNIR&#39;: 8,
+ &#39;HRBCR&#39;: 9,
+ &#39;WR&#39;: 10,
+ &#39;PB&#39;: 11,
+ &#39;GH&#39;: 12,
+ &#39;VBBB&#39;: 13,
+ &#39;BBB&#39;: 14,
+ &#39;SBB&#39;: 15,
+ &#39;ABB&#39;: 16,
+ &#39;DBB&#39;: 17,
+ &#39;WBBorSHB&#39;: 18,
+ &#39;NIRPBB&#39;: 19,
+ &#39;BA&#39;: 20,
+ &#39;DPWASH&#39;: 21,
+ &#39;SLWASH&#39;: 22,
+ &#39;TWASH&#39;: 23,
+ &#39;SASLWA&#39;: 24,
+ &#39;TNCLV&#39;: 27,
+ &#39;TNCLWA_BB&#39;: 28,
+ &#39;SN&#39;: 29,
+ &#39;SHSN&#39;: 30,
+ &#39;SH&#39;: 31,
+ &#39;FLAME&#39;: 32}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>water = ontology.translate(&quot;entity&quot;, &quot;water&quot;, extent = extent, factbase = factbase)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>water.sq.value_type
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;binary&#39;
+</pre></div></div>
+</div>
+<p>Whenever applying actions to a data cube, its value type might change. For example, when evaluating an expression (e.g. when evaluating an expression involving a comparison operator the resulting values are always binary) or applying a reducer (e.g. when counting the number of “true” values in a binary data cube the resulting values are numerical). This is what we also call <strong>type promotion</strong>. Each implemented operator and reducer function is able to promote the type of the output given the
+type(s) of the input(s) by using a type promotion manual. Most of the times this manual is not constructed inside the function itself, but a pre-defined template is used instead.</p>
+<p>A common type promotion manual for a univariate operator and a reducer has a dictionary structure with as keys the supported input value types. The value of each key is the output value type. For example, the <code class="docutils literal notranslate"><span class="pre">count</span></code> reducer should only be applied to data cubes containing binary data, since it counts the number of “true” values. The output of that operation, however, is a data cube with numerical data. Hence, the corresponding type promotion manual looks like this:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from semantique.processor.templates import TYPE_PROMOTION_TEMPLATES
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>TYPE_PROMOTION_TEMPLATES[&quot;count_reducers&quot;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;binary&#39;: &#39;numerical&#39;, None: None, &#39;__preserve_labels__&#39;: False}
+</pre></div></div>
+</div>
+<p>The additional key <code class="docutils literal notranslate"><span class="pre">__preserve_labels__</span></code> defines if value labels should be preserved after the reducer is applied.</p>
+<p>The reduction function will apply the type promotion whenever argument <code class="docutils literal notranslate"><span class="pre">track_types</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. When we apply the count reducer to a binary data cube, this means the value type of the output will be numerical:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from semantique.processor import reducers
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new = water.sq.reduce(&quot;time&quot;, reducers.count_, track_types = True)
+new.sq.value_type
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;numerical&#39;
+</pre></div></div>
+</div>
+<p>Now, when we call this reducer function on e.g. an ordinal data cube instead of a binary data cube, an <code class="docutils literal notranslate"><span class="pre">InvalidValueTypeError</span></code> will be thrown. Hence, the query processor uses type tracking also to <em>check</em> type promotions, and thus, to detect invalid operations.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from semantique.exceptions import InvalidValueTypeError
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>try:
+    colors.sq.reduce(&quot;time&quot;, reducers.count_, track_types = True)
+except InvalidValueTypeError as e:
+    print(e)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Unsupported operand value type(s) for &#39;count&#39;: &#39;[&#39;ordinal&#39;]&#39;
+</pre></div></div>
+</div>
+<p>This will not happen when <code class="docutils literal notranslate"><span class="pre">track_types</span> <span class="pre">=</span> <span class="pre">False</span></code>. In that case, value types are not tracked and the output cube has no value type at all.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new = colors.sq.reduce(&quot;time&quot;, reducers.count_, track_types = False)
+&quot;value_type&quot; in new.attrs
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+False
+</pre></div></div>
+</div>
+<p>For multivariate expressions, the type promotion manuals have an extra “layer” per additional operand. For expressions with two operands, that means that the first layer of keys refers to the value type of the first operand (i.e. x) and the second layer of keys to the value type of the second operand (i.e. y). For example, the boolean operator <code class="docutils literal notranslate"><span class="pre">and</span></code> accepts only data cubes with binary values, and returns binary values as well. Hence, the corresponding type promotion manual looks like this:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>TYPE_PROMOTION_TEMPLATES[&quot;boolean_multivariate_operators&quot;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;binary&#39;: {&#39;binary&#39;: &#39;binary&#39;, &#39;b&#39;: &#39;binary&#39;, None: None},
+ None: {&#39;binary&#39;: None, &#39;b&#39;: None, None: None},
+ &#39;__preserve_labels__&#39;: True}
+</pre></div></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">track_types</span> <span class="pre">=</span> <span class="pre">True</span></code>, the operator function will apply the type promotion. Also here, providing data cubes with an unsupported value type for this operation results in an <code class="docutils literal notranslate"><span class="pre">InvalidValueTypeError</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from semantique.processor import operators
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new = water.sq.evaluate(operators.and_, water, track_types = True)
+new.sq.value_type
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;binary&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>try:
+    colors.sq.evaluate(operators.and_, water, track_types = True)
+except InvalidValueTypeError as e:
+    print(e)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Unsupported operand value type(s) for &#39;and&#39;: &#39;[&#39;ordinal&#39;, &#39;binary&#39;]&#39;
+</pre></div></div>
+</div>
+<p>In the type promotion manual of the <code class="docutils literal notranslate"><span class="pre">and</span></code> operator we see something interesting: the occurence “b” in the second layer of keys. This is there since the second operand in the evaluate verb can also be a single value or a list of values instead of a data cube. For such values, we use regular numpy dtypes to check types. In numpy, the <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.kind.html">character code</a> “b” refers to boolean values, and are therefore accepted as second
+operand in an expression involving a logical operator like <code class="docutils literal notranslate"><span class="pre">and</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new = water.sq.evaluate(operators.and_, True, track_types = True)
+new.sq.value_type
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;binary&#39;
+</pre></div></div>
+</div>
+<p>Next to the main value types, there are two special value types we did not touch upon yet. These are <em>time</em> for timestamps and <em>space</em> for tuples of (x, y)-coordinates. These additional value types are added to support specific temporal (e.g. during, after) and spatial (e.g. intersects) operators. For example, the temporal operator <code class="docutils literal notranslate"><span class="pre">during</span></code> only accepts data cubes containing timestamps (usually such cubes are obtained by extracting dimension coordinates from a retrieved data cube), and
+possibly datetime objects (character code “M”) as second operand.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>TYPE_PROMOTION_TEMPLATES[&quot;temporal_relational_operators&quot;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;time&#39;: {&#39;time&#39;: &#39;binary&#39;, &#39;M&#39;: &#39;binary&#39;, None: None},
+ None: {&#39;time&#39;: None, &#39;M&#39;: None, None: None},
+ &#39;__preserve_labels__&#39;: False}
+</pre></div></div>
+</div>
+<p>Now what if you don’t want the query processor to track types at all? There are several reasons why you’d want to do so. For example, type tracking can be so strict that it limits your flexibility of using certain processes “out of the box”. Some custom factbases you use may not set value types at all, and some custom operators or reducers that you use may not have any type promotion manual. Also, type tracking of course takes time and thus decreases query performance. No worries, it is easy to
+tell the query processor to <em>not</em> track types. Simply add the configuration parameter “track_types” when initializing the query processor, and set its value to “False”:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;track_types&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Adding-custom-operators">
+<h2>Adding custom operators<a class="headerlink" href="#Adding-custom-operators" title="Permalink to this headline">¶</a></h2>
+<p>Operators are used when evaluating expressions on data cubes with the evaluate verb. For example, you can compare each value in a data cube with a given constant (using e.g. the <code class="docutils literal notranslate"><span class="pre">greater</span></code>, <code class="docutils literal notranslate"><span class="pre">equal</span></code> or <code class="docutils literal notranslate"><span class="pre">less</span></code> operators), add two data cubes together (using the <code class="docutils literal notranslate"><span class="pre">add</span></code> operator), etcetera. When creating a query recipe, you can refer to these operators by their name, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="s2">&quot;water_count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;multiply&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The query processor instance has a <code class="docutils literal notranslate"><span class="pre">operators</span></code> property in which it stores all supported operator functions. The keys of this dictionary are the operator names, such that the query processor can quickly retrieve the corresponding function of any referenced operator in the query recipe. For example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>processor.operators[&quot;multiply&quot;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;function semantique.processor.operators.multiply_(x, y, track_types=False, **kwargs)&gt;
+</pre></div></div>
+</div>
+<p>As can be seen, the operator function itself is taken from the <a class="reference external" href="semantique/processor/operators.py">operators module</a> of <code class="docutils literal notranslate"><span class="pre">semantique</span></code>. This is the module in which all built-in operator functions are defined. When initializing a query processor with default settings, these are the operators that get stored in the processors <code class="docutils literal notranslate"><span class="pre">operators</span></code> property.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>for x in processor.operators.keys():
+    print(x)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+absolute
+add
+after
+and
+assign
+before
+cube_root
+divide
+during
+equal
+exclusive_or
+greater
+greater_equal
+in
+invert
+less
+less_equal
+multiply
+natural_logarithm
+not_equal
+not_in
+or
+power
+square_root
+subtract
+</pre></div></div>
+</div>
+<p>That all operator functions are stored inside a property of the query processor means that you can easily overwrite them with your own custom operator functions (or add new ones to the list of existing ones) after initializing a query processor instance. However, you can also do this already at initialization itself, by setting specific configuration parameters.</p>
+<p>But let us first prepare a custom operator. As shown above this requires a name, an operator function and a type promotion manual. If you plan to disable type tracking either way, the latter is of course not needed. An operator function has to accept a <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> object as its first argument. This is the <em>active evaluation object</em> in the processing chain, to which the verb is applied. Multivariate operators also accept a second argument, which can either be a <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>, or a
+single value. The return value of the operator must again be a <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>. Usually it is a good idea to use the <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.apply_ufunc.html">apply_ufunc</a> function from <code class="docutils literal notranslate"><span class="pre">xarray</span></code> inside operator functions, as shown below. Also, you should not forget to align the second operand to the input object before applying the core operation!</p>
+<blockquote>
+<div><p><strong>NOTE</strong> It is also possible to implement operator functions with more than two operands. All additional keyword arguments that the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> verb receives are simply forwarded to the operator function. You could for example build a query recipe like the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="s2">&quot;water_count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;custom&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">bar</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You then need to implement an operator with four arguments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">custom</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">bar</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>If you want to <a class="reference external" href="#Tracking-value-types">track value types</a>, the custom operator should also have a <code class="docutils literal notranslate"><span class="pre">track_types</span></code> argument, which can be set to either <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. Inside the function, the type promotion should be applied whenever the <code class="docutils literal notranslate"><span class="pre">track_types</span></code> argument is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. You can create your own type promotion manual or use one of the existing templates. There are different templates for different types of operators.</p>
+<p>Lets create a custom operator that calculates the normalized difference between two values. Since this is a multivariate algebraic operator, we can use the type promotion template for such operators.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>def normalized_difference(x, y, track_types = False, **kwargs):
+    def f(x, y):
+        dif = np.subtract(x, y)
+        sum = np.add(x, y)
+        return np.divide(dif, sum)
+    y = xr.DataArray(y).sq.align_with(x)
+    out = xr.apply_ufunc(f, x, y)
+    if track_types:
+        manual = TYPE_PROMOTION_TEMPLATES[&quot;algebraic_multivariate_operators&quot;]
+        out.sq.promote_value_type(x, y, func = &quot;normalized_difference&quot;, manual = manual)
+    return out
+</pre></div>
+</div>
+</div>
+<p>When executing a query recipe, we can now add this operator to the configuration parameters. There are two ways:</p>
+<ol class="arabic simple">
+<li><p>Setting the “operators” parameter will fully replace the default operators with the custom one(s).</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;operators&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;normalized_difference&quot;</span><span class="p">:</span> <span class="n">normalized_difference</span><span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Setting the “extra_operators” parameter will add the custom operator(s) to the default ones. If a custom operator has the same name as a default operator, the default operator will be replaced by the custom operator.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;extra_operators&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;normalized_difference&quot;</span><span class="p">:</span> <span class="n">normalized_difference</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new_recipe = sq.QueryRecipe()
+new_config = copy.deepcopy(config)
+
+red = sq.reflectance(&quot;s2_band04&quot;)
+nir = sq.reflectance(&quot;s2_band08&quot;)
+
+new_recipe[&quot;ndvi&quot;] = nir.evaluate(&quot;normalized_difference&quot;, red)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from semantique.exceptions import UnknownOperatorError
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>try:
+    print(new_recipe.execute(factbase, ontology, space, time, **new_config)[&quot;ndvi&quot;])
+except UnknownOperatorError as e:
+    print(e)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Operator &#39;normalized_difference&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new_config[&quot;extra_operators&quot;] = {&quot;normalized_difference&quot;: normalized_difference}
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>try:
+    print(new_recipe.execute(factbase, ontology, space, time, **new_config)[&quot;ndvi&quot;])
+except UnknownOperatorError as e:
+    print(e)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.DataArray &#39;ndvi&#39; (time: 3, y: 563, x: 576)&gt;
+array([[[ 0.06463104,  0.06605417,  0.04975973, ...,  0.11545816,
+          0.10660313,  0.10823728],
+        [ 0.07442172,  0.03657611,  0.04975973, ...,  0.14102377,
+          0.09754753,  0.10823728],
+        [ 0.0389009 ,  0.04185903,  0.05637693, ...,  0.11246979,
+          0.11095286,  0.11179397],
+        ...,
+        [ 0.13882795,  0.13730929,  0.14364387, ...,  0.05175072,
+          0.04400544,  0.06594342],
+        [ 0.14264128,  0.13166518,  0.13150118, ...,  0.06302978,
+          0.04802882,  0.04945549],
+        [ 0.1257726 ,  0.11195005,  0.11356696, ...,  0.08424991,
+          0.04015335,  0.03483351]],
+
+       [[ 0.64032073,  0.51404151,  0.52908966, ...,  0.65699208,
+          0.75698067,  0.70158989],
+        [ 0.57204169,  0.42692939,  0.5282392 , ...,  0.68892508,
+          0.73757455,  0.67257112],
+        [ 0.36415094,  0.4533205 ,  0.52322524, ...,  0.68765331,
+          0.70018116,  0.65779927],
+...
+        [ 0.7087529 ,  0.73780044,  0.74212034, ...,  0.760401  ,
+          0.76305419,  0.80208103],
+        [ 0.71806167,  0.74991482,  0.77155307, ...,  0.78023758,
+          0.7745248 ,  0.7745248 ],
+        [ 0.74438108,  0.7622291 ,  0.79881094, ...,  0.76843734,
+          0.77130371,  0.76729272]],
+
+       [[-0.18237082, -0.26141079, -0.25398773, ...,  0.59859155,
+          0.48709572,  0.60056259],
+        [-0.1641791 , -0.2920354 , -0.21957041, ...,  0.61845478,
+          0.54006969,  0.53923818],
+        [-0.23684211, -0.26146789, -0.20727273, ...,  0.60207972,
+          0.49000444,  0.42719615],
+        ...,
+        [ 0.64620061,  0.66354078,  0.6400818 , ...,  0.54438368,
+          0.52448133,  0.45625896],
+        [ 0.61768671,  0.61704394,  0.5682248 , ...,  0.53318966,
+          0.49320197,  0.49231981],
+        [ 0.55243644,  0.53545904,  0.47660587, ...,  0.51008278,
+          0.51458991,  0.4960907 ]]])
+Coordinates:
+  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
+    spatial_ref   int64 0
+    temporal_ref  int64 0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    value_type:  numerical
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Adding-custom-reducers">
+<h2>Adding custom reducers<a class="headerlink" href="#Adding-custom-reducers" title="Permalink to this headline">¶</a></h2>
+<p>Reducers are used inside the reduce verb as a function to aggregate values along a dimension of a data cube. For example, you can reduce the temporal dimension of a data cube by calculating the average value of each slice along the time dimension axis (using the <code class="docutils literal notranslate"><span class="pre">mean</span></code> reducer), etcetera. When creating a query recipe, you can refer to these reducers by their name, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="s2">&quot;water_count_space&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The query processor instance has a <code class="docutils literal notranslate"><span class="pre">reducers</span></code> property in which it stores all supported reducer functions. The keys of this dictionary are the reducer names, such that the query processor can quickly retrieve the corresponding function of any referenced reducer in the query recipe. For example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>processor.reducers[&quot;mean&quot;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;function semantique.processor.reducers.mean_(x, dimension, track_types=False, **kwargs)&gt;
+</pre></div></div>
+</div>
+<p>As can be seen, the reducer function itself is taken from the <a class="reference external" href="semantique/processor/reducers.py">reducers module</a> of <code class="docutils literal notranslate"><span class="pre">semantique</span></code>. This is the module in which all built-in reducer functions are defined. When initializing a query processor with default settings, these are the reducers that get stored in the processors <code class="docutils literal notranslate"><span class="pre">reducers</span></code> property.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>for x in processor.reducers.keys():
+    print(x)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+all
+any
+count
+first
+last
+max
+mean
+median
+min
+mode
+percentage
+product
+standard_deviation
+sum
+variance
+</pre></div></div>
+</div>
+<p>That all reducer functions are stored inside a property of the query processor means that you can easily overwrite them with your own custom reducer functions (or add new ones to the list of existing ones) after initializing a query processor instance. However, you can also do this already at initialization itself, by setting specific configuration parameters.</p>
+<p>But let us first prepare a custom reducer. As shown above this requires a name, a reducer function and a type promotion manual. If you plan to disable type tracking either way, the latter is of course not needed. A reducer function has to accept a <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> object as its first argument. This is the <em>active evaluation object</em> in the processing chain, to which the verb is applied. The function should also accept a <code class="docutils literal notranslate"><span class="pre">dimension</span></code> argument, containing the name of the dimension to reduce
+over. The return value of the reducer must again be a <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>. Usually it is a good idea to use the <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.reduce.html">reduce</a> method from <code class="docutils literal notranslate"><span class="pre">xarray</span></code> inside reducer functions, as shown below. This function will take care e.g. of translating the dimension name into its corresponding axis number.</p>
+<blockquote>
+<div><p><strong>NOTE</strong> All additional keyword arguments that the <code class="docutils literal notranslate"><span class="pre">reduce</span></code> verb receives are simply forwarded to the reducers function. That allows you to include additional variables in your reducer functions (e.g. constants). You could for example build a query recipe like the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;custom&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You then need to implement a reducer with four arguments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">custom</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dimension</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>If you want to <a class="reference external" href="#Tracking-value-types">track value types</a>, the custom reducer should also have a <code class="docutils literal notranslate"><span class="pre">track_types</span></code> argument, which can be set to either <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. Inside the function, the type promotion should be applied whenever the <code class="docutils literal notranslate"><span class="pre">track_types</span></code> argument is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. You can create your own type promotion manual or use one of the existing templates. There are different templates for different types of reducers.</p>
+<p>Lets create a custom operator that reduces a set of values to its sum of squares. Since this is a numerical reducer (i.e. it only makes sense for numerical data), we can use the type promotion template for such reducers.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>def sum_of_squares(x, dimension, track_types = False, **kwargs):
+    def f(x, axis):
+        squares = np.square(x)
+        return np.sum(squares, axis)
+    out = x.reduce(f, dim = dimension)
+    if track_types:
+        manual = TYPE_PROMOTION_TEMPLATES[&quot;numerical_reducers&quot;]
+        out.sq.promote_value_type(x, func = &quot;sum_of_squares&quot;, manual = manual)
+    return out
+</pre></div>
+</div>
+</div>
+<p>When executing a query recipe, we can now add this reducer to the configuration parameters. There are two ways:</p>
+<ol class="arabic simple">
+<li><p>Setting the “reducers” parameter will fully replace the default reducers with the custom one(s).</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;reducers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;sum_of_squares&quot;</span><span class="p">:</span> <span class="n">sum_of_squares</span><span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Setting the “extra_reducers” parameter will add the custom reducer(s) to the default ones. If a custom reducer has the same name as a default reducer, the default reducer will be replaced by the custom reducer.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;extra_reducers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;sum_of_squares&quot;</span><span class="p">:</span> <span class="n">sum_of_squares</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new_recipe = sq.QueryRecipe()
+new_config = copy.deepcopy(config)
+
+nir = sq.reflectance(&quot;s2_band08&quot;)
+
+new_recipe[&quot;foo&quot;] = nir.reduce(&quot;time&quot;, &quot;sum_of_squares&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from semantique.exceptions import UnknownReducerError
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>try:
+    print(new_recipe.execute(factbase, ontology, space, time, **new_config)[&quot;foo&quot;])
+except UnknownReducerError as e:
+    print(e)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Reducer &#39;sum_of_squares&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>new_config[&quot;extra_reducers&quot;] = {&quot;sum_of_squares&quot;: sum_of_squares}
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>try:
+    print(new_recipe.execute(factbase, ontology, space, time, **new_config)[&quot;foo&quot;])
+except UnknownReducerError as e:
+    print(e)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.DataArray &#39;foo&#39; (y: 563, x: 576)&gt;
+array([[11970029., 12932114., 12805101., ..., 21018013., 29893041.,
+        25075109.],
+       [11993949., 12495786., 12418325., ..., 24489320., 27623273.,
+        20779057.],
+       [11930054., 12131934., 11431091., ..., 24904561., 21545458.,
+        17718638.],
+       ...,
+       [25405656., 27876425., 27766517., ..., 48620561., 51247553.,
+        54305937.],
+       [28771561., 30244321., 31182561., ..., 47444339., 58274411.,
+        58431746.],
+       [30685817., 30561806., 36765614., ..., 47268251., 54635210.,
+        58603757.]])
+Coordinates:
+    spatial_ref   int64 0
+    temporal_ref  int64 0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+  * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+Attributes:
+    value_type:  numerical
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Tuning-factbase-configuration-settings">
+<h2>Tuning factbase configuration settings<a class="headerlink" href="#Tuning-factbase-configuration-settings" title="Permalink to this headline">¶</a></h2>
+<p><em>To be added</em></p>
+</div>
+<div class="section" id="Creating-custom-factbase-classes">
+<h2>Creating custom factbase classes<a class="headerlink" href="#Creating-custom-factbase-classes" title="Permalink to this headline">¶</a></h2>
+<p><em>To be added</em></p>
+</div>
+<div class="section" id="Creating-custom-ontology-classes">
+<h2>Creating custom ontology classes<a class="headerlink" href="#Creating-custom-ontology-classes" title="Permalink to this headline">¶</a></h2>
+<p><em>To be added</em></p>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="verbs.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Verbs</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../reference.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API Reference</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright 2021, Department of Geoinformatics – Z_GIS.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

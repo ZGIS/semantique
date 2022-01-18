@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.Cube.drop\_non\_dimension\_coords
+=================================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: Cube.drop_non_dimension_coords

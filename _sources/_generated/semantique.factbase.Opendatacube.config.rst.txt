@@ -1,0 +1,6 @@
+﻿semantique.factbase.Opendatacube.config
+=======================================
+
+.. currentmodule:: semantique.factbase
+
+.. autoproperty:: Opendatacube.config

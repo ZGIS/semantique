@@ -1,0 +1,6 @@
+﻿semantique.processor.core.QueryProcessor.get\_handler
+=====================================================
+
+.. currentmodule:: semantique.processor.core
+
+.. automethod:: QueryProcessor.get_handler

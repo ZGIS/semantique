@@ -1,0 +1,30 @@
+﻿semantique.factbase.Factbase
+============================
+
+.. currentmodule:: semantique.factbase
+
+.. autoclass:: Factbase
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Factbase.__init__
+      ~Factbase.lookup
+      ~Factbase.retrieve
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Factbase.layout
+   
+   

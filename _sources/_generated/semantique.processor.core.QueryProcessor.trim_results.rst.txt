@@ -1,0 +1,6 @@
+﻿semantique.processor.core.QueryProcessor.trim\_results
+======================================================
+
+.. currentmodule:: semantique.processor.core
+
+.. autoproperty:: QueryProcessor.trim_results

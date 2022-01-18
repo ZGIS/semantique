@@ -1,0 +1,6 @@
+﻿semantique.CubeProxy.groupby\_time
+==================================
+
+.. currentmodule:: semantique
+
+.. automethod:: CubeProxy.groupby_time

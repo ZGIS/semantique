@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.CubeCollection.filter
+=====================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. automethod:: CubeCollection.filter
