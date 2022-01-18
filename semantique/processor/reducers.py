@@ -464,6 +464,11 @@ def mode_(x, dimension, track_types = False, **kwargs):
     :obj:`xarray.DataArray`
       The reduced data cube.
 
+  Note
+  -------
+    If there are multiple modal values in a set, the minimum of them (i.e. the
+    smallest of these values) is returned.
+
   """
   def f(x, axis, **kwargs):
     values = stats.mode(x, axis = axis, nan_policy = "omit")[0].squeeze(axis = axis)
