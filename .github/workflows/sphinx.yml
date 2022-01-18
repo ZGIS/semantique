@@ -15,7 +15,7 @@ jobs:
         environment-file: environment.yml
     - name: install-pip
       shell: bash -l {0}
-      run: pip install -r .docs/requirements.txt
+      run: pip install -r ./docs/requirements.txt
     - name: build
       shell: bash -l {0}
       run: sphinx-build -b html ${SOURCE_DIR} ${BUILD_DIR}
