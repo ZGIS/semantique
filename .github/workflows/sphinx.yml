@@ -6,17 +6,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Build HTML
-      uses: ammaraskar/sphinx-action@0.4
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v1
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: setup-conda
+      uses: conda-incubator/setup-miniconda@v2
       with:
-        name: html-docs
-        path: docs/build/html/
-    - name: Deploy
+        activate-environment: makedoc
+        python-version: 3.9
+        channels: conda-forge
+        environment-file: ./docs/environment.yml
+    - name: build
+      shell: bash -l {0}
+      run: |
+        sphinx-build -b html ${SOURCE_DIR} ${BUILD_DIR}
+      env:
+        SOURCE_DIR: ./docs/source
+        BUILD_DIR: ./docs/build
+    - name: deploy
       uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/main'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: docs/build/html
+        publish_dir: ./docs/build
+        publish_branch: gh-pages
