@@ -14,12 +14,14 @@ jobs:
         activate-environment: makedoc
         python-version: 3.9
         channels: conda-forge
-        environment-file: ./docs/environment.yml
+        environment-file: environment.yml
     - name: build
       shell: bash -l {0}
       run: |
+        pip install -r ${REQUIREMENTS_TXT}
         sphinx-build -b html ${SOURCE_DIR} ${BUILD_DIR}
       env:
+        REQUIREMENTS_TXT: ./docs/requirements.txt
         SOURCE_DIR: ./docs/source
         BUILD_DIR: ./docs/build
     - name: deploy
