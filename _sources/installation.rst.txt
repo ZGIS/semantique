@@ -17,7 +17,7 @@ At this moment the package can only be installed from source. This can be done i
   cd semantique
   pip install .
 
-3) If you prefer to use conda, you can create a `semantique` conda environment with the package itself and all dependencies installed, using the provided [environment.yml](environment.yml) file:
+3) If you prefer to use conda, you can create a `semantique` conda environment with the package itself and all dependencies installed, using the provided `environment.yml` file:
 
 .. code-block::
 
