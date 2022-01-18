@@ -561,17 +561,27 @@ class QueryProcessor():
     -------
       :obj:`exceptions.UnknownLabelError`
         If the value label is not used for any value in the active evaluation
-        object.
+        object, or the active evaluation object has no value labels defined at
+        all.
 
     """
-    label = block["label"]
-    try:
-      idx = self._get_eval_obj().sq.value_labels[label]
-    except (KeyError, TypeError):
+    obj = self._get_eval_obj()
+    mapping = obj.sq.value_labels
+    if mapping is None:
       raise exceptions.UnknownLabelError(
-        f"Category label '{label}' is not defined"
+        "Active evaluation object has no value labels defined"
       )
-    return idx
+    label = block["label"]
+    value = None
+    for i, x in enumerate(mapping.values()):
+      if x == label:
+        value = list(mapping.keys())[i]
+        break
+    if value is None:
+      raise exceptions.UnknownLabelError(
+        f"There is no value with label '{label}'"
+      )
+    return value
 
   def handle_geometries(self, block):
     """Handler for spatial features.

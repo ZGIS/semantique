@@ -296,7 +296,7 @@ class Opendatacube(Factbase):
     if vtype in ["nominal", "ordinal"]:
       value_labels = {}
       for x in metadata["values"]:
-        value_labels[x["label"]] = x["id"]
+        value_labels[x["id"]] = x["label"]
       data.sq.value_labels = value_labels
     data["space"].sq.value_type = "space"
     data["time"].sq.value_type = "time"
@@ -488,7 +488,7 @@ class GeotiffArchive(Factbase):
     if vtype in ["nominal", "ordinal"]:
       value_labels = {}
       for x in metadata["values"]:
-        value_labels[x["label"]] = x["id"]
+        value_labels[x["id"]] = x["label"]
       data.sq.value_labels = value_labels
     data["space"].sq.value_type = "space"
     data["time"].sq.value_type = "time"

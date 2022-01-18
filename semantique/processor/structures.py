@@ -977,7 +977,7 @@ class CubeCollection(list):
     labels = [x.name for x in self]
     idxs = range(1, len(labels) + 1)
     out.sq.value_type = "nominal"
-    out.sq.value_labels = {k:v for k, v in zip(labels, idxs)}
+    out.sq.value_labels = {k:v for k, v in zip(idxs, labels)}
     return out
 
   def concatenate(self, dimension, track_types = False,
