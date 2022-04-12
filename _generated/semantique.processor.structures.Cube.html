@@ -783,24 +783,24 @@
 <h1>semantique.processor.structures.Cube<a class="headerlink" href="#semantique-processor-structures-cube" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.processor.structures.Cube">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.structures.</span></span><span class="sig-name descname"><span class="pre">Cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L14-L910"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.structures.</span></span><span class="sig-name descname"><span class="pre">Cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L15-L946"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal representation of a data cube.</p>
-<p>This data structure is modelled as an accessor of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.20.2.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>.
+<p>This data structure is modelled as an accessor of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>.
 Using accessors instead of the common class inheritance is recommended by the
 developers of xarray, see <a class="reference external" href="https://xarray.pydata.org/en/stable/internals/extending-xarray.html">here</a>. In practice, this means that each method
-of this class can be called as method of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.20.2.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> objects by
+of this class can be called as method of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> objects by
 using the <code class="docutils literal notranslate"><span class="pre">.sq</span></code> prefix:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xarray_obj</span><span class="o">.</span><span class="n">sq</span><span class="o">.</span><span class="n">method</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>xarray_obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.20.2.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – The content of the data cube.</p>
+<dd class="field-odd"><p><strong>xarray_obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – The content of the data cube.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.structures.Cube.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L36-L37"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L37-L38"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -849,13 +849,19 @@ using the <code class="docutils literal notranslate"><span class="pre">.sq</span
 <tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.stack_spatial_dims.html#semantique.processor.structures.Cube.stack_spatial_dims" title="semantique.processor.structures.Cube.stack_spatial_dims"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stack_spatial_dims</span></code></a>([name])</p></td>
 <td><p>Stack the spatial X and Y dimensions into a single spatial dimension.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.to_csv.html#semantique.processor.structures.Cube.to_csv" title="semantique.processor.structures.Cube.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></a>(file[, unstack])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.to_csv.html#semantique.processor.structures.Cube.to_csv" title="semantique.processor.structures.Cube.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></a>(file)</p></td>
 <td><p>Write the content of the cube to a CSV file on disk.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dataframe</span></code>()</p></td>
+<td><p>Convert the cube to a pandas DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_geodataframe</span></code>([output_crs])</p></td>
+<td><p>Convert the cube to a geopandas GeoDataFrame.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.to_geotiff.html#semantique.processor.structures.Cube.to_geotiff" title="semantique.processor.structures.Cube.to_geotiff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_geotiff</span></code></a>(file[, cloud_optimized, ...])</p></td>
 <td><p>Write the content of the cube to a GeoTIFF file on disk.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.trim.html#semantique.processor.structures.Cube.trim" title="semantique.processor.structures.Cube.trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trim</span></code></a>([trim_space, force_regular])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.trim.html#semantique.processor.structures.Cube.trim" title="semantique.processor.structures.Cube.trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trim</span></code></a>([force_regular])</p></td>
 <td><p>Trim the dimensions of the cube.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.tz_convert.html#semantique.processor.structures.Cube.tz_convert" title="semantique.processor.structures.Cube.tz_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz_convert</span></code></a>(tz, **kwargs)</p></td>

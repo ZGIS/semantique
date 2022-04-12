@@ -781,7 +781,7 @@
 <h1>semantique.processor.structures.Cube.align_with<a class="headerlink" href="#semantique-processor-structures-cube-align-with" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.structures.Cube.align_with">
-<span class="sig-prename descclassname"><span class="pre">Cube.</span></span><span class="sig-name descname"><span class="pre">align_with</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L403-L453"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube.align_with" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Cube.</span></span><span class="sig-name descname"><span class="pre">align_with</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L404-L454"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube.align_with" title="Permalink to this definition">¶</a></dt>
 <dd><p>Align the cube to the shape of another data cube.</p>
 <p>An input cube is alinged to another cube if the pixel at position <em>i</em> in
 the input cube has the same coordinates as the pixel at position <em>i</em> in the
@@ -804,10 +804,10 @@ duplicated along those dimensions that are missing.</p></li>
 <p>Alignment may also be a combination of more than one of these ways.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.20.2.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Data cube to which the input cube should be aligned.</p>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Data cube to which the input cube should be aligned.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.20.2.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – The aligned input cube.</p>
+<dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – The aligned input cube.</p>
 </dd>
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><p><a class="reference internal" href="semantique.exceptions.AlignmentError.html#semantique.exceptions.AlignmentError" title="semantique.exceptions.AlignmentError"><strong>exceptions.AlignmentError</strong></a> – If the input cube cannot be aligned to the other cube, for example when

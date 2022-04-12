@@ -785,17 +785,17 @@
 <dt class="sig sig-object py" id="semantique.processor.utils.parse_datetime_component">
 <span class="sig-prename descclassname"><span class="pre">semantique.processor.utils.</span></span><span class="sig-name descname"><span class="pre">parse_datetime_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/utils.py#L111-L168"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.utils.parse_datetime_component" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse datetime accessor arrays.</p>
-<p>The <a class="reference external" href="https://xarray.pydata.org/en/stable/user-guide/time-series.html#datetime-components">datetime accessors</a> of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.20.2.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> objects are treated in
+<p>The <a class="reference external" href="https://xarray.pydata.org/en/stable/user-guide/time-series.html#datetime-components">datetime accessors</a> of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> objects are treated in
 semantique as a component of the temporal dimension. Parsing them includes
 adding <a class="reference internal" href="semantique.processor.structures.Cube.value_type.html#semantique.processor.structures.Cube.value_type" title="semantique.processor.structures.Cube.value_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value_type</span></code></a>
 and <a class="reference internal" href="semantique.processor.structures.Cube.value_labels.html#semantique.processor.structures.Cube.value_labels" title="semantique.processor.structures.Cube.value_labels"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value_label</span></code></a>
 properties as well as in some cases re-organize the values in the array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.20.2.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Xarray datetime accessor.</p>
+<dd class="field-odd"><p><strong>obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Xarray datetime accessor.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v0.20.2.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – Parsed datetime accessor.</p>
+<dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – Parsed datetime accessor.</p>
 </dd>
 </dl>
 </dd></dl>

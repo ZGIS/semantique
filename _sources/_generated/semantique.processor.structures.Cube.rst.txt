@@ -27,6 +27,8 @@
       ~Cube.reproject
       ~Cube.stack_spatial_dims
       ~Cube.to_csv
+      ~Cube.to_dataframe
+      ~Cube.to_geodataframe
       ~Cube.to_geotiff
       ~Cube.trim
       ~Cube.tz_convert
