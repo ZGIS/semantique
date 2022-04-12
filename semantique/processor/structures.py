@@ -546,7 +546,7 @@ class Cube():
         :obj:`pyproj.crs.CRS` objects themselves, as well as EPSG codes and WKT
         strings.
       **kwargs:
-        Additional keyword argument passed on to
+        Additional keyword arguments passed on to
         :meth:`rioxarray.rioxarray.XRasterBase.reproject`.
 
     Returns
@@ -773,7 +773,34 @@ class Cube():
       del out.sq.value_labels
     return out
 
-  def to_csv(self, file, unstack = True, **kwargs):
+  def to_dataframe(self, unstack = True, **kwargs):
+    """Convert the cube to a pandas data frame.
+
+    The data frame will contain one column per dimension, and a column
+    containing the data values.
+
+    Parameters
+    ----------
+      unstack : :obj:`bool`
+        Should the spatial dimension (if present) of the input cube be
+        unstacked into respectively the separate x and y dimensions?
+
+    Returns
+    -------
+      :obj:`pandas.DataFrame`
+
+    """
+    obj = self.drop_non_dimension_coords()
+    if unstack:
+      obj = obj.sq.unstack_spatial_dims()
+    # to_dataframe method does not work for zero-dimensional arrays.
+    if len(self.dims) == 0:
+      out = pd.DataFrame([obj.values])
+    else:
+      out = obj.to_dataframe()
+    return out
+
+  def to_csv(self, file, unstack = True):
     """Write the content of the cube to a CSV file on disk.
 
     The CSV file will contain one column per dimension, and a column containing
@@ -784,11 +811,9 @@ class Cube():
       file : :obj:`str`
         Path to the CSV file to be written.
       unstack : :obj:`bool`
-        Should the spatial dimension (if present) in of the input cube be
+        Should the spatial dimension (if present) of the input cube be
         unstacked into respectively the separate x and y dimensions before
         writing to the CSV file?
-      **kwargs
-        Ignored.
 
     Returns
     --------
@@ -796,14 +821,11 @@ class Cube():
         Path to the written CSV file.
 
     """
-    obj = self.drop_non_dimension_coords()
-    if unstack:
-      obj = obj.sq.unstack_spatial_dims()
-    # to_dataframe method does not work for zero-dimensional arrays.
+    df = self.to_dataframe(unstack = unstack)
     if len(self.dims) == 0:
-      pd.DataFrame([obj.values]).to_csv(file, header = False, index = False)
+      df.to_csv(file, header = False, index = False)
     else:
-      obj.to_dataframe().to_csv(file)
+      df.to_csv(file)
     return file
 
   def to_geotiff(self, file, cloud_optimized = True, compress = True,
