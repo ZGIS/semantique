@@ -8,6 +8,22 @@ from xarray import testing
 
 o = np.nan
 
+class TestExtract(unittest.TestCase):
+
+  def test_dimension(self):
+    x = xr.DataArray([[1, 2], [3, 4]], coords = {"foo": ["a", "b"], "bar": [0, 1]})
+    f = xr.DataArray(["a", "b"], coords = {"foo": ["a", "b"]})
+    g = xr.DataArray([0, 1], coords = {"bar": [0, 1]})
+    self.assertIsNone(testing.assert_equal(x.sq.extract("foo"), f))
+    self.assertIsNone(testing.assert_equal(x.sq.extract("bar"), g))
+
+  def test_component(self):
+    x = xr.DataArray([[1, 2], [3, 4]], coords = {"foo": ["a", "b"], "bar": [0, 1]})
+    x = x.stack(fubar = ["foo", "bar"])
+    f = xr.DataArray(["a", "b"], coords = {"foo": ["a", "b"]})
+    self.assertIsNone(testing.assert_equal(x.sq.extract("fubar", "foo"), f))
+
+
 class TestFilter(unittest.TestCase):
 
   def test_regular(self):
