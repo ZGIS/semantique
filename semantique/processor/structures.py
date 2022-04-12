@@ -791,7 +791,7 @@ class Cube():
     if len(self._obj.dims) == 0:
       out = pd.DataFrame([obj.values])
     else:
-      out = obj.to_dataframe().reset_index()
+      out = obj.to_dataframe()
     return out
 
   def to_geodataframe(self, output_crs = None):
@@ -828,7 +828,7 @@ class Cube():
         "GeoDataFrame conversion requires spatial dimensions"
       )
     # Convert to dataframe.
-    df = self.to_dataframe()
+    df = self.to_dataframe().reset_index()
     # Create geometries.
     geoms = gpd.points_from_xy(df[spatial_dims[0]], df[spatial_dims[1]])
     # Convert to geodataframe
