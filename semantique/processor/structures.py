@@ -1,3 +1,4 @@
+import geopandas as gpd
 import numpy as np
 import pandas as pd
 import xarray as xr
@@ -773,34 +774,71 @@ class Cube():
       del out.sq.value_labels
     return out
 
-  def to_dataframe(self, unstack = True, **kwargs):
-    """Convert the cube to a pandas data frame.
+  def to_dataframe(self):
+    """Convert the cube to a pandas DataFrame.
 
     The data frame will contain one column per dimension, and a column
     containing the data values.
 
-    Parameters
-    ----------
-      unstack : :obj:`bool`
-        Should the spatial dimension (if present) of the input cube be
-        unstacked into respectively the separate x and y dimensions?
-
     Returns
     -------
       :obj:`pandas.DataFrame`
+        The converted input cube
 
     """
-    obj = self.drop_non_dimension_coords()
-    if unstack:
-      obj = obj.sq.unstack_spatial_dims()
+    obj = self.drop_non_dimension_coords().sq.unstack_spatial_dims()
     # to_dataframe method does not work for zero-dimensional arrays.
-    if len(self.dims) == 0:
+    if len(self._obj.dims) == 0:
       out = pd.DataFrame([obj.values])
     else:
-      out = obj.to_dataframe()
+      out = obj.to_dataframe().reset_index()
     return out
 
-  def to_csv(self, file, unstack = True):
+  def to_geodataframe(self, output_crs = None):
+    """Convert the cube to a geopandas GeoDataFrame.
+
+    The data frame will contain one column per dimension, a column
+    containing the data values, and a geometry column containing coordinates of
+    geospatial points that represent the centroids of the pixels in the cube.
+
+    Parameters
+    ----------
+      output_crs : optional
+        Spatial coordinate reference system of the GeoDataFrame. Can be
+        given as any object understood by the initializer of
+        :class:`pyproj.crs.CRS`. This includes :obj:`pyproj.crs.CRS` objects
+        themselves, as well as EPSG codes and WKT strings. If :obj:`None`, the
+        CRS of the cube itself is used.
+
+    Returns
+    -------
+      :obj:`geopandas.GeoDataFrame`
+        The converted input cube
+
+    Raises
+    ------
+      :obj:`exceptions.MissingDimensionError`
+        If the cube does not have spatial dimensions.
+
+    """
+    # Make sure spatial dimensions are present.
+    spatial_dims = self.xy_dimensions
+    if spatial_dims is None:
+      raise exceptions.MissingDimensionError(
+        "GeoDataFrame conversion requires spatial dimensions"
+      )
+    # Convert to dataframe.
+    df = self.to_dataframe()
+    # Create geometries.
+    geoms = gpd.points_from_xy(df[spatial_dims[0]], df[spatial_dims[1]])
+    # Convert to geodataframe
+    gdf = gpd.GeoDataFrame(df, geometry = geoms, crs = self.crs)
+    # Reproject if needed.
+    if output_crs is not None:
+      gdf = gdf.to_crs(output_crs)
+    return gdf
+
+  def to_csv(self, file):
     """Write the content of the cube to a CSV file on disk.
 
     The CSV file will contain one column per dimension, and a column containing
@@ -810,10 +848,6 @@ class Cube():
     ----------
       file : :obj:`str`
         Path to the CSV file to be written.
-      unstack : :obj:`bool`
-        Should the spatial dimension (if present) of the input cube be
-        unstacked into respectively the separate x and y dimensions before
-        writing to the CSV file?
 
     Returns
     --------
@@ -822,14 +856,14 @@ class Cube():
 
     """
     df = self.to_dataframe(unstack = unstack)
-    if len(self.dims) == 0:
+    if len(self._obj.dims) == 0:
       df.to_csv(file, header = False, index = False)
     else:
       df.to_csv(file)
     return file
 
   def to_geotiff(self, file, cloud_optimized = True, compress = True,
-                 output_crs = None, **kwargs):
+                 output_crs = None):
     """Write the content of the cube to a GeoTIFF file on disk.
 
     Parameters
@@ -850,8 +884,6 @@ class Cube():
         :class:`pyproj.crs.CRS`. This includes :obj:`pyproj.crs.CRS` objects
         themselves, as well as EPSG codes and WKT strings. If :obj:`None`, the
         CRS of the cube itself is used.
-      **kwargs:
-        Ignored.
 
     Returns
     -------
