@@ -348,7 +348,7 @@ class QueryProcessor():
           obj = obj.sq
         except AttributeError:
           pass
-        return obj.trim(trim_space = True, force_regular = True)
+        return obj.trim()
       self._response = {k: trim(v) for k, v in self._response.items()}
     # Unstack spatial dimensions if requested.
     if self._unstack_results:

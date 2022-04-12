@@ -452,7 +452,7 @@ class Cube():
       )
     return out
 
-  def trim(self, trim_space = True, force_regular = True):
+  def trim(self, force_regular = True):
     """Trim the dimensions of the cube.
 
     Trimming means that all coordinates for which all values are nodata, are
@@ -460,12 +460,10 @@ class Cube():
 
     Parameters
     ----------
-      trim_space : :obj:`bool`
-        Should the spatial dimensions be trimmed?
       force_regular : :obj:`bool`
-        If the spatial dimensions should be trimmed, should the regularity of
-        these dimensions be preserved? If ``True`` the spatial dimensions are
-        trimmed only at their edges. Ignored when ``trim_space = False``.
+        If spatial dimensions are present, should the regularity of these
+        dimensions be preserved? If ``True`` the spatial dimensions are
+        trimmed only at their edges.
 
     Returns
     -------
@@ -474,53 +472,37 @@ class Cube():
 
     """
     space = self.spatial_dimension
-    if space is None:
+    if force_regular and space is not None:
+      # Trim all dimensions normally except the spatial dimension.
+      out = self._obj
+      all_dims = out.dims
+      trim_dims = [d for d in all_dims if d != space]
+      # Trim spatial dimensions separately while preserving regularity.
+      # Hence trimming only at the edges of the spatial dimensions.
+      # First unstack spatial dimension into x and y dimensions.
+      out = out.unstack(space)
+      xy_dims = self.xy_dimensions
+      y_dim = xy_dims[1]
+      x_dim = xy_dims[0]
+      # For the x and y dimensions:
+      # Find the smallest and largest coordinates containing valid values.
+      y_idxs = np.nonzero(out.count(trim_dims + [x_dim]).data)[0]
+      x_idxs = np.nonzero(out.count(trim_dims + [y_dim]).data)[0]
+      y_slice = slice(y_idxs.min(), y_idxs.max() + 1)
+      x_slice = slice(x_idxs.min(), x_idxs.max() + 1)
+      # Limit the x and y coordinates to only those ranges.
+      out = out.isel({y_dim: y_slice, x_dim: x_slice})
+      # Stack x and y dimensions back together.
+      out = out.stack({space: [y_dim, x_dim]})
+    else:
       # Trim all dimensions normally.
       out = self._obj
       all_dims = out.dims
       trim_dims = all_dims
-    else:
-      if trim_space:
-        if force_regular:
-          # Trim all dimensions normally except the spatial dimension.
-          out = self._obj
-          all_dims = out.dims
-          trim_dims = [d for d in all_dims if d != space]
-          # Trim spatial dimensions separately while preserving regularity.
-          # Hence trimming only at the edges of the spatial dimensions.
-          # First unstack spatial dimension into x and y dimensions.
-          out = out.unstack(space)
-          xy_dims = self.xy_dimensions
-          y_dim = xy_dims[1]
-          x_dim = xy_dims[0]
-          # For the x and y dimensions:
-          # Find the smallest and largest coordinates containing valid values.
-          y_idxs = np.nonzero(out.count(trim_dims + [x_dim]).data)[0]
-          x_idxs = np.nonzero(out.count(trim_dims + [y_dim]).data)[0]
-          y_slice = slice(y_idxs.min(), y_idxs.max() + 1)
-          x_slice = slice(x_idxs.min(), x_idxs.max() + 1)
-          # Limit the x and y coordinates to only those ranges.
-          out = out.isel({y_dim: y_slice, x_dim: x_slice})
-          # Stack x and y dimensions back together.
-          out = out.stack({space: [y_dim, x_dim]})
-        else:
-          # Trim all dimensions normally.
-          # Spatial dimension should be unstacked before trimming it.
-          out = self._obj.unstack(space)
-          all_dims = out.dims
-          trim_dims = all_dims
-      else:
-        # Trim all dimensions except the spatial dimension.
-        out = self._obj
-        all_dims = out.dims
-        trim_dims = [d for d in all_dims if d != space]
     # Apply normal trimming to the selected dimensions.
     for dim in trim_dims:
       other_dims = [d for d in all_dims if d != dim]
       out = out.isel({dim: out.count(other_dims) > 0})
-    # If spatial dimensions where unstacked stack them back together.
-    if space is not None and trim_space and not force_regular:
-      out = out.sq.stack_spatial_dims(name = space)
     return out
 
   def regularize(self):
