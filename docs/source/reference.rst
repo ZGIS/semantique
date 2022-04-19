@@ -299,6 +299,7 @@ Utils
    processor.utils.convert_datetime64
    processor.utils.create_extent_cube
    processor.utils.parse_datetime_component
+   processor.utils.parse_coords_component
 
 Templates
 ----------

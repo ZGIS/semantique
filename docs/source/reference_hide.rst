@@ -129,6 +129,8 @@
    processor.structures.Cube.unstack_spatial_dims
    processor.structures.Cube.drop_non_dimension_coords
    processor.structures.Cube.promote_value_type
+   processor.structures.Cube.to_dataframe
+   processor.structures.Cube.to_geodataframe
    processor.structures.Cube.to_csv
    processor.structures.Cube.to_geotiff
 
