@@ -119,6 +119,8 @@ def parse_datetime_component(name, obj):
 
   Parameters
   -----------
+    name : :obj:`str`
+      Name of the datetime component.
     obj : :obj:`xarray.DataArray`
       Xarray datetime accessor.
 
