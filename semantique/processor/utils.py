@@ -166,3 +166,26 @@ def parse_datetime_component(name, obj):
   else:
     obj.sq.value_type = "numerical"
   return obj
+
+def parse_coords_component(obj):
+  """Parse spatial coordinate arrays.
+
+  The spatial coordinate tuples of each pixel in a data cube are treated in
+  semantique as a component of the spatial dimension. Parsing them includes
+  adding a relevant
+  :attr:`value_type <semantique.processor.structures.Cube.value_type>`
+  property.
+
+  Parameters
+  -----------
+    obj : :obj:`xarray.DataArray`
+      Array containing spatial coordinate tuples.
+
+  Returns
+  --------
+    :obj:`xarray.DataArray`
+      Parsed spatial coordinate array.
+
+  """
+  obj.sq.value_type = "numerical"
+  return obj

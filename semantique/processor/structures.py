@@ -236,8 +236,11 @@ class Cube():
         else:
           out = utils.parse_datetime_component(component, out)
       else:
-        if component in self.xy_dimensions:
-          out.sq.value_type = "numerical"
+        try:
+          if component in self.xy_dimensions:
+            out = utils.parse_coords_component(out)
+        except TypeError:
+          pass
     return out
 
   def filter(self, filterer, trim = False, track_types = False, **kwargs):
