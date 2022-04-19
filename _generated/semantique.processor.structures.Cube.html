@@ -569,6 +569,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.templates.html">
      semantique.processor.templates
     </a>
@@ -783,7 +788,7 @@
 <h1>semantique.processor.structures.Cube<a class="headerlink" href="#semantique-processor-structures-cube" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.processor.structures.Cube">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.structures.</span></span><span class="sig-name descname"><span class="pre">Cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L15-L946"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.structures.</span></span><span class="sig-name descname"><span class="pre">Cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L15-L949"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal representation of a data cube.</p>
 <p>This data structure is modelled as an accessor of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>.
 Using accessors instead of the common class inheritance is recommended by the
@@ -852,10 +857,10 @@ using the <code class="docutils literal notranslate"><span class="pre">.sq</span
 <tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.to_csv.html#semantique.processor.structures.Cube.to_csv" title="semantique.processor.structures.Cube.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></a>(file)</p></td>
 <td><p>Write the content of the cube to a CSV file on disk.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dataframe</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.to_dataframe.html#semantique.processor.structures.Cube.to_dataframe" title="semantique.processor.structures.Cube.to_dataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dataframe</span></code></a>()</p></td>
 <td><p>Convert the cube to a pandas DataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_geodataframe</span></code>([output_crs])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.to_geodataframe.html#semantique.processor.structures.Cube.to_geodataframe" title="semantique.processor.structures.Cube.to_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_geodataframe</span></code></a>([output_crs])</p></td>
 <td><p>Convert the cube to a geopandas GeoDataFrame.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.to_geotiff.html#semantique.processor.structures.Cube.to_geotiff" title="semantique.processor.structures.Cube.to_geotiff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_geotiff</span></code></a>(file[, cloud_optimized, ...])</p></td>

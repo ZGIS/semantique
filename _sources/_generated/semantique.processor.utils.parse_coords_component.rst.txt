@@ -1,0 +1,6 @@
+﻿semantique.processor.utils.parse\_coords\_component
+===================================================
+
+.. currentmodule:: semantique.processor.utils
+
+.. autofunction:: parse_coords_component

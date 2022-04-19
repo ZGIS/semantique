@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.processor.templates" href="semantique.processor.templates.html" />
+    <link rel="next" title="semantique.processor.utils.parse_coords_component" href="semantique.processor.utils.parse_coords_component.html" />
     <link rel="prev" title="semantique.processor.utils.create_extent_cube" href="semantique.processor.utils.create_extent_cube.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -569,6 +569,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.templates.html">
      semantique.processor.templates
     </a>
@@ -783,7 +788,7 @@
 <h1>semantique.processor.utils.parse_datetime_component<a class="headerlink" href="#semantique-processor-utils-parse-datetime-component" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="semantique.processor.utils.parse_datetime_component">
-<span class="sig-prename descclassname"><span class="pre">semantique.processor.utils.</span></span><span class="sig-name descname"><span class="pre">parse_datetime_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/utils.py#L111-L168"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.utils.parse_datetime_component" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">semantique.processor.utils.</span></span><span class="sig-name descname"><span class="pre">parse_datetime_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/utils.py#L111-L170"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.utils.parse_datetime_component" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse datetime accessor arrays.</p>
 <p>The <a class="reference external" href="https://xarray.pydata.org/en/stable/user-guide/time-series.html#datetime-components">datetime accessors</a> of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> objects are treated in
 semantique as a component of the temporal dimension. Parsing them includes
@@ -792,7 +797,10 @@ and <a class="reference internal" href="semantique.processor.structures.Cube.val
 properties as well as in some cases re-organize the values in the array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Xarray datetime accessor.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the datetime component.</p></li>
+<li><p><strong>obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Xarray datetime accessor.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – Parsed datetime accessor.</p>
@@ -815,10 +823,10 @@ properties as well as in some cases re-organize the values in the array.</p>
             <p class="prev-next-title">semantique.processor.utils.create_extent_cube</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.processor.templates.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.processor.utils.parse_coords_component.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.processor.templates</p>
+        <p class="prev-next-title">semantique.processor.utils.parse_coords_component</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
