@@ -143,16 +143,36 @@ class Cube():
   @property
   def xy_dimensions(self):
     """:obj:`list`: Names of respectively the X and Y dimensions of the cube."""
+    spatial_dim = self.spatial_dimension
+    if spatial_dim is None:
+      all_dims = self._obj.dims
+    else:
+      all_dims = self.extract(spatial_dim).unstack().dims
     candidates = [
       ["x", "y"],
       ["X", "Y"],
       ["longitude", "latitude"],
       ["lon", "lat"],
     ]
-    for xy in candidates:
-      if all([dim in self._obj.unstack().dims for dim in xy]):
-        return xy
+    for pair in candidates:
+      if all([dim in all_dims for dim in pair]):
+        return pair
     return None
+
+  @property
+  def grid_points(self):
+    """:obj:`geopandas.GeoSeries`: Spatial grid points of the cube."""
+    # Extract names of spatial dimensions.
+    space_dim = self.spatial_dimension
+    if space_dim is None:
+      return None
+    xy_dims = self.xy_dimensions
+    # Extract spatial coordinates.
+    xcoords = self._obj[space_dim][xy_dims[0]]
+    ycoords = self._obj[space_dim][xy_dims[1]]
+    # Return grid points as geometries.
+    points = gpd.points_from_xy(xcoords, ycoords)
+    return gpd.GeoSeries(points, crs = self.crs)
 
   def evaluate(self, operator, y = None, track_types = False, **kwargs):
     """Apply the evaluate verb to the cube.
@@ -241,6 +261,7 @@ class Cube():
             out = utils.parse_coords_component(out)
         except TypeError:
           pass
+    out._variable = out._variable.to_base_variable()
     return out
 
   def filter(self, filterer, trim = False, track_types = False, **kwargs):
@@ -498,6 +519,7 @@ class Cube():
       out = out.isel({y_dim: y_slice, x_dim: x_slice})
       # Stack x and y dimensions back together.
       out = out.stack({space: [y_dim, x_dim]})
+      out[space].sq.value_type = "space"
     else:
       # Trim all dimensions normally.
       out = self._obj
@@ -749,11 +771,11 @@ class Cube():
     # Based on value types of the operands and the type promotion manual.
     def _get_type(x):
       try:
-        return x.attrs["value_type"]
+        vtype = x.sq.value_type
       except AttributeError:
-        return np.array(x).dtype.kind
-      except KeyError:
-        return x.dtype.kind
+        x = np.array(x)
+        vtype = None
+      return x.dtype.kind if vtype is None else vtype
     intypes = [_get_type(x) for x in operands]
     outtype = manual # Initialize before scanning.
     for x in intypes:

@@ -938,7 +938,8 @@ def geometries(value, **kwargs):
       understood by the query processor as such.
 
   """
-  obj = {"type": "geometry", "value": SpatialExtent(value, **kwargs)}
+  obj = {"type": "geometries", "value": SpatialExtent(value, **kwargs)}
+  return obj
 
 def time_instant(value, **kwargs):
   """Time instant.

@@ -787,6 +787,56 @@ def less_equal_(x, y, track_types = False, **kwargs):
   return out
 
 #
+# SPATIAL RELATIONAL OPERATORS
+#
+
+def intersects_(x, y, track_types = False, **kwargs):
+  """Test if x spatially intersects with y.
+
+  This is a specific spatial relational operator meant to be evaluated with
+  a spatial coordinate tuple as left-hand side operand, and spatial
+  `geometries <semantique.geometries>` as right-hand side operand. It will
+  evaluate if the spatial point with the specified coordinates spatially
+  intersects with any of the given geometries.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Data cube containing the operands at the left-hand side of each
+      expression, which should be spatial coordinate tuples.
+    y :
+      Spatial geometries to be used as the right-hand side of each expression.
+      May also be another data cube with spatial coordinate tuples. In the
+      latter case, when evaluating the expression for a coordinate tuple in
+      cube ``x`` the second operand is the spatial bounding box of all
+      coordinate tuples in cube ``y``.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input objects?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      A data cube with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  """
+  x_gdf = x.sq.grid_points
+  try:
+    y_gdf = y.unary_union
+  except AttributeError:
+    y_gdf = y.sq.trim().grid_points.envelope.unary_union
+  values = x_gdf.intersects(y_gdf)
+  coords = x[x.sq.spatial_dimension].coords
+  out = xr.DataArray(values, coords = coords).sq.align_with(x)
+  if track_types:
+    manual = TYPE_PROMOTION_TEMPLATES["spatial_relational_operators"]
+    out.sq.promote_value_type(x, y, func = "intersects", manual = manual)
+  return out
+
+#
 # TEMPORAL RELATIONAL OPERATORS
 #
 
@@ -794,21 +844,23 @@ def after_(x, y, track_types = False, **kwargs):
   """Test if x comes after y.
 
   This is a specific temporal relational operator meant to be evaluated with
-  `time instants <semantique.time_instant>` and/or
-  `time intervals <semantique.time_interval>` as operands.
+  a temporal coordinate as left-hand side operand, and a
+  `time instant <semantique.time_instant>` and/or
+  `time interval <semantique.time_interval>` as right-hand side operand. It
+  will evaluate if the specified temporal coordinate is later in time than
+  the given time instant or the end of the given time interval.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       Data cube containing the operands at the left-hand side of each
-      expression.
+      expression, which should be temporal coordinates.
     y :
-      Operands at the right-hand side of each expression. May be a constant,
-      meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
-      has the same dimension coordinates.
+      Time instant or time interval to be used as the right-hand side of each
+      expression. May also be another data cube with temporal coordinates. In
+      the latter case, when evaluating the expression for a coordinate in cube
+      ``x`` the second operand is the temporal bounding box of all coordinates
+      in cube ``y``.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
@@ -834,21 +886,23 @@ def before_(x, y, track_types = False, **kwargs):
   """Test if x comes before y.
 
   This is a specific temporal relational operator meant to be evaluated with
-  `time instants <semantique.time_instant>` and/or
-  `time intervals <semantique.time_interval>` as operands.
+  a temporal coordinate as left-hand side operand, and a
+  `time instant <semantique.time_instant>` and/or
+  `time interval <semantique.time_interval>` as right-hand side operand. It
+  will evaluate if the specified temporal coordinate is earlier in time than
+  the given time instant or the start of the given time interval.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       Data cube containing the operands at the left-hand side of each
-      expression.
+      expression, which should be temporal coordinates.
     y :
-      Operands at the right-hand side of each expression. May be a constant,
-      meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
-      has the same dimension coordinates.
+      Time instant or time interval to be used as the right-hand side of each
+      expression. May also be another data cube with temporal coordinates. In
+      the latter case, when evaluating the expression for a coordinate in cube
+      ``x`` the second operand is the temporal bounding box of all coordinates
+      in cube ``y``.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
@@ -874,21 +928,21 @@ def during_(x, y, track_types = False, **kwargs):
   """Test if x is during interval y.
 
   This is a specific temporal relational operator meant to be evaluated with
-  `time instants <semantique.time_instant>` and/or
-  `time intervals <semantique.time_interval>` as operands.
+  a temporal coordinate as left-hand side operand, and a
+  `time interval <semantique.time_interval>` as right-hand side operand. It
+  will evaluate if the specified temporal coordinate fall inside the given
+  time interval.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       Data cube containing the operands at the left-hand side of each
-      expression.
+      expression, which should be temporal coordinates.
     y :
-      Operands at the right-hand side of each expression. May be a constant,
-      meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
-      has the same dimension coordinates.
+      Time interval to be used as the right-hand side of each expression. May
+      also be another data cube with temporal coordinates. In the latter case,
+      when evaluating the expression for a coordinate in cube ``x`` the second
+      operand is the temporal bounding box of all coordinates in cube ``y``.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?

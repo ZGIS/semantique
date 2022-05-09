@@ -593,16 +593,14 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray`
+      :obj:`geopandas.GeoDataFrame`
 
     """
     feats = block["value"]["features"]
     crs = pyproj.CRS.from_string(block["value"]["crs"])
-    geodf = gpd.GeoDataFrame.from_features(feats, crs = crs)
+    out = gpd.GeoDataFrame.from_features(feats, crs = crs)
     if crs != self.crs:
-      geodf = geodf.to_crs(crs)
-    out = xr.DataArray([geodf])
-    out.sq.value_type = "space"
+      out = out.to_crs(self.crs)
     return out
 
   def handle_time_instant(self, block):
@@ -663,19 +661,26 @@ class QueryProcessor():
 
     """
     name = block["name"]
+    # Extract function parameters for the verb.
     try:
       params = block["params"]
     except KeyError:
       params = {}
+    # Update function parameters for the verb.
+    # This for example executes nested processing chains.
     try:
-      params = getattr(self, "update_params_of_" + name)(params)
+      updater = getattr(self, "update_params_of_" + name)
     except AttributeError:
       pass
+    else:
+      params = updater(params)
+    # Get the cube to apply the verb to.
     obj = self._get_eval_obj()
     try:
       obj = obj.sq
     except AttributeError:
       pass
+    # Apply the verb.
     out = getattr(obj, name)(**params)
     try:
       is_empty = out.sq.is_empty
@@ -685,6 +690,7 @@ class QueryProcessor():
       warnings.warn(
         f"Verb '{name}' returned an empty array"
       )
+    # Set the output as the new active evaluation object.
     self._replace_eval_obj(out)
     return out
 
