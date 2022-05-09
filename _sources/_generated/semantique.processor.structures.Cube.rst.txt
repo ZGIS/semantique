@@ -46,6 +46,7 @@
    
       ~Cube.crs
       ~Cube.extent
+      ~Cube.grid_points
       ~Cube.is_empty
       ~Cube.spatial_dimension
       ~Cube.spatial_resolution

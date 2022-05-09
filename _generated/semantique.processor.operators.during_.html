@@ -788,22 +788,22 @@
 <h1>semantique.processor.operators.during_<a class="headerlink" href="#semantique-processor-operators-during" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="semantique.processor.operators.during_">
-<span class="sig-prename descclassname"><span class="pre">semantique.processor.operators.</span></span><span class="sig-name descname"><span class="pre">during_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/operators.py#L836-L876"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.operators.during_" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">semantique.processor.operators.</span></span><span class="sig-name descname"><span class="pre">during_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/operators.py#L927-L967"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.operators.during_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test if x is during interval y.</p>
 <p>This is a specific temporal relational operator meant to be evaluated with
-<cite>time instants &lt;semantique.time_instant&gt;</cite> and/or
-<cite>time intervals &lt;semantique.time_interval&gt;</cite> as operands.</p>
+a temporal coordinate as left-hand side operand, and a
+<cite>time interval &lt;semantique.time_interval&gt;</cite> as right-hand side operand. It
+will evaluate if the specified temporal coordinate fall inside the given
+time interval.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Data cube containing the operands at the left-hand side of each
-expression.</p></li>
-<li><p><strong>y</strong> – Operands at the right-hand side of each expression. May be a constant,
-meaning that the same value is used in each expression. May also be
-another data cube which can be aligned to the same shape as cube <code class="docutils literal notranslate"><span class="pre">x</span></code>.
-In the latter case, when evaluating the expression for a pixel in cube
-<code class="docutils literal notranslate"><span class="pre">x</span></code> the second operand is the value of the pixel in cube <code class="docutils literal notranslate"><span class="pre">y</span></code> that
-has the same dimension coordinates.</p></li>
+expression, which should be temporal coordinates.</p></li>
+<li><p><strong>y</strong> – Time interval to be used as the right-hand side of each expression. May
+also be another data cube with temporal coordinates. In the latter case,
+when evaluating the expression for a coordinate in cube <code class="docutils literal notranslate"><span class="pre">x</span></code> the second
+operand is the temporal bounding box of all coordinates in cube <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
 <li><p><strong>track_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the operator promote the value type of the output object, based
 on the value type of the input objects?</p></li>
 <li><p><strong>**kwargs</strong> – Ignored.</p></li>

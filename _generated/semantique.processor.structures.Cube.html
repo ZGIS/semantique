@@ -788,7 +788,7 @@
 <h1>semantique.processor.structures.Cube<a class="headerlink" href="#semantique-processor-structures-cube" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.processor.structures.Cube">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.structures.</span></span><span class="sig-name descname"><span class="pre">Cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L15-L949"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.structures.</span></span><span class="sig-name descname"><span class="pre">Cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L15-L971"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal representation of a data cube.</p>
 <p>This data structure is modelled as an accessor of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>.
 Using accessors instead of the common class inheritance is recommended by the
@@ -896,28 +896,31 @@ using the <code class="docutils literal notranslate"><span class="pre">.sq</span
 <tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.extent.html#semantique.processor.structures.Cube.extent" title="semantique.processor.structures.Cube.extent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extent</span></code></a></p></td>
 <td><p>Spatio-temporal extent of the cube.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.is_empty.html#semantique.processor.structures.Cube.is_empty" title="semantique.processor.structures.Cube.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">grid_points</span></code></p></td>
+<td><p>Spatial grid points of the cube.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.is_empty.html#semantique.processor.structures.Cube.is_empty" title="semantique.processor.structures.Cube.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a></p></td>
 <td><p>Is the data cube empty.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.spatial_dimension.html#semantique.processor.structures.Cube.spatial_dimension" title="semantique.processor.structures.Cube.spatial_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spatial_dimension</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.spatial_dimension.html#semantique.processor.structures.Cube.spatial_dimension" title="semantique.processor.structures.Cube.spatial_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spatial_dimension</span></code></a></p></td>
 <td><p>Name of the spatial dimension of the cube.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.spatial_resolution.html#semantique.processor.structures.Cube.spatial_resolution" title="semantique.processor.structures.Cube.spatial_resolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spatial_resolution</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.spatial_resolution.html#semantique.processor.structures.Cube.spatial_resolution" title="semantique.processor.structures.Cube.spatial_resolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spatial_resolution</span></code></a></p></td>
 <td><p>Spatial resolution of the cube in units of the CRS.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.temporal_dimension.html#semantique.processor.structures.Cube.temporal_dimension" title="semantique.processor.structures.Cube.temporal_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">temporal_dimension</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.temporal_dimension.html#semantique.processor.structures.Cube.temporal_dimension" title="semantique.processor.structures.Cube.temporal_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">temporal_dimension</span></code></a></p></td>
 <td><p>Name of the temporal dimension of the cube.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.tz.html#semantique.processor.structures.Cube.tz" title="semantique.processor.structures.Cube.tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.tz.html#semantique.processor.structures.Cube.tz" title="semantique.processor.structures.Cube.tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz</span></code></a></p></td>
 <td><p>Time zone in which the temporal coordinates of the cube are expressed.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.value_labels.html#semantique.processor.structures.Cube.value_labels" title="semantique.processor.structures.Cube.value_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value_labels</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.value_labels.html#semantique.processor.structures.Cube.value_labels" title="semantique.processor.structures.Cube.value_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value_labels</span></code></a></p></td>
 <td><p>Character labels of data values.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.value_type.html#semantique.processor.structures.Cube.value_type" title="semantique.processor.structures.Cube.value_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value_type</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.value_type.html#semantique.processor.structures.Cube.value_type" title="semantique.processor.structures.Cube.value_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value_type</span></code></a></p></td>
 <td><p>The value type of the data cube.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.xy_dimensions.html#semantique.processor.structures.Cube.xy_dimensions" title="semantique.processor.structures.Cube.xy_dimensions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xy_dimensions</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.Cube.xy_dimensions.html#semantique.processor.structures.Cube.xy_dimensions" title="semantique.processor.structures.Cube.xy_dimensions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xy_dimensions</span></code></a></p></td>
 <td><p>Names of respectively the X and Y dimensions of the cube.</p></td>
 </tr>
 </tbody>
