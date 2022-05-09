@@ -95,8 +95,45 @@ def cube_root_(x, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "cube_root", manual = manual)
   return out
 
+def exponential_(x, track_types = False, **kwargs):
+  """Compute the exponential function of x.
+
+  The exponential function of x is defined as e to the power x, in which e is
+  Eulers number (approximately equal to 2.718). It is the inverse function of
+  :func:`natural_logarithm_`.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Data cube containing the values to apply the operator to.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      A data cube with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  """
+  def f(x, **kwargs):
+    return np.where(np.isfinite(x), np.exp(x), np.nan)
+  out = xr.apply_ufunc(f, x, kwargs = kwargs)
+  if track_types:
+    manual = TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"]
+    out.sq.promote_value_type(x, func = "exponential", manual = manual)
+  return out
+
+
 def natural_logarithm_(x, track_types = False, **kwargs):
   """Compute the natural logarithm of x.
+
+  The natural logarithm of x is the logarithm with base e, in which e is
+  Eulers number (approximately equal to 2.718). It is the inverse function of
+  :func:`exponential_`.
 
   Parameters
   ----------
