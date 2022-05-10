@@ -682,15 +682,16 @@ class QueryProcessor():
       pass
     # Apply the verb.
     out = getattr(obj, name)(**params)
+    # Warn when output array is empty.
     try:
-      is_empty = out.sq.is_empty
-    except:
-      is_empty = out.is_empty
-    if is_empty:
+      obj = obj.sq
+    except AttributeError:
+      pass
+    if obj.is_empty:
       warnings.warn(
         f"Verb '{name}' returned an empty array"
       )
-    # Set the output as the new active evaluation object.
+    # Set the output array as the new active evaluation object.
     self._replace_eval_obj(out)
     return out
 

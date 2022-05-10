@@ -122,7 +122,7 @@ class Cube():
   @property
   def is_empty(self):
     """:obj:`bool`: Is the data cube empty."""
-    return self._obj.values.size == 0 or self._obj.max() != self._obj.max()
+    return self._obj.values.size == 0 or not np.any(np.isfinite(self._obj))
 
   @ property
   def temporal_dimension(self):
