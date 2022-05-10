@@ -1220,7 +1220,7 @@ class CubeCollection(list):
     out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
     return out
 
-  def trim(self, trim_space = True, force_regular = True):
+  def trim(self, force_regular = True):
     """Trim the dimensions of all cubes in the collection.
 
     See :meth:`Cube.trim`
@@ -1231,7 +1231,7 @@ class CubeCollection(list):
 
     """
     out = copy.deepcopy(self)
-    out[:] = [x.sq.trim(trim_space, force_regular) for x in out]
+    out[:] = [x.sq.trim(force_regular) for x in out]
     return out
 
   def regularize(self):
