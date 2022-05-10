@@ -77,6 +77,11 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../background.html">
+   Background
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../installation.html">
    Installation
   </a>
@@ -361,6 +366,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.exponential_.html">
+     semantique.processor.operators.exponential_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.processor.operators.cube_root_.html">
      semantique.processor.operators.cube_root_
     </a>
@@ -458,6 +468,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.processor.operators.not_in_.html">
      semantique.processor.operators.not_in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.intersects_.html">
+     semantique.processor.operators.intersects_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1134,7 +1149,7 @@ div.rendered_html tbody tr:hover {
 <h2>Prepare<a class="headerlink" href="#Prepare" title="Permalink to this headline">¶</a></h2>
 <p>Import the <code class="docutils literal notranslate"><span class="pre">semantique</span></code> package:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[149]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1144,7 +1159,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>Import other packages we will use in this demo:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[150]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1160,7 +1175,7 @@ import inspect
 </div>
 <p>Create the components for query processing. See the <a class="reference internal" href="intro.html"><span class="doc">Intro notebook</span></a> for details.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[151]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1190,7 +1205,7 @@ config = {&quot;crs&quot;: 3035, &quot;tz&quot;: &quot;UTC&quot;, &quot;spatial_
 <h2>The query processor class<a class="headerlink" href="#The-query-processor-class" title="Permalink to this headline">¶</a></h2>
 <p>A semantic query is processed by a query processor. In <code class="docutils literal notranslate"><span class="pre">semantique</span></code>, this query processor is internally modelled as an object of class <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code>. An instance of this class is initialized whenever a query recipe is executed with respect to a given factbase, ontology and spatio-temporal extent. That is, whenever you call the execute method of a <code class="docutils literal notranslate"><span class="pre">QueryRecipe</span></code> instance, semantique internally creates a <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code> object to take care of all processing tasks.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[152]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1208,7 +1223,7 @@ query statement are actually defined in the ontology. A specific task of the que
 <div><p><strong>NOTE</strong> Currently the actual implementation of the query parsing phase is still very basic in its functionalities. It initializes the internal query processor object, but does not validate the query components yet.</p>
 </div></blockquote>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[153]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1217,7 +1232,7 @@ query statement are actually defined in the ontology. A specific task of the que
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[154]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1226,7 +1241,7 @@ query statement are actually defined in the ontology. A specific task of the que
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[154]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1244,7 +1259,7 @@ instead of loading data for the full extent and then subset it afterwards.</p>
 <div><p><strong>NOTE</strong> Currently the actual implementation of the query optimization phase is still very basic in its functionalities. To be honest, it currently does exactly nothing. That is, the query will be executed ‘as-is’, and not yet according to an optimized query execution plan. The function is merely provided as a placeholder for a future implementation of query optimization.</p>
 </div></blockquote>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[155]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1253,7 +1268,7 @@ instead of loading data for the full extent and then subset it afterwards.</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[156]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1262,7 +1277,7 @@ instead of loading data for the full extent and then subset it afterwards.</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[156]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1276,7 +1291,7 @@ semantique.processor.core.QueryProcessor
 <p>Finally, the execution phase follows the execution plan and executes all result instructions. The query processor instance contains specific handlers for all kind of operations that may be specified in the execution plan. Internally it will take care of the interaction with (and between) the given ontology and factbase, and forward required parameters to their translator and retriever accordingly.</p>
 <p>Execution is modelled as a method of the <code class="docutils literal notranslate"><span class="pre">QueryProcessor</span></code> class, and returns the same instance, but with a filled response property containing all executed result instructions as <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> objects.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[157]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1286,7 +1301,7 @@ processor.response
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[157]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1295,7 +1310,7 @@ processor.response
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[158]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1304,7 +1319,7 @@ processor.response
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[159]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1313,7 +1328,7 @@ processor.response
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[159]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1322,7 +1337,7 @@ semantique.processor.core.QueryProcessor
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[160]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1332,7 +1347,7 @@ processor.response
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[160]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1391,7 +1406,7 @@ processor.response
 <p>For example, when the processor stumbles upon a reference to a semantic concept, it forwards it to the <code class="docutils literal notranslate"><span class="pre">call_handler</span></code> function, which will notice this is a block of type “concept”, and therefore call the handler <code class="docutils literal notranslate"><span class="pre">handle_concept</span></code>. This handler knows exactly what to do with this type of block. In this specific example, it calls the translator function of the provided ontology to obtain the boolean data cube belonging to the referenced concept. Note that this example makes it extra clear that
 the query processor does not care <em>how</em> the reference is translated. It only cares about the parameters the translator function accepts, and about the type of object it returns (which should be an <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[161]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1433,7 +1448,7 @@ the query processor does not care <em>how</em> the reference is translated. It o
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[162]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1442,7 +1457,7 @@ the query processor does not care <em>how</em> the reference is translated. It o
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[163]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1455,12 +1470,12 @@ water.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, c
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[163]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;xarray.plot.facetgrid.FacetGrid at 0x7f0c4df64190&gt;
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fa5d3eff850&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1471,7 +1486,7 @@ water.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, c
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[164]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1482,12 +1497,12 @@ vegetation.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colo
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[164]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;xarray.plot.facetgrid.FacetGrid at 0x7f0c48f13a00&gt;
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fa5d6a2beb0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1500,7 +1515,7 @@ vegetation.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colo
 <p>Another example: when the processor stumbles upon a processing chain, it forwards it to the <code class="docutils literal notranslate"><span class="pre">call_handler</span></code> function, which will notice this is a block of type “chain”, and therefore call the handler <code class="docutils literal notranslate"><span class="pre">handle_chain</span></code>. This handler knows exactly what to do with this type of block. It first moves into the <em>with</em> part of the chain, and processes the reference (or a nested processing chain) it finds there by calling the corresponding handler. Then, it sets the obtained data cube (represented as
 <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> object) as the new active evaluation object, and moves into the <em>do</em> part of the chain. For each verb, it calls the handler corresponding to that verb, which knows exactly how to apply that verb to a data cube (this is explained in more detail in the <a class="reference internal" href="verbs.html"><span class="doc">Verbs notebook</span></a>). Et cetera.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[165]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1536,7 +1551,7 @@ vegetation.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colo
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[166]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1549,7 +1564,7 @@ out = processor.handle_processing_chain(chain)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[167]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1561,12 +1576,12 @@ out.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cba
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[167]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;xarray.plot.facetgrid.FacetGrid at 0x7f0c48e9d760&gt;
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fa5d688ebe0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1580,7 +1595,7 @@ out.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cba
 functions to take care of this. It also specifies additional parameters to be forwarded to the filter function, such as if it needs to keep track of value types or not (see <a class="reference external" href="#Tracking-value-types">Tracking value types</a>).</p>
 <p>For example:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[168]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1590,7 +1605,7 @@ verb
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[168]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1608,7 +1623,7 @@ verb
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[169]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1618,7 +1633,7 @@ verb
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[169]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1648,7 +1663,7 @@ verb
 </div>
 <p>Note the difference:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[170]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1660,7 +1675,7 @@ new_recipe[&quot;foo&quot;] = sq.entity(&quot;water&quot;).filter_time(&quot;yea
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[171]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1674,12 +1689,12 @@ out.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cba
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[171]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;xarray.plot.facetgrid.FacetGrid at 0x7f0c4813e8e0&gt;
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fa5d6b1f700&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1690,7 +1705,7 @@ out.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cba
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[172]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1699,7 +1714,7 @@ out.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cba
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[173]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1713,12 +1728,12 @@ out.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cba
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[173]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;xarray.plot.facetgrid.FacetGrid at 0x7f0c4813ec70&gt;
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fa5d432b910&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1735,7 +1750,7 @@ out.unstack().plot(col = &quot;time&quot;, levels = levels, colors = colors, cba
 </div>
 <p>Note the difference:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[174]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1747,7 +1762,7 @@ new_recipe[&quot;foo&quot;] = sq.entity(&quot;water&quot;).filter_time(&quot;yea
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[175]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1757,7 +1772,7 @@ out
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[175]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1804,7 +1819,7 @@ body.vscode-dark {
 }
 
 .xr-wrap {
-  display: block;
+  display: block !important;
   min-width: 300px;
   max-width: 700px;
 }
@@ -2136,7 +2151,7 @@ Coordinates:
   * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
   * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
 Attributes:
-    value_type:  binary</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'foo'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 2</li><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-2e1b00b6-3214-4b71-b299-018657ffbcd0' class='xr-array-in' type='checkbox' checked><label for='section-2e1b00b6-3214-4b71-b299-018657ffbcd0' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</span></div><div class='xr-array-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+    value_type:  binary</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'foo'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 2</li><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-b84f5fb6-3a4a-4e50-8e85-236c55afb1f2' class='xr-array-in' type='checkbox' checked><label for='section-b84f5fb6-3a4a-4e50-8e85-236c55afb1f2' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</span></div><div class='xr-array-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
@@ -2150,17 +2165,17 @@ Attributes:
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></div></li><li class='xr-section-item'><input id='section-e15c0755-b843-43c8-bd19-9c01c7c4e819' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e15c0755-b843-43c8-bd19-9c01c7c4e819' class='xr-section-summary' >Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2020-09-05T10:17:43.167942 2020-...</div><input id='attrs-467e2d2c-4478-4bbd-8945-ff6f9753ec1a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-467e2d2c-4478-4bbd-8945-ff6f9753ec1a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c75286d1-c9bb-45a9-93d7-db36029dab28' class='xr-var-data-in' type='checkbox'><label for='data-c75286d1-c9bb-45a9-93d7-db36029dab28' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2020-09-05T10:17:43.167942000&#x27;, &#x27;2020-12-19T10:17:34.610661000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-094acfda-ad23-46b2-807b-3aedb7e9a9d1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-094acfda-ad23-46b2-807b-3aedb7e9a9d1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6f2ff55e-c81b-4d53-863b-1a2a4113975d' class='xr-var-data-in' type='checkbox'><label for='data-6f2ff55e-c81b-4d53-863b-1a2a4113975d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-76c4b1f5-8514-4c3b-b388-99a1d71d0d9a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-76c4b1f5-8514-4c3b-b388-99a1d71d0d9a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-be0e419a-a9bf-4804-818a-8b0958d81bb6' class='xr-var-data-in' type='checkbox'><label for='data-be0e419a-a9bf-4804-818a-8b0958d81bb6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>feature</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-3a92e4d5-9b47-4cae-8d79-9e328646c7cf' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3a92e4d5-9b47-4cae-8d79-9e328646c7cf' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-206acf88-40df-4947-a798-c646dd225dba' class='xr-var-data-in' type='checkbox'><label for='data-206acf88-40df-4947-a798-c646dd225dba' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{&#x27;feature_1&#x27;: 1}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></div></li><li class='xr-section-item'><input id='section-e02b17a1-993d-4a73-a727-d6b6b3fcf57d' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e02b17a1-993d-4a73-a727-d6b6b3fcf57d' class='xr-section-summary' >Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2020-09-05T10:17:43.167942 2020-...</div><input id='attrs-a20363dd-e12f-49cb-95b2-93f220e37a5e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a20363dd-e12f-49cb-95b2-93f220e37a5e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e36235b7-d5cd-4b68-810f-df1f9de1d9bc' class='xr-var-data-in' type='checkbox'><label for='data-e36235b7-d5cd-4b68-810f-df1f9de1d9bc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2020-09-05T10:17:43.167942000&#x27;, &#x27;2020-12-19T10:17:34.610661000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-d639e935-a36b-4cd0-984d-c3b11e341a82' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d639e935-a36b-4cd0-984d-c3b11e341a82' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7b08f430-291c-4c6a-86ea-4450ceb7465c' class='xr-var-data-in' type='checkbox'><label for='data-7b08f430-291c-4c6a-86ea-4450ceb7465c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-30923d6a-36bb-4263-aecd-df696d93e131' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-30923d6a-36bb-4263-aecd-df696d93e131' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-91c304f7-aaaa-4841-93d1-1bcc9be0d996' class='xr-var-data-in' type='checkbox'><label for='data-91c304f7-aaaa-4841-93d1-1bcc9be0d996' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>feature</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-95321497-bf8e-4f28-9545-0fcbe7b9f6c5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-95321497-bf8e-4f28-9545-0fcbe7b9f6c5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-49bdecb6-2b4f-48a1-83ef-9fd1a09bd8d7' class='xr-var-data-in' type='checkbox'><label for='data-49bdecb6-2b4f-48a1-83ef-9fd1a09bd8d7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        ...,
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
-       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-af8b261f-c85c-4aa7-b600-f72ba5422830' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-af8b261f-c85c-4aa7-b600-f72ba5422830' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cde11cca-8eec-4ca7-87aa-d53096101128' class='xr-var-data-in' type='checkbox'><label for='data-cde11cca-8eec-4ca7-87aa-d53096101128' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-046e902e-21d7-4fd1-abb1-b993644b4c5a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-046e902e-21d7-4fd1-abb1-b993644b4c5a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4017784e-8100-4988-a355-438583afd950' class='xr-var-data-in' type='checkbox'><label for='data-4017784e-8100-4988-a355-438583afd950' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e311ac5b-087a-403d-9562-1ec1d63f1795' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e311ac5b-087a-403d-9562-1ec1d63f1795' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>binary</dd></dl></div></li></ul></div></div></div>
+       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-f1986be8-054c-44b7-8ae5-8a85d9997e38' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f1986be8-054c-44b7-8ae5-8a85d9997e38' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-caac29a6-acd7-41f3-95dd-53bb8cec81c8' class='xr-var-data-in' type='checkbox'><label for='data-caac29a6-acd7-41f3-95dd-53bb8cec81c8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-f7e3c9a1-66ee-4b9b-ad61-df57c65f6c34' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f7e3c9a1-66ee-4b9b-ad61-df57c65f6c34' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7af0ce4a-29f8-452e-988a-4812c97b5c8d' class='xr-var-data-in' type='checkbox'><label for='data-7af0ce4a-29f8-452e-988a-4812c97b5c8d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7bfc2554-ee7e-4ec0-8366-366cd3b9d1de' class='xr-section-summary-in' type='checkbox'  checked><label for='section-7bfc2554-ee7e-4ec0-8366-366cd3b9d1de' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>binary</dd></dl></div></li></ul></div></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[176]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2169,7 +2184,7 @@ Attributes:
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[177]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2179,7 +2194,7 @@ out
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[177]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2226,7 +2241,7 @@ body.vscode-dark {
 }
 
 .xr-wrap {
-  display: block;
+  display: block !important;
   min-width: 300px;
   max-width: 700px;
 }
@@ -2546,11 +2561,11 @@ Coordinates:
   - y             (space) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
   - x             (space) float64 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
 Attributes:
-    value_type:  binary</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'foo'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 2</li><li><span class='xr-has-index'>space</span>: 324288</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-f15749f1-bd9d-40cb-a51f-09ac44928384' class='xr-array-in' type='checkbox' checked><label for='section-f15749f1-bd9d-40cb-a51f-09ac44928384' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</span></div><div class='xr-array-data'><pre>array([[0., 0., 0., ..., 0., 0., 0.],
-       [1., 1., 1., ..., 0., 0., 0.]])</pre></div></div></li><li class='xr-section-item'><input id='section-350a4bc8-1580-4fce-9ef0-c4673517dc28' class='xr-section-summary-in' type='checkbox'  checked><label for='section-350a4bc8-1580-4fce-9ef0-c4673517dc28' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2020-09-05T10:17:43.167942 2020-...</div><input id='attrs-8360bf8e-15e7-4991-a478-f3c128165175' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8360bf8e-15e7-4991-a478-f3c128165175' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-744cb8b6-42bb-44c1-a9e8-2d302556350d' class='xr-var-data-in' type='checkbox'><label for='data-744cb8b6-42bb-44c1-a9e8-2d302556350d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2020-09-05T10:17:43.167942000&#x27;, &#x27;2020-12-19T10:17:34.610661000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-e2a44f39-9b6f-451d-916a-d3a1cd2744c6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e2a44f39-9b6f-451d-916a-d3a1cd2744c6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-22783a6e-366a-4c8f-94d8-bc68381a07a3' class='xr-var-data-in' type='checkbox'><label for='data-22783a6e-366a-4c8f-94d8-bc68381a07a3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-7728c9e0-31a8-4909-b199-39ed185db2d8' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7728c9e0-31a8-4909-b199-39ed185db2d8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a65d935b-a9b6-4bd6-a7fc-0ce68f0ca7b9' class='xr-var-data-in' type='checkbox'><label for='data-a65d935b-a9b6-4bd6-a7fc-0ce68f0ca7b9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>feature</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-a77064da-df7d-49bb-81ff-14e44f3265ba' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a77064da-df7d-49bb-81ff-14e44f3265ba' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ca1e3490-4e25-4ac3-a551-f185dd151f1b' class='xr-var-data-in' type='checkbox'><label for='data-ca1e3490-4e25-4ac3-a551-f185dd151f1b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{&#x27;feature_1&#x27;: 1}</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 1., ..., 1., 1., 1.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>space</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>MultiIndex</div><div class='xr-var-preview xr-preview'>(y, x)</div><input id='attrs-e4a8dd80-7442-4d33-bfca-61fad0931003' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e4a8dd80-7442-4d33-bfca-61fad0931003' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ff5cdf76-a3e2-4c5d-9d60-c23c86085d90' class='xr-var-data-in' type='checkbox'><label for='data-ff5cdf76-a3e2-4c5d-9d60-c23c86085d90' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([(2696625.0, 4530115.0), (2696625.0, 4530125.0), (2696625.0, 4530135.0),
+    value_type:  binary</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'foo'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 2</li><li><span class='xr-has-index'>space</span>: 324288</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-84f5a031-771e-4419-bcbd-96523a368d1c' class='xr-array-in' type='checkbox' checked><label for='section-84f5a031-771e-4419-bcbd-96523a368d1c' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</span></div><div class='xr-array-data'><pre>array([[0., 0., 0., ..., 0., 0., 0.],
+       [1., 1., 1., ..., 0., 0., 0.]])</pre></div></div></li><li class='xr-section-item'><input id='section-e6fec1ca-4a28-48ed-ab5e-cf32db408de6' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e6fec1ca-4a28-48ed-ab5e-cf32db408de6' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2020-09-05T10:17:43.167942 2020-...</div><input id='attrs-53e89d7d-2e2f-4d07-a5b6-bd297c8cd148' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-53e89d7d-2e2f-4d07-a5b6-bd297c8cd148' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bfc76e9d-47e0-4b88-8878-6340a1592c62' class='xr-var-data-in' type='checkbox'><label for='data-bfc76e9d-47e0-4b88-8878-6340a1592c62' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2020-09-05T10:17:43.167942000&#x27;, &#x27;2020-12-19T10:17:34.610661000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-9c159459-a56e-42d3-8419-8c690f3cf6eb' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9c159459-a56e-42d3-8419-8c690f3cf6eb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dbeed206-b73b-4415-9dd7-09aec8e54380' class='xr-var-data-in' type='checkbox'><label for='data-dbeed206-b73b-4415-9dd7-09aec8e54380' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-866fb9a3-4091-4f63-97a0-741302124f84' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-866fb9a3-4091-4f63-97a0-741302124f84' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-edcce05f-4d6c-4596-b031-3e7375a1175f' class='xr-var-data-in' type='checkbox'><label for='data-edcce05f-4d6c-4596-b031-3e7375a1175f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>feature</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-341fbaec-94b5-4f61-9177-b3d2ba61b66f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-341fbaec-94b5-4f61-9177-b3d2ba61b66f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5ed81f54-05b0-440a-a091-de2c71d1b491' class='xr-var-data-in' type='checkbox'><label for='data-5ed81f54-05b0-440a-a091-de2c71d1b491' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 1., ..., 1., 1., 1.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>space</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>MultiIndex</div><div class='xr-var-preview xr-preview'>(y, x)</div><input id='attrs-da76a819-eee1-466c-beb9-913d32c6e3df' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-da76a819-eee1-466c-beb9-913d32c6e3df' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d959bc60-6166-45eb-b235-ec97b299cbb7' class='xr-var-data-in' type='checkbox'><label for='data-d959bc60-6166-45eb-b235-ec97b299cbb7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>space</dd></dl></div><div class='xr-var-data'><pre>array([(2696625.0, 4530115.0), (2696625.0, 4530125.0), (2696625.0, 4530135.0),
        ..., (2691005.0, 4535845.0), (2691005.0, 4535855.0),
-       (2691005.0, 4535865.0)], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-6afd85bc-a618-4eb7-9d7d-96ab7862fb96' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6afd85bc-a618-4eb7-9d7d-96ab7862fb96' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-334b550c-6273-419d-a38f-cae6fc3d9488' class='xr-var-data-in' type='checkbox'><label for='data-334b550c-6273-419d-a38f-cae6fc3d9488' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([2696625., 2696625., 2696625., ..., 2691005., 2691005., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>x</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-9cdc879e-88b2-40ac-9e16-7064be64c4b8' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9cdc879e-88b2-40ac-9e16-7064be64c4b8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ba8fed9d-0b71-4de3-bfeb-8babce3bbfd5' class='xr-var-data-in' type='checkbox'><label for='data-ba8fed9d-0b71-4de3-bfeb-8babce3bbfd5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9edee6a7-92bd-4daa-90bf-82818d0fdcdd' class='xr-section-summary-in' type='checkbox'  checked><label for='section-9edee6a7-92bd-4daa-90bf-82818d0fdcdd' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>binary</dd></dl></div></li></ul></div></div></div>
+       (2691005.0, 4535865.0)], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-d62219f9-ce14-41a5-9300-9779350c5cb4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d62219f9-ce14-41a5-9300-9779350c5cb4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5b77d664-1aff-48d0-8d4a-89e460f3f1a2' class='xr-var-data-in' type='checkbox'><label for='data-5b77d664-1aff-48d0-8d4a-89e460f3f1a2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([2696625., 2696625., 2696625., ..., 2691005., 2691005., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>x</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-e8874474-5cce-469a-b740-111f251d49a6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e8874474-5cce-469a-b740-111f251d49a6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bedbbe71-e800-432e-91ff-0da5e194f0c8' class='xr-var-data-in' type='checkbox'><label for='data-bedbbe71-e800-432e-91ff-0da5e194f0c8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-3d2f0e67-5800-47ac-b2d8-b58edf3a2107' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3d2f0e67-5800-47ac-b2d8-b58edf3a2107' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>binary</dd></dl></div></li></ul></div></div></div>
 </div>
 </div>
 </div>
@@ -2567,7 +2582,7 @@ all filled with a value of <code class="docutils literal notranslate"><span clas
 </ol>
 <p>You can call the <code class="docutils literal notranslate"><span class="pre">create_extent_cube</span></code> function directly to create a spatio-temporal extent cube from respectively a spatial and temporal extent. It may occur that due to the reprojection of the provided spatial extent, some pixels at the edges of the extent get a nodata value.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[178]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2576,7 +2591,7 @@ all filled with a value of <code class="docutils literal notranslate"><span clas
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[179]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2588,7 +2603,7 @@ extent = create_extent_cube(space, time, res, crs = crs, tz = tz)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[180]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2597,7 +2612,7 @@ extent = create_extent_cube(space, time, res, crs = crs, tz = tz)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[180]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2644,7 +2659,7 @@ body.vscode-dark {
 }
 
 .xr-wrap {
-  display: block;
+  display: block !important;
   min-width: 300px;
   max-width: 700px;
 }
@@ -2968,15 +2983,15 @@ Attributes:
     long_name:     index
     _FillValue:    nan
     value_type:    nominal
-    value_labels:  {&#x27;feature_1&#x27;: 1}</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'index'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 2</li><li><span class='xr-has-index'>space</span>: 324288</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-9bd01366-4bee-4318-b9df-35a61e64ff45' class='xr-array-in' type='checkbox' checked><label for='section-9bd01366-4bee-4318-b9df-35a61e64ff45' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</span></div><div class='xr-array-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
-       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></div></li><li class='xr-section-item'><input id='section-62d65ab7-8d7f-4167-893a-db7b2ac8f7cb' class='xr-section-summary-in' type='checkbox'  checked><label for='section-62d65ab7-8d7f-4167-893a-db7b2ac8f7cb' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-01-01 2020-12-31</div><input id='attrs-673d3796-9591-420d-8026-86460bc7738f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-673d3796-9591-420d-8026-86460bc7738f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4c0d0f19-bf33-4522-9df0-c5936ba5f8c3' class='xr-var-data-in' type='checkbox'><label for='data-4c0d0f19-bf33-4522-9df0-c5936ba5f8c3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-01-01T00:00:00.000000000&#x27;, &#x27;2020-12-31T00:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-2b94b0e1-46a3-4449-806c-d7cfad01d39f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2b94b0e1-46a3-4449-806c-d7cfad01d39f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4b9c2445-50a5-47a0-ae2f-8d753333d626' class='xr-var-data-in' type='checkbox'><label for='data-4b9c2445-50a5-47a0-ae2f-8d753333d626' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696640.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>feature</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-ac0bc9b3-a238-4b61-a3ca-240343631caf' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ac0bc9b3-a238-4b61-a3ca-240343631caf' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9d576271-9172-4faa-9733-f93afa6de65d' class='xr-var-data-in' type='checkbox'><label for='data-9d576271-9172-4faa-9733-f93afa6de65d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{&#x27;feature_1&#x27;: 1}</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 1., ..., 1., 1., 1.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-eadca032-27c4-44e6-9789-cf427d4a0acd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-eadca032-27c4-44e6-9789-cf427d4a0acd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1e428949-720d-47c4-a03f-99ce62cbe366' class='xr-var-data-in' type='checkbox'><label for='data-1e428949-720d-47c4-a03f-99ce62cbe366' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>space</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>MultiIndex</div><div class='xr-var-preview xr-preview'>(y, x)</div><input id='attrs-110b7039-56ee-4804-9275-460b2612251b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-110b7039-56ee-4804-9275-460b2612251b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8120b581-f2a1-4ac5-ae0d-f4f9d4d4a638' class='xr-var-data-in' type='checkbox'><label for='data-8120b581-f2a1-4ac5-ae0d-f4f9d4d4a638' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([(2696625.0, 4530115.0), (2696625.0, 4530125.0), (2696625.0, 4530135.0),
+    value_labels:  {1: &#x27;feature_1&#x27;}</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'index'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 2</li><li><span class='xr-has-index'>space</span>: 324288</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-a2c599e2-6c70-4e89-9ecb-ceca9484dfab' class='xr-array-in' type='checkbox' checked><label for='section-a2c599e2-6c70-4e89-9ecb-ceca9484dfab' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</span></div><div class='xr-array-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
+       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></div></li><li class='xr-section-item'><input id='section-44ae18c8-f3d0-49b3-aff9-a9f99fd64e4d' class='xr-section-summary-in' type='checkbox'  checked><label for='section-44ae18c8-f3d0-49b3-aff9-a9f99fd64e4d' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-01-01 2020-12-31</div><input id='attrs-189ce4c2-6b1e-47cd-a038-1c1b7d15829b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-189ce4c2-6b1e-47cd-a038-1c1b7d15829b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5dcd9481-796e-42e0-9157-e0ad9792fbbb' class='xr-var-data-in' type='checkbox'><label for='data-5dcd9481-796e-42e0-9157-e0ad9792fbbb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-01-01T00:00:00.000000000&#x27;, &#x27;2020-12-31T00:00:00.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-dfbfeca4-5e83-470c-a571-9941e2326744' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-dfbfeca4-5e83-470c-a571-9941e2326744' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0afda977-e0b5-4532-b970-d418da11a90b' class='xr-var-data-in' type='checkbox'><label for='data-0afda977-e0b5-4532-b970-d418da11a90b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696640.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>feature</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-338c8197-ced2-4f58-9ee2-0cad13b70b59' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-338c8197-ced2-4f58-9ee2-0cad13b70b59' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-eb39c1b7-7eb0-4fde-8c51-137557718f2d' class='xr-var-data-in' type='checkbox'><label for='data-eb39c1b7-7eb0-4fde-8c51-137557718f2d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 1., ..., 1., 1., 1.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-ceab44c9-29f1-4103-b42c-de94cba5ca9a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ceab44c9-29f1-4103-b42c-de94cba5ca9a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6b677dd8-5ca8-46f0-89c0-55dc94221d78' class='xr-var-data-in' type='checkbox'><label for='data-6b677dd8-5ca8-46f0-89c0-55dc94221d78' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>space</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>MultiIndex</div><div class='xr-var-preview xr-preview'>(y, x)</div><input id='attrs-8da4a9cf-bd32-4016-a1be-0979d595e5c3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8da4a9cf-bd32-4016-a1be-0979d595e5c3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1f69d873-6d6c-46d2-8f1a-fb0cfe67a8fa' class='xr-var-data-in' type='checkbox'><label for='data-1f69d873-6d6c-46d2-8f1a-fb0cfe67a8fa' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>space</dd></dl></div><div class='xr-var-data'><pre>array([(2696625.0, 4530115.0), (2696625.0, 4530125.0), (2696625.0, 4530135.0),
        ..., (2691005.0, 4535845.0), (2691005.0, 4535855.0),
-       (2691005.0, 4535865.0)], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-ad2cdfff-81ad-4b53-9939-42d7b16fc4ae' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ad2cdfff-81ad-4b53-9939-42d7b16fc4ae' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8bd41611-b009-45bc-9d06-d3d521783de2' class='xr-var-data-in' type='checkbox'><label for='data-8bd41611-b009-45bc-9d06-d3d521783de2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([2696625., 2696625., 2696625., ..., 2691005., 2691005., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>x</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-3e4a2349-ec00-4992-a2a2-ff193717b49d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3e4a2349-ec00-4992-a2a2-ff193717b49d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-aa54e1fe-88d4-4e97-91e7-6e4c0a1017f7' class='xr-var-data-in' type='checkbox'><label for='data-aa54e1fe-88d4-4e97-91e7-6e4c0a1017f7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-be45f9ad-5a70-47a8-83d6-c606e91908eb' class='xr-section-summary-in' type='checkbox'  checked><label for='section-be45f9ad-5a70-47a8-83d6-c606e91908eb' class='xr-section-summary' >Attributes: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>index</dd><dt><span>long_name :</span></dt><dd>index</dd><dt><span>_FillValue :</span></dt><dd>nan</dd><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{&#x27;feature_1&#x27;: 1}</dd></dl></div></li></ul></div></div></div>
+       (2691005.0, 4535865.0)], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-c94a5540-0d58-4f72-b851-9edebfc41b86' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c94a5540-0d58-4f72-b851-9edebfc41b86' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-080003bf-813b-45f3-a09f-03d0ac6c52dc' class='xr-var-data-in' type='checkbox'><label for='data-080003bf-813b-45f3-a09f-03d0ac6c52dc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([2696625., 2696625., 2696625., ..., 2691005., 2691005., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>x</span></div><div class='xr-var-dims'>(space)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-0e176ff6-dfbe-4077-965e-3c7eac87ddbe' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0e176ff6-dfbe-4077-965e-3c7eac87ddbe' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c95568e0-ef67-428b-bf7c-06ac4e78174e' class='xr-var-data-in' type='checkbox'><label for='data-c95568e0-ef67-428b-bf7c-06ac4e78174e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-5ddf72d1-46ae-4a00-97e0-a439d0935110' class='xr-section-summary-in' type='checkbox'  checked><label for='section-5ddf72d1-46ae-4a00-97e0-a439d0935110' class='xr-section-summary' >Attributes: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>name :</span></dt><dd>index</dd><dt><span>long_name :</span></dt><dd>index</dd><dt><span>_FillValue :</span></dt><dd>nan</dd><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div></li></ul></div></div></div>
 </div>
 <p>Complying with common standards (see e.g. the discussion <a class="reference external" href="https://github.com/opendatacube/datacube-core/issues/837">here</a>), the coordinate reference system of the spatial coordinates is stored as attribute of a specific non-dimension coordinate named “spatial_ref”. Storing this inside a non-dimension coordinate instead of as direct attribute of the array guarantees that this information is preserved during any kind of operation. The coordinate itself serves merely as a placeholder.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[181]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2994,7 +3009,7 @@ Attributes:
 </div>
 <p>In the same style, <code class="docutils literal notranslate"><span class="pre">semantique</span></code> stores time zone information as attribute of a non-dimension coordinate named “temporal_ref”. Note that time coordinates themselves are stored as <code class="docutils literal notranslate"><span class="pre">numpy.datetime64</span></code> objects, which in itself don’t support timezone information anymore. Therefore, the “temporal_ref” coordinate is an important piece of information in the spatio-temporal extent cube.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[182]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3015,7 +3030,7 @@ Attributes:
 <div><p><strong>NOTE</strong> <code class="docutils literal notranslate"><span class="pre">semantique</span></code> extends regular <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> objects with an accessor named <code class="docutils literal notranslate"><span class="pre">sq</span></code>. Therefore, <code class="docutils literal notranslate"><span class="pre">semantique</span></code> specific array methods are always called as <code class="docutils literal notranslate"><span class="pre">sq.methodname</span></code>. Using accessors instead of the common class inheritance is recommended by the developers of <code class="docutils literal notranslate"><span class="pre">xarray</span></code>. Read more about it <a class="reference external" href="http://xarray.pydata.org/en/stable/internals/extending-xarray.html">here</a>.</p>
 </div></blockquote>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[183]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3024,7 +3039,7 @@ Attributes:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[183]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3033,7 +3048,7 @@ CRS.from_epsg(3035)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[184]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3042,7 +3057,7 @@ CRS.from_epsg(3035)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[184]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3051,7 +3066,7 @@ rasterio.crs.CRS
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[185]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3060,7 +3075,7 @@ rasterio.crs.CRS
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[185]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3069,7 +3084,7 @@ rasterio.crs.CRS
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[186]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3078,7 +3093,7 @@ rasterio.crs.CRS
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[186]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3087,7 +3102,7 @@ pytz.UTC
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[187]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3096,7 +3111,7 @@ pytz.UTC
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[187]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3118,7 +3133,7 @@ makes a distinction between three main value types:</p>
 <p>It is expected that whenever a data cube is retrieved from the factbase, the corresponding value type is stored as an array attribute named “value_type”. Even when the data are not qualitative, they are usually stored as numbers. In these cases, an additional attribute named “value_labels” may be used to define the mapping between character-encoded <em>labels</em> and integer-encoded <em>indices</em>.</p>
 <p>If a data cube does not contain these attributes, the value type is considered to be <code class="docutils literal notranslate"><span class="pre">None</span></code>, which in practice means that the query processor assumes it can be any of the supported value types.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[188]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3127,7 +3142,7 @@ makes a distinction between three main value types:</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[189]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3136,7 +3151,7 @@ makes a distinction between three main value types:</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[189]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3145,7 +3160,7 @@ makes a distinction between three main value types:</p>
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[190]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3154,7 +3169,7 @@ makes a distinction between three main value types:</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[190]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3192,7 +3207,7 @@ makes a distinction between three main value types:</p>
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[191]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3201,7 +3216,7 @@ makes a distinction between three main value types:</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[192]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3210,7 +3225,7 @@ makes a distinction between three main value types:</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[192]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3222,7 +3237,7 @@ makes a distinction between three main value types:</p>
 type(s) of the input(s) by using a type promotion manual. Most of the times this manual is not constructed inside the function itself, but a pre-defined template is used instead.</p>
 <p>A common type promotion manual for a univariate operator and a reducer has a dictionary structure with as keys the supported input value types. The value of each key is the output value type. For example, the <code class="docutils literal notranslate"><span class="pre">count</span></code> reducer should only be applied to data cubes containing binary data, since it counts the number of “true” values. The output of that operation, however, is a data cube with numerical data. Hence, the corresponding type promotion manual looks like this:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[193]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3231,7 +3246,7 @@ type(s) of the input(s) by using a type promotion manual. Most of the times this
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[194]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3240,7 +3255,7 @@ type(s) of the input(s) by using a type promotion manual. Most of the times this
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[194]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3251,7 +3266,7 @@ type(s) of the input(s) by using a type promotion manual. Most of the times this
 <p>The additional key <code class="docutils literal notranslate"><span class="pre">__preserve_labels__</span></code> defines if value labels should be preserved after the reducer is applied.</p>
 <p>The reduction function will apply the type promotion whenever argument <code class="docutils literal notranslate"><span class="pre">track_types</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. When we apply the count reducer to a binary data cube, this means the value type of the output will be numerical:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[195]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3260,7 +3275,7 @@ type(s) of the input(s) by using a type promotion manual. Most of the times this
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[196]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3270,7 +3285,7 @@ new.sq.value_type
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[196]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3280,7 +3295,7 @@ new.sq.value_type
 </div>
 <p>Now, when we call this reducer function on e.g. an ordinal data cube instead of a binary data cube, an <code class="docutils literal notranslate"><span class="pre">InvalidValueTypeError</span></code> will be thrown. Hence, the query processor uses type tracking also to <em>check</em> type promotions, and thus, to detect invalid operations.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[197]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3289,7 +3304,7 @@ new.sq.value_type
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[198]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3310,7 +3325,7 @@ Unsupported operand value type(s) for &#39;count&#39;: &#39;[&#39;ordinal&#39;]&
 </div>
 <p>This will not happen when <code class="docutils literal notranslate"><span class="pre">track_types</span> <span class="pre">=</span> <span class="pre">False</span></code>. In that case, value types are not tracked and the output cube has no value type at all.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[199]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3320,7 +3335,7 @@ Unsupported operand value type(s) for &#39;count&#39;: &#39;[&#39;ordinal&#39;]&
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[199]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3330,7 +3345,7 @@ False
 </div>
 <p>For multivariate expressions, the type promotion manuals have an extra “layer” per additional operand. For expressions with two operands, that means that the first layer of keys refers to the value type of the first operand (i.e. x) and the second layer of keys to the value type of the second operand (i.e. y). For example, the boolean operator <code class="docutils literal notranslate"><span class="pre">and</span></code> accepts only data cubes with binary values, and returns binary values as well. Hence, the corresponding type promotion manual looks like this:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[200]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3339,7 +3354,7 @@ False
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[200]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3351,7 +3366,7 @@ False
 </div>
 <p>When <code class="docutils literal notranslate"><span class="pre">track_types</span> <span class="pre">=</span> <span class="pre">True</span></code>, the operator function will apply the type promotion. Also here, providing data cubes with an unsupported value type for this operation results in an <code class="docutils literal notranslate"><span class="pre">InvalidValueTypeError</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[201]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3360,7 +3375,7 @@ False
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[202]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3370,7 +3385,7 @@ new.sq.value_type
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[202]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3379,7 +3394,7 @@ new.sq.value_type
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[203]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3401,7 +3416,7 @@ Unsupported operand value type(s) for &#39;and&#39;: &#39;[&#39;ordinal&#39;, &#
 <p>In the type promotion manual of the <code class="docutils literal notranslate"><span class="pre">and</span></code> operator we see something interesting: the occurence “b” in the second layer of keys. This is there since the second operand in the evaluate verb can also be a single value or a list of values instead of a data cube. For such values, we use regular numpy dtypes to check types. In numpy, the <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.kind.html">character code</a> “b” refers to boolean values, and are therefore accepted as second
 operand in an expression involving a logical operator like <code class="docutils literal notranslate"><span class="pre">and</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[204]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3411,7 +3426,7 @@ new.sq.value_type
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[204]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3422,7 +3437,7 @@ new.sq.value_type
 <p>Next to the main value types, there are two special value types we did not touch upon yet. These are <em>time</em> for timestamps and <em>space</em> for tuples of (x, y)-coordinates. These additional value types are added to support specific temporal (e.g. during, after) and spatial (e.g. intersects) operators. For example, the temporal operator <code class="docutils literal notranslate"><span class="pre">during</span></code> only accepts data cubes containing timestamps (usually such cubes are obtained by extracting dimension coordinates from a retrieved data cube), and
 possibly datetime objects (character code “M”) as second operand.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[205]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3431,7 +3446,7 @@ possibly datetime objects (character code “M”) as second operand.</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[205]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -3455,7 +3470,7 @@ tell the query processor to <em>not</em> track types. Simply add the configurati
 </div>
 <p>The query processor instance has a <code class="docutils literal notranslate"><span class="pre">operators</span></code> property in which it stores all supported operator functions. The keys of this dictionary are the operator names, such that the query processor can quickly retrieve the corresponding function of any referenced operator in the query recipe. For example:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[206]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3464,17 +3479,17 @@ tell the query processor to <em>not</em> track types. Simply add the configurati
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[206]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;function semantique.processor.operators.multiply_(x, y, track_types=False, **kwargs)&gt;
+&lt;function semantique.processor.operators.multiply_(x, y, track_types=True, **kwargs)&gt;
 </pre></div></div>
 </div>
 <p>As can be seen, the operator function itself is taken from the <a class="reference external" href="https://zgis.github.io/semantique/reference.html#operator-functions">operators module</a> of <code class="docutils literal notranslate"><span class="pre">semantique</span></code>. This is the module in which all built-in operator functions are defined. When initializing a query processor with default settings, these are the operators that get stored in the processors <code class="docutils literal notranslate"><span class="pre">operators</span></code> property.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[207]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3499,9 +3514,11 @@ divide
 during
 equal
 exclusive_or
+exponential
 greater
 greater_equal
 in
+intersects
 invert
 less
 less_equal
@@ -3531,7 +3548,7 @@ single value. The return value of the operator must again be a <code class="docu
 <p>If you want to <a class="reference external" href="#Tracking-value-types">track value types</a>, the custom operator should also have a <code class="docutils literal notranslate"><span class="pre">track_types</span></code> argument, which can be set to either <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. Inside the function, the type promotion should be applied whenever the <code class="docutils literal notranslate"><span class="pre">track_types</span></code> argument is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. You can create your own type promotion manual or use one of the existing templates. There are different templates for different types of operators.</p>
 <p>Lets create a custom operator that calculates the normalized difference between two values. Since this is a multivariate algebraic operator, we can use the type promotion template for such operators.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[208]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3563,7 +3580,7 @@ single value. The return value of the operator must again be a <code class="docu
 </pre></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[209]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3578,7 +3595,7 @@ new_recipe[&quot;ndvi&quot;] = nir.evaluate(&quot;normalized_difference&quot;, r
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[210]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3587,7 +3604,7 @@ new_recipe[&quot;ndvi&quot;] = nir.evaluate(&quot;normalized_difference&quot;, r
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[211]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3607,7 +3624,7 @@ Operator &#39;normalized_difference&#39; is not defined
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[212]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3616,7 +3633,7 @@ Operator &#39;normalized_difference&#39; is not defined
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[213]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3694,7 +3711,7 @@ Attributes:
 </div>
 <p>The query processor instance has a <code class="docutils literal notranslate"><span class="pre">reducers</span></code> property in which it stores all supported reducer functions. The keys of this dictionary are the reducer names, such that the query processor can quickly retrieve the corresponding function of any referenced reducer in the query recipe. For example:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[214]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3703,17 +3720,17 @@ Attributes:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[214]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;function semantique.processor.reducers.mean_(x, dimension, track_types=False, **kwargs)&gt;
+&lt;function semantique.processor.reducers.mean_(x, dimension, track_types=True, **kwargs)&gt;
 </pre></div></div>
 </div>
 <p>As can be seen, the reducer function itself is taken from the <a class="reference external" href="https://zgis.github.io/semantique/reference.html#reducer-functions">reducers module</a> of <code class="docutils literal notranslate"><span class="pre">semantique</span></code>. This is the module in which all built-in reducer functions are defined. When initializing a query processor with default settings, these are the reducers that get stored in the processors <code class="docutils literal notranslate"><span class="pre">reducers</span></code> property.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[215]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3760,7 +3777,7 @@ over. The return value of the reducer must again be a <code class="docutils lite
 <p>If you want to <a class="reference external" href="#Tracking-value-types">track value types</a>, the custom reducer should also have a <code class="docutils literal notranslate"><span class="pre">track_types</span></code> argument, which can be set to either <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. Inside the function, the type promotion should be applied whenever the <code class="docutils literal notranslate"><span class="pre">track_types</span></code> argument is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. You can create your own type promotion manual or use one of the existing templates. There are different templates for different types of reducers.</p>
 <p>Lets create a custom operator that reduces a set of values to its sum of squares. Since this is a numerical reducer (i.e. it only makes sense for numerical data), we can use the type promotion template for such reducers.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[216]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3790,7 +3807,7 @@ over. The return value of the reducer must again be a <code class="docutils lite
 </pre></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[217]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3804,7 +3821,7 @@ new_recipe[&quot;foo&quot;] = nir.reduce(&quot;time&quot;, &quot;sum_of_squares&
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[218]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3813,7 +3830,7 @@ new_recipe[&quot;foo&quot;] = nir.reduce(&quot;time&quot;, &quot;sum_of_squares&
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[219]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3833,7 +3850,7 @@ Reducer &#39;sum_of_squares&#39; is not defined
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[220]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -3842,7 +3859,7 @@ Reducer &#39;sum_of_squares&#39; is not defined
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[221]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>

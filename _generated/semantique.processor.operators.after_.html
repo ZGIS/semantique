@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="semantique.processor.operators.before_" href="semantique.processor.operators.before_.html" />
-    <link rel="prev" title="semantique.processor.operators.not_in_" href="semantique.processor.operators.not_in_.html" />
+    <link rel="prev" title="semantique.processor.operators.intersects_" href="semantique.processor.operators.intersects_.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -74,6 +74,11 @@
  </span>
 </p>
 <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background.html">
+   Background
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../installation.html">
    Installation
@@ -359,6 +364,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.exponential_.html">
+     semantique.processor.operators.exponential_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.operators.cube_root_.html">
      semantique.processor.operators.cube_root_
     </a>
@@ -456,6 +466,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.operators.not_in_.html">
      semantique.processor.operators.not_in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.intersects_.html">
+     semantique.processor.operators.intersects_
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -788,7 +803,7 @@
 <h1>semantique.processor.operators.after_<a class="headerlink" href="#semantique-processor-operators-after" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="semantique.processor.operators.after_">
-<span class="sig-prename descclassname"><span class="pre">semantique.processor.operators.</span></span><span class="sig-name descname"><span class="pre">after_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/operators.py#L843-L883"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.operators.after_" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">semantique.processor.operators.</span></span><span class="sig-name descname"><span class="pre">after_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/operators.py#L847-L891"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.operators.after_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test if x comes after y.</p>
 <p>This is a specific temporal relational operator meant to be evaluated with
 a temporal coordinate as left-hand side operand, and a
@@ -816,6 +831,10 @@ on the value type of the input objects?</p></li>
 evaluated expressions.</p>
 </dd>
 </dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The timezones of x and y are expected to be equal.</p>
+</div>
 </dd></dl>
 
 </div>
@@ -826,11 +845,11 @@ evaluated expressions.</p>
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="semantique.processor.operators.not_in_.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="semantique.processor.operators.intersects_.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">semantique.processor.operators.not_in_</p>
+            <p class="prev-next-title">semantique.processor.operators.intersects_</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="semantique.processor.operators.before_.html" title="next page">

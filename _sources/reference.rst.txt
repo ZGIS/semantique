@@ -158,6 +158,7 @@ Numerical univariate operators
    :nosignatures:
 
    processor.operators.absolute_
+   processor.operators.exponential_
    processor.operators.cube_root_
    processor.operators.natural_logarithm_
    processor.operators.square_root_
@@ -210,6 +211,15 @@ Relational operators
    processor.operators.less_equal_
    processor.operators.not_equal_
    processor.operators.not_in_
+
+Spatial relational operators
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   processor.operators.intersects_
 
 Temporal relational operators
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
