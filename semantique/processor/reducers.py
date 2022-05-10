@@ -437,7 +437,7 @@ def last_(x, dimension, track_types = True, **kwargs):
 
   """
   def f(x, axis, **kwargs):
-    return first(np.flip(x, axis = axis), axis = axis)
+    return first_(np.flip(x, axis = axis), axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
     manual = TYPE_PROMOTION_TEMPLATES["universal_reducers"]
