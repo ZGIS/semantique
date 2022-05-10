@@ -179,6 +179,8 @@ class SpatialExtent(dict):
     # Use CRS of extent if no output CRS is given.
     if crs is None:
       crs = self.crs
+    else:
+      crs = CRS(crs)
     # Rasterize.
     vector_obj = self._features.reset_index()
     vector_obj["index"] = vector_obj["index"] + 1
@@ -186,7 +188,7 @@ class SpatialExtent(dict):
       vector_data = vector_obj,
       measurements = ["index"],
       output_crs = crs,
-      resolution = resolution,
+      resolution = tuple(resolution),
     )["index"]
     # Update spatial reference.
     # CRS information was already automatically included during rasterizing.
