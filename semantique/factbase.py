@@ -255,7 +255,7 @@ class Opendatacube(Factbase):
     if data.sq.is_empty:
       raise exceptions.EmptyDataError(
         f"Data for product '{metadata['product']}' and "
-        f"measurement '{metadata['measurement']}' contains only missing data "
+        f"measurement '{metadata['name']}' contains only missing data "
         f"values within the given spatio-temporal extent"
       )
     return data
@@ -275,7 +275,7 @@ class Opendatacube(Factbase):
     except KeyError:
       raise exceptions.EmptyDataError(
         f"Cannot find data for product '{metadata['product']}' and "
-        f"measurement '{metadata['measurement']}' within the given "
+        f"measurement '{metadata['name']}' within the given "
         f"spatio-temporal extent"
       )
     return data
