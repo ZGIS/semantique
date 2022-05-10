@@ -822,6 +822,10 @@ def intersects_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+  The spatial coordinate reference systems of x and y are expected to be equal.
+
   """
   x_gdf = x.sq.grid_points
   try:
@@ -873,6 +877,10 @@ def after_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+  The timezones of x and y are expected to be equal.
+
   """
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.greater(x, np.max(y)), np.nan)
@@ -915,6 +923,10 @@ def before_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+  The timezones of x and y are expected to be equal.
+
   """
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.less(x, np.min(y)), np.nan)
@@ -954,6 +966,10 @@ def during_(x, y, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+  The timezones of x and y are expected to be equal.
 
   """
   def f(x, y, **kwargs):
