@@ -13,7 +13,7 @@ def _nodata_as_zero(x):
 # NUMERICAL REDUCERS
 #
 
-def mean_(x, dimension, track_types = False, **kwargs):
+def mean_(x, dimension, track_types = True, **kwargs):
   """Calculate the mean of a set of values.
 
   Parameters
@@ -42,7 +42,7 @@ def mean_(x, dimension, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "mean", manual = manual)
   return out
 
-def product_(x, dimension, track_types = False, **kwargs):
+def product_(x, dimension, track_types = True, **kwargs):
   """Calculate the product of a set of values.
 
   Parameters
@@ -72,7 +72,7 @@ def product_(x, dimension, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "product", manual = manual)
   return out
 
-def standard_deviation_(x, dimension, track_types = False, **kwargs):
+def standard_deviation_(x, dimension, track_types = True, **kwargs):
   """Calculate the standard deviation of a set of values.
 
   Parameters
@@ -101,7 +101,7 @@ def standard_deviation_(x, dimension, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "standard_deviation", manual = manual)
   return out
 
-def sum_(x, dimension, track_types = False, **kwargs):
+def sum_(x, dimension, track_types = True, **kwargs):
   """Calculate the sum of a set of values.
 
   Parameters
@@ -131,7 +131,7 @@ def sum_(x, dimension, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "sum", manual = manual)
   return out
 
-def variance_(x, dimension, track_types = False, **kwargs):
+def variance_(x, dimension, track_types = True, **kwargs):
   """Calculate the variance of a set of values.
 
   Parameters
@@ -164,7 +164,7 @@ def variance_(x, dimension, track_types = False, **kwargs):
 # BOOLEAN REDUCERS
 #
 
-def all_(x, dimension, track_types = False, **kwargs):
+def all_(x, dimension, track_types = True, **kwargs):
   """Test if all values in a set are true.
 
   Parameters
@@ -194,7 +194,7 @@ def all_(x, dimension, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "all", manual = manual)
   return out
 
-def any_(x, dimension, track_types = False, **kwargs):
+def any_(x, dimension, track_types = True, **kwargs):
   """Test if at least one value in a set is true.
 
   Parameters
@@ -227,7 +227,7 @@ def any_(x, dimension, track_types = False, **kwargs):
 # COUNT REDUCERS
 #
 
-def count_(x, dimension, track_types = False, **kwargs):
+def count_(x, dimension, track_types = True, **kwargs):
   """Count the number of true values in a set.
 
   Parameters
@@ -257,7 +257,7 @@ def count_(x, dimension, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "count", manual = manual)
   return out
 
-def percentage_(x, dimension, track_types = False, **kwargs):
+def percentage_(x, dimension, track_types = True, **kwargs):
   """Calculate the percentage of true values in a set.
 
   Parameters
@@ -293,7 +293,7 @@ def percentage_(x, dimension, track_types = False, **kwargs):
 # ORDERED REDUCERS
 #
 
-def max_(x, dimension, track_types = False, **kwargs):
+def max_(x, dimension, track_types = True, **kwargs):
   """Return the maximum value in a set.
 
   Parameters
@@ -322,7 +322,7 @@ def max_(x, dimension, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "max", manual = manual)
   return out
 
-def median_(x, dimension, track_types = False, **kwargs):
+def median_(x, dimension, track_types = True, **kwargs):
   """Return the median value in a set.
 
   Parameters
@@ -351,7 +351,7 @@ def median_(x, dimension, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "median", manual = manual)
   return out
 
-def min_(x, dimension, track_types = False, **kwargs):
+def min_(x, dimension, track_types = True, **kwargs):
   """Return the minimum value in a set.
 
   Parameters
@@ -384,7 +384,7 @@ def min_(x, dimension, track_types = False, **kwargs):
 # UNIVERSAL REDUCERS
 #
 
-def first_(x, dimension, track_types = False, **kwargs):
+def first_(x, dimension, track_types = True, **kwargs):
   """Return the first value in a set.
 
   Parameters
@@ -415,7 +415,7 @@ def first_(x, dimension, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "first", manual = manual)
   return out
 
-def last_(x, dimension, track_types = False, **kwargs):
+def last_(x, dimension, track_types = True, **kwargs):
   """Return the last value in a set.
 
   Parameters
@@ -444,7 +444,7 @@ def last_(x, dimension, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "last", manual = manual)
   return out
 
-def mode_(x, dimension, track_types = False, **kwargs):
+def mode_(x, dimension, track_types = True, **kwargs):
   """Return the most occuring value in a set.
 
   Parameters

@@ -174,7 +174,7 @@ class Cube():
     points = gpd.points_from_xy(xcoords, ycoords)
     return gpd.GeoSeries(points, crs = self.crs)
 
-  def evaluate(self, operator, y = None, track_types = False, **kwargs):
+  def evaluate(self, operator, y = None, track_types = True, **kwargs):
     """Apply the evaluate verb to the cube.
 
     The evaluate verb evaluates an expression for each pixel in a data cube.
@@ -264,7 +264,7 @@ class Cube():
     out._variable = out._variable.to_base_variable()
     return out
 
-  def filter(self, filterer, trim = False, track_types = False, **kwargs):
+  def filter(self, filterer, trim = False, track_types = True, **kwargs):
     """Apply the filter verb to the cube.
 
     The filter verb filters the values in a data cube.
@@ -391,7 +391,7 @@ class Cube():
     out = self._obj.rename(label)
     return out
 
-  def reduce(self, dimension, reducer, track_types = False, **kwargs):
+  def reduce(self, dimension, reducer, track_types = True, **kwargs):
     """Apply the reduce verb to the cube.
 
     The reduce verb reduces the dimensionality of a data cube.
@@ -996,7 +996,7 @@ class CubeCollection(list):
     """:obj:`bool`: Are all elements of the collection empty data cubes."""
     return all([x.sq.is_empty for x in self])
 
-  def compose(self, track_types = False, **kwargs):
+  def compose(self, track_types = True, **kwargs):
     """Apply the compose verb to the collection.
 
     The compose verb creates a categorical composition from the cubes in the
@@ -1041,7 +1041,7 @@ class CubeCollection(list):
     out.sq.value_labels = {k:v for k, v in zip(idxs, labels)}
     return out
 
-  def concatenate(self, dimension, track_types = False,
+  def concatenate(self, dimension, track_types = True,
                   vtype = "nominal", **kwargs):
     """Apply the concatenate verb to the collection.
 
@@ -1103,7 +1103,7 @@ class CubeCollection(list):
     del out.sq.value_labels
     return out
 
-  def merge(self, reducer, track_types = False, **kwargs):
+  def merge(self, reducer, track_types = True, **kwargs):
     """Apply the merge verb to the collection.
 
     The merge verb merges the pixel values of all cubes in the collection into
@@ -1146,7 +1146,7 @@ class CubeCollection(list):
     out = concat.sq.reduce(dim, reducer, track_types, **kwargs)
     return out
 
-  def evaluate(self, operator, y = None, track_types = False, **kwargs):
+  def evaluate(self, operator, y = None, track_types = True, **kwargs):
     """Apply the evaluate verb to all cubes in the collection.
 
     See :meth:`Cube.evaluate`
@@ -1176,7 +1176,7 @@ class CubeCollection(list):
     out[:] = [x.sq.extract(*args, **kwargs) for x in out]
     return out
 
-  def filter(self, filterer, trim = True, track_types = False, **kwargs):
+  def filter(self, filterer, trim = True, track_types = True, **kwargs):
     """Apply the filter verb to all cubes in the collection.
 
     See :meth:`Cube.filter`
@@ -1205,7 +1205,7 @@ class CubeCollection(list):
     out[:] = [x.sq.label(label, **kwargs) for x in out]
     return out
 
-  def reduce(self, dimension, reducer, track_types = False, **kwargs):
+  def reduce(self, dimension, reducer, track_types = True, **kwargs):
     """Apply the reduce verb to all cubes in the collection.
 
     See :meth:`Cube.reduce`

@@ -7,7 +7,7 @@ from semantique.processor.templates import TYPE_PROMOTION_TEMPLATES
 # BOOLEAN UNIVARIATE OPERATORS
 #
 
-def invert_(x, track_types = False, **kwargs):
+def invert_(x, track_types = True, **kwargs):
   """Compute the boolean inverse of x.
 
   Parameters
@@ -39,7 +39,7 @@ def invert_(x, track_types = False, **kwargs):
 # NUMERICAL UNIVARIATE OPERATORS
 #
 
-def absolute_(x, track_types = False, **kwargs):
+def absolute_(x, track_types = True, **kwargs):
   """Compute the absolute value of x.
 
   Parameters
@@ -67,7 +67,7 @@ def absolute_(x, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "absolute", manual = manual)
   return out
 
-def cube_root_(x, track_types = False, **kwargs):
+def cube_root_(x, track_types = True, **kwargs):
   """Compute the cube root of x.
 
   Parameters
@@ -95,7 +95,7 @@ def cube_root_(x, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "cube_root", manual = manual)
   return out
 
-def exponential_(x, track_types = False, **kwargs):
+def exponential_(x, track_types = True, **kwargs):
   """Compute the exponential function of x.
 
   The exponential function of x is defined as e to the power x, in which e is
@@ -128,7 +128,7 @@ def exponential_(x, track_types = False, **kwargs):
   return out
 
 
-def natural_logarithm_(x, track_types = False, **kwargs):
+def natural_logarithm_(x, track_types = True, **kwargs):
   """Compute the natural logarithm of x.
 
   The natural logarithm of x is the logarithm with base e, in which e is
@@ -160,7 +160,7 @@ def natural_logarithm_(x, track_types = False, **kwargs):
     out.sq.promote_value_type(x, func = "natural_logarithm", manual = manual)
   return out
 
-def square_root_(x, track_types = False, **kwargs):
+def square_root_(x, track_types = True, **kwargs):
   """Compute the square root of x.
 
   Parameters
@@ -192,7 +192,7 @@ def square_root_(x, track_types = False, **kwargs):
 # ALGEBRAIC MULTIVARIATE OPERATORS
 #
 
-def add_(x, y, track_types = False, **kwargs):
+def add_(x, y, track_types = True, **kwargs):
   """Add y to x.
 
   Parameters
@@ -229,7 +229,7 @@ def add_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "add", manual = manual)
   return out
 
-def divide_(x, y, track_types = False, **kwargs):
+def divide_(x, y, track_types = True, **kwargs):
   """Divide x by y.
 
   Parameters
@@ -266,7 +266,7 @@ def divide_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "divide", manual = manual)
   return out
 
-def multiply_(x, y, track_types = False, **kwargs):
+def multiply_(x, y, track_types = True, **kwargs):
   """Multiply x by y.
 
   Parameters
@@ -303,7 +303,7 @@ def multiply_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "multiply", manual = manual)
   return out
 
-def power_(x, y, track_types = False, **kwargs):
+def power_(x, y, track_types = True, **kwargs):
   """Raise x to the yth power.
 
   Parameters
@@ -340,7 +340,7 @@ def power_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "power", manual = manual)
   return out
 
-def subtract_(x, y, track_types = False, **kwargs):
+def subtract_(x, y, track_types = True, **kwargs):
   """Subtract y from x.
 
   Parameters
@@ -381,7 +381,7 @@ def subtract_(x, y, track_types = False, **kwargs):
 # BOOLEAN MULTIVARIATE OPERATORS
 #
 
-def and_(x, y, track_types = False, **kwargs):
+def and_(x, y, track_types = True, **kwargs):
   """Test if both x and y are true.
 
   Parameters
@@ -418,7 +418,7 @@ def and_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "and", manual = manual)
   return out
 
-def or_(x, y, track_types = False, **kwargs):
+def or_(x, y, track_types = True, **kwargs):
   """Test if either x or y are true.
 
   Parameters
@@ -455,7 +455,7 @@ def or_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "or", manual = manual)
   return out
 
-def exclusive_or_(x, y, track_types = False, **kwargs):
+def exclusive_or_(x, y, track_types = True, **kwargs):
   """Test if only one of x and y is true.
 
   Parameters
@@ -496,7 +496,7 @@ def exclusive_or_(x, y, track_types = False, **kwargs):
 # EQUALITY OPERATORS
 #
 
-def equal_(x, y, track_types = False, **kwargs):
+def equal_(x, y, track_types = True, **kwargs):
   """Test if x is equal to y.
 
   Parameters
@@ -533,7 +533,7 @@ def equal_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "equal", manual = manual)
   return out
 
-def in_(x, y, track_types = False, **kwargs):
+def in_(x, y, track_types = True, **kwargs):
   """Test if x is a member of set y.
 
   Parameters
@@ -565,7 +565,7 @@ def in_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "in", manual = manual)
   return out
 
-def not_equal_(x, y, track_types = False, **kwargs):
+def not_equal_(x, y, track_types = True, **kwargs):
   """Test if x is not equal to y.
 
   Parameters
@@ -602,7 +602,7 @@ def not_equal_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "not_equal", manual = manual)
   return out
 
-def not_in_(x, y, track_types = False, **kwargs):
+def not_in_(x, y, track_types = True, **kwargs):
   """Test if x is not a member of set y.
 
   Parameters
@@ -638,7 +638,7 @@ def not_in_(x, y, track_types = False, **kwargs):
 # REGULAR RELATIONAL OPERATORS
 #
 
-def greater_(x, y, track_types = False, **kwargs):
+def greater_(x, y, track_types = True, **kwargs):
   """Test if x is greater than y.
 
   Parameters
@@ -675,7 +675,7 @@ def greater_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "greater", manual = manual)
   return out
 
-def greater_equal_(x, y, track_types = False, **kwargs):
+def greater_equal_(x, y, track_types = True, **kwargs):
   """Test if x is greater than or equal to y.
 
   Parameters
@@ -712,7 +712,7 @@ def greater_equal_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "greater_equal", manual = manual)
   return out
 
-def less_(x, y, track_types = False, **kwargs):
+def less_(x, y, track_types = True, **kwargs):
   """Test if x is less than y.
 
   Parameters
@@ -749,7 +749,7 @@ def less_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "less", manual = manual)
   return out
 
-def less_equal_(x, y, track_types = False, **kwargs):
+def less_equal_(x, y, track_types = True, **kwargs):
   """Test if x is less than or equal to y.
 
   Parameters
@@ -790,7 +790,7 @@ def less_equal_(x, y, track_types = False, **kwargs):
 # SPATIAL RELATIONAL OPERATORS
 #
 
-def intersects_(x, y, track_types = False, **kwargs):
+def intersects_(x, y, track_types = True, **kwargs):
   """Test if x spatially intersects with y.
 
   This is a specific spatial relational operator meant to be evaluated with
@@ -828,7 +828,7 @@ def intersects_(x, y, track_types = False, **kwargs):
     y_gdf = y.unary_union
   except AttributeError:
     y_gdf = y.sq.trim().grid_points.envelope.unary_union
-  values = x_gdf.intersects(y_gdf)
+  values = x_gdf.intersects(y_gdf).astype(int)
   coords = x[x.sq.spatial_dimension].coords
   out = xr.DataArray(values, coords = coords).sq.align_with(x)
   if track_types:
@@ -840,7 +840,7 @@ def intersects_(x, y, track_types = False, **kwargs):
 # TEMPORAL RELATIONAL OPERATORS
 #
 
-def after_(x, y, track_types = False, **kwargs):
+def after_(x, y, track_types = True, **kwargs):
   """Test if x comes after y.
 
   This is a specific temporal relational operator meant to be evaluated with
@@ -882,7 +882,7 @@ def after_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "after", manual = manual)
   return out
 
-def before_(x, y, track_types = False, **kwargs):
+def before_(x, y, track_types = True, **kwargs):
   """Test if x comes before y.
 
   This is a specific temporal relational operator meant to be evaluated with
@@ -924,7 +924,7 @@ def before_(x, y, track_types = False, **kwargs):
     out.sq.promote_value_type(x, y, func = "before", manual = manual)
   return out
 
-def during_(x, y, track_types = False, **kwargs):
+def during_(x, y, track_types = True, **kwargs):
   """Test if x is during interval y.
 
   This is a specific temporal relational operator meant to be evaluated with
@@ -970,7 +970,7 @@ def during_(x, y, track_types = False, **kwargs):
 # ASSIGNMENT OPERATORS
 #
 
-def assign_(x, y, track_types = False, **kwargs):
+def assign_(x, y, track_types = True, **kwargs):
   """Replace x by y.
 
   Parameters
