@@ -200,7 +200,7 @@ class SpatialExtent(dict):
     except KeyError:
       names = ["feature_" + str(i) for i in indices]
     raster_obj.sq.value_type = "nominal"
-    raster_obj.sq.value_labels = {k:v for k, v in zip(names, indices)}
+    raster_obj.sq.value_labels = {k:v for k, v in zip(indices, names)}
     # Stack the two spatial dimensions into one if requested.
     if stack:
       raster_obj = raster_obj.sq.stack_spatial_dims()
