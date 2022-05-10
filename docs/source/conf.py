@@ -101,6 +101,15 @@ napoleon_type_aliases = {
 
 autosummary_generate = True
 
+# -- Nbsphinx configuration ---------------------------------------------------
+
+nbsphinx_prolog = """
+{% set docname = env.doc2path(env.docname, base=None) %}
+Explore this notebook interactively: |Binder|.
+.. |Binder| image:: https://mybinder.org/badge.svg
+   :target: https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo%2F{{ docname }}
+"""
+
 # -- Intersphinx configuration ------------------------------------------------
 
 intersphinx_mapping = {

@@ -794,8 +794,8 @@ def intersects_(x, y, track_types = True, **kwargs):
   """Test if x spatially intersects with y.
 
   This is a specific spatial relational operator meant to be evaluated with
-  a spatial coordinate tuple as left-hand side operand, and spatial
-  `geometries <semantique.geometries>` as right-hand side operand. It will
+  a spatial coordinate tuple as left-hand side operand, and
+  :func:`semantique.geometries` as right-hand side operand. It will
   evaluate if the spatial point with the specified coordinates spatially
   intersects with any of the given geometries.
 
@@ -849,10 +849,10 @@ def after_(x, y, track_types = True, **kwargs):
 
   This is a specific temporal relational operator meant to be evaluated with
   a temporal coordinate as left-hand side operand, and a
-  `time instant <semantique.time_instant>` and/or
-  `time interval <semantique.time_interval>` as right-hand side operand. It
-  will evaluate if the specified temporal coordinate is later in time than
-  the given time instant or the end of the given time interval.
+  :func:`semantique.time_instant` and/or :func:`semantique.time_interval` as
+  right-hand side operand. It will evaluate if the specified temporal
+  coordinate is later in time than the given time instant or the end of the
+  given time interval.
 
   Parameters
   ----------
@@ -895,10 +895,10 @@ def before_(x, y, track_types = True, **kwargs):
 
   This is a specific temporal relational operator meant to be evaluated with
   a temporal coordinate as left-hand side operand, and a
-  `time instant <semantique.time_instant>` and/or
-  `time interval <semantique.time_interval>` as right-hand side operand. It
-  will evaluate if the specified temporal coordinate is earlier in time than
-  the given time instant or the start of the given time interval.
+  :func:`semantique.time_instant` and/or :func:`semantique.time_interval` as
+  right-hand side operand. It will evaluate if the specified temporal
+  coordinate is earlier in time than the given time instant or the start of
+  the given time interval.
 
   Parameters
   ----------
@@ -941,9 +941,8 @@ def during_(x, y, track_types = True, **kwargs):
 
   This is a specific temporal relational operator meant to be evaluated with
   a temporal coordinate as left-hand side operand, and a
-  `time interval <semantique.time_interval>` as right-hand side operand. It
-  will evaluate if the specified temporal coordinate fall inside the given
-  time interval.
+  :func:`semantique.time_interval` as right-hand side operand. It will evaluate
+  if the specified temporal coordinate fall inside the given time interval.
 
   Parameters
   ----------
