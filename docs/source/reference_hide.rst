@@ -107,11 +107,11 @@
    processor.structures.Cube.crs
    processor.structures.Cube.spatial_resolution
    processor.structures.Cube.tz
-   processor.structures.Cube.extent
    processor.structures.Cube.is_empty
    processor.structures.Cube.temporal_dimension
    processor.structures.Cube.spatial_dimension
    processor.structures.Cube.xy_dimensions
+   processor.structures.Cube.grid_points
    processor.structures.Cube.evaluate
    processor.structures.Cube.extract
    processor.structures.Cube.filter
@@ -134,7 +134,6 @@
    processor.structures.Cube.to_csv
    processor.structures.Cube.to_geotiff
 
-   processor.structures.CubeCollection.extent
    processor.structures.CubeCollection.is_empty
    processor.structures.CubeCollection.compose
    processor.structures.CubeCollection.concatenate

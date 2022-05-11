@@ -102,24 +102,6 @@ class Cube():
       return None
 
   @property
-  def extent(self):
-    """:obj:`xarray.DataArray`: Spatio-temporal extent of the cube."""
-    time = self.temporal_dimension
-    space = self.spatial_dimension
-    if time is None:
-      if space is None:
-        out = xr.DataArray([])
-      else:
-        out = self._obj[space]["feature"]
-    else:
-      if space is None:
-        out = self._obj[time]
-        out.sq.value_type = "time"
-      else:
-        out = self._obj[space]["feature"].expand_dims({"time": self._obj[time]})
-    return out
-
-  @property
   def is_empty(self):
     """:obj:`bool`: Is the data cube empty."""
     return self._obj.values.size == 0 or not np.any(np.isfinite(self._obj))
@@ -982,14 +964,6 @@ class CubeCollection(list):
 
   def __init__(self, list_obj):
     super(CubeCollection, self).__init__(list_obj)
-
-  @property
-  def extent(self):
-    """:obj:`xarray.DataArray`: Combined spatio-temporal extent of the elements
-    in the collection."""
-    named = [xr.DataArray(self[i], name = i) for i in range(len(self))]
-    merged = xr.merge(named, compat = "override", join = "outer")
-    return merged[0].sq.extent
 
   @property
   def is_empty(self):
