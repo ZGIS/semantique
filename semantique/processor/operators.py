@@ -831,7 +831,7 @@ def intersects_(x, y, track_types = True, **kwargs):
   try:
     y_gdf = y.unary_union
   except AttributeError:
-    y_gdf = y.sq.trim().grid_points.envelope.unary_union
+    y_gdf = y.sq.trim().sq.grid_points.envelope.unary_union
   values = x_gdf.intersects(y_gdf).astype(int)
   coords = x[x.sq.spatial_dimension].coords
   out = xr.DataArray(values, coords = coords).sq.align_with(x)
