@@ -231,7 +231,8 @@ def any_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "any")
     promoter.check()
   def f(x, axis, **kwargs):
-    return np.any(_nodata_as_zero(x), axis = axis)
+    values = np.any(_nodata_as_zero(x), axis = axis)
+    return np.where(_is_all_nodata(x, axis), np.nan, values)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
     out = promoter.promote(out)
