@@ -322,7 +322,7 @@ Value type handling
    processor.types.get_value_type
    processor.types.get_value_labels
    processor.types.DTYPE_MAPPING
-   processor.types.TYPE_PROMOTION_TEMPLATES
+   processor.types.TYPE_PROMOTION_MANUALS
 
 
 Exceptions

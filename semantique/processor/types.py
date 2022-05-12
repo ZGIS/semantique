@@ -327,10 +327,10 @@ def get_value_type(x):
   categorization, which contains e.g. :obj:`int`, :obj:`float`, etc. Instead,
   the semantique value type describes data on a more general, statistical
   level. Currently it makes a distinction between three main value types:
-  `numerical`, `nominal`, `ordinal` and `binary`. Additional value types exist
-  for spatio-temporal data: `datetime` for timestamps, `coords` for spatial
-  coordinate tuples, and `geometry` for spatial geometries stored in
-  :obj:`geopandas.GeoDataFrame` objects.
+  ``numerical``, ``nominal``, ``ordinal`` and ``binary``. Additional value
+  types exist for spatio-temporal data: ``datetime`` for timestamps,
+  ``coords`` for spatial coordinate tuples, and ``geometry`` for spatial
+  geometries stored in :obj:`geopandas.GeoDataFrame` objects.
 
   Parameters
   ----------
@@ -341,7 +341,7 @@ def get_value_type(x):
   -------
     :obj:`str`
       The determined value type. If no value type could be determined for the
-      given object, the function will return `None`.
+      given object, the function will return ``None``.
 
   .. _numpy dtype:
     https://numpy.org/doc/stable/reference/arrays.dtypes.html
@@ -381,7 +381,7 @@ def get_value_labels(x):
     :obj:`dict`
       The obtained value labels as a dictionary containing value-label pairs.
       If the object does not have value labels stored, the function will return
-      `None`.
+      ``None``.
 
   """
   try:
@@ -411,9 +411,9 @@ class TypePromoter:
     function : :obj:`str`, optional
       Name of the operation.
     manual : :obj:`dict`, optional
-      Type promotion manual of the operation. If `None`, the worker will try to
-      obtain the manual from the built-in :data:`TYPE_PROMOTION_MANUALS`
-      dictionary, using the operation name (see the `function` parameter) as
+      Type promotion manual of the operation. If ``None``, the worker will try
+      to obtain the manual from the built-in :data:`TYPE_PROMOTION_MANUALS`
+      dictionary, using the operation name (see the ``function`` parameter) as
       search key.
 
   """
@@ -474,8 +474,9 @@ class TypePromoter:
     """Check if the operation supports the operand value type(s).
 
     Specific operations may only be applicable to specific value types. For
-    example, :func:`reducers.any_` is only supported for data cubes containing
-    binary values, and :func:`operators.sum_` is only supported for operands
+    example, :func:`semantique.processor.reducers.any_` is only supported for
+    data cubes containing binary values, and
+    :func:`semantique.processor.operators.sum_` is only supported for operands
     that are both numerical.
 
     This method obtains the value type of the operand/operands and uses the type
