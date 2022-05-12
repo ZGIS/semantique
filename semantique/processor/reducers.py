@@ -435,8 +435,8 @@ def first_(x, dimension, track_types = True, **kwargs):
     promoter.check()
   def f(x, axis, **kwargs):
     is_value = np.isfinite(x)
-    is_last = np.equal(np.cumsum(np.cumsum(is_value, axis = axis), axis = axis), 1)
-    return np.nanmax(np.where(is_last, x, np.nan), axis = axis)
+    is_first = np.equal(np.cumsum(np.cumsum(is_value, axis = axis), axis = axis), 1)
+    return np.nanmax(np.where(is_first, x, np.nan), axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -467,7 +467,10 @@ def last_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "last")
     promoter.check()
   def f(x, axis, **kwargs):
-    return first_(np.flip(x, axis = axis), axis = axis)
+    xflipped = np.flip(x, axis = axis)
+    is_value = np.isfinite(xflipped)
+    is_first = np.equal(np.cumsum(np.cumsum(is_value, axis = axis), axis = axis), 1)
+    return np.nanmax(np.where(is_first, xflipped, np.nan), axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
     out = promoter.promote(out)
