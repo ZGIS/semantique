@@ -587,8 +587,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.templates.html">
-     semantique.processor.templates
+    <a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.html">
+     semantique.processor.types.TypePromoter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.types.get_value_type.html">
+     semantique.processor.types.get_value_type
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.types.get_value_labels.html">
+     semantique.processor.types.get_value_labels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.types.DTYPE_MAPPING.html">
+     semantique.processor.types.DTYPE_MAPPING
     </a>
    </li>
    <li class="toctree-l2">
@@ -1068,20 +1083,20 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.tz.html#semantique.processor.structures.Cube.tz" title="semantique.processor.structures.Cube.tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.tz</span></code></a></p></td>
 <td><p>Time zone in which the temporal coordinates of the cube are expressed.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.extent.html#semantique.processor.structures.Cube.extent" title="semantique.processor.structures.Cube.extent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.extent</span></code></a></p></td>
-<td><p>Spatio-temporal extent of the cube.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.is_empty.html#semantique.processor.structures.Cube.is_empty" title="semantique.processor.structures.Cube.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.is_empty</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.is_empty.html#semantique.processor.structures.Cube.is_empty" title="semantique.processor.structures.Cube.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.is_empty</span></code></a></p></td>
 <td><p>Is the data cube empty.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.temporal_dimension.html#semantique.processor.structures.Cube.temporal_dimension" title="semantique.processor.structures.Cube.temporal_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.temporal_dimension</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.temporal_dimension.html#semantique.processor.structures.Cube.temporal_dimension" title="semantique.processor.structures.Cube.temporal_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.temporal_dimension</span></code></a></p></td>
 <td><p>Name of the temporal dimension of the cube.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.spatial_dimension.html#semantique.processor.structures.Cube.spatial_dimension" title="semantique.processor.structures.Cube.spatial_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.spatial_dimension</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.spatial_dimension.html#semantique.processor.structures.Cube.spatial_dimension" title="semantique.processor.structures.Cube.spatial_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.spatial_dimension</span></code></a></p></td>
 <td><p>Name of the spatial dimension of the cube.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.xy_dimensions.html#semantique.processor.structures.Cube.xy_dimensions" title="semantique.processor.structures.Cube.xy_dimensions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.xy_dimensions</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.xy_dimensions.html#semantique.processor.structures.Cube.xy_dimensions" title="semantique.processor.structures.Cube.xy_dimensions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.xy_dimensions</span></code></a></p></td>
 <td><p>Names of respectively the X and Y dimensions of the cube.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.grid_points.html#semantique.processor.structures.Cube.grid_points" title="semantique.processor.structures.Cube.grid_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.grid_points</span></code></a></p></td>
+<td><p>Spatial grid points of the cube.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.evaluate.html#semantique.processor.structures.Cube.evaluate" title="semantique.processor.structures.Cube.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.evaluate</span></code></a>(operator)</p></td>
 <td><p>Apply the evaluate verb to the cube.</p></td>
@@ -1131,23 +1146,17 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.drop_non_dimension_coords.html#semantique.processor.structures.Cube.drop_non_dimension_coords" title="semantique.processor.structures.Cube.drop_non_dimension_coords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.drop_non_dimension_coords</span></code></a>([keep])</p></td>
 <td><p>Drop non-dimension coordinates from the cube.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.promote_value_type.html#semantique.processor.structures.Cube.promote_value_type" title="semantique.processor.structures.Cube.promote_value_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.promote_value_type</span></code></a>(...)</p></td>
-<td><p>Promote the value type of the output cube of an operation.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.to_dataframe.html#semantique.processor.structures.Cube.to_dataframe" title="semantique.processor.structures.Cube.to_dataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.to_dataframe</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.to_dataframe.html#semantique.processor.structures.Cube.to_dataframe" title="semantique.processor.structures.Cube.to_dataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.to_dataframe</span></code></a>()</p></td>
 <td><p>Convert the cube to a pandas DataFrame.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.to_geodataframe.html#semantique.processor.structures.Cube.to_geodataframe" title="semantique.processor.structures.Cube.to_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.to_geodataframe</span></code></a>([...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.to_geodataframe.html#semantique.processor.structures.Cube.to_geodataframe" title="semantique.processor.structures.Cube.to_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.to_geodataframe</span></code></a>([...])</p></td>
 <td><p>Convert the cube to a geopandas GeoDataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.to_csv.html#semantique.processor.structures.Cube.to_csv" title="semantique.processor.structures.Cube.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.to_csv</span></code></a>(file)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.to_csv.html#semantique.processor.structures.Cube.to_csv" title="semantique.processor.structures.Cube.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.to_csv</span></code></a>(file)</p></td>
 <td><p>Write the content of the cube to a CSV file on disk.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.to_geotiff.html#semantique.processor.structures.Cube.to_geotiff" title="semantique.processor.structures.Cube.to_geotiff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.to_geotiff</span></code></a>(file[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.to_geotiff.html#semantique.processor.structures.Cube.to_geotiff" title="semantique.processor.structures.Cube.to_geotiff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.to_geotiff</span></code></a>(file[, ...])</p></td>
 <td><p>Write the content of the cube to a GeoTIFF file on disk.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.extent.html#semantique.processor.structures.CubeCollection.extent" title="semantique.processor.structures.CubeCollection.extent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.extent</span></code></a></p></td>
-<td><p>Combined spatio-temporal extent of the elements in the collection.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.is_empty.html#semantique.processor.structures.CubeCollection.is_empty" title="semantique.processor.structures.CubeCollection.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.is_empty</span></code></a></p></td>
 <td><p>Are all elements of the collection empty data cubes.</p></td>
@@ -1187,6 +1196,24 @@
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.unstack_spatial_dims.html#semantique.processor.structures.CubeCollection.unstack_spatial_dims" title="semantique.processor.structures.CubeCollection.unstack_spatial_dims"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.unstack_spatial_dims</span></code></a>()</p></td>
 <td><p>Unstack the spatial dimensions for all cubes in the collection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.manual.html#semantique.processor.types.TypePromoter.manual" title="semantique.processor.types.TypePromoter.manual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.manual</span></code></a></p></td>
+<td><p>The type promotion manual of the operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.input_types.html#semantique.processor.types.TypePromoter.input_types" title="semantique.processor.types.TypePromoter.input_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.input_types</span></code></a></p></td>
+<td><p>The value types of the operands.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.output_type.html#semantique.processor.types.TypePromoter.output_type" title="semantique.processor.types.TypePromoter.output_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.output_type</span></code></a></p></td>
+<td><p>The value type of the output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.input_labels.html#semantique.processor.types.TypePromoter.input_labels" title="semantique.processor.types.TypePromoter.input_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.input_labels</span></code></a></p></td>
+<td><p>The value labels of the operands.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.check.html#semantique.processor.types.TypePromoter.check" title="semantique.processor.types.TypePromoter.check"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.check</span></code></a>()</p></td>
+<td><p>Check if the operation supports the operand value type(s).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.promote.html#semantique.processor.types.TypePromoter.promote" title="semantique.processor.types.TypePromoter.promote"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.promote</span></code></a>(obj)</p></td>
+<td><p>Promote the value type of the operation output.</p></td>
 </tr>
 </tbody>
 </table>

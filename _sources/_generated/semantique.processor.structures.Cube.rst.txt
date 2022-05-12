@@ -21,7 +21,6 @@
       ~Cube.filter
       ~Cube.groupby
       ~Cube.label
-      ~Cube.promote_value_type
       ~Cube.reduce
       ~Cube.regularize
       ~Cube.reproject
@@ -45,7 +44,6 @@
    .. autosummary::
    
       ~Cube.crs
-      ~Cube.extent
       ~Cube.grid_points
       ~Cube.is_empty
       ~Cube.spatial_dimension

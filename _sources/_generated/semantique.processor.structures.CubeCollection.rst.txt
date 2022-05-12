@@ -35,7 +35,6 @@
 
    .. autosummary::
    
-      ~CubeCollection.extent
       ~CubeCollection.is_empty
    
    

@@ -1,6 +1,0 @@
-﻿semantique.processor.structures.Cube.extent
-===========================================
-
-.. currentmodule:: semantique.processor.structures
-
-.. autoproperty:: Cube.extent

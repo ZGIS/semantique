@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.processor.templates" href="semantique.processor.templates.html" />
+    <link rel="next" title="semantique.processor.types.TypePromoter" href="semantique.processor.types.TypePromoter.html" />
     <link rel="prev" title="semantique.processor.utils.parse_datetime_component" href="semantique.processor.utils.parse_datetime_component.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -589,8 +589,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.templates.html">
-     semantique.processor.templates
+    <a class="reference internal" href="semantique.processor.types.TypePromoter.html">
+     semantique.processor.types.TypePromoter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.get_value_type.html">
+     semantique.processor.types.get_value_type
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.get_value_labels.html">
+     semantique.processor.types.get_value_labels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.DTYPE_MAPPING.html">
+     semantique.processor.types.DTYPE_MAPPING
     </a>
    </li>
    <li class="toctree-l2">
@@ -805,14 +820,14 @@
 <dt class="sig sig-object py" id="semantique.processor.utils.parse_coords_component">
 <span class="sig-prename descclassname"><span class="pre">semantique.processor.utils.</span></span><span class="sig-name descname"><span class="pre">parse_coords_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/utils.py#L172-L193"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.utils.parse_coords_component" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse spatial coordinate arrays.</p>
-<p>The spatial coordinate tuples of each pixel in a data cube are treated in
+<p>The spatial x and y coordinates of each pixel in a data cube are treated in
 semantique as a component of the spatial dimension. Parsing them includes
 adding a relevant
 <a class="reference internal" href="semantique.processor.structures.Cube.value_type.html#semantique.processor.structures.Cube.value_type" title="semantique.processor.structures.Cube.value_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value_type</span></code></a>
 property.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Array containing spatial coordinate tuples.</p>
+<dd class="field-odd"><p><strong>obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Array containing spatial coordinates.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – Parsed spatial coordinate array.</p>
@@ -835,10 +850,10 @@ property.</p>
             <p class="prev-next-title">semantique.processor.utils.parse_datetime_component</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.processor.templates.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.processor.types.TypePromoter.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.processor.templates</p>
+        <p class="prev-next-title">semantique.processor.types.TypePromoter</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

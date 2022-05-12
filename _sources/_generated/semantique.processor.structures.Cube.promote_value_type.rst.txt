@@ -1,6 +1,0 @@
-﻿semantique.processor.structures.Cube.promote\_value\_type
-=========================================================
-
-.. currentmodule:: semantique.processor.structures
-
-.. automethod:: Cube.promote_value_type

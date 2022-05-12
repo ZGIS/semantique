@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>semantique.processor.structures.Cube.extent &#8212; semantique 0.1.0 documentation</title>
+    <title>semantique.processor.types.TypePromoter &#8212; semantique 0.1.0 documentation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -35,6 +35,8 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="semantique.processor.types.get_value_type" href="semantique.processor.types.get_value_type.html" />
+    <link rel="prev" title="semantique.processor.utils.parse_coords_component" href="semantique.processor.utils.parse_coords_component.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -88,7 +90,7 @@
   Documentation
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../guide.html">
    User Guide
@@ -121,16 +123,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../reference.html">
    API Reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.QueryRecipe.html">
      semantique.QueryRecipe
@@ -586,9 +588,24 @@
      semantique.processor.utils.parse_coords_component
     </a>
    </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     semantique.processor.types.TypePromoter
+    </a>
+   </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.templates.html">
-     semantique.processor.templates
+    <a class="reference internal" href="semantique.processor.types.get_value_type.html">
+     semantique.processor.types.get_value_type
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.get_value_labels.html">
+     semantique.processor.types.get_value_labels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.DTYPE_MAPPING.html">
+     semantique.processor.types.DTYPE_MAPPING
     </a>
    </li>
    <li class="toctree-l2">
@@ -746,7 +763,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/_generated/semantique.processor.structures.Cube.extent.rst.txt"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/_generated/semantique.processor.types.TypePromoter.rst.txt"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.rst</button></a>
         <!-- Download PDF via print -->
@@ -766,10 +783,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_generated/semantique.processor.structures.Cube.extent.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_generated/semantique.processor.types.TypePromoter.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/_generated/semantique.processor.structures.Cube.extent.rst"><button
+        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/_generated/semantique.processor.types.TypePromoter.rst"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -797,17 +814,80 @@
         
               <div>
                 
-  <div class="section" id="semantique-processor-structures-cube-extent">
-<h1>semantique.processor.structures.Cube.extent<a class="headerlink" href="#semantique-processor-structures-cube-extent" title="Permalink to this headline">¶</a></h1>
-<dl class="py property">
-<dt class="sig sig-object py" id="semantique.processor.structures.Cube.extent">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Cube.</span></span><span class="sig-name descname"><span class="pre">extent</span></span><a class="headerlink" href="#semantique.processor.structures.Cube.extent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Spatio-temporal extent of the cube.</p>
+  <div class="section" id="semantique-processor-types-typepromoter">
+<h1>semantique.processor.types.TypePromoter<a class="headerlink" href="#semantique-processor-types-typepromoter" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="semantique.processor.types.TypePromoter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.types.</span></span><span class="sig-name descname"><span class="pre">TypePromoter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">operands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/types.py#L393-L544"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.types.TypePromoter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Worker that takes care of promoting value types during an operation.</p>
+<p>Whenever applying an operation to a data cube, its value type might change.
+For example, when evaluating an expression (e.g. when evaluating an expression
+involving a comparison operator the resulting values are always binary) or
+applying a reducer (e.g. when counting the number of “true” values in a binary
+data cube the resulting values are numerical). This is called type promotion.</p>
+<p>This worker takes care of the type promotion during a specified operation. It
+can check if the value types of the operands are supported by the operation,
+and if yes, determine the value type of the output of the operation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*operands</strong> – The operands of the operation. Reducer functions and univariate operators
+always have a single operand, while bivariate operators have two operands.</p></li>
+<li><p><strong>function</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – Name of the operation.</p></li>
+<li><p><strong>manual</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>, <em>optional</em>) – Type promotion manual of the operation. If <cite>None</cite>, the worker will try to
+obtain the manual from the built-in <code class="xref py py-data docutils literal notranslate"><span class="pre">TYPE_PROMOTION_MANUALS</span></code>
+dictionary, using the operation name (see the <cite>function</cite> parameter) as
+search key.</p></li>
+</ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="semantique.processor.types.TypePromoter.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">operands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/types.py#L421-L428"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.types.TypePromoter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#semantique.processor.types.TypePromoter.__init__" title="semantique.processor.types.TypePromoter.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*operands[, function, manual])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.types.TypePromoter.check.html#semantique.processor.types.TypePromoter.check" title="semantique.processor.types.TypePromoter.check"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check</span></code></a>()</p></td>
+<td><p>Check if the operation supports the operand value type(s).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.types.TypePromoter.promote.html#semantique.processor.types.TypePromoter.promote" title="semantique.processor.types.TypePromoter.promote"><code class="xref py py-obj docutils literal notranslate"><span class="pre">promote</span></code></a>(obj)</p></td>
+<td><p>Promote the value type of the operation output.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.types.TypePromoter.input_labels.html#semantique.processor.types.TypePromoter.input_labels" title="semantique.processor.types.TypePromoter.input_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_labels</span></code></a></p></td>
+<td><p>The value labels of the operands.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.types.TypePromoter.input_types.html#semantique.processor.types.TypePromoter.input_types" title="semantique.processor.types.TypePromoter.input_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_types</span></code></a></p></td>
+<td><p>The value types of the operands.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.types.TypePromoter.manual.html#semantique.processor.types.TypePromoter.manual" title="semantique.processor.types.TypePromoter.manual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">manual</span></code></a></p></td>
+<td><p>The type promotion manual of the operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_labels</span></code></p></td>
+<td><p>The value labels of the output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.types.TypePromoter.output_type.html#semantique.processor.types.TypePromoter.output_type" title="semantique.processor.types.TypePromoter.output_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_type</span></code></a></p></td>
+<td><p>The value type of the output.</p></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -817,7 +897,21 @@
               
         
             <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="semantique.processor.utils.parse_coords_component.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">semantique.processor.utils.parse_coords_component</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="semantique.processor.types.get_value_type.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">semantique.processor.types.get_value_type</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>

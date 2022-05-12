@@ -311,14 +311,19 @@ Utils
    processor.utils.parse_datetime_component
    processor.utils.parse_coords_component
 
-Templates
-----------
+Value type handling
+-------------------
 
 .. autosummary::
    :toctree: _generated/
    :nosignatures:
 
-   processor.templates
+   processor.types.TypePromoter
+   processor.types.get_value_type
+   processor.types.get_value_labels
+   processor.types.DTYPE_MAPPING
+   processor.types.TYPE_PROMOTION_TEMPLATES
+
 
 Exceptions
 ===========

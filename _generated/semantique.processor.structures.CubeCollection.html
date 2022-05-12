@@ -589,8 +589,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.templates.html">
-     semantique.processor.templates
+    <a class="reference internal" href="semantique.processor.types.TypePromoter.html">
+     semantique.processor.types.TypePromoter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.get_value_type.html">
+     semantique.processor.types.get_value_type
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.get_value_labels.html">
+     semantique.processor.types.get_value_labels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.DTYPE_MAPPING.html">
+     semantique.processor.types.DTYPE_MAPPING
     </a>
    </li>
    <li class="toctree-l2">
@@ -803,7 +818,7 @@
 <h1>semantique.processor.structures.CubeCollection<a class="headerlink" href="#semantique-processor-structures-cubecollection" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.processor.structures.CubeCollection">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.structures.</span></span><span class="sig-name descname"><span class="pre">CubeCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L973-L1277"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.CubeCollection" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.structures.</span></span><span class="sig-name descname"><span class="pre">CubeCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L893-L1189"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.CubeCollection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal representation of a data cube collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -812,7 +827,7 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.structures.CubeCollection.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L983-L984"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.CubeCollection.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L903-L904"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.CubeCollection.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -870,10 +885,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.CubeCollection.extent.html#semantique.processor.structures.CubeCollection.extent" title="semantique.processor.structures.CubeCollection.extent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extent</span></code></a></p></td>
-<td><p>Combined spatio-temporal extent of the elements in the collection.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.CubeCollection.is_empty.html#semantique.processor.structures.CubeCollection.is_empty" title="semantique.processor.structures.CubeCollection.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.CubeCollection.is_empty.html#semantique.processor.structures.CubeCollection.is_empty" title="semantique.processor.structures.CubeCollection.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a></p></td>
 <td><p>Are all elements of the collection empty data cubes.</p></td>
 </tr>
 </tbody>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>semantique.processor.structures.Cube.promote_value_type &#8212; semantique 0.1.0 documentation</title>
+    <title>semantique.processor.types.TypePromoter.input_types &#8212; semantique 0.1.0 documentation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -587,8 +587,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.templates.html">
-     semantique.processor.templates
+    <a class="reference internal" href="semantique.processor.types.TypePromoter.html">
+     semantique.processor.types.TypePromoter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.get_value_type.html">
+     semantique.processor.types.get_value_type
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.get_value_labels.html">
+     semantique.processor.types.get_value_labels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.DTYPE_MAPPING.html">
+     semantique.processor.types.DTYPE_MAPPING
     </a>
    </li>
    <li class="toctree-l2">
@@ -746,7 +761,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/_generated/semantique.processor.structures.Cube.promote_value_type.rst.txt"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/_generated/semantique.processor.types.TypePromoter.input_types.rst.txt"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.rst</button></a>
         <!-- Download PDF via print -->
@@ -766,10 +781,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_generated/semantique.processor.structures.Cube.promote_value_type.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_generated/semantique.processor.types.TypePromoter.input_types.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/_generated/semantique.processor.structures.Cube.promote_value_type.rst"><button
+        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/_generated/semantique.processor.types.TypePromoter.input_types.rst"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -797,27 +812,15 @@
         
               <div>
                 
-  <div class="section" id="semantique-processor-structures-cube-promote-value-type">
-<h1>semantique.processor.structures.Cube.promote_value_type<a class="headerlink" href="#semantique-processor-structures-cube-promote-value-type" title="Permalink to this headline">¶</a></h1>
-<dl class="py method">
-<dt class="sig sig-object py" id="semantique.processor.structures.Cube.promote_value_type">
-<span class="sig-prename descclassname"><span class="pre">Cube.</span></span><span class="sig-name descname"><span class="pre">promote_value_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">operands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manual</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L740-L800"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube.promote_value_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Promote the value type of the output cube of an operation.</p>
-<p>Operations in which value type promotion is needed include evaluating
-expressions for each pixel in a cube with the evaluate verb and reducing
-dimensionality of a cube with the reduce verb.</p>
+  <div class="section" id="semantique-processor-types-typepromoter-input-types">
+<h1>semantique.processor.types.TypePromoter.input_types<a class="headerlink" href="#semantique-processor-types-typepromoter-input-types" title="Permalink to this headline">¶</a></h1>
+<dl class="py property">
+<dt class="sig sig-object py" id="semantique.processor.types.TypePromoter.input_types">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">TypePromoter.</span></span><span class="sig-name descname"><span class="pre">input_types</span></span><a class="headerlink" href="#semantique.processor.types.TypePromoter.input_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value types of the operands.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>*operands</strong> – The operands used in the operation.</p></li>
-<li><p><strong>func</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of the function used in the operation.</p></li>
-<li><p><strong>manual</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>) – Type promotion manual for the operation.</p></li>
-<li><p><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the object be modified inplace?</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="semantique.exceptions.InvalidValueTypeError.html#semantique.exceptions.InvalidValueTypeError" title="semantique.exceptions.InvalidValueTypeError"><strong>exceptions.InvalidValueTypeError</strong></a> – If the (combination of) operand value type(s) is not supported
-    according to the type promotion manual of the operation.</p>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
