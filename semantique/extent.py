@@ -206,7 +206,7 @@ class SpatialExtent(dict):
     # Stack the two spatial dimensions into one if requested.
     if stack:
       raster_obj = raster_obj.sq.stack_spatial_dims()
-      raster_obj["space"].sq.value_type = "space"
+      raster_obj["space"].sq.value_type = "coords"
     return raster_obj
 
 class TemporalExtent(dict):
@@ -335,6 +335,6 @@ class TemporalExtent(dict):
     range_obj = range_obj.tz_convert(tz)
     range_obj = [np.datetime64(x) for x in range_obj.tz_localize(None)]
     array_obj = xr.DataArray(range_obj, dims = ["time"], coords = [range_obj])
-    array_obj.sq.value_type = "time"
+    array_obj.sq.value_type = "datetime"
     array_obj = array_obj.sq.write_tz(tz)
     return array_obj

@@ -1,7 +1,7 @@
 import numpy as np
 import xarray as xr
 
-from semantique.processor.templates import TYPE_PROMOTION_TEMPLATES
+from semantique.processor.types import TypePromoter
 
 #
 # BOOLEAN UNIVARIATE OPERATORS
@@ -27,12 +27,14 @@ def invert_(x, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "invert")
+    promoter.check()
   def f(x, **kwargs):
     return np.where(np.isfinite(x), np.logical_not(x), np.nan)
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["boolean_univariate_operators"]
-    out.sq.promote_value_type(x, func = "invert", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -59,12 +61,14 @@ def absolute_(x, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "absolute")
+    promoter.check()
   def f(x, **kwargs):
     return np.where(np.isfinite(x), np.absolute(x), np.nan)
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"]
-    out.sq.promote_value_type(x, func = "absolute", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def cube_root_(x, track_types = True, **kwargs):
@@ -87,12 +91,14 @@ def cube_root_(x, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "cube_root")
+    promoter.check()
   def f(x, **kwargs):
     return np.where(np.isfinite(x), np.cbrt(x), np.nan)
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"]
-    out.sq.promote_value_type(x, func = "cube_root", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def exponential_(x, track_types = True, **kwargs):
@@ -119,12 +125,14 @@ def exponential_(x, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "exponential")
+    promoter.check()
   def f(x, **kwargs):
     return np.where(np.isfinite(x), np.exp(x), np.nan)
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"]
-    out.sq.promote_value_type(x, func = "exponential", manual = manual)
+    out = promoter.promote(out)
   return out
 
 
@@ -152,12 +160,14 @@ def natural_logarithm_(x, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "natural_logarithm")
+    promoter.check()
   def f(x, **kwargs):
     return np.where(np.isfinite(x), np.log(x), np.nan)
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"]
-    out.sq.promote_value_type(x, func = "natural_logarithm", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def square_root_(x, track_types = True, **kwargs):
@@ -180,12 +190,14 @@ def square_root_(x, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "square_root")
+    promoter.check()
   def f(x, **kwargs):
     return np.where(np.isfinite(x), np.sqrt(x), np.nan)
   out = xr.apply_ufunc(f, x, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["algebraic_univariate_operators"]
-    out.sq.promote_value_type(x, func = "square_root", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -220,13 +232,15 @@ def add_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "add")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.add(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["algebraic_multivariate_operators"]
-    out.sq.promote_value_type(x, y, func = "add", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def divide_(x, y, track_types = True, **kwargs):
@@ -257,13 +271,15 @@ def divide_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "divide")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.divide(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["algebraic_multivariate_operators"]
-    out.sq.promote_value_type(x, y, func = "divide", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def multiply_(x, y, track_types = True, **kwargs):
@@ -294,13 +310,15 @@ def multiply_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "multiply")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.multiply(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["algebraic_multivariate_operators"]
-    out.sq.promote_value_type(x, y, func = "multiply", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def power_(x, y, track_types = True, **kwargs):
@@ -331,13 +349,15 @@ def power_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "power")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.power(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["algebraic_multivariate_operators"]
-    out.sq.promote_value_type(x, y, func = "power", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def subtract_(x, y, track_types = True, **kwargs):
@@ -368,13 +388,15 @@ def subtract_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "subtract")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.subtract(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["algebraic_multivariate_operators"]
-    out.sq.promote_value_type(x, y, func = "subtract", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -409,13 +431,15 @@ def and_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "and")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.logical_and(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["boolean_multivariate_operators"]
-    out.sq.promote_value_type(x, y, func = "and", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def or_(x, y, track_types = True, **kwargs):
@@ -446,13 +470,15 @@ def or_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "or")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.logical_or(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["boolean_multivariate_operators"]
-    out.sq.promote_value_type(x, y, func = "or", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def exclusive_or_(x, y, track_types = True, **kwargs):
@@ -483,13 +509,15 @@ def exclusive_or_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "exclusive_or")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.logical_xor(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["boolean_multivariate_operators"]
-    out.sq.promote_value_type(x, y, func = "exclusive_or", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -524,13 +552,15 @@ def equal_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "equal")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.equal(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["equality_operators"]
-    out.sq.promote_value_type(x, y, func = "equal", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def in_(x, y, track_types = True, **kwargs):
@@ -557,12 +587,14 @@ def in_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "in")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.isin(x, y), np.nan)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["equality_operators"]
-    out.sq.promote_value_type(x, y, func = "in", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def not_equal_(x, y, track_types = True, **kwargs):
@@ -593,13 +625,15 @@ def not_equal_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "not_equal")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.not_equal(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["equality_operators"]
-    out.sq.promote_value_type(x, y, func = "not_equal", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def not_in_(x, y, track_types = True, **kwargs):
@@ -626,12 +660,14 @@ def not_in_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "not_in")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.isin(x, y, invert = True), np.nan)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["equality_operators"]
-    out.sq.promote_value_type(x, y, func = "not_in", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -666,13 +702,15 @@ def greater_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "greater")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.greater(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["regular_relational_operators"]
-    out.sq.promote_value_type(x, y, func = "greater", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def greater_equal_(x, y, track_types = True, **kwargs):
@@ -703,13 +741,15 @@ def greater_equal_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "greater_equal")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.greater_equal(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["regular_relational_operators"]
-    out.sq.promote_value_type(x, y, func = "greater_equal", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def less_(x, y, track_types = True, **kwargs):
@@ -740,13 +780,15 @@ def less_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "less")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.less(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["regular_relational_operators"]
-    out.sq.promote_value_type(x, y, func = "less", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def less_equal_(x, y, track_types = True, **kwargs):
@@ -777,13 +819,15 @@ def less_equal_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "less_equal")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.less_equal(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["regular_relational_operators"]
-    out.sq.promote_value_type(x, y, func = "less_equal", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -827,17 +871,18 @@ def intersects_(x, y, track_types = True, **kwargs):
   The spatial coordinate reference systems of x and y are expected to be equal.
 
   """
-  x_gdf = x.sq.grid_points
+  if track_types:
+    promoter = TypePromoter(x, y, function = "intersects")
+    promoter.check()
   try:
-    y_gdf = y.unary_union
+    y = y.unary_union
   except AttributeError:
-    y_gdf = y.sq.trim().sq.grid_points.envelope.unary_union
-  values = x_gdf.intersects(y_gdf).astype(int)
+    y = y.sq.trim().sq.grid_points.envelope.unary_union
+  values = x.sq.grid_points.intersects(y).astype(int)
   coords = x[x.sq.spatial_dimension].coords
   out = xr.DataArray(values, coords = coords).sq.align_with(x)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["spatial_relational_operators"]
-    out.sq.promote_value_type(x, y, func = "intersects", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -882,12 +927,14 @@ def after_(x, y, track_types = True, **kwargs):
   The timezones of x and y are expected to be equal.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "after")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.greater(x, np.max(y)), np.nan)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["temporal_relational_operators"]
-    out.sq.promote_value_type(x, y, func = "after", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def before_(x, y, track_types = True, **kwargs):
@@ -928,12 +975,14 @@ def before_(x, y, track_types = True, **kwargs):
   The timezones of x and y are expected to be equal.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "before")
+    promoter.check()
   def f(x, y, **kwargs):
     return np.where(np.isfinite(x), np.less(x, np.min(y)), np.nan)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["temporal_relational_operators"]
-    out.sq.promote_value_type(x, y, func = "before", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def during_(x, y, track_types = True, **kwargs):
@@ -971,14 +1020,16 @@ def during_(x, y, track_types = True, **kwargs):
   The timezones of x and y are expected to be equal.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "during")
+    promoter.check()
   def f(x, y, **kwargs):
     a = np.greater_equal(x, np.min(y))
     b = np.less_equal(x, np.max(y))
     return np.where(np.isfinite(x), np.logical_and(a, b), np.nan)
   out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["temporal_relational_operators"]
-    out.sq.promote_value_type(x, y, func = "during", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -1013,12 +1064,12 @@ def assign_(x, y, track_types = True, **kwargs):
       evaluated expressions.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "assign")
+    promoter.check()
   y = xr.DataArray(y).sq.align_with(x)
   nodata = np.datetime64("NaT") if y.dtype.kind == "M" else np.nan
   out = xr.where(np.isfinite(x), y, nodata)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["assignment_operators"]
-    out.sq.promote_value_type(x, y, func = "assign", manual = manual)
-    if y.sq.value_labels is not None:
-      out.sq.value_labels = y.sq.value_labels
+    out = promoter.promote(out)
   return out

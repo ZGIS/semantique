@@ -99,7 +99,7 @@ def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
   time = temporal_extent.discretize(temporal_resolution, tz)
   # Combine rasterized spatial extent with discretized temporal extent.
   extent = space.expand_dims({"time": time})
-  extent["time"].sq.value_type = "time"
+  extent["time"].sq.value_type = "datetime"
   # Add temporal reference.
   extent = extent.sq.write_tz(time.sq.tz)
   # Trim the extent cube if requested.

@@ -128,7 +128,6 @@
    processor.structures.Cube.stack_spatial_dims
    processor.structures.Cube.unstack_spatial_dims
    processor.structures.Cube.drop_non_dimension_coords
-   processor.structures.Cube.promote_value_type
    processor.structures.Cube.to_dataframe
    processor.structures.Cube.to_geodataframe
    processor.structures.Cube.to_csv
@@ -147,3 +146,11 @@
    processor.structures.CubeCollection.regularize
    processor.structures.CubeCollection.stack_spatial_dims
    processor.structures.CubeCollection.unstack_spatial_dims
+
+   processor.types.TypePromoter.manual
+   processor.types.TypePromoter.input_types
+   processor.types.TypePromoter.output_type
+   processor.types.TypePromoter.input_labels
+   processor.types.TypePromoter.output_label
+   processor.types.TypePromoter.check
+   processor.types.TypePromoter.promote

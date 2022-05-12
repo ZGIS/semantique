@@ -621,7 +621,7 @@ class QueryProcessor():
     if tz != self.tz.zone:
       dt = utils.convert_datetime64(dt, tz, self.tz)
     out = xr.DataArray([dt])
-    out.sq.value_type = "time"
+    out.sq.value_type = "datetime"
     return out
 
   def handle_time_interval(self, block):
@@ -644,7 +644,7 @@ class QueryProcessor():
       start = utils.convert_datetime64(start, tz, self.tz)
       end = utils.convert_datetime64(start, tz, self.tz)
     out = xr.DataArray([start, end])
-    out.sq.value_type = "time"
+    out.sq.value_type = "datetime"
     return out
 
   def handle_verb(self, block):

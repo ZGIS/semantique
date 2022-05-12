@@ -1,7 +1,7 @@
 import numpy as np
 from scipy import stats
 
-from semantique.processor.templates import TYPE_PROMOTION_TEMPLATES
+from semantique.processor.types import TypePromoter
 
 def _is_all_nodata(x, axis):
   return np.equal(np.sum(np.isfinite(x), axis = axis), 0)
@@ -34,12 +34,14 @@ def mean_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "mean")
+    promoter.check()
   def f(x, axis, **kwargs):
     return np.nanmean(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["numerical_reducers"]
-    out.sq.promote_value_type(x, func = "mean", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def product_(x, dimension, track_types = True, **kwargs):
@@ -63,13 +65,15 @@ def product_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "product")
+    promoter.check()
   def f(x, axis, **kwargs):
     values = np.nanprod(x, axis = axis)
     return np.where(_is_all_nodata(x, axis), np.nan, values)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["numerical_reducers"]
-    out.sq.promote_value_type(x, func = "product", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def standard_deviation_(x, dimension, track_types = True, **kwargs):
@@ -93,12 +97,14 @@ def standard_deviation_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "standard_deviation")
+    promoter.check()
   def f(x, axis, **kwargs):
     return np.nanstd(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["numerical_reducers"]
-    out.sq.promote_value_type(x, func = "standard_deviation", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def sum_(x, dimension, track_types = True, **kwargs):
@@ -122,13 +128,15 @@ def sum_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "sum")
+    promoter.check()
   def f(x, axis, **kwargs):
     values = np.nansum(x, axis = axis)
     return np.where(_is_all_nodata(x, axis), np.nan, values)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["numerical_reducers"]
-    out.sq.promote_value_type(x, func = "sum", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def variance_(x, dimension, track_types = True, **kwargs):
@@ -152,12 +160,14 @@ def variance_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "variance")
+    promoter.check()
   def f(x, axis, **kwargs):
     return np.nanvar(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["numerical_reducers"]
-    out.sq.promote_value_type(x, func = "variance", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -185,13 +195,15 @@ def all_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "all")
+    promoter.check()
   def f(x, axis, **kwargs):
     values = np.all(x, axis = axis)
     return np.where(_is_all_nodata(x, axis), np.nan, values)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["boolean_reducers"]
-    out.sq.promote_value_type(x, func = "all", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def any_(x, dimension, track_types = True, **kwargs):
@@ -215,12 +227,14 @@ def any_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "any")
+    promoter.check()
   def f(x, axis, **kwargs):
     return np.any(_nodata_as_zero(x), axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["boolean_reducers"]
-    out.sq.promote_value_type(x, func = "any", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -248,13 +262,15 @@ def count_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "count")
+    promoter.check()
   def f(x, axis, **kwargs):
     values = np.count_nonzero(_nodata_as_zero(x), axis = axis)
     return np.where(_is_all_nodata(x, axis), np.nan, values)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["count_reducers"]
-    out.sq.promote_value_type(x, func = "count", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def percentage_(x, dimension, track_types = True, **kwargs):
@@ -278,6 +294,9 @@ def percentage_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "percentage")
+    promoter.check()
   def f(x, axis, **kwargs):
     part = np.count_nonzero(_nodata_as_zero(x), axis = axis)
     part = np.where(_is_all_nodata(x, axis), np.nan, part)
@@ -285,8 +304,7 @@ def percentage_(x, dimension, track_types = True, **kwargs):
     return np.multiply(np.divide(part, whole), 100)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["count_reducers"]
-    out.sq.promote_value_type(x, func = "percentage", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -314,12 +332,14 @@ def max_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "max")
+    promoter.check()
   def f(x, axis, **kwargs):
     return np.nanmax(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["ordered_reducers"]
-    out.sq.promote_value_type(x, func = "max", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def median_(x, dimension, track_types = True, **kwargs):
@@ -343,12 +363,14 @@ def median_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "median")
+    promoter.check()
   def f(x, axis, **kwargs):
     return np.nanmedian(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["ordered_reducers"]
-    out.sq.promote_value_type(x, func = "median", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def min_(x, dimension, track_types = True, **kwargs):
@@ -372,12 +394,14 @@ def min_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "min")
+    promoter.check()
   def f(x, axis, **kwargs):
     return np.nanmin(x, axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["ordered_reducers"]
-    out.sq.promote_value_type(x, func = "min", manual = manual)
+    out = promoter.promote(out)
   return out
 
 #
@@ -405,14 +429,16 @@ def first_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "first")
+    promoter.check()
   def f(x, axis, **kwargs):
     is_value = np.isfinite(x)
     is_last = np.equal(np.cumsum(np.cumsum(is_value, axis = axis), axis = axis), 1)
     return np.nanmax(np.where(is_last, x, np.nan), axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["universal_reducers"]
-    out.sq.promote_value_type(x, func = "first", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def last_(x, dimension, track_types = True, **kwargs):
@@ -436,12 +462,14 @@ def last_(x, dimension, track_types = True, **kwargs):
       The reduced data cube.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "last")
+    promoter.check()
   def f(x, axis, **kwargs):
     return first_(np.flip(x, axis = axis), axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["universal_reducers"]
-    out.sq.promote_value_type(x, func = "last", manual = manual)
+    out = promoter.promote(out)
   return out
 
 def mode_(x, dimension, track_types = True, **kwargs):
@@ -470,11 +498,13 @@ def mode_(x, dimension, track_types = True, **kwargs):
     smallest of these values) is returned.
 
   """
+  if track_types:
+    promoter = TypePromoter(x, function = "mode")
+    promoter.check()
   def f(x, axis, **kwargs):
     values = stats.mode(x, axis = axis, nan_policy = "omit")[0].squeeze(axis = axis)
     return np.where(_is_all_nodata(x, axis), np.nan, values)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
-    manual = TYPE_PROMOTION_TEMPLATES["universal_reducers"]
-    out.sq.promote_value_type(x, func = "mode", manual = manual)
+    out = promoter.promote(out)
   return out

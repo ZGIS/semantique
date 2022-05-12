@@ -501,7 +501,7 @@ class Cube():
       out = out.isel({y_dim: y_slice, x_dim: x_slice})
       # Stack x and y dimensions back together.
       out = out.stack({space: [y_dim, x_dim]})
-      out[space].sq.value_type = "space"
+      out[space].sq.value_type = "coords"
     else:
       # Trim all dimensions normally.
       out = self._obj
@@ -718,68 +718,6 @@ class Cube():
     else:
       drop = set(self._obj.coords) - set(self._obj.dims) - set(keep)
     return self._obj.reset_coords(drop, drop = True)
-
-  def promote_value_type(self, *operands, func, manual, inplace = True):
-    """Promote the value type of the output cube of an operation.
-
-    Operations in which value type promotion is needed include evaluating
-    expressions for each pixel in a cube with the evaluate verb and reducing
-    dimensionality of a cube with the reduce verb.
-
-    Parameters
-    ----------
-      *operands:
-        The operands used in the operation.
-      func : :obj:`str`
-        The name of the function used in the operation.
-      manual : :obj:`dict`
-        Type promotion manual for the operation.
-      inplace : :obj:`bool`
-        Should the object be modified inplace?
-
-    Raises
-    -------
-      :obj:`exceptions.InvalidValueTypeError`
-        If the (combination of) operand value type(s) is not supported
-        according to the type promotion manual of the operation.
-
-    """
-    out = self._obj if inplace else copy.deepcopy(self._obj)
-    if manual is None:
-      out.sq.value_type = None
-      out.sq.value_labels = None
-      return out
-    # Update value type.
-    # Based on value types of the operands and the type promotion manual.
-    def _get_type(x):
-      try:
-        vtype = x.sq.value_type
-      except AttributeError:
-        x = np.array(x)
-        vtype = None
-      return x.dtype.kind if vtype is None else vtype
-    intypes = [_get_type(x) for x in operands]
-    outtype = manual # Initialize before scanning.
-    for x in intypes:
-      try:
-        outtype = outtype[x]
-      except KeyError:
-        raise exceptions.InvalidValueTypeError(
-          f"Unsupported operand value type(s) for '{func}': '{intypes}'"
-        )
-    out.sq.value_type = outtype
-    # Update value labels.
-    # The manual has a special key to define if labels should be preserved.
-    # If True the labels of the first operand should be preserved.
-    try:
-      preserve_labels = manual["__preserve_labels__"]
-    except KeyError:
-      preserve_labels = False
-    if preserve_labels:
-      out.sq.value_labels = operands[0].sq.value_labels
-    else:
-      del out.sq.value_labels
-    return out
 
   def to_dataframe(self):
     """Convert the cube to a pandas DataFrame.

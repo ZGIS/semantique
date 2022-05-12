@@ -298,8 +298,8 @@ class Opendatacube(Factbase):
       for x in metadata["values"]:
         value_labels[x["id"]] = x["label"]
       data.sq.value_labels = value_labels
-    data["space"].sq.value_type = "space"
-    data["time"].sq.value_type = "time"
+    data["space"].sq.value_type = "coords"
+    data["time"].sq.value_type = "datetime"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
     data["feature"].sq.value_labels = extent["feature"].sq.value_labels
     return data
@@ -490,8 +490,8 @@ class GeotiffArchive(Factbase):
       for x in metadata["values"]:
         value_labels[x["id"]] = x["label"]
       data.sq.value_labels = value_labels
-    data["space"].sq.value_type = "space"
-    data["time"].sq.value_type = "time"
+    data["space"].sq.value_type = "coords"
+    data["time"].sq.value_type = "datetime"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
     data["feature"].sq.value_labels = extent["feature"].sq.value_labels
     return data
