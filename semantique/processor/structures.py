@@ -353,9 +353,34 @@ class Cube():
       idx = pd.MultiIndex.from_arrays([x.data for x in grouper])
       dim = grouper[0].dims
       partition = list(self._obj.groupby(xr.IndexVariable(dim, idx)))
+      # Use value labels as group names if defined.
+      labs = [x.sq.value_labels for x in grouper]
+      names = [i[0] for i in partition]
+      for i, x in enumerate(labs):
+        if x is None:
+          pass
+        else:
+          for j, y in enumerate(names):
+            y = list(y)
+            y[i] = x[y[i]]
+            names[j] = tuple(y)
+
+      # if None in labs:
+      #   groups = [i[1].sq.label(i[0]) for i in partition]
+      # else:
+      #   names = [i[0] for i in partition]
+      #   for i, x in enumerate(names):
+      #     names[i] = tuple([labs[j][y] for j, y in enumerate(x)])
+      groups = [i[1].sq.label(j) for i, j in zip(partition, names)]
     else:
       partition = list(self._obj.groupby(grouper))
-    out = CubeCollection([i[1].sq.label(i[0]) for i in partition])
+      # Use value labels as group names if defined.
+      labs = grouper.sq.value_labels
+      if labs is not None:
+        groups = [i[1].sq.label(labs[i[0]]) for i in partition]
+      else:
+        groups = [i[1].sq.label(i[0]) for i in partition]
+    out = CubeCollection(groups)
     return out
 
   def label(self, label, **kwargs):
