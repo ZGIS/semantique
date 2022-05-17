@@ -3,6 +3,9 @@ from scipy import stats
 
 from semantique.processor.types import TypePromoter
 
+def _nodata(x):
+  return np.datetime64("NaT") if x.dtype.kind == "M" else np.nan
+
 def _is_all_nodata(x, axis):
   return np.equal(np.sum(np.isfinite(x), axis = axis), 0)
 
@@ -148,7 +151,7 @@ def mode_(x, dimension, track_types = True, **kwargs):
     promoter.check()
   def f(x, axis, **kwargs):
     values = stats.mode(x, axis = axis, nan_policy = "omit")[0].squeeze(axis = axis)
-    return np.where(_is_all_nodata(x, axis), np.nan, values)
+    return np.where(_is_all_nodata(x, axis), _nodata(x), values)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -665,7 +668,7 @@ def first_(x, dimension, track_types = True, **kwargs):
   def f(x, axis, **kwargs):
     is_value = np.isfinite(x)
     is_first = np.equal(np.cumsum(np.cumsum(is_value, axis = axis), axis = axis), 1)
-    return np.nanmax(np.where(is_first, x, np.nan), axis = axis)
+    return np.nanmax(np.where(is_first, x, _nodata(x)), axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -713,7 +716,7 @@ def last_(x, dimension, track_types = True, **kwargs):
     xflipped = np.flip(x, axis = axis)
     is_value = np.isfinite(xflipped)
     is_first = np.equal(np.cumsum(np.cumsum(is_value, axis = axis), axis = axis), 1)
-    return np.nanmax(np.where(is_first, xflipped, np.nan), axis = axis)
+    return np.nanmax(np.where(is_first, xflipped, _nodata(x)), axis = axis)
   out = x.reduce(f, dim = dimension, **kwargs)
   if track_types:
     out = promoter.promote(out)

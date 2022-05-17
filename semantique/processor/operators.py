@@ -3,6 +3,9 @@ import xarray as xr
 
 from semantique.processor.types import TypePromoter
 
+def _nodata(x):
+  return np.datetime64("NaT") if x.dtype.kind == "M" else np.nan
+
 #
 # BOOLEAN UNIVARIATE OPERATORS
 #
@@ -1488,8 +1491,7 @@ def assign_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "assign")
     promoter.check()
   y = xr.DataArray(y).sq.align_with(x)
-  nodata = np.datetime64("NaT") if y.dtype.kind == "M" else np.nan
-  out = xr.where(np.isfinite(x), y, nodata)
+  out = xr.where(np.isfinite(x), y, _nodata(y))
   if track_types:
     out = promoter.promote(out)
   return out
