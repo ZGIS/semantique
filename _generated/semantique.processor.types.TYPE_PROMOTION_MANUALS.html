@@ -1,0 +1,896 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>semantique.processor.types.TYPE_PROMOTION_MANUALS &#8212; semantique 0.1.0 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="semantique.exceptions.AlignmentError" href="semantique.exceptions.AlignmentError.html" />
+    <link rel="prev" title="semantique.processor.types.DTYPE_MAPPING" href="semantique.processor.types.DTYPE_MAPPING.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">semantique 0.1.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background.html">
+   Background
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Documentation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../guide.html">
+   User Guide
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/intro.html">
+     Intro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/references.html">
+     References
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/verbs.html">
+     Verbs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../reference.html">
+   API Reference
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.QueryRecipe.html">
+     semantique.QueryRecipe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ontology.Ontology.html">
+     semantique.ontology.Ontology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ontology.Semantique.html">
+     semantique.ontology.Semantique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.factbase.Factbase.html">
+     semantique.factbase.Factbase
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.factbase.Opendatacube.html">
+     semantique.factbase.Opendatacube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.factbase.GeotiffArchive.html">
+     semantique.factbase.GeotiffArchive
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.extent.SpatialExtent.html">
+     semantique.extent.SpatialExtent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.extent.TemporalExtent.html">
+     semantique.extent.TemporalExtent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.concept.html">
+     semantique.concept
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.entity.html">
+     semantique.entity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.event.html">
+     semantique.event
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.resource.html">
+     semantique.resource
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.appearance.html">
+     semantique.appearance
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.artifacts.html">
+     semantique.artifacts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.atmosphere.html">
+     semantique.atmosphere
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.reflectance.html">
+     semantique.reflectance
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.topography.html">
+     semantique.topography
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.result.html">
+     semantique.result
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.self.html">
+     semantique.self
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.collection.html">
+     semantique.collection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeProxy.evaluate.html">
+     semantique.CubeProxy.evaluate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeProxy.extract.html">
+     semantique.CubeProxy.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeProxy.filter.html">
+     semantique.CubeProxy.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeProxy.filter_time.html">
+     semantique.CubeProxy.filter_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeProxy.filter_space.html">
+     semantique.CubeProxy.filter_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeProxy.groupby.html">
+     semantique.CubeProxy.groupby
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeProxy.groupby_time.html">
+     semantique.CubeProxy.groupby_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeProxy.groupby_space.html">
+     semantique.CubeProxy.groupby_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeProxy.label.html">
+     semantique.CubeProxy.label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeProxy.reduce.html">
+     semantique.CubeProxy.reduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeCollectionProxy.compose.html">
+     semantique.CubeCollectionProxy.compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeCollectionProxy.concatenate.html">
+     semantique.CubeCollectionProxy.concatenate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeCollectionProxy.merge.html">
+     semantique.CubeCollectionProxy.merge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeCollectionProxy.evaluate.html">
+     semantique.CubeCollectionProxy.evaluate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeCollectionProxy.extract.html">
+     semantique.CubeCollectionProxy.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeCollectionProxy.filter.html">
+     semantique.CubeCollectionProxy.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeCollectionProxy.filter_time.html">
+     semantique.CubeCollectionProxy.filter_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeCollectionProxy.filter_space.html">
+     semantique.CubeCollectionProxy.filter_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeCollectionProxy.label.html">
+     semantique.CubeCollectionProxy.label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CubeCollectionProxy.reduce.html">
+     semantique.CubeCollectionProxy.reduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.value_label.html">
+     semantique.value_label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.geometries.html">
+     semantique.geometries
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.time_instant.html">
+     semantique.time_instant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.time_interval.html">
+     semantique.time_interval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.core.QueryProcessor.html">
+     semantique.processor.core.QueryProcessor
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.structures.Cube.html">
+     semantique.processor.structures.Cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.structures.CubeCollection.html">
+     semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.absolute_.html">
+     semantique.processor.operators.absolute_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.exponential_.html">
+     semantique.processor.operators.exponential_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.cube_root_.html">
+     semantique.processor.operators.cube_root_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.natural_logarithm_.html">
+     semantique.processor.operators.natural_logarithm_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.square_root_.html">
+     semantique.processor.operators.square_root_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.invert_.html">
+     semantique.processor.operators.invert_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.add_.html">
+     semantique.processor.operators.add_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.divide_.html">
+     semantique.processor.operators.divide_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.multiply_.html">
+     semantique.processor.operators.multiply_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.power_.html">
+     semantique.processor.operators.power_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.subtract_.html">
+     semantique.processor.operators.subtract_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.and_.html">
+     semantique.processor.operators.and_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.or_.html">
+     semantique.processor.operators.or_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.equal_.html">
+     semantique.processor.operators.equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.exclusive_or_.html">
+     semantique.processor.operators.exclusive_or_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.greater_.html">
+     semantique.processor.operators.greater_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.greater_equal_.html">
+     semantique.processor.operators.greater_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.in_.html">
+     semantique.processor.operators.in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.less_.html">
+     semantique.processor.operators.less_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.less_equal_.html">
+     semantique.processor.operators.less_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.not_equal_.html">
+     semantique.processor.operators.not_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.not_in_.html">
+     semantique.processor.operators.not_in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.intersects_.html">
+     semantique.processor.operators.intersects_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.after_.html">
+     semantique.processor.operators.after_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.before_.html">
+     semantique.processor.operators.before_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.during_.html">
+     semantique.processor.operators.during_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.assign_.html">
+     semantique.processor.operators.assign_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.mean_.html">
+     semantique.processor.reducers.mean_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.median_.html">
+     semantique.processor.reducers.median_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.mode_.html">
+     semantique.processor.reducers.mode_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.max_.html">
+     semantique.processor.reducers.max_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.min_.html">
+     semantique.processor.reducers.min_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.product_.html">
+     semantique.processor.reducers.product_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.standard_deviation_.html">
+     semantique.processor.reducers.standard_deviation_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.sum_.html">
+     semantique.processor.reducers.sum_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.variance_.html">
+     semantique.processor.reducers.variance_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.all_.html">
+     semantique.processor.reducers.all_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.any_.html">
+     semantique.processor.reducers.any_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.count_.html">
+     semantique.processor.reducers.count_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.percentage_.html">
+     semantique.processor.reducers.percentage_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.first_.html">
+     semantique.processor.reducers.first_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.last_.html">
+     semantique.processor.reducers.last_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.TypePromoter.html">
+     semantique.processor.types.TypePromoter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.get_value_type.html">
+     semantique.processor.types.get_value_type
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.get_value_labels.html">
+     semantique.processor.types.get_value_labels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.DTYPE_MAPPING.html">
+     semantique.processor.types.DTYPE_MAPPING
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     semantique.processor.types.TYPE_PROMOTION_MANUALS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.AlignmentError.html">
+     semantique.exceptions.AlignmentError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.EmptyDataError.html">
+     semantique.exceptions.EmptyDataError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.InvalidValueTypeError.html">
+     semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.InvalidBuildingBlockError.html">
+     semantique.exceptions.InvalidBuildingBlockError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownConceptError.html">
+     semantique.exceptions.UnknownConceptError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownResourceError.html">
+     semantique.exceptions.UnknownResourceError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownResultError.html">
+     semantique.exceptions.UnknownResultError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownReducerError.html">
+     semantique.exceptions.UnknownReducerError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownOperatorError.html">
+     semantique.exceptions.UnknownOperatorError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownDimensionError.html">
+     semantique.exceptions.UnknownDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownComponentError.html">
+     semantique.exceptions.UnknownComponentError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownLabelError.html">
+     semantique.exceptions.UnknownLabelError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.TooManyDimensionsError.html">
+     semantique.exceptions.TooManyDimensionsError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.MissingDimensionError.html">
+     semantique.exceptions.MissingDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.MixedDimensionsError.html">
+     semantique.exceptions.MixedDimensionsError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.MixedTimeZonesError.html">
+     semantique.exceptions.MixedTimeZonesError
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../_notebooks/gallery.html">
+   Gallery
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../changelog.html">
+   Changelog
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Community
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../code_of_conduct.html">
+   Code of Conduct
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing.html">
+   Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/ZGIS/semantique">
+   GitHub repository
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/_generated/semantique.processor.types.TYPE_PROMOTION_MANUALS.rst.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ZGIS/semantique"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_generated/semantique.processor.types.TYPE_PROMOTION_MANUALS.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/_generated/semantique.processor.types.TYPE_PROMOTION_MANUALS.rst"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="semantique-processor-types-type-promotion-manuals">
+<h1>semantique.processor.types.TYPE_PROMOTION_MANUALS<a class="headerlink" href="#semantique-processor-types-type-promotion-manuals" title="Permalink to this headline">¶</a></h1>
+<dl class="py data">
+<dt class="sig sig-object py" id="semantique.processor.types.TYPE_PROMOTION_MANUALS">
+<span class="sig-prename descclassname"><span class="pre">semantique.processor.types.</span></span><span class="sig-name descname"><span class="pre">TYPE_PROMOTION_MANUALS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'absolute':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'},</span> <span class="pre">'add':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'numerical'}},</span> <span class="pre">'after':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'}},</span> <span class="pre">'all':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'and':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'}},</span> <span class="pre">'any':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'assign':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">2,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary',</span> <span class="pre">'coords':</span> <span class="pre">'coords',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'nominal':</span> <span class="pre">'nominal',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'},</span> <span class="pre">'coords':</span> <span class="pre">{'binary':</span> <span class="pre">'binary',</span> <span class="pre">'coords':</span> <span class="pre">'coords',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'nominal':</span> <span class="pre">'nominal',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'},</span> <span class="pre">'datetime':</span> <span class="pre">{'binary':</span> <span class="pre">'binary',</span> <span class="pre">'coords':</span> <span class="pre">'coords',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'nominal':</span> <span class="pre">'nominal',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'},</span> <span class="pre">'nominal':</span> <span class="pre">{'binary':</span> <span class="pre">'binary',</span> <span class="pre">'coords':</span> <span class="pre">'coords',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'nominal':</span> <span class="pre">'nominal',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'},</span> <span class="pre">'numerical':</span> <span class="pre">{'binary':</span> <span class="pre">'binary',</span> <span class="pre">'coords':</span> <span class="pre">'coords',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'nominal':</span> <span class="pre">'nominal',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'},</span> <span class="pre">'ordinal':</span> <span class="pre">{'binary':</span> <span class="pre">'binary',</span> <span class="pre">'coords':</span> <span class="pre">'coords',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'nominal':</span> <span class="pre">'nominal',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'}},</span> <span class="pre">'before':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'}},</span> <span class="pre">'count':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'binary':</span> <span class="pre">'numerical'},</span> <span class="pre">'cube_root':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'},</span> <span class="pre">'divide':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'numerical'}},</span> <span class="pre">'during':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'}},</span> <span class="pre">'equal':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'coords':</span> <span class="pre">{'coords':</span> <span class="pre">'binary'},</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'},</span> <span class="pre">'nominal':</span> <span class="pre">{'nominal':</span> <span class="pre">'binary'},</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'binary'},</span> <span class="pre">'ordinal':</span> <span class="pre">{'ordinal':</span> <span class="pre">'binary'}},</span> <span class="pre">'exclusive_or':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'}},</span> <span class="pre">'exponential':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'},</span> <span class="pre">'first':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">'binary',</span> <span class="pre">'coords':</span> <span class="pre">'coords',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'nominal':</span> <span class="pre">'nominal',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'},</span> <span class="pre">'greater':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'},</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'binary'},</span> <span class="pre">'ordinal':</span> <span class="pre">{'ordinal':</span> <span class="pre">'binary'}},</span> <span class="pre">'greater_equal':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'},</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'binary'},</span> <span class="pre">'ordinal':</span> <span class="pre">{'ordinal':</span> <span class="pre">'binary'}},</span> <span class="pre">'in':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'coords':</span> <span class="pre">{'coords':</span> <span class="pre">'binary'},</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'},</span> <span class="pre">'nominal':</span> <span class="pre">{'nominal':</span> <span class="pre">'binary'},</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'binary'},</span> <span class="pre">'ordinal':</span> <span class="pre">{'ordinal':</span> <span class="pre">'binary'}},</span> <span class="pre">'intersects':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'coords':</span> <span class="pre">{'coords':</span> <span class="pre">'binary',</span> <span class="pre">'geometry':</span> <span class="pre">'binary'}},</span> <span class="pre">'invert':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'last':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">'binary',</span> <span class="pre">'coords':</span> <span class="pre">'coords',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'nominal':</span> <span class="pre">'nominal',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'},</span> <span class="pre">'less':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'},</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'binary'},</span> <span class="pre">'ordinal':</span> <span class="pre">{'ordinal':</span> <span class="pre">'binary'}},</span> <span class="pre">'less_equal':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'},</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'binary'},</span> <span class="pre">'ordinal':</span> <span class="pre">{'ordinal':</span> <span class="pre">'binary'}},</span> <span class="pre">'max':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">'binary',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'},</span> <span class="pre">'mean':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'},</span> <span class="pre">'median':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'},</span> <span class="pre">'min':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">'binary',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'},</span> <span class="pre">'mode':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">'binary',</span> <span class="pre">'coords':</span> <span class="pre">'coords',</span> <span class="pre">'datetime':</span> <span class="pre">'datetime',</span> <span class="pre">'nominal':</span> <span class="pre">'nominal',</span> <span class="pre">'numerical':</span> <span class="pre">'numerical',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'},</span> <span class="pre">'multiply':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'numerical'}},</span> <span class="pre">'natural_logarithm':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'},</span> <span class="pre">'not_equal':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'coords':</span> <span class="pre">{'coords':</span> <span class="pre">'binary'},</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'},</span> <span class="pre">'nominal':</span> <span class="pre">{'nominal':</span> <span class="pre">'binary'},</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'binary'},</span> <span class="pre">'ordinal':</span> <span class="pre">{'ordinal':</span> <span class="pre">'binary'}},</span> <span class="pre">'not_in':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'},</span> <span class="pre">'coords':</span> <span class="pre">{'coords':</span> <span class="pre">'binary'},</span> <span class="pre">'datetime':</span> <span class="pre">{'datetime':</span> <span class="pre">'binary'},</span> <span class="pre">'nominal':</span> <span class="pre">{'nominal':</span> <span class="pre">'binary'},</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'binary'},</span> <span class="pre">'ordinal':</span> <span class="pre">{'ordinal':</span> <span class="pre">'binary'}},</span> <span class="pre">'or':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">1,</span> <span class="pre">'binary':</span> <span class="pre">{'binary':</span> <span class="pre">'binary'}},</span> <span class="pre">'percentage':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'binary':</span> <span class="pre">'numerical'},</span> <span class="pre">'power':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'numerical'}},</span> <span class="pre">'product':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'},</span> <span class="pre">'square_root':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'},</span> <span class="pre">'standard_deviation':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'},</span> <span class="pre">'subtract':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">{'numerical':</span> <span class="pre">'numerical'}},</span> <span class="pre">'sum':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'},</span> <span class="pre">'variance':</span> <span class="pre">{'__preserve_labels__':</span> <span class="pre">0,</span> <span class="pre">'numerical':</span> <span class="pre">'numerical'}}</span></em><a class="headerlink" href="#semantique.processor.types.TYPE_PROMOTION_MANUALS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type promotion manuals for all built-in operators and reducers.</p>
+<p>Whenever applying actions to a data cube, its value type might change. For
+example, when evaluating an expression (e.g. when evaluating an expression
+involving a comparison operator the resulting values are always binary) or
+applying a reducer (e.g. when counting the number of “true” values in a binary
+data cube the resulting values are numerical). This is called type promotion.
+For each built-in operator and reducer function, this dictionary stores a
+manual that defines which value types are accepted as input, and what the value
+type of the output should be.</p>
+<p>For reducers and univariate operators, a type promotion manual is always a
+dictionary with as keys the supported input value types and as values the
+output value type. For bivariate operators, the type promotion manuals have
+an extra layer. The first layer of keys refers to the value type of the first
+operand and the second layer of keys to the value type of the second operand.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="semantique.processor.types.DTYPE_MAPPING.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">semantique.processor.types.DTYPE_MAPPING</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="semantique.exceptions.AlignmentError.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">semantique.exceptions.AlignmentError</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright 2021, Department of Geoinformatics – Z_GIS.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

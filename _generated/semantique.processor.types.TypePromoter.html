@@ -116,11 +116,6 @@
      Verbs
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_notebooks/advanced.html">
-     Advanced usage
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -216,6 +211,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.topography.html">
      semantique.topography
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.result.html">
+     semantique.result
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.self.html">
+     semantique.self
     </a>
    </li>
    <li class="toctree-l2">
@@ -499,6 +504,26 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.median_.html">
+     semantique.processor.reducers.median_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.mode_.html">
+     semantique.processor.reducers.mode_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.max_.html">
+     semantique.processor.reducers.max_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.min_.html">
+     semantique.processor.reducers.min_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.reducers.product_.html">
      semantique.processor.reducers.product_
     </a>
@@ -549,26 +574,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.mode_.html">
-     semantique.processor.reducers.mode_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.max_.html">
-     semantique.processor.reducers.max_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.median_.html">
-     semantique.processor.reducers.median_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.min_.html">
-     semantique.processor.reducers.min_
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
      semantique.processor.utils.convert_datetime64
     </a>
@@ -606,6 +611,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.types.DTYPE_MAPPING.html">
      semantique.processor.types.DTYPE_MAPPING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.TYPE_PROMOTION_MANUALS.html">
+     semantique.processor.types.TYPE_PROMOTION_MANUALS
     </a>
    </li>
    <li class="toctree-l2">
@@ -818,7 +828,7 @@
 <h1>semantique.processor.types.TypePromoter<a class="headerlink" href="#semantique-processor-types-typepromoter" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.processor.types.TypePromoter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.types.</span></span><span class="sig-name descname"><span class="pre">TypePromoter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">operands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/types.py#L393-L544"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.types.TypePromoter" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.types.</span></span><span class="sig-name descname"><span class="pre">TypePromoter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">operands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/types.py#L390-L542"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.types.TypePromoter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Worker that takes care of promoting value types during an operation.</p>
 <p>Whenever applying an operation to a data cube, its value type might change.
 For example, when evaluating an expression (e.g. when evaluating an expression
@@ -834,20 +844,20 @@ and if yes, determine the value type of the output of the operation.</p>
 <li><p><strong>*operands</strong> – The operands of the operation. Reducer functions and univariate operators
 always have a single operand, while bivariate operators have two operands.</p></li>
 <li><p><strong>function</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – Name of the operation.</p></li>
-<li><p><strong>manual</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>, <em>optional</em>) – Type promotion manual of the operation. If <cite>None</cite>, the worker will try to
-obtain the manual from the built-in <code class="xref py py-data docutils literal notranslate"><span class="pre">TYPE_PROMOTION_MANUALS</span></code>
-dictionary, using the operation name (see the <cite>function</cite> parameter) as
+<li><p><strong>manual</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>, <em>optional</em>) – Type promotion manual of the operation. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the worker will try
+to obtain the manual from the built-in <a class="reference internal" href="semantique.processor.types.TYPE_PROMOTION_MANUALS.html#semantique.processor.types.TYPE_PROMOTION_MANUALS" title="semantique.processor.types.TYPE_PROMOTION_MANUALS"><code class="xref py py-data docutils literal notranslate"><span class="pre">TYPE_PROMOTION_MANUALS</span></code></a>
+dictionary, using the operation name (see the <code class="docutils literal notranslate"><span class="pre">function</span></code> parameter) as
 search key.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.types.TypePromoter.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">operands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/types.py#L421-L428"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.types.TypePromoter.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">operands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/types.py#L418-L425"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.types.TypePromoter.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -865,7 +875,7 @@ search key.</p></li>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -880,7 +890,7 @@ search key.</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.types.TypePromoter.manual.html#semantique.processor.types.TypePromoter.manual" title="semantique.processor.types.TypePromoter.manual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">manual</span></code></a></p></td>
 <td><p>The type promotion manual of the operation.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_labels</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.types.TypePromoter.output_labels.html#semantique.processor.types.TypePromoter.output_labels" title="semantique.processor.types.TypePromoter.output_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_labels</span></code></a></p></td>
 <td><p>The value labels of the output.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.types.TypePromoter.output_type.html#semantique.processor.types.TypePromoter.output_type" title="semantique.processor.types.TypePromoter.output_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_type</span></code></a></p></td>

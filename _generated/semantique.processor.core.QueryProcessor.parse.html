@@ -114,11 +114,6 @@
      Verbs
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_notebooks/advanced.html">
-     Advanced usage
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -214,6 +209,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.topography.html">
      semantique.topography
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.result.html">
+     semantique.result
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.self.html">
+     semantique.self
     </a>
    </li>
    <li class="toctree-l2">
@@ -497,6 +502,26 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.median_.html">
+     semantique.processor.reducers.median_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.mode_.html">
+     semantique.processor.reducers.mode_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.max_.html">
+     semantique.processor.reducers.max_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.min_.html">
+     semantique.processor.reducers.min_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.reducers.product_.html">
      semantique.processor.reducers.product_
     </a>
@@ -547,26 +572,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.mode_.html">
-     semantique.processor.reducers.mode_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.max_.html">
-     semantique.processor.reducers.max_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.median_.html">
-     semantique.processor.reducers.median_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.min_.html">
-     semantique.processor.reducers.min_
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
      semantique.processor.utils.convert_datetime64
     </a>
@@ -604,6 +609,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.types.DTYPE_MAPPING.html">
      semantique.processor.types.DTYPE_MAPPING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.TYPE_PROMOTION_MANUALS.html">
+     semantique.processor.types.TYPE_PROMOTION_MANUALS
     </a>
    </li>
    <li class="toctree-l2">
@@ -816,14 +826,14 @@
 <h1>semantique.processor.core.QueryProcessor.parse<a class="headerlink" href="#semantique-processor-core-queryprocessor-parse" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.core.QueryProcessor.parse">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">QueryProcessor.</span></span><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recipe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factbase</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ontology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/core.py#L217-L286"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.core.QueryProcessor.parse" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">QueryProcessor.</span></span><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recipe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factbase</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ontology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/core.py#L217-L293"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.core.QueryProcessor.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse a semantic query.</p>
 <p>During query parsing, the required components for processing are read and
-converted all together into a single query processor object which will be
-used further process the query. Parsing should take care of validating the
-components and their interrelations. A specific task of the query parser in
-semantique is also to combine the spatial and temporal extent of the query
-into a single spatio-temporal extent cube.</p>
+converted all together into a single object which will be used internally
+for further processing of the query. Hence, query parsing takes care of
+initializing a <a class="reference internal" href="semantique.processor.core.QueryProcessor.html#semantique.processor.core.QueryProcessor" title="semantique.processor.core.QueryProcessor"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryProcessor</span></code></a> instance. It also rasterizes the
+given spatial extent and combines it with the temporal extent into a single
+spatio-temporal array (see <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html#semantique.processor.utils.create_extent_cube" title="semantique.processor.utils.create_extent_cube"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_extent_cube</span></code></a>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -858,9 +868,10 @@ QueryProcessor instance. See <a class="reference internal" href="semantique.proc
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The current implementation of query parsing is still very basic in its
-functionalities. It initializes the query processor object, but does not
-validate the query components yet.</p>
+<p>Ideally, parsing should also take care of validating the components and
+their interrelations. For example, it should check if referenced concepts
+in the provided query recipe are actually defined in the provided
+ontology. Such functionality is not implemented yet.</p>
 </div>
 </dd></dl>
 

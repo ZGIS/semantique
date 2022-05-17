@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="semantique.QueryRecipe" href="_generated/semantique.QueryRecipe.html" />
-    <link rel="prev" title="Advanced usage" href="_notebooks/advanced.html" />
+    <link rel="prev" title="Verbs" href="_notebooks/verbs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -114,11 +114,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_notebooks/verbs.html">
      Verbs
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/advanced.html">
-     Advanced usage
     </a>
    </li>
   </ul>
@@ -216,6 +211,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.topography.html">
      semantique.topography
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.result.html">
+     semantique.result
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.self.html">
+     semantique.self
     </a>
    </li>
    <li class="toctree-l2">
@@ -499,6 +504,26 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.median_.html">
+     semantique.processor.reducers.median_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.mode_.html">
+     semantique.processor.reducers.mode_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.max_.html">
+     semantique.processor.reducers.max_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.min_.html">
+     semantique.processor.reducers.min_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.reducers.product_.html">
      semantique.processor.reducers.product_
     </a>
@@ -549,26 +574,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.mode_.html">
-     semantique.processor.reducers.mode_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.max_.html">
-     semantique.processor.reducers.max_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.median_.html">
-     semantique.processor.reducers.median_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.min_.html">
-     semantique.processor.reducers.min_
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
      semantique.processor.utils.convert_datetime64
     </a>
@@ -606,6 +611,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.types.DTYPE_MAPPING.html">
      semantique.processor.types.DTYPE_MAPPING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.types.TYPE_PROMOTION_MANUALS.html">
+     semantique.processor.types.TYPE_PROMOTION_MANUALS
     </a>
    </li>
    <li class="toctree-l2">
@@ -940,8 +950,8 @@
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#numerical-reducers">
-       Numerical reducers
+      <a class="reference internal nav-link" href="#statistical-reducers">
+       Statistical reducers
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
@@ -950,18 +960,13 @@
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#count-reducers">
-       Count reducers
+      <a class="reference internal nav-link" href="#occurence-reducers">
+       Occurence reducers
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#universal-reducers">
-       Universal reducers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#ordered-reducers">
-       Ordered reducers
+      <a class="reference internal nav-link" href="#positional-reducers">
+       Positional reducers
       </a>
      </li>
     </ul>
@@ -1001,7 +1006,7 @@
 <h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="recipe">
 <h3>Recipe<a class="headerlink" href="#recipe" title="Permalink to this headline">¶</a></h3>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1015,7 +1020,7 @@
 </div>
 <div class="section" id="ontology">
 <h3>Ontology<a class="headerlink" href="#ontology" title="Permalink to this headline">¶</a></h3>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1032,7 +1037,7 @@
 </div>
 <div class="section" id="factbase">
 <h3>Factbase<a class="headerlink" href="#factbase" title="Permalink to this headline">¶</a></h3>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1052,7 +1057,7 @@
 </div>
 <div class="section" id="extent">
 <h3>Extent<a class="headerlink" href="#extent" title="Permalink to this headline">¶</a></h3>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1072,7 +1077,7 @@
 <h2>Building blocks<a class="headerlink" href="#building-blocks" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="references">
 <h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1105,6 +1110,12 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.topography.html#semantique.topography" title="semantique.topography"><code class="xref py py-obj docutils literal notranslate"><span class="pre">topography</span></code></a></p></td>
 <td><p>Reference to a factbase resource describing topography.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.result.html#semantique.result" title="semantique.result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">result</span></code></a></p></td>
+<td><p>Reference to a another result definition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.self.html#semantique.self" title="semantique.self"><code class="xref py py-obj docutils literal notranslate"><span class="pre">self</span></code></a></p></td>
+<td><p>Reference to the active evaluation object itself.</p></td>
+</tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.collection.html#semantique.collection" title="semantique.collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collection</span></code></a></p></td>
 <td><p>Reference multiple data cubes at once.</p></td>
 </tr>
@@ -1115,7 +1126,7 @@
 <h3>Verbs<a class="headerlink" href="#verbs" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="verbs-for-single-data-cubes">
 <h4>Verbs for single data cubes<a class="headerlink" href="#verbs-for-single-data-cubes" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1156,7 +1167,7 @@
 </div>
 <div class="section" id="verbs-for-data-cube-collections">
 <h4>Verbs for data cube collections<a class="headerlink" href="#verbs-for-data-cube-collections" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1198,7 +1209,7 @@
 </div>
 <div class="section" id="special-values">
 <h3>Special values<a class="headerlink" href="#special-values" title="Permalink to this headline">¶</a></h3>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1224,7 +1235,7 @@
 <h2>Processor<a class="headerlink" href="#processor" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="core">
 <h3>Core<a class="headerlink" href="#core" title="Permalink to this headline">¶</a></h3>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1238,7 +1249,7 @@
 </div>
 <div class="section" id="data-structures">
 <h3>Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h3>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1257,7 +1268,7 @@
 <h3>Operator functions<a class="headerlink" href="#operator-functions" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="numerical-univariate-operators">
 <h4>Numerical univariate operators<a class="headerlink" href="#numerical-univariate-operators" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1283,7 +1294,7 @@
 </div>
 <div class="section" id="boolean-univariate-operators">
 <h4>Boolean univariate operators<a class="headerlink" href="#boolean-univariate-operators" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1297,7 +1308,7 @@
 </div>
 <div class="section" id="algebraic-operators">
 <h4>Algebraic operators<a class="headerlink" href="#algebraic-operators" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1323,7 +1334,7 @@
 </div>
 <div class="section" id="boolean-operators">
 <h4>Boolean operators<a class="headerlink" href="#boolean-operators" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1340,7 +1351,7 @@
 </div>
 <div class="section" id="relational-operators">
 <h4>Relational operators<a class="headerlink" href="#relational-operators" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1378,7 +1389,7 @@
 </div>
 <div class="section" id="spatial-relational-operators">
 <h4>Spatial relational operators<a class="headerlink" href="#spatial-relational-operators" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1392,7 +1403,7 @@
 </div>
 <div class="section" id="temporal-relational-operators">
 <h4>Temporal relational operators<a class="headerlink" href="#temporal-relational-operators" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1412,7 +1423,7 @@
 </div>
 <div class="section" id="assignment-operators">
 <h4>Assignment operators<a class="headerlink" href="#assignment-operators" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1427,9 +1438,9 @@
 </div>
 <div class="section" id="reducer-functions">
 <h3>Reducer functions<a class="headerlink" href="#reducer-functions" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="numerical-reducers">
-<h4>Numerical reducers<a class="headerlink" href="#numerical-reducers" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<div class="section" id="statistical-reducers">
+<h4>Statistical reducers<a class="headerlink" href="#statistical-reducers" title="Permalink to this headline">¶</a></h4>
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1437,6 +1448,18 @@
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.mean_.html#semantique.processor.reducers.mean_" title="semantique.processor.reducers.mean_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.mean_</span></code></a></p></td>
 <td><p>Calculate the mean of a set of values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.median_.html#semantique.processor.reducers.median_" title="semantique.processor.reducers.median_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.median_</span></code></a></p></td>
+<td><p>Return the median value in a set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.mode_.html#semantique.processor.reducers.mode_" title="semantique.processor.reducers.mode_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.mode_</span></code></a></p></td>
+<td><p>Return the most occuring value in a set.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.max_.html#semantique.processor.reducers.max_" title="semantique.processor.reducers.max_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.max_</span></code></a></p></td>
+<td><p>Return the maximum value in a set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.min_.html#semantique.processor.reducers.min_" title="semantique.processor.reducers.min_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.min_</span></code></a></p></td>
+<td><p>Return the minimum value in a set.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.product_.html#semantique.processor.reducers.product_" title="semantique.processor.reducers.product_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.product_</span></code></a></p></td>
 <td><p>Calculate the product of a set of values.</p></td>
@@ -1455,7 +1478,7 @@
 </div>
 <div class="section" id="boolean-reducers">
 <h4>Boolean reducers<a class="headerlink" href="#boolean-reducers" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1470,9 +1493,9 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="count-reducers">
-<h4>Count reducers<a class="headerlink" href="#count-reducers" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<div class="section" id="occurence-reducers">
+<h4>Occurence reducers<a class="headerlink" href="#occurence-reducers" title="Permalink to this headline">¶</a></h4>
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1487,9 +1510,9 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="universal-reducers">
-<h4>Universal reducers<a class="headerlink" href="#universal-reducers" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
+<div class="section" id="positional-reducers">
+<h4>Positional reducers<a class="headerlink" href="#positional-reducers" title="Permalink to this headline">¶</a></h4>
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1501,36 +1524,13 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.last_.html#semantique.processor.reducers.last_" title="semantique.processor.reducers.last_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.last_</span></code></a></p></td>
 <td><p>Return the last value in a set.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.mode_.html#semantique.processor.reducers.mode_" title="semantique.processor.reducers.mode_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.mode_</span></code></a></p></td>
-<td><p>Return the most occuring value in a set.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="ordered-reducers">
-<h4>Ordered reducers<a class="headerlink" href="#ordered-reducers" title="Permalink to this headline">¶</a></h4>
-<table class="longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.max_.html#semantique.processor.reducers.max_" title="semantique.processor.reducers.max_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.max_</span></code></a></p></td>
-<td><p>Return the maximum value in a set.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.median_.html#semantique.processor.reducers.median_" title="semantique.processor.reducers.median_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.median_</span></code></a></p></td>
-<td><p>Return the median value in a set.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.min_.html#semantique.processor.reducers.min_" title="semantique.processor.reducers.min_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.min_</span></code></a></p></td>
-<td><p>Return the minimum value in a set.</p></td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
 <div class="section" id="utils">
 <h3>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h3>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1553,7 +1553,7 @@
 </div>
 <div class="section" id="value-type-handling">
 <h3>Value type handling<a class="headerlink" href="#value-type-handling" title="Permalink to this headline">¶</a></h3>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1571,13 +1571,16 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.DTYPE_MAPPING.html#semantique.processor.types.DTYPE_MAPPING" title="semantique.processor.types.DTYPE_MAPPING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.DTYPE_MAPPING</span></code></a></p></td>
 <td><p>Mapping between numpy data types and semantique value types.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TYPE_PROMOTION_MANUALS.html#semantique.processor.types.TYPE_PROMOTION_MANUALS" title="semantique.processor.types.TYPE_PROMOTION_MANUALS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TYPE_PROMOTION_MANUALS</span></code></a></p></td>
+<td><p>Type promotion manuals for all built-in operators and reducers.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
 <div class="section" id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
-<table class="longtable table autosummary">
+<table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -1642,11 +1645,11 @@
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="_notebooks/advanced.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="_notebooks/verbs.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Advanced usage</p>
+            <p class="prev-next-title">Verbs</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="_generated/semantique.QueryRecipe.html" title="next page">

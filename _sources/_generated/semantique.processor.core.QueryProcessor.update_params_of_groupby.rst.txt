@@ -1,6 +1,0 @@
-﻿semantique.processor.core.QueryProcessor.update\_params\_of\_groupby
-====================================================================
-
-.. currentmodule:: semantique.processor.core
-
-.. automethod:: QueryProcessor.update_params_of_groupby

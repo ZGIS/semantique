@@ -114,11 +114,6 @@
      Verbs
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_notebooks/advanced.html">
-     Advanced usage
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -214,6 +209,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.topography.html">
      semantique.topography
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.result.html">
+     semantique.result
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.self.html">
+     semantique.self
     </a>
    </li>
    <li class="toctree-l2">
@@ -497,6 +502,26 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.median_.html">
+     semantique.processor.reducers.median_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.mode_.html">
+     semantique.processor.reducers.mode_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.max_.html">
+     semantique.processor.reducers.max_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.min_.html">
+     semantique.processor.reducers.min_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.reducers.product_.html">
      semantique.processor.reducers.product_
     </a>
@@ -547,26 +572,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.mode_.html">
-     semantique.processor.reducers.mode_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.max_.html">
-     semantique.processor.reducers.max_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.median_.html">
-     semantique.processor.reducers.median_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.min_.html">
-     semantique.processor.reducers.min_
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
      semantique.processor.utils.convert_datetime64
     </a>
@@ -604,6 +609,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.types.DTYPE_MAPPING.html">
      semantique.processor.types.DTYPE_MAPPING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.TYPE_PROMOTION_MANUALS.html">
+     semantique.processor.types.TYPE_PROMOTION_MANUALS
     </a>
    </li>
    <li class="toctree-l2">
@@ -831,6 +841,53 @@ of the dedicated reference functions or by applying verbs to existing
 CubeProxy or CubeCollectionProxy objects.</p>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="semantique.CubeProxy.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L60-L61"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.CubeProxy.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#semantique.CubeProxy.__init__" title="semantique.CubeProxy.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(obj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.CubeProxy.evaluate.html#semantique.CubeProxy.evaluate" title="semantique.CubeProxy.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(operator[, y])</p></td>
+<td><p>Evaluate an expression for each pixel in a data cube.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CubeProxy.extract.html#semantique.CubeProxy.extract" title="semantique.CubeProxy.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract</span></code></a>(dimension[, component])</p></td>
+<td><p>Extract coordinate labels of a dimension as a new data cube.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.CubeProxy.filter.html#semantique.CubeProxy.filter" title="semantique.CubeProxy.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(filterer, **kwargs)</p></td>
+<td><p>Filter the values in a data cube.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CubeProxy.filter_space.html#semantique.CubeProxy.filter_space" title="semantique.CubeProxy.filter_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_space</span></code></a>(*filterer, **kwargs)</p></td>
+<td><p>Filter a data cube along the spatial dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.CubeProxy.filter_time.html#semantique.CubeProxy.filter_time" title="semantique.CubeProxy.filter_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_time</span></code></a>(*filterer, **kwargs)</p></td>
+<td><p>Filter a data cube along the temporal dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CubeProxy.groupby.html#semantique.CubeProxy.groupby" title="semantique.CubeProxy.groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby</span></code></a>(grouper, **kwargs)</p></td>
+<td><p>Group the values in a data cube.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.CubeProxy.groupby_space.html#semantique.CubeProxy.groupby_space" title="semantique.CubeProxy.groupby_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby_space</span></code></a>([component])</p></td>
+<td><p>Group a data cube along the spatial dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CubeProxy.groupby_time.html#semantique.CubeProxy.groupby_time" title="semantique.CubeProxy.groupby_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby_time</span></code></a>([component])</p></td>
+<td><p>Group a data cube along the temporal dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.CubeProxy.label.html#semantique.CubeProxy.label" title="semantique.CubeProxy.label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">label</span></code></a>(label, **kwargs)</p></td>
+<td><p>Label a data cube with a word or phrase.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CubeProxy.reduce.html#semantique.CubeProxy.reduce" title="semantique.CubeProxy.reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reduce</span></code></a>(dimension, reducer, **kwargs)</p></td>
+<td><p>Reduce the dimensionality of a data cube.</p></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

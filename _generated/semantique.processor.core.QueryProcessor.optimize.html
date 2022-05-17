@@ -114,11 +114,6 @@
      Verbs
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_notebooks/advanced.html">
-     Advanced usage
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -214,6 +209,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.topography.html">
      semantique.topography
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.result.html">
+     semantique.result
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.self.html">
+     semantique.self
     </a>
    </li>
    <li class="toctree-l2">
@@ -497,6 +502,26 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.median_.html">
+     semantique.processor.reducers.median_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.mode_.html">
+     semantique.processor.reducers.mode_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.max_.html">
+     semantique.processor.reducers.max_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.min_.html">
+     semantique.processor.reducers.min_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.reducers.product_.html">
      semantique.processor.reducers.product_
     </a>
@@ -547,26 +572,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.mode_.html">
-     semantique.processor.reducers.mode_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.max_.html">
-     semantique.processor.reducers.max_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.median_.html">
-     semantique.processor.reducers.median_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.reducers.min_.html">
-     semantique.processor.reducers.min_
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
      semantique.processor.utils.convert_datetime64
     </a>
@@ -604,6 +609,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.types.DTYPE_MAPPING.html">
      semantique.processor.types.DTYPE_MAPPING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.types.TYPE_PROMOTION_MANUALS.html">
+     semantique.processor.types.TYPE_PROMOTION_MANUALS
     </a>
    </li>
    <li class="toctree-l2">
@@ -816,13 +826,15 @@
 <h1>semantique.processor.core.QueryProcessor.optimize<a class="headerlink" href="#semantique-processor-core-queryprocessor-optimize" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.core.QueryProcessor.optimize">
-<span class="sig-prename descclassname"><span class="pre">QueryProcessor.</span></span><span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/core.py#L288-L311"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.core.QueryProcessor.optimize" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">QueryProcessor.</span></span><span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/core.py#L295-L320"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.core.QueryProcessor.optimize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optimize a semantic query.</p>
-<p>During query optimization, the query processor is scanned and an execution
-plan is written. The execution plan is a step-by-step guide of how the
-query should be executed during the execution phase that follows. Creating
-this causes some overhead, but that should be balanced out by considerably
-faster execution times.</p>
+<p>During query optimization, the query components are scanned and certain
+properties of the query processor are set. These properties influence some
+tweaks in how the query processor will behave when processing the query.
+For example, if the given spatial extent consists of multiple dispersed
+sub-areas, the query processor might instruct itself to load data
+separately for each sub-area, instead of loading data for the full extent
+and then subset it afterwards.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.html#semantique.processor.core.QueryProcessor" title="semantique.processor.core.QueryProcessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QueryProcessor</span></code></a> – An updated query processor instance.</p>
@@ -830,11 +842,8 @@ faster execution times.</p>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The current implementation of query parsing is still very basic in its
-functionalities. To be honest, it currently does exactly nothing. That
-is, the query will be executed ‘as-is’, and not yet according to an
-optimized query execution plan. The function is merely provided as a
-placeholder for a future implementation of query optimization.</p>
+<p>In the current version of semantique, the optimization phase only exists
+as a placeholder, and no properties are updated yet.</p>
 </div>
 </dd></dl>
 

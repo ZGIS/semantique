@@ -4,3 +4,29 @@
 .. currentmodule:: semantique
 
 .. autoclass:: CubeCollectionProxy
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CubeCollectionProxy.__init__
+      ~CubeCollectionProxy.compose
+      ~CubeCollectionProxy.concatenate
+      ~CubeCollectionProxy.evaluate
+      ~CubeCollectionProxy.extract
+      ~CubeCollectionProxy.filter
+      ~CubeCollectionProxy.filter_space
+      ~CubeCollectionProxy.filter_time
+      ~CubeCollectionProxy.label
+      ~CubeCollectionProxy.merge
+      ~CubeCollectionProxy.reduce
+   
+   
+
+   
+   
+   
