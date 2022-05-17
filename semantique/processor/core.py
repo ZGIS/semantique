@@ -220,11 +220,12 @@ class QueryProcessor():
     """Parse a semantic query.
 
     During query parsing, the required components for processing are read and
-    converted all together into a single query processor object which will be
-    used further process the query. Parsing should take care of validating the
-    components and their interrelations. A specific task of the query parser in
-    semantique is also to combine the spatial and temporal extent of the query
-    into a single spatio-temporal extent cube.
+    converted all together into a single object which will be used internally
+    for further processing of the query. Hence, query parsing takes care of
+    initializing a :obj:`QueryProcessor` instance. It also rasterizes the
+    given spatial extent and combines it with the temporal extent into a single
+    spatio-temporal array (see :func:`create_extent_cube
+    <semantique.processor.core.utils.create_extent_cube>`).
 
     Parameters
     ----------
@@ -268,11 +269,13 @@ class QueryProcessor():
 
     Note
     -----
-      The current implementation of query parsing is still very basic in its
-      functionalities. It initializes the query processor object, but does not
-      validate the query components yet.
+      Ideally, parsing should also take care of validating the components and
+      their interrelations. For example, it should check if referenced concepts
+      in the provided query recipe are actually defined in the provided
+      ontology. Such functionality is not implemented yet.
 
     """
+    logger.info("Started parsing the semantic query")
     # Step I: Parse the spatio-temporal extent.
     # It needs to be stored as a 2D array with dimensions space and time.
     extent = utils.create_extent_cube(
@@ -282,17 +285,23 @@ class QueryProcessor():
       crs = crs,
       tz = tz
     )
+    logger.debug(f"Created the spatio-temporal extent cube:\n{extent}")
     # Step II: Initialize the QueryProcessor instance.
-    return cls(recipe, factbase, ontology, extent, **config)
+    out = cls(recipe, factbase, ontology, extent, **config)
+    # Return.
+    logger.info("Finished parsing the semantic query")
+    return out
 
   def optimize(self):
     """Optimize a semantic query.
 
-    During query optimization, the query processor is scanned and an execution
-    plan is written. The execution plan is a step-by-step guide of how the
-    query should be executed during the execution phase that follows. Creating
-    this causes some overhead, but that should be balanced out by considerably
-    faster execution times.
+    During query optimization, the query components are scanned and certain
+    properties of the query processor are set. These properties influence some
+    tweaks in how the query processor will behave when processing the query.
+    For example, if the given spatial extent consists of multiple dispersed
+    sub-areas, the query processor might instruct itself to load data
+    separately for each sub-area, instead of loading data for the full extent
+    and then subset it afterwards.
 
     Returns
     -------
@@ -301,20 +310,21 @@ class QueryProcessor():
 
     Note
     -----
-      The current implementation of query parsing is still very basic in its
-      functionalities. To be honest, it currently does exactly nothing. That
-      is, the query will be executed ‘as-is’, and not yet according to an
-      optimized query execution plan. The function is merely provided as a
-      placeholder for a future implementation of query optimization.
+      In the current version of semantique, the optimization phase only exists
+      as a placeholder, and no properties are updated yet.
 
     """
-    return self
+    logger.info("Started optimizing the semantic query")
+    out = self
+    logger.info("Finished optimizing the semantic query")
+    return out
 
   def execute(self):
     """Execute a semantic query.
 
-    During query execution, the query processor follows the execution plan and
-    executes all result instructions.
+    During query execution, the query processor executes the result
+    instructions of the query recipe. It solves all references, evaluates them
+    into data cubes, and applies the defined actions to them.
 
     Returns
     -------
@@ -323,13 +333,20 @@ class QueryProcessor():
         containing the resulting data cubes.
 
     """
+    logger.info("Started executing the semantic query")
+    # Execute instructions for each result in the recipe.
     for x in self._recipe:
       if x in self._response:
         continue
+      logger.info(f"Started executing result: '{x}'")
       result = self.call_handler(self._recipe[x])
       result.name = x
       self._response[x] = result
-    return self
+      logger.info(f"Finished executing result: '{x}'")
+    # Return.
+    out = self
+    logger.info("Finished executing the semantic query")
+    return out
 
   def respond(self):
     """Return the response of an executed semantic query.
@@ -340,6 +357,7 @@ class QueryProcessor():
         Dictionary containing result names as keys and result arrays as values.
 
     """
+    logger.info("Started preparing response")
     # Trim result arrays if requested.
     # This means we drop all coordinates for which all values are nan.
     if self._trim_results:
@@ -348,7 +366,9 @@ class QueryProcessor():
           obj = obj.sq
         except AttributeError:
           pass
-        return obj.trim()
+        out = obj.trim()
+        logger.debug(f"Trimmed result '{out.name}':\n{out}")
+        return out
       self._response = {k: trim(v) for k, v in self._response.items()}
     # Unstack spatial dimensions if requested.
     if self._unstack_results:
@@ -357,9 +377,14 @@ class QueryProcessor():
           obj = obj.sq
         except AttributeError:
           pass
-        return obj.unstack_spatial_dims()
+        out = obj.unstack_spatial_dims()
+        logger.debug(f"Unstacked result '{out.name}':\n{out}")
+        return out
       self._response = {k: unstack(v) for k, v in self._response.items()}
-    return self._response
+    # Return.
+    out = self._response
+    logger.info("Finished preparing response")
+    return out
 
   def call_handler(self, block, key = "type"):
     """Call the handler for a specific building block.
@@ -377,32 +402,13 @@ class QueryProcessor():
       :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
         The processed building block.
 
-    """
-    out = self.get_handler(block, key)(block)
-    logger.debug(f"Handled {block[key]}:\n{out}")
-    return out
-
-  def get_handler(self, block, key = "type"):
-    """Get the handler function for a specific building block.
-
-    Parameters
-    ----------
-      block : :obj:`dict`
-        Textual representation of a building block.
-      key : :obj:`str`
-        The key that identifies the handler to be called.
-
-    Returns
-    --------
-      :obj:`callable`
-        The handler function corresponding to the type of building block.
-
     Raises
     ------
       :obj:`exceptions.InvalidBuildingBlockError`
         If a handler for the provided building block cannot be found.
 
     """
+    # Get handler.
     try:
       btype = block[key]
     except TypeError:
@@ -411,15 +417,16 @@ class QueryProcessor():
       )
     except KeyError:
       raise exceptions.InvalidBuildingBlockError(
-        f"Block has no {key} key"
+        f"Block has no '{key}' key"
       )
     try:
-      out = getattr(self, "handle_" + btype)
+      handler = getattr(self, "handle_" + btype)
     except AttributeError:
       raise exceptions.InvalidBuildingBlockError(
         f"Unknown block type: '{btype}'"
       )
-    return out
+    # Call handler.
+    return handler(block)
 
   def handle_concept(self, block):
     """Handler for semantic concept references.
@@ -434,6 +441,7 @@ class QueryProcessor():
       :obj:`xarray.DataArray`
 
     """
+    logger.debug(f"Translating concept {block['reference']}")
     out = self._ontology.translate(
       *block["reference"],
       property = block["property"] if "property" in block else None,
@@ -445,6 +453,7 @@ class QueryProcessor():
       track_types = self._track_types,
       trim_filter = self._trim_filter
     )
+    logger.debug(f"Translated concept {block['reference']}:\n{out}")
     return out
 
   def handle_resource(self, block):
@@ -460,10 +469,12 @@ class QueryProcessor():
       :obj:`xarray.DataArray`
 
     """
+    logger.debug(f"Retrieving resource {block['reference']}")
     out = self._factbase.retrieve(
       *block["reference"],
       extent = self._extent
     )
+    logger.debug(f"Retrieved resource {block['reference']}:\n{out}")
     return out
 
   def handle_result(self, block):
@@ -486,6 +497,8 @@ class QueryProcessor():
 
     """
     name = block["name"]
+    logger.debug(f"Fetching result '{name}'")
+    # Process referenced result if it is not processed yet.
     if name not in self._response:
       try:
         instructions = self._recipe[name]
@@ -493,10 +506,14 @@ class QueryProcessor():
         raise exceptions.UnknownResultError(
           f"Recipe does not contain result '{name}'"
         )
+      logger.info(f"Started executing result: '{name}'")
       result = self.call_handler(instructions)
       result.name = name
       self._response[name] = result
-      return result
+      logger.info(f"Finished executing result: '{name}'")
+    # Return referenced result.
+    out = self._response[name]
+    logger.debug(f"Fetched result '{name}':\n{out}")
     return self._response[name]
 
   def handle_self(self, block):
@@ -513,7 +530,9 @@ class QueryProcessor():
       :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
-    return self._get_eval_obj()
+    out = self._get_eval_obj()
+    logger.debug(f"Solved self reference:\n{out}")
+    return out
 
   def handle_collection(self, block):
     """Handler for cube collection references.
@@ -528,8 +547,11 @@ class QueryProcessor():
       :obj:`processor.structures.CubeCollection`
 
     """
+    logger.debug("Constructing cube collection")
     out = [self.call_handler(x) for x in block["elements"]]
-    return structures.CubeCollection(out)
+    out = structures.CubeCollection(out)
+    logger.debug(f"Constructed cube collection of:\n{[x.name for x in out]}")
+    return out
 
   def handle_processing_chain(self, block):
     """Handler for processing chains.
@@ -817,6 +839,7 @@ class QueryProcessor():
       raise exceptions.UnknownLabelError(
         f"There is no value with label '{label}'"
       )
+    logger.debug(f"Matched value label '{label}' with value {value}")
     return value
 
   def handle_geometries(self, block):
@@ -837,6 +860,7 @@ class QueryProcessor():
     out = gpd.GeoDataFrame.from_features(feats, crs = crs)
     if crs != self.crs:
       out = out.to_crs(self.crs)
+    logger.debug(f"Parsed geometries:\n{out}")
     return out
 
   def handle_time_instant(self, block):
@@ -858,6 +882,7 @@ class QueryProcessor():
       dt = utils.convert_datetime64(dt, tz, self.tz)
     out = xr.DataArray([dt])
     out.sq.value_type = "datetime"
+    logger.debug(f"Parsed time instant:\n{out}")
     return out
 
   def handle_time_interval(self, block):
@@ -881,6 +906,7 @@ class QueryProcessor():
       end = utils.convert_datetime64(start, tz, self.tz)
     out = xr.DataArray([start, end])
     out.sq.value_type = "datetime"
+    logger.debug(f"Parsed time interval:\n{out}")
     return out
 
   def call_verb(self, name, params):
@@ -917,6 +943,7 @@ class QueryProcessor():
       warnings.warn(
         f"Verb '{name}' returned an empty array"
       )
+    logger.debug(f"Applied verb {name}:\n{out}")
     return out
 
   def update_list_elements(self, obj):
