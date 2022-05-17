@@ -260,11 +260,8 @@ TYPE_PROMOTION_MANUALS = {
     "__preserve_labels__": 1
   },
   "median": {
-    "binary": "binary",
     "numerical": "numerical",
-    "ordinal": "ordinal",
-    "datetime": "datetime",
-    "__preserve_labels__": 1
+    "__preserve_labels__": 0
   },
   "min": {
     "binary": "binary",
