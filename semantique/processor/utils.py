@@ -136,21 +136,21 @@ def parse_datetime_component(name, obj):
   if name in ["dayofweek", "weekday"]:
     obj.sq.value_type = "ordinal"
     obj.sq.value_labels = {
-      "Monday": 0,
-      "Tuesday": 1,
-      "Wednesday": 2,
-      "Thursday": 3,
-      "Friday": 4,
-      "Saturday": 5,
-      "Sunday": 6
+      0: "Monday",
+      1: "Tuesday",
+      2: "Wednesday",
+      3: "Thursday",
+      4: "Friday",
+      5: "Saturday",
+      6: "Sunday"
     }
   elif name == "quarter":
     obj.sq.value_type = "ordinal"
     obj.sq.value_labels = {
-      "January, February, March": 1,
-      "May, April, June": 2,
-      "July, August, September": 3,
-      "October, November, December": 4
+      1: "January, February, March",
+      2: "May, April, June",
+      3: "July, August, September",
+      4: "October, November, December"
     }
   elif name == "season":
     # In xarray seasons get stored as strings.
@@ -160,10 +160,10 @@ def parse_datetime_component(name, obj):
     obj = obj.astype(int)
     obj.sq.value_type = "ordinal"
     obj.sq.value_labels = {
-      "March, April, May": 1,
-      "June, July, August": 2,
-      "September, October, November": 3,
-      "December, January, February": 4
+      1: "March, April, May",
+      2: "June, July, August",
+      3: "September, October, November",
+      4: "December, January, February"
     }
   else:
     obj.sq.value_type = "numerical"
