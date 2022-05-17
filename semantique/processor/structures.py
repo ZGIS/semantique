@@ -201,6 +201,8 @@ class Cube():
         Name of a specific component of the dimension coordinates to be
         extracted, e.g. *year*, *month* or *day* for temporal dimension
         coordinates.
+      track_types : :obj:`bool`
+        Should the extracted object get a value type assigned?
       **kwargs:
         Ignored.
 
