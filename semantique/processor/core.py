@@ -361,31 +361,36 @@ class QueryProcessor():
       self._response = {k: unstack(v) for k, v in self._response.items()}
     return self._response
 
-  def call_handler(self, block):
+  def call_handler(self, block, key = "type"):
     """Call the handler for a specific building block.
 
     Parameters
     ----------
       block : :obj:`dict`
         Textual representation of a building block.
+      key : :obj:`str`
+        The key that identifies the handler to be called.
 
     Returns
     --------
-      :obj:`xarray.DataArray` or :obj:`Cube Collection <semantique.processor.strctures.CubeCollection>`
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
         The processed building block.
 
     """
-    out = self.get_handler(block)(block)
-    logger.debug(f"Handled {block['type']}:\n{out}")
+    out = self.get_handler(block, key)(block)
+    logger.debug(f"Handled {block[key]}:\n{out}")
     return out
 
-  def get_handler(self, block):
+  def get_handler(self, block, key = "type"):
     """Get the handler function for a specific building block.
 
     Parameters
     ----------
       block : :obj:`dict`
         Textual representation of a building block.
+      key : :obj:`str`
+        The key that identifies the handler to be called.
 
     Returns
     --------
@@ -399,14 +404,14 @@ class QueryProcessor():
 
     """
     try:
-      btype = block["type"]
+      btype = block[key]
     except TypeError:
       raise exceptions.InvalidBuildingBlockError(
         "Block is not subscriptable"
       )
     except KeyError:
       raise exceptions.InvalidBuildingBlockError(
-        "Block has no 'type' key"
+        f"Block has no {key} key"
       )
     try:
       out = getattr(self, "handle_" + btype)
@@ -471,7 +476,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     Raises
     ------
@@ -503,7 +509,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     return self._get_eval_obj()
@@ -534,7 +541,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     obj = self.call_handler(block["with"])
@@ -543,6 +551,234 @@ class QueryProcessor():
       out = self.call_handler(i)
     self._reset_eval_obj()
     return out
+
+  def handle_verb(self, block):
+    """Handler for verbs.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+
+    """
+    out = self.call_handler(block, key = "name")
+    # Set the output array as the new active evaluation object.
+    self._replace_eval_obj(out)
+    return out
+
+  def handle_evaluate(self, block):
+    """Handler for the evaluate verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "evaluate".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+
+    """
+    # Get function parameters.
+    params = copy.deepcopy(block["params"])
+    # Parse right hand side of expression.
+    # If this is a reference it should be evaluated into an array.
+    try:
+      y = params["y"]
+    except KeyError:
+      pass
+    else:
+      if isinstance(y, (list, tuple)):
+        params["y"] = self.update_list_elements(y)
+      else:
+        try:
+          params["y"] = self.call_handler(y)
+        except exceptions.InvalidBuildingBlockError:
+          pass
+    # Obtain operator function.
+    params["operator"] = self.get_operator(params["operator"])
+    # Set other function parameters.
+    params["track_types"] = self._track_types
+    # Call verb.
+    return self.call_verb("evaluate", params)
+
+  def handle_extract(self, block):
+    """Handler for the extract verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "extract".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+
+    """
+    # Set function parameters.
+    params = copy.deepcopy(block["params"])
+    params["track_types"] = self._track_types
+    # Call verb.
+    return self.call_verb("extract", params)
+
+  def handle_filter(self, block):
+    """Handler for the filter verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "filter".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+
+    """
+    # Get function parameters.
+    params = copy.deepcopy(block["params"])
+    # Evaluate filterer reference into an array.
+    params["filterer"] = self.call_handler(params["filterer"])
+    # Set other function parameters.
+    params["trim"] = self._trim_filter
+    params["track_types"] = self._track_types
+    # Call verb.
+    return self.call_verb("filter", params)
+
+  def handle_groupby(self, block):
+    """Handler for the groupby verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "groupby".
+
+    Returns
+    -------
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+
+    """
+    # Get function parameters.
+    params = copy.deepcopy(block["params"])
+    # Evaluate grouper reference into an array or collection of arrays.
+    params["grouper"] = self.call_handler(params["grouper"])
+    # Call verb.
+    return self.call_verb("groupby", params)
+
+  def handle_label(self, block):
+    """Handler for the label verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "label".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+
+    """
+    return self.call_verb("label", block["params"])
+
+  def handle_reduce(self, block):
+    """Handler for the reduce verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "reduce".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+
+    """
+    # Get function parameters.
+    params = copy.deepcopy(block["params"])
+    # Obtain reducer function.
+    params["reducer"] = self.get_reducer(params["reducer"])
+    # Set other function parameters.
+    params["track_types"] = self._track_types
+    # Call verb.
+    return self.call_verb("reduce", params)
+
+  def handle_compose(self, block):
+    """Handler for the compose verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "compose".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+
+    """
+    # Set function parameters.
+    params = copy.deepcopy(block["params"])
+    params["track_types"] = self._track_types
+    # Call verb.
+    return self.call_verb("compose", params)
+
+  def handle_concatenate(self, block):
+    """Handler for the concatenate verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "concatenate".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+
+    """
+    # Set function parameters.
+    params = copy.deepcopy(block["params"])
+    params["track_types"] = self._track_types
+    # Call verb.
+    return self.call_verb("concatenate", params)
+
+  def handle_merge(self, block):
+    """Handler for the merge verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "merge".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+
+    """
+    # Get function parameters.
+    params = copy.deepcopy(block["params"])
+    # Obtain reducer function.
+    params["reducer"] = self.get_reducer(params["reducer"])
+    # Set other function parameters.
+    params["track_types"] = self._track_types
+    # Call verb.
+    return self.call_verb("merge", params)
 
   def handle_value_label(self, block):
     """Handler for value labels.
@@ -647,232 +883,41 @@ class QueryProcessor():
     out.sq.value_type = "datetime"
     return out
 
-  def handle_verb(self, block):
-    """Handler for verbs.
+  def call_verb(self, name, params):
+    """Apply a verb to the active evaluation object.
 
     Parameters
-    ----------
-      block : :obj:`dict`
-        Textual representation of a building block of type "verb".
+    -----------
+      name : :obj:`str`
+        Name of the verb.
+      params : :obj:`dict`
+        Parameters to be forwarded to the verb.
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or
+      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
-    name = block["name"]
-    # Extract function parameters for the verb.
-    try:
-      params = block["params"]
-    except KeyError:
-      params = {}
-    # Update function parameters for the verb.
-    # This for example executes nested processing chains.
-    try:
-      updater = getattr(self, "update_params_of_" + name)
-    except AttributeError:
-      pass
-    else:
-      params = updater(params)
-    # Get the cube to apply the verb to.
+    # Get the object to apply the verb to.
     obj = self._get_eval_obj()
     try:
       obj = obj.sq
     except AttributeError:
       pass
     # Apply the verb.
-    out = getattr(obj, name)(**params)
+    verb = getattr(obj, name)
+    out = verb(**params)
     # Warn when output array is empty.
     try:
-      obj = obj.sq
+      is_empty = out.sq.is_empty
     except AttributeError:
-      pass
-    if obj.is_empty:
+      is_empty = out.is_empty
+    if is_empty:
       warnings.warn(
         f"Verb '{name}' returned an empty array"
       )
-    # Set the output array as the new active evaluation object.
-    self._replace_eval_obj(out)
     return out
-
-  def update_params_of_evaluate(self, params):
-    """Update the parameters of the evaluate verb.
-
-    Processes the building blocks attached to the ``y`` parameter (if present)
-    into a data cube, obtains the operator function corresponding to the
-    operator name given as ``operator`` parameter, and adds the boolean
-    ``track_types`` parameter according to the processor configuration
-    settings.
-
-    Parameters
-    -----------
-      params : :obj:`dict`
-        Value of the ``params`` key in the textual representation of a
-        evaluate verb building block.
-
-    Returns
-    --------
-      :obj:`dict`
-        The updated parameters.
-
-    """
-    params = copy.deepcopy(params)
-    try:
-      y = params["y"]
-    except KeyError:
-      pass
-    else:
-      if isinstance(y, (list, tuple)):
-        params["y"] = self.update_list_elements(y)
-      else:
-        try:
-          params["y"] = self.call_handler(y)
-        except exceptions.InvalidBuildingBlockError:
-          pass
-    params["operator"] = self.get_operator(params["operator"])
-    params["track_types"] = self._track_types
-    return params
-
-  def update_params_of_filter(self, params):
-    """Update the parameters of the filter verb.
-
-    Processes the building blocks attached to the ``filterer`` parameter into a
-    data cube, and adds the boolean ``trim`` and ``track_types`` parameters
-    according to the processor configuration settings.
-
-    Parameters
-    -----------
-      params : :obj:`dict`
-        Value of the ``params`` key in the textual representation of a
-        filter verb building block.
-
-    Returns
-    --------
-      :obj:`dict`
-        The updated parameters.
-
-    """
-    params = copy.deepcopy(params)
-    filterer = params["filterer"]
-    params["filterer"] = getattr(self, "handle_" + filterer["type"])(filterer)
-    params["trim"] = self._trim_filter
-    params["track_types"] = self._track_types
-    return params
-
-  def update_params_of_groupby(self, params):
-    """Update the parameters of the groupby verb.
-
-    Processes the building blocks attached to the ``grouper`` parameter
-    into a data cube.
-
-    Parameters
-    -----------
-      params : :obj:`dict`
-        Value of the ``params`` key in the textual representation of a
-        groupby verb building block.
-
-    Returns
-    --------
-      :obj:`dict`
-        The updated parameters.
-
-    """
-    params = copy.deepcopy(params)
-    grouper = params["grouper"]
-    params["grouper"] = getattr(self, "handle_" + grouper["type"])(grouper)
-    return params
-
-  def update_params_of_reduce(self, params):
-    """Update the parameters of the reduce verb.
-
-    Obtains the reducer function corresponding to the reducer name given as
-    ``reducer`` parameter, and adds the boolean ``track_types`` parameter
-    according to the processor configuration settings.
-
-    Parameters
-    -----------
-      params : :obj:`dict`
-        Value of the ``params`` key in the textual representation of a
-        reduce verb building block.
-
-    Returns
-    --------
-      :obj:`dict`
-        The updated parameters.
-
-    """
-    params = copy.deepcopy(params)
-    params["reducer"] = self.get_reducer(params["reducer"])
-    params["track_types"] = self._track_types
-    return params
-
-  def update_params_of_compose(self, params):
-    """Update the parameters of the compose verb.
-
-    Adds the boolean ``track_types`` parameter according to the processor
-    configuration settings.
-
-    Parameters
-    -----------
-      params : :obj:`dict`
-        Value of the ``params`` key in the textual representation of a
-        compose verb building block.
-
-    Returns
-    --------
-      :obj:`dict`
-        The updated parameters.
-
-    """
-    params = copy.deepcopy(params)
-    params["track_types"] = self._track_types
-    return params
-
-  def update_params_of_concatenate(self, params):
-    """Update the parameters of the concatenate verb.
-
-    Adds the boolean ``track_types`` parameter according to the processor
-    configuration settings.
-
-    Parameters
-    -----------
-      params : :obj:`dict`
-        Value of the ``params`` key in the textual representation of a
-        concatenate verb building block.
-
-    Returns
-    --------
-      :obj:`dict`
-        The updated parameters.
-
-    """
-    params = copy.deepcopy(params)
-    params["track_types"] = self._track_types
-    return params
-
-  def update_params_of_merge(self, params):
-    """Update the parameters of the merge verb.
-
-    Obtains the reducer function corresponding to the reducer name given as
-    ``reducer`` parameter, and adds the boolean ``track_types`` parameter
-    according to the processor configuration settings.
-
-    Parameters
-    -----------
-      params : :obj:`dict`
-        Value of the ``params`` key in the textual representation of a
-        merge verb building block.
-
-    Returns
-    --------
-      :obj:`dict`
-        The updated parameters.
-
-    """
-    params = copy.deepcopy(params)
-    params["reducer"] = self.get_reducer(params["reducer"])
-    params["track_types"] = self._track_types
-    return params
 
   def update_list_elements(self, obj):
     """Update the elements of a list.

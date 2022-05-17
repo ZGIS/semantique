@@ -187,7 +187,7 @@ class Cube():
     out = operator(*operands, track_types = track_types, **kwargs)
     return out
 
-  def extract(self, dimension, component = None, **kwargs):
+  def extract(self, dimension, component = None, track_types = True, **kwargs):
     """Apply the extract verb to the cube.
 
     The extract verb extracts coordinate labels of a dimension as a new data
@@ -244,6 +244,9 @@ class Cube():
         except TypeError:
           pass
     out._variable = out._variable.to_base_variable()
+    if not track_types:
+      del out.sq.value_type
+      del out.sq.value_labels
     return out
 
   def filter(self, filterer, trim = False, track_types = True, **kwargs):
