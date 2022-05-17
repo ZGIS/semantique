@@ -1,5 +1,5 @@
 {
-  "water_count_map": {
+  "water_map": {
     "type": "processing_chain",
     "with": {
       "type": "concept",
@@ -19,7 +19,7 @@
       }
     ]
   },
-  "vegetation_count_map": {
+  "vegetation_map": {
     "type": "processing_chain",
     "with": {
       "type": "concept",
@@ -39,7 +39,7 @@
       }
     ]
   },
-  "water_percentage_time_series": {
+  "water_time_series": {
     "type": "processing_chain",
     "with": {
       "type": "concept",
