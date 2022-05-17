@@ -222,10 +222,10 @@ class QueryProcessor():
     During query parsing, the required components for processing are read and
     converted all together into a single object which will be used internally
     for further processing of the query. Hence, query parsing takes care of
-    initializing a :obj:`QueryProcessor` instance. It also rasterizes the
+    initializing a :class:`QueryProcessor` instance. It also rasterizes the
     given spatial extent and combines it with the temporal extent into a single
     spatio-temporal array (see :func:`create_extent_cube
-    <semantique.processor.core.utils.create_extent_cube>`).
+    <semantique.processor.utils.create_extent_cube>`).
 
     Parameters
     ----------
@@ -398,8 +398,7 @@ class QueryProcessor():
 
     Returns
     --------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
         The processed building block.
 
     Raises
@@ -487,8 +486,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     Raises
     ------
@@ -526,8 +524,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     out = self._get_eval_obj()
@@ -563,8 +560,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     obj = self.call_handler(block["with"])
@@ -584,8 +580,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     out = self.call_handler(block, key = "name")
@@ -604,8 +599,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     # Get function parameters.
@@ -642,8 +636,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     # Set function parameters.
@@ -663,8 +656,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     # Get function parameters.
@@ -709,8 +701,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     return self.call_verb("label", block["params"])
@@ -726,8 +717,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     # Get function parameters.
@@ -921,8 +911,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or
-      :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
+      :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
     # Get the object to apply the verb to.

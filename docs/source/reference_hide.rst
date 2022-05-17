@@ -8,7 +8,7 @@
 
 .. autosummary::
    :toctree: _generated/
-   :template: dictlike.rst
+   :template: inherited.rst
    :nosignatures:
 
    CubeProxy
@@ -75,25 +75,27 @@
    processor.core.QueryProcessor.execute
    processor.core.QueryProcessor.respond
    processor.core.QueryProcessor.call_handler
-   processor.core.QueryProcessor.get_handler
    processor.core.QueryProcessor.handle_concept
    processor.core.QueryProcessor.handle_resource
    processor.core.QueryProcessor.handle_result
    processor.core.QueryProcessor.handle_self
    processor.core.QueryProcessor.handle_collection
    processor.core.QueryProcessor.handle_processing_chain
+   processor.core.QueryProcessor.handle_verb
+   processor.core.QueryProcessor.handle_evaluate
+   processor.core.QueryProcessor.handle_extract
+   processor.core.QueryProcessor.handle_filter
+   processor.core.QueryProcessor.handle_groupby
+   processor.core.QueryProcessor.handle_label
+   processor.core.QueryProcessor.handle_reduce
+   processor.core.QueryProcessor.handle_compose
+   processor.core.QueryProcessor.handle_concatenate
+   processor.core.QueryProcessor.handle_merge
    processor.core.QueryProcessor.handle_value_label
    processor.core.QueryProcessor.handle_geometries
    processor.core.QueryProcessor.handle_time_instant
    processor.core.QueryProcessor.handle_time_interval
-   processor.core.QueryProcessor.handle_verb
-   processor.core.QueryProcessor.update_params_of_evaluate
-   processor.core.QueryProcessor.update_params_of_filter
-   processor.core.QueryProcessor.update_params_of_groupby
-   processor.core.QueryProcessor.update_params_of_reduce
-   processor.core.QueryProcessor.update_params_of_compose
-   processor.core.QueryProcessor.update_params_of_concatenate
-   processor.core.QueryProcessor.update_params_of_merge
+   processor.core.QueryProcessor.call_verb
    processor.core.QueryProcessor.update_list_elements
    processor.core.QueryProcessor.add_operator
    processor.core.QueryProcessor.get_operator
@@ -151,6 +153,6 @@
    processor.types.TypePromoter.input_types
    processor.types.TypePromoter.output_type
    processor.types.TypePromoter.input_labels
-   processor.types.TypePromoter.output_label
+   processor.types.TypePromoter.output_labels
    processor.types.TypePromoter.check
    processor.types.TypePromoter.promote

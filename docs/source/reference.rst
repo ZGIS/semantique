@@ -71,6 +71,8 @@ References
    atmosphere
    reflectance
    topography
+   result
+   self
    collection
 
 Verbs
@@ -244,14 +246,18 @@ Assignment operators
 Reducer functions
 ------------------
 
-Numerical reducers
-~~~~~~~~~~~~~~~~~~~
+Statistical reducers
+~~~~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
    :toctree: _generated/
    :nosignatures:
 
    processor.reducers.mean_
+   processor.reducers.median_
+   processor.reducers.mode_
+   processor.reducers.max_
+   processor.reducers.min_
    processor.reducers.product_
    processor.reducers.standard_deviation_
    processor.reducers.sum_
@@ -267,8 +273,8 @@ Boolean reducers
    processor.reducers.all_
    processor.reducers.any_
 
-Count reducers
-~~~~~~~~~~~~~~~
+Occurence reducers
+~~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
    :toctree: _generated/
@@ -277,8 +283,8 @@ Count reducers
    processor.reducers.count_
    processor.reducers.percentage_
 
-Universal reducers
-~~~~~~~~~~~~~~~~~~~
+Positional reducers
+~~~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
    :toctree: _generated/
@@ -286,18 +292,6 @@ Universal reducers
 
    processor.reducers.first_
    processor.reducers.last_
-   processor.reducers.mode_
-
-Ordered reducers
-~~~~~~~~~~~~~~~~~
-
-.. autosummary::
-   :toctree: _generated/
-   :nosignatures:
-
-   processor.reducers.max_
-   processor.reducers.median_
-   processor.reducers.min_
 
 Utils
 ------

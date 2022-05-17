@@ -26,6 +26,20 @@ def invert_(x, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["invert"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, function = "invert")
@@ -60,6 +74,20 @@ def absolute_(x, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["absolute"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, function = "absolute")
@@ -89,6 +117,20 @@ def cube_root_(x, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["cube_root"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -123,6 +165,20 @@ def exponential_(x, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["exponential"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -159,6 +215,20 @@ def natural_logarithm_(x, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["natural_logarithm"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, function = "natural_logarithm")
@@ -189,6 +259,20 @@ def square_root_(x, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["square_root"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, function = "square_root")
@@ -201,7 +285,7 @@ def square_root_(x, track_types = True, **kwargs):
   return out
 
 #
-# ALGEBRAIC MULTIVARIATE OPERATORS
+# ALGEBRAIC OPERATORS
 #
 
 def add_(x, y, track_types = True, **kwargs):
@@ -230,6 +314,22 @@ def add_(x, y, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["add"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -270,6 +370,22 @@ def divide_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["divide"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "divide")
@@ -308,6 +424,22 @@ def multiply_(x, y, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["multiply"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -348,6 +480,22 @@ def power_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["power"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "power")
@@ -387,6 +535,22 @@ def subtract_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["subtract"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "subtract")
@@ -400,7 +564,7 @@ def subtract_(x, y, track_types = True, **kwargs):
   return out
 
 #
-# BOOLEAN MULTIVARIATE OPERATORS
+# BOOLEAN OPERATORS
 #
 
 def and_(x, y, track_types = True, **kwargs):
@@ -429,6 +593,22 @@ def and_(x, y, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["and"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -469,6 +649,22 @@ def or_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["or"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "or")
@@ -507,6 +703,22 @@ def exclusive_or_(x, y, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["exclusive_or"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -551,6 +763,22 @@ def equal_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["equal"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "equal")
@@ -585,6 +813,22 @@ def in_(x, y, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["in"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -624,6 +868,22 @@ def not_equal_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["not_equal"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "not_equal")
@@ -658,6 +918,22 @@ def not_in_(x, y, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["not_in"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -701,6 +977,22 @@ def greater_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["greater"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "greater")
@@ -739,6 +1031,22 @@ def greater_equal_(x, y, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["greater_equal"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -779,6 +1087,22 @@ def less_(x, y, track_types = True, **kwargs):
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["less"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "less")
@@ -817,6 +1141,22 @@ def less_equal_(x, y, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["less_equal"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -869,6 +1209,22 @@ def intersects_(x, y, track_types = True, **kwargs):
   Note
   -----
   The spatial coordinate reference systems of x and y are expected to be equal.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["intersects"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:
@@ -926,6 +1282,22 @@ def after_(x, y, track_types = True, **kwargs):
   -----
   The timezones of x and y are expected to be equal.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["after"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "after")
@@ -974,6 +1346,22 @@ def before_(x, y, track_types = True, **kwargs):
   -----
   The timezones of x and y are expected to be equal.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["before"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "before")
@@ -1019,6 +1407,22 @@ def during_(x, y, track_types = True, **kwargs):
   -----
   The timezones of x and y are expected to be equal.
 
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["during"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
   """
   if track_types:
     promoter = TypePromoter(x, y, function = "during")
@@ -1062,6 +1466,22 @@ def assign_(x, y, track_types = True, **kwargs):
     :obj:`xarray.DataArray`
       A data cube with the same shape as ``x`` containing the results of all
       evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["assign"]
+      obj.pop("__preserve_labels__")
+      print(obj)
 
   """
   if track_types:

@@ -43,7 +43,8 @@ extensions = [
   'nbsphinx',
   'nbsphinx_link',
   'm2r2',
-  'sphinxemoji.sphinxemoji'
+  'sphinxemoji.sphinxemoji',
+  'sphinx_exec_code'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
