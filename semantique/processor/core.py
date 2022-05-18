@@ -870,8 +870,7 @@ class QueryProcessor():
     tz = pytz.timezone(block["value"]["tz"])
     if tz != self.tz.zone:
       dt = utils.convert_datetime64(dt, tz, self.tz)
-    out = xr.DataArray([dt])
-    out.sq.value_type = "datetime"
+    out = np.array([dt])
     logger.debug(f"Parsed time instant:\n{out}")
     return out
 
@@ -894,8 +893,7 @@ class QueryProcessor():
     if tz != self.tz:
       start = utils.convert_datetime64(start, tz, self.tz)
       end = utils.convert_datetime64(start, tz, self.tz)
-    out = xr.DataArray([start, end])
-    out.sq.value_type = "datetime"
+    out = np.array([start, end])
     logger.debug(f"Parsed time interval:\n{out}")
     return out
 
