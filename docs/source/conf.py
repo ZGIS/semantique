@@ -106,7 +106,7 @@ autosummary_generate = True
 
 nbsphinx_prolog = """
 {% set docname = env.doc2path(env.docname, base=None) %}
-Explore this notebook interactively: |Binder|.
+Explore this notebook interactively: |Binder|
 
 .. |Binder| image:: https://mybinder.org/badge.svg
    :target: https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo%2F{{ docname }}
