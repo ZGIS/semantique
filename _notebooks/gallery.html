@@ -118,6 +118,11 @@
      Verbs
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="advanced.html">
+     Advanced
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -868,6 +873,11 @@
    Seasonal aggregates
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#First-observation-timestamps">
+   First observation timestamps
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -1127,7 +1137,7 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<p>Explore this notebook interactively: <a class="reference external" href="https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo%2F_notebooks/gallery.nblink"><img alt="Binder" src="https://mybinder.org/badge.svg" /></a>.</p>
+<p>Explore this notebook interactively: <a class="reference external" href="https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo%2F_notebooks/gallery.nblink"><img alt="Binder" src="https://mybinder.org/badge.svg" /></a></p>
 <div class="section" id="Gallery">
 <h1>Gallery<a class="headerlink" href="#Gallery" title="Permalink to this headline">¶</a></h1>
 <p>In this notebook we show different types of queries and how their response look like.</p>
@@ -1161,6 +1171,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
 import geopandas as gpd
+import xarray as xr
 import matplotlib.pyplot as plt
 import numpy as np
 import json
@@ -1518,8 +1529,190 @@ response = recipe.execute(factbase, ontology, space, time, **config)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>parcels = sq.SpatialExtent(gpd.read_file(&quot;files/parcels.geojson&quot;))
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>parcels.features.to_crs(4326).explore()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
 
-recipe = sq.QueryRecipe()
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_de760b29600e66fee362e76b50814735 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            &lt;/style&gt;
+
+
+                    &lt;style&gt;
+                        .foliumtooltip {
+
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    &lt;/style&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_de760b29600e66fee362e76b50814735&quot; &gt;&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;script&gt;
+
+            var map_de760b29600e66fee362e76b50814735 = L.map(
+                &quot;map_de760b29600e66fee362e76b50814735&quot;,
+                {
+                    center: [47.32110812526405, 12.808509961311596],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+            L.control.scale().addTo(map_de760b29600e66fee362e76b50814735);
+
+
+
+
+
+            var tile_layer_08e079f9bc97419f301229cd768e417d = L.tileLayer(
+                &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_de760b29600e66fee362e76b50814735);
+
+
+            map_de760b29600e66fee362e76b50814735.fitBounds(
+                [[47.30444420302901, 12.799052458545688], [47.33777204749909, 12.817967464077503]],
+                {}
+            );
+
+
+        function geo_json_4c648188fcfaa14c0e62a8ed428f3865_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
+            }
+        }
+        function geo_json_4c648188fcfaa14c0e62a8ed428f3865_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0.75};
+            }
+        }
+        function geo_json_4c648188fcfaa14c0e62a8ed428f3865_pointToLayer(feature, latlng) {
+            var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
+
+            let style = geo_json_4c648188fcfaa14c0e62a8ed428f3865_styler(feature)
+            Object.assign(opts, style)
+
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_4c648188fcfaa14c0e62a8ed428f3865_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                        geo_json_4c648188fcfaa14c0e62a8ed428f3865.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                        const highlightStyle = geo_json_4c648188fcfaa14c0e62a8ed428f3865_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_4c648188fcfaa14c0e62a8ed428f3865 = L.geoJson(null, {
+                onEachFeature: geo_json_4c648188fcfaa14c0e62a8ed428f3865_onEachFeature,
+
+                style: geo_json_4c648188fcfaa14c0e62a8ed428f3865_styler,
+                pointToLayer: geo_json_4c648188fcfaa14c0e62a8ed428f3865_pointToLayer
+        });
+
+        function geo_json_4c648188fcfaa14c0e62a8ed428f3865_add (data) {
+            geo_json_4c648188fcfaa14c0e62a8ed428f3865
+                .addData(data)
+                .addTo(map_de760b29600e66fee362e76b50814735);
+        }
+            geo_json_4c648188fcfaa14c0e62a8ed428f3865_add({&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.817967464077503, 47.33777204749909], &quot;features&quot;: [{&quot;bbox&quot;: [12.803868147852612, 47.33056389640604, 12.817967464077503, 47.33777204749909], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.803868147852612, 47.33091868331674], [12.817596157332153, 47.33056389640604], [12.817967464077503, 47.33741720662344], [12.804237649967712, 47.33777204749909], [12.803868147852612, 47.33091868331674]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Northern&quot;}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.815746431172713, 47.31514111553671], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.799052458545688, 47.30486091070503], [12.815190335969971, 47.30444420302901], [12.815746431172713, 47.3147243128484], [12.799605373818284, 47.31514111553671], [12.799052458545688, 47.30486091070503]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;1&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Southern&quot;}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+
+
+
+    geo_json_4c648188fcfaa14c0e62a8ed428f3865.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create(&#x27;div&#x27;);
+
+    let handleObject = feature=&gt;typeof(feature)==&#x27;object&#x27; ? JSON.stringify(feature) : feature;
+    let fields = [&quot;name&quot;];
+    let aliases = [&quot;name&quot;];
+    let table = &#x27;&lt;table&gt;&#x27; +
+        String(
+        fields.map(
+        (v,i)=&gt;
+        `&lt;tr&gt;
+            &lt;th&gt;${aliases[i]}&lt;/th&gt;
+
+            &lt;td&gt;${handleObject(layer.feature.properties[v])}&lt;/td&gt;
+        &lt;/tr&gt;`).join(&#x27;&#x27;))
+    +&#x27;&lt;/table&gt;&#x27;;
+    div.innerHTML=table;
+
+    return div
+    }
+    ,{&quot;className&quot;: &quot;foliumtooltip&quot;, &quot;sticky&quot;: true});
+
+&lt;/script&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
 
 recipe[&quot;avg_water_count_per_parcel&quot;] = sq.entity(&quot;water&quot;).\
     reduce(&quot;time&quot;, &quot;count&quot;).\
@@ -1532,7 +1725,7 @@ response = recipe.execute(factbase, ontology, parcels, time, **config)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df = response[&quot;avg_water_count_per_parcel&quot;].sq.to_dataframe()
@@ -1541,7 +1734,7 @@ df
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1572,254 +1765,23 @@ df
   </thead>
   <tbody>
     <tr>
-      <th>1.0</th>
+      <th>Northern</th>
       <td>0.939145</td>
     </tr>
     <tr>
-      <th>2.0</th>
+      <th>Southern</th>
       <td>1.175439</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>geodf = parcels.features
-geodf[&quot;avg_water_count&quot;] = response[&quot;avg_water_count_per_parcel&quot;].values
-parcels.features.to_crs(4326).explore(column = &quot;avg_water_count&quot;, tiles = &quot;CartoDB positron&quot;)
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
-&lt;head&gt;
-    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
-
-        &lt;script&gt;
-            L_NO_TOUCH = false;
-            L_DISABLE_3D = false;
-        &lt;/script&gt;
-
-    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
-    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
-    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
-
-            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
-                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
-            &lt;style&gt;
-                #map_b0f6c91c66254357b924b0218001cf00 {
-                    position: relative;
-                    width: 100.0%;
-                    height: 100.0%;
-                    left: 0.0%;
-                    top: 0.0%;
-                }
-            &lt;/style&gt;
-
-
-                    &lt;style&gt;
-                        .foliumtooltip {
-
-                        }
-                       .foliumtooltip table{
-                            margin: auto;
-                        }
-                        .foliumtooltip tr{
-                            text-align: left;
-                        }
-                        .foliumtooltip th{
-                            padding: 2px; padding-right: 8px;
-                        }
-                    &lt;/style&gt;
-
-    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js&quot;&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_b0f6c91c66254357b924b0218001cf00&quot; &gt;&lt;/div&gt;
-
-&lt;/body&gt;
-&lt;script&gt;
-
-            var map_b0f6c91c66254357b924b0218001cf00 = L.map(
-                &quot;map_b0f6c91c66254357b924b0218001cf00&quot;,
-                {
-                    center: [47.32110812526405, 12.808509961311596],
-                    crs: L.CRS.EPSG3857,
-                    zoom: 10,
-                    zoomControl: true,
-                    preferCanvas: false,
-                }
-            );
-            L.control.scale().addTo(map_b0f6c91c66254357b924b0218001cf00);
-
-
-
-
-
-            var tile_layer_12d7f64285b01f46444ecb580ed12332 = L.tileLayer(
-                &quot;https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png&quot;,
-                {&quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\&quot;https://carto.com/attributions\&quot;\u003eCARTO\u003c/a\u003e&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 20, &quot;maxZoom&quot;: 20, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_b0f6c91c66254357b924b0218001cf00);
-
-
-            map_b0f6c91c66254357b924b0218001cf00.fitBounds(
-                [[47.30444420302901, 12.799052458545688], [47.33777204749909, 12.817967464077503]],
-                {}
-            );
-
-
-        function geo_json_6ac04376390107de43da88043fe84286_styler(feature) {
-            switch(feature.id) {
-                case &quot;0&quot;:
-                    return {&quot;color&quot;: &quot;#440154&quot;, &quot;fillColor&quot;: &quot;#440154&quot;, &quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
-                default:
-                    return {&quot;color&quot;: &quot;#fde725&quot;, &quot;fillColor&quot;: &quot;#fde725&quot;, &quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
-            }
-        }
-        function geo_json_6ac04376390107de43da88043fe84286_highlighter(feature) {
-            switch(feature.id) {
-                default:
-                    return {&quot;fillOpacity&quot;: 0.75};
-            }
-        }
-        function geo_json_6ac04376390107de43da88043fe84286_pointToLayer(feature, latlng) {
-            var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
-
-            let style = geo_json_6ac04376390107de43da88043fe84286_styler(feature)
-            Object.assign(opts, style)
-
-            return new L.CircleMarker(latlng, opts)
-        }
-
-        function geo_json_6ac04376390107de43da88043fe84286_onEachFeature(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if(typeof e.target.setStyle === &quot;function&quot;){
-                        geo_json_6ac04376390107de43da88043fe84286.resetStyle(e.target);
-                    }
-                },
-                mouseover: function(e) {
-                    if(typeof e.target.setStyle === &quot;function&quot;){
-                        const highlightStyle = geo_json_6ac04376390107de43da88043fe84286_highlighter(e.target.feature)
-                        e.target.setStyle(highlightStyle);
-                    }
-                },
-            });
-        };
-        var geo_json_6ac04376390107de43da88043fe84286 = L.geoJson(null, {
-                onEachFeature: geo_json_6ac04376390107de43da88043fe84286_onEachFeature,
-
-                style: geo_json_6ac04376390107de43da88043fe84286_styler,
-                pointToLayer: geo_json_6ac04376390107de43da88043fe84286_pointToLayer
-        });
-
-        function geo_json_6ac04376390107de43da88043fe84286_add (data) {
-            geo_json_6ac04376390107de43da88043fe84286
-                .addData(data)
-                .addTo(map_b0f6c91c66254357b924b0218001cf00);
-        }
-            geo_json_6ac04376390107de43da88043fe84286_add({&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.817967464077503, 47.33777204749909], &quot;features&quot;: [{&quot;bbox&quot;: [12.803868147852612, 47.33056389640604, 12.817967464077503, 47.33777204749909], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.803868147852612, 47.33091868331674], [12.817596157332153, 47.33056389640604], [12.817967464077503, 47.33741720662344], [12.804237649967712, 47.33777204749909], [12.803868147852612, 47.33091868331674]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {&quot;__folium_color&quot;: &quot;#440154&quot;, &quot;avg_water_count&quot;: 0.9391447368421053, &quot;name&quot;: &quot;Northern&quot;}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.815746431172713, 47.31514111553671], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.799052458545688, 47.30486091070503], [12.815190335969971, 47.30444420302901], [12.815746431172713, 47.3147243128484], [12.799605373818284, 47.31514111553671], [12.799052458545688, 47.30486091070503]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;1&quot;, &quot;properties&quot;: {&quot;__folium_color&quot;: &quot;#fde725&quot;, &quot;avg_water_count&quot;: 1.1754385964912282, &quot;name&quot;: &quot;Southern&quot;}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
-
-
-
-    geo_json_6ac04376390107de43da88043fe84286.bindTooltip(
-    function(layer){
-    let div = L.DomUtil.create(&#x27;div&#x27;);
-
-    let handleObject = feature=&gt;typeof(feature)==&#x27;object&#x27; ? JSON.stringify(feature) : feature;
-    let fields = [&quot;name&quot;, &quot;avg_water_count&quot;];
-    let aliases = [&quot;name&quot;, &quot;avg_water_count&quot;];
-    let table = &#x27;&lt;table&gt;&#x27; +
-        String(
-        fields.map(
-        (v,i)=&gt;
-        `&lt;tr&gt;
-            &lt;th&gt;${aliases[i]}&lt;/th&gt;
-
-            &lt;td&gt;${handleObject(layer.feature.properties[v])}&lt;/td&gt;
-        &lt;/tr&gt;`).join(&#x27;&#x27;))
-    +&#x27;&lt;/table&gt;&#x27;;
-    div.innerHTML=table;
-
-    return div
-    }
-    ,{&quot;className&quot;: &quot;foliumtooltip&quot;, &quot;sticky&quot;: true});
-
-
-    var color_map_8d596a3aadca59d80e072afd74a3a86f = {};
-
-
-    color_map_8d596a3aadca59d80e072afd74a3a86f.color = d3.scale.threshold()
-              .domain([0.9391447368421053, 0.9396182716309813, 0.9400918064198573, 0.9405653412087333, 0.9410388759976093, 0.9415124107864853, 0.9419859455753613, 0.9424594803642373, 0.9429330151531133, 0.9434065499419892, 0.9438800847308653, 0.9443536195197413, 0.9448271543086173, 0.9453006890974933, 0.9457742238863692, 0.9462477586752452, 0.9467212934641213, 0.9471948282529973, 0.9476683630418733, 0.9481418978307493, 0.9486154326196252, 0.9490889674085012, 0.9495625021973773, 0.9500360369862533, 0.9505095717751293, 0.9509831065640053, 0.9514566413528812, 0.9519301761417572, 0.9524037109306333, 0.9528772457195093, 0.9533507805083853, 0.9538243152972612, 0.9542978500861372, 0.9547713848750132, 0.9552449196638892, 0.9557184544527653, 0.9561919892416413, 0.9566655240305172, 0.9571390588193932, 0.9576125936082692, 0.9580861283971452, 0.9585596631860213, 0.9590331979748972, 0.9595067327637732, 0.9599802675526492, 0.9604538023415252, 0.9609273371304012, 0.9614008719192773, 0.9618744067081532, 0.9623479414970292, 0.9628214762859052, 0.9632950110747812, 0.9637685458636572, 0.9642420806525331, 0.9647156154414092, 0.9651891502302852, 0.9656626850191612, 0.9661362198080372, 0.9666097545969132, 0.9670832893857891, 0.9675568241746652, 0.9680303589635412, 0.9685038937524172, 0.9689774285412932, 0.9694509633301691, 0.9699244981190451, 0.9703980329079211, 0.9708715676967972, 0.9713451024856732, 0.9718186372745492, 0.9722921720634251, 0.9727657068523011, 0.9732392416411771, 0.9737127764300532, 0.9741863112189292, 0.9746598460078051, 0.9751333807966811, 0.9756069155855571, 0.9760804503744331, 0.9765539851633092, 0.9770275199521852, 0.9775010547410611, 0.9779745895299371, 0.9784481243188131, 0.9789216591076891, 0.9793951938965652, 0.9798687286854411, 0.9803422634743171, 0.9808157982631931, 0.9812893330520691, 0.9817628678409451, 0.9822364026298211, 0.982709937418697, 0.9831834722075731, 0.9836570069964491, 0.9841305417853251, 0.9846040765742011, 0.985077611363077, 0.985551146151953, 0.9860246809408291, 0.9864982157297051, 0.9869717505185811, 0.9874452853074571, 0.987918820096333, 0.988392354885209, 0.9888658896740851, 0.9893394244629611, 0.9898129592518371, 0.990286494040713, 0.990760028829589, 0.991233563618465, 0.9917070984073411, 0.9921806331962171, 0.9926541679850931, 0.993127702773969, 0.993601237562845, 0.994074772351721, 0.994548307140597, 0.9950218419294731, 0.995495376718349, 0.995968911507225, 0.996442446296101, 0.996915981084977, 0.997389515873853, 0.9978630506627291, 0.998336585451605, 0.998810120240481, 0.999283655029357, 0.999757189818233, 1.000230724607109, 1.000704259395985, 1.001177794184861, 1.001651328973737, 1.002124863762613, 1.002598398551489, 1.003071933340365, 1.003545468129241, 1.004019002918117, 1.004492537706993, 1.004966072495869, 1.005439607284745, 1.005913142073621, 1.006386676862497, 1.006860211651373, 1.007333746440249, 1.007807281229125, 1.008280816018001, 1.008754350806877, 1.009227885595753, 1.009701420384629, 1.0101749551735049, 1.0106484899623809, 1.011122024751257, 1.011595559540133, 1.012069094329009, 1.012542629117885, 1.013016163906761, 1.013489698695637, 1.013963233484513, 1.014436768273389, 1.014910303062265, 1.0153838378511408, 1.0158573726400169, 1.0163309074288929, 1.016804442217769, 1.017277977006645, 1.017751511795521, 1.018225046584397, 1.018698581373273, 1.019172116162149, 1.019645650951025, 1.020119185739901, 1.0205927205287768, 1.0210662553176528, 1.0215397901065288, 1.0220133248954049, 1.0224868596842809, 1.022960394473157, 1.023433929262033, 1.023907464050909, 1.024380998839785, 1.024854533628661, 1.025328068417537, 1.0258016032064128, 1.0262751379952888, 1.0267486727841648, 1.0272222075730408, 1.0276957423619169, 1.0281692771507929, 1.0286428119396689, 1.029116346728545, 1.029589881517421, 1.030063416306297, 1.030536951095173, 1.0310104858840488, 1.0314840206729248, 1.0319575554618008, 1.0324310902506768, 1.0329046250395528, 1.0333781598284288, 1.0338516946173049, 1.0343252294061809, 1.034798764195057, 1.035272298983933, 1.035745833772809, 1.0362193685616847, 1.0366929033505607, 1.0371664381394368, 1.0376399729283128, 1.0381135077171888, 1.0385870425060648, 1.0390605772949408, 1.0395341120838169, 1.0400076468726929, 1.0404811816615689, 1.040954716450445, 1.0414282512393207, 1.0419017860281967, 1.0423753208170727, 1.0428488556059488, 1.0433223903948248, 1.0437959251837008, 1.0442694599725768, 1.0447429947614528, 1.0452165295503288, 1.0456900643392049, 1.0461635991280809, 1.046637133916957, 1.0471106687058327, 1.0475842034947087, 1.0480577382835847, 1.0485312730724607, 1.0490048078613368, 1.0494783426502128, 1.0499518774390888, 1.0504254122279648, 1.0508989470168408, 1.0513724818057169, 1.0518460165945926, 1.0523195513834687, 1.0527930861723447, 1.0532666209612207, 1.0537401557500967, 1.0542136905389727, 1.0546872253278488, 1.0551607601167248, 1.0556342949056008, 1.0561078296944768, 1.0565813644833528, 1.0570548992722286, 1.0575284340611046, 1.0580019688499807, 1.0584755036388567, 1.0589490384277327, 1.0594225732166087, 1.0598961080054847, 1.0603696427943607, 1.0608431775832368, 1.0613167123721128, 1.0617902471609888, 1.0622637819498648, 1.0627373167387408, 1.0632108515276166, 1.0636843863164926, 1.0641579211053687, 1.0646314558942447, 1.0651049906831207, 1.0655785254719967, 1.0660520602608727, 1.0665255950497488, 1.0669991298386248, 1.0674726646275008, 1.0679461994163768, 1.0684197342052526, 1.0688932689941286, 1.0693668037830046, 1.0698403385718807, 1.0703138733607567, 1.0707874081496327, 1.0712609429385087, 1.0717344777273847, 1.0722080125162607, 1.0726815473051365, 1.0731550820940128, 1.0736286168828886, 1.0741021516717646, 1.0745756864606406, 1.0750492212495166, 1.0755227560383926, 1.0759962908272687, 1.0764698256161447, 1.0769433604050207, 1.0774168951938967, 1.0778904299827727, 1.0783639647716488, 1.0788374995605245, 1.0793110343494006, 1.0797845691382766, 1.0802581039271526, 1.0807316387160286, 1.0812051735049046, 1.0816787082937807, 1.0821522430826567, 1.0826257778715327, 1.0830993126604085, 1.0835728474492845, 1.0840463822381605, 1.0845199170270365, 1.0849934518159126, 1.0854669866047886, 1.0859405213936646, 1.0864140561825406, 1.0868875909714166, 1.0873611257602926, 1.0878346605491687, 1.0883081953380447, 1.0887817301269207, 1.0892552649157965, 1.0897287997046725, 1.0902023344935485, 1.0906758692824245, 1.0911494040713006, 1.0916229388601766, 1.0920964736490526, 1.0925700084379286, 1.0930435432268046, 1.0935170780156807, 1.0939906128045567, 1.0944641475934325, 1.0949376823823085, 1.0954112171711845, 1.0958847519600605, 1.0963582867489365, 1.0968318215378126, 1.0973053563266886, 1.0977788911155646, 1.0982524259044406, 1.0987259606933164, 1.0991994954821926, 1.0996730302710684, 1.1001465650599445, 1.1006200998488205, 1.1010936346376965, 1.1015671694265725, 1.1020407042154485, 1.1025142390043245, 1.1029877737932006, 1.1034613085820766, 1.1039348433709526, 1.1044083781598286, 1.1048819129487044, 1.1053554477375804, 1.1058289825264564, 1.1063025173153325, 1.1067760521042085, 1.1072495868930845, 1.1077231216819605, 1.1081966564708365, 1.1086701912597126, 1.1091437260485886, 1.1096172608374646, 1.1100907956263404, 1.1105643304152164, 1.1110378652040924, 1.1115113999929684, 1.1119849347818445, 1.1124584695707205, 1.1129320043595965, 1.1134055391484725, 1.1138790739373485, 1.1143526087262245, 1.1148261435151006, 1.1152996783039764, 1.1157732130928524, 1.1162467478817284, 1.1167202826706044, 1.1171938174594804, 1.1176673522483564, 1.1181408870372325, 1.1186144218261085, 1.1190879566149845, 1.1195614914038605, 1.1200350261927365, 1.1205085609816123, 1.1209820957704884, 1.1214556305593644, 1.1219291653482404, 1.1224027001371164, 1.1228762349259924, 1.1233497697148684, 1.1238233045037445, 1.1242968392926205, 1.1247703740814965, 1.1252439088703725, 1.1257174436592483, 1.1261909784481243, 1.1266645132370003, 1.1271380480258764, 1.1276115828147524, 1.1280851176036284, 1.1285586523925044, 1.1290321871813804, 1.1295057219702564, 1.1299792567591325, 1.1304527915480085, 1.1309263263368843, 1.1313998611257603, 1.1318733959146363, 1.1323469307035123, 1.1328204654923884, 1.1332940002812644, 1.1337675350701404, 1.1342410698590164, 1.1347146046478924, 1.1351881394367684, 1.1356616742256445, 1.1361352090145203, 1.1366087438033963, 1.1370822785922723, 1.1375558133811483, 1.1380293481700243, 1.1385028829589003, 1.1389764177477764, 1.1394499525366524, 1.1399234873255284, 1.1403970221144044, 1.1408705569032804, 1.1413440916921562, 1.1418176264810325, 1.1422911612699083, 1.1427646960587843, 1.1432382308476603, 1.1437117656365363, 1.1441853004254123, 1.1446588352142884, 1.1451323700031644, 1.1456059047920404, 1.1460794395809164, 1.1465529743697922, 1.1470265091586682, 1.1475000439475442, 1.1479735787364203, 1.1484471135252963, 1.1489206483141723, 1.1493941831030483, 1.1498677178919243, 1.1503412526808003, 1.1508147874696764, 1.1512883222585524, 1.1517618570474282, 1.1522353918363042, 1.1527089266251802, 1.1531824614140562, 1.1536559962029322, 1.1541295309918083, 1.1546030657806843, 1.1550766005695603, 1.1555501353584363, 1.1560236701473123, 1.1564972049361883, 1.1569707397250644, 1.1574442745139404, 1.1579178093028162, 1.1583913440916922, 1.1588648788805682, 1.1593384136694442, 1.1598119484583203, 1.1602854832471963, 1.1607590180360723, 1.1612325528249483, 1.1617060876138243, 1.1621796224027001, 1.1626531571915761, 1.1631266919804522, 1.1636002267693282, 1.1640737615582042, 1.1645472963470802, 1.1650208311359562, 1.1654943659248322, 1.1659679007137083, 1.1664414355025843, 1.1669149702914603, 1.167388505080336, 1.1678620398692123, 1.1683355746580881, 1.1688091094469641, 1.1692826442358402, 1.1697561790247162, 1.1702297138135922, 1.1707032486024682, 1.1711767833913442, 1.1716503181802203, 1.1721238529690963, 1.1725973877579723, 1.1730709225468483, 1.173544457335724, 1.1740179921246001, 1.1744915269134761, 1.1749650617023522, 1.1754385964912282])
-              .range([&#x27;#440154ff&#x27;, &#x27;#440155ff&#x27;, &#x27;#440256ff&#x27;, &#x27;#440356ff&#x27;, &#x27;#450457ff&#x27;, &#x27;#450458ff&#x27;, &#x27;#450559ff&#x27;, &#x27;#450659ff&#x27;, &#x27;#46075aff&#x27;, &#x27;#46075bff&#x27;, &#x27;#46085cff&#x27;, &#x27;#46095cff&#x27;, &#x27;#460a5dff&#x27;, &#x27;#460a5eff&#x27;, &#x27;#460b5eff&#x27;, &#x27;#460c5fff&#x27;, &#x27;#470d60ff&#x27;, &#x27;#470d61ff&#x27;, &#x27;#470e61ff&#x27;, &#x27;#470f62ff&#x27;, &#x27;#471063ff&#x27;, &#x27;#471064ff&#x27;, &#x27;#471164ff&#x27;, &#x27;#471265ff&#x27;, &#x27;#471365ff&#x27;, &#x27;#481366ff&#x27;, &#x27;#481467ff&#x27;, &#x27;#481568ff&#x27;, &#x27;#481668ff&#x27;, &#x27;#481669ff&#x27;, &#x27;#481769ff&#x27;, &#x27;#48176aff&#x27;, &#x27;#48186bff&#x27;, &#x27;#48196cff&#x27;, &#x27;#481a6cff&#x27;, &#x27;#481a6dff&#x27;, &#x27;#481b6dff&#x27;, &#x27;#481c6eff&#x27;, &#x27;#481c6eff&#x27;, &#x27;#481d6fff&#x27;, &#x27;#481d6fff&#x27;, &#x27;#481f70ff&#x27;, &#x27;#481f70ff&#x27;, &#x27;#482071ff&#x27;, &#x27;#482072ff&#x27;, &#x27;#482173ff&#x27;, &#x27;#482273ff&#x27;, &#x27;#482374ff&#x27;, &#x27;#482374ff&#x27;, &#x27;#482475ff&#x27;, &#x27;#482476ff&#x27;, &#x27;#482576ff&#x27;, &#x27;#482577ff&#x27;, &#x27;#482677ff&#x27;, &#x27;#482778ff&#x27;, &#x27;#482878ff&#x27;, &#x27;#482879ff&#x27;, &#x27;#482979ff&#x27;, &#x27;#47297aff&#x27;, &#x27;#472a7aff&#x27;, &#x27;#472b7aff&#x27;, &#x27;#472c7aff&#x27;, &#x27;#472c7bff&#x27;, &#x27;#472d7bff&#x27;, &#x27;#472d7cff&#x27;, &#x27;#472e7cff&#x27;, &#x27;#472e7dff&#x27;, &#x27;#472f7dff&#x27;, &#x27;#462f7eff&#x27;, &#x27;#46307eff&#x27;, &#x27;#46317eff&#x27;, &#x27;#46327eff&#x27;, &#x27;#46327fff&#x27;, &#x27;#46337fff&#x27;, &#x27;#463480ff&#x27;, &#x27;#453480ff&#x27;, &#x27;#453581ff&#x27;, &#x27;#453581ff&#x27;, &#x27;#453681ff&#x27;, &#x27;#453781ff&#x27;, &#x27;#453882ff&#x27;, &#x27;#443882ff&#x27;, &#x27;#443983ff&#x27;, &#x27;#443983ff&#x27;, &#x27;#443a83ff&#x27;, &#x27;#443a83ff&#x27;, &#x27;#443b84ff&#x27;, &#x27;#433c84ff&#x27;, &#x27;#433d84ff&#x27;, &#x27;#433d85ff&#x27;, &#x27;#433e85ff&#x27;, &#x27;#423e85ff&#x27;, &#x27;#423f85ff&#x27;, &#x27;#423f86ff&#x27;, &#x27;#424086ff&#x27;, &#x27;#424086ff&#x27;, &#x27;#424186ff&#x27;, &#x27;#414187ff&#x27;, &#x27;#414287ff&#x27;, &#x27;#414387ff&#x27;, &#x27;#414487ff&#x27;, &#x27;#404488ff&#x27;, &#x27;#404588ff&#x27;, &#x27;#404588ff&#x27;, &#x27;#404688ff&#x27;, &#x27;#3f4688ff&#x27;, &#x27;#3f4788ff&#x27;, &#x27;#3f4789ff&#x27;, &#x27;#3f4889ff&#x27;, &#x27;#3e4889ff&#x27;, &#x27;#3e4989ff&#x27;, &#x27;#3e4a89ff&#x27;, &#x27;#3e4a89ff&#x27;, &#x27;#3e4b8aff&#x27;, &#x27;#3d4c8aff&#x27;, &#x27;#3d4d8aff&#x27;, &#x27;#3d4d8aff&#x27;, &#x27;#3d4e8aff&#x27;, &#x27;#3c4e8aff&#x27;, &#x27;#3c4f8aff&#x27;, &#x27;#3c4f8aff&#x27;, &#x27;#3c508bff&#x27;, &#x27;#3b508bff&#x27;, &#x27;#3b518bff&#x27;, &#x27;#3b518bff&#x27;, &#x27;#3b528bff&#x27;, &#x27;#3a528bff&#x27;, &#x27;#3a538bff&#x27;, &#x27;#3a538bff&#x27;, &#x27;#3a548cff&#x27;, &#x27;#39548cff&#x27;, &#x27;#39558cff&#x27;, &#x27;#39558cff&#x27;, &#x27;#39568cff&#x27;, &#x27;#38578cff&#x27;, &#x27;#38588cff&#x27;, &#x27;#38588cff&#x27;, &#x27;#38598cff&#x27;, &#x27;#37598cff&#x27;, &#x27;#375a8cff&#x27;, &#x27;#375a8dff&#x27;, &#x27;#375b8dff&#x27;, &#x27;#365b8dff&#x27;, &#x27;#365c8dff&#x27;, &#x27;#365c8dff&#x27;, &#x27;#365d8dff&#x27;, &#x27;#355d8dff&#x27;, &#x27;#355e8dff&#x27;, &#x27;#355f8dff&#x27;, &#x27;#355f8dff&#x27;, &#x27;#34608dff&#x27;, &#x27;#34608dff&#x27;, &#x27;#34618dff&#x27;, &#x27;#34618dff&#x27;, &#x27;#33628dff&#x27;, &#x27;#33628dff&#x27;, &#x27;#33638dff&#x27;, &#x27;#32638dff&#x27;, &#x27;#32648eff&#x27;, &#x27;#32648eff&#x27;, &#x27;#32658eff&#x27;, &#x27;#31658eff&#x27;, &#x27;#31668eff&#x27;, &#x27;#31668eff&#x27;, &#x27;#31678eff&#x27;, &#x27;#31678eff&#x27;, &#x27;#31688eff&#x27;, &#x27;#30688eff&#x27;, &#x27;#30698eff&#x27;, &#x27;#30698eff&#x27;, &#x27;#306a8eff&#x27;, &#x27;#2f6a8eff&#x27;, &#x27;#2f6b8eff&#x27;, &#x27;#2f6b8eff&#x27;, &#x27;#2f6c8eff&#x27;, &#x27;#2e6c8eff&#x27;, &#x27;#2e6d8eff&#x27;, &#x27;#2e6d8eff&#x27;, &#x27;#2e6e8eff&#x27;, &#x27;#2e6e8eff&#x27;, &#x27;#2e6f8eff&#x27;, &#x27;#2d6f8eff&#x27;, &#x27;#2d708eff&#x27;, &#x27;#2d708eff&#x27;, &#x27;#2d718eff&#x27;, &#x27;#2c718eff&#x27;, &#x27;#2c718eff&#x27;, &#x27;#2c728eff&#x27;, &#x27;#2c728eff&#x27;, &#x27;#2c738eff&#x27;, &#x27;#2c738eff&#x27;, &#x27;#2b748eff&#x27;, &#x27;#2b748eff&#x27;, &#x27;#2b758eff&#x27;, &#x27;#2b758eff&#x27;, &#x27;#2a768eff&#x27;, &#x27;#2a768eff&#x27;, &#x27;#2a778eff&#x27;, &#x27;#2a778eff&#x27;, &#x27;#2a788eff&#x27;, &#x27;#29788eff&#x27;, &#x27;#29798eff&#x27;, &#x27;#29798eff&#x27;, &#x27;#297a8eff&#x27;, &#x27;#297a8eff&#x27;, &#x27;#297b8eff&#x27;, &#x27;#287b8eff&#x27;, &#x27;#287c8eff&#x27;, &#x27;#287c8eff&#x27;, &#x27;#287d8eff&#x27;, &#x27;#277d8eff&#x27;, &#x27;#277e8eff&#x27;, &#x27;#277e8eff&#x27;, &#x27;#277f8eff&#x27;, &#x27;#277f8eff&#x27;, &#x27;#27808eff&#x27;, &#x27;#26808eff&#x27;, &#x27;#26818eff&#x27;, &#x27;#26818eff&#x27;, &#x27;#26828eff&#x27;, &#x27;#26828eff&#x27;, &#x27;#26828eff&#x27;, &#x27;#25828eff&#x27;, &#x27;#25838eff&#x27;, &#x27;#25838eff&#x27;, &#x27;#25848eff&#x27;, &#x27;#25858eff&#x27;, &#x27;#25858eff&#x27;, &#x27;#24868eff&#x27;, &#x27;#24868eff&#x27;, &#x27;#24878eff&#x27;, &#x27;#24878eff&#x27;, &#x27;#23888eff&#x27;, &#x27;#23888eff&#x27;, &#x27;#23898eff&#x27;, &#x27;#23898eff&#x27;, &#x27;#238a8dff&#x27;, &#x27;#238a8dff&#x27;, &#x27;#228b8dff&#x27;, &#x27;#228b8dff&#x27;, &#x27;#228c8dff&#x27;, &#x27;#228c8dff&#x27;, &#x27;#228d8dff&#x27;, &#x27;#218d8dff&#x27;, &#x27;#218e8dff&#x27;, &#x27;#218e8dff&#x27;, &#x27;#218f8dff&#x27;, &#x27;#218f8dff&#x27;, &#x27;#21908dff&#x27;, &#x27;#21908dff&#x27;, &#x27;#21918cff&#x27;, &#x27;#20918cff&#x27;, &#x27;#20928cff&#x27;, &#x27;#20928cff&#x27;, &#x27;#20928cff&#x27;, &#x27;#20928cff&#x27;, &#x27;#20938cff&#x27;, &#x27;#1f938cff&#x27;, &#x27;#1f948cff&#x27;, &#x27;#1f948cff&#x27;, &#x27;#1f958bff&#x27;, &#x27;#1f958bff&#x27;, &#x27;#1f968bff&#x27;, &#x27;#1f968bff&#x27;, &#x27;#1f978bff&#x27;, &#x27;#1f988bff&#x27;, &#x27;#1f988bff&#x27;, &#x27;#1f998bff&#x27;, &#x27;#1f998aff&#x27;, &#x27;#1f9a8aff&#x27;, &#x27;#1f9a8aff&#x27;, &#x27;#1e9b8aff&#x27;, &#x27;#1e9b8aff&#x27;, &#x27;#1e9c8aff&#x27;, &#x27;#1e9c89ff&#x27;, &#x27;#1e9d89ff&#x27;, &#x27;#1e9d89ff&#x27;, &#x27;#1e9e89ff&#x27;, &#x27;#1f9e89ff&#x27;, &#x27;#1f9f88ff&#x27;, &#x27;#1f9f88ff&#x27;, &#x27;#1fa088ff&#x27;, &#x27;#1fa088ff&#x27;, &#x27;#1fa188ff&#x27;, &#x27;#1fa188ff&#x27;, &#x27;#1fa187ff&#x27;, &#x27;#1fa187ff&#x27;, &#x27;#1fa287ff&#x27;, &#x27;#1fa287ff&#x27;, &#x27;#1fa386ff&#x27;, &#x27;#20a386ff&#x27;, &#x27;#20a486ff&#x27;, &#x27;#20a486ff&#x27;, &#x27;#20a585ff&#x27;, &#x27;#21a585ff&#x27;, &#x27;#21a685ff&#x27;, &#x27;#21a685ff&#x27;, &#x27;#21a785ff&#x27;, &#x27;#22a785ff&#x27;, &#x27;#22a884ff&#x27;, &#x27;#22a884ff&#x27;, &#x27;#22a983ff&#x27;, &#x27;#23a983ff&#x27;, &#x27;#23aa83ff&#x27;, &#x27;#24ab83ff&#x27;, &#x27;#25ab82ff&#x27;, &#x27;#25ac82ff&#x27;, &#x27;#25ac82ff&#x27;, &#x27;#25ad82ff&#x27;, &#x27;#26ad81ff&#x27;, &#x27;#26ad81ff&#x27;, &#x27;#27ad81ff&#x27;, &#x27;#27ae81ff&#x27;, &#x27;#28ae80ff&#x27;, &#x27;#28af80ff&#x27;, &#x27;#29af7fff&#x27;, &#x27;#29b07fff&#x27;, &#x27;#2ab07fff&#x27;, &#x27;#2bb17eff&#x27;, &#x27;#2cb17eff&#x27;, &#x27;#2cb27dff&#x27;, &#x27;#2db27dff&#x27;, &#x27;#2db37cff&#x27;, &#x27;#2eb37cff&#x27;, &#x27;#2eb47cff&#x27;, &#x27;#2fb47cff&#x27;, &#x27;#30b57bff&#x27;, &#x27;#31b57bff&#x27;, &#x27;#31b67aff&#x27;, &#x27;#32b67aff&#x27;, &#x27;#33b679ff&#x27;, &#x27;#34b679ff&#x27;, &#x27;#34b779ff&#x27;, &#x27;#35b779ff&#x27;, &#x27;#36b878ff&#x27;, &#x27;#37b878ff&#x27;, &#x27;#37b977ff&#x27;, &#x27;#38b977ff&#x27;, &#x27;#39ba76ff&#x27;, &#x27;#3aba76ff&#x27;, &#x27;#3abb75ff&#x27;, &#x27;#3bbb75ff&#x27;, &#x27;#3cbc74ff&#x27;, &#x27;#3dbc74ff&#x27;, &#x27;#3ebc73ff&#x27;, &#x27;#3fbd73ff&#x27;, &#x27;#40bd72ff&#x27;, &#x27;#40be72ff&#x27;, &#x27;#41be71ff&#x27;, &#x27;#42bf71ff&#x27;, &#x27;#43bf70ff&#x27;, &#x27;#45c070ff&#x27;, &#x27;#46c06fff&#x27;, &#x27;#47c16fff&#x27;, &#x27;#48c16eff&#x27;, &#x27;#49c16eff&#x27;, &#x27;#4ac16dff&#x27;, &#x27;#4bc26cff&#x27;, &#x27;#4cc26cff&#x27;, &#x27;#4dc36bff&#x27;, &#x27;#4ec36bff&#x27;, &#x27;#4fc46aff&#x27;, &#x27;#50c46aff&#x27;, &#x27;#51c569ff&#x27;, &#x27;#52c569ff&#x27;, &#x27;#53c568ff&#x27;, &#x27;#54c568ff&#x27;, &#x27;#55c667ff&#x27;, &#x27;#56c667ff&#x27;, &#x27;#57c766ff&#x27;, &#x27;#58c765ff&#x27;, &#x27;#59c864ff&#x27;, &#x27;#5ac864ff&#x27;, &#x27;#5bc863ff&#x27;, &#x27;#5cc863ff&#x27;, &#x27;#5dc962ff&#x27;, &#x27;#5ec962ff&#x27;, &#x27;#5fca61ff&#x27;, &#x27;#60ca60ff&#x27;, &#x27;#62cb5fff&#x27;, &#x27;#63cb5fff&#x27;, &#x27;#64cb5eff&#x27;, &#x27;#65cc5dff&#x27;, &#x27;#66cc5cff&#x27;, &#x27;#67cd5cff&#x27;, &#x27;#68cd5bff&#x27;, &#x27;#6acd5bff&#x27;, &#x27;#6bcd5aff&#x27;, &#x27;#6cce59ff&#x27;, &#x27;#6ece58ff&#x27;, &#x27;#6fcf58ff&#x27;, &#x27;#70cf57ff&#x27;, &#x27;#71d057ff&#x27;, &#x27;#72d056ff&#x27;, &#x27;#74d055ff&#x27;, &#x27;#75d054ff&#x27;, &#x27;#76d153ff&#x27;, &#x27;#77d153ff&#x27;, &#x27;#78d152ff&#x27;, &#x27;#7ad151ff&#x27;, &#x27;#7bd250ff&#x27;, &#x27;#7cd250ff&#x27;, &#x27;#7dd34fff&#x27;, &#x27;#7fd34eff&#x27;, &#x27;#80d34dff&#x27;, &#x27;#81d34dff&#x27;, &#x27;#82d44cff&#x27;, &#x27;#84d44bff&#x27;, &#x27;#85d54aff&#x27;, &#x27;#86d549ff&#x27;, &#x27;#88d548ff&#x27;, &#x27;#89d548ff&#x27;, &#x27;#8ad647ff&#x27;, &#x27;#8bd646ff&#x27;, &#x27;#8dd645ff&#x27;, &#x27;#8ed645ff&#x27;, &#x27;#8fd744ff&#x27;, &#x27;#90d743ff&#x27;, &#x27;#92d742ff&#x27;, &#x27;#93d741ff&#x27;, &#x27;#94d840ff&#x27;, &#x27;#96d83fff&#x27;, &#x27;#97d83eff&#x27;, &#x27;#99d93dff&#x27;, &#x27;#9ad93cff&#x27;, &#x27;#9bd93cff&#x27;, &#x27;#9dd93bff&#x27;, &#x27;#9eda3aff&#x27;, &#x27;#9fda39ff&#x27;, &#x27;#a1da38ff&#x27;, &#x27;#a2da37ff&#x27;, &#x27;#a3db36ff&#x27;, &#x27;#a4db36ff&#x27;, &#x27;#a6db35ff&#x27;, &#x27;#a8db34ff&#x27;, &#x27;#a9dc33ff&#x27;, &#x27;#aadc32ff&#x27;, &#x27;#abdc31ff&#x27;, &#x27;#addc30ff&#x27;, &#x27;#aedd2fff&#x27;, &#x27;#b0dd2fff&#x27;, &#x27;#b1dd2eff&#x27;, &#x27;#b2dd2dff&#x27;, &#x27;#b3de2cff&#x27;, &#x27;#b5de2bff&#x27;, &#x27;#b6de2aff&#x27;, &#x27;#b8de29ff&#x27;, &#x27;#b9de28ff&#x27;, &#x27;#bade28ff&#x27;, &#x27;#bcdf27ff&#x27;, &#x27;#bddf26ff&#x27;, &#x27;#bfdf25ff&#x27;, &#x27;#c0df25ff&#x27;, &#x27;#c1df24ff&#x27;, &#x27;#c2df23ff&#x27;, &#x27;#c4e022ff&#x27;, &#x27;#c5e021ff&#x27;, &#x27;#c7e020ff&#x27;, &#x27;#c8e020ff&#x27;, &#x27;#c9e11fff&#x27;, &#x27;#cbe11eff&#x27;, &#x27;#cce11dff&#x27;, &#x27;#cee11dff&#x27;, &#x27;#cfe11cff&#x27;, &#x27;#d1e11bff&#x27;, &#x27;#d2e21bff&#x27;, &#x27;#d3e21aff&#x27;, &#x27;#d4e21aff&#x27;, &#x27;#d6e219ff&#x27;, &#x27;#d7e219ff&#x27;, &#x27;#d9e319ff&#x27;, &#x27;#dae319ff&#x27;, &#x27;#dbe318ff&#x27;, &#x27;#dde318ff&#x27;, &#x27;#dee318ff&#x27;, &#x27;#dfe318ff&#x27;, &#x27;#e0e418ff&#x27;, &#x27;#e2e418ff&#x27;, &#x27;#e3e418ff&#x27;, &#x27;#e5e418ff&#x27;, &#x27;#e6e419ff&#x27;, &#x27;#e7e419ff&#x27;, &#x27;#e8e519ff&#x27;, &#x27;#eae519ff&#x27;, &#x27;#ebe51aff&#x27;, &#x27;#ece51aff&#x27;, &#x27;#ede51bff&#x27;, &#x27;#efe51bff&#x27;, &#x27;#f0e51cff&#x27;, &#x27;#f1e51dff&#x27;, &#x27;#f3e61dff&#x27;, &#x27;#f4e61eff&#x27;, &#x27;#f5e61eff&#x27;, &#x27;#f6e61fff&#x27;, &#x27;#f7e620ff&#x27;, &#x27;#f8e621ff&#x27;, &#x27;#fae722ff&#x27;, &#x27;#fbe723ff&#x27;, &#x27;#fce724ff&#x27;, &#x27;#fde725ff&#x27;]);
-
-
-    color_map_8d596a3aadca59d80e072afd74a3a86f.x = d3.scale.linear()
-              .domain([0.9391447368421053, 1.1754385964912282])
-              .range([0, 400]);
-
-    color_map_8d596a3aadca59d80e072afd74a3a86f.legend = L.control({position: &#x27;topright&#x27;});
-    color_map_8d596a3aadca59d80e072afd74a3a86f.legend.onAdd = function (map) {var div = L.DomUtil.create(&#x27;div&#x27;, &#x27;legend&#x27;); return div};
-    color_map_8d596a3aadca59d80e072afd74a3a86f.legend.addTo(map_b0f6c91c66254357b924b0218001cf00);
-
-    color_map_8d596a3aadca59d80e072afd74a3a86f.xAxis = d3.svg.axis()
-        .scale(color_map_8d596a3aadca59d80e072afd74a3a86f.x)
-        .orient(&quot;top&quot;)
-        .tickSize(1)
-        .tickValues([0.9391447368421053, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, 0.9632374441004472, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, 0.9873301513587892, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, 1.0114228586171312, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, 1.035515565875473, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, 1.059608273133815, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, 1.083700980392157, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, 1.1077936876504988, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, 1.131886394908841, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, 1.1559791021671828, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;]);
-
-    color_map_8d596a3aadca59d80e072afd74a3a86f.svg = d3.select(&quot;.legend.leaflet-control&quot;).append(&quot;svg&quot;)
-        .attr(&quot;id&quot;, &#x27;legend&#x27;)
-        .attr(&quot;width&quot;, 450)
-        .attr(&quot;height&quot;, 40);
-
-    color_map_8d596a3aadca59d80e072afd74a3a86f.g = color_map_8d596a3aadca59d80e072afd74a3a86f.svg.append(&quot;g&quot;)
-        .attr(&quot;class&quot;, &quot;key&quot;)
-        .attr(&quot;transform&quot;, &quot;translate(25,16)&quot;);
-
-    color_map_8d596a3aadca59d80e072afd74a3a86f.g.selectAll(&quot;rect&quot;)
-        .data(color_map_8d596a3aadca59d80e072afd74a3a86f.color.range().map(function(d, i) {
-          return {
-            x0: i ? color_map_8d596a3aadca59d80e072afd74a3a86f.x(color_map_8d596a3aadca59d80e072afd74a3a86f.color.domain()[i - 1]) : color_map_8d596a3aadca59d80e072afd74a3a86f.x.range()[0],
-            x1: i &lt; color_map_8d596a3aadca59d80e072afd74a3a86f.color.domain().length ? color_map_8d596a3aadca59d80e072afd74a3a86f.x(color_map_8d596a3aadca59d80e072afd74a3a86f.color.domain()[i]) : color_map_8d596a3aadca59d80e072afd74a3a86f.x.range()[1],
-            z: d
-          };
-        }))
-      .enter().append(&quot;rect&quot;)
-        .attr(&quot;height&quot;, 10)
-        .attr(&quot;x&quot;, function(d) { return d.x0; })
-        .attr(&quot;width&quot;, function(d) { return d.x1 - d.x0; })
-        .style(&quot;fill&quot;, function(d) { return d.z; });
-
-    color_map_8d596a3aadca59d80e072afd74a3a86f.g.call(color_map_8d596a3aadca59d80e072afd74a3a86f.xAxis).append(&quot;text&quot;)
-        .attr(&quot;class&quot;, &quot;caption&quot;)
-        .attr(&quot;y&quot;, 21)
-        .text(&#x27;avg_water_count&#x27;);
-&lt;/script&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div>
-</div>
 </div>
 <div class="section" id="Seasonal-aggregates">
 <h2>Seasonal aggregates<a class="headerlink" href="#Seasonal-aggregates" title="Permalink to this headline">¶</a></h2>
 <p>We create a water count map for each season in the data separately. We use the built-in “season” component of the time dimension, which defines seasons as: 1 = March, April, May; 2 = June, July, August; 3 = September, October, November; 4 = December, January, February.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
@@ -1834,7 +1796,7 @@ response = recipe.execute(factbase, ontology, space, time, **config)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, (ax1, ax2) = plt.subplots(1, 2, figsize = (15, 5))
@@ -1844,11 +1806,11 @@ values = list(range(int(np.nanmin(water_count_per_season)), int(np.nanmax(water_
 levels = [x - 0.5 for x in values + [max(values) + 1]]
 colors = plt.cm.Blues
 
-autumn = water_count_per_season.sel(season = 3)
+autumn = water_count_per_season.sel(season = &quot;September, October, November&quot;)
 autumn.plot(ax = ax1, levels = levels, cmap = colors, cbar_kwargs = {&quot;ticks&quot;: values, &quot;label&quot;: &quot;water count&quot;})
 ax1.set_title(&quot;Autumn&quot;)
 
-winter = water_count_per_season.sel(season = 4)
+winter = water_count_per_season.sel(season = &quot;December, January, February&quot;)
 winter.plot(ax = ax2, levels = levels, cmap = colors, cbar_kwargs = {&quot;ticks&quot;: values, &quot;label&quot;: &quot;water count&quot;})
 ax2.set_title(&quot;Winter&quot;)
 
@@ -1861,7 +1823,57 @@ plt.draw()
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/_notebooks_gallery_29_0.png" src="../_images/_notebooks_gallery_29_0.png" />
+<img alt="../_images/_notebooks_gallery_30_0.png" src="../_images/_notebooks_gallery_30_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="First-observation-timestamps">
+<h2>First observation timestamps<a class="headerlink" href="#First-observation-timestamps" title="Permalink to this headline">¶</a></h2>
+<p>Find for each spatial pixel at which timestamp vegetation was first observed.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
+
+recipe[&quot;dates&quot;] = sq.entity(&quot;vegetation&quot;).\
+    filter(sq.self()).\
+    evaluate(&quot;assign&quot;, sq.self().extract(&quot;time&quot;)).\
+    reduce(&quot;time&quot;, &quot;first&quot;)
+
+response = recipe.execute(factbase, ontology, space, time, **config)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/luuk/Documents/zgis/sen2cube/semantique/semantique/processor/reducers.py:671: RuntimeWarning: All-NaN slice encountered
+  return np.nanmax(np.where(is_first, x, _nodata(x)), axis = axis)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(1, figsize = (7, 5))
+
+dates = xr.DataArray(np.where(np.isfinite(response[&quot;dates&quot;]), response[&quot;dates&quot;].astype(float), np.nan))
+dates.plot(ax = ax, cbar_kwargs = {&quot;label&quot;: &quot;unix time&quot;})
+ax.set_title(&quot;First vegetation observation&quot;)
+
+plt.tight_layout()
+plt.draw()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/_notebooks_gallery_33_0.png" src="../_images/_notebooks_gallery_33_0.png" />
 </div>
 </div>
 </div>
