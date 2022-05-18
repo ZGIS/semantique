@@ -144,6 +144,22 @@ def parse_datetime_component(name, obj):
       5: "Saturday",
       6: "Sunday"
     }
+  elif name == "month":
+    obj.sq.value_type = "ordinal"
+    obj.sq.value_labels = {
+      1: "January",
+      2: "February",
+      3: "March",
+      4: "April",
+      5: "May",
+      6: "June",
+      7: "July",
+      8: "August",
+      9: "September",
+      10: "October",
+      11: "November",
+      12: "December"
+    }
   elif name == "quarter":
     obj.sq.value_type = "ordinal"
     obj.sq.value_labels = {
