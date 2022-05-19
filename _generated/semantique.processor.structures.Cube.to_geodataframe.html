@@ -527,6 +527,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.n_.html">
+     semantique.processor.reducers.n_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.reducers.product_.html">
      semantique.processor.reducers.product_
     </a>
@@ -584,6 +589,26 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
      semantique.processor.utils.create_extent_cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_null.html">
+     semantique.processor.utils.np_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_allnull.html">
+     semantique.processor.utils.np_allnull
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_null_as_zero.html">
+     semantique.processor.utils.np_null_as_zero
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_inf_as_null.html">
+     semantique.processor.utils.np_inf_as_null
     </a>
    </li>
    <li class="toctree-l2">
@@ -831,7 +856,7 @@
 <h1>semantique.processor.structures.Cube.to_geodataframe<a class="headerlink" href="#semantique-processor-structures-cube-to-geodataframe" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.structures.Cube.to_geodataframe">
-<span class="sig-prename descclassname"><span class="pre">Cube.</span></span><span class="sig-name descname"><span class="pre">to_geodataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L775-L817"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube.to_geodataframe" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Cube.</span></span><span class="sig-name descname"><span class="pre">to_geodataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L781-L823"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube.to_geodataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the cube to a geopandas GeoDataFrame.</p>
 <p>The data frame will contain one column per dimension, a column
 containing the data values, and a geometry column containing coordinates of

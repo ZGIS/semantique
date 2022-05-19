@@ -531,6 +531,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.reducers.n_.html">
+     semantique.processor.reducers.n_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.processor.reducers.product_.html">
      semantique.processor.reducers.product_
     </a>
@@ -588,6 +593,26 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.processor.utils.create_extent_cube.html">
      semantique.processor.utils.create_extent_cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.np_null.html">
+     semantique.processor.utils.np_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.np_allnull.html">
+     semantique.processor.utils.np_allnull
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.np_null_as_zero.html">
+     semantique.processor.utils.np_null_as_zero
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.np_inf_as_null.html">
+     semantique.processor.utils.np_inf_as_null
     </a>
    </li>
    <li class="toctree-l2">
@@ -7309,10 +7334,7 @@ shown below. Also, you should not forget to <a class="reference external" href="
         }
         promoter = TypePromoter(x, y, manual = manual)
         promoter.check()
-    def f(x, y):
-        dif = np.subtract(x, y)
-        sum = np.add(x, y)
-        return np.divide(dif, sum)
+    f = lambda x, y: np.divide(np.subtract(x, y), np.add(x, y))
     y = xr.DataArray(y).sq.align_with(x)
     out = xr.apply_ufunc(f, x, y)
     if track_types:
@@ -7737,9 +7759,7 @@ axis number.</p>
         manual = {&quot;numerical&quot;: &quot;numerical&quot;, &quot;__preserve_labels&quot;: 0}
         promoter = TypePromoter(x, manual = manual)
         promoter.check()
-    def f(x, axis):
-        squares = np.square(x)
-        return np.sum(squares, axis)
+    f = lambda x, axis: np.sum(np.square(x), axis)
     out = x.reduce(f, dim = dimension)
     if track_types:
         promoter.promote(out)

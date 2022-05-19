@@ -527,6 +527,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.n_.html">
+     semantique.processor.reducers.n_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.reducers.product_.html">
      semantique.processor.reducers.product_
     </a>
@@ -584,6 +589,26 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
      semantique.processor.utils.create_extent_cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_null.html">
+     semantique.processor.utils.np_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_allnull.html">
+     semantique.processor.utils.np_allnull
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_null_as_zero.html">
+     semantique.processor.utils.np_null_as_zero
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_inf_as_null.html">
+     semantique.processor.utils.np_inf_as_null
     </a>
    </li>
    <li class="toctree-l2">
@@ -831,7 +856,7 @@
 <h1>semantique.processor.structures.Cube.groupby<a class="headerlink" href="#semantique-processor-structures-cube-groupby" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.structures.Cube.groupby">
-<span class="sig-prename descclassname"><span class="pre">Cube.</span></span><span class="sig-name descname"><span class="pre">groupby</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grouper</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L302-L387"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube.groupby" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Cube.</span></span><span class="sig-name descname"><span class="pre">groupby</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grouper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_as_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L306-L393"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.Cube.groupby" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply the groupby verb to the cube.</p>
 <p>The groupby verb groups the values in a data cube.</p>
 <dl class="field-list simple">
@@ -844,6 +869,8 @@ coordinate for that dimension. Alternatively it may be a cube
 collection in which each cube meets the requirements above. In that
 case, groups are defined by the unique combinations of corresponding
 values in all collection members.</p></li>
+<li><p><strong>labels_as_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – If value labels are defined, should they be used as group names instead
+of the values themselves?</p></li>
 <li><p><strong>**kwargs</strong> – Ignored.</p></li>
 </ul>
 </dd>

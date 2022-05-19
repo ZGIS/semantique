@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.processor.utils.parse_datetime_component" href="semantique.processor.utils.parse_datetime_component.html" />
+    <link rel="next" title="semantique.processor.utils.np_null" href="semantique.processor.utils.np_null.html" />
     <link rel="prev" title="semantique.processor.utils.convert_datetime64" href="semantique.processor.utils.convert_datetime64.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -529,6 +529,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.reducers.n_.html">
+     semantique.processor.reducers.n_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.reducers.product_.html">
      semantique.processor.reducers.product_
     </a>
@@ -586,6 +591,26 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      semantique.processor.utils.create_extent_cube
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_null.html">
+     semantique.processor.utils.np_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_allnull.html">
+     semantique.processor.utils.np_allnull
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_null_as_zero.html">
+     semantique.processor.utils.np_null_as_zero
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.np_inf_as_null.html">
+     semantique.processor.utils.np_inf_as_null
     </a>
    </li>
    <li class="toctree-l2">
@@ -866,7 +891,7 @@ zone in the tz database, or as instance of any class inheriting from
 <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.tzinfo" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.tzinfo</span></code></a>. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, the timezone of the provided
 temporal extent is used.</p></li>
 <li><p><strong>trim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the cube be trimmed before returning? Trimming means that all
-coordinates for which all values are nodata, are dropped from the array.
+coordinates for which all values are null, are dropped from the array.
 The spatial dimension (if present) is treated differently, by trimming
 it only at the edges, and thus maintaining the regularity of the spatial
 dimension.</p></li>
@@ -895,10 +920,10 @@ being a tuple of the x and y coordinate of the corresponding cell.</p>
             <p class="prev-next-title">semantique.processor.utils.convert_datetime64</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.processor.utils.parse_datetime_component.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.processor.utils.np_null.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.processor.utils.parse_datetime_component</p>
+        <p class="prev-next-title">semantique.processor.utils.np_null</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

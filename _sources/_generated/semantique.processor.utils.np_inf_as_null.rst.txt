@@ -1,0 +1,6 @@
+﻿semantique.processor.utils.np\_inf\_as\_null
+============================================
+
+.. currentmodule:: semantique.processor.utils
+
+.. autofunction:: np_inf_as_null
