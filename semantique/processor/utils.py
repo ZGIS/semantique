@@ -111,15 +111,13 @@ def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
 def np_null(x):
   """Return the appropriate null value for a numpy array.
 
+  For arrays of datetime values ``NaT`` is returned. For other arrays ``nan``
+  is returned.
+
   Parameters
   ----------
-    x : :obj:`np.array`
+    x : :obj:`numpy.array`
       The input array.
-
-  Return
-  -------
-    For arrays of datetime values ``NaT`` is returned. For other arrays ``nan``
-    is returned.
 
   """
   return np.datetime64("NaT") if x.dtype.kind == "M" else np.nan
@@ -129,14 +127,14 @@ def np_allnull(x, axis):
 
   Parameters
   ----------
-    x : :obj:`np.array`
+    x : :obj:`numpy.array`
       The input array.
     axis : :obj:`int`
       Axis along which the tests are performed.
 
   Return
   -------
-    :obj:`np.array`
+    :obj:`numpy.array`
 
   """
   return np.equal(np.sum(pd.notnull(x), axis = axis), 0)
@@ -146,12 +144,12 @@ def np_null_as_zero(x):
 
   Parameters
   -----------
-    x : :obj:`np.array`
+    x : :obj:`numpy.array`
       The input array.
 
   Return
   ------
-    :obj:`np.array`
+    :obj:`numpy.array`
 
   """
   return np.where(pd.isnull(x), 0, x)
@@ -161,12 +159,12 @@ def np_inf_as_null(x):
 
   Parameters
   -----------
-    x : :obj:`np.array`
+    x : :obj:`numpy.array`
       The input array.
 
   Return
   ------
-    :obj:`np.array`
+    :obj:`numpy.array`
 
   """
   return np.where(np.isinf(x), np.nan, x)
