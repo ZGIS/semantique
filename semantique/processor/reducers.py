@@ -237,6 +237,50 @@ def min_(x, dimension, track_types = True, **kwargs):
     out = promoter.promote(out)
   return out
 
+def n_(x, dimension, track_types = True, **kwargs):
+  """Return the number of observations in a set.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  Note
+  -----
+    When tracking value types, this reducer uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["n"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, function = "n")
+    promoter.check()
+  f = lambda x, axis: np.nansum(pd.notnull(x), axis)
+  out = x.reduce(f, dim = dimension)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
 def product_(x, dimension, track_types = True, **kwargs):
   """Calculate the product of a set of values.
 
