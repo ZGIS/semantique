@@ -303,7 +303,7 @@ class Cube():
       out = out.sq.trim()
     return out
 
-  def groupby(self, grouper, **kwargs):
+  def groupby(self, grouper, labels_as_names = True, **kwargs):
     """Apply the groupby verb to the cube.
 
     The groupby verb groups the values in a data cube.
@@ -318,6 +318,9 @@ class Cube():
         collection in which each cube meets the requirements above. In that
         case, groups are defined by the unique combinations of corresponding
         values in all collection members.
+      labels_as_names : :obj:`bool`
+        If value labels are defined, should they be used as group names instead
+        of the values themselves?
       **kwargs:
         Ignored.
 
@@ -361,30 +364,29 @@ class Cube():
       dim = grouper[0].dims
       partition = list(self._obj.groupby(xr.IndexVariable(dim, idx)))
       # Use value labels as group names if defined.
-      labs = [x.sq.value_labels for x in grouper]
-      names = [i[0] for i in partition]
-      for i, x in enumerate(labs):
-        if x is None:
-          pass
-        else:
-          for j, y in enumerate(names):
-            y = list(y)
-            y[i] = x[y[i]]
-            names[j] = tuple(y)
-
-      # if None in labs:
-      #   groups = [i[1].sq.label(i[0]) for i in partition]
-      # else:
-      #   names = [i[0] for i in partition]
-      #   for i, x in enumerate(names):
-      #     names[i] = tuple([labs[j][y] for j, y in enumerate(x)])
-      groups = [i[1].sq.label(j) for i, j in zip(partition, names)]
+      if labels_as_names:
+        labs = [x.sq.value_labels for x in grouper]
+        names = [i[0] for i in partition]
+        for i, x in enumerate(labs):
+          if x is None:
+            pass
+          else:
+            for j, y in enumerate(names):
+              y = list(y)
+              y[i] = x[y[i]]
+              names[j] = tuple(y)
+        groups = [i[1].sq.label(j) for i, j in zip(partition, names)]
+      else:
+        groups = [i[1].sq.label(i[0]) for i in partition]
     else:
       partition = list(self._obj.groupby(grouper))
       # Use value labels as group names if defined.
-      labs = grouper.sq.value_labels
-      if labs is not None:
-        groups = [i[1].sq.label(labs[i[0]]) for i in partition]
+      if labels_as_names:
+        labs = grouper.sq.value_labels
+        if labs is not None:
+          groups = [i[1].sq.label(labs[i[0]]) for i in partition]
+        else:
+          groups = [i[1].sq.label(i[0]) for i in partition]
       else:
         groups = [i[1].sq.label(i[0]) for i in partition]
     out = CubeCollection(groups)
