@@ -258,6 +258,7 @@ Statistical reducers
    processor.reducers.mode_
    processor.reducers.max_
    processor.reducers.min_
+   processor.reducers.n_
    processor.reducers.product_
    processor.reducers.standard_deviation_
    processor.reducers.sum_
@@ -302,6 +303,10 @@ Utils
 
    processor.utils.convert_datetime64
    processor.utils.create_extent_cube
+   processor.utils.np_null
+   processor.utils.np_allnull
+   processor.utils.np_null_as_zero
+   processor.utils.np_inf_as_null
    processor.utils.parse_datetime_component
    processor.utils.parse_coords_component
 
