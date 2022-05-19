@@ -293,7 +293,6 @@ TYPE_PROMOTION_MANUALS = {
     "nominal": "nominal",
     "numerical": "numerical",
     "ordinal": "ordinal",
-    "coords": "coords",
     "datetime": "datetime",
     "__preserve_labels__": 1
   }

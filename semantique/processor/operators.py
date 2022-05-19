@@ -1,10 +1,9 @@
+import pandas as pd
 import numpy as np
 import xarray as xr
 
 from semantique.processor.types import TypePromoter
-
-def _nodata(x):
-  return np.datetime64("NaT") if x.dtype.kind == "M" else np.nan
+from semantique.processor.utils import np_null, np_null_as_zero
 
 #
 # BOOLEAN UNIVARIATE OPERATORS
@@ -47,9 +46,8 @@ def invert_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "invert")
     promoter.check()
-  def f(x, **kwargs):
-    return np.where(np.isfinite(x), np.logical_not(x), np.nan)
-  out = xr.apply_ufunc(f, x, kwargs = kwargs)
+  f = lambda x: np.where(pd.notnull(x), np.logical_not(x), np.nan)
+  out = xr.apply_ufunc(f, x)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -95,9 +93,8 @@ def absolute_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "absolute")
     promoter.check()
-  def f(x, **kwargs):
-    return np.where(np.isfinite(x), np.absolute(x), np.nan)
-  out = xr.apply_ufunc(f, x, kwargs = kwargs)
+  f = lambda x: np.absolute(x)
+  out = xr.apply_ufunc(f, x)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -139,9 +136,8 @@ def cube_root_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "cube_root")
     promoter.check()
-  def f(x, **kwargs):
-    return np.where(np.isfinite(x), np.cbrt(x), np.nan)
-  out = xr.apply_ufunc(f, x, kwargs = kwargs)
+  f = lambda x: np.cbrt(x)
+  out = xr.apply_ufunc(f, x)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -187,13 +183,11 @@ def exponential_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "exponential")
     promoter.check()
-  def f(x, **kwargs):
-    return np.where(np.isfinite(x), np.exp(x), np.nan)
-  out = xr.apply_ufunc(f, x, kwargs = kwargs)
+  f = lambda x: np.exp(x)
+  out = xr.apply_ufunc(f, x)
   if track_types:
     out = promoter.promote(out)
   return out
-
 
 def natural_logarithm_(x, track_types = True, **kwargs):
   """Compute the natural logarithm of x.
@@ -236,9 +230,8 @@ def natural_logarithm_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "natural_logarithm")
     promoter.check()
-  def f(x, **kwargs):
-    return np.where(np.isfinite(x), np.log(x), np.nan)
-  out = xr.apply_ufunc(f, x, kwargs = kwargs)
+  f = lambda x: np.where(np.equal(x, 0), np.nan, np.log(x))
+  out = xr.apply_ufunc(f, x)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -280,9 +273,8 @@ def square_root_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "square_root")
     promoter.check()
-  def f(x, **kwargs):
-    return np.where(np.isfinite(x), np.sqrt(x), np.nan)
-  out = xr.apply_ufunc(f, x, kwargs = kwargs)
+  f = lambda x: np.sqrt(x)
+  out = xr.apply_ufunc(f, x)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -338,10 +330,9 @@ def add_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "add")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.add(x, y), np.nan)
+  f = lambda x, y: np.add(x, y)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -393,10 +384,9 @@ def divide_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "divide")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.divide(x, y), np.nan)
+  f = lambda x, y: np.divide(x, np.where(np.equal(y, 0), np.nan, y))
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -448,10 +438,9 @@ def multiply_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "multiply")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.multiply(x, y), np.nan)
+  f = lambda x, y: np.multiply(x, y)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -503,10 +492,9 @@ def power_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "power")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.power(x, y), np.nan)
+  f = lambda x, y: np.power(x, y)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -558,10 +546,9 @@ def subtract_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "subtract")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.subtract(x, y), np.nan)
+  f = lambda x, y: np.subtract(x, y)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -617,10 +604,11 @@ def and_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "and")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.logical_and(x, y), np.nan)
+  def f(x, y):
+    y = np_null_as_zero(y)
+    return np.where(pd.notnull(x), np.logical_and(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -672,10 +660,11 @@ def or_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "or")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.logical_or(x, y), np.nan)
+  def f(x, y):
+    y = np_null_as_zero(y)
+    return np.where(pd.notnull(x), np.logical_or(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -727,10 +716,11 @@ def exclusive_or_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "exclusive_or")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.logical_xor(x, y), np.nan)
+  def f(x, y):
+    y = np_null_as_zero(y)
+    return np.where(pd.notnull(x), np.logical_xor(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -786,10 +776,9 @@ def equal_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "equal")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.equal(x, y), np.nan)
+  f = lambda x, y: np.where(pd.notnull(x), np.equal(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -837,9 +826,8 @@ def in_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "in")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.isin(x, y), np.nan)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  f = lambda x, y: np.where(pd.notnull(x), np.isin(x, y), np.nan)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -891,10 +879,9 @@ def not_equal_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "not_equal")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.not_equal(x, y), np.nan)
+  f = lambda x, y: np.where(pd.notnull(x), np.not_equal(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -942,9 +929,8 @@ def not_in_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "not_in")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.isin(x, y, invert = True), np.nan)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  f = lambda x, y: np.where(pd.notnull(x), np.isin(x, y, invert = True), np.nan)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -1000,10 +986,9 @@ def greater_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "greater")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.greater(x, y), np.nan)
+  f = lambda x, y: np.where(pd.notnull(x), np.greater(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -1055,10 +1040,9 @@ def greater_equal_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "greater_equal")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.greater_equal(x, y), np.nan)
+  f = lambda x, y: np.where(pd.notnull(x), np.greater_equal(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -1110,10 +1094,9 @@ def less_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "less")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.less(x, y), np.nan)
+  f = lambda x, y: np.where(pd.notnull(x), np.less(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -1165,10 +1148,9 @@ def less_equal_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "less_equal")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.less_equal(x, y), np.nan)
+  f = lambda x, y: np.where(pd.notnull(x), np.less_equal(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -1305,9 +1287,8 @@ def after_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "after")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.greater(x, np.max(y)), np.nan)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  f = lambda x, y: np.where(pd.notnull(x), np.greater(x, np.nanmax(y)), np.nan)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -1369,9 +1350,8 @@ def before_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "before")
     promoter.check()
-  def f(x, y, **kwargs):
-    return np.where(np.isfinite(x), np.less(x, np.min(y)), np.nan)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  f = lambda x, y: np.where(pd.notnull(x), np.less(x, np.nanmin(y)), np.nan)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -1430,11 +1410,11 @@ def during_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "during")
     promoter.check()
-  def f(x, y, **kwargs):
-    a = np.greater_equal(x, np.min(y))
-    b = np.less_equal(x, np.max(y))
-    return np.where(np.isfinite(x), np.logical_and(a, b), np.nan)
-  out = xr.apply_ufunc(f, x, y, kwargs = kwargs)
+  def f(x, y):
+    a = np.greater_equal(x, np.nanmin(y))
+    b = np.less_equal(x, np.nanmax(y))
+    return np.where(pd.notnull(x), np.logical_and(a, b), np.nan)
+  out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -1491,7 +1471,7 @@ def assign_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "assign")
     promoter.check()
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.where(np.isfinite(x), y, _nodata(y))
+  out = xr.where(np.isfinite(x), y, np_null(y))
   if track_types:
     out = promoter.promote(out)
   return out

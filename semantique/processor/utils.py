@@ -75,7 +75,7 @@ def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
       temporal extent is used.
     trim : :obj:`bool`
       Should the cube be trimmed before returning? Trimming means that all
-      coordinates for which all values are nodata, are dropped from the array.
+      coordinates for which all values are null, are dropped from the array.
       The spatial dimension (if present) is treated differently, by trimming
       it only at the edges, and thus maintaining the regularity of the spatial
       dimension.
@@ -107,6 +107,69 @@ def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
   if trim:
     extent = extent.sq.trim()
   return extent
+
+def np_null(x):
+  """Return the appropriate null value for a numpy array.
+
+  Parameters
+  ----------
+    x : :obj:`np.array`
+      The input array.
+
+  Return
+  -------
+    For arrays of datetime values ``NaT`` is returned. For other arrays ``nan``
+    is returned.
+
+  """
+  return np.datetime64("NaT") if x.dtype.kind == "M" else np.nan
+
+def np_allnull(x, axis):
+  """Test whether all elements along a given axis in a numpy array are null.
+
+  Parameters
+  ----------
+    x : :obj:`np.array`
+      The input array.
+    axis : :obj:`int`
+      Axis along which the tests are performed.
+
+  Return
+  -------
+    :obj:`np.array`
+
+  """
+  return np.equal(np.sum(pd.notnull(x), axis = axis), 0)
+
+def np_null_as_zero(x):
+  """Convert all null values in a numpy array to 0.
+
+  Parameters
+  -----------
+    x : :obj:`np.array`
+      The input array.
+
+  Return
+  ------
+    :obj:`np.array`
+
+  """
+  return np.where(pd.isnull(x), 0, x)
+
+def np_inf_as_null(x):
+  """Convert all infinite values in a numpy array to null values.
+
+  Parameters
+  -----------
+    x : :obj:`np.array`
+      The input array.
+
+  Return
+  ------
+    :obj:`np.array`
+
+  """
+  return np.where(np.isinf(x), np.nan, x)
 
 def parse_datetime_component(name, obj):
   """Parse datetime accessor arrays.
