@@ -294,6 +294,10 @@ class Cube():
         raise exceptions.InvalidValueTypeError(
           f"Filterer must be of value type 'binary', not '{vtype}'"
         )
+    # Update filterer.
+    # Xarray treats null values as True but they should not pass the filter.
+    filterer.values = utils.np_null_as_zero(filterer)
+    # Apply filter.
     out = self._obj.where(filterer.sq.align_with(self._obj))
     if trim:
       out = out.sq.trim()
