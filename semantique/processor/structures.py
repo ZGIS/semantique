@@ -375,20 +375,20 @@ class Cube():
               y = list(y)
               y[i] = x[y[i]]
               names[j] = tuple(y)
-        groups = [i[1].sq.label(j) for i, j in zip(partition, names)]
+        groups = [i[1].rename(j) for i, j in zip(partition, names)]
       else:
-        groups = [i[1].sq.label(i[0]) for i in partition]
+        groups = [i[1].rename(i[0]) for i in partition]
     else:
       partition = list(self._obj.groupby(grouper))
       # Use value labels as group names if defined.
       if labels_as_names:
         labs = grouper.sq.value_labels
         if labs is not None:
-          groups = [i[1].sq.label(labs[i[0]]) for i in partition]
+          groups = [i[1].rename(labs[i[0]]) for i in partition]
         else:
-          groups = [i[1].sq.label(i[0]) for i in partition]
+          groups = [i[1].rename(i[0]) for i in partition]
       else:
-        groups = [i[1].sq.label(i[0]) for i in partition]
+        groups = [i[1].rename(i[0]) for i in partition]
     out = CubeCollection(groups)
     return out
 
