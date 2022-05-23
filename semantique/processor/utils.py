@@ -249,16 +249,17 @@ def parse_datetime_component(name, obj):
 def parse_coords_component(obj):
   """Parse spatial coordinate arrays.
 
-  The spatial x and y coordinates of each pixel in a data cube are treated in
-  semantique as a component of the spatial dimension. Parsing them includes
-  adding a relevant
+  The spatial x and y coordinates of each value in :obj:`xarray.DataArray`
+  objects are treated in semantique as components of a stacked spatial
+  dimension, i.e. a multi-indexed dimension. Parsing these individual
+  coordinte arrays includes adding a relevant
   :attr:`value_type <semantique.processor.structures.Cube.value_type>`
   property.
 
   Parameters
   -----------
     obj : :obj:`xarray.DataArray`
-      Array containing spatial coordinates.
+      Array containing spatial x or y coordinates.
 
   Returns
   --------

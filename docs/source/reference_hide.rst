@@ -149,6 +149,11 @@
    processor.structures.CubeCollection.stack_spatial_dims
    processor.structures.CubeCollection.unstack_spatial_dims
 
+   processor.values.ValueRange.start
+   processor.values.ValueRange.end
+   processor.values.ValueRange.value_type
+   processor.values.ValueRange.sq
+
    processor.types.TypePromoter.manual
    processor.types.TypePromoter.input_types
    processor.types.TypePromoter.output_type
