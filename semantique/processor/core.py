@@ -11,7 +11,7 @@ import warnings
 import semantique.processor.operators
 import semantique.processor.reducers
 from semantique import exceptions
-from semantique.processor import structures, utils
+from semantique.processor import structures, values, utils
 
 logger = logging.getLogger(__name__)
 
@@ -831,6 +831,13 @@ class QueryProcessor():
       )
     logger.debug(f"Matched value label '{label}' with value {value}")
     return value
+
+  def handle_value_range(self, block):
+    start = block["start"]
+    end = block["end"]
+    out = values.ValueRange(start, end)
+    logger.debug(f"Created a value range object with bounds {[start, end]}")
+    return out
 
   def handle_geometries(self, block):
     """Handler for spatial features.

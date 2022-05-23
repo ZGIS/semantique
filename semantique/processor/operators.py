@@ -3,6 +3,7 @@ import numpy as np
 import xarray as xr
 
 from semantique.processor.types import TypePromoter
+from semantique.processor.values import ValueRange
 from semantique.processor.utils import np_null, np_null_as_zero
 
 #
@@ -826,7 +827,13 @@ def in_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "in")
     promoter.check()
-  f = lambda x, y: np.where(pd.notnull(x), np.isin(x, y), np.nan)
+  def f(x, y):
+    if isinstance(y, ValueRange):
+      a = np.greater_equal(x, y.start)
+      b = np.less_equal(x, y.end)
+      return np.where(pd.notnull(x), np.logical_and(a, b), np.nan)
+    else:
+      return np.where(pd.notnull(x), np.isin(x, y), np.nan)
   out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)
@@ -929,7 +936,13 @@ def not_in_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "not_in")
     promoter.check()
-  f = lambda x, y: np.where(pd.notnull(x), np.isin(x, y, invert = True), np.nan)
+  def f(x, y):
+    if isinstance(y, ValueRange):
+      a = np.less(x, y.start)
+      b = np.greater(x, y.end)
+      return np.where(pd.notnull(x), np.logical_or(a, b), np.nan)
+    else:
+      return np.where(pd.notnull(x), np.isin(x, y, invert = True), np.nan)
   out = xr.apply_ufunc(f, x, y)
   if track_types:
     out = promoter.promote(out)

@@ -44,6 +44,10 @@ class InvalidValueTypeError(Exception):
   """
   pass
 
+class InvalidValueRangeError(Exception):
+  """Raised when the end of a value range is smaller than its start."""
+  pass
+
 class InvalidBuildingBlockError(Exception):
   """Raised when a query recipe contains an invalid building block.
 

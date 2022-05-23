@@ -12,6 +12,7 @@ __all__ = [
   "self",
   "collection",
   "value_label",
+  "value_range",
   "geometries",
   "time_instant",
   "time_interval",
@@ -19,6 +20,7 @@ __all__ = [
   "CubeCollectionProxy"
 ]
 
+from semantique import exceptions
 from semantique.extent import SpatialExtent, TemporalExtent
 
 def _parse_filter_expression(*args):
@@ -911,6 +913,37 @@ def value_label(label):
 
   """
   obj = {"type": "value_label", "label": label}
+  return obj
+
+def value_range(start, end):
+  """Range of numerical or ordinal values.
+
+  Special value representing a set of values ranging from a given start to a
+  given end. All values in between those are part of the range, no matter their
+  precision. The range forms a closed interval, meaning that the start and end
+  themselves also belong to the range. By definition, the given bounds should
+  ordinal or numerical values, and the start should be smaller than or equal to
+  the end.
+
+  Parameters
+  ----------
+    start : :obj:`int` or :obj:`float`
+      The first value in the range.
+    end : :obj:`int` or :obj:`float`
+      The last value in the range.
+
+  Returns
+  --------
+    :obj:`dict`
+      JSON-serializable object that contains the bounds of the time
+      interval, and can be understood by the query processor as such.
+
+  """
+  if end < start:
+    raise exceptions.InvalidValueRangeException(
+      "The start of value range cannot be smaller than its end"
+    )
+  obj = {"type": "value_range", "start": start, "end": end}
   return obj
 
 def geometries(value, **kwargs):
