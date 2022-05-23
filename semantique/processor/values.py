@@ -28,7 +28,7 @@ class ValueRange(list):
 
   @property
   def sq(self):
-    """Semantique accessor.
+    """self: Semantique accessor.
 
     This is merely provided to ensure compatible behaviour with
     :obj:`Cube <semantique.processor.structures.Cube>` objects, which are

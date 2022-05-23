@@ -362,22 +362,14 @@ class QueryProcessor():
     # This means we drop all coordinates for which all values are nan.
     if self._trim_results:
       def trim(obj):
-        try:
-          obj = obj.sq
-        except AttributeError:
-          pass
-        out = obj.trim()
+        out = obj.sq.trim()
         logger.debug(f"Trimmed result '{out.name}':\n{out}")
         return out
       self._response = {k: trim(v) for k, v in self._response.items()}
     # Unstack spatial dimensions if requested.
     if self._unstack_results:
       def unstack(obj):
-        try:
-          obj = obj.sq
-        except AttributeError:
-          pass
-        out = obj.unstack_spatial_dims()
+        out = obj.sq.unstack_spatial_dims()
         logger.debug(f"Unstacked result '{out.name}':\n{out}")
         return out
       self._response = {k: unstack(v) for k, v in self._response.items()}
@@ -921,12 +913,8 @@ class QueryProcessor():
     """
     # Get the object to apply the verb to.
     obj = self._get_eval_obj()
-    try:
-      obj = obj.sq
-    except AttributeError:
-      pass
     # Apply the verb.
-    verb = getattr(obj, name)
+    verb = getattr(obj.sq, name)
     out = verb(**params)
     # Warn when output array is empty.
     try:

@@ -943,6 +943,17 @@ class CubeCollection(list):
     super(CubeCollection, self).__init__(list_obj)
 
   @property
+  def sq(self):
+    """self: Semantique accessor.
+
+    This is merely provided to ensure compatible behaviour with
+    :obj:`Cube <semantique.processor.structures.Cube>` objects, which are
+    modelled as an accessor to :obj:`xarray.DataArray` objects.
+
+    """
+    return self
+
+  @property
   def is_empty(self):
     """:obj:`bool`: Are all elements of the collection empty data cubes."""
     return all([x.sq.is_empty for x in self])
