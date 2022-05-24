@@ -269,6 +269,7 @@ Statistical reducers
    processor.reducers.mode_
    processor.reducers.max_
    processor.reducers.min_
+   processor.reducers.range_
    processor.reducers.n_
    processor.reducers.product_
    processor.reducers.standard_deviation_
