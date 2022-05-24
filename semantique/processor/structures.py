@@ -1047,12 +1047,19 @@ class CubeCollection(list):
           f"not {np.unique(value_types).tolist()} "
         )
     # Concatenate.
-    if dimension in self[0].dims:
-      # Concatenate over existing dimension.
-      raw = xr.concat([x for x in self], dimension)
-      coords = raw.get_index(dimension)
-      clean = raw.isel({dimension: np.invert(coords.duplicated())})
-      out = clean.sortby(dimension)
+    has_dim = [dimension in x.dims for x in self]
+    if any(has_dim):
+      if all(has_dim):
+        # Concatenate over existing dimension.
+        raw = xr.concat([x for x in self], dimension)
+        coords = raw.get_index(dimension)
+        clean = raw.isel({dimension: np.invert(coords.duplicated())})
+        out = clean.sortby(dimension)
+      else:
+        raise exceptions.MissingDimensionError(
+          f"Concatenation dimension '{dimension}' exists in some but not all "
+          "cubes in the collection"
+        )
     else:
       # Concatenate over new dimension.
       names = [x.name for x in self]

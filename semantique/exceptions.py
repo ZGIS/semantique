@@ -150,9 +150,10 @@ class MissingDimensionError(Exception):
 
   This occurs in functions that require one or more specific dimensions to be
   present in a data cube. This includes grouping with the groupby verb, which
-  requires the dimension of the grouper to be present in the input data cube,
-  and retrieving data from a factbase, which requires often that at least a
-  spatial dimension is present.
+  requires the dimension of the grouper to be present in the input data cube;
+  retrieving data from a factbase, which requires often that at least a
+  spatial dimension is present; and concatenating over an existing dimension,
+  which requires this dimension to exist in all input data cubes.
 
   """
   pass
