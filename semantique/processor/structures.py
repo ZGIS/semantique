@@ -1038,6 +1038,7 @@ class CubeCollection(list):
         collection are not all equal to each other.
 
     """
+    # Check value types.
     if track_types:
       value_types = [x.sq.value_type for x in self]
       if not all([x is None or x == value_types[0] for x in value_types]):
@@ -1045,6 +1046,7 @@ class CubeCollection(list):
           f"Element value types for 'concatenate' should all be the same, "
           f"not {np.unique(value_types).tolist()} "
         )
+    # Concatenate.
     if dimension in self[0].dims:
       # Concatenate over existing dimension.
       raw = xr.concat([x for x in self], dimension)
@@ -1053,16 +1055,25 @@ class CubeCollection(list):
       out = clean.sortby(dimension)
     else:
       # Concatenate over new dimension.
-      labels = [x.name for x in self]
-      coords = pd.Index(labels, name = dimension, tupleize_cols = False)
+      names = [x.name for x in self]
+      coords = pd.Index(names, name = dimension, tupleize_cols = False)
       out = xr.concat([x for x in self], coords)
       out[dimension].sq.value_type = vtype
-      out[dimension].sq.value_labels = {x:x for x in labels}
-    # PROVISIONAL FIX: Always drop value labels of the concatenated cube.
-    # Value labels are preserved from the first element in the collection.
-    # These may not be accurate anymore for the concatenated cube.
-    # TODO: Find a way to merge value labels. But how to handle duplicates?
-    del out.sq.value_labels
+      out[dimension].sq.value_labels = {x:x for x in names}
+    # Update value labels.
+    if track_types:
+      orig_labs = [x.sq.value_labels for x in self]
+      if None not in orig_labs:
+        # If keys are duplicated first cube should be prioritized.
+        # Therefore we first reverse the list of value label dictionaries.
+        orig_labs.reverse()
+        new_labs = {k:v for x in orig_labs for k,v in x.items()}
+        out.sq.value_labels = new_labs
+      else:
+        del out.sq.value_labels
+    else:
+      del out.sq.value_labels
+    # Return.
     return out
 
   def merge(self, reducer, track_types = True, **kwargs):
