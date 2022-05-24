@@ -305,6 +305,11 @@ TYPE_PROMOTION_MANUALS = {
     "datetime": "numerical",
     "__preserve_labels__": 0
   },
+  "range": {
+    "numerical": "numerical",
+    "datetime": "numerical",
+    "__preserve_labels__": 0
+  }
 }
 """:obj:`dict` : Type promotion manuals for all built-in operators and reducers.
 

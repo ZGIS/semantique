@@ -187,7 +187,7 @@ def max_(x, dimension, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "max")
     promoter.check()
-  f = lambda x, axis: np.nanmax(x, axis = axis)
+  f = lambda x, axis: np.nanmax(x, axis)
   out = x.reduce(f, dim = dimension)
   if track_types:
     out = promoter.promote(out)
@@ -231,7 +231,57 @@ def min_(x, dimension, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "min")
     promoter.check()
-  f = lambda x, axis: np.nanmin(x, axis = axis)
+  f = lambda x, axis: np.nanmin(x, axis)
+  out = x.reduce(f, dim = dimension)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
+def range_(x, dimension, track_types = True, **kwargs):
+  """Return the difference between the maximum and minimum values in a set.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The data cube to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reduction function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced data cube.
+
+  Note
+  -----
+    When tracking value types, this reducer uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["range"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  Note
+  -----
+    When applied to an input containing timestamps as values, the output cube
+    will contain numerical values representing the difference between the most
+    recent and least recent timestamp in nanoseconds.
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, function = "range")
+    promoter.check()
+  f = lambda x, axis: np.subtract(np.nanmax(x, axis), np.nanmin(x, axis))
   out = x.reduce(f, dim = dimension)
   if track_types:
     out = promoter.promote(out)
