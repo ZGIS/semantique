@@ -40,6 +40,7 @@
       ~QueryProcessor.handle_time_instant
       ~QueryProcessor.handle_time_interval
       ~QueryProcessor.handle_value_label
+      ~QueryProcessor.handle_value_range
       ~QueryProcessor.handle_verb
       ~QueryProcessor.optimize
       ~QueryProcessor.parse

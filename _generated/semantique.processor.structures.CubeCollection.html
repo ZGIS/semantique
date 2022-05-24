@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.processor.operators.absolute_" href="semantique.processor.operators.absolute_.html" />
+    <link rel="next" title="semantique.processor.values.ValueRange" href="semantique.processor.values.ValueRange.html" />
     <link rel="prev" title="semantique.processor.structures.Cube" href="semantique.processor.structures.Cube.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -339,6 +339,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.value_range.html">
+     semantique.value_range
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.geometries.html">
      semantique.geometries
     </a>
@@ -366,6 +371,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.values.ValueRange.html">
+     semantique.processor.values.ValueRange
     </a>
    </li>
    <li class="toctree-l2">
@@ -584,13 +594,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
+    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -611,16 +631,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.np_inf_as_null.html">
      semantique.processor.utils.np_inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
     </a>
    </li>
    <li class="toctree-l2">
@@ -661,6 +671,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.InvalidValueTypeError.html">
      semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.InvalidValueRangeError.html">
+     semantique.exceptions.InvalidValueRangeError
     </a>
    </li>
    <li class="toctree-l2">
@@ -858,7 +873,7 @@
 <h1>semantique.processor.structures.CubeCollection<a class="headerlink" href="#semantique-processor-structures-cubecollection" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.processor.structures.CubeCollection">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.structures.</span></span><span class="sig-name descname"><span class="pre">CubeCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L932-L1228"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.CubeCollection" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.structures.</span></span><span class="sig-name descname"><span class="pre">CubeCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/structures.py#L932-L1257"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.structures.CubeCollection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal representation of a data cube collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -928,6 +943,9 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.structures.CubeCollection.is_empty.html#semantique.processor.structures.CubeCollection.is_empty" title="semantique.processor.structures.CubeCollection.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a></p></td>
 <td><p>Are all elements of the collection empty data cubes.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.structures.CubeCollection.sq.html#semantique.processor.structures.CubeCollection.sq" title="semantique.processor.structures.CubeCollection.sq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sq</span></code></a></p></td>
+<td><p>Semantique accessor.</p></td>
+</tr>
 </tbody>
 </table>
 </dd></dl>
@@ -947,10 +965,10 @@
             <p class="prev-next-title">semantique.processor.structures.Cube</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.processor.operators.absolute_.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.processor.values.ValueRange.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.processor.operators.absolute_</p>
+        <p class="prev-next-title">semantique.processor.values.ValueRange</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -341,6 +341,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.value_range.html">
+     semantique.value_range
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.geometries.html">
      semantique.geometries
     </a>
@@ -368,6 +373,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.processor.structures.CubeCollection.html">
      semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.values.ValueRange.html">
+     semantique.processor.values.ValueRange
     </a>
    </li>
    <li class="toctree-l2">
@@ -586,13 +596,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
+    <a class="reference internal" href="../_generated/semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -613,16 +633,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.processor.utils.np_inf_as_null.html">
      semantique.processor.utils.np_inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
     </a>
    </li>
    <li class="toctree-l2">
@@ -663,6 +673,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.exceptions.InvalidValueTypeError.html">
      semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.InvalidValueRangeError.html">
+     semantique.exceptions.InvalidValueRangeError
     </a>
    </li>
    <li class="toctree-l2">
@@ -1197,7 +1212,7 @@ interoperability of EO data analysis workflows, also for expert users.</p>
 <h2>Prepare<a class="headerlink" href="#Prepare" title="Permalink to this headline">¶</a></h2>
 <p>Import the semantique package:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import semantique as sq
@@ -1206,7 +1221,7 @@ interoperability of EO data analysis workflows, also for expert users.</p>
 </div>
 <p>Import other packages we will use in this demo:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import xarray as xr
@@ -1226,7 +1241,7 @@ import json
 <p>The first step in the semantic querying process is to construct the query recipe for inference of new knowledge. That is, you have to write <em>instructions</em> that tell the query processor what steps it should take to obtain your desired result. In semantique you can do this in a flexible manner, by combining basic building blocks with each other. Each building block represents a specific component of a result instruction, like a reference to a semantic concept or a certain processing task.</p>
 <p>We start with an empty query recipe:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
@@ -1252,7 +1267,7 @@ to a specific semantic concept usually consists of the name of that concept, <em
 <div><p><strong>NOTE</strong> Currently we only focus on pixel based queries. Hence, the query processor evaluates for each pixel if the observed phenonemon in that pixel is <em>part of</em> a given entity or not, considering only the data value of the pixel itself. The semantique framework is flexible enough to also support object-based approaches. In that case te rulesets of concepts should look further than only individual pixels. Creating such rulesets is still a challenge..</p>
 </div></blockquote>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>water = sq.concept(&quot;entity&quot;, &quot;water&quot;)
@@ -1276,7 +1291,7 @@ print(json.dumps(water, indent = 2))
 </div>
 <p>If you use ontologies that include sub-categories, you can simply use the same function to refer to them, in a form as below. There is no limit on how many sub-categories you can use in a reference. Of course, this all depends on the categorization of the ontology that you will use.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>lake = sq.concept(&quot;entity&quot;, &quot;natural_entities&quot;, &quot;water_bodies&quot;, &quot;lake&quot;)
@@ -1285,7 +1300,7 @@ print(json.dumps(water, indent = 2))
 </div>
 <p>Note that each reference is nothing more than a textual reference. At the construction stage, no data processing is done at all. More specifically: the reference is an object of class <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.CubeProxy.html">CubeProxy</a>, meaning that it will be evaluated into a data cube, but only when executing the query recipe.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>type(water)
@@ -1293,7 +1308,7 @@ print(json.dumps(water, indent = 2))
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1303,7 +1318,7 @@ semantique.blocks.CubeProxy
 </div>
 <p>For convenience, commonly used lowest-level semantic concept categories (e.g. entities) are also implemented as separate construction functions, such that you can call them directly. Hence, the code below produces the same output as above.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>water = sq.entity(&quot;water&quot;)
@@ -1328,7 +1343,7 @@ print(json.dumps(water, indent = 2))
 <p>The <em>do</em> part of the processing chain can be formulated by applying the actions as methods to the input object. Just an in the <em>with</em> part, this will not perform any action just yet. It only constructs the textual recipe for the result, which will be executed at the processing stage.</p>
 <p>The code below shows a simple set of instructions that form the recipe for a result. The instructions consist of a single processing chain, starting with a reference to the concept “water”, and subsequently applying a single action to it. During processing, this will be evaluated into a two dimensional data cube with for each location in space the number of times water was observed. Right now, it is nothing more than a textual recipe.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>water_count = sq.entity(&quot;water&quot;).reduce(&quot;time&quot;, &quot;count&quot;)
@@ -1365,7 +1380,7 @@ print(json.dumps(water_count, indent = 2))
 </div>
 <p>Instead saving result instructions as separate objects, we include them as an element in our recipe object. We can include as many result instructions in a single query as we want.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe[&quot;water_map&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;time&quot;, &quot;count&quot;)
@@ -1376,7 +1391,7 @@ recipe[&quot;water_time_series&quot;] = sq.entity(&quot;water&quot;).reduce(&quo
 </div>
 <p>You can apply as many actions as you want simply by adding more actions blocks to the chain.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe[&quot;avg_water_count&quot;] = sq.entity(&quot;water&quot;).\
@@ -1387,7 +1402,7 @@ recipe[&quot;water_time_series&quot;] = sq.entity(&quot;water&quot;).reduce(&quo
 </div>
 <p>Some of the action blocks allow to join information from other objects into the active evaluation object. For example, instead of only calculating the water count as shown above, we might be interested in the summed count of the concepts water and vegetation. Such an instruction can be modelled by nesting multiple processing chains.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe[&quot;summed_count&quot;] = sq.entity(&quot;water&quot;).\
@@ -1399,7 +1414,7 @@ recipe[&quot;water_time_series&quot;] = sq.entity(&quot;water&quot;).reduce(&quo
 <p>Again, it is important to notice that the query construction phase does not include <em>any</em> loading nor analysis of data or information. It simply creates a textual query recipe, which will be executed at a later stage. The query we constructed in all the examples above looks like <a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/demo/files/recipe.json">this</a>.</p>
 <p>We can export and share this query recipe as a JSON file.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/recipe.json&quot;, &quot;w&quot;) as file:
@@ -1430,7 +1445,7 @@ function accepts, and in what format it returns the retrieved resource.</p>
 <p>In our examples we will use the simpler <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.factbase.GeotiffArchive.html">GeotiffArchive</a> factbase format. We have a set of <a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/demo/files/resources.zip">example resources</a> for a tiny <a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/demo/files/footprint.json">spatial extent</a> and only three different timestamps, as well as a <a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/demo/files/factbase.json">layout
 file</a> that contains all necessary metadata entries the retriever function of this format needs.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/factbase.json&quot;, &quot;r&quot;) as file:
@@ -1439,7 +1454,7 @@ file</a> that contains all necessary metadata entries the retriever function of 
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>factbase = sq.factbase.GeotiffArchive(layout, src = &quot;files/resources.zip&quot;)
@@ -1448,7 +1463,7 @@ file</a> that contains all necessary metadata entries the retriever function of 
 </div>
 <p>The retriever function is a method of this factbase instance, which will internally be called by the query processor whenever a specific resource is referenced.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>hasattr(factbase, &quot;retrieve&quot;)
@@ -1456,7 +1471,7 @@ file</a> that contains all necessary metadata entries the retriever function of 
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1478,7 +1493,7 @@ scripts. Hence, just as the factbase models described before, the ontology model
 It is important to note that the query processor does not care at all what the format of the ontology is and how it translated concept references. It only cares about what input the translator function accepts, and in what format it returns the translated concepts.</p>
 <p>Back to the semantique specific ontology format. We can create an instance of it by providing a dictionary with rulesets that was shared with us. However, expert users can also create their own ontology from scratch. In that case, you’ll start with an empty ontology, and iteratively fill it with rules afterwards:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ontology = sq.ontology.Semantique()
@@ -1487,7 +1502,7 @@ It is important to note that the query processor does not care at all what the f
 </div>
 <p>The translator function is a method of this ontology instance, which will internally be called by the query processor whenever a specific concept is referenced.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>hasattr(ontology, &quot;translate&quot;)
@@ -1495,7 +1510,7 @@ It is important to note that the query processor does not care at all what the f
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1508,7 +1523,7 @@ True
 <div><p><strong>NOTE</strong> The examples we use below are heavily simplified and don’t always make sense, but are meant mainly to get an idea of how the package works.</p>
 </div></blockquote>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ontology[&quot;entity&quot;] = {}
@@ -1521,7 +1536,7 @@ processing, this reference will be send to the retriever function of the factbas
 <p>For example: we utilize the “Color type” resource to define if a pixel has a water-like color. This resource is a layer of semantically enriched data and contains categorical values. The categories with indices 21, 22, 23 and 24 correspond to color combinations that <em>appear</em> to be water. Hence, we state that a pixel meets the color property of a lake when its value in this “Color type” resource corresponds with one of the above mentioned indices. Furthermore, we state that a pixel meets the
 texture property of a lake when its value in the “slope” resource equals 0.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ontology[&quot;entity&quot;][&quot;lake&quot;] = {
@@ -1537,7 +1552,7 @@ texture property of a lake when its value in the “slope” resource equals 0.<
 <div><p><strong>NOTE</strong> Different entities do not <em>need</em> to have the same properties defined.</p>
 </div></blockquote>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ontology[&quot;entity&quot;][&quot;river&quot;] = {
@@ -1549,7 +1564,7 @@ texture property of a lake when its value in the “slope” resource equals 0.<
 </div>
 <p>As you see, there is a relation between the entities <em>lake</em> and <em>river</em>. They share a property. However, we defined the same property twice. This is not needed, because in the Semantique-format, you can always refer to other entities in your ontology, as well as to properties in these entities. In this way, you can intuitively model relations between different semantic concepts. Hence, the same <em>river</em> definition can also be structured as follows:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ontology[&quot;entity&quot;][&quot;river&quot;] = {
@@ -1561,7 +1576,7 @@ texture property of a lake when its value in the “slope” resource equals 0.<
 </div>
 <p>Or, to take it a step further, as below. Basically we are saying here that a <em>lake</em> has the color of <em>water</em> and the texture of a <em>plain</em> (again, we oversimplify here!).</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ontology[&quot;entity&quot;][&quot;water&quot;] = {
@@ -1591,7 +1606,7 @@ ontology[&quot;entity&quot;][&quot;river&quot;] = {
 </div>
 <p>We can also model relationships in a way where some entity is the union of other entities.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ontology[&quot;entity&quot;][&quot;natural_area&quot;] = {
@@ -1602,7 +1617,7 @@ ontology[&quot;entity&quot;][&quot;river&quot;] = {
 </div>
 <p>It is also possible to include temporal information. For example, we only consider an observation to be part of a lake when over time more than 80% of the observations at that location are identified as water, excluding those observations that are identified as a cloud.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ontology[&quot;entity&quot;][&quot;lake&quot;] = {
@@ -1618,7 +1633,7 @@ ontology[&quot;entity&quot;][&quot;river&quot;] = {
 </div>
 <p>The flexible structure with the building blocks of semantique make many more structures possible. Now you have an idea of how to construct and ontology from scratch using the built-in Semantique-format, we move on and construct a complete ontology in one go. We use simpler rulesets as above, since our demo factbase only contains a very limited set of resources.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ontology = sq.ontology.Semantique()
@@ -1634,7 +1649,7 @@ ontology[&quot;entity&quot;][&quot;snow&quot;] = {&quot;color&quot;: sq.appearan
 </div>
 <p>Our constructed ontology looks like <a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/demo/files/ontology.json">this</a>. We can export and share this ontology as a JSON file.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/ontology.json&quot;, &quot;w&quot;) as file:
@@ -1644,7 +1659,7 @@ ontology[&quot;entity&quot;][&quot;snow&quot;] = {&quot;color&quot;: sq.appearan
 </div>
 <p>That also means that as non-expert we don’t have to worry about constructing our own ontology from scratch. We can simply load a shared ontology in the same way as we loaded the layout file of the factbase, and construct the ontology object accordingly.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/ontology.json&quot;, &quot;r&quot;) as file:
@@ -1661,7 +1676,7 @@ ontology = sq.ontology.Semantique(rules)
 <p>To model a spatial extent, semantique contains the <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.extent.SpatialExtent.html">SpatialExtent</a> class. An instance of this class can be initialized by providing it any object that can be read by the <a class="reference external" href="https://geopandas.org/docs/reference/api/geopandas.GeoDataFrame.html">GeoDataFrame</a> initializer of the <a class="reference external" href="https://geopandas.org/en/stable/">geopandas</a> package. Any additional keyword arguments will be forwarded to this initializer. In
 practice, this means you can read any GDAL-supported file format with <a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.read_file.html">geopandas.read_file()</a>, and then use that object to initialize a spatial extent. In this demo we use a small, rectangular area around Zell am See in Salzbuger Land, Austria.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>geodf = gpd.read_file(&quot;files/footprint.geojson&quot;)
@@ -1670,7 +1685,7 @@ geodf.explore()
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1699,7 +1714,7 @@ geodf.explore()
             &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
             &lt;style&gt;
-                #map_44ff758444ab94014811009da2c372f8 {
+                #map_d368766779ca1735b780d04833e5c3b4 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -1727,13 +1742,13 @@ geodf.explore()
 &lt;/head&gt;
 &lt;body&gt;
 
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_44ff758444ab94014811009da2c372f8&quot; &gt;&lt;/div&gt;
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_d368766779ca1735b780d04833e5c3b4&quot; &gt;&lt;/div&gt;
 
 &lt;/body&gt;
 &lt;script&gt;
 
-            var map_44ff758444ab94014811009da2c372f8 = L.map(
-                &quot;map_44ff758444ab94014811009da2c372f8&quot;,
+            var map_d368766779ca1735b780d04833e5c3b4 = L.map(
+                &quot;map_d368766779ca1735b780d04833e5c3b4&quot;,
                 {
                     center: [47.32182848564892, 12.802874710259392],
                     crs: L.CRS.EPSG3857,
@@ -1742,77 +1757,77 @@ geodf.explore()
                     preferCanvas: false,
                 }
             );
-            L.control.scale().addTo(map_44ff758444ab94014811009da2c372f8);
+            L.control.scale().addTo(map_d368766779ca1735b780d04833e5c3b4);
 
 
 
 
 
-            var tile_layer_4903e9b34228fb3ba002edbd851e2ab3 = L.tileLayer(
+            var tile_layer_69392b0053175a4487ab47f3d2e67149 = L.tileLayer(
                 &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_44ff758444ab94014811009da2c372f8);
+            ).addTo(map_d368766779ca1735b780d04833e5c3b4);
 
 
-            map_44ff758444ab94014811009da2c372f8.fitBounds(
+            map_d368766779ca1735b780d04833e5c3b4.fitBounds(
                 [[47.29549949362208, 12.763509083137114], [47.34815747767577, 12.84224033738167]],
                 {}
             );
 
 
-        function geo_json_182219a1a37a008de37ec001ea0b8748_styler(feature) {
+        function geo_json_9e4163ff785349997d4e63c15f5f2c0e_styler(feature) {
             switch(feature.id) {
                 default:
                     return {&quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
             }
         }
-        function geo_json_182219a1a37a008de37ec001ea0b8748_highlighter(feature) {
+        function geo_json_9e4163ff785349997d4e63c15f5f2c0e_highlighter(feature) {
             switch(feature.id) {
                 default:
                     return {&quot;fillOpacity&quot;: 0.75};
             }
         }
-        function geo_json_182219a1a37a008de37ec001ea0b8748_pointToLayer(feature, latlng) {
+        function geo_json_9e4163ff785349997d4e63c15f5f2c0e_pointToLayer(feature, latlng) {
             var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
 
-            let style = geo_json_182219a1a37a008de37ec001ea0b8748_styler(feature)
+            let style = geo_json_9e4163ff785349997d4e63c15f5f2c0e_styler(feature)
             Object.assign(opts, style)
 
             return new L.CircleMarker(latlng, opts)
         }
 
-        function geo_json_182219a1a37a008de37ec001ea0b8748_onEachFeature(feature, layer) {
+        function geo_json_9e4163ff785349997d4e63c15f5f2c0e_onEachFeature(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if(typeof e.target.setStyle === &quot;function&quot;){
-                        geo_json_182219a1a37a008de37ec001ea0b8748.resetStyle(e.target);
+                        geo_json_9e4163ff785349997d4e63c15f5f2c0e.resetStyle(e.target);
                     }
                 },
                 mouseover: function(e) {
                     if(typeof e.target.setStyle === &quot;function&quot;){
-                        const highlightStyle = geo_json_182219a1a37a008de37ec001ea0b8748_highlighter(e.target.feature)
+                        const highlightStyle = geo_json_9e4163ff785349997d4e63c15f5f2c0e_highlighter(e.target.feature)
                         e.target.setStyle(highlightStyle);
                     }
                 },
             });
         };
-        var geo_json_182219a1a37a008de37ec001ea0b8748 = L.geoJson(null, {
-                onEachFeature: geo_json_182219a1a37a008de37ec001ea0b8748_onEachFeature,
+        var geo_json_9e4163ff785349997d4e63c15f5f2c0e = L.geoJson(null, {
+                onEachFeature: geo_json_9e4163ff785349997d4e63c15f5f2c0e_onEachFeature,
 
-                style: geo_json_182219a1a37a008de37ec001ea0b8748_styler,
-                pointToLayer: geo_json_182219a1a37a008de37ec001ea0b8748_pointToLayer
+                style: geo_json_9e4163ff785349997d4e63c15f5f2c0e_styler,
+                pointToLayer: geo_json_9e4163ff785349997d4e63c15f5f2c0e_pointToLayer
         });
 
-        function geo_json_182219a1a37a008de37ec001ea0b8748_add (data) {
-            geo_json_182219a1a37a008de37ec001ea0b8748
+        function geo_json_9e4163ff785349997d4e63c15f5f2c0e_add (data) {
+            geo_json_9e4163ff785349997d4e63c15f5f2c0e
                 .addData(data)
-                .addTo(map_44ff758444ab94014811009da2c372f8);
+                .addTo(map_d368766779ca1735b780d04833e5c3b4);
         }
-            geo_json_182219a1a37a008de37ec001ea0b8748_add({&quot;bbox&quot;: [12.763509083137114, 47.29549949362208, 12.84224033738167, 47.34815747767577], &quot;features&quot;: [{&quot;bbox&quot;: [12.763509083137114, 47.29549949362208, 12.84224033738167, 47.34815747767577], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.763509083137114, 47.29745731209052], [12.766203393446109, 47.34815747767577], [12.84224033738167, 47.3461974559335], [12.83947215089213, 47.29549949362208], [12.763509083137114, 47.29745731209052]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+            geo_json_9e4163ff785349997d4e63c15f5f2c0e_add({&quot;bbox&quot;: [12.763509083137114, 47.29549949362208, 12.84224033738167, 47.34815747767577], &quot;features&quot;: [{&quot;bbox&quot;: [12.763509083137114, 47.29549949362208, 12.84224033738167, 47.34815747767577], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.763509083137114, 47.29745731209052], [12.766203393446109, 47.34815747767577], [12.84224033738167, 47.3461974559335], [12.83947215089213, 47.29549949362208], [12.763509083137114, 47.29745731209052]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
 
 
 
-    geo_json_182219a1a37a008de37ec001ea0b8748.bindTooltip(
+    geo_json_9e4163ff785349997d4e63c15f5f2c0e.bindTooltip(
     function(layer){
     let div = L.DomUtil.create(&#x27;div&#x27;);
 
@@ -1823,7 +1838,7 @@ geodf.explore()
 &lt;/script&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>space = sq.SpatialExtent(geodf)
@@ -1832,7 +1847,7 @@ geodf.explore()
 </div>
 <p>To model a temporal extent, semantique contains the <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.extent.TemporalExtent.html">TemporalExtent</a> class. An instance of this class can be initialized by providing it the first timestamp of the timespan, and the last timestamp of the timespan. The given interval is treated as being closed at both sides.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>time = sq.TemporalExtent(&quot;2019-01-01&quot;, &quot;2020-12-31&quot;)
@@ -1848,7 +1863,7 @@ forwarded to this initializer.</p>
 degrees for geographic CRS) and including direction. Note that for most CRS, that means that the first value (i.e. the y-value) of the resolution will always be negative.</p>
 <p>There are also other configuration parameters that can be included to tune the behaviour of the query processor. See the <a class="reference internal" href="advanced.html"><span class="doc">Advanced usage notebook</span></a> for details.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>config = {&quot;crs&quot;: 3035, &quot;tz&quot;: &quot;UTC&quot;, &quot;spatial_resolution&quot;: [-10, 10]}
@@ -1862,7 +1877,7 @@ degrees for geographic CRS) and including direction. Note that for most CRS, tha
 <p>Now we have all components constructed, we are ready to execute our semantic query recipe. Hooray! This step is quite simple. You call the <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.QueryRecipe.execute.html#semantique.QueryRecipe.execute">execute()</a> method of our recipe object, and provide it the factbase object, the ontology object, the spatial and temporal extents, and the additional configuration parameters. Then, just be a bit patient… Internally, the query processor will
 solve all references, evaluate them into data cubes, and apply the defined actions to them. In the <a class="reference external" href="https://zgis.github.io/semantique/_notebooks/advanced.html#The-query-processor-class">Advanced usage notebook</a> the implementation of query processing is described in some more detail.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response = recipe.execute(factbase, ontology, space, time, **config)
@@ -1871,7 +1886,7 @@ solve all references, evaluate them into data cubes, and apply the defined actio
 </div>
 <p>The response of the query is a dictionary which one element per result.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for key in response.keys():
@@ -1893,7 +1908,7 @@ summed_count
 </div>
 <p>Each result is stored as an instance of the <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/data-structures.html#dataarray">DataArray</a> class from the <a class="reference external" href="https://docs.xarray.dev/en/stable/">xarray</a> package, which serves as the backbone for most of the analysis tasks the query processor performs.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for x in response.values():
@@ -1915,7 +1930,7 @@ summed_count
 </div>
 <p>The dimensions the arrays depend on the actions that were called in the result instruction. Some results might only have spatial dimensions (i.e. a map).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response[&quot;water_map&quot;]
@@ -1923,7 +1938,7 @@ summed_count
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2293,23 +2308,23 @@ Coordinates:
   * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
   * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
 Attributes:
-    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'water_map'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-2b27f8e0-9a54-4d38-b1ff-17f0631d434e' class='xr-array-in' type='checkbox' checked><label for='section-2b27f8e0-9a54-4d38-b1ff-17f0631d434e' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 ... 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</span></div><div class='xr-array-data'><pre>array([[1., 1., 1., ..., 0., 0., 0.],
+    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'water_map'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-e93f54b5-d27e-47d4-92ec-fe5ce776db3b' class='xr-array-in' type='checkbox' checked><label for='section-e93f54b5-d27e-47d4-92ec-fe5ce776db3b' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 ... 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</span></div><div class='xr-array-data'><pre>array([[1., 1., 1., ..., 0., 0., 0.],
        [1., 1., 1., ..., 0., 0., 0.],
        [1., 1., 1., ..., 0., 0., 0.],
        ...,
        [0., 0., 0., ..., 0., 0., 0.],
        [0., 0., 0., ..., 0., 0., 0.],
-       [0., 0., 0., ..., 0., 0., 0.]])</pre></div></div></li><li class='xr-section-item'><input id='section-bea28e10-1837-4466-911f-9b0d7f382740' class='xr-section-summary-in' type='checkbox'  checked><label for='section-bea28e10-1837-4466-911f-9b0d7f382740' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-0c7b6ee4-b7fe-46d6-8d08-3d6ad523b482' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-0c7b6ee4-b7fe-46d6-8d08-3d6ad523b482' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-55fa173a-2c21-4dd6-b108-bf401bda6f0d' class='xr-var-data-in' type='checkbox'><label for='data-55fa173a-2c21-4dd6-b108-bf401bda6f0d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-4f187616-cf1e-434b-a8be-e1d091beb8aa' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4f187616-cf1e-434b-a8be-e1d091beb8aa' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1e429a36-9b67-43e5-8033-15d64bfa1240' class='xr-var-data-in' type='checkbox'><label for='data-1e429a36-9b67-43e5-8033-15d64bfa1240' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>feature</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-2da8459a-cdeb-403f-a0f7-dd18e06ef397' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2da8459a-cdeb-403f-a0f7-dd18e06ef397' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-17efaf72-7521-42d6-a8f7-7487aa874286' class='xr-var-data-in' type='checkbox'><label for='data-17efaf72-7521-42d6-a8f7-7487aa874286' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
+       [0., 0., 0., ..., 0., 0., 0.]])</pre></div></div></li><li class='xr-section-item'><input id='section-12856500-b2bd-4a6a-b4c9-1ee313570ed2' class='xr-section-summary-in' type='checkbox'  checked><label for='section-12856500-b2bd-4a6a-b4c9-1ee313570ed2' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-488803d7-e68f-472f-940e-8482c9e6903d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-488803d7-e68f-472f-940e-8482c9e6903d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bb5a2477-1fa8-4ab2-a9bf-4a45abf7e13d' class='xr-var-data-in' type='checkbox'><label for='data-bb5a2477-1fa8-4ab2-a9bf-4a45abf7e13d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-c26fde48-a074-4de9-8af4-bc58bcdd2253' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c26fde48-a074-4de9-8af4-bc58bcdd2253' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7738b683-417c-4e98-9c31-7dacb24327a0' class='xr-var-data-in' type='checkbox'><label for='data-7738b683-417c-4e98-9c31-7dacb24327a0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>feature</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-7461dd92-c184-4a84-9353-2b4a314da8f2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7461dd92-c184-4a84-9353-2b4a314da8f2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3c5f238d-5d8d-46bc-8f19-04260db59b8d' class='xr-var-data-in' type='checkbox'><label for='data-3c5f238d-5d8d-46bc-8f19-04260db59b8d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        ...,
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
-       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-dd1aca5e-c034-456b-96fa-275aad144abb' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-dd1aca5e-c034-456b-96fa-275aad144abb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-36c0c366-49cb-44cc-ac33-8e1816c50dd6' class='xr-var-data-in' type='checkbox'><label for='data-36c0c366-49cb-44cc-ac33-8e1816c50dd6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-1bf630bf-590a-4624-8ed0-44ef0c988c81' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-1bf630bf-590a-4624-8ed0-44ef0c988c81' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4fd5bc91-a988-41f5-ace2-89382b99673c' class='xr-var-data-in' type='checkbox'><label for='data-4fd5bc91-a988-41f5-ace2-89382b99673c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9eea51cc-023a-4f72-ac20-e8688dd86033' class='xr-section-summary-in' type='checkbox'  checked><label for='section-9eea51cc-023a-4f72-ac20-e8688dd86033' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
+       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-e20deb31-ad5a-4308-886a-88aaaf08f99e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e20deb31-ad5a-4308-886a-88aaaf08f99e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-892b173c-21c1-45bf-8c39-dac4266ec79f' class='xr-var-data-in' type='checkbox'><label for='data-892b173c-21c1-45bf-8c39-dac4266ec79f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-9041a91d-b193-47d1-ac51-5e3283f6bd37' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9041a91d-b193-47d1-ac51-5e3283f6bd37' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b243c994-a28a-4dd8-87ea-b268ce31a5d9' class='xr-var-data-in' type='checkbox'><label for='data-b243c994-a28a-4dd8-87ea-b268ce31a5d9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e7afd200-915f-47c1-8c60-8b8e29610868' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e7afd200-915f-47c1-8c60-8b8e29610868' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
 </div>
 <p>Other results might only have the temporal dimension (i.e. a time series).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response[&quot;water_time_series&quot;]
@@ -2317,7 +2332,7 @@ Attributes:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2679,12 +2694,12 @@ Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'water_time_series'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-a94db4be-2837-49ec-8d2d-12c4667a01c1' class='xr-array-in' type='checkbox' checked><label for='section-a94db4be-2837-49ec-8d2d-12c4667a01c1' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.0 13.82 24.24</span></div><div class='xr-array-data'><pre>array([ 0.        , 13.81611407, 24.2398732 ])</pre></div></div></li><li class='xr-section-item'><input id='section-b745944d-e7c3-42e6-833d-79ec1faefabf' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b745944d-e7c3-42e6-833d-79ec1faefabf' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-12-15T10:17:33.408715 ... 2...</div><input id='attrs-47868f80-492e-4480-94d8-ed8804d0d350' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-47868f80-492e-4480-94d8-ed8804d0d350' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-11c898f5-016c-4265-813d-b54dd4361881' class='xr-var-data-in' type='checkbox'><label for='data-11c898f5-016c-4265-813d-b54dd4361881' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>datetime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-12-15T10:17:33.408715000&#x27;, &#x27;2020-09-05T10:17:43.167942000&#x27;,
-       &#x27;2020-12-19T10:17:34.610661000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-9f653e77-2ea6-45b6-86b2-1e325507730c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9f653e77-2ea6-45b6-86b2-1e325507730c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f4d0fa16-cd4e-4417-a48b-28530b81268f' class='xr-var-data-in' type='checkbox'><label for='data-f4d0fa16-cd4e-4417-a48b-28530b81268f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-0cc7e619-ae3b-46a3-99a8-9510824197c9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-0cc7e619-ae3b-46a3-99a8-9510824197c9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b02f4fe2-fc74-48d4-8380-00d517d145eb' class='xr-var-data-in' type='checkbox'><label for='data-b02f4fe2-fc74-48d4-8380-00d517d145eb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-438560a9-0590-4b3a-b5b1-abe63ec957df' class='xr-section-summary-in' type='checkbox'  checked><label for='section-438560a9-0590-4b3a-b5b1-abe63ec957df' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
+    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'water_time_series'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-9ce38b82-875b-4912-a04d-65108533b480' class='xr-array-in' type='checkbox' checked><label for='section-9ce38b82-875b-4912-a04d-65108533b480' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.0 13.82 24.24</span></div><div class='xr-array-data'><pre>array([ 0.        , 13.81611407, 24.2398732 ])</pre></div></div></li><li class='xr-section-item'><input id='section-4f7cdbc1-6da5-4ad9-be82-484702115098' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4f7cdbc1-6da5-4ad9-be82-484702115098' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-12-15T10:17:33.408715 ... 2...</div><input id='attrs-6393a7cb-6650-47d9-a07b-13a4b0a3c3da' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6393a7cb-6650-47d9-a07b-13a4b0a3c3da' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4b3fc672-009a-4545-b773-1707e10da8ec' class='xr-var-data-in' type='checkbox'><label for='data-4b3fc672-009a-4545-b773-1707e10da8ec' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>datetime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-12-15T10:17:33.408715000&#x27;, &#x27;2020-09-05T10:17:43.167942000&#x27;,
+       &#x27;2020-12-19T10:17:34.610661000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-2c4c43c0-e81e-4f88-9c5f-8cd39c7f4cf7' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2c4c43c0-e81e-4f88-9c5f-8cd39c7f4cf7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-88081b7a-63ec-4b82-be80-9987a10b608b' class='xr-var-data-in' type='checkbox'><label for='data-88081b7a-63ec-4b82-be80-9987a10b608b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-62067446-c8a4-4de8-b5df-d6dbfde1cc74' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-62067446-c8a4-4de8-b5df-d6dbfde1cc74' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-20c56545-4ecc-4f11-b6e5-371147d14e49' class='xr-var-data-in' type='checkbox'><label for='data-20c56545-4ecc-4f11-b6e5-371147d14e49' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-71308d12-8e5f-4e26-8943-f6bc27a6e313' class='xr-section-summary-in' type='checkbox'  checked><label for='section-71308d12-8e5f-4e26-8943-f6bc27a6e313' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
 </div>
 <p>And other results might even be dimensionless (i.e. a single aggregated value).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response[&quot;avg_water_count&quot;]
@@ -2692,7 +2707,7 @@ Attributes:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -3053,13 +3068,13 @@ Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'avg_water_count'</div></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-72528c85-e6d2-4704-8883-4f6cef4f01db' class='xr-array-in' type='checkbox' checked><label for='section-72528c85-e6d2-4704-8883-4f6cef4f01db' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.3806</span></div><div class='xr-array-data'><pre>array(0.38055987)</pre></div></div></li><li class='xr-section-item'><input id='section-97cf2e74-2c12-4ae4-ab30-0e1af2ac010b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-97cf2e74-2c12-4ae4-ab30-0e1af2ac010b' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-72c133f8-fb5d-4a70-99e7-8afb6dd869d8' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-72c133f8-fb5d-4a70-99e7-8afb6dd869d8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5f30087b-01a9-47fe-be74-5efe13da848a' class='xr-var-data-in' type='checkbox'><label for='data-5f30087b-01a9-47fe-be74-5efe13da848a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-04fdaaf3-eef6-4277-995c-e23f781dc380' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-04fdaaf3-eef6-4277-995c-e23f781dc380' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c6d9fe87-8ab8-4356-a3e3-8889022fe3e5' class='xr-var-data-in' type='checkbox'><label for='data-c6d9fe87-8ab8-4356-a3e3-8889022fe3e5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-67dddd1f-2fb8-4166-8fe2-667d594a6012' class='xr-section-summary-in' type='checkbox'  checked><label for='section-67dddd1f-2fb8-4166-8fe2-667d594a6012' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
+    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'avg_water_count'</div></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-9321ad14-6348-45e2-89d0-6dd9e502d542' class='xr-array-in' type='checkbox' checked><label for='section-9321ad14-6348-45e2-89d0-6dd9e502d542' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.3806</span></div><div class='xr-array-data'><pre>array(0.38055987)</pre></div></div></li><li class='xr-section-item'><input id='section-b6ad3572-ef1b-4d66-865b-fe64c2db22f7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b6ad3572-ef1b-4d66-865b-fe64c2db22f7' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-7aed3006-bf17-40ac-9138-754048033176' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7aed3006-bf17-40ac-9138-754048033176' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9f0a0bbe-7a14-4f6d-af07-9e7c1a446fcb' class='xr-var-data-in' type='checkbox'><label for='data-9f0a0bbe-7a14-4f6d-af07-9e7c1a446fcb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-e69b0a0d-3a63-40f1-8d3a-6090c742dff3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e69b0a0d-3a63-40f1-8d3a-6090c742dff3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-125b167f-ccd6-48c4-ab85-0a29be6795f0' class='xr-var-data-in' type='checkbox'><label for='data-125b167f-ccd6-48c4-ab85-0a29be6795f0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-1ebfb340-4062-496a-b55e-01f2e2cebc08' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1ebfb340-4062-496a-b55e-01f2e2cebc08' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
 </div>
 <p>There may also be results that contain both the spatial and temporal dimension, as well as results that contain an additonal, thematic dimension.</p>
 <p>Since the result objects are <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/data-structures.html#dataarray">DataArray</a> objects, we can use xarray for any further processing, and also to visualize the results. Again, see the <a class="reference external" href="http://xarray.pydata.org/en/stable/index.html">xarray documentation</a> for more details on what that package has to offer (which is a lot!). For now, we will just plot some of our obtained results to give an impression. In the <a class="reference internal" href="gallery.html"><span class="doc">Gallery notebook</span></a> you can
 find much more of such examples.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, (ax1, ax2) = plt.subplots(1, 2, figsize = (15, 5))

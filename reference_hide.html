@@ -337,6 +337,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.value_range.html">
+     semantique.value_range
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.geometries.html">
      semantique.geometries
     </a>
@@ -364,6 +369,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.html">
      semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.values.ValueRange.html">
+     semantique.processor.values.ValueRange
     </a>
    </li>
    <li class="toctree-l2">
@@ -582,13 +592,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
+    <a class="reference internal" href="_generated/semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -609,16 +629,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.utils.np_inf_as_null.html">
      semantique.processor.utils.np_inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
     </a>
    </li>
    <li class="toctree-l2">
@@ -659,6 +669,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.exceptions.InvalidValueTypeError.html">
      semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.InvalidValueRangeError.html">
+     semantique.exceptions.InvalidValueRangeError
     </a>
    </li>
    <li class="toctree-l2">
@@ -1204,64 +1219,79 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.Cube.to_geotiff.html#semantique.processor.structures.Cube.to_geotiff" title="semantique.processor.structures.Cube.to_geotiff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.Cube.to_geotiff</span></code></a>(file[, ...])</p></td>
 <td><p>Write the content of the cube to a GeoTIFF file on disk.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.is_empty.html#semantique.processor.structures.CubeCollection.is_empty" title="semantique.processor.structures.CubeCollection.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.is_empty</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.sq.html#semantique.processor.structures.CubeCollection.sq" title="semantique.processor.structures.CubeCollection.sq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.sq</span></code></a></p></td>
+<td><p>Semantique accessor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.is_empty.html#semantique.processor.structures.CubeCollection.is_empty" title="semantique.processor.structures.CubeCollection.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.is_empty</span></code></a></p></td>
 <td><p>Are all elements of the collection empty data cubes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.compose.html#semantique.processor.structures.CubeCollection.compose" title="semantique.processor.structures.CubeCollection.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.compose</span></code></a>([...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.compose.html#semantique.processor.structures.CubeCollection.compose" title="semantique.processor.structures.CubeCollection.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.compose</span></code></a>([...])</p></td>
 <td><p>Apply the compose verb to the collection.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.concatenate.html#semantique.processor.structures.CubeCollection.concatenate" title="semantique.processor.structures.CubeCollection.concatenate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.concatenate</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.concatenate.html#semantique.processor.structures.CubeCollection.concatenate" title="semantique.processor.structures.CubeCollection.concatenate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.concatenate</span></code></a>(...)</p></td>
 <td><p>Apply the concatenate verb to the collection.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.merge.html#semantique.processor.structures.CubeCollection.merge" title="semantique.processor.structures.CubeCollection.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.merge</span></code></a>(reducer)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.merge.html#semantique.processor.structures.CubeCollection.merge" title="semantique.processor.structures.CubeCollection.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.merge</span></code></a>(reducer)</p></td>
 <td><p>Apply the merge verb to the collection.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.evaluate.html#semantique.processor.structures.CubeCollection.evaluate" title="semantique.processor.structures.CubeCollection.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.evaluate</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.evaluate.html#semantique.processor.structures.CubeCollection.evaluate" title="semantique.processor.structures.CubeCollection.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.evaluate</span></code></a>(...)</p></td>
 <td><p>Apply the evaluate verb to all cubes in the collection.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.extract.html#semantique.processor.structures.CubeCollection.extract" title="semantique.processor.structures.CubeCollection.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.extract</span></code></a>(...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.extract.html#semantique.processor.structures.CubeCollection.extract" title="semantique.processor.structures.CubeCollection.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.extract</span></code></a>(...)</p></td>
 <td><p>Apply the extract verb to all cubes in the collection.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.filter.html#semantique.processor.structures.CubeCollection.filter" title="semantique.processor.structures.CubeCollection.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.filter</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.filter.html#semantique.processor.structures.CubeCollection.filter" title="semantique.processor.structures.CubeCollection.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.filter</span></code></a>(...)</p></td>
 <td><p>Apply the filter verb to all cubes in the collection.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.label.html#semantique.processor.structures.CubeCollection.label" title="semantique.processor.structures.CubeCollection.label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.label</span></code></a>(...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.label.html#semantique.processor.structures.CubeCollection.label" title="semantique.processor.structures.CubeCollection.label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.label</span></code></a>(...)</p></td>
 <td><p>Apply the label verb to all cubes in the collection.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.reduce.html#semantique.processor.structures.CubeCollection.reduce" title="semantique.processor.structures.CubeCollection.reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.reduce</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.reduce.html#semantique.processor.structures.CubeCollection.reduce" title="semantique.processor.structures.CubeCollection.reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.reduce</span></code></a>(...)</p></td>
 <td><p>Apply the reduce verb to all cubes in the collection.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.trim.html#semantique.processor.structures.CubeCollection.trim" title="semantique.processor.structures.CubeCollection.trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.trim</span></code></a>([...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.trim.html#semantique.processor.structures.CubeCollection.trim" title="semantique.processor.structures.CubeCollection.trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.trim</span></code></a>([...])</p></td>
 <td><p>Trim the dimensions of all cubes in the collection.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.regularize.html#semantique.processor.structures.CubeCollection.regularize" title="semantique.processor.structures.CubeCollection.regularize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.regularize</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.regularize.html#semantique.processor.structures.CubeCollection.regularize" title="semantique.processor.structures.CubeCollection.regularize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.regularize</span></code></a>()</p></td>
 <td><p>Regularize the spatial dimension of all cubes in the collection.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.stack_spatial_dims.html#semantique.processor.structures.CubeCollection.stack_spatial_dims" title="semantique.processor.structures.CubeCollection.stack_spatial_dims"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.stack_spatial_dims</span></code></a>([name])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.stack_spatial_dims.html#semantique.processor.structures.CubeCollection.stack_spatial_dims" title="semantique.processor.structures.CubeCollection.stack_spatial_dims"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.stack_spatial_dims</span></code></a>([name])</p></td>
 <td><p>Stack the spatial dimensions for all cubes in the collection.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.unstack_spatial_dims.html#semantique.processor.structures.CubeCollection.unstack_spatial_dims" title="semantique.processor.structures.CubeCollection.unstack_spatial_dims"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.unstack_spatial_dims</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.unstack_spatial_dims.html#semantique.processor.structures.CubeCollection.unstack_spatial_dims" title="semantique.processor.structures.CubeCollection.unstack_spatial_dims"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection.unstack_spatial_dims</span></code></a>()</p></td>
 <td><p>Unstack the spatial dimensions for all cubes in the collection.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.manual.html#semantique.processor.types.TypePromoter.manual" title="semantique.processor.types.TypePromoter.manual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.manual</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.values.ValueRange.sq.html#semantique.processor.values.ValueRange.sq" title="semantique.processor.values.ValueRange.sq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.values.ValueRange.sq</span></code></a></p></td>
+<td><p>Semantique accessor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.values.ValueRange.start.html#semantique.processor.values.ValueRange.start" title="semantique.processor.values.ValueRange.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.values.ValueRange.start</span></code></a></p></td>
+<td><p>The first value in the range.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.values.ValueRange.end.html#semantique.processor.values.ValueRange.end" title="semantique.processor.values.ValueRange.end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.values.ValueRange.end</span></code></a></p></td>
+<td><p>The last value in the range.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.values.ValueRange.value_type.html#semantique.processor.values.ValueRange.value_type" title="semantique.processor.values.ValueRange.value_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.values.ValueRange.value_type</span></code></a></p></td>
+<td><p>The possible value types of the range.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.manual.html#semantique.processor.types.TypePromoter.manual" title="semantique.processor.types.TypePromoter.manual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.manual</span></code></a></p></td>
 <td><p>The type promotion manual of the operation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.input_types.html#semantique.processor.types.TypePromoter.input_types" title="semantique.processor.types.TypePromoter.input_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.input_types</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.input_types.html#semantique.processor.types.TypePromoter.input_types" title="semantique.processor.types.TypePromoter.input_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.input_types</span></code></a></p></td>
 <td><p>The value types of the operands.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.output_type.html#semantique.processor.types.TypePromoter.output_type" title="semantique.processor.types.TypePromoter.output_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.output_type</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.output_type.html#semantique.processor.types.TypePromoter.output_type" title="semantique.processor.types.TypePromoter.output_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.output_type</span></code></a></p></td>
 <td><p>The value type of the output.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.input_labels.html#semantique.processor.types.TypePromoter.input_labels" title="semantique.processor.types.TypePromoter.input_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.input_labels</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.input_labels.html#semantique.processor.types.TypePromoter.input_labels" title="semantique.processor.types.TypePromoter.input_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.input_labels</span></code></a></p></td>
 <td><p>The value labels of the operands.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.output_labels.html#semantique.processor.types.TypePromoter.output_labels" title="semantique.processor.types.TypePromoter.output_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.output_labels</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.output_labels.html#semantique.processor.types.TypePromoter.output_labels" title="semantique.processor.types.TypePromoter.output_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.output_labels</span></code></a></p></td>
 <td><p>The value labels of the output.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.check.html#semantique.processor.types.TypePromoter.check" title="semantique.processor.types.TypePromoter.check"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.check</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.check.html#semantique.processor.types.TypePromoter.check" title="semantique.processor.types.TypePromoter.check"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.check</span></code></a>()</p></td>
 <td><p>Check if the operation supports the operand value type(s).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.promote.html#semantique.processor.types.TypePromoter.promote" title="semantique.processor.types.TypePromoter.promote"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.promote</span></code></a>(obj)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.promote.html#semantique.processor.types.TypePromoter.promote" title="semantique.processor.types.TypePromoter.promote"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter.promote</span></code></a>(obj)</p></td>
 <td><p>Promote the value type of the operation output.</p></td>
 </tr>
 </tbody>

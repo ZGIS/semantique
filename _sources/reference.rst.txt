@@ -122,6 +122,7 @@ Special values
    :nosignatures:
 
    value_label
+   value_range
    geometries
    time_instant
    time_interval
@@ -138,8 +139,8 @@ Core
 
    processor.core.QueryProcessor
 
-Data structures
-----------------
+Data cube objects
+------------------
 
 .. autosummary::
    :toctree: _generated/
@@ -148,6 +149,16 @@ Data structures
 
    processor.structures.Cube
    processor.structures.CubeCollection
+
+Special value objects
+----------------------
+
+.. autosummary::
+   :toctree: _generated/
+   :template: inherited.rst
+   :nosignatures:
+
+   processor.values.ValueRange
 
 Operator functions
 -------------------
@@ -297,18 +308,29 @@ Positional reducers
 Utils
 ------
 
+Utility functions to interact with xarray
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   processor.utils.create_extent_cube
+   processor.utils.parse_datetime_component
+   processor.utils.parse_coords_component
+
+Utility functions to interact with numpy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. autosummary::
    :toctree: _generated/
    :nosignatures:
 
    processor.utils.convert_datetime64
-   processor.utils.create_extent_cube
    processor.utils.np_null
    processor.utils.np_allnull
    processor.utils.np_null_as_zero
    processor.utils.np_inf_as_null
-   processor.utils.parse_datetime_component
-   processor.utils.parse_coords_component
 
 Value type handling
 -------------------
@@ -334,6 +356,7 @@ Exceptions
    exceptions.AlignmentError
    exceptions.EmptyDataError
    exceptions.InvalidValueTypeError
+   exceptions.InvalidValueRangeError
    exceptions.InvalidBuildingBlockError
    exceptions.UnknownConceptError
    exceptions.UnknownResourceError

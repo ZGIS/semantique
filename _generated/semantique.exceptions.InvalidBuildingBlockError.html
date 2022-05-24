@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="semantique.exceptions.UnknownConceptError" href="semantique.exceptions.UnknownConceptError.html" />
-    <link rel="prev" title="semantique.exceptions.InvalidValueTypeError" href="semantique.exceptions.InvalidValueTypeError.html" />
+    <link rel="prev" title="semantique.exceptions.InvalidValueRangeError" href="semantique.exceptions.InvalidValueRangeError.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -339,6 +339,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.value_range.html">
+     semantique.value_range
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.geometries.html">
      semantique.geometries
     </a>
@@ -366,6 +371,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.structures.CubeCollection.html">
      semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.values.ValueRange.html">
+     semantique.processor.values.ValueRange
     </a>
    </li>
    <li class="toctree-l2">
@@ -584,13 +594,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
+    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -611,16 +631,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.np_inf_as_null.html">
      semantique.processor.utils.np_inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
     </a>
    </li>
    <li class="toctree-l2">
@@ -661,6 +671,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.InvalidValueTypeError.html">
      semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.InvalidValueRangeError.html">
+     semantique.exceptions.InvalidValueRangeError
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -858,7 +873,7 @@
 <h1>semantique.exceptions.InvalidBuildingBlockError<a class="headerlink" href="#semantique-exceptions-invalidbuildingblockerror" title="Permalink to this headline">¶</a></h1>
 <dl class="py exception">
 <dt class="sig sig-object py" id="semantique.exceptions.InvalidBuildingBlockError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidBuildingBlockError</span></span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/exceptions.py#L47-L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.exceptions.InvalidBuildingBlockError" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidBuildingBlockError</span></span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/exceptions.py#L51-L59"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.exceptions.InvalidBuildingBlockError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raised when a query recipe contains an invalid building block.</p>
 <p>This occurs for example when the building block is not dict-like, when the
 building block is missing a “type” key, or when the value of the “type” key
@@ -873,11 +888,11 @@ does not correspond to a specific handler function of the query processor.</p>
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="semantique.exceptions.InvalidValueTypeError.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="semantique.exceptions.InvalidValueRangeError.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">semantique.exceptions.InvalidValueTypeError</p>
+            <p class="prev-next-title">semantique.exceptions.InvalidValueRangeError</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="semantique.exceptions.UnknownConceptError.html" title="next page">

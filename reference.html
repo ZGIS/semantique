@@ -339,6 +339,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.value_range.html">
+     semantique.value_range
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.geometries.html">
      semantique.geometries
     </a>
@@ -366,6 +371,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.html">
      semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.values.ValueRange.html">
+     semantique.processor.values.ValueRange
     </a>
    </li>
    <li class="toctree-l2">
@@ -584,13 +594,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
+    <a class="reference internal" href="_generated/semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -611,16 +631,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.utils.np_inf_as_null.html">
      semantique.processor.utils.np_inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
     </a>
    </li>
    <li class="toctree-l2">
@@ -661,6 +671,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.exceptions.InvalidValueTypeError.html">
      semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.InvalidValueRangeError.html">
+     semantique.exceptions.InvalidValueRangeError
     </a>
    </li>
    <li class="toctree-l2">
@@ -923,8 +938,13 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-structures">
-     Data structures
+    <a class="reference internal nav-link" href="#data-cube-objects">
+     Data cube objects
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#special-value-objects">
+     Special value objects
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -1005,6 +1025,18 @@
     <a class="reference internal nav-link" href="#utils">
      Utils
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#utility-functions-to-interact-with-xarray">
+       Utility functions to interact with xarray
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#utility-functions-to-interact-with-numpy">
+       Utility functions to interact with numpy
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#value-type-handling">
@@ -1248,13 +1280,16 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.value_label.html#semantique.value_label" title="semantique.value_label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value_label</span></code></a></p></td>
 <td><p>Label of a numeric index.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.geometries.html#semantique.geometries" title="semantique.geometries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometries</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.value_range.html#semantique.value_range" title="semantique.value_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value_range</span></code></a></p></td>
+<td><p>Range of numerical or ordinal values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.geometries.html#semantique.geometries" title="semantique.geometries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometries</span></code></a></p></td>
 <td><p>Spatial geometries.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.time_instant.html#semantique.time_instant" title="semantique.time_instant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_instant</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.time_instant.html#semantique.time_instant" title="semantique.time_instant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_instant</span></code></a></p></td>
 <td><p>Time instant.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.time_interval.html#semantique.time_interval" title="semantique.time_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_interval</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.time_interval.html#semantique.time_interval" title="semantique.time_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_interval</span></code></a></p></td>
 <td><p>Time interval.</p></td>
 </tr>
 </tbody>
@@ -1277,8 +1312,8 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="data-structures">
-<h3>Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="data-cube-objects">
+<h3>Data cube objects<a class="headerlink" href="#data-cube-objects" title="Permalink to this headline">¶</a></h3>
 <table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
@@ -1290,6 +1325,20 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.html#semantique.processor.structures.CubeCollection" title="semantique.processor.structures.CubeCollection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.structures.CubeCollection</span></code></a></p></td>
 <td><p>Internal representation of a data cube collection.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="special-value-objects">
+<h3>Special value objects<a class="headerlink" href="#special-value-objects" title="Permalink to this headline">¶</a></h3>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.values.ValueRange.html#semantique.processor.values.ValueRange" title="semantique.processor.values.ValueRange"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.values.ValueRange</span></code></a></p></td>
+<td><p>Object to represent a range of values.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1563,6 +1612,28 @@
 </div>
 <div class="section" id="utils">
 <h3>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="utility-functions-to-interact-with-xarray">
+<h4>Utility functions to interact with xarray<a class="headerlink" href="#utility-functions-to-interact-with-xarray" title="Permalink to this headline">¶</a></h4>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.create_extent_cube.html#semantique.processor.utils.create_extent_cube" title="semantique.processor.utils.create_extent_cube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.create_extent_cube</span></code></a></p></td>
+<td><p>Create a spatio-temporal extent cube.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html#semantique.processor.utils.parse_datetime_component" title="semantique.processor.utils.parse_datetime_component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.parse_datetime_component</span></code></a></p></td>
+<td><p>Parse datetime accessor arrays.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.parse_coords_component.html#semantique.processor.utils.parse_coords_component" title="semantique.processor.utils.parse_coords_component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.parse_coords_component</span></code></a></p></td>
+<td><p>Parse spatial coordinate arrays.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="utility-functions-to-interact-with-numpy">
+<h4>Utility functions to interact with numpy<a class="headerlink" href="#utility-functions-to-interact-with-numpy" title="Permalink to this headline">¶</a></h4>
 <table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
@@ -1572,29 +1643,21 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html#semantique.processor.utils.convert_datetime64" title="semantique.processor.utils.convert_datetime64"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.convert_datetime64</span></code></a></p></td>
 <td><p>Convert a numpy datetime object to a different timezone.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.create_extent_cube.html#semantique.processor.utils.create_extent_cube" title="semantique.processor.utils.create_extent_cube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.create_extent_cube</span></code></a></p></td>
-<td><p>Create a spatio-temporal extent cube.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.np_null.html#semantique.processor.utils.np_null" title="semantique.processor.utils.np_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.np_null</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.np_null.html#semantique.processor.utils.np_null" title="semantique.processor.utils.np_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.np_null</span></code></a></p></td>
 <td><p>Return the appropriate null value for a numpy array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.np_allnull.html#semantique.processor.utils.np_allnull" title="semantique.processor.utils.np_allnull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.np_allnull</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.np_allnull.html#semantique.processor.utils.np_allnull" title="semantique.processor.utils.np_allnull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.np_allnull</span></code></a></p></td>
 <td><p>Test whether all elements along a given axis in a numpy array are null.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.np_null_as_zero.html#semantique.processor.utils.np_null_as_zero" title="semantique.processor.utils.np_null_as_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.np_null_as_zero</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.np_null_as_zero.html#semantique.processor.utils.np_null_as_zero" title="semantique.processor.utils.np_null_as_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.np_null_as_zero</span></code></a></p></td>
 <td><p>Convert all null values in a numpy array to 0.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.np_inf_as_null.html#semantique.processor.utils.np_inf_as_null" title="semantique.processor.utils.np_inf_as_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.np_inf_as_null</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.np_inf_as_null.html#semantique.processor.utils.np_inf_as_null" title="semantique.processor.utils.np_inf_as_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.np_inf_as_null</span></code></a></p></td>
 <td><p>Convert all infinite values in a numpy array to null values.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html#semantique.processor.utils.parse_datetime_component" title="semantique.processor.utils.parse_datetime_component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.parse_datetime_component</span></code></a></p></td>
-<td><p>Parse datetime accessor arrays.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.parse_coords_component.html#semantique.processor.utils.parse_coords_component" title="semantique.processor.utils.parse_coords_component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.parse_coords_component</span></code></a></p></td>
-<td><p>Parse spatial coordinate arrays.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div class="section" id="value-type-handling">
 <h3>Value type handling<a class="headerlink" href="#value-type-handling" title="Permalink to this headline">¶</a></h3>
@@ -1640,43 +1703,46 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.InvalidValueTypeError.html#semantique.exceptions.InvalidValueTypeError" title="semantique.exceptions.InvalidValueTypeError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.InvalidValueTypeError</span></code></a></p></td>
 <td><p>Raised when a data cube has a value type which a process does not allow.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.InvalidBuildingBlockError.html#semantique.exceptions.InvalidBuildingBlockError" title="semantique.exceptions.InvalidBuildingBlockError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.InvalidBuildingBlockError</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.InvalidValueRangeError.html#semantique.exceptions.InvalidValueRangeError" title="semantique.exceptions.InvalidValueRangeError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.InvalidValueRangeError</span></code></a></p></td>
+<td><p>Raised when the end of a value range is smaller than its start.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.InvalidBuildingBlockError.html#semantique.exceptions.InvalidBuildingBlockError" title="semantique.exceptions.InvalidBuildingBlockError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.InvalidBuildingBlockError</span></code></a></p></td>
 <td><p>Raised when a query recipe contains an invalid building block.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownConceptError.html#semantique.exceptions.UnknownConceptError" title="semantique.exceptions.UnknownConceptError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownConceptError</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownConceptError.html#semantique.exceptions.UnknownConceptError" title="semantique.exceptions.UnknownConceptError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownConceptError</span></code></a></p></td>
 <td><p>Raised when an unexisting semantic concept is referenced.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownResourceError.html#semantique.exceptions.UnknownResourceError" title="semantique.exceptions.UnknownResourceError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownResourceError</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownResourceError.html#semantique.exceptions.UnknownResourceError" title="semantique.exceptions.UnknownResourceError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownResourceError</span></code></a></p></td>
 <td><p>Raised when an unexisting data resource is referenced.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownResultError.html#semantique.exceptions.UnknownResultError" title="semantique.exceptions.UnknownResultError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownResultError</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownResultError.html#semantique.exceptions.UnknownResultError" title="semantique.exceptions.UnknownResultError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownResultError</span></code></a></p></td>
 <td><p>Raised when an unexisting query result is referenced.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownReducerError.html#semantique.exceptions.UnknownReducerError" title="semantique.exceptions.UnknownReducerError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownReducerError</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownReducerError.html#semantique.exceptions.UnknownReducerError" title="semantique.exceptions.UnknownReducerError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownReducerError</span></code></a></p></td>
 <td><p>Raised when an undefined reducer function is used in the reduce verb.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownOperatorError.html#semantique.exceptions.UnknownOperatorError" title="semantique.exceptions.UnknownOperatorError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownOperatorError</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownOperatorError.html#semantique.exceptions.UnknownOperatorError" title="semantique.exceptions.UnknownOperatorError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownOperatorError</span></code></a></p></td>
 <td><p>Raised when an undefined operator function is used in the evaluate verb.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownDimensionError.html#semantique.exceptions.UnknownDimensionError" title="semantique.exceptions.UnknownDimensionError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownDimensionError</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownDimensionError.html#semantique.exceptions.UnknownDimensionError" title="semantique.exceptions.UnknownDimensionError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownDimensionError</span></code></a></p></td>
 <td><p>Raised when an unexisting dimension is referenced.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownComponentError.html#semantique.exceptions.UnknownComponentError" title="semantique.exceptions.UnknownComponentError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownComponentError</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownComponentError.html#semantique.exceptions.UnknownComponentError" title="semantique.exceptions.UnknownComponentError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownComponentError</span></code></a></p></td>
 <td><p>Raised when an unexisting dimension component is referenced.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownLabelError.html#semantique.exceptions.UnknownLabelError" title="semantique.exceptions.UnknownLabelError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownLabelError</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.UnknownLabelError.html#semantique.exceptions.UnknownLabelError" title="semantique.exceptions.UnknownLabelError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.UnknownLabelError</span></code></a></p></td>
 <td><p>Raised when a referenced value label is not used for any value in a cube.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.TooManyDimensionsError.html#semantique.exceptions.TooManyDimensionsError" title="semantique.exceptions.TooManyDimensionsError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.TooManyDimensionsError</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.TooManyDimensionsError.html#semantique.exceptions.TooManyDimensionsError" title="semantique.exceptions.TooManyDimensionsError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.TooManyDimensionsError</span></code></a></p></td>
 <td><p>Raised when a data cube has more dimensions than a process allows.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.MissingDimensionError.html#semantique.exceptions.MissingDimensionError" title="semantique.exceptions.MissingDimensionError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.MissingDimensionError</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.MissingDimensionError.html#semantique.exceptions.MissingDimensionError" title="semantique.exceptions.MissingDimensionError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.MissingDimensionError</span></code></a></p></td>
 <td><p>Raised when a data cube does not contain a required dimension.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.MixedDimensionsError.html#semantique.exceptions.MixedDimensionsError" title="semantique.exceptions.MixedDimensionsError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.MixedDimensionsError</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.MixedDimensionsError.html#semantique.exceptions.MixedDimensionsError" title="semantique.exceptions.MixedDimensionsError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.MixedDimensionsError</span></code></a></p></td>
 <td><p>Raised when the data cubes in a cube collection have differing dimensions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.MixedTimeZonesError.html#semantique.exceptions.MixedTimeZonesError" title="semantique.exceptions.MixedTimeZonesError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.MixedTimeZonesError</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.MixedTimeZonesError.html#semantique.exceptions.MixedTimeZonesError" title="semantique.exceptions.MixedTimeZonesError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.MixedTimeZonesError</span></code></a></p></td>
 <td><p>Raised when the bounds of a time interval have differing time zones.</p></td>
 </tr>
 </tbody>

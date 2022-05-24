@@ -341,6 +341,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.value_range.html">
+     semantique.value_range
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.geometries.html">
      semantique.geometries
     </a>
@@ -368,6 +373,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.processor.structures.CubeCollection.html">
      semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.values.ValueRange.html">
+     semantique.processor.values.ValueRange
     </a>
    </li>
    <li class="toctree-l2">
@@ -586,13 +596,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
+    <a class="reference internal" href="../_generated/semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -613,16 +633,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.processor.utils.np_inf_as_null.html">
      semantique.processor.utils.np_inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
     </a>
    </li>
    <li class="toctree-l2">
@@ -663,6 +673,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.exceptions.InvalidValueTypeError.html">
      semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.InvalidValueRangeError.html">
+     semantique.exceptions.InvalidValueRangeError
     </a>
    </li>
    <li class="toctree-l2">
@@ -899,8 +914,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#First-observation-timestamps">
-   First observation timestamps
+  <a class="reference internal nav-link" href="#Time-of-first-vegetation-observation">
+   Time of first vegetation observation
   </a>
  </li>
 </ul>
@@ -1176,6 +1191,7 @@ div.rendered_html tbody tr:hover {
 <li><p><a class="reference external" href="#Semantic-content-based-image-retrieval">Semantic content based image retrieval</a></p></li>
 <li><p><a class="reference external" href="#Parcel-statistics">Parcel statistics</a></p></li>
 <li><p><a class="reference external" href="#Seasonal-aggregates">Seasonal aggregates</a></p></li>
+<li><p><a class="reference external" href="#Time-of-first-vegetation-observation">Time of first vegetation observation</a></p></li>
 </ul>
 </div>
 <div class="section" id="Prepare">
@@ -1852,8 +1868,8 @@ plt.draw()
 </div>
 </div>
 </div>
-<div class="section" id="First-observation-timestamps">
-<h2>First observation timestamps<a class="headerlink" href="#First-observation-timestamps" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Time-of-first-vegetation-observation">
+<h2>Time of first vegetation observation<a class="headerlink" href="#Time-of-first-vegetation-observation" title="Permalink to this headline">¶</a></h2>
 <p>Find for each spatial pixel at which timestamp vegetation was first observed.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:

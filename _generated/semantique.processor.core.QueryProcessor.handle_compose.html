@@ -337,6 +337,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.value_range.html">
+     semantique.value_range
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.geometries.html">
      semantique.geometries
     </a>
@@ -364,6 +369,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.structures.CubeCollection.html">
      semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.values.ValueRange.html">
+     semantique.processor.values.ValueRange
     </a>
    </li>
    <li class="toctree-l2">
@@ -582,13 +592,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
+    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -609,16 +629,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.np_inf_as_null.html">
      semantique.processor.utils.np_inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
     </a>
    </li>
    <li class="toctree-l2">
@@ -659,6 +669,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.InvalidValueTypeError.html">
      semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.InvalidValueRangeError.html">
+     semantique.exceptions.InvalidValueRangeError
     </a>
    </li>
    <li class="toctree-l2">
@@ -856,7 +871,7 @@
 <h1>semantique.processor.core.QueryProcessor.handle_compose<a class="headerlink" href="#semantique-processor-core-queryprocessor-handle-compose" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.core.QueryProcessor.handle_compose">
-<span class="sig-prename descclassname"><span class="pre">QueryProcessor.</span></span><span class="sig-name descname"><span class="pre">handle_compose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/core.py#L732-L750"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.core.QueryProcessor.handle_compose" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">QueryProcessor.</span></span><span class="sig-name descname"><span class="pre">handle_compose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/core.py#L724-L742"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.core.QueryProcessor.handle_compose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handler for the compose verb.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

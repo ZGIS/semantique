@@ -1,0 +1,6 @@
+﻿semantique.processor.structures.CubeCollection.sq
+=================================================
+
+.. currentmodule:: semantique.processor.structures
+
+.. autoproperty:: CubeCollection.sq

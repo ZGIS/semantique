@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.exceptions.InvalidBuildingBlockError" href="semantique.exceptions.InvalidBuildingBlockError.html" />
+    <link rel="next" title="semantique.exceptions.InvalidValueRangeError" href="semantique.exceptions.InvalidValueRangeError.html" />
     <link rel="prev" title="semantique.exceptions.EmptyDataError" href="semantique.exceptions.EmptyDataError.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -339,6 +339,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.value_range.html">
+     semantique.value_range
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.geometries.html">
      semantique.geometries
     </a>
@@ -366,6 +371,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.structures.CubeCollection.html">
      semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.values.ValueRange.html">
+     semantique.processor.values.ValueRange
     </a>
    </li>
    <li class="toctree-l2">
@@ -584,13 +594,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
+    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -611,16 +631,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.np_inf_as_null.html">
      semantique.processor.utils.np_inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
     </a>
    </li>
    <li class="toctree-l2">
@@ -661,6 +671,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.InvalidValueRangeError.html">
+     semantique.exceptions.InvalidValueRangeError
     </a>
    </li>
    <li class="toctree-l2">
@@ -890,10 +905,10 @@ executing a query recipe.</p>
             <p class="prev-next-title">semantique.exceptions.EmptyDataError</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.exceptions.InvalidBuildingBlockError.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.exceptions.InvalidValueRangeError.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.exceptions.InvalidBuildingBlockError</p>
+        <p class="prev-next-title">semantique.exceptions.InvalidValueRangeError</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

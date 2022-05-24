@@ -1,0 +1,6 @@
+﻿semantique.processor.values.ValueRange.end
+==========================================
+
+.. currentmodule:: semantique.processor.values
+
+.. autoproperty:: ValueRange.end

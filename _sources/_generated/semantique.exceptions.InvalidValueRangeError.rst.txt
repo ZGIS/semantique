@@ -1,0 +1,6 @@
+﻿semantique.exceptions.InvalidValueRangeError
+============================================
+
+.. currentmodule:: semantique.exceptions
+
+.. autoexception:: InvalidValueRangeError

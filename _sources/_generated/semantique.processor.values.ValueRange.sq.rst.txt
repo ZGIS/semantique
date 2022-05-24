@@ -1,0 +1,6 @@
+﻿semantique.processor.values.ValueRange.sq
+=========================================
+
+.. currentmodule:: semantique.processor.values
+
+.. autoproperty:: ValueRange.sq

@@ -36,5 +36,6 @@
    .. autosummary::
    
       ~CubeCollection.is_empty
+      ~CubeCollection.sq
    
    

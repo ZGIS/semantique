@@ -337,6 +337,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.value_range.html">
+     semantique.value_range
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.geometries.html">
      semantique.geometries
     </a>
@@ -364,6 +369,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.html">
      semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.values.ValueRange.html">
+     semantique.processor.values.ValueRange
     </a>
    </li>
    <li class="toctree-l2">
@@ -582,13 +592,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
+    <a class="reference internal" href="_generated/semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -609,16 +629,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.utils.np_inf_as_null.html">
      semantique.processor.utils.np_inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
     </a>
    </li>
    <li class="toctree-l2">
@@ -659,6 +669,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.exceptions.InvalidValueTypeError.html">
      semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.InvalidValueRangeError.html">
+     semantique.exceptions.InvalidValueRangeError
     </a>
    </li>
    <li class="toctree-l2">
@@ -892,6 +907,8 @@
 </li>
         <li><a href="_generated/semantique.processor.types.TypePromoter.html#semantique.processor.types.TypePromoter.__init__">(semantique.processor.types.TypePromoter method)</a>
 </li>
+        <li><a href="_generated/semantique.processor.values.ValueRange.html#semantique.processor.values.ValueRange.__init__">(semantique.processor.values.ValueRange method)</a>
+</li>
         <li><a href="_generated/semantique.QueryRecipe.html#semantique.QueryRecipe.__init__">(semantique.QueryRecipe method)</a>
 </li>
       </ul></li>
@@ -1028,7 +1045,11 @@
       <li><a href="_generated/semantique.exceptions.EmptyDataError.html#semantique.exceptions.EmptyDataError">EmptyDataError</a>
 </li>
       <li><a href="_generated/semantique.extent.TemporalExtent.end.html#semantique.extent.TemporalExtent.end">end (semantique.extent.TemporalExtent property)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.processor.values.ValueRange.end.html#semantique.processor.values.ValueRange.end">(semantique.processor.values.ValueRange property)</a>
 </li>
+      </ul></li>
       <li><a href="_generated/semantique.entity.html#semantique.entity">entity() (in module semantique)</a>
 </li>
       <li><a href="_generated/semantique.processor.operators.equal_.html#semantique.processor.operators.equal_">equal_() (in module semantique.processor.operators)</a>
@@ -1043,10 +1064,10 @@
         <li><a href="_generated/semantique.processor.structures.CubeCollection.evaluate.html#semantique.processor.structures.CubeCollection.evaluate">(semantique.processor.structures.CubeCollection method)</a>
 </li>
       </ul></li>
-      <li><a href="_generated/semantique.event.html#semantique.event">event() (in module semantique)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_generated/semantique.event.html#semantique.event">event() (in module semantique)</a>
+</li>
       <li><a href="_generated/semantique.processor.operators.exclusive_or_.html#semantique.processor.operators.exclusive_or_">exclusive_or_() (in module semantique.processor.operators)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.execute.html#semantique.processor.core.QueryProcessor.execute">execute() (semantique.processor.core.QueryProcessor method)</a>
@@ -1213,9 +1234,11 @@
 </li>
       <li><a href="_generated/semantique.processor.operators.intersects_.html#semantique.processor.operators.intersects_">intersects_() (in module semantique.processor.operators)</a>
 </li>
+      <li><a href="_generated/semantique.exceptions.InvalidBuildingBlockError.html#semantique.exceptions.InvalidBuildingBlockError">InvalidBuildingBlockError</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.exceptions.InvalidBuildingBlockError.html#semantique.exceptions.InvalidBuildingBlockError">InvalidBuildingBlockError</a>
+      <li><a href="_generated/semantique.exceptions.InvalidValueRangeError.html#semantique.exceptions.InvalidValueRangeError">InvalidValueRangeError</a>
 </li>
       <li><a href="_generated/semantique.exceptions.InvalidValueTypeError.html#semantique.exceptions.InvalidValueTypeError">InvalidValueTypeError</a>
 </li>
@@ -1457,12 +1480,18 @@
       </ul></li>
       <li><a href="_generated/semantique.extent.SpatialExtent.html#semantique.extent.SpatialExtent">SpatialExtent (class in semantique.extent)</a>
 </li>
-      <li><a href="_generated/semantique.processor.operators.square_root_.html#semantique.processor.operators.square_root_">square_root_() (in module semantique.processor.operators)</a>
+      <li><a href="_generated/semantique.processor.structures.CubeCollection.sq.html#semantique.processor.structures.CubeCollection.sq">sq (semantique.processor.structures.CubeCollection property)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.processor.values.ValueRange.sq.html#semantique.processor.values.ValueRange.sq">(semantique.processor.values.ValueRange property)</a>
 </li>
-      <li><a href="_generated/semantique.factbase.GeotiffArchive.src.html#semantique.factbase.GeotiffArchive.src">src (semantique.factbase.GeotiffArchive property)</a>
+      </ul></li>
+      <li><a href="_generated/semantique.processor.operators.square_root_.html#semantique.processor.operators.square_root_">square_root_() (in module semantique.processor.operators)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_generated/semantique.factbase.GeotiffArchive.src.html#semantique.factbase.GeotiffArchive.src">src (semantique.factbase.GeotiffArchive property)</a>
+</li>
       <li><a href="_generated/semantique.processor.structures.Cube.stack_spatial_dims.html#semantique.processor.structures.Cube.stack_spatial_dims">stack_spatial_dims() (semantique.processor.structures.Cube method)</a>
 
       <ul>
@@ -1472,7 +1501,11 @@
       <li><a href="_generated/semantique.processor.reducers.standard_deviation_.html#semantique.processor.reducers.standard_deviation_">standard_deviation_() (in module semantique.processor.reducers)</a>
 </li>
       <li><a href="_generated/semantique.extent.TemporalExtent.start.html#semantique.extent.TemporalExtent.start">start (semantique.extent.TemporalExtent property)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.processor.values.ValueRange.start.html#semantique.processor.values.ValueRange.start">(semantique.processor.values.ValueRange property)</a>
 </li>
+      </ul></li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.store_default_operators.html#semantique.processor.core.QueryProcessor.store_default_operators">store_default_operators() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.store_default_reducers.html#semantique.processor.core.QueryProcessor.store_default_reducers">store_default_reducers() (semantique.processor.core.QueryProcessor method)</a>
@@ -1589,9 +1622,17 @@
 </li>
       <li><a href="_generated/semantique.processor.structures.Cube.value_labels.html#semantique.processor.structures.Cube.value_labels">value_labels (semantique.processor.structures.Cube property)</a>
 </li>
+      <li><a href="_generated/semantique.value_range.html#semantique.value_range">value_range() (in module semantique)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.structures.Cube.value_type.html#semantique.processor.structures.Cube.value_type">value_type (semantique.processor.structures.Cube property)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.processor.values.ValueRange.value_type.html#semantique.processor.values.ValueRange.value_type">(semantique.processor.values.ValueRange property)</a>
+</li>
+      </ul></li>
+      <li><a href="_generated/semantique.processor.values.ValueRange.html#semantique.processor.values.ValueRange">ValueRange (class in semantique.processor.values)</a>
 </li>
       <li><a href="_generated/semantique.processor.reducers.variance_.html#semantique.processor.reducers.variance_">variance_() (in module semantique.processor.reducers)</a>
 </li>

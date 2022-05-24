@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.geometries" href="semantique.geometries.html" />
+    <link rel="next" title="semantique.value_range" href="semantique.value_range.html" />
     <link rel="prev" title="semantique.CubeCollectionProxy.reduce" href="semantique.CubeCollectionProxy.reduce.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -339,6 +339,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.value_range.html">
+     semantique.value_range
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.geometries.html">
      semantique.geometries
     </a>
@@ -366,6 +371,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.structures.CubeCollection.html">
      semantique.processor.structures.CubeCollection
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.values.ValueRange.html">
+     semantique.processor.values.ValueRange
     </a>
    </li>
    <li class="toctree-l2">
@@ -584,13 +594,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
+    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
+     semantique.processor.utils.create_extent_cube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
+     semantique.processor.utils.parse_datetime_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
+     semantique.processor.utils.parse_coords_component
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -611,16 +631,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.np_inf_as_null.html">
      semantique.processor.utils.np_inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
     </a>
    </li>
    <li class="toctree-l2">
@@ -661,6 +671,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.InvalidValueTypeError.html">
      semantique.exceptions.InvalidValueTypeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.InvalidValueRangeError.html">
+     semantique.exceptions.InvalidValueRangeError
     </a>
    </li>
    <li class="toctree-l2">
@@ -858,7 +873,7 @@
 <h1>semantique.value_label<a class="headerlink" href="#semantique-value-label" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="semantique.value_label">
-<span class="sig-prename descclassname"><span class="pre">semantique.</span></span><span class="sig-name descname"><span class="pre">value_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L894-L914"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.value_label" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">semantique.</span></span><span class="sig-name descname"><span class="pre">value_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L896-L916"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.value_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Label of a numeric index.</p>
 <p>Special value representing a label of a numeric index. Can be used to query
 data cubes by character labels rather than numerical indices, which are the
@@ -889,10 +904,10 @@ understood by the query processor as such.</p>
             <p class="prev-next-title">semantique.CubeCollectionProxy.reduce</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.geometries.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.value_range.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.geometries</p>
+        <p class="prev-next-title">semantique.value_range</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
