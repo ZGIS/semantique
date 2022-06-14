@@ -462,7 +462,8 @@ class Cube():
       other cube, but not all coordinates match. In that case, the coordinates
       that are in the input cube but not in the other cube are removed from the
       input cube, and at the same time the coordinates that are in the other
-      cube but not in the input cube are added to the input cube.
+      cube but not in the input cube are added to the input cube, with nodata
+      values assigned.
 
     * Consider the case where all dimensions of the input cube are also present
       in the other cube, but not all dimensions of the other cube are present
@@ -494,7 +495,7 @@ class Cube():
       raise exceptions.AlignmentError(
         f"Cube '{other.name if other.name is not None else 'y'}' "
         f"cannot be aligned with "
-        f"input cube '{self._obj.name if self._obj.name is not None else 'y'}'"
+        f"input cube '{self._obj.name if self._obj.name is not None else 'x'}'"
       )
     return out
 
@@ -839,7 +840,7 @@ class Cube():
         Path to the written CSV file.
 
     """
-    df = self.to_dataframe(unstack = unstack)
+    df = self.to_dataframe()
     if len(self._obj.dims) == 0:
       df.to_csv(file, header = False, index = False)
     else:
@@ -948,7 +949,8 @@ class CubeCollection(list):
 
     This is merely provided to ensure compatible behaviour with
     :obj:`Cube <semantique.processor.structures.Cube>` objects, which are
-    modelled as an accessor to :obj:`xarray.DataArray` objects.
+    modelled as an accessor to :obj:`xarray.DataArray` objects. It allows
+    to call all other properties and methods through the prefix ``.sq``.
 
     """
     return self
