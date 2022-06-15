@@ -2,8 +2,8 @@ from semantique.blocks import *
 from semantique.extent import SpatialExtent, TemporalExtent
 from semantique.recipe import QueryRecipe
 
-import semantique.factbase
-import semantique.ontology
+import semantique.datacube
+import semantique.mapping
 
 import pkg_resources
 

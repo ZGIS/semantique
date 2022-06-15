@@ -34,7 +34,7 @@ class InvalidValueTypeError(Exception):
   used when the inputs are of a certain value type. It may also occur in the
   concatenate verb, which requires all provided arrays to have the same
   value type, the compose verb, which requires all provided arrays to be
-  binary, and the filter verb, which requires the filterer cube to be binary.
+  binary, and the filter verb, which requires the filterer to be binary.
 
   Note
   -----
@@ -125,7 +125,7 @@ class UnknownComponentError(Exception):
   pass
 
 class UnknownLabelError(Exception):
-  """Raised when a referenced value label is not used for any value in a cube.
+  """Raised when a referenced label is not used for any value in an array.
 
   This occurs when one uses the :func:`label` block to query values in an array
   by their label rather than by the value itself, but the referenced label is

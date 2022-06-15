@@ -71,7 +71,7 @@ class Datacube():
         Spatio-temporal extent in which the data should be retrieved. Should be
         given as an array with a temporal dimension as well as a stacked
         spatial dimension, such as returned by
-        :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
+        :func:`parse_extent <semantique.processor.utils.parse_extent>`.
         The retrieved subset of the EO data cube will have the same extent.
 
     """
@@ -191,7 +191,7 @@ class Opendatacube(Datacube):
         Spatio-temporal extent in which the data should be retrieved. Should be
         given as an array with a temporal dimension as well as a stacked
         spatial dimension, such as returned by
-        :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
+        :func:`parse_extent <semantique.processor.utils.parse_extent>`.
         The retrieved subset of the EO data cube will have the same extent.
 
     Returns
@@ -393,7 +393,7 @@ class GeotiffArchive(Datacube):
         Spatio-temporal extent in which the data should be retrieved. Should be
         given as an array with a temporal dimension as well as a stacked
         spatial dimension, such as returned by
-        :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
+        :func:`parse_extent <semantique.processor.utils.parse_extent>`.
         The retrieved subset of the EO data cube will have the same extent.
 
     Returns

@@ -63,7 +63,7 @@ class Mapping(dict):
         Spatio-temporal extent in which the semantic concept should be
         translated. Should be given as an array with a temporal dimension as
         well as a stacked spatial dimension, such as returned by
-        :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
+        :func:`parse_extent <semantique.processor.utils.parse_extent>`.
         The translated semantic concept will have the same extent.
       datacube : Datacube
         The datacube instance to be used for data retrieval.
@@ -113,7 +113,7 @@ class Semantique(Mapping):
         Spatio-temporal extent in which the semantic concept should be
         translated. Should be given as an array with a temporal dimension as
         well as a stacked spatial dimension, such as returned by
-        :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
+        :func:`parse_extent <semantique.processor.utils.parse_extent>`.
         The translated semantic concept will have the same extent.
       datacube : Datacube
         The datacube instance to be used for data retrieval.

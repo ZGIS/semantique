@@ -263,7 +263,7 @@ class ArrayProxy(dict):
     -----------
       grouper : :obj:`ArrayProxy` or :obj:`CollectionProxy`
         Proxy of an array containing a single dimension that is also
-        present in the input cube. Each unique value in this array corresponds
+        present in the input. Each unique value in this array corresponds
         to a group. Alternatively it may be a proxy of a collection of such
         one-dimensional arrays. Then, each unique combination of values
         corresponds to a group.
@@ -948,7 +948,7 @@ def collection(*elements):
   Returns
   -------
     :obj:`CollectionProxy`
-      A textual reference to the cube collection that can be solved by the
+      A textual reference to the collection that can be solved by the
       query processor.
 
   Examples

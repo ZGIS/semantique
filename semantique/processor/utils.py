@@ -32,82 +32,6 @@ def convert_datetime64(obj, tz_from, tz_to, **kwargs):
   obj_new = pd.Timestamp(obj).tz_localize(tz_from).tz_convert(tz_to, **kwargs)
   return np.datetime64(obj_new.tz_localize(None))
 
-def create_extent_cube(spatial_extent, temporal_extent, spatial_resolution,
-                       temporal_resolution = None, crs = None, tz = None,
-                       trim = True):
-  """Create a spatio-temporal extent cube.
-
-  Internally the query processor uses a multi-dimensional array to represent
-  the spatio-temporal extent of the query. This is an :obj:`xarray.DataArray`
-  and forms the base template for all cubes that are fetched from the factbase
-  during query processing.
-
-  Parameters
-  -----------
-    spatial_extent : SpatialExtent
-      Spatial extent.
-    temporal_extent : TemporalExtent
-      Temporal extent.
-    spatial_resolution : :obj:`list`
-      Spatial resolution of the cube. Should be given as a list in the format
-      `[y, x]`, where y is the cell size along the y-axis, x is the cell size
-      along the x-axis, and both are given as :obj:`int` or :obj:`float`
-      value expressed in the units of the CRS. These values should include
-      the direction of the axes. For most CRSs, the y-axis has a negative
-      direction, and hence the cell size along the y-axis is given as a
-      negative number.
-    temporal_resolution : :obj:`str` or :obj:`pandas.tseries.offsets.DateOffset`
-        Temporal resolution of the cube. Can be given as offset alias as
-        defined in pandas, e.g. "D" for a daily frequency. These aliases can
-        have multiples, e.g. "5D". If :obj:`None`, only the start and end
-        instants of the extent will be temporal coordinates in the cube.
-    crs : optional
-      Coordinate reference system in which the spatial coordinates of the cube
-      should be expressed. Can be given as any object understood by the
-      initializer of :class:`pyproj.crs.CRS`. This includes
-      :obj:`pyproj.crs.CRS` objects themselves, as well as EPSG codes and WKT
-      strings. If :obj:`None`, the CRS of the provided spatial extent is used.
-    tz : optional
-      Timezone in which the temporal coordinates of the cube should be
-      expressed. Can be given as :obj:`str` referring to the name of a time
-      zone in the tz database, or as instance of any class inheriting from
-      :class:`datetime.tzinfo`. If :obj:`None`, the timezone of the provided
-      temporal extent is used.
-    trim : :obj:`bool`
-      Should the cube be trimmed before returning? Trimming means that all
-      coordinates for which all values are null, are dropped from the array.
-      The spatial dimension (if present) is treated differently, by trimming
-      it only at the edges, and thus maintaining the regularity of the spatial
-      dimension.
-
-  Returns
-  -------
-    :obj:`xarray.DataArray`
-      A two-dimensional data cube with a spatial and temporal dimension. The
-      spatial dimension is a stacked dimension with each coordinate value
-      being a tuple of the x and y coordinate of the corresponding cell.
-
-  """
-  # Rasterize spatial extent.
-  space = spatial_extent.rasterize(spatial_resolution, crs, stack = True)
-  # Add spatial feature indices as coordinates.
-  space.coords["feature"] = ("space", space.data)
-  space["feature"].name = "feature"
-  space["feature"].sq.value_type = space.sq.value_type
-  space["feature"].sq.value_labels = space.sq.value_labels
-  # Discretize temporal extent.
-  time = temporal_extent.discretize(temporal_resolution, tz)
-  # Combine rasterized spatial extent with discretized temporal extent.
-  extent = space.expand_dims({"time": time})
-  extent["time"].sq.value_type = "datetime"
-  # Add temporal reference.
-  extent = extent.sq.write_tz(time.sq.tz)
-  # Trim the extent cube if requested.
-  # This means we drop all x, y and time slices for which all values are nan.
-  if trim:
-    extent = extent.sq.trim()
-  return extent
-
 def np_null(x):
   """Return the appropriate null value for a numpy array.
 
@@ -169,13 +93,88 @@ def np_inf_as_null(x):
   """
   return np.where(np.isinf(x), np.nan, x)
 
+def parse_extent(spatial_extent, temporal_extent, spatial_resolution,
+                 temporal_resolution = None, crs = None, tz = None, trim = True):
+  """Parse the spatial and temporal extent into a spatio-temporal array.
+
+  Internally the query processor uses a multi-dimensional array to represent
+  the spatio-temporal extent of the query. This is an :obj:`xarray.DataArray`
+  and forms the base template for all arrays that are retrieved from the
+  mapping during query processing.
+
+  Parameters
+  -----------
+    spatial_extent : SpatialExtent
+      Spatial extent.
+    temporal_extent : TemporalExtent
+      Temporal extent.
+    spatial_resolution : :obj:`list`
+      Spatial resolution of the array. Should be given as a list in the format
+      `[y, x]`, where y is the cell size along the y-axis, x is the cell size
+      along the x-axis, and both are given as :obj:`int` or :obj:`float`
+      value expressed in the units of the CRS. These values should include
+      the direction of the axes. For most CRSs, the y-axis has a negative
+      direction, and hence the cell size along the y-axis is given as a
+      negative number.
+    temporal_resolution : :obj:`str` or :obj:`pandas.tseries.offsets.DateOffset`
+      Temporal resolution of the array. Can be given as offset alias as
+      defined in pandas, e.g. "D" for a daily frequency. These aliases can
+      have multiples, e.g. "5D". If :obj:`None`, only the start and end
+      instants of the extent will be temporal coordinates in the array.
+    crs : optional
+      Coordinate reference system in which the spatial coordinates of the array
+      should be expressed. Can be given as any object understood by the
+      initializer of :class:`pyproj.crs.CRS`. This includes
+      :obj:`pyproj.crs.CRS` objects themselves, as well as EPSG codes and WKT
+      strings. If :obj:`None`, the CRS of the provided spatial extent is used.
+    tz : optional
+      Timezone in which the temporal coordinates of the array should be
+      expressed. Can be given as :obj:`str` referring to the name of a time
+      zone in the tz database, or as instance of any class inheriting from
+      :class:`datetime.tzinfo`. If :obj:`None`, the timezone of the provided
+      temporal extent is used.
+    trim : :obj:`bool`
+      Should the array be trimmed before returning? Trimming means that all
+      coordinates for which all values are null, are dropped from the array.
+      The spatial dimension (if present) is treated differently, by trimming
+      it only at the edges, and thus maintaining the regularity of the spatial
+      dimension.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      A two-dimensional array with a spatial and temporal dimension. The
+      spatial dimension is a stacked dimension with each coordinate value
+      being a tuple of the x and y coordinate of the corresponding cell.
+
+  """
+  # Rasterize spatial extent.
+  space = spatial_extent.rasterize(spatial_resolution, crs, stack = True)
+  # Add spatial feature indices as coordinates.
+  space.coords["feature"] = ("space", space.data)
+  space["feature"].name = "feature"
+  space["feature"].sq.value_type = space.sq.value_type
+  space["feature"].sq.value_labels = space.sq.value_labels
+  # Discretize temporal extent.
+  time = temporal_extent.discretize(temporal_resolution, tz)
+  # Combine rasterized spatial extent with discretized temporal extent.
+  extent = space.expand_dims({"time": time})
+  extent["time"].sq.value_type = "datetime"
+  # Add temporal reference.
+  extent = extent.sq.write_tz(time.sq.tz)
+  # Trim the extent array if requested.
+  # This means we drop all x, y and time slices for which all values are nan.
+  if trim:
+    extent = extent.sq.trim()
+  return extent
+
 def parse_datetime_component(name, obj):
   """Parse datetime accessor arrays.
 
   The `datetime accessors`_ of :obj:`xarray.DataArray` objects are treated in
   semantique as a component of the temporal dimension. Parsing them includes
-  adding :attr:`value_type <semantique.processor.structures.Cube.value_type>`
-  and :attr:`value_label <semantique.processor.structures.Cube.value_labels>`
+  adding :attr:`value_type <semantique.processor.structures.SemanticArray.value_type>`
+  and :attr:`value_label <semantique.processor.structures.SemanticArray.value_labels>`
   properties as well as in some cases re-organize the values in the array.
 
   Parameters
@@ -252,8 +251,8 @@ def parse_coords_component(obj):
   The spatial x and y coordinates of each value in :obj:`xarray.DataArray`
   objects are treated in semantique as components of a stacked spatial
   dimension, i.e. a multi-indexed dimension. Parsing these individual
-  coordinte arrays includes adding a relevant
-  :attr:`value_type <semantique.processor.structures.Cube.value_type>`
+  coordinate arrays includes adding a relevant
+  :attr:`value_type <semantique.processor.structures.SemanticArray.value_type>`
   property.
 
   Parameters
