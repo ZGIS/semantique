@@ -603,13 +603,10 @@ class QueryProcessor():
     except KeyError:
       pass
     else:
-      if isinstance(y, (list, tuple)):
-        params["y"] = self.update_list_elements(y)
-      else:
-        try:
-          params["y"] = self.call_handler(y)
-        except exceptions.InvalidBuildingBlockError:
-          pass
+      try:
+        params["y"] = self.call_handler(y)
+      except exceptions.InvalidBuildingBlockError:
+        pass
     # Obtain operator function.
     params["operator"] = self.get_operator(params["operator"])
     # Set other function parameters.
@@ -811,23 +808,57 @@ class QueryProcessor():
         "Active evaluation object has no value labels defined"
       )
     label = block["content"]
-    value = None
+    out = None # Initialize.
     for i, x in enumerate(label_mapping.values()):
       if x == label:
-        value = list(label_mapping.keys())[i]
+        out = list(label_mapping.keys())[i]
         break
-    if value is None:
+    if out is None:
       raise exceptions.UnknownLabelError(
         f"There is no value with label '{label}'"
       )
-    logger.debug(f"Matched label '{label}' with value {value}")
-    return value
+    logger.debug(f"Matched label '{label}' with index {out}")
+    return out
+
+  def handle_set(self, block):
+    """Handler for value sets.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "set".
+
+    Returns
+    -------
+      :obj:`list`
+
+    """
+    values = block["content"]
+    def _update(x):
+      try:
+        return self.call_handler(x)
+      except exceptions.InvalidBuildingBlockError:
+        return x
+    out = [_update(x) for x in values]
+    return out
 
   def handle_interval(self, block):
-    start = block["content"][0]
-    end = block["content"][1]
-    out = values.Interval(start, end)
-    logger.debug(f"Created an interval object with bounds {[start, end]}")
+    """Handler for value intervals.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "interval".
+
+    Returns
+    -------
+      :obj:`Interval <semantique.processor.values.Interval>`
+
+    """
+    lower = block["content"][0]
+    upper = block["content"][1]
+    out = values.Interval(lower, upper)
+    logger.debug(f"Parsed interval::\n{out}")
     return out
 
   def handle_geometry(self, block):
@@ -926,31 +957,6 @@ class QueryProcessor():
       )
     logger.debug(f"Applied verb {name}:\n{out}")
     return out
-
-  def update_list_elements(self, obj):
-    """Update the elements of a list.
-
-    If an element in a list is a valid building block with a corresponding
-    handler function, this handler function is called to proccess the building
-    block.
-
-    Parameters
-    ----------
-      obj : :obj:`list`
-        List of which the elements should be updated.
-
-    Returns
-    -------
-      :obj:`list`
-        The same list with updated elements.
-
-    """
-    def _update(x):
-      try:
-        return self.call_handler(x)
-      except exceptions.InvalidBuildingBlockError:
-        return x
-    return [_update(x) for x in obj]
 
   def add_operator(self, name, function):
     """Add a new operator to the set of supported operators.

@@ -1,3 +1,5 @@
+import builtins
+
 from semantique import exceptions
 from semantique.extent import SpatialExtent, TemporalExtent
 
@@ -17,6 +19,11 @@ def _parse_filter_expression(*args):
       f"or 2 (operator, y), not {n_args}"
     )
   return component, operator, y
+
+def _parse_second_operand(x):
+  if isinstance(x, (list, tuple, builtins.set)):
+    out = set(x) # Note this is the def of set in this module, not built-in.
+  return out
 
 class ArrayProxy(dict):
   """Proxy object of an array.
@@ -87,6 +94,7 @@ class ArrayProxy(dict):
     if y is None:
       kwargs.update({"operator": operator})
     else:
+      y = _parse_second_operand(y)
       kwargs.update({"operator": operator, "y": y})
     return self._append_verb("evaluate", **kwargs)
 
@@ -975,6 +983,26 @@ def label(x):
 
   """
   obj = {"type": "label", "content": x}
+  return obj
+
+def set(*members):
+  """Finite set of values.
+
+  Object representing a finite set of values.
+
+  Parameters
+  ----------
+    *members:
+      The members of the set.
+
+  Returns
+  --------
+    :obj:`dict`
+      JSON-serializable object that contains the members of the set, and
+      can be understood by the query processor as such.
+
+  """
+  obj = {"type": "set", "content": list(builtins.set(members))}
   return obj
 
 def interval(a, b):
