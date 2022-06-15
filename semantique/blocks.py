@@ -1,25 +1,3 @@
-__all__ = [
-  "concept",
-  "entity",
-  "event",
-  "layer",
-  "appearance",
-  "artifacts",
-  "atmosphere",
-  "reflectance",
-  "topography",
-  "result",
-  "self",
-  "collection",
-  "value_label",
-  "value_range",
-  "geometries",
-  "time_instant",
-  "time_interval",
-  "ArrayProxy",
-  "CollectionProxy"
-]
-
 from semantique import exceptions
 from semantique.extent import SpatialExtent, TemporalExtent
 
