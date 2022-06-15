@@ -37,11 +37,19 @@ TYPE_PROMOTION_MANUALS = {
     "numerical": "numerical",
     "__preserve_labels__": 0
   },
+  "ceiling": {
+    "numerical": "numerical",
+    "__preserve_labels__": 0
+  },
   "cube_root": {
     "numerical": "numerical",
     "__preserve_labels__": 0
   },
   "exponential": {
+    "numerical": "numerical",
+    "__preserve_labels__": 0
+  },
+  "floor": {
     "numerical": "numerical",
     "__preserve_labels__": 0
   },

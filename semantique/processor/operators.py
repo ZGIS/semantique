@@ -100,6 +100,51 @@ def absolute_(x, track_types = True, **kwargs):
     out = promoter.promote(out)
   return out
 
+def ceiling_(x, track_types = True, **kwargs):
+  """Compute the ceiling of x.
+
+  The ceiling is the smallest integer *i* such that *i >= x*.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Array containing the values to apply the operator to.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      An array with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["ceiling"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, function = "ceiling")
+    promoter.check()
+  f = lambda x: np.ceil(x)
+  out = xr.apply_ufunc(f, x)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
 def cube_root_(x, track_types = True, **kwargs):
   """Compute the cube root of x.
 
@@ -185,6 +230,51 @@ def exponential_(x, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "exponential")
     promoter.check()
   f = lambda x: np.exp(x)
+  out = xr.apply_ufunc(f, x)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
+def floor_(x, track_types = True, **kwargs):
+  """Compute the floor of x.
+
+  The floor is the largest integer *i* such that *i <= x*.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Array containing the values to apply the operator to.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      An array with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["floor"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, function = "floor")
+    promoter.check()
+  f = lambda x: np.floor(x)
   out = xr.apply_ufunc(f, x)
   if track_types:
     out = promoter.promote(out)
