@@ -16,9 +16,9 @@ def mean_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -28,7 +28,7 @@ def mean_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -60,9 +60,9 @@ def median_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -72,7 +72,7 @@ def median_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -104,9 +104,9 @@ def mode_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -116,7 +116,7 @@ def mode_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -------
@@ -155,9 +155,9 @@ def max_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -167,7 +167,7 @@ def max_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -199,9 +199,9 @@ def min_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -211,7 +211,7 @@ def min_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -243,9 +243,9 @@ def range_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -255,7 +255,7 @@ def range_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -273,7 +273,7 @@ def range_(x, dimension, track_types = True, **kwargs):
 
   Note
   -----
-    When applied to an input containing timestamps as values, the output cube
+    When applied to an input containing timestamps as values, the output array
     will contain numerical values representing the difference between the most
     recent and least recent timestamp in nanoseconds.
 
@@ -293,9 +293,9 @@ def n_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -305,7 +305,7 @@ def n_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -337,9 +337,9 @@ def product_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -349,7 +349,7 @@ def product_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -381,9 +381,9 @@ def standard_deviation_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -393,7 +393,7 @@ def standard_deviation_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -425,9 +425,9 @@ def sum_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -437,7 +437,7 @@ def sum_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -469,9 +469,9 @@ def variance_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -481,7 +481,7 @@ def variance_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -517,9 +517,9 @@ def all_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -529,7 +529,7 @@ def all_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -561,9 +561,9 @@ def any_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -573,7 +573,7 @@ def any_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -611,9 +611,9 @@ def count_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -623,7 +623,7 @@ def count_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -657,9 +657,9 @@ def percentage_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -669,7 +669,7 @@ def percentage_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -709,9 +709,9 @@ def first_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -721,7 +721,7 @@ def first_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----
@@ -756,9 +756,9 @@ def last_(x, dimension, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      The data cube to be reduced.
+      The array to be reduced.
     dimension : :obj:`str`
-      Name of the dimension to apply the reduction function to.
+      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
@@ -768,7 +768,7 @@ def last_(x, dimension, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      The reduced data cube.
+      The reduced array.
 
   Note
   -----

@@ -1,21 +1,11 @@
 from semantique.processor.core import QueryProcessor
 
 class QueryRecipe(dict):
-  """Dict-like container to store result instructions.
-
-  In semantique, a query recipe is a dict-like container storing instructions
-  that can be executed by a query processor in order to infer new knowledge
-  from earth observation data. Each distinct piece of knowledge, called a query
-  result, has its own set of instructions, which are constructed by chaining
-  together several building blocks offered by semantique.
-
-  In these instructions, one can refer directly to real-world semantic concepts
-  by their name, without having to be aware how these concepts are actually
-  represented by the earth observations data.
+  """Dict-like container to store instructions of a query recipe.
 
   Parameters
   ----------
-    results : :obj:`dict` of :obj:`CubeProxy`
+    results : :obj:`dict` of :obj:`ArrayProxy`
       Dictionary containing result names as keys and result instructions as
       values. If :obj:`None`, an empty recipe is constructed.
 
@@ -24,7 +14,7 @@ class QueryRecipe(dict):
     obj = {} if results is None else results
     super(QueryRecipe, self).__init__(obj)
 
-  def execute(self, factbase, ontology, space, time, **config):
+  def execute(self, datacube, mapping, space, time, **config):
     """Execute a query recipe.
 
     This function initializes a :obj:`processor.core.QueryProcessor` instance
@@ -33,10 +23,10 @@ class QueryRecipe(dict):
 
     Parameters
     ----------
-      factbase : Factbase
-        The factbase instance to process the query against.
-      ontology : Ontology
-        The ontology instance to process the query against.
+      datacube : Datacube
+        The datacube instance to process the query against.
+      mapping : Mapping
+        The mapping instance to process the query against.
       space : SpatialExtent
         The spatial extent in which the query should be processed.
       time : TemporalExtent
@@ -52,5 +42,5 @@ class QueryRecipe(dict):
         names as keys and result arrays as values.
 
     """
-    qp = QueryProcessor.parse(self, factbase, ontology, space, time, **config)
+    qp = QueryProcessor.parse(self, datacube, mapping, space, time, **config)
     return qp.optimize().execute().respond()

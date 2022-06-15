@@ -14,7 +14,7 @@ DTYPE_MAPPING = {
 }
 """:obj:`dict` : Mapping between numpy data types and semantique value types.
 
-A semantique value type describes what kind of data a cube contains. It differs
+A semantique value type describes what kind of data an array contains. It differs
 from the very technical, computer-oriented `numpy dtype`_ categorization, which
 contains e.g. :obj:`int`, :obj:`float`, etc. Instead, the semantique value type
 describes data on a more general, statistical level. Each numpy data type can
@@ -29,7 +29,7 @@ value types are stored in a list.
 """
 
 TYPE_PROMOTION_MANUALS = {
-  "invert": {
+  "not": {
     "binary": "binary",
     "__preserve_labels__": 1
   },
@@ -313,11 +313,11 @@ TYPE_PROMOTION_MANUALS = {
 }
 """:obj:`dict` : Type promotion manuals for all built-in operators and reducers.
 
-Whenever applying actions to a data cube, its value type might change. For
+Whenever applying actions to an array, its value type might change. For
 example, when evaluating an expression (e.g. when evaluating an expression
 involving a comparison operator the resulting values are always binary) or
 applying a reducer (e.g. when counting the number of "true" values in a binary
-data cube the resulting values are numerical). This is called type promotion.
+array the resulting values are numerical). This is called type promotion.
 For each built-in operator and reducer function, this dictionary stores a
 manual that defines which value types are accepted as input, and what the value
 type of the output should be.
@@ -332,7 +332,7 @@ operand and the second layer of keys to the value type of the second operand.
 def get_value_type(x):
   """Determine the value type of an object.
 
-  A semantique value type describes what kind of data a cube contains. It
+  A semantique value type describes what kind of data an array contains. It
   differs from the very technical, computer-oriented `numpy dtype`_
   categorization, which contains e.g. :obj:`int`, :obj:`float`, etc. Instead,
   the semantique value type describes data on a more general, statistical
@@ -377,8 +377,8 @@ def get_value_labels(x):
   """Obtain the value labels of an object.
 
   Value labels are character strings that describe the meaning of the values in
-  a data cube. They are mainly used for categorical data, in which integer
-  indices are the value in the cube, and the labels store the name of each
+  an array. They are mainly used for categorical data, in which integer
+  indices are the value in the array, and the labels store the name of each
   category.
 
   Parameters
@@ -403,11 +403,11 @@ def get_value_labels(x):
 class TypePromoter:
   """Worker that takes care of promoting value types during an operation.
 
-  Whenever applying an operation to a data cube, its value type might change.
+  Whenever applying an operation to an array, its value type might change.
   For example, when evaluating an expression (e.g. when evaluating an expression
   involving a comparison operator the resulting values are always binary) or
   applying a reducer (e.g. when counting the number of "true" values in a binary
-  data cube the resulting values are numerical). This is called type promotion.
+  array the resulting values are numerical). This is called type promotion.
 
   This worker takes care of the type promotion during a specified operation. It
   can check if the value types of the operands are supported by the operation,
@@ -485,7 +485,7 @@ class TypePromoter:
 
     Specific operations may only be applicable to specific value types. For
     example, :func:`semantique.processor.reducers.any_` is only supported for
-    data cubes containing binary values, and
+    arrays containing binary values, and
     :func:`semantique.processor.operators.sum_` is only supported for operands
     that are both numerical.
 

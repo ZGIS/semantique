@@ -11,36 +11,14 @@ from abc import abstractmethod
 
 from semantique import exceptions
 
-class Factbase():
-  """Base class for factbase formats.
-
-  The factbase is the place where the available resources of earth observation
-  data are stored. In semantique, a factbase is represented by an object that
-  does not contain the actual data values themselves, but instead serves as an
-  interface that allows to access them. This interface contains the layout of
-  the factbase, which is a dict-like container storing a metadata object for
-  each resource.
-
-  A factbase instance in semantique always has a :meth:`retrieve` method. This
-  function is able to read a to read a reference to a specific resource, lookup
-  its metadata object in the layout file, and use these metadata to retrieve
-  the corresponding data values as a data cube from the actual data storage
-  location. There are no strict requirements on how data should be stored and
-  accessed, and therefore there is not a single way to retrieve them. For each
-  different format of storing and accessing data resources, a separate class
-  should be created with a :meth:`retrieve` method specific to that format.
-  Such a class should always inherit from this base class.
-
-  Usually a factbase instance also has some kind of connection object that
-  allows the retriever function to access the actual data values, but how this
-  object looks like can be very different between different formats, and is
-  therefore not a method in the base class itself.
+class Datacube():
+  """Base class for EO data cube representations.
 
   Parameters
   ----------
     layout : :obj:`dict`
-      The layout file describing the factbase. If :obj:`None`, an empty
-      factbase is constructed.
+      The layout describing the EO data cube. If :obj:`None`, an empty
+      EO data cube instance is constructed.
 
   """
 
@@ -49,7 +27,7 @@ class Factbase():
 
   @property
   def layout(self):
-    """:obj:`dict`: The layout file of the factbase."""
+    """:obj:`dict`: The layout file of the EO data cube."""
     return self._layout
 
   @layout.setter
@@ -57,19 +35,18 @@ class Factbase():
     self._layout = {} if value is None else value
 
   def lookup(self, *reference):
-    """Lookup the metadata of a referenced data resource.
+    """Lookup the metadata of a referenced data layer.
 
     Parameters
     ----------
       *reference:
-        One or more keys that specify the location of a metadata object in the
-        layout of the factbase.
+        The index of the data layer in the layout of the EO data cube.
 
     Raises
     -------
-      :obj:`exceptions.UnknownResourceError`
-        If the referenced data resource does not have a metadata object in the
-        layout of the factbase.
+      :obj:`exceptions.UnknownLayerError`
+        If the referenced data layer does not have a metadata object in the
+        layout of the EO data cube.
 
     """
     obj = self._layout
@@ -77,8 +54,8 @@ class Factbase():
       try:
         obj = obj[key]
       except KeyError:
-        raise exceptions.UnknownResourceError(
-          f"Factbase does not contain resource '{reference}'"
+        raise exceptions.UnknownLayerError(
+          f"The EO data cube does not contain layer '{reference}'"
         )
     return obj
 
@@ -89,33 +66,32 @@ class Factbase():
     Parameters
     ----------
       *reference:
-        One or more keys that specify the location of a metadata object in the
-        layout of the factbase.
+        The index of the data layer in the layout of the EO data cube.
       extent : :obj:`xarray.DataArray`
         Spatio-temporal extent in which the data should be retrieved. Should be
         given as an array with a temporal dimension as well as a stacked
         spatial dimension, such as returned by
         :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
-        The retrieved data cube will have the same extent.
+        The retrieved subset of the EO data cube will have the same extent.
 
     """
     pass
 
-class Opendatacube(Factbase):
-  """Opendatacube specific factbase format.
+class Opendatacube(Datacube):
+  """Opendatacube specific EO data cube configuration.
 
-  This factbase format is an interface to Opendatacube backends. See the
+  This class is an interface to Opendatacube backends. See the
   `Opendatacube manual`_ for details.
 
   Parameters
   ----------
     layout : :obj:`dict`
-      The layout file describing the factbase. If :obj:`None`, an empty
-      factbase is constructed.
+      The layout file describing the EO data cube. If :obj:`None`, an empty
+      EO data cube is constructed.
     connection : :obj:`datacube.Datacube`
       Opendatacube interface object allowing to read from the data cube.
     tz
-      Timezone of the temporal coordinates in the factbase. Can be given as
+      Timezone of the temporal coordinates in the EO data cube. Can be given as
       :obj:`str` referring to the name of a timezone in the tz database, or
       as instance of any class inheriting from :class:`datetime.tzinfo`.
     **config:
@@ -173,7 +149,7 @@ class Opendatacube(Factbase):
   @property
   def tz(self):
     """:obj:`datetime.tzinfo`: Timezone of the temporal coordinates in the
-    factbase."""
+    EO data cube."""
     return self._tz
 
   @tz.setter
@@ -205,24 +181,23 @@ class Opendatacube(Factbase):
     self._config = value
 
   def retrieve(self, *reference, extent):
-    """Retrieve a data resource from the factbase.
+    """Retrieve a data layer from the EO data cube.
 
     Parameters
     ----------
       *reference:
-        One or more keys that specify the location of a metadata object in the
-        layout of the factbase.
+        The index of the data layer in the layout of the EO data cube.
       extent : :obj:`xarray.DataArray`
         Spatio-temporal extent in which the data should be retrieved. Should be
         given as an array with a temporal dimension as well as a stacked
         spatial dimension, such as returned by
         :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
-        The retrieved data cube will have the same extent.
+        The retrieved subset of the EO data cube will have the same extent.
 
     Returns
     -------
       :obj:`xarray.DataArray`
-        The retrieved data in a data cube.
+        The retrieved subset of the EO data cube.
 
     """
     # Get metadata.
@@ -313,21 +288,21 @@ class Opendatacube(Factbase):
     data = data.where(data["feature"].notnull())
     return data
 
-class GeotiffArchive(Factbase):
-  """Factbase format for zipped GeoTIFF files.
+class GeotiffArchive(Datacube):
+  """EO data cube format for zipped GeoTIFF files.
 
-  This simple factbase format assumes each data resource is a GeoTIFF file, and
-  that all resources together are bundled in a ZIP archive.
+  This simple EO data cube format assumes each data layer is a GeoTIFF file, and
+  that all layers together are bundled in a ZIP archive.
 
   Parameters
   ----------
     layout : :obj:`dict`
-      The layout file describing the factbase. If :obj:`None`, an empty
-      factbase is constructed.
+      The layout file describing the EO data cube. If :obj:`None`, an empty
+      EO data cube is constructed.
     src : :obj:`str`
-      Path to the ZIP archive containing the data resources.
+      Path to the ZIP archive containing the data layers.
     tz
-      Timezone of the temporal coordinates in the factbase. Can be given as
+      Timezone of the temporal coordinates in the EO data cube. Can be given as
       :obj:`str` referring to the name of a timezone in the tz database, or
       as instance of any class inheriting from :class:`datetime.tzinfo`.
     **config:
@@ -365,7 +340,7 @@ class GeotiffArchive(Factbase):
 
   @property
   def src(self):
-    """:obj:`str`: Path to the ZIP archive containing the data resources."""
+    """:obj:`str`: Path to the ZIP archive containing the data layers."""
     return self._src
 
   @src.setter
@@ -377,7 +352,7 @@ class GeotiffArchive(Factbase):
   @property
   def tz(self):
     """:obj:`datetime.tzinfo`: Timezone of the temporal coordinates in the
-    factbase."""
+    EO data cube."""
     return self._tz
 
   @tz.setter
@@ -408,24 +383,23 @@ class GeotiffArchive(Factbase):
     self._config = value
 
   def retrieve(self, *reference, extent):
-    """Retrieve a data resource from the factbase.
+    """Retrieve a data layer from the EO data cube.
 
     Parameters
     ----------
       *reference:
-        One or more keys that specify the location of a metadata object in the
-        layout of the factbase.
+        The index of the data layer in the layout of the EO data cube.
       extent : :obj:`xarray.DataArray`
         Spatio-temporal extent in which the data should be retrieved. Should be
         given as an array with a temporal dimension as well as a stacked
         spatial dimension, such as returned by
         :func:`create_extent_cube <semantique.processor.utils.create_extent_cube>`.
-        The retrieved data cube will have the same extent.
+        The retrieved subset of the EO data cube will have the same extent.
 
     Returns
     -------
       :obj:`xarray.DataArray`
-        The retrieved data in a data cube.
+        The retrieved subset of the EO data cube.
 
     """
     # Get metadata.

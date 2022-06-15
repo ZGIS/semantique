@@ -2,7 +2,7 @@ __all__ = [
   "concept",
   "entity",
   "event",
-  "resource",
+  "layer",
   "appearance",
   "artifacts",
   "atmosphere",
@@ -16,8 +16,8 @@ __all__ = [
   "geometries",
   "time_instant",
   "time_interval",
-  "CubeProxy",
-  "CubeCollectionProxy"
+  "ArrayProxy",
+  "CollectionProxy"
 ]
 
 from semantique import exceptions
@@ -40,39 +40,45 @@ def _parse_filter_expression(*args):
     )
   return component, operator, y
 
-class CubeProxy(dict):
-  """Proxy object of a data cube.
+class ArrayProxy(dict):
+  """Proxy object of an array.
 
-  This proxy object serves as a substitute for a real data cube object. All
-  data cube specific actions (i.e. *verbs*) can be called as methods of this
-  object. However, the proxy object iself does not contain any data, and the
-  actions will not be applied. Instead, a textual recipe is constructed which
-  will be executed only at the stage of query processing.
+  This proxy object serves as a placeholder for a multi-dimensional array. All
+  array specific actions (i.e. *verbs*) can be called as methods of this object.
+  However, the proxy object iself does not contain any data, and the actions
+  are not applied. Instead, a textual recipe is constructed which will be
+  executed only at the stage of query processing.
 
   Parameters
   ----------
     obj : :obj:`dict`
-      Textual reference that can be solved by the query
-      processor. Normally not constructed by hand, but obtained by calling one
-      of the dedicated reference functions or by applying verbs to existing
-      CubeProxy or CubeCollectionProxy objects.
+      Textual reference that can be solved by the query processor. Normally not
+      constructed by hand, but obtained by calling one of the dedicated
+      reference functions or by applying verbs to existing :obj:`ArrayProxy` or
+      :obj:`CollectionProxy` instances.
 
   """
 
   def __init__(self, obj):
-    super(CubeProxy, self).__init__(obj)
+    super(ArrayProxy, self).__init__(obj)
 
   def _append_verb(self, name, collector = False, **kwargs):
     verb = {"type": "verb", "name": name, "params": kwargs}
     if "do" in self:
       self["do"].append(verb)
-      return CubeCollectionProxy(self) if collector else self
+      return CollectionProxy(self) if collector else self
     else:
       new = {"type": "processing_chain", "with": self, "do": [verb]}
-      return CubeCollectionProxy(new) if collector else CubeProxy(new)
+      return CollectionProxy(new) if collector else ArrayProxy(new)
 
   def evaluate(self, operator, y = None, **kwargs):
-    """Evaluate an expression for each pixel in a data cube.
+    """Evaluate an expression for each pixel in an array.
+
+    Evaluates an expression for each pixel in the input. This expression may be
+    univariate, i.e. applying an operator to a single value, or bivariate, e.g.
+    an arithmetic operation (add, multiply, ..) or a condition (equals,
+    greater, ..). In the bivariate case, the second operand may be a constant
+    (e.g. multiply by 2) or a second array (e.g. add the pixels of two arrays).
 
     Parameters
     -----------
@@ -82,20 +88,22 @@ class CubeProxy(dict):
         which will be provided to the query processor when executing the query
         recipe.
       y : optional
-        Right-hand side of the expression. May be a constant, meaning that the
-        same value is used in each expression. May also be a proxy of another
-        data cube which can be aligned to the same shape as the input cube. In
-        the latter case, when evaluating the expression for a pixel in the
-        input cube the second operand is the value of the pixel in cube ``y``
-        that has the same dimension coordinates. Ignored when the operator is
-        univariate.
+        Right-hand side of a bivariate expression. May be a constant, meaning
+        that the same value is used in each expression. May also be a proxy of
+        another array which can be aligned to the same shape as the input.
+        Ignored when the operator is univariate.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Cube.evaluate> <processor.structures.Cube.evaluate>>`.
+        :obj:`SemanticArray.evaluate> <processor.structures.SemanticArray.evaluate>>`.
 
     Returns
     --------
-      :obj:`CubeProxy`
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> sq.entity("water").evaluate("not")
+    >>> sq.entity("water").evaluate("or", sq.entity("vegetation"))
 
     """
     if y is None:
@@ -105,7 +113,7 @@ class CubeProxy(dict):
     return self._append_verb("evaluate", **kwargs)
 
   def extract(self, dimension, component = None, **kwargs):
-    """Extract coordinate labels of a dimension as a new data cube.
+    """Extract coordinate labels of a dimension as a new array.
 
     Parameters
     -----------
@@ -117,11 +125,16 @@ class CubeProxy(dict):
         coordinates.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Cube.extract <processor.structures.Cube.extract>`.
+        :obj:`SemanticArray.extract <processor.structures.SemanticArray.extract>`.
 
     Returns
     --------
-      :obj:`CubeProxy`
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> sq.entity("water").extract("time")
+    >>> sq.entity("water").extract("time", "year")
 
     """
     if component is None:
@@ -131,35 +144,45 @@ class CubeProxy(dict):
     return self._append_verb("extract", **kwargs)
 
   def filter(self, filterer, **kwargs):
-    """Filter the values in a data cube.
+    """Filter the values in an array.
+
+    Filters the pixel values in the input based on a condition. The evaluated
+    condition should be provided as a binary array that can be aligned to the
+    same shape as the input. Only the values of pixels corresponding to a
+    "true" value in the evaluated condition are preserved, the others are
+    assigned a nodata value.
 
     Parameters
     -----------
-      filterer : :obj:`CubeProxy`
-        Proxy of a data cube which can be aligned to the same shape as the
-        input cube. Each pixel in the input cube will be kept if the pixel in
-        the filterer with the same dimension coordinates has true as value,
-        and dropped otherwise.
+      filterer : :obj:`ArrayProxy`
+        Proxy of a binary array which can be aligned to the same shape as the
+        input.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Cube.filter <processor.structures.Cube.filter>`.
+        :obj:`SemanticArray.filter <processor.structures.SemanticArray.filter>`.
 
     Returns
     --------
-      :obj:`CubeProxy`
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> sq.entity("water").filter(sq.entity("cloud").evaluate("not"))
+    >>> sq.entity("water").filter(sq.self())
 
     """
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
   def filter_time(self, *filterer, **kwargs):
-    """Filter a data cube along the temporal dimension.
+    """Filter an array along the temporal dimension.
 
     This verb is a shortcut for first extracting the temporal dimension with
-    the extract verb (optionally only a specific component of that dimension),
-    then evaluating a relational operator to this dimension using the evaluate
+    the :meth:`extract` verb (optionally only a specific component of that
+    dimension, such as *year* or *month*), then evaluating a relational
+    operator on the coordinates of this dimension using the :meth:`evaluate`
     verb, and finally using the output of that operation as filterer in the
-    filter verb.
+    :meth:`filter` verb.
 
     Parameters
     -----------
@@ -172,27 +195,33 @@ class CubeProxy(dict):
         side operand to be used in the expression.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Cube.filter <processor.structures.Cube.filter>`.
+        :obj:`SemanticArray.filter <processor.structures.SemanticArray.filter>`.
 
     Returns
     --------
-      :obj:`CubeProxy`
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> sq.entity("water").filter_time("after", sq.time_instant("2021-12-31"))
+    >>> sq.entity("water").filter_time("year", "equals", 2020)
 
     """
     component, operator, y = _parse_filter_expression(*filterer)
-    eval_obj = CubeProxy({"type": "self"})
+    eval_obj = ArrayProxy({"type": "self"})
     filterer = eval_obj.extract("time", component).evaluate(operator, y)
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
   def filter_space(self, *filterer, **kwargs):
-    """Filter a data cube along the spatial dimension.
+    """Filter an array along the spatial dimension.
 
     This verb is a shortcut for first extracting the spatial dimension with
-    the extract verb (optionally only a specific component of that dimension),
-    then evaluating a relational operator to this dimension using the evaluate
-    verb, and finally using the output of that operation as filterer in the
-    filter verb.
+    the :meth:`extract` verb (optionally only a specific component of that
+    dimension, such as the spatial feature indices), then evaluating a
+    relational operator on the coordinates of this dimension using the
+    :meth:`evaluate` verb, and finally using the output of that operation as
+    filterer in the :meth:`filter` verb.
 
     Parameters
     -----------
@@ -205,199 +234,244 @@ class CubeProxy(dict):
         side operand to be used in the expression.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Cube.filter <processor.structures.Cube.filter>`.
+        :obj:`SemanticArray.filter <processor.structures.SemanticArray.filter>`.
 
     Returns
     --------
-      :obj:`CubeProxy`
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> sq.entity("water").filter_space("intersects", sq.geometry(gpd.read_file("foo.gpkg")))
+    >>> sq.entity("water").filter_space("feature", "equals", 1)
 
     """
     component, operator, y = _parse_filter_expression(*filterer)
-    eval_obj = CubeProxy({"type": "self"})
+    eval_obj = ArrayProxy({"type": "self"})
     filterer = eval_obj.extract("space", component).evaluate(operator, y)
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
   def groupby(self, grouper, **kwargs):
-    """Group the values in a data cube.
+    """Group the values in an array.
+
+    Splits the array into distinct subsets that each comprise a group of pixels
+    sharing similar coordinates of a particular dimension, e.g. each group may
+    correspond to a year.
 
     Parameters
     -----------
-      grouper : :obj:`CubeProxy` or :obj:`CubeCollectionProxy`
-        Proxy of a data cube containing a single dimension that is also
-        present in the input cube. The group to which each pixel in the input
-        cube will be assigned depends on the value of the grouper that has the
-        same coordinate for that dimension. Alternatively it may be a proxy
-        of a cube collection in which each cube meets the requirements above.
-        In that case, groups are defined by the unique combinations of
-        corresponding values in all collection members.
+      grouper : :obj:`ArrayProxy` or :obj:`CollectionProxy`
+        Proxy of an array containing a single dimension that is also
+        present in the input cube. Each unique value in this array corresponds
+        to a group. Alternatively it may be a proxy of a collection of such
+        one-dimensional arrays. Then, each unique combination of values
+        corresponds to a group.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Cube.groupby <processor.structures.Cube.groupby>`.
+        :obj:`SemanticArray.groupby <processor.structures.SemanticArray.groupby>`.
 
     Returns
     --------
-      :obj:`CubeCollectionProxy`
+      :obj:`CollectionProxy`
+
+    Examples
+    --------
+    >>> sq.entity("water").groupby(sq.entity("water").extract("time", "year"))
 
     """
     kwargs.update({"grouper": grouper})
     return self._append_verb("groupby", collector = True, **kwargs)
 
   def groupby_time(self, component = None, **kwargs):
-    """Group a data cube along the temporal dimension.
+    """Group an array along the temporal dimension.
 
     This verb is a shortcut for first extracting the temporal dimension with
-    the extract verb (usually only a specific component of that dimension),
-    and then using that as grouper in the groupby verb.
+    the :meth:`extract` verb (usually only a specific component of that
+    dimension, such as *year* or *month*), and then using the resulting
+    one-dimensional array as grouper in the :meth:`groupby` verb.
 
     Parameters
     -----------
       component : :obj:`str`, optional
-        Name of a specific component of the dimension coordinates to be
-        extracted, e.g. *year*, *month* or *day* for temporal dimension
-        coordinates.
+        Name of a specific component of the temporal dimension coordinates to
+        be extracted, e.g. *year*, *month* or *day*.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Cube.groupby <processor.structures.Cube.groupby>`.
+        :obj:`SemanticArray.groupby <processor.structures.SemanticArray.groupby>`.
 
     Returns
     --------
-      :obj:`CubeCollectionProxy`
+      :obj:`CollectionProxy`
+
+    Examples
+    --------
+    >>> sq.entity("water").groupby_time("year")
 
     """
-    eval_obj = CubeProxy({"type": "self"})
+    eval_obj = ArrayProxy({"type": "self"})
     if isinstance(component, list):
       comps = [eval_obj.extract("time", x) for x in component]
-      grouper = CubeCollectionProxy({"type": "collection", "elements": comps})
+      grouper = CollectionProxy({"type": "collection", "elements": comps})
     else:
       grouper = eval_obj.extract("time", component)
     kwargs.update({"grouper": grouper})
     return self._append_verb("groupby", collector = True, **kwargs)
 
   def groupby_space(self, component = None, **kwargs):
-    """Group a data cube along the spatial dimension.
+    """Group an array along the spatial dimension.
 
     This verb is a shortcut for first extracting the spatial dimension with
-    the extract verb (usually only a specific component of that dimension),
-    and then using that as grouper in the groupby verb.
+    the :meth:`extract` verb (usually only a specific component of that
+    dimension, such as the spatial feature indices), and then using the
+    resulting one-dimensional array as grouper in the :meth:`groupby` verb.
 
     Parameters
     -----------
       component : :obj:`str`, optional
-        Name of a specific component of the dimension coordinates to be
-        extracted, e.g. *year*, *month* or *day* for spatial dimension
-        coordinates.
+        Name of a specific component of the spatial dimension coordinates to
+        be extracted, e.g. *feature*.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Cube.groupby <processor.structures.Cube.groupby>`.
+        :obj:`SemanticArray.groupby <processor.structures.SemanticArray.groupby>`.
 
     Returns
     --------
-      :obj:`CubeCollectionProxy`
+      :obj:`CollectionProxy`
+
+    Examples
+    --------
+    >>> sq.entity("water").groupby_space("feature")
 
     """
-    eval_obj = CubeProxy({"type": "self"})
+    eval_obj = ArrayProxy({"type": "self"})
     if isinstance(component, list):
       comps = [eval_obj.extract("space", x) for x in component]
-      grouper = CubeCollectionProxy({"type": "collection", "elements": comps})
+      grouper = CollectionProxy({"type": "collection", "elements": comps})
     else:
       grouper = eval_obj.extract("space", component)
     kwargs.update({"grouper": grouper})
     return self._append_verb("groupby", collector = True, **kwargs)
 
-  def label(self, label, **kwargs):
-    """Label a data cube with a word or phrase.
-
-    Parameters
-    -----------
-      label : :obj:`str`
-        Character label to be attached to the input cube.
-      **kwargs:
-        Additional keyword arguments passed on to
-        :obj:`Cube.label <processor.structures.Cube.label>`.
-
-    Returns
-    --------
-      :obj:`CubeProxy`
-
-    """
-    kwargs.update({"label": label})
-    return self._append_verb("label", **kwargs)
-
   def reduce(self, dimension, reducer, **kwargs):
-    """Reduce the dimensionality of a data cube.
+    """Reduce the dimensionality of an array.
+
+    Reduces dimensionality by applying a reducer function that returns a single
+    value for each column along a given dimension, e.g. a summary statistic or
+    a boolean.
+
+    See `here`_ for an overview of the built-in reducer functions that can be
+    chosen from (they should be referred to by their name, without the
+    underscore at the end).
 
     Parameters
     -----------
       dimension : :obj:`str`
-        Name of the dimension to apply the reduction function to.
+        Name of the dimension to be reduced.
       operator : :obj:`str`
-        Name of the reducer function to be applied. Should either be one
-        of the built-in reducers of semantique, or a user-defined reducer
-        which will be provided to the query processor when executing the query
-        recipe.
+        Name of the reducer function to be applied.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Cube.reduce <processor.structures.Cube.reduce>`.
+        :obj:`SemanticArray.reduce <processor.structures.SemanticArray.reduce>`.
 
     Returns
     --------
-      :obj:`CubeProxy`
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> sq.entity("water").reduce("time", "count")
+
+    .. _here:
+      https://zgis.github.io/semantique/reference.html#reducer-functions
 
     """
     kwargs.update({"dimension": dimension, "reducer": reducer})
     return self._append_verb("reduce", **kwargs)
 
-class CubeCollectionProxy(dict):
-  """Proxy object of a data cube collection.
+  def name(self, name, **kwargs):
+    """Assign a name to an array.
 
-  This proxy object serves as a substitute for a collecton of real data cube
-  objects. All data cube collection specific actions (i.e. *verbs*) can be
-  called as methods of this object. However, the proxy object iself does not
-  contain any data, and the actions will not be applied. Instead, a textual
-  recipe is constructed which will be executed only at the stage of query
-  processing.
+    Parameters
+    -----------
+      name : :obj:`str`
+        Name to be assigned to the input.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`SemanticArray.name <processor.structures.SemanticArray.name>`.
+
+    Returns
+    --------
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> sq.entity("water").name("foo")
+
+    """
+    kwargs.update({"name": name})
+    return self._append_verb("name", **kwargs)
+
+class CollectionProxy(dict):
+  """Proxy object of an array collection.
+
+  This proxy object serves as a placeholder for a collection of multiple
+  multi-dimensional arrays. All collection specific actions (i.e. *verbs*) can
+  be called as methods of this object. However, the proxy object iself does not
+  contain any data, and the actions are not applied. Instead, a textual recipe
+  is constructed which will be executed only at the stage of query processing.
 
   Parameters
   ----------
     obj : :obj:`dict`
-      Textual reference that can be solved by the query
-      processor. Normally not constructed by hand, but obtained by calling one
-      of the dedicated reference functions or by applying verbs to existing
-      CubeProxy or CubeCollectionProxy objects.
+      Textual reference that can be solved by the query processor. Normally not
+      constructed by hand, but obtained by calling one of the dedicated
+      reference functions or by applying verbs to existing :obj:`ArrayProxy` or
+      :obj:`CollectionProxy` instances.
 
   """
 
   def __init__(self, obj):
-    super(CubeCollectionProxy, self).__init__(obj)
+    super(CollectionProxy, self).__init__(obj)
 
   def _append_verb(self, name, combiner = False, **kwargs):
     verb = {"type": "verb", "name": name, "params": kwargs}
     if "do" in self:
       self["do"].append(verb)
-      return CubeProxy(self) if combiner else self
+      return ArrayProxy(self) if combiner else self
     else:
       new = {"type": "processing_chain", "with": self, "do": [verb]}
-      return CubeProxy(new) if combiner else CubeCollectionProxy(new)
+      return ArrayProxy(new) if combiner else CollectionProxy(new)
 
   def compose(self, **kwargs):
-    """Create a categorical composition from multiple data cubes.
+    """Create a categorical composition of multiple binary arrays.
+
+    The categorical composition contains a value of 1 for each pixel being
+    "true" in the first array of the collection, a value of 2 for each pixel
+    being "true" in the second array of the collection, et cetera. If a pixel
+    is "true" in more than one array of the collection, the first of those is
+    prioritized. If a pixel is not "true" in any array of the collection it
+    gets assigned a nodata value.
 
     Parameters
     -----------
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`CubeCollection.compose <processor.structures.CubeCollection.compose>`.
+        :obj:`Collection.compose <processor.structures.Collection.compose>`.
 
     Returns
     --------
-      :obj:`CubeProxy`
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> sq.collection(sq.entity("water"), sq.entity("ice")).compose()
 
     """
     return self._append_verb("compose", combiner = True)
 
   def concatenate(self, dimension, **kwargs):
-    """Concatenate multiple data cubes along a new or existing dimension.
+    """Concatenate multiple arrays along a new or existing dimension.
 
     Parameters
     -----------
@@ -408,46 +482,56 @@ class CubeCollectionProxy(dict):
         a dimension that does not exist in any of the collection members.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`CubeCollection.concatenate <processor.structures.CubeCollection.concatenate>`.
+        :obj:`Collection.concatenate <processor.structures.Collection.concatenate>`.
 
     Returns
     --------
-      :obj:`CubeProxy`
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> sq.collection(sq.entity("water"), sq.entity("ice")).concatenate("concept")
 
     """
     kwargs.update({"dimension": dimension})
     return self._append_verb("concatenate", combiner = True, **kwargs)
 
   def merge(self, reducer, **kwargs):
-    """Merge values of multiple data cubes into a single value per pixel.
+    """Merge pixel values of multiple arrays into a single value per pixel.
+
+    The values of corresponding pixels (i.e. having the same dimension
+    coordinates) are merged by applying a reducer function. See `here`_ for an
+    overview of the built-in reducer functions that can be chosen from (they
+    should be referred to by their name, without the underscore at the end).
 
     Parameters
     -----------
       reducer : :obj:`str`
-        Name of the reducer function to be applied in order to reduce multiple
-        values per pixel into a single value. Should either be one of the
-        built-in reducers of semantique, or a user-defined reducer which will
-        be provided to the query processor when executing the query recipe.
+        Name of the reducer function to be applied.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`CubeCollection.merge <processor.structures.CubeCollection.merge>`.
+        :obj:`Collection.merge <processor.structures.Collection.merge>`.
 
     Returns
     --------
-      :obj:`CubeProxy`
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> sq.collection(sq.entity("water"), sq.entity("ice")).merge("or")
 
     """
     kwargs.update({"reducer": reducer})
     return self._append_verb("merge", combiner = True, **kwargs)
 
   def evaluate(self, operator, y = None, **kwargs):
-    """Apply the evaluate verb to each data cube in a collection.
+    """Apply the evaluate verb to each array in a collection.
 
-    See :meth:`CubeProxy.evaluate`.
+    See :meth:`ArrayProxy.evaluate`.
 
     Returns
     --------
-      :obj:`CubeCollectionProxy`
+      :obj:`CollectionProxy`
 
     """
     if y is None:
@@ -457,13 +541,13 @@ class CubeCollectionProxy(dict):
     return self._append_verb("evaluate", **kwargs)
 
   def extract(self, dimension, component = None, **kwargs):
-    """Apply the extract verb to each data cube in a collection.
+    """Apply the extract verb to each array in a collection.
 
-    See :meth:`CubeProxy.extract`.
+    See :meth:`ArrayProxy.extract`.
 
     Returns
     --------
-      :obj:`CubeCollectionProxy`
+      :obj:`CollectionProxy`
 
     """
     if component is None:
@@ -473,88 +557,80 @@ class CubeCollectionProxy(dict):
     return self._append_verb("extract", **kwargs)
 
   def filter(self, filterer, **kwargs):
-    """Apply the filter verb to each data cube in a collection.
+    """Apply the filter verb to each array in a collection.
 
-    See :meth:`CubeProxy.filter`.
+    See :meth:`ArrayProxy.filter`.
 
     Returns
     --------
-      :obj:`CubeCollectionProxy`
+      :obj:`CollectionProxy`
 
     """
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
   def filter_time(self, *filterer, **kwargs):
-    """Apply the filter_time verb to each data cube in a collection.
+    """Apply the filter_time verb to each array in a collection.
 
-    See :meth:`CubeProxy.filter_time`.
+    See :meth:`ArrayProxy.filter_time`.
 
     Returns
     --------
-      :obj:`CubeCollectionProxy`
+      :obj:`CollectionProxy`
 
     """
     component, operator, y = _parse_filter_expression(*filterer)
-    eval_obj = CubeProxy({"type": "self"})
+    eval_obj = ArrayProxy({"type": "self"})
     filterer = eval_obj.extract("time", component).evaluate(operator, y)
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
   def filter_space(self, *filterer, **kwargs):
-    """Apply the filter_space verb to each data cube in a collection.
+    """Apply the filter_space verb to each array in a collection.
 
-    See :meth:`CubeProxy.filter_space`.
+    See :meth:`ArrayProxy.filter_space`.
 
     Returns
     --------
-      :obj:`CubeCollectionProxy`
+      :obj:`CollectionProxy`
 
     """
     component, operator, y = _parse_filter_expression(*filterer)
-    eval_obj = CubeProxy({"type": "self"})
+    eval_obj = ArrayProxy({"type": "self"})
     filterer = eval_obj.extract("space", component).evaluate(operator, y)
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
-  def label(self, label, **kwargs):
-    """Apply the label verb to each data cube in a collection.
-
-    See :meth:`CubeProxy.label`.
-
-    Returns
-    --------
-      :obj:`CubeCollectionProxy`
-
-    """
-    kwargs.update({"label": label})
-    return self._append_verb("label", **kwargs)
-
   def reduce(self, dimension, reducer, **kwargs):
-    """Apply the reduce verb to each data cube in a collection.
+    """Apply the reduce verb to each array in a collection.
 
-    See :meth:`CubeProxy.reduce`.
+    See :meth:`ArrayProxy.reduce`.
 
     Returns
     --------
-      :obj:`CubeCollectionProxy`
+      :obj:`CollectionProxy`
 
     """
     kwargs.update({"dimension": dimension, "reducer": reducer})
     return self._append_verb("reduce", **kwargs)
 
-def concept(*reference):
+def concept(*reference, property = None):
   """Reference to a semantic concept.
 
   Parameters
   ----------
     *reference : :obj:`str`
-      Keys pointing to the ruleset defining this concept in the rules file of
-      an ontology.
+      The index of the semantic concept in the mapping against which the query
+      is processed.
+    property : :obj:`str`
+      Name of a property of the referenced semantic concept. If given, only
+      this property of the semantic concept is translated. If :obj:`None`,
+      all properties of the semantic concept are translated and combined into a
+      single semantic array.
 
   Returns
   -------
-    :obj:`CubeProxy`
+    :obj:`ArrayProxy`
       A textual reference to the concept that can be solved by the query
       processor.
 
@@ -571,7 +647,7 @@ def concept(*reference):
 
   """
   obj = {"type": "concept", "reference": reference}
-  return CubeProxy(obj)
+  return ArrayProxy(obj)
 
 def entity(*reference, property = None):
   """Reference to a semantic concept being an entity.
@@ -579,12 +655,17 @@ def entity(*reference, property = None):
   Parameters
   ----------
     *reference : :obj:`str`
-      Keys pointing to the ruleset defining this concept within the entity
-      category in the rules file of an ontology.
+      The index of the semantic concept within the "entity" category of the
+      mapping against which the query is processed.
+    property : :obj:`str`
+      Name of a property of the referenced semantic concept. If given, only
+      this property of the semantic concept is translated. If :obj:`None`,
+      all properties of the semantic concept are translated and combined into a
+      single semantic array.
 
   Returns
   -------
-    :obj:`CubeProxy`
+    :obj:`ArrayProxy`
       A textual reference to the concept that can be solved by the query
       processor.
 
@@ -603,7 +684,7 @@ def entity(*reference, property = None):
   obj = {"type": "concept", "reference": ("entity",) + reference}
   if property is not None:
     obj["property"] = property
-  return CubeProxy(obj)
+  return ArrayProxy(obj)
 
 def event(*reference, property = None):
   """Reference to a semantic concept being an event.
@@ -611,12 +692,17 @@ def event(*reference, property = None):
   Parameters
   ----------
     *reference : :obj:`str`
-      Keys pointing to the ruleset defining this concept within the event
-      category in the rules file of an ontology.
+      The index of the semantic concept within the "event" category of the
+      mapping against which the query is processed.
+    property : :obj:`str`
+      Name of a property of the referenced semantic concept. If given, only
+      this property of the semantic concept is translated. If :obj:`None`,
+      all properties of the semantic concept are translated and combined into a
+      single semantic array.
 
   Returns
   -------
-    :obj:`CubeProxy`
+    :obj:`ArrayProxy`
       A textual reference to the concept that can be solved by the query
       processor.
 
@@ -635,28 +721,27 @@ def event(*reference, property = None):
   obj = {"type": "concept", "reference": ("event",) + reference}
   if property is not None:
     obj["property"] = property
-  return CubeProxy(obj)
+  return ArrayProxy(obj)
 
-def resource(*reference):
-  """Reference to a factbase resource.
+def layer(*reference):
+  """Reference to a data layer in an EO data cube.
 
   Parameters
   ----------
     *reference : :obj:`str`
-      Keys pointing to the metadata object describing the resource in the
-      layout file of a factbase.
+      The index of the data layer in the layout of the EO data cube.
 
   Returns
   -------
-    :obj:`CubeProxy`
-      A textual reference to the resource that can be solved by the query
+    :obj:`ArrayProxy`
+      A textual reference to the layer that can be solved by the query
       processor.
 
   Examples
   --------
-  >>> sq.resource("appearance", "brightness")
+  >>> sq.layer("appearance", "brightness")
   {
-    "type": "resource",
+    "type": "layer",
     "reference": [
       "appearance",
       "brightness"
@@ -664,29 +749,29 @@ def resource(*reference):
   }
 
   """
-  obj = {"type": "resource", "reference": reference}
-  return CubeProxy(obj)
+  obj = {"type": "layer", "reference": reference}
+  return ArrayProxy(obj)
 
 def appearance(*reference):
-  """Reference to a factbase resource describing appearance.
+  """Reference to a data layer describing appearance.
 
   Parameters
   ----------
     *reference : :obj:`str`
-      Keys pointing to the metadata object describing the resource within the
-      appearance category in the layout file of a factbase.
+      The index of the data layer within the "appearance" category of the
+      layout of the EO data cube.
 
   Returns
   -------
-    :obj:`CubeProxy`
-      A textual reference to the resource that can be solved by the query
+    :obj:`ArrayProxy`
+      A textual reference to the layer that can be solved by the query
       processor.
 
   Examples
   --------
   >>> sq.appearance("brightness")
   {
-    "type": "resource",
+    "type": "layer",
     "reference": [
       "appearance",
       "brightness"
@@ -694,48 +779,48 @@ def appearance(*reference):
   }
 
   """
-  obj = {"type": "resource", "reference": ("appearance",) + reference}
-  return CubeProxy(obj)
+  obj = {"type": "layer", "reference": ("appearance",) + reference}
+  return ArrayProxy(obj)
 
 def artifacts(*reference):
-  """Reference to a factbase resource describing artifacts.
+  """Reference to a data layer describing artifacts.
 
   Parameters
   ----------
     *reference : :obj:`str`
-      Keys pointing to the metadata object describing the resource within the
-      artifacts category in the layout file of a factbase.
+      The index of the data layer within the "artifacts" category of the
+      layout of the EO data cube.
 
   Returns
   -------
-    :obj:`CubeProxy`
-      A textual reference to the resource that can be solved by the query
+    :obj:`ArrayProxy`
+      A textual reference to the layer that can be solved by the query
       processor.
 
   """
-  obj = {"type": "resource", "reference": ("artifacts",) + reference}
-  return CubeProxy(obj)
+  obj = {"type": "layer", "reference": ("artifacts",) + reference}
+  return ArrayProxy(obj)
 
 def atmosphere(*reference):
-  """Reference to a factbase resource describing atmosphere.
+  """Reference to a data layer describing atmosphere.
 
   Parameters
   ----------
     *reference : :obj:`str`
-      Keys pointing to the metadata object describing the resource within the
-      atmosphere category in the layout file of a factbase.
+      The index of the data layer within the "atmosphere" category of the
+      layout of the EO data cube.
 
   Returns
   -------
-    :obj:`CubeProxy`
-      A textual reference to the resource that can be solved by the query
+    :obj:`ArrayProxy`
+      A textual reference to the layer that can be solved by the query
       processor.
 
   Examples
   --------
   >>> sq.atmosphere("Color type")
   {
-    "type": "resource",
+    "type": "layer",
     "reference": [
       "atmosphere",
       "Color type"
@@ -743,29 +828,29 @@ def atmosphere(*reference):
   }
 
   """
-  obj = {"type": "resource", "reference": ("atmosphere",) + reference}
-  return CubeProxy(obj)
+  obj = {"type": "layer", "reference": ("atmosphere",) + reference}
+  return ArrayProxy(obj)
 
 def reflectance(*reference):
-  """Reference to a factbase resource describing reflectance.
+  """Reference to a data layer describing reflectance.
 
   Parameters
   ----------
     *reference : :obj:`str`
-      Keys pointing to the metadata object describing the resource within the
-      reflectance category in the layout file of a factbase.
+      The index of the data layer within the "reflectance" category of the
+      layout of the EO data cube.
 
   Returns
   -------
-    :obj:`CubeProxy`
-      A textual reference to the resource that can be solved by the query
+    :obj:`ArrayProxy`
+      A textual reference to the layer that can be solved by the query
       processor.
 
   Examples
   --------
   >>> sq.reflectance("s2_band01")
   {
-    "type": "resource",
+    "type": "layer",
     "reference": [
       "reflectance",
       "s2_band01"
@@ -773,29 +858,29 @@ def reflectance(*reference):
   }
 
   """
-  obj = {"type": "resource", "reference": ("reflectance",) + reference}
-  return CubeProxy(obj)
+  obj = {"type": "layer", "reference": ("reflectance",) + reference}
+  return ArrayProxy(obj)
 
 def topography(*reference):
-  """Reference to a factbase resource describing topography.
+  """Reference to a data layer describing topography.
 
   Parameters
   ----------
     *reference : :obj:`str`
-      Keys pointing to the metadata object describing the resource within the
-      topography category in the layout file of a factbase.
+      The index of the data layer within the "topography" category of the
+      layout of the EO data cube.
 
   Returns
   -------
-    :obj:`CubeProxy`
-      A textual reference to the resource that can be solved by the query
+    :obj:`ArrayProxy`
+      A textual reference to the layer that can be solved by the query
       processor.
 
   Examples
   --------
   >>> sq.topography("elevation")
   {
-    "type": "resource",
+    "type": "layer",
     "reference": [
       "topography",
       "elevation"
@@ -803,8 +888,8 @@ def topography(*reference):
   }
 
   """
-  obj = {"type": "resource", "reference": ("topography",) + reference}
-  return CubeProxy(obj)
+  obj = {"type": "layer", "reference": ("topography",) + reference}
+  return ArrayProxy(obj)
 
 def result(name):
   """Reference to a another result definition.
@@ -816,7 +901,7 @@ def result(name):
 
   Returns
   -------
-    :obj:`CubeProxy`
+    :obj:`ArrayProxy`
       A textual reference to the result that can be solved by the query
       processor.
 
@@ -830,14 +915,14 @@ def result(name):
 
   """
   obj = {"type": "result", "name": name}
-  return CubeProxy(obj)
+  return ArrayProxy(obj)
 
 def self():
   """Reference to the active evaluation object itself.
 
   Returns
   -------
-    :obj:`CubeProxy`
+    :obj:`ArrayProxy`
       A textual reference to the active evaluation object that can be
       solved by the query processor.
 
@@ -850,19 +935,19 @@ def self():
 
   """
   obj = {"type": "self"}
-  return CubeProxy(obj)
+  return ArrayProxy(obj)
 
-def collection(*cubes):
-  """Reference multiple data cubes at once.
+def collection(*elements):
+  """Reference to a collection of multiple arrays.
 
   Parameters
   ----------
-    *cubes : :obj:`CubeProxy`
+    *elements : :obj:`ArrayProxy`
       Elements of the collection.
 
   Returns
   -------
-    :obj:`CubeCollectionProxy`
+    :obj:`CollectionProxy`
       A textual reference to the cube collection that can be solved by the
       query processor.
 
@@ -890,76 +975,74 @@ def collection(*cubes):
   }
 
   """
-  obj = {"type": "collection", "elements": list(cubes)}
-  return CubeCollectionProxy(obj)
+  obj = {"type": "collection", "elements": list(elements)}
+  return CollectionProxy(obj)
 
-def value_label(label):
-  """Label of a numeric index.
+def label(x):
+  """Character label of a numeric index.
 
-  Special value representing a label of a numeric index. Can be used to query
-  data cubes by character labels rather than numerical indices, which are the
-  actual pixel values.
+  Object representing a character label of a numeric index. Can be used to
+  query values in an array by their label rather than by the value itself.
 
   Parameters
   ----------
-    label : :obj:`str`
-      The label.
+    x : :obj:`str`
+      The character label of the value of interest.
 
   Returns
   -------
     :obj:`dict`
-      JSON-serializable object that contains the value label, and can be
+      JSON-serializable object that contains the label, and can be
       understood by the query processor as such.
 
   """
-  obj = {"type": "value_label", "label": label}
+  obj = {"type": "label", "content": x}
   return obj
 
-def value_range(start, end):
-  """Range of numerical or ordinal values.
+def interval(a, b):
+  """Interval of numerical or ordinal values.
 
-  Special value representing a set of values ranging from a given start to a
-  given end. All values in between those are part of the range, no matter their
-  precision. The range forms a closed interval, meaning that the start and end
-  themselves also belong to the range. By definition, the given bounds should
-  ordinal or numerical values, and the start should be smaller than or equal to
-  the end.
+  Object representing a set of values that fall inside the given bounds of an
+  interval. The interval is closed at both sides, meaning that both of its
+  bounds belong to the set. By definition, the given bounds should be ordinal
+  or numerical values, and the lower bound should be smaller than or equal to
+  the upper bound.
 
   Parameters
   ----------
-    start : :obj:`int` or :obj:`float`
-      The first value in the range.
-    end : :obj:`int` or :obj:`float`
-      The last value in the range.
+    a : :obj:`int` or :obj:`float`
+      The lower bound of the interval.
+    b : :obj:`int` or :obj:`float`
+      The upper bound of the interval.
 
   Returns
   --------
     :obj:`dict`
-      JSON-serializable object that contains the bounds of the time
-      interval, and can be understood by the query processor as such.
+      JSON-serializable object that contains the bounds of the interval, and
+      can be understood by the query processor as such.
 
   """
-  if end < start:
-    raise exceptions.InvalidValueRangeException(
-      "The start of value range cannot be smaller than its end"
+  if b < a:
+    raise exceptions.InvalidIntervalError(
+      "The lower bound of an interval cannot be smaller than the upper bound"
     )
-  obj = {"type": "value_range", "start": start, "end": end}
+  obj = {"type": "interval", "content": [a, b]}
   return obj
 
-def geometries(value, **kwargs):
-  """Spatial geometries.
+def geometry(x, **kwargs):
+  """Spatial geometry object.
 
-  Special value representing one or more spatial vector geometries, such as
-  points, lines or polygons. Can be used to apply spatial filters to data
-  cubes.
+  Object representing a spatial vector geometry, such as a point, a line, or a
+  polygon. Can be used to apply a spatial filter to an array.
 
   Parameters
   ----------
-    value
-      One or more spatial features containing the geometries. Should be given
-      as an object that can be understood by the initializer of
-      :class:`SpatialExtent <extent.SpatialExtent>`. This includes
-      :obj:`geopandas.GeoDataFrame` objects.
+    x
+      A spatial feature formatted as an object that can be understood by the
+      initializer of :class:`SpatialExtent <extent.SpatialExtent>`. This
+      includes :obj:`geopandas.GeoDataFrame` objects. If multiple features
+      are given they will be unioned into a multi-geometry, e.g. a multi-point,
+      multi-linestring or multi-polygon.
     **kwargs
       Additional keyword arguments passed on to the initializer of
       :class:`SpatialExtent <extent.SpatialExtent>`.
@@ -967,26 +1050,26 @@ def geometries(value, **kwargs):
   Returns
   -------
     :obj:`dict`
-      JSON-serializable object that contains the geometries, and can be
-      understood by the query processor as such.
+      JSON-serializable object that contains the spatial vector geometry, and
+      can be understood by the query processor as such.
 
   """
-  obj = {"type": "geometries", "value": SpatialExtent(value, **kwargs)}
+  obj = {"type": "geometry", "content": SpatialExtent(x, **kwargs)}
   return obj
 
-def time_instant(value, **kwargs):
+def time_instant(x, **kwargs):
   """Time instant.
 
-  Special value representing a single timestamp. Can be used to apply temporal
-  filters to data cubes.
+  Object representing a single time instant. Can be used to apply a temporal
+  filter to an array.
 
   Parameters
   ----------
-    value
-      The time instant as object that can be understood by the initializer of
-      :class:`TemporalExtent <extent.TemporalExtent>`. This includes
-      :obj:`pandas.Timestamp` objects, as well as text representations of time
-      instants in different formats.
+    x
+      A time instant formatted as an object that can be understood by the
+      initializer of :class:`TemporalExtent <extent.TemporalExtent>`. This
+      includes :obj:`pandas.Timestamp` objects, as well as text representations
+      of time instants in different formats.
     **kwargs
       Additional keyword arguments passed on to the initializer of
       :class:`TemporalExtent <extent.TemporalExtent>`.
@@ -998,24 +1081,32 @@ def time_instant(value, **kwargs):
       can be understood by the query processor as such.
 
   """
-  obj = {"type": "time_instant", "value": TemporalExtent(value, **kwargs)}
+  obj = {"type": "time_instant", "content": TemporalExtent(x, **kwargs)}
   return obj
 
-def time_interval(*bounds, **kwargs):
+def time_interval(a, b, **kwargs):
   """Time interval.
 
-  Special value representing an interval between two timestamps. Can be used to
-  apply temporal filters to data cubes.
+  Object representing a set of timestamps that fall inside the given bounds of
+  a time interval. The interval is closed at both sides, meaning that both of
+  its bounds belong to the set. By definition, the given bounds should be time
+  instants, and the lower bound should be smaller than or equal to the upper
+  bound.
 
   Parameters
   ----------
-    *bounds
-      Respectively the start and end of the time interval. Should be given as
-      objects that can be understood by the initializer of
+    a
+      The lower bound of the interval, which should be a time instant formatted
+      as an object that can be understood by the initializer of
       :class:`TemporalExtent <extent.TemporalExtent>`. This includes
       :obj:`pandas.Timestamp` objects, as well as text representations of time
-      instants in different formats. The interval is assumed to be closed at
-      both sides.
+      instants in different formats.
+    b
+      The upper bound of the interval, which should be a time instant formatted
+      as an object that can be understood by the initializer of
+      :class:`TemporalExtent <extent.TemporalExtent>`. This includes
+      :obj:`pandas.Timestamp` objects, as well as text representations of time
+      instants in different formats.
     **kwargs
       Additional keyword arguments passed on to the initializer of
       :class:`TemporalExtent <extent.TemporalExtent>`.
@@ -1027,5 +1118,5 @@ def time_interval(*bounds, **kwargs):
       interval, and can be understood by the query processor as such.
 
   """
-  obj = {"type": "time_interval", "value": TemporalExtent(*bounds, **kwargs)}
+  obj = {"type": "time_interval", "content": TemporalExtent(a, b, **kwargs)}
   return obj

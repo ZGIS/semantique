@@ -22,10 +22,10 @@ class QueryProcessor():
   ----------
     recipe : QueryRecipe
       The query recipe to be processed.
-    factbase : Factbase
-      The factbase instance to process the query against.
-    ontology : Ontology
-      The ontology instance to process the query against.
+    datacube : Datacube
+      The datacube instance to process the query against.
+    mapping : Mapping
+      The mapping instance to process the query against.
     extent : :obj:`xarray.DataArray`
       The spatio-temporal extent in which the query should be processed. Should
       be given as an array with a temporal dimension as well as a stacked
@@ -39,46 +39,46 @@ class QueryProcessor():
       Operator functions that may be used when evaluating expressions with the
       evaluate verb *in addition* to the built-in operators in semantique.
     reducers : :obj:`dict`
-      Reducer functions that may be used when reducing data cube dimensions
+      Reducer functions that may be used when reducing array dimensions
       with the reduce verb. If :obj:`None`, all built-in reducers in semantique
       will be provided automatically.
     extra_reducers : :obj:`dict`, optional
-      Reducer functions that may be used when reducing data cube dimensions
+      Reducer functions that may be used when reducing array dimensions
       with the reduce verb *in addition* to the built-in reducers in
       semantique.
     track_types : :obj:`bool`
-      Should the query processor keep track of the value type of data cubes
+      Should the query processor keep track of the value type of arrays
       when applying processes, and promote them if necessary? Keeping track of
       value types also means throwing errors whenever a value type is not
       supported by a specific process.
     trim_filter : :obj:`bool`
-      Should data cubes be trimmed after a filter verb is applied to them?
+      Should arrays be trimmed after a filter verb is applied to them?
       Trimming means that all coordinates for which all values are nodata, are
       dropped from the array. The spatial dimension (if present) is treated
       differently, by trimming it only at the edges, and thus maintaining the
       regularity of the spatial dimension.
     trim_results : :obj:`bool`
-      Should result data cubes be trimmed before returning the response?
+      Should result arrays be trimmed before returning the response?
       Trimming means that all coordinates for which all values are nodata, are
       dropped from the array. The spatial dimension (if present) is treated
       differently, by trimming it only at the edges, and thus maintaining the
       regularity of the spatial dimension.
     unstack_results : :obj:`bool`
-      Should the spatial dimension (if present) in result data cubes be
+      Should the spatial dimension (if present) in result arrays be
       unstacked into respectively the separate x and y dimensions before
       returning the response?
 
   """
 
-  def __init__(self, recipe, factbase, ontology, extent, operators = None,
+  def __init__(self, recipe, datacube, mapping, extent, operators = None,
                extra_operators = None, reducers = None, extra_reducers = None,
                track_types = True, trim_filter = False, trim_results = True,
                unstack_results = True):
     self._eval_obj = [None]
     self._response = {}
     self.recipe = recipe
-    self.factbase = factbase
-    self.ontology = ontology
+    self.datacube = datacube
+    self.mapping = mapping
     self.extent = extent
     self.track_types = track_types
     self.trim_filter = trim_filter
@@ -112,24 +112,24 @@ class QueryProcessor():
     self._recipe = value
 
   @property
-  def factbase(self):
-    """Factbase: The factbase instance to process the query
+  def datacube(self):
+    """Datacube: The datacube instance to process the query
     against."""
-    return self._factbase
+    return self._datacube
 
-  @factbase.setter
-  def factbase(self, value):
-    self._factbase = value
+  @datacube.setter
+  def datacube(self, value):
+    self._datacube = value
 
   @property
-  def ontology(self):
-    """Ontology: The ontology instance to process the query
+  def mapping(self):
+    """Mapping: The mapping instance to process the query
     against."""
-    return self._ontology
+    return self._mapping
 
-  @ontology.setter
-  def ontology(self, value):
-    self._ontology = value
+  @mapping.setter
+  def mapping(self, value):
+    self._mapping = value
 
   @property
   def extent(self):
@@ -215,7 +215,7 @@ class QueryProcessor():
     self._unstack_results = value
 
   @classmethod
-  def parse(cls, recipe, factbase, ontology, space, time,
+  def parse(cls, recipe, datacube, mapping, space, time,
             spatial_resolution, crs = None, tz = None, **config):
     """Parse a semantic query.
 
@@ -231,10 +231,10 @@ class QueryProcessor():
     ----------
       recipe : QueryRecipe
         The query recipe to be processed.
-      factbase : Factbase
-        The factbase instance to process the query against.
-      ontology : Ontology
-        The ontology instance to process the query against.
+      datacube : Datacube
+        The datacube instance to process the query against.
+      mapping : Mapping
+        The mapping instance to process the query against.
       space : SpatialExtent
         The spatial extent in which the query should be processed.
       time : TemporalExtent
@@ -272,7 +272,7 @@ class QueryProcessor():
       Ideally, parsing should also take care of validating the components and
       their interrelations. For example, it should check if referenced concepts
       in the provided query recipe are actually defined in the provided
-      ontology. Such functionality is not implemented yet.
+      mapping. Such functionality is not implemented yet.
 
     """
     logger.info("Started parsing the semantic query")
@@ -287,7 +287,7 @@ class QueryProcessor():
     )
     logger.debug(f"Created the spatio-temporal extent cube:\n{extent}")
     # Step II: Initialize the QueryProcessor instance.
-    out = cls(recipe, factbase, ontology, extent, **config)
+    out = cls(recipe, datacube, mapping, extent, **config)
     # Return.
     logger.info("Finished parsing the semantic query")
     return out
@@ -324,13 +324,13 @@ class QueryProcessor():
 
     During query execution, the query processor executes the result
     instructions of the query recipe. It solves all references, evaluates them
-    into data cubes, and applies the defined actions to them.
+    into arrays, and applies the defined actions to them.
 
     Returns
     -------
       :obj:`QueryProcessor`
         An updated query processor instance, with a :attr:`response` property
-        containing the resulting data cubes.
+        containing the resulting arrays.
 
     """
     logger.info("Started executing the semantic query")
@@ -433,11 +433,11 @@ class QueryProcessor():
 
     """
     logger.debug(f"Translating concept {block['reference']}")
-    out = self._ontology.translate(
+    out = self._mapping.translate(
       *block["reference"],
       property = block["property"] if "property" in block else None,
       extent = self._extent,
-      factbase = self._factbase,
+      datacube = self._datacube,
       eval_obj = self._get_eval_obj(),
       operators = self._operators,
       reducers = self._reducers,
@@ -447,25 +447,25 @@ class QueryProcessor():
     logger.debug(f"Translated concept {block['reference']}:\n{out}")
     return out
 
-  def handle_resource(self, block):
-    """Handler for data resource references.
+  def handle_layer(self, block):
+    """Handler for data layer references.
 
     Parameters
     ----------
       block : :obj:`dict`
-        Textual representation of a building block of type "resource".
+        Textual representation of a building block of type "layer".
 
     Returns
     -------
       :obj:`xarray.DataArray`
 
     """
-    logger.debug(f"Retrieving resource {block['reference']}")
-    out = self._factbase.retrieve(
+    logger.debug(f"Retrieving layer {block['reference']}")
+    out = self._datacube.retrieve(
       *block["reference"],
       extent = self._extent
     )
-    logger.debug(f"Retrieved resource {block['reference']}:\n{out}")
+    logger.debug(f"Retrieved layer {block['reference']}:\n{out}")
     return out
 
   def handle_result(self, block):
@@ -682,21 +682,21 @@ class QueryProcessor():
     # Call verb.
     return self.call_verb("groupby", params)
 
-  def handle_label(self, block):
-    """Handler for the label verb.
+  def handle_name(self, block):
+    """Handler for the name verb.
 
     Parameters
     ----------
       block : :obj:`dict`
         Textual representation of a building block of type "verb" and name
-        "label".
+        "name".
 
     Returns
     -------
       :obj:`xarray.DataArray` or :obj:`CubeCollection <semantique.processor.structures.CubeCollection>`
 
     """
-    return self.call_verb("label", block["params"])
+    return self.call_verb("name", block["params"])
 
   def handle_reduce(self, block):
     """Handler for the reduce verb.
@@ -784,13 +784,13 @@ class QueryProcessor():
     # Call verb.
     return self.call_verb("merge", params)
 
-  def handle_value_label(self, block):
+  def handle_label(self, block):
     """Handler for value labels.
 
     Parameters
     ----------
       block : :obj:`dict`
-        Textual representation of a building block of type "value_label".
+        Textual representation of a building block of type "label".
 
     Returns
     -------
@@ -800,56 +800,55 @@ class QueryProcessor():
     Raises
     -------
       :obj:`exceptions.UnknownLabelError`
-        If the value label is not used for any value in the active evaluation
-        object, or the active evaluation object has no value labels defined at
-        all.
+        If the label is not used for any value in the active evaluation object,
+        or the active evaluation object has no value labels defined at all.
 
     """
     obj = self._get_eval_obj()
-    mapping = obj.sq.value_labels
-    if mapping is None:
+    label_mapping = obj.sq.value_labels
+    if label_mapping is None:
       raise exceptions.UnknownLabelError(
         "Active evaluation object has no value labels defined"
       )
-    label = block["label"]
+    label = block["content"]
     value = None
-    for i, x in enumerate(mapping.values()):
+    for i, x in enumerate(label_mapping.values()):
       if x == label:
-        value = list(mapping.keys())[i]
+        value = list(label_mapping.keys())[i]
         break
     if value is None:
       raise exceptions.UnknownLabelError(
         f"There is no value with label '{label}'"
       )
-    logger.debug(f"Matched value label '{label}' with value {value}")
+    logger.debug(f"Matched label '{label}' with value {value}")
     return value
 
-  def handle_value_range(self, block):
-    start = block["start"]
-    end = block["end"]
-    out = values.ValueRange(start, end)
-    logger.debug(f"Created a value range object with bounds {[start, end]}")
+  def handle_interval(self, block):
+    start = block["content"][0]
+    end = block["content"][1]
+    out = values.Interval(start, end)
+    logger.debug(f"Created an interval object with bounds {[start, end]}")
     return out
 
-  def handle_geometries(self, block):
-    """Handler for spatial features.
+  def handle_geometry(self, block):
+    """Handler for spatial vector geometries.
 
     Parameters
     ----------
       block : :obj:`dict`
-        Textual representation of a building block of type "geometries".
+        Textual representation of a building block of type "geometry".
 
     Returns
     -------
       :obj:`geopandas.GeoDataFrame`
 
     """
-    feats = block["value"]["features"]
-    crs = pyproj.CRS.from_string(block["value"]["crs"])
+    feats = block["content"]["features"]
+    crs = pyproj.CRS.from_string(block["content"]["crs"])
     out = gpd.GeoDataFrame.from_features(feats, crs = crs)
     if crs != self.crs:
       out = out.to_crs(self.crs)
-    logger.debug(f"Parsed geometries:\n{out}")
+    logger.debug(f"Parsed geometry:\n{out}")
     return out
 
   def handle_time_instant(self, block):
@@ -865,8 +864,8 @@ class QueryProcessor():
       :obj:`xarray.DataArray`
 
     """
-    dt = np.datetime64(block["value"]["datetime"])
-    tz = pytz.timezone(block["value"]["tz"])
+    dt = np.datetime64(block["content"]["start"])
+    tz = pytz.timezone(block["content"]["tz"])
     if tz != self.tz.zone:
       dt = utils.convert_datetime64(dt, tz, self.tz)
     out = np.array([dt])
@@ -886,9 +885,9 @@ class QueryProcessor():
       :obj:`xarray.DataArray`
 
     """
-    start = np.datetime64(block["value"]["start"])
-    end = np.datetime64(block["value"]["end"])
-    tz = pytz.timezone(block["value"]["tz"])
+    start = np.datetime64(block["content"]["start"])
+    end = np.datetime64(block["content"]["end"])
+    tz = pytz.timezone(block["content"]["tz"])
     if tz != self.tz:
       start = utils.convert_datetime64(start, tz, self.tz)
       end = utils.convert_datetime64(start, tz, self.tz)

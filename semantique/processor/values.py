@@ -1,53 +1,53 @@
 from semantique import exceptions
 
-class ValueRange(list):
-  """Object to represent a range of values.
+class Interval(list):
+  """Object to represent a set of values within the bounds of an interval.
 
-  A value range in semantique is defined by two values: the value at the start
-  of the range and the value at the end of the range. All values in between
-  those are part of the range, no matter their precision. The range forms a
-  closed interval, meaning that the start and end themselves also belong to the
-  range. By definition, the given values should be either :obj:`int` or
-  :obj:`float`, and the start should be smaller than or equal to the end.
+  The interval is closed at both sides, meaning that both of its bounds belong
+  to the set. By definition, the given bounds should be ordinal or numerical
+  values, and the lower bound should be smaller than or equal to the upper
+  bound.
 
   Parameters
   ----------
-    start : :obj:`int` or :obj:`float`
-      The first value in the range.
-    end : :obj:`int` or :obj:`float`
-      The last value in the range.
+    a : :obj:`int` or :obj:`float`
+      The lower bound of the interval.
+    b : :obj:`int` or :obj:`float`
+      The upper bound of the interval.
 
   """
 
-  def __init__(self, start, end):
-    if end < start:
-      raise exceptions.InvalidValueRangeException(
-        "The start of value range cannot be smaller than its end"
+  def __init__(self, lower, upper):
+    if upper < lower:
+      raise exceptions.InvalidIntervalError(
+        "The lower bound of an interval cannot be smaller than its upper bound"
       )
-    super(ValueRange, self).__init__([start, end])
+    super(Interval, self).__init__([lower, upper])
 
   @property
   def sq(self):
     """self: Semantique accessor.
 
     This is merely provided to ensure compatible behaviour with
-    :obj:`Cube <semantique.processor.structures.Cube>` objects, which are
-    modelled as an accessor to :obj:`xarray.DataArray` objects.
+    :obj:`SemanticArray <semantique.processor.structures.SemanticArray>`
+    objects, which are modelled as an accessor to :obj:`xarray.DataArray`
+    objects. It allows to call all other properties and methods through the
+    prefix ``.sq``.
 
     """
     return self
 
   @property
-  def start(self):
-    """:obj:`int` or :obj:`float`: The first value in the range."""
+  def lower(self):
+    """:obj:`int` or :obj:`float`: The lower bound of the interval."""
     return self[0]
 
   @property
-  def end(self):
-    """:obj:`int` or :obj:`float`: The last value in the range."""
+  def upper(self):
+    """:obj:`int` or :obj:`float`: The upper bound of the interval."""
     return self[1]
 
   @property
   def value_type(self):
-    """:obj:`str`: The possible value types of the range."""
+    """:obj:`str`: The possible value types of the interval."""
     return ["numerical", "ordinal"]

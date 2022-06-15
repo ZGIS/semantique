@@ -274,7 +274,7 @@ class TemporalExtent(dict):
     else:
       timejs = {
         "type": "Instant",
-        "datetime": start.tz_localize(None).isoformat(),
+        "start": start.tz_localize(None).isoformat(),
         "tz": start.tz.zone
       }
     self._start = start
@@ -310,8 +310,8 @@ class TemporalExtent(dict):
       resolution : :obj:`str` or :obj:`pandas.tseries.offsets.DateOffset`
         Temporal resolution of the grid. Can be given as offset alias as
         defined in `pandas`_, e.g. "D" for a daily frequency. These aliases can
-        have multiples, e.g. "5D". If :obj:`None`, only the start and end
-        instants of the extent will be coordinates in the grid.
+        have multiples, e.g. "5D". If :obj:`None`, only the bounds of the
+        extent will be coordinates in the grid.
       tz : optional
         Timezone of the datetime values in the grid. Can be given as :obj:`str`
         referring to the name of a timezone in the tz database, or as instance

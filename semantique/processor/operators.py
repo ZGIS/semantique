@@ -10,13 +10,13 @@ from semantique.processor.utils import np_null, np_null_as_zero
 # BOOLEAN UNIVARIATE OPERATORS
 #
 
-def invert_(x, track_types = True, **kwargs):
+def not_(x, track_types = True, **kwargs):
   """Compute the boolean inverse of x.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the values to apply the operator to.
+      Array containing the values to apply the operator to.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input object?
@@ -26,7 +26,7 @@ def invert_(x, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -39,13 +39,13 @@ def invert_(x, track_types = True, **kwargs):
       :hide_code:
 
       from semantique.processor.types import TYPE_PROMOTION_MANUALS
-      obj = TYPE_PROMOTION_MANUALS["invert"]
+      obj = TYPE_PROMOTION_MANUALS["not"]
       obj.pop("__preserve_labels__")
       print(obj)
 
   """
   if track_types:
-    promoter = TypePromoter(x, function = "invert")
+    promoter = TypePromoter(x, function = "not")
     promoter.check()
   f = lambda x: np.where(pd.notnull(x), np.logical_not(x), np.nan)
   out = xr.apply_ufunc(f, x)
@@ -63,7 +63,7 @@ def absolute_(x, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the values to apply the operator to.
+      Array containing the values to apply the operator to.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input object?
@@ -73,7 +73,7 @@ def absolute_(x, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -106,7 +106,7 @@ def cube_root_(x, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the values to apply the operator to.
+      Array containing the values to apply the operator to.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input object?
@@ -116,7 +116,7 @@ def cube_root_(x, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -153,7 +153,7 @@ def exponential_(x, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the values to apply the operator to.
+      Array containing the values to apply the operator to.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input object?
@@ -163,7 +163,7 @@ def exponential_(x, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -200,7 +200,7 @@ def natural_logarithm_(x, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the values to apply the operator to.
+      Array containing the values to apply the operator to.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input object?
@@ -210,7 +210,7 @@ def natural_logarithm_(x, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -243,7 +243,7 @@ def square_root_(x, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the values to apply the operator to.
+      Array containing the values to apply the operator to.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input object?
@@ -253,7 +253,7 @@ def square_root_(x, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -290,14 +290,14 @@ def add_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -308,7 +308,7 @@ def add_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -344,14 +344,14 @@ def divide_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -362,7 +362,7 @@ def divide_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -398,14 +398,14 @@ def multiply_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -416,7 +416,7 @@ def multiply_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -452,14 +452,14 @@ def power_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -470,7 +470,7 @@ def power_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -506,14 +506,14 @@ def subtract_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -524,7 +524,7 @@ def subtract_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -564,14 +564,14 @@ def and_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -582,7 +582,7 @@ def and_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -615,19 +615,19 @@ def and_(x, y, track_types = True, **kwargs):
   return out
 
 def or_(x, y, track_types = True, **kwargs):
-  """Test if either x or y are true.
+  """Test if at least one of x and y are true.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -638,7 +638,7 @@ def or_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -671,19 +671,19 @@ def or_(x, y, track_types = True, **kwargs):
   return out
 
 def exclusive_or_(x, y, track_types = True, **kwargs):
-  """Test if only one of x and y is true.
+  """Test if either x or y is true but not both.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -694,7 +694,7 @@ def exclusive_or_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -736,14 +736,14 @@ def equal_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -754,7 +754,7 @@ def equal_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -790,7 +790,7 @@ def in_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y : :obj:`list`
       Operands at the right-hand side of each expression. Should be a set of
@@ -804,7 +804,7 @@ def in_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -845,14 +845,14 @@ def not_equal_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -863,7 +863,7 @@ def not_equal_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -899,7 +899,7 @@ def not_in_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y : :obj:`list`
       Operands at the right-hand side of each expression. Should be a set of
@@ -913,7 +913,7 @@ def not_in_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -958,14 +958,14 @@ def greater_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -976,7 +976,7 @@ def greater_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -1012,14 +1012,14 @@ def greater_equal_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -1030,7 +1030,7 @@ def greater_equal_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -1066,14 +1066,14 @@ def less_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -1084,7 +1084,7 @@ def less_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -1120,14 +1120,14 @@ def less_equal_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -1138,7 +1138,7 @@ def less_equal_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -1184,14 +1184,14 @@ def intersects_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression, which should be spatial coordinate tuples.
     y :
       Spatial geometries to be used as the right-hand side of each expression.
-      May also be another data cube with spatial coordinate tuples. In the
+      May also be another array with spatial coordinate tuples. In the
       latter case, when evaluating the expression for a coordinate tuple in
-      cube ``x`` the second operand is the spatial bounding box of all
-      coordinate tuples in cube ``y``.
+      array ``x`` the second operand is the spatial bounding box of all
+      coordinate tuples in array ``y``.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
@@ -1201,7 +1201,7 @@ def intersects_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -1256,14 +1256,14 @@ def after_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression, which should be temporal coordinates.
     y :
       Time instant or time interval to be used as the right-hand side of each
-      expression. May also be another data cube with temporal coordinates. In
-      the latter case, when evaluating the expression for a coordinate in cube
+      expression. May also be another array with temporal coordinates. In
+      the latter case, when evaluating the expression for a coordinate in array
       ``x`` the second operand is the temporal bounding box of all coordinates
-      in cube ``y``.
+      in array ``y``.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
@@ -1273,7 +1273,7 @@ def after_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -1319,14 +1319,14 @@ def before_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression, which should be temporal coordinates.
     y :
       Time instant or time interval to be used as the right-hand side of each
-      expression. May also be another data cube with temporal coordinates. In
-      the latter case, when evaluating the expression for a coordinate in cube
+      expression. May also be another array with temporal coordinates. In
+      the latter case, when evaluating the expression for a coordinate in array
       ``x`` the second operand is the temporal bounding box of all coordinates
-      in cube ``y``.
+      in array ``y``.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
@@ -1336,7 +1336,7 @@ def before_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -1380,13 +1380,13 @@ def during_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression, which should be temporal coordinates.
     y :
       Time interval to be used as the right-hand side of each expression. May
-      also be another data cube with temporal coordinates. In the latter case,
-      when evaluating the expression for a coordinate in cube ``x`` the second
-      operand is the temporal bounding box of all coordinates in cube ``y``.
+      also be another array with temporal coordinates. In the latter case,
+      when evaluating the expression for a coordinate in array ``x`` the second
+      operand is the temporal bounding box of all coordinates in array ``y``.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
@@ -1396,7 +1396,7 @@ def during_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note
@@ -1442,14 +1442,14 @@ def assign_(x, y, track_types = True, **kwargs):
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
-      Data cube containing the operands at the left-hand side of each
+      Array containing the operands at the left-hand side of each
       expression.
     y :
       Operands at the right-hand side of each expression. May be a constant,
       meaning that the same value is used in each expression. May also be
-      another data cube which can be aligned to the same shape as cube ``x``.
-      In the latter case, when evaluating the expression for a pixel in cube
-      ``x`` the second operand is the value of the pixel in cube ``y`` that
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
       has the same dimension coordinates.
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
@@ -1460,7 +1460,7 @@ def assign_(x, y, track_types = True, **kwargs):
   Returns
   -------
     :obj:`xarray.DataArray`
-      A data cube with the same shape as ``x`` containing the results of all
+      An array with the same shape as ``x`` containing the results of all
       evaluated expressions.
 
   Note

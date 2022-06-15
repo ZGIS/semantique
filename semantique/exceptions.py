@@ -1,39 +1,39 @@
 class AlignmentError(Exception):
-  """Raised when a data cube cannot be aligned to a given shape.
+  """Raised when an array cannot be aligned to a given shape.
 
-  This occurs for example when evaluating multivariate expressions for
-  pixels in a data cube using the evaluate verb, filtering values in a
-  data cube using the filter verb, or splitting a data cube into distinct
-  groups using the groupby verb. In these processes a second data cube is
-  involved, which is aligned to the same shape as the input cube before
-  applying the operation, such that each of its pixels has a corresponding
-  pixel in the input cube. In some cases alignment is not possible, e.g. when
-  the second cube has no dimensions in common with the input cube or when the
-  second cube has more dimensions than the input cube.
+  This occurs for example when evaluating bivariate expressions on pixels in an
+  array using the evaluate verb, filtering values in an array using the filter
+  verb, or splitting an array into distinct groups using the groupby verb. In
+  all these processes a second array is involved, which is aligned to the same
+  shape as the input, such that each of its pixels has a corresponding pixel in
+  the input. In some cases alignment is not possible, e.g. when the second
+  array has no dimensions in common with the input or when it has more
+  dimensions than the input.
 
   """
   pass
 
 class EmptyDataError(Exception):
-  """Raised when a retrieved data cube does not contain any valid values.
+  """Raised when a retrieved array does not contain any valid values.
 
   This occurs for example when the spatio-temporal extent for which the data
   are retrieved does not intersect with the spatio-temporal extent of the
-  factbase, or when all observations within that extent happen to be erroneous.
+  EO data cube, or when all observations within that extent happen to be
+  erroneous.
 
   """
   pass
 
 class InvalidValueTypeError(Exception):
-  """Raised when a data cube has a value type which a process does not allow.
+  """Raised when an array has a value type which a process does not allow.
 
-  This occurs for example when evaluating expressions for pixels in a data cube
-  using the evaluate verb, or when reducing the dimensionality of a data cube
+  This occurs for example when evaluating expressions for pixels in an array
+  using the evaluate verb, or when reducing the dimensionality of an array
   using the reduce verb. These processes allow to choose from a wide range of
-  respectively operator an reducer function, each of which can only be sensibly
+  respectively operator an reducer functions, each of which can only be sensibly
   used when the inputs are of a certain value type. It may also occur in the
-  concatenate verb, which requires all provided data cubes to have the same
-  value type, the compose verb, which requires all provided data cubes to be
+  concatenate verb, which requires all provided arrays to have the same
+  value type, the compose verb, which requires all provided arrays to be
   binary, and the filter verb, which requires the filterer cube to be binary.
 
   Note
@@ -44,8 +44,8 @@ class InvalidValueTypeError(Exception):
   """
   pass
 
-class InvalidValueRangeError(Exception):
-  """Raised when the end of a value range is smaller than its start."""
+class InvalidIntervalError(Exception):
+  """Raised when an intervals upper bound is smaller than its lower bound."""
   pass
 
 class InvalidBuildingBlockError(Exception):
@@ -62,16 +62,16 @@ class UnknownConceptError(Exception):
   """Raised when an unexisting semantic concept is referenced.
 
   This occurs when a referenced semantic concept is not defined in the
-  ontology against which the query is processed, or when a referenced
+  mapping against which the query is processed, or when a referenced
   property of a semantic concept is not defined for that concept.
 
   """
   pass
 
-class UnknownResourceError(Exception):
-  """Raised when an unexisting data resource is referenced.
+class UnknownLayerError(Exception):
+  """Raised when an unexisting data layer is referenced.
 
-  This occurs when a referenced data resource is not present in the factbase
+  This occurs when a referenced data layer is not present in the EO data cube
   against which the query is processed.
 
   """
@@ -86,19 +86,19 @@ class UnknownResultError(Exception):
   pass
 
 class UnknownReducerError(Exception):
-  """Raised when an undefined reducer function is used in the reduce verb.
+  """Raised when an undefined reducer function is used.
 
-  This occurs because the reducer function is not built-in in semantique,
-  or is not added to the query processor as a custom reducer function.
+  This occurs because the reducer function is not provided by semantique
+  nor added to the query processor as a custom reducer function.
 
   """
   pass
 
 class UnknownOperatorError(Exception):
-  """Raised when an undefined operator function is used in the evaluate verb.
+  """Raised when an undefined operator function.
 
-  This occurs because the operator function is not built-in in semantique,
-  or is not added to the query processor as a custom operator function.
+  This occurs because the operator function is not provided by semantique
+  nor added to the query processor as a custom operator function.
 
   """
   pass
@@ -107,8 +107,8 @@ class UnknownDimensionError(Exception):
   """Raised when an unexisting dimension is referenced.
 
   This occurs for example when one wants to extract coordinates of a specific
-  dimension from a data cube that does not contain this dimension, or try to
-  reduce a data cube along an unexisting dimension.
+  dimension from an array that does not contain this dimension, or try to
+  reduce an array along an unexisting dimension.
 
   """
   pass
@@ -127,43 +127,43 @@ class UnknownComponentError(Exception):
 class UnknownLabelError(Exception):
   """Raised when a referenced value label is not used for any value in a cube.
 
-  This occurs when one tries to query values in a data cube by their label
-  instead of actual stored data value (using the obj:`value_label` block)
-  but the given label is not attached to any of the values in the cube.
+  This occurs when one uses the :func:`label` block to query values in an array
+  by their label rather than by the value itself, but the referenced label is
+  not attached to any of the values in the array.
 
   """
   pass
 
 class TooManyDimensionsError(Exception):
-  """Raised when a data cube has more dimensions than a process allows.
+  """Raised when an array has more dimensions than a process allows.
 
   This occurs in functions that put a limit on the allowed number of dimensions
-  a data cube may have. This includes grouping with the groupby verb, in which
-  the grouper cube may only have one dimension. The documentation of such
-  functions should always clearly mention these requirements.
+  an array may have. This includes grouping with the groupby verb, in which
+  the grouper may only have one dimension. The documentation of such functions
+  should always clearly mention these requirements.
 
   """
   pass
 
 class MissingDimensionError(Exception):
-  """Raised when a data cube does not contain a required dimension.
+  """Raised when an array does not contain a required dimension.
 
   This occurs in functions that require one or more specific dimensions to be
-  present in a data cube. This includes grouping with the groupby verb, which
-  requires the dimension of the grouper to be present in the input data cube;
-  retrieving data from a factbase, which requires often that at least a
+  present in an array. This includes grouping with the groupby verb, which
+  requires the dimension of the grouper to be present in the input array;
+  retrieving data from the EO data cube, which often requires that at least a
   spatial dimension is present; and concatenating over an existing dimension,
-  which requires this dimension to exist in all input data cubes.
+  which requires this dimension to exist in all input arrays.
 
   """
   pass
 
 class MixedDimensionsError(Exception):
-  """Raised when the data cubes in a cube collection have differing dimensions.
+  """Raised when arrays in a collection have differing dimensions.
 
-  This occurs in functions that require all cubes in a cube collection to have
+  This occurs in functions that require all arrays in a collection to have
   exactly the same dimensions. This includes grouping with the groupby verb,
-  which allows a collection of cubes to be used as grouper argument, but only
+  which allows a collection of arrays to be used as grouper argument, but only
   when their dimensions are the same.
 
   """
