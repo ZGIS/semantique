@@ -309,6 +309,12 @@ def n_(x, dimension, track_types = True, **kwargs):
 
   Note
   -----
+    Missing values in ``x`` are ignored. That means that this reducer will
+    return the number of non-null values in the set. If all values in the set
+    are null, it returns 0.
+
+  Note
+  -----
     When tracking value types, this reducer uses the following type promotion
     manual, with the keys being the supported value types of ``x``, and the
     corresponding value being the promoted value type of the output.
@@ -549,7 +555,9 @@ def all_(x, dimension, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "all")
     promoter.check()
-  f = lambda x, axis: np.where(allnull(x, axis), np.nan, np.all(x, axis))
+  def f(x, y):
+    values = np.all(x, axis)
+    return np.where(allnull(x, axis), np.nan, values)
   out = x.reduce(f, dim = dimension)
   if track_types:
     out = promoter.promote(out)
@@ -577,6 +585,11 @@ def any_(x, dimension, track_types = True, **kwargs):
 
   Note
   -----
+    Missing values in ``x`` are ignored. That means that this reducer will
+    return null rather than false if all values in the set are null.
+
+  Note
+  -----
     When tracking value types, this reducer uses the following type promotion
     manual, with the keys being the supported value types of ``x``, and the
     corresponding value being the promoted value type of the output.
@@ -595,6 +608,57 @@ def any_(x, dimension, track_types = True, **kwargs):
     promoter.check()
   def f(x, axis):
     values = np.any(null_as_zero(x), axis)
+    return np.where(allnull(x, axis), np.nan, values)
+  out = x.reduce(f, dim = dimension)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
+def none_(x, dimension, track_types = True, **kwargs):
+  """Test if none of the values in a set are true.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      The array to be reduced.
+    dimension : :obj:`str`
+      Name of the dimension to apply the reducer function to.
+    track_types : :obj:`bool`
+      Should the reducer promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      The reduced array.
+
+  Note
+  -----
+    Missing values in ``x`` are ignored. That means that this reducer will
+    return null rather than true if all values in the set are null.
+
+  Note
+  -----
+    When tracking value types, this reducer uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["none"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, function = "none")
+    promoter.check()
+  def f(x, axis):
+    values = np.logical_not(np.any(null_as_zero(x), axis))
     return np.where(allnull(x, axis), np.nan, values)
   out = x.reduce(f, dim = dimension)
   if track_types:
@@ -673,6 +737,12 @@ def percentage_(x, dimension, track_types = True, **kwargs):
 
   Note
   -----
+    Missing values in ``x`` are ignored. That means that this reducer will
+    return how much percent of the non-null values are true. If all values in
+    the set are null, it returns null.
+
+  Note
+  -----
     When tracking value types, this reducer uses the following type promotion
     manual, with the keys being the supported value types of ``x``, and the
     corresponding value being the promoted value type of the output.
@@ -725,6 +795,12 @@ def first_(x, dimension, track_types = True, **kwargs):
 
   Note
   -----
+    Missing values in ``x`` are ignored. That means that this reducer will
+    return the first non-null value in the set. If all values in the set are
+    null, it returns null.
+
+  Note
+  -----
     When tracking value types, this reducer uses the following type promotion
     manual, with the keys being the supported value types of ``x``, and the
     corresponding value being the promoted value type of the output.
@@ -769,6 +845,12 @@ def last_(x, dimension, track_types = True, **kwargs):
   -------
     :obj:`xarray.DataArray`
       The reduced array.
+
+  Note
+  -----
+    Missing values in ``x`` are ignored. That means that this reducer will
+    return the last non-null value in the set. If all values in the set are
+    null, it returns null.
 
   Note
   -----

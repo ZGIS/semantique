@@ -252,6 +252,10 @@ TYPE_PROMOTION_MANUALS = {
     "binary": "binary",
     "__preserve_labels__": 1
   },
+  "none": {
+    "binary": "binary",
+    "__preserve_labels__": 1
+  },
   "count": {
     "binary": "numerical",
     "__preserve_labels__": 0
