@@ -3,8 +3,8 @@ import numpy as np
 import xarray as xr
 
 from semantique.processor.types import TypePromoter
-from semantique.processor.values import ValueRange
-from semantique.processor.utils import np_null, np_null_as_zero
+from semantique.processor.values import Interval
+from semantique.processor.utils import get_null, null_as_zero
 
 #
 # BOOLEAN UNIVARIATE OPERATORS
@@ -696,7 +696,7 @@ def and_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "and")
     promoter.check()
   def f(x, y):
-    y = np_null_as_zero(y)
+    y = null_as_zero(y)
     return np.where(pd.notnull(x), np.logical_and(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y)
@@ -733,6 +733,13 @@ def or_(x, y, track_types = True, **kwargs):
 
   Note
   -----
+    Missing values in ``x`` are always preserved. That means that each
+    expression in which x is null will be evaluated as null, no matter if y
+    is true. However, when x is true and y is null, the expression will be
+    evaluated as true.
+
+  Note
+  -----
     When tracking value types, this operator uses the following type promotion
     manual, with the first layer of keys being the supported value types of
     ``x``, the second layer of keys being the supported value types of ``y``
@@ -752,7 +759,7 @@ def or_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "or")
     promoter.check()
   def f(x, y):
-    y = np_null_as_zero(y)
+    y = null_as_zero(y)
     return np.where(pd.notnull(x), np.logical_or(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y)
@@ -789,6 +796,13 @@ def exclusive_or_(x, y, track_types = True, **kwargs):
 
   Note
   -----
+    Missing values in ``x`` are always preserved. That means that each
+    expression in which x is null will be evaluated as null, no matter if y
+    is true. However, when x is true and y is null, the expression will be
+    evaluated as true.
+
+  Note
+  -----
     When tracking value types, this operator uses the following type promotion
     manual, with the first layer of keys being the supported value types of
     ``x``, the second layer of keys being the supported value types of ``y``
@@ -808,7 +822,7 @@ def exclusive_or_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "exclusive_or")
     promoter.check()
   def f(x, y):
-    y = np_null_as_zero(y)
+    y = null_as_zero(y)
     return np.where(pd.notnull(x), np.logical_xor(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y)
@@ -918,7 +932,7 @@ def in_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "in")
     promoter.check()
   def f(x, y):
-    if isinstance(y, ValueRange):
+    if isinstance(y, Interval):
       a = np.greater_equal(x, y.start)
       b = np.less_equal(x, y.end)
       return np.where(pd.notnull(x), np.logical_and(a, b), np.nan)
@@ -1027,7 +1041,7 @@ def not_in_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "not_in")
     promoter.check()
   def f(x, y):
-    if isinstance(y, ValueRange):
+    if isinstance(y, Interval):
       a = np.less(x, y.start)
       b = np.greater(x, y.end)
       return np.where(pd.notnull(x), np.logical_or(a, b), np.nan)
@@ -1574,7 +1588,7 @@ def assign_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "assign")
     promoter.check()
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.where(np.isfinite(x), y, np_null(y))
+  out = xr.where(np.isfinite(x), y, get_null(y))
   if track_types:
     out = promoter.promote(out)
   return out

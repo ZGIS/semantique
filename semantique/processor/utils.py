@@ -32,8 +32,8 @@ def convert_datetime64(obj, tz_from, tz_to, **kwargs):
   obj_new = pd.Timestamp(obj).tz_localize(tz_from).tz_convert(tz_to, **kwargs)
   return np.datetime64(obj_new.tz_localize(None))
 
-def np_null(x):
-  """Return the appropriate null value for a numpy array.
+def get_null(x):
+  """Return the appropriate nodata value for a numpy array.
 
   For arrays of datetime values ``NaT`` is returned. For other arrays ``nan``
   is returned.
@@ -46,7 +46,7 @@ def np_null(x):
   """
   return np.datetime64("NaT") if x.dtype.kind == "M" else np.nan
 
-def np_allnull(x, axis):
+def allnull(x, axis):
   """Test whether all elements along a given axis in a numpy array are null.
 
   Parameters
@@ -63,7 +63,7 @@ def np_allnull(x, axis):
   """
   return np.equal(np.sum(pd.notnull(x), axis = axis), 0)
 
-def np_null_as_zero(x):
+def null_as_zero(x):
   """Convert all null values in a numpy array to 0.
 
   Parameters
@@ -78,7 +78,7 @@ def np_null_as_zero(x):
   """
   return np.where(pd.isnull(x), 0, x)
 
-def np_inf_as_null(x):
+def inf_as_null(x):
   """Convert all infinite values in a numpy array to null values.
 
   Parameters

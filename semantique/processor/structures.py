@@ -296,7 +296,7 @@ class SemanticArray():
         )
     # Update filterer.
     # Xarray treats null values as True but they should not pass the filter.
-    filterer.values = utils.np_null_as_zero(filterer)
+    filterer.values = utils.null_as_zero(filterer)
     # Apply filter.
     out = self._obj.where(filterer.sq.align_with(self._obj))
     if trim:
