@@ -9,6 +9,19 @@ class QueryRecipe(dict):
       Dictionary containing result names as keys and result instructions as
       values. If :obj:`None`, an empty recipe is constructed.
 
+  Returns
+  -------
+    :obj:`dict` of :obj:`ArrayProxy`:
+      The query recipe as a dictionary containing result names as keys and
+      result instructions as values.
+
+  Examples
+  --------
+  >>> import semantique as sq
+  >>> recipe = sq.QueryRecipe()
+  >>> recipe["map"] = sq.entity("water").reduce("time", "count")
+  >>> recipe["series"] = sq.entity("water").reduce("space", "count")
+
   """
   def __init__(self, results = None):
     obj = {} if results is None else results
@@ -40,6 +53,23 @@ class QueryRecipe(dict):
       :obj:`dict` of :obj:`xarray.DataArray`:
         The response of the query processor as a dictionary containing result
         names as keys and result arrays as values.
+
+    Examples
+    --------
+    >>> import semantique as sq
+    >>> import geopandas as pd
+
+    >>> recipe = sq.QueryRecipe()
+    >>> recipe["map"] = sq.entity("water").reduce("time", "count")
+    >>> recipe["series"] = sq.entity("water").reduce("space", "count")
+
+    >>> dc = sq.datacube.GeotiffArchive("files/layout.json", src = "layers.zip")
+    >>> mapping = sq.mapping.Semantique("files/mapping.json")
+    >>> space = sq.SpatialExtent(gpd.read_file("files/footprint.geojson"))
+    >>> time = sq.TemporalExtent("2019-01-01", "2020-12-31")
+    >>> config = {"crs": 3035, "tz": "UTC", "spatial_resolution": [-1800, 1800]}
+
+    >>> recipe.execute(dc, mapping, space, time, **config)
 
     """
     qp = QueryProcessor.parse(self, datacube, mapping, space, time, **config)

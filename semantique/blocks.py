@@ -87,6 +87,7 @@ class ArrayProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.entity("water").evaluate("not")
     >>> sq.entity("water").evaluate("or", sq.entity("vegetation"))
 
@@ -119,6 +120,7 @@ class ArrayProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.entity("water").extract("time")
     >>> sq.entity("water").extract("time", "year")
 
@@ -153,6 +155,7 @@ class ArrayProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.entity("water").filter(sq.entity("cloud").evaluate("not"))
     >>> sq.entity("water").filter(sq.self())
 
@@ -189,6 +192,7 @@ class ArrayProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.entity("water").filter_time("after", sq.time_instant("2021-12-31"))
     >>> sq.entity("water").filter_time("year", "equals", 2020)
 
@@ -228,6 +232,7 @@ class ArrayProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.entity("water").filter_space("intersects", sq.geometry(gpd.read_file("foo.gpkg")))
     >>> sq.entity("water").filter_space("feature", "equals", 1)
 
@@ -263,6 +268,7 @@ class ArrayProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.entity("water").groupby(sq.entity("water").extract("time", "year"))
 
     """
@@ -292,6 +298,7 @@ class ArrayProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.entity("water").groupby_time("year")
 
     """
@@ -327,6 +334,7 @@ class ArrayProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.entity("water").groupby_space("feature")
 
     """
@@ -366,6 +374,7 @@ class ArrayProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.entity("water").reduce("time", "count")
 
     .. _here:
@@ -392,6 +401,7 @@ class ArrayProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.entity("water").name("foo")
 
     """
@@ -451,6 +461,7 @@ class CollectionProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.collection(sq.entity("water"), sq.entity("ice")).compose()
 
     """
@@ -476,6 +487,7 @@ class CollectionProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.collection(sq.entity("water"), sq.entity("ice")).concatenate("concept")
 
     """
@@ -504,6 +516,7 @@ class CollectionProxy(dict):
 
     Examples
     --------
+    >>> import semantique as sq
     >>> sq.collection(sq.entity("water"), sq.entity("ice")).merge("or")
 
     """
@@ -622,14 +635,8 @@ def concept(*reference, property = None):
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.concept("entity", "water")
-  {
-    "type": "concept",
-    "reference": [
-      "entity",
-      "water"
-    ]
-  }
 
   """
   obj = {"type": "concept", "reference": reference}
@@ -657,14 +664,8 @@ def entity(*reference, property = None):
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.entity("water")
-  {
-    "type": "concept",
-    "reference": [
-      "entity",
-      "water"
-    ]
-  }
 
   """
   obj = {"type": "concept", "reference": ("entity",) + reference}
@@ -694,14 +695,8 @@ def event(*reference, property = None):
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.event("flood")
-  {
-    "type": "concept",
-    "reference": [
-      "event",
-      "flood"
-    ]
-  }
 
   """
   obj = {"type": "concept", "reference": ("event",) + reference}
@@ -725,14 +720,8 @@ def layer(*reference):
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.layer("appearance", "brightness")
-  {
-    "type": "layer",
-    "reference": [
-      "appearance",
-      "brightness"
-    ]
-  }
 
   """
   obj = {"type": "layer", "reference": reference}
@@ -755,14 +744,8 @@ def appearance(*reference):
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.appearance("brightness")
-  {
-    "type": "layer",
-    "reference": [
-      "appearance",
-      "brightness"
-    ]
-  }
 
   """
   obj = {"type": "layer", "reference": ("appearance",) + reference}
@@ -804,14 +787,8 @@ def atmosphere(*reference):
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.atmosphere("Color type")
-  {
-    "type": "layer",
-    "reference": [
-      "atmosphere",
-      "Color type"
-    ]
-  }
 
   """
   obj = {"type": "layer", "reference": ("atmosphere",) + reference}
@@ -834,14 +811,8 @@ def reflectance(*reference):
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.reflectance("s2_band01")
-  {
-    "type": "layer",
-    "reference": [
-      "reflectance",
-      "s2_band01"
-    ]
-  }
 
   """
   obj = {"type": "layer", "reference": ("reflectance",) + reference}
@@ -864,14 +835,8 @@ def topography(*reference):
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.topography("elevation")
-  {
-    "type": "layer",
-    "reference": [
-      "topography",
-      "elevation"
-    ]
-  }
 
   """
   obj = {"type": "layer", "reference": ("topography",) + reference}
@@ -893,11 +858,8 @@ def result(name):
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.result("water_count")
-  {
-    "type": "result",
-    "name": "water_count"
-  }
 
   """
   obj = {"type": "result", "name": name}
@@ -914,10 +876,8 @@ def self():
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.self()
-  {
-    "type": "self",
-  }
 
   """
   obj = {"type": "self"}
@@ -939,26 +899,8 @@ def collection(*elements):
 
   Examples
   --------
+  >>> import semantique as sq
   >>> sq.collection(sq.entity("water"), sq.entity("vegetation"))
-  {
-    "type": "collection",
-    "elements": [
-      {
-        "type": "concept",
-        "reference": [
-          "entity",
-          "water"
-        ]
-      },
-      {
-        "type": "concept",
-        "reference": [
-          "entity",
-          "vegetation"
-        ]
-      }
-    ]
-  }
 
   """
   obj = {"type": "collection", "elements": list(elements)}
@@ -981,6 +923,11 @@ def label(x):
       JSON-serializable object that contains the label, and can be
       understood by the query processor as such.
 
+  Examples
+  --------
+  >>> import semantique as sq
+  >>> sq.label("high")
+
   """
   obj = {"type": "label", "content": x}
   return obj
@@ -1000,6 +947,11 @@ def set(*members):
     :obj:`dict`
       JSON-serializable object that contains the members of the set, and
       can be understood by the query processor as such.
+
+  Examples
+  --------
+  >>> import semantique as sq
+  >>> sq.set(21, 22, 23, 24)
 
   """
   obj = {"type": "set", "content": list(builtins.set(members))}
@@ -1026,6 +978,11 @@ def interval(a, b):
     :obj:`dict`
       JSON-serializable object that contains the bounds of the interval, and
       can be understood by the query processor as such.
+
+  Examples
+  --------
+  >>> import semantique as sq
+  >>> sq.interval(21, 24)
 
   """
   if b < a:
@@ -1059,6 +1016,12 @@ def geometry(x, **kwargs):
       JSON-serializable object that contains the spatial vector geometry, and
       can be understood by the query processor as such.
 
+  Examples
+  --------
+  >>> import semantique as sq
+  >>> import geopandas as gpd
+  >>> sq.geometry(gpd.read_file("files/parcels.geojson"))
+
   """
   obj = {"type": "geometry", "content": SpatialExtent(x, **kwargs)}
   return obj
@@ -1085,6 +1048,11 @@ def time_instant(x, **kwargs):
     :obj:`dict`
       JSON-serializable object that contains the time instant, and
       can be understood by the query processor as such.
+
+  Examples
+  --------
+  >>> import semantique as sq
+  >>> sq.time_instant("2021-12-31")
 
   """
   obj = {"type": "time_instant", "content": TemporalExtent(x, **kwargs)}
@@ -1122,6 +1090,11 @@ def time_interval(a, b, **kwargs):
     :obj:`dict`
       JSON-serializable object that contains the bounds of the time
       interval, and can be understood by the query processor as such.
+
+  Examples
+  --------
+  >>> import semantique as sq
+  >>> sq.time_interval("2021-01-01", "2021-12-31")
 
   """
   obj = {"type": "time_interval", "content": TemporalExtent(a, b, **kwargs)}
