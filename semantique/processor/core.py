@@ -11,7 +11,7 @@ import warnings
 import semantique.processor.operators
 import semantique.processor.reducers
 from semantique import exceptions
-from semantique.processor import structures, values, utils
+from semantique.processor import arrays, values, utils
 
 logger = logging.getLogger(__name__)
 
@@ -390,7 +390,7 @@ class QueryProcessor():
 
     Returns
     --------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
         The processed building block.
 
     Raises
@@ -478,7 +478,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     Raises
     ------
@@ -516,7 +516,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     out = self._get_eval_obj()
@@ -533,12 +533,12 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`processor.structures.Collection`
+      :obj:`processor.arrays.Collection`
 
     """
     logger.debug("Constructing collection of arrays")
     out = [self.call_handler(x) for x in block["elements"]]
-    out = structures.Collection(out)
+    out = arrays.Collection(out)
     logger.debug(f"Constructed collection of:\n{[x.name for x in out]}")
     return out
 
@@ -552,7 +552,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     obj = self.call_handler(block["with"])
@@ -572,7 +572,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     out = self.call_handler(block, key = "name")
@@ -591,7 +591,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -625,7 +625,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Set function parameters.
@@ -645,7 +645,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -669,7 +669,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -708,7 +708,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -729,7 +729,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -752,7 +752,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     return self.call_verb("shift", block["params"])
@@ -768,7 +768,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -791,7 +791,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     return self.call_verb("name", block["params"])
@@ -1016,7 +1016,7 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get the object to apply the verb to.

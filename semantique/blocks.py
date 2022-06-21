@@ -79,7 +79,7 @@ class ArrayProxy(dict):
         Ignored when the operator is univariate.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.evaluate> <processor.structures.SemanticArray.evaluate>>`.
+        :obj:`SemanticArray.evaluate> <processor.arrays.SemanticArray.evaluate>>`.
 
     Returns
     --------
@@ -112,7 +112,7 @@ class ArrayProxy(dict):
         coordinates.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.extract <processor.structures.SemanticArray.extract>`.
+        :obj:`SemanticArray.extract <processor.arrays.SemanticArray.extract>`.
 
     Returns
     --------
@@ -147,7 +147,7 @@ class ArrayProxy(dict):
         input.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.filter <processor.structures.SemanticArray.filter>`.
+        :obj:`SemanticArray.filter <processor.arrays.SemanticArray.filter>`.
 
     Returns
     --------
@@ -184,7 +184,7 @@ class ArrayProxy(dict):
         side operand to be used in the expression.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.filter <processor.structures.SemanticArray.filter>`.
+        :obj:`SemanticArray.filter <processor.arrays.SemanticArray.filter>`.
 
     Returns
     --------
@@ -224,7 +224,7 @@ class ArrayProxy(dict):
         side operand to be used in the expression.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.filter <processor.structures.SemanticArray.filter>`.
+        :obj:`SemanticArray.filter <processor.arrays.SemanticArray.filter>`.
 
     Returns
     --------
@@ -262,7 +262,7 @@ class ArrayProxy(dict):
         input.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.assign <processor.structures.SemanticArray.assign>`.
+        :obj:`SemanticArray.assign <processor.arrays.SemanticArray.assign>`.
 
     Returns
     --------
@@ -296,7 +296,7 @@ class ArrayProxy(dict):
         be extracted, e.g. *year*, *month* or *day*.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.assign <processor.structures.SemanticArray.assign>`.
+        :obj:`SemanticArray.assign <processor.arrays.SemanticArray.assign>`.
 
     Returns
     --------
@@ -330,7 +330,7 @@ class ArrayProxy(dict):
         be extracted, e.g. *feature*.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.assign <processor.structures.SemanticArray.assign>`.
+        :obj:`SemanticArray.assign <processor.arrays.SemanticArray.assign>`.
 
     Returns
     --------
@@ -365,7 +365,7 @@ class ArrayProxy(dict):
         corresponds to a group.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.groupby <processor.structures.SemanticArray.groupby>`.
+        :obj:`SemanticArray.groupby <processor.arrays.SemanticArray.groupby>`.
 
     Returns
     --------
@@ -397,7 +397,7 @@ class ArrayProxy(dict):
         multiple groupers.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.groupby <processor.structures.SemanticArray.groupby>`.
+        :obj:`SemanticArray.groupby <processor.arrays.SemanticArray.groupby>`.
 
     Returns
     --------
@@ -434,7 +434,7 @@ class ArrayProxy(dict):
         components, in case the groups should be defined by multiple groupers.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.groupby <processor.structures.SemanticArray.groupby>`.
+        :obj:`SemanticArray.groupby <processor.arrays.SemanticArray.groupby>`.
 
     Returns
     --------
@@ -474,7 +474,7 @@ class ArrayProxy(dict):
         Name of the reducer function to be applied.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.reduce <processor.structures.SemanticArray.reduce>`.
+        :obj:`SemanticArray.reduce <processor.arrays.SemanticArray.reduce>`.
 
     Returns
     --------
@@ -507,7 +507,7 @@ class ArrayProxy(dict):
         a shift to the right.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.shift <processor.structures.SemanticArray.shift>`.
+        :obj:`SemanticArray.shift <processor.arrays.SemanticArray.shift>`.
 
     Returns
     --------
@@ -549,7 +549,7 @@ class ArrayProxy(dict):
         middle.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.smooth <processor.structures.SemanticArray.smooth>`.
+        :obj:`SemanticArray.smooth <processor.arrays.SemanticArray.smooth>`.
 
     Returns
     --------
@@ -577,7 +577,7 @@ class ArrayProxy(dict):
         Name to be given to the input.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.name <processor.structures.SemanticArray.name>`.
+        :obj:`SemanticArray.name <processor.arrays.SemanticArray.name>`.
 
     Returns
     --------
@@ -637,7 +637,7 @@ class CollectionProxy(dict):
     -----------
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Collection.compose <processor.structures.Collection.compose>`.
+        :obj:`Collection.compose <processor.arrays.Collection.compose>`.
 
     Returns
     --------
@@ -663,7 +663,7 @@ class CollectionProxy(dict):
         a dimension that does not exist in any of the collection members.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Collection.concatenate <processor.structures.Collection.concatenate>`.
+        :obj:`Collection.concatenate <processor.arrays.Collection.concatenate>`.
 
     Returns
     --------
@@ -692,7 +692,7 @@ class CollectionProxy(dict):
         Name of the reducer function to be applied.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`Collection.merge <processor.structures.Collection.merge>`.
+        :obj:`Collection.merge <processor.arrays.Collection.merge>`.
 
     Returns
     --------

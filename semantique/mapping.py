@@ -2,7 +2,7 @@ from abc import abstractmethod
 
 from semantique import exceptions
 from semantique.processor.core import QueryProcessor
-from semantique.processor.structures import Collection
+from semantique.processor.arrays import Collection
 
 class Mapping(dict):
   """Base class for mapping configurations.

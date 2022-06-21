@@ -173,8 +173,8 @@ def parse_datetime_component(name, obj):
 
   The `datetime accessors`_ of :obj:`xarray.DataArray` objects are treated in
   semantique as a component of the temporal dimension. Parsing them includes
-  adding :attr:`value_type <semantique.processor.structures.SemanticArray.value_type>`
-  and :attr:`value_label <semantique.processor.structures.SemanticArray.value_labels>`
+  adding :attr:`value_type <semantique.processor.arrays.SemanticArray.value_type>`
+  and :attr:`value_label <semantique.processor.arrays.SemanticArray.value_labels>`
   properties as well as in some cases re-organize the values in the array.
 
   Parameters
@@ -252,7 +252,7 @@ def parse_coords_component(obj):
   objects are treated in semantique as components of a stacked spatial
   dimension, i.e. a multi-indexed dimension. Parsing these individual
   coordinate arrays includes adding a relevant
-  :attr:`value_type <semantique.processor.structures.SemanticArray.value_type>`
+  :attr:`value_type <semantique.processor.arrays.SemanticArray.value_type>`
   property.
 
   Parameters
