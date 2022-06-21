@@ -531,6 +531,9 @@ class SemanticArray():
       raise exceptions.UnknownDimensionError(
         f"Dimension '{dimension}' is not present in the input object"
       )
+    # Parse size.
+    # Size parameter defines neighborhood size at each side of the pixel.
+    size = size * 2 + 1
     # Create the rolling window object.
     # Spatial dimension needs special treatment because it is stacked.
     if dimension == self.spatial_dimension:
