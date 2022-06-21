@@ -10,7 +10,7 @@ import rioxarray
 import warnings
 
 from semantique import exceptions
-from semantique.processor import utils
+from semantique.processor import operators, utils
 
 @xr.register_dataarray_accessor("sq")
 class SemanticArray():
@@ -243,18 +243,17 @@ class SemanticArray():
     Parameters
     -----------
       filterer : :obj:`xarray.DataArray`
-        Data array which can be aligned to the same shape as the input array.
-        Each pixel in the input array will be kept if the pixel in the
-        filterer with the same dimension coordinates has true as value, and
-        dropped otherwise.
+        Binary array which can be aligned to the same shape as the input array.
+        Each pixel in the input array will be kept if the pixel in the filterer
+        with the same dimension coordinates is true, and dropped otherwise
+        (i.e. assigned a missing data value).
       trim : :obj:`bool`
-        Should the filtered array be trimmed before returning?
-        Trimming means that all coordinates for which all values are nodata, are
-        dropped from the array. The spatial dimension (if present) is treated
-        differently, by trimming it only at the edges, and thus maintaining the
-        regularity of the spatial dimension.
+        Should the filtered array be trimmed before returning? Trimming means
+        that dimension coordinates for which all values are missing are removed
+        from the array. The spatial dimension is treated differently, by
+        trimming it only at the edges, and thus maintaining its regularity.
       track_types : :obj:`bool`
-        Should it be checked if the filterer has value type *binary*?
+        Should it be checked that the filterer has value type *binary*?
       **kwargs:
         Ignored.
 
@@ -282,6 +281,54 @@ class SemanticArray():
     out = self._obj.where(filterer.sq.align_with(self._obj))
     if trim:
       out = out.sq.trim()
+    return out
+
+  def assign(self, y, at = None, track_types = True, **kwargs):
+    """Apply the assign verb to the array.
+
+    The assign verb assigns new values to the pixels in an array, without any
+    computation. It only assigns to non-missing pixels. Hence, pixels with
+    missing values in the input are always preserved in the output.
+
+    Parameters
+    ----------
+    y :
+      Value(s) to be assigned. May be a constant, meaning that the same value
+      is assigned to every pixel. May also be another array which can be
+      aligned to the same shape as the input array. In the latter case, the
+      value assigned to a pixel in the input array is the value of the pixel in
+      array ``y`` that has the same dimension coordinates.
+    at : :obj:`xarray.DataArray`, optional
+      Binary array which can be aligned to the same shape as the input array.
+      To be used for conditional assignment, in which a pixel in the input will
+      only be assigned a new value if the if the pixel in ``at`` with the same
+      dimension coordinates is true.
+    track_types : :obj:`bool`
+      Should the value type of the output object be promoted, and should it be
+      checked that ``at`` has value type *binary*?
+    **kwargs:
+      Ignored.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    Raises
+    -------
+      :obj:`exceptions.InvalidValueTypeError`
+        If ``track_types = True`` and the value type of ``at`` is not *binary*.
+
+    """
+    if at is None:
+      out = operators.assign_(self._obj, y, track_types = track_types)
+    else:
+      if track_types:
+        vtype = at.sq.value_type
+        if vtype is not None and vtype != "binary":
+          raise exceptions.InvalidValueTypeError(
+            f"Array 'at' must be of value type 'binary', not '{vtype}'"
+          )
+      out = operators.assign_at_(self._obj, y, at, track_types = track_types)
     return out
 
   def groupby(self, grouper, labels_as_names = True, **kwargs):
@@ -371,26 +418,6 @@ class SemanticArray():
       else:
         groups = [i[1].rename(i[0]) for i in partition]
     out = Collection(groups)
-    return out
-
-  def name(self, name, **kwargs):
-    """Apply the name verb to the array.
-
-    The name verb assigns a name to an array.
-
-    Parameters
-    -----------
-      name : :obj:`str`
-        Character sting to be assigned as name to the input array.
-      **kwargs:
-        Ignored.
-
-    Returns
-    --------
-      :obj:`xarray.DataArray`
-
-    """
-    out = self._obj.rename(name)
     return out
 
   def reduce(self, dimension, reducer, track_types = True, **kwargs):
@@ -522,6 +549,26 @@ class SemanticArray():
     if spatial:
       out = out.stack({dimension: [y_dim, x_dim]})
       out[dimension].sq.value_type = "coords"
+    return out
+
+  def name(self, name, **kwargs):
+    """Apply the name verb to the array.
+
+    The name verb assigns a name to an array.
+
+    Parameters
+    -----------
+      name : :obj:`str`
+        Character sting to be assigned as name to the input array.
+      **kwargs:
+        Ignored.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    """
+    out = self._obj.rename(name)
     return out
 
   def align_with(self, other):
@@ -1273,18 +1320,19 @@ class Collection(list):
     out[:] = [x.sq.filter(*args, **kwargs) for x in out]
     return out
 
-  def name(self, name, **kwargs):
-    """Apply the name verb to all arrays in the collection.
+  def assign(self, y, at = None, track_types = True, **kwargs):
+    """Apply the assign verb to all arrays in the collection.
 
-    See :meth:`SemanticArray.name`
+    See :meth:`SemanticArray.assign`
 
     Returns
     -------
       :obj:`Collection`
 
     """
+    args = tuple([y, at, track_types])
     out = copy.deepcopy(self)
-    out[:] = [x.sq.name(name, **kwargs) for x in out]
+    out[:] = [x.sq.assign(*args, **kwargs) for x in out]
     return out
 
   def reduce(self, dimension, reducer, track_types = True, **kwargs):
@@ -1330,6 +1378,20 @@ class Collection(list):
     args = tuple([dimension, reducer, size, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.smooth(*args, **kwargs) for x in out]
+    return out
+
+  def name(self, name, **kwargs):
+    """Apply the name verb to all arrays in the collection.
+
+    See :meth:`SemanticArray.name`
+
+    Returns
+    -------
+      :obj:`Collection`
+
+    """
+    out = copy.deepcopy(self)
+    out[:] = [x.sq.name(name, **kwargs) for x in out]
     return out
 
   def trim(self, force_regular = True):

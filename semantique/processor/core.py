@@ -658,6 +658,45 @@ class QueryProcessor():
     # Call verb.
     return self.call_verb("filter", params)
 
+  def handle_assign(self, block):
+    """Handler for the assign verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "assign".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+
+    """
+    # Get function parameters.
+    params = copy.deepcopy(block["params"])
+    # Parse right hand side of expression.
+    # If this is a reference it should be evaluated into an array.
+    try:
+      y = params["y"]
+    except KeyError:
+      pass
+    else:
+      try:
+        params["y"] = self.call_handler(y)
+      except exceptions.InvalidBuildingBlockError:
+        pass
+    # Parse at reference for conditional assignment.
+    try:
+      at = params["at"]
+    except KeyError:
+      pass
+    else:
+      params["at"] = self.call_handler(params["at"])
+    # Set other function parameters.
+    params["track_types"] = self._track_types
+    # Call verb.
+    return self.call_verb("assign", params)
+
   def handle_groupby(self, block):
     """Handler for the groupby verb.
 
@@ -678,22 +717,6 @@ class QueryProcessor():
     params["grouper"] = self.call_handler(params["grouper"])
     # Call verb.
     return self.call_verb("groupby", params)
-
-  def handle_name(self, block):
-    """Handler for the name verb.
-
-    Parameters
-    ----------
-      block : :obj:`dict`
-        Textual representation of a building block of type "verb" and name
-        "name".
-
-    Returns
-    -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
-
-    """
-    return self.call_verb("name", block["params"])
 
   def handle_reduce(self, block):
     """Handler for the reduce verb.
@@ -756,6 +779,22 @@ class QueryProcessor():
     params["track_types"] = self._track_types
     # Call verb.
     return self.call_verb("smooth", params)
+
+  def handle_name(self, block):
+    """Handler for the name verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "name".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+
+    """
+    return self.call_verb("name", block["params"])
 
   def handle_compose(self, block):
     """Handler for the compose verb.

@@ -186,6 +186,104 @@ TYPE_PROMOTION_MANUALS = {
     "datetime": {"datetime": "binary"},
     "__preserve_labels__": 0
   },
+  "mean": {
+    "numerical": "numerical",
+    "__preserve_labels__": 0
+  },
+  "median": {
+    "numerical": "numerical",
+    "__preserve_labels__": 0
+  },
+  "mode": {
+    "binary": "binary",
+    "nominal": "nominal",
+    "numerical": "numerical",
+    "ordinal": "ordinal",
+    "datetime": "datetime",
+    "__preserve_labels__": 1
+  },
+  "max": {
+    "binary": "binary",
+    "numerical": "numerical",
+    "ordinal": "ordinal",
+    "datetime": "datetime",
+    "__preserve_labels__": 1
+  },
+  "min": {
+    "binary": "binary",
+    "numerical": "numerical",
+    "ordinal": "ordinal",
+    "datetime": "datetime",
+    "__preserve_labels__": 1
+  },
+  "range": {
+    "numerical": "numerical",
+    "datetime": "numerical",
+    "__preserve_labels__": 0
+  },
+  "n": {
+    "binary": "numerical",
+    "nominal": "numerical",
+    "numerical": "numerical",
+    "ordinal": "numerical",
+    "coords": "numerical",
+    "datetime": "numerical",
+    "__preserve_labels__": 0
+  },
+  "product": {
+    "numerical": "numerical",
+    "__preserve_labels__": 0
+  },
+  "standard_deviation": {
+    "numerical": "numerical",
+    "__preserve_labels__": 0
+  },
+  "sum": {
+    "numerical": "numerical",
+    "__preserve_labels__": 0
+  },
+  "variance": {
+    "numerical": "numerical",
+    "__preserve_labels__": 0
+  },
+  "all": {
+    "binary": "binary",
+    "__preserve_labels__": 1
+  },
+  "any": {
+    "binary": "binary",
+    "__preserve_labels__": 1
+  },
+  "none": {
+    "binary": "binary",
+    "__preserve_labels__": 1
+  },
+  "count": {
+    "binary": "numerical",
+    "__preserve_labels__": 0
+  },
+  "percentage": {
+    "binary": "numerical",
+    "__preserve_labels__": 0
+  },
+  "first": {
+    "binary": "binary",
+    "nominal": "nominal",
+    "numerical": "numerical",
+    "ordinal": "ordinal",
+    "coords": "coords",
+    "datetime": "datetime",
+    "__preserve_labels__": 1
+  },
+  "last": {
+    "binary": "binary",
+    "nominal": "nominal",
+    "numerical": "numerical",
+    "ordinal": "ordinal",
+    "coords": "coords",
+    "datetime": "datetime",
+    "__preserve_labels__": 1
+  },
   "assign": {
     "binary": {
       "binary": "binary",
@@ -237,102 +335,13 @@ TYPE_PROMOTION_MANUALS = {
     },
     "__preserve_labels__": 2
   },
-  "mean": {
-    "numerical": "numerical",
-    "__preserve_labels__": 0
-  },
-  "product": {
-    "numerical": "numerical",
-    "__preserve_labels__": 0
-  },
-  "standard_deviation": {
-    "numerical": "numerical",
-    "__preserve_labels__": 0
-  },
-  "sum": {
-    "numerical": "numerical",
-    "__preserve_labels__": 0
-  },
-  "variance": {
-    "numerical": "numerical",
-    "__preserve_labels__": 0
-  },
-  "all": {
-    "binary": "binary",
-    "__preserve_labels__": 1
-  },
-  "any": {
-    "binary": "binary",
-    "__preserve_labels__": 1
-  },
-  "none": {
-    "binary": "binary",
-    "__preserve_labels__": 1
-  },
-  "count": {
-    "binary": "numerical",
-    "__preserve_labels__": 0
-  },
-  "percentage": {
-    "binary": "numerical",
-    "__preserve_labels__": 0
-  },
-  "max": {
-    "binary": "binary",
-    "numerical": "numerical",
-    "ordinal": "ordinal",
-    "datetime": "datetime",
-    "__preserve_labels__": 1
-  },
-  "median": {
-    "numerical": "numerical",
-    "__preserve_labels__": 0
-  },
-  "min": {
-    "binary": "binary",
-    "numerical": "numerical",
-    "ordinal": "ordinal",
-    "datetime": "datetime",
-    "__preserve_labels__": 1
-  },
-  "first": {
-    "binary": "binary",
-    "nominal": "nominal",
-    "numerical": "numerical",
-    "ordinal": "ordinal",
-    "coords": "coords",
-    "datetime": "datetime",
-    "__preserve_labels__": 1
-  },
-  "last": {
-    "binary": "binary",
-    "nominal": "nominal",
-    "numerical": "numerical",
-    "ordinal": "ordinal",
-    "coords": "coords",
-    "datetime": "datetime",
-    "__preserve_labels__": 1
-  },
-  "mode": {
-    "binary": "binary",
-    "nominal": "nominal",
-    "numerical": "numerical",
-    "ordinal": "ordinal",
-    "datetime": "datetime",
-    "__preserve_labels__": 1
-  },
-  "n": {
-    "binary": "numerical",
-    "nominal": "numerical",
-    "numerical": "numerical",
-    "ordinal": "numerical",
-    "coords": "numerical",
-    "datetime": "numerical",
-    "__preserve_labels__": 0
-  },
-  "range": {
-    "numerical": "numerical",
-    "datetime": "numerical",
+  "assign_at": {
+    "binary": {"binary": "binary"},
+    "nominal": {"nominal": "nominal"},
+    "numerical": {"numerical": "numerical"},
+    "ordinal": {"ordinal": "ordinal"},
+    "datetime": {"datetime": "datetime"},
+    "coords": {"coords": "coords"},
     "__preserve_labels__": 0
   }
 }
@@ -557,7 +566,7 @@ class TypePromoter:
         out = out[x]
       except KeyError:
         raise exceptions.InvalidValueTypeError(
-          f"Unsupported operand value type(s) for '{self._function}': '{intypes}'"
+          f"Unsupported operand value type(s) for '{self._function}': {intypes}"
         )
     self._output_type = out
 

@@ -1650,6 +1650,8 @@ def during_(x, y, track_types = True, **kwargs):
 # ASSIGNMENT OPERATORS
 #
 
+# Note: These are used by the assign verb.
+
 def assign_(x, y, track_types = True, **kwargs):
   """Replace x by y.
 
@@ -1698,7 +1700,65 @@ def assign_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "assign")
     promoter.check()
   y = xr.DataArray(y).sq.align_with(x)
-  out = xr.where(np.isfinite(x), y, get_null(y))
+  out = xr.where(pd.notnull(x), y, get_null(y))
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
+def assign_at_(x, y, z, track_types = True, **kwargs):
+  """Replace x by y where z is true.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Array containing the operands at the left-hand side of each
+      expression.
+    y :
+      Operands at the right-hand side of each expression. May be a constant,
+      meaning that the same value is used in each expression. May also be
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
+      has the same dimension coordinates.
+    z : :obj:`xarray.DataArray`
+      Binary array which can be aligned to the same shape as array ``x``,
+      defining at which pixels in x the expression should be evaluated. All
+      other pixels remain unchanged.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input objects?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      An array with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["assign_at"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "assign_at")
+    promoter.check()
+  y = xr.DataArray(y).sq.align_with(x)
+  z = z.sq.align_with(x)
+  out = xr.where(pd.notnull(x), xr.where(z, y, x), get_null(y))
   if track_types:
     out = promoter.promote(out)
   return out

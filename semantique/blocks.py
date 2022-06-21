@@ -243,6 +243,111 @@ class ArrayProxy(dict):
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
 
+  def assign(self, y, at = None, **kwargs):
+    """Assign new values to the pixels in the array.
+
+    Assigns a new value to each non-missing observation in the input, without
+    any computation. Optionally, it assigns these new values only to a subset
+    of pixels in the input. Which pixels these are is defined by the ``at``
+    argument.
+
+    Parameters
+    -----------
+      y:
+        Values to be assigned. May be a constant, meaning that the same value
+        is assigned to each pixel. May also be a proxy of another array which
+        can be aligned to the same shape as the input.
+      at : :obj:`ArrayProxy`, optional
+        Proxy of a binary array which can be aligned to the same shape as the
+        input.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`SemanticArray.assign <processor.structures.SemanticArray.assign>`.
+
+    Returns
+    --------
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> import semantique as sq
+    >>> sq.entity("water").assign(True, at = sq.entity("cloud"))
+    >>> sq.entity("water").assign(sq.self().extract("time", "year"))
+
+    """
+    if at is None:
+      kwargs.update({"y": y})
+    else:
+      kwargs.update({"y": y, "at": at})
+    return self._append_verb("assign", **kwargs)
+
+  def assign_time(self, component = None, **kwargs):
+    """Assign temporal coordinates as values to the pixels in an array.
+
+    This verb is a shortcut for first extracting the temporal dimension with
+    the :meth:`extract` verb (optionally only a specific component of that
+    dimension, such as *year* or *month*), and then using the coordinates of
+    this dimension as as the values to be assigned by the  :meth:`assign` verb.
+
+    Parameters
+    -----------
+      component : :obj:`str`, optional
+        Name of a specific component of the temporal dimension coordinates to
+        be extracted, e.g. *year*, *month* or *day*.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`SemanticArray.assign <processor.structures.SemanticArray.assign>`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    Examples
+    --------
+    >>> import semantique as sq
+    >>> sq.entity("water").assign_time()
+    >>> sq.entity("water").assign_time("year")
+
+    """
+    eval_obj = ArrayProxy({"type": "self"})
+    y = eval_obj.extract("time", component)
+    kwargs.update({"y": y})
+    return self._append_verb("assign", **kwargs)
+
+  def assign_space(self, component = None, **kwargs):
+    """Assign spatial coordinates as values to the pixels in an array.
+
+    This verb is a shortcut for first extracting the spatial dimension with
+    the :meth:`extract` verb (optionally only a specific component of that
+    dimension, such as the spatial feature indices), and then using the
+    coordinates of this dimension as values to be assigned by the
+    :meth:`assign` verb.
+
+    Parameters
+    -----------
+      component : :obj:`str`, optional
+        Name of a specific component of the spatial dimension coordinates to
+        be extracted, e.g. *feature*.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`SemanticArray.assign <processor.structures.SemanticArray.assign>`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    Examples
+    --------
+    >>> import semantique as sq
+    >>> sq.entity("water").assign_space()
+    >>> sq.entity("water").assign_space("feature")
+
+    """
+    eval_obj = ArrayProxy({"type": "self"})
+    y = eval_obj.extract("space", component)
+    kwargs.update({"y": y})
+    return self._append_verb("assign", **kwargs)
+
   def groupby(self, grouper, **kwargs):
     """Group the values in an array.
 
@@ -269,7 +374,7 @@ class ArrayProxy(dict):
     Examples
     --------
     >>> import semantique as sq
-    >>> sq.entity("water").groupby(sq.entity("water").extract("time", "year"))
+    >>> sq.entity("water").groupby(sq.self().extract("time", "year"))
 
     """
     kwargs.update({"grouper": grouper})
@@ -285,9 +390,11 @@ class ArrayProxy(dict):
 
     Parameters
     -----------
-      component : :obj:`str`, optional
+      component : :obj:`str` or :obj:`list` of :obj:`str`, optional
         Name of a specific component of the temporal dimension coordinates to
-        be extracted, e.g. *year*, *month* or *day*.
+        be extracted, e.g. *year*, *month* or *day*. Can also be a list of
+        multiple of such components, in case the groups should be defined by
+        multiple groupers.
       **kwargs:
         Additional keyword arguments passed on to
         :obj:`SemanticArray.groupby <processor.structures.SemanticArray.groupby>`.
@@ -321,9 +428,10 @@ class ArrayProxy(dict):
 
     Parameters
     -----------
-      component : :obj:`str`, optional
+      component : :obj:`str` or :obj:`list` of :obj:`str`, optional
         Name of a specific component of the spatial dimension coordinates to
-        be extracted, e.g. *feature*.
+        be extracted, e.g. *feature*. Can also be a list of multiple of such
+        components, in case the groups should be defined by multiple groupers.
       **kwargs:
         Additional keyword arguments passed on to
         :obj:`SemanticArray.groupby <processor.structures.SemanticArray.groupby>`.
@@ -675,6 +783,49 @@ class CollectionProxy(dict):
     filterer = eval_obj.extract("space", component).evaluate(operator, y)
     kwargs.update({"filterer": filterer})
     return self._append_verb("filter", **kwargs)
+
+  def assign(self, y, at = None, **kwargs):
+    """Apply the assign verb to each array in a collection.
+
+    See :meth:`ArrayProxy.assign`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    """
+    kwargs.update({"filterer": filterer})
+    return self._append_verb("filter", **kwargs)
+
+  def assign_time(self, component = None, **kwargs):
+    """Apply the assign_time verb to each array in a collection.
+
+    See :meth:`ArrayProxy.assign_time`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    """
+    eval_obj = ArrayProxy({"type": "self"})
+    y = eval_obj.extract("time", component)
+    kwargs.update({"y": y})
+    return self._append_verb("assign", **kwargs)
+
+  def assign_space(self, component = None, **kwargs):
+    """Apply the assign_space verb to each array in a collection.
+
+    See :meth:`ArrayProxy.assign_space`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    """
+    eval_obj = ArrayProxy({"type": "self"})
+    y = eval_obj.extract("space", component)
+    kwargs.update({"y": y})
+    return self._append_verb("assign", **kwargs)
 
   def reduce(self, dimension, reducer, **kwargs):
     """Apply the reduce verb to each array in a collection.
