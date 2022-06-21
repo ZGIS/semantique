@@ -1,6 +1,0 @@
-﻿semantique.factbase.GeotiffArchive.retrieve
-===========================================
-
-.. currentmodule:: semantique.factbase
-
-.. automethod:: GeotiffArchive.retrieve

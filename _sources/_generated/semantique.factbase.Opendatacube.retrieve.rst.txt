@@ -1,6 +1,0 @@
-﻿semantique.factbase.Opendatacube.retrieve
-=========================================
-
-.. currentmodule:: semantique.factbase
-
-.. automethod:: Opendatacube.retrieve

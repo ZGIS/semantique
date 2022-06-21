@@ -1,6 +1,0 @@
-﻿semantique.processor.structures.Cube.to\_csv
-============================================
-
-.. currentmodule:: semantique.processor.structures
-
-.. automethod:: Cube.to_csv

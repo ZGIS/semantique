@@ -1,6 +1,0 @@
-﻿semantique.CubeProxy.evaluate
-=============================
-
-.. currentmodule:: semantique
-
-.. automethod:: CubeProxy.evaluate

@@ -1,0 +1,6 @@
+﻿semantique.processor.arrays.SemanticArray.value\_type
+=====================================================
+
+.. currentmodule:: semantique.processor.arrays
+
+.. autoproperty:: SemanticArray.value_type

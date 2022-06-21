@@ -1,6 +1,0 @@
-﻿semantique.processor.operators.assign\_
-=======================================
-
-.. currentmodule:: semantique.processor.operators
-
-.. autofunction:: assign_

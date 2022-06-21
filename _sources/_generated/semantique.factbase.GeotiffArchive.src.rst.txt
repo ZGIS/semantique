@@ -1,6 +1,0 @@
-﻿semantique.factbase.GeotiffArchive.src
-======================================
-
-.. currentmodule:: semantique.factbase
-
-.. autoproperty:: GeotiffArchive.src

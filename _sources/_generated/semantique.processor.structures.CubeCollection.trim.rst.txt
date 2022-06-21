@@ -1,6 +1,0 @@
-﻿semantique.processor.structures.CubeCollection.trim
-===================================================
-
-.. currentmodule:: semantique.processor.structures
-
-.. automethod:: CubeCollection.trim

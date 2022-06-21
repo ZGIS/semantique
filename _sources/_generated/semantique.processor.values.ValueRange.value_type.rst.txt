@@ -1,6 +1,0 @@
-﻿semantique.processor.values.ValueRange.value\_type
-==================================================
-
-.. currentmodule:: semantique.processor.values
-
-.. autoproperty:: ValueRange.value_type

@@ -18,7 +18,7 @@ Recipe
 
    QueryRecipe
 
-Ontology
+Mapping
 ---------
 
 .. autosummary::
@@ -26,23 +26,23 @@ Ontology
    :template: inherited.rst
    :nosignatures:
 
-   ontology.Ontology
-   ontology.Semantique
+   mapping.Mapping
+   mapping.Semantique
 
-Factbase
----------
+EO data cube
+-------------
 
 .. autosummary::
    :toctree: _generated/
    :template: inherited.rst
    :nosignatures:
 
-   factbase.Factbase
-   factbase.Opendatacube
-   factbase.GeotiffArchive
+   datacube.Datacube
+   datacube.Opendatacube
+   datacube.GeotiffArchive
 
-Extent
--------
+Spatio-temporal extent
+-----------------------
 
 .. autosummary::
    :toctree: _generated/
@@ -65,7 +65,7 @@ References
    concept
    entity
    event
-   resource
+   layer
    appearance
    artifacts
    atmosphere
@@ -85,16 +85,20 @@ Verbs for single data cubes
    :toctree: _generated/
    :nosignatures:
 
-   CubeProxy.evaluate
-   CubeProxy.extract
-   CubeProxy.filter
-   CubeProxy.filter_time
-   CubeProxy.filter_space
-   CubeProxy.groupby
-   CubeProxy.groupby_time
-   CubeProxy.groupby_space
-   CubeProxy.label
-   CubeProxy.reduce
+   ArrayProxy.evaluate
+   ArrayProxy.extract
+   ArrayProxy.filter
+   ArrayProxy.filter_time
+   ArrayProxy.filter_space
+   ArrayProxy.assign
+   ArrayProxy.assign_time
+   ArrayProxy.assign_space
+   ArrayProxy.groupby
+   ArrayProxy.groupby_time
+   ArrayProxy.groupby_space
+   ArrayProxy.reduce
+   ArrayProxy.shift
+   ArrayProxy.smooth
 
 Verbs for data cube collections
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,16 +107,29 @@ Verbs for data cube collections
    :toctree: _generated/
    :nosignatures:
 
-   CubeCollectionProxy.compose
-   CubeCollectionProxy.concatenate
-   CubeCollectionProxy.merge
-   CubeCollectionProxy.evaluate
-   CubeCollectionProxy.extract
-   CubeCollectionProxy.filter
-   CubeCollectionProxy.filter_time
-   CubeCollectionProxy.filter_space
-   CubeCollectionProxy.label
-   CubeCollectionProxy.reduce
+   CollectionProxy.compose
+   CollectionProxy.concatenate
+   CollectionProxy.merge
+   CollectionProxy.evaluate
+   CollectionProxy.extract
+   CollectionProxy.filter
+   CollectionProxy.filter_time
+   CollectionProxy.filter_space
+   CollectionProxy.assign
+   CollectionProxy.assign_time
+   CollectionProxy.assign_space
+   CollectionProxy.reduce
+   CollectionProxy.shift
+   CollectionProxy.smooth
+
+Utility verbs
+~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   ArrayProxy.name
 
 Special values
 ---------------
@@ -121,9 +138,10 @@ Special values
    :toctree: _generated/
    :nosignatures:
 
-   value_label
-   value_range
-   geometries
+   label
+   set
+   interval
+   geometry
    time_instant
    time_interval
 
@@ -139,16 +157,16 @@ Core
 
    processor.core.QueryProcessor
 
-Data cube objects
-------------------
+Array objects
+--------------
 
 .. autosummary::
    :toctree: _generated/
    :template: inherited.rst
    :nosignatures:
 
-   processor.structures.Cube
-   processor.structures.CubeCollection
+   processor.arrays.SemanticArray
+   processor.arrays.Collection
 
 Special value objects
 ----------------------
@@ -158,32 +176,28 @@ Special value objects
    :template: inherited.rst
    :nosignatures:
 
-   processor.values.ValueRange
+   processor.values.Interval
 
 Operator functions
 -------------------
 
-Numerical univariate operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Univariate operators
+~~~~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
    :toctree: _generated/
    :nosignatures:
 
+   processor.operators.not_
+   processor.operators.is_missing_
+   processor.operators.not_missing_
    processor.operators.absolute_
    processor.operators.exponential_
    processor.operators.cube_root_
    processor.operators.natural_logarithm_
    processor.operators.square_root_
-
-Boolean univariate operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. autosummary::
-   :toctree: _generated/
-   :nosignatures:
-
-   processor.operators.invert_
+   processor.operators.floor_
+   processor.operators.ceiling_
 
 Algebraic operators
 ~~~~~~~~~~~~~~~~~~~~
@@ -197,6 +211,7 @@ Algebraic operators
    processor.operators.multiply_
    processor.operators.power_
    processor.operators.subtract_
+   processor.operators.normalized_difference_
 
 Boolean operators
 ~~~~~~~~~~~~~~~~~~
@@ -207,6 +222,7 @@ Boolean operators
 
    processor.operators.and_
    processor.operators.or_
+   processor.operators.exclusive_or_
 
 Relational operators
 ~~~~~~~~~~~~~~~~~~~~~
@@ -216,14 +232,14 @@ Relational operators
    :nosignatures:
 
    processor.operators.equal_
-   processor.operators.exclusive_or_
+   processor.operators.not_equal_
+   processor.operators.in_
+   processor.operators.not_in_
    processor.operators.greater_
    processor.operators.greater_equal_
-   processor.operators.in_
    processor.operators.less_
    processor.operators.less_equal_
-   processor.operators.not_equal_
-   processor.operators.not_in_
+
 
 Spatial relational operators
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -244,15 +260,6 @@ Temporal relational operators
    processor.operators.after_
    processor.operators.before_
    processor.operators.during_
-
-Assignment operators
-~~~~~~~~~~~~~~~~~~~~~
-
-.. autosummary::
-   :toctree: _generated/
-   :nosignatures:
-
-   processor.operators.assign_
 
 Reducer functions
 ------------------
@@ -285,6 +292,7 @@ Boolean reducers
 
    processor.reducers.all_
    processor.reducers.any_
+   processor.reducers.none_
 
 Occurence reducers
 ~~~~~~~~~~~~~~~~~~~
@@ -309,29 +317,18 @@ Positional reducers
 Utils
 ------
 
-Utility functions to interact with xarray
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 .. autosummary::
    :toctree: _generated/
    :nosignatures:
 
-   processor.utils.create_extent_cube
+   processor.utils.parse_extent
    processor.utils.parse_datetime_component
    processor.utils.parse_coords_component
-
-Utility functions to interact with numpy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. autosummary::
-   :toctree: _generated/
-   :nosignatures:
-
    processor.utils.convert_datetime64
-   processor.utils.np_null
-   processor.utils.np_allnull
-   processor.utils.np_null_as_zero
-   processor.utils.np_inf_as_null
+   processor.utils.get_null
+   processor.utils.allnull
+   processor.utils.null_as_zero
+   processor.utils.inf_as_null
 
 Value type handling
 -------------------
@@ -357,10 +354,10 @@ Exceptions
    exceptions.AlignmentError
    exceptions.EmptyDataError
    exceptions.InvalidValueTypeError
-   exceptions.InvalidValueRangeError
+   exceptions.InvalidIntervalError
    exceptions.InvalidBuildingBlockError
    exceptions.UnknownConceptError
-   exceptions.UnknownResourceError
+   exceptions.UnknownLayerError
    exceptions.UnknownResultError
    exceptions.UnknownReducerError
    exceptions.UnknownOperatorError

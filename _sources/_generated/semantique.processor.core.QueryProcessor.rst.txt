@@ -21,6 +21,7 @@
       ~QueryProcessor.execute
       ~QueryProcessor.get_operator
       ~QueryProcessor.get_reducer
+      ~QueryProcessor.handle_assign
       ~QueryProcessor.handle_collection
       ~QueryProcessor.handle_compose
       ~QueryProcessor.handle_concatenate
@@ -28,26 +29,28 @@
       ~QueryProcessor.handle_evaluate
       ~QueryProcessor.handle_extract
       ~QueryProcessor.handle_filter
-      ~QueryProcessor.handle_geometries
+      ~QueryProcessor.handle_geometry
       ~QueryProcessor.handle_groupby
+      ~QueryProcessor.handle_interval
       ~QueryProcessor.handle_label
+      ~QueryProcessor.handle_layer
       ~QueryProcessor.handle_merge
+      ~QueryProcessor.handle_name
       ~QueryProcessor.handle_processing_chain
       ~QueryProcessor.handle_reduce
-      ~QueryProcessor.handle_resource
       ~QueryProcessor.handle_result
       ~QueryProcessor.handle_self
+      ~QueryProcessor.handle_set
+      ~QueryProcessor.handle_shift
+      ~QueryProcessor.handle_smooth
       ~QueryProcessor.handle_time_instant
       ~QueryProcessor.handle_time_interval
-      ~QueryProcessor.handle_value_label
-      ~QueryProcessor.handle_value_range
       ~QueryProcessor.handle_verb
       ~QueryProcessor.optimize
       ~QueryProcessor.parse
       ~QueryProcessor.respond
       ~QueryProcessor.store_default_operators
       ~QueryProcessor.store_default_reducers
-      ~QueryProcessor.update_list_elements
    
    
 
@@ -58,9 +61,9 @@
    .. autosummary::
    
       ~QueryProcessor.crs
+      ~QueryProcessor.datacube
       ~QueryProcessor.extent
-      ~QueryProcessor.factbase
-      ~QueryProcessor.ontology
+      ~QueryProcessor.mapping
       ~QueryProcessor.operators
       ~QueryProcessor.recipe
       ~QueryProcessor.reducers

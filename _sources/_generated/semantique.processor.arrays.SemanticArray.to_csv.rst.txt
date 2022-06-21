@@ -1,0 +1,6 @@
+﻿semantique.processor.arrays.SemanticArray.to\_csv
+=================================================
+
+.. currentmodule:: semantique.processor.arrays
+
+.. automethod:: SemanticArray.to_csv

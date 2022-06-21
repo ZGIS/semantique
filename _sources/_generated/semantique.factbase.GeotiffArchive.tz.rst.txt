@@ -1,6 +1,0 @@
-﻿semantique.factbase.GeotiffArchive.tz
-=====================================
-
-.. currentmodule:: semantique.factbase
-
-.. autoproperty:: GeotiffArchive.tz

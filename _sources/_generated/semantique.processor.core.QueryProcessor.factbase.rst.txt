@@ -1,6 +1,0 @@
-﻿semantique.processor.core.QueryProcessor.factbase
-=================================================
-
-.. currentmodule:: semantique.processor.core
-
-.. autoproperty:: QueryProcessor.factbase

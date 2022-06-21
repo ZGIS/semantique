@@ -1,6 +1,0 @@
-﻿semantique.ontology.Ontology.translate
-======================================
-
-.. currentmodule:: semantique.ontology
-
-.. automethod:: Ontology.translate

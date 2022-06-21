@@ -1,0 +1,6 @@
+﻿semantique.processor.arrays.SemanticArray.groupby
+=================================================
+
+.. currentmodule:: semantique.processor.arrays
+
+.. automethod:: SemanticArray.groupby

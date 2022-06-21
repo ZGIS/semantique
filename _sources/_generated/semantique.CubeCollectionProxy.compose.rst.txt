@@ -1,6 +1,0 @@
-﻿semantique.CubeCollectionProxy.compose
-======================================
-
-.. currentmodule:: semantique
-
-.. automethod:: CubeCollectionProxy.compose

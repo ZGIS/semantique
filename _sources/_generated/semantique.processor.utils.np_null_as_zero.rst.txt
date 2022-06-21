@@ -1,6 +1,0 @@
-﻿semantique.processor.utils.np\_null\_as\_zero
-=============================================
-
-.. currentmodule:: semantique.processor.utils
-
-.. autofunction:: np_null_as_zero

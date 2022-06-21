@@ -1,6 +1,0 @@
-﻿semantique.value\_range
-=======================
-
-.. currentmodule:: semantique
-
-.. autofunction:: value_range

@@ -1,6 +1,0 @@
-﻿semantique.CubeProxy.label
-==========================
-
-.. currentmodule:: semantique
-
-.. automethod:: CubeProxy.label

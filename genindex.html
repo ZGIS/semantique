@@ -73,11 +73,6 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="background.html">
-   Background
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="installation.html">
    Installation
   </a>
@@ -89,44 +84,17 @@
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1">
   <a class="reference internal" href="guide.html">
    User Guide
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/intro.html">
-     Intro
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/references.html">
-     References
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/verbs.html">
-     Verbs
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/advanced.html">
-     Advanced
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="reference.html">
    API Reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -137,28 +105,28 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ontology.Ontology.html">
-     semantique.ontology.Ontology
+    <a class="reference internal" href="_generated/semantique.mapping.Mapping.html">
+     semantique.mapping.Mapping
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ontology.Semantique.html">
-     semantique.ontology.Semantique
+    <a class="reference internal" href="_generated/semantique.mapping.Semantique.html">
+     semantique.mapping.Semantique
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.factbase.Factbase.html">
-     semantique.factbase.Factbase
+    <a class="reference internal" href="_generated/semantique.datacube.Datacube.html">
+     semantique.datacube.Datacube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.factbase.Opendatacube.html">
-     semantique.factbase.Opendatacube
+    <a class="reference internal" href="_generated/semantique.datacube.Opendatacube.html">
+     semantique.datacube.Opendatacube
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.factbase.GeotiffArchive.html">
-     semantique.factbase.GeotiffArchive
+    <a class="reference internal" href="_generated/semantique.datacube.GeotiffArchive.html">
+     semantique.datacube.GeotiffArchive
     </a>
    </li>
    <li class="toctree-l2">
@@ -187,8 +155,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.resource.html">
-     semantique.resource
+    <a class="reference internal" href="_generated/semantique.layer.html">
+     semantique.layer
     </a>
    </li>
    <li class="toctree-l2">
@@ -232,118 +200,168 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeProxy.evaluate.html">
-     semantique.CubeProxy.evaluate
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.evaluate.html">
+     semantique.ArrayProxy.evaluate
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeProxy.extract.html">
-     semantique.CubeProxy.extract
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.extract.html">
+     semantique.ArrayProxy.extract
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeProxy.filter.html">
-     semantique.CubeProxy.filter
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.filter.html">
+     semantique.ArrayProxy.filter
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeProxy.filter_time.html">
-     semantique.CubeProxy.filter_time
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.filter_time.html">
+     semantique.ArrayProxy.filter_time
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeProxy.filter_space.html">
-     semantique.CubeProxy.filter_space
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.filter_space.html">
+     semantique.ArrayProxy.filter_space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeProxy.groupby.html">
-     semantique.CubeProxy.groupby
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.assign.html">
+     semantique.ArrayProxy.assign
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeProxy.groupby_time.html">
-     semantique.CubeProxy.groupby_time
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.assign_time.html">
+     semantique.ArrayProxy.assign_time
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeProxy.groupby_space.html">
-     semantique.CubeProxy.groupby_space
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.assign_space.html">
+     semantique.ArrayProxy.assign_space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeProxy.label.html">
-     semantique.CubeProxy.label
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.groupby.html">
+     semantique.ArrayProxy.groupby
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeProxy.reduce.html">
-     semantique.CubeProxy.reduce
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.groupby_time.html">
+     semantique.ArrayProxy.groupby_time
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.compose.html">
-     semantique.CubeCollectionProxy.compose
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.groupby_space.html">
+     semantique.ArrayProxy.groupby_space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.concatenate.html">
-     semantique.CubeCollectionProxy.concatenate
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.reduce.html">
+     semantique.ArrayProxy.reduce
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.merge.html">
-     semantique.CubeCollectionProxy.merge
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.shift.html">
+     semantique.ArrayProxy.shift
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.evaluate.html">
-     semantique.CubeCollectionProxy.evaluate
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.smooth.html">
+     semantique.ArrayProxy.smooth
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.extract.html">
-     semantique.CubeCollectionProxy.extract
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.compose.html">
+     semantique.CollectionProxy.compose
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.filter.html">
-     semantique.CubeCollectionProxy.filter
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.concatenate.html">
+     semantique.CollectionProxy.concatenate
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.filter_time.html">
-     semantique.CubeCollectionProxy.filter_time
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.merge.html">
+     semantique.CollectionProxy.merge
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.filter_space.html">
-     semantique.CubeCollectionProxy.filter_space
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.evaluate.html">
+     semantique.CollectionProxy.evaluate
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.label.html">
-     semantique.CubeCollectionProxy.label
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.extract.html">
+     semantique.CollectionProxy.extract
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CubeCollectionProxy.reduce.html">
-     semantique.CubeCollectionProxy.reduce
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.filter.html">
+     semantique.CollectionProxy.filter
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.value_label.html">
-     semantique.value_label
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.filter_time.html">
+     semantique.CollectionProxy.filter_time
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.value_range.html">
-     semantique.value_range
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.filter_space.html">
+     semantique.CollectionProxy.filter_space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.geometries.html">
-     semantique.geometries
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.assign.html">
+     semantique.CollectionProxy.assign
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.assign_time.html">
+     semantique.CollectionProxy.assign_time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.assign_space.html">
+     semantique.CollectionProxy.assign_space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.reduce.html">
+     semantique.CollectionProxy.reduce
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.shift.html">
+     semantique.CollectionProxy.shift
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.smooth.html">
+     semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.name.html">
+     semantique.ArrayProxy.name
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.label.html">
+     semantique.label
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.set.html">
+     semantique.set
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.interval.html">
+     semantique.interval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.geometry.html">
+     semantique.geometry
     </a>
    </li>
    <li class="toctree-l2">
@@ -362,18 +380,33 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.structures.Cube.html">
-     semantique.processor.structures.Cube
+    <a class="reference internal" href="_generated/semantique.processor.arrays.SemanticArray.html">
+     semantique.processor.arrays.SemanticArray
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.structures.CubeCollection.html">
-     semantique.processor.structures.CubeCollection
+    <a class="reference internal" href="_generated/semantique.processor.arrays.Collection.html">
+     semantique.processor.arrays.Collection
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.values.ValueRange.html">
-     semantique.processor.values.ValueRange
+    <a class="reference internal" href="_generated/semantique.processor.values.Interval.html">
+     semantique.processor.values.Interval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.not_.html">
+     semantique.processor.operators.not_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.is_missing_.html">
+     semantique.processor.operators.is_missing_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.not_missing_.html">
+     semantique.processor.operators.not_missing_
     </a>
    </li>
    <li class="toctree-l2">
@@ -402,8 +435,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.invert_.html">
-     semantique.processor.operators.invert_
+    <a class="reference internal" href="_generated/semantique.processor.operators.floor_.html">
+     semantique.processor.operators.floor_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.ceiling_.html">
+     semantique.processor.operators.ceiling_
     </a>
    </li>
    <li class="toctree-l2">
@@ -432,6 +470,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.normalized_difference_.html">
+     semantique.processor.operators.normalized_difference_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.operators.and_.html">
      semantique.processor.operators.and_
     </a>
@@ -442,13 +485,28 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.exclusive_or_.html">
+     semantique.processor.operators.exclusive_or_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.operators.equal_.html">
      semantique.processor.operators.equal_
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.exclusive_or_.html">
-     semantique.processor.operators.exclusive_or_
+    <a class="reference internal" href="_generated/semantique.processor.operators.not_equal_.html">
+     semantique.processor.operators.not_equal_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.in_.html">
+     semantique.processor.operators.in_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.operators.not_in_.html">
+     semantique.processor.operators.not_in_
     </a>
    </li>
    <li class="toctree-l2">
@@ -462,11 +520,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.in_.html">
-     semantique.processor.operators.in_
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.operators.less_.html">
      semantique.processor.operators.less_
     </a>
@@ -474,16 +527,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.operators.less_equal_.html">
      semantique.processor.operators.less_equal_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.not_equal_.html">
-     semantique.processor.operators.not_equal_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.not_in_.html">
-     semantique.processor.operators.not_in_
     </a>
    </li>
    <li class="toctree-l2">
@@ -504,11 +547,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.operators.during_.html">
      semantique.processor.operators.during_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.assign_.html">
-     semantique.processor.operators.assign_
     </a>
    </li>
    <li class="toctree-l2">
@@ -577,6 +615,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.reducers.none_.html">
+     semantique.processor.reducers.none_
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.reducers.count_.html">
      semantique.processor.reducers.count_
     </a>
@@ -597,8 +640,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.create_extent_cube.html">
-     semantique.processor.utils.create_extent_cube
+    <a class="reference internal" href="_generated/semantique.processor.utils.parse_extent.html">
+     semantique.processor.utils.parse_extent
     </a>
    </li>
    <li class="toctree-l2">
@@ -617,23 +660,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.np_null.html">
-     semantique.processor.utils.np_null
+    <a class="reference internal" href="_generated/semantique.processor.utils.get_null.html">
+     semantique.processor.utils.get_null
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.np_allnull.html">
-     semantique.processor.utils.np_allnull
+    <a class="reference internal" href="_generated/semantique.processor.utils.allnull.html">
+     semantique.processor.utils.allnull
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.np_null_as_zero.html">
-     semantique.processor.utils.np_null_as_zero
+    <a class="reference internal" href="_generated/semantique.processor.utils.null_as_zero.html">
+     semantique.processor.utils.null_as_zero
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.np_inf_as_null.html">
-     semantique.processor.utils.np_inf_as_null
+    <a class="reference internal" href="_generated/semantique.processor.utils.inf_as_null.html">
+     semantique.processor.utils.inf_as_null
     </a>
    </li>
    <li class="toctree-l2">
@@ -677,8 +720,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.InvalidValueRangeError.html">
-     semantique.exceptions.InvalidValueRangeError
+    <a class="reference internal" href="_generated/semantique.exceptions.InvalidIntervalError.html">
+     semantique.exceptions.InvalidIntervalError
     </a>
    </li>
    <li class="toctree-l2">
@@ -692,8 +735,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.UnknownResourceError.html">
-     semantique.exceptions.UnknownResourceError
+    <a class="reference internal" href="_generated/semantique.exceptions.UnknownLayerError.html">
+     semantique.exceptions.UnknownLayerError
     </a>
    </li>
    <li class="toctree-l2">
@@ -747,11 +790,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="_notebooks/gallery.html">
-   Gallery
-  </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="changelog.html">
@@ -879,40 +917,39 @@
  | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
- | <a href="#X"><strong>X</strong></a>
  
 </div>
 <h2 id="_">_</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.CubeCollectionProxy.html#semantique.CubeCollectionProxy.__init__">__init__() (semantique.CubeCollectionProxy method)</a>
+      <li><a href="_generated/semantique.ArrayProxy.html#semantique.ArrayProxy.__init__">__init__() (semantique.ArrayProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.CubeProxy.html#semantique.CubeProxy.__init__">(semantique.CubeProxy method)</a>
+        <li><a href="_generated/semantique.CollectionProxy.html#semantique.CollectionProxy.__init__">(semantique.CollectionProxy method)</a>
+</li>
+        <li><a href="_generated/semantique.datacube.Datacube.html#semantique.datacube.Datacube.__init__">(semantique.datacube.Datacube method)</a>
+</li>
+        <li><a href="_generated/semantique.datacube.GeotiffArchive.html#semantique.datacube.GeotiffArchive.__init__">(semantique.datacube.GeotiffArchive method)</a>
+</li>
+        <li><a href="_generated/semantique.datacube.Opendatacube.html#semantique.datacube.Opendatacube.__init__">(semantique.datacube.Opendatacube method)</a>
 </li>
         <li><a href="_generated/semantique.extent.SpatialExtent.html#semantique.extent.SpatialExtent.__init__">(semantique.extent.SpatialExtent method)</a>
 </li>
         <li><a href="_generated/semantique.extent.TemporalExtent.html#semantique.extent.TemporalExtent.__init__">(semantique.extent.TemporalExtent method)</a>
 </li>
-        <li><a href="_generated/semantique.factbase.Factbase.html#semantique.factbase.Factbase.__init__">(semantique.factbase.Factbase method)</a>
+        <li><a href="_generated/semantique.mapping.Mapping.html#semantique.mapping.Mapping.__init__">(semantique.mapping.Mapping method)</a>
 </li>
-        <li><a href="_generated/semantique.factbase.GeotiffArchive.html#semantique.factbase.GeotiffArchive.__init__">(semantique.factbase.GeotiffArchive method)</a>
+        <li><a href="_generated/semantique.mapping.Semantique.html#semantique.mapping.Semantique.__init__">(semantique.mapping.Semantique method)</a>
 </li>
-        <li><a href="_generated/semantique.factbase.Opendatacube.html#semantique.factbase.Opendatacube.__init__">(semantique.factbase.Opendatacube method)</a>
+        <li><a href="_generated/semantique.processor.arrays.Collection.html#semantique.processor.arrays.Collection.__init__">(semantique.processor.arrays.Collection method)</a>
 </li>
-        <li><a href="_generated/semantique.ontology.Ontology.html#semantique.ontology.Ontology.__init__">(semantique.ontology.Ontology method)</a>
-</li>
-        <li><a href="_generated/semantique.ontology.Semantique.html#semantique.ontology.Semantique.__init__">(semantique.ontology.Semantique method)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.html#semantique.processor.arrays.SemanticArray.__init__">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
         <li><a href="_generated/semantique.processor.core.QueryProcessor.html#semantique.processor.core.QueryProcessor.__init__">(semantique.processor.core.QueryProcessor method)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.Cube.html#semantique.processor.structures.Cube.__init__">(semantique.processor.structures.Cube method)</a>
-</li>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.html#semantique.processor.structures.CubeCollection.__init__">(semantique.processor.structures.CubeCollection method)</a>
-</li>
         <li><a href="_generated/semantique.processor.types.TypePromoter.html#semantique.processor.types.TypePromoter.__init__">(semantique.processor.types.TypePromoter method)</a>
 </li>
-        <li><a href="_generated/semantique.processor.values.ValueRange.html#semantique.processor.values.ValueRange.__init__">(semantique.processor.values.ValueRange method)</a>
+        <li><a href="_generated/semantique.processor.values.Interval.html#semantique.processor.values.Interval.__init__">(semantique.processor.values.Interval method)</a>
 </li>
         <li><a href="_generated/semantique.QueryRecipe.html#semantique.QueryRecipe.__init__">(semantique.QueryRecipe method)</a>
 </li>
@@ -933,24 +970,48 @@
 </li>
       <li><a href="_generated/semantique.processor.operators.after_.html#semantique.processor.operators.after_">after_() (in module semantique.processor.operators)</a>
 </li>
-      <li><a href="_generated/semantique.processor.structures.Cube.align_with.html#semantique.processor.structures.Cube.align_with">align_with() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.align_with.html#semantique.processor.arrays.SemanticArray.align_with">align_with() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
       <li><a href="_generated/semantique.exceptions.AlignmentError.html#semantique.exceptions.AlignmentError">AlignmentError</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.reducers.all_.html#semantique.processor.reducers.all_">all_() (in module semantique.processor.reducers)</a>
+</li>
+      <li><a href="_generated/semantique.processor.utils.allnull.html#semantique.processor.utils.allnull">allnull() (in module semantique.processor.utils)</a>
 </li>
       <li><a href="_generated/semantique.processor.operators.and_.html#semantique.processor.operators.and_">and_() (in module semantique.processor.operators)</a>
 </li>
       <li><a href="_generated/semantique.processor.reducers.any_.html#semantique.processor.reducers.any_">any_() (in module semantique.processor.reducers)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.appearance.html#semantique.appearance">appearance() (in module semantique)</a>
+</li>
+      <li><a href="_generated/semantique.ArrayProxy.html#semantique.ArrayProxy">ArrayProxy (class in semantique)</a>
 </li>
       <li><a href="_generated/semantique.artifacts.html#semantique.artifacts">artifacts() (in module semantique)</a>
 </li>
-      <li><a href="_generated/semantique.processor.operators.assign_.html#semantique.processor.operators.assign_">assign_() (in module semantique.processor.operators)</a>
+      <li><a href="_generated/semantique.ArrayProxy.assign.html#semantique.ArrayProxy.assign">assign() (semantique.ArrayProxy method)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.CollectionProxy.assign.html#semantique.CollectionProxy.assign">(semantique.CollectionProxy method)</a>
 </li>
+        <li><a href="_generated/semantique.processor.arrays.Collection.assign.html#semantique.processor.arrays.Collection.assign">(semantique.processor.arrays.Collection method)</a>
+</li>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.assign.html#semantique.processor.arrays.SemanticArray.assign">(semantique.processor.arrays.SemanticArray method)</a>
+</li>
+      </ul></li>
+      <li><a href="_generated/semantique.ArrayProxy.assign_space.html#semantique.ArrayProxy.assign_space">assign_space() (semantique.ArrayProxy method)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.CollectionProxy.assign_space.html#semantique.CollectionProxy.assign_space">(semantique.CollectionProxy method)</a>
+</li>
+      </ul></li>
+      <li><a href="_generated/semantique.ArrayProxy.assign_time.html#semantique.ArrayProxy.assign_time">assign_time() (semantique.ArrayProxy method)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.CollectionProxy.assign_time.html#semantique.CollectionProxy.assign_time">(semantique.CollectionProxy method)</a>
+</li>
+      </ul></li>
       <li><a href="_generated/semantique.atmosphere.html#semantique.atmosphere">atmosphere() (in module semantique)</a>
 </li>
   </ul></td>
@@ -971,57 +1032,53 @@
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.call_verb.html#semantique.processor.core.QueryProcessor.call_verb">call_verb() (semantique.processor.core.QueryProcessor method)</a>
 </li>
+      <li><a href="_generated/semantique.processor.operators.ceiling_.html#semantique.processor.operators.ceiling_">ceiling_() (in module semantique.processor.operators)</a>
+</li>
       <li><a href="_generated/semantique.processor.types.TypePromoter.check.html#semantique.processor.types.TypePromoter.check">check() (semantique.processor.types.TypePromoter method)</a>
+</li>
+      <li><a href="_generated/semantique.processor.arrays.Collection.html#semantique.processor.arrays.Collection">Collection (class in semantique.processor.arrays)</a>
 </li>
       <li><a href="_generated/semantique.collection.html#semantique.collection">collection() (in module semantique)</a>
 </li>
-      <li><a href="_generated/semantique.CubeCollectionProxy.compose.html#semantique.CubeCollectionProxy.compose">compose() (semantique.CubeCollectionProxy method)</a>
+      <li><a href="_generated/semantique.CollectionProxy.html#semantique.CollectionProxy">CollectionProxy (class in semantique)</a>
+</li>
+      <li><a href="_generated/semantique.CollectionProxy.compose.html#semantique.CollectionProxy.compose">compose() (semantique.CollectionProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.compose.html#semantique.processor.structures.CubeCollection.compose">(semantique.processor.structures.CubeCollection method)</a>
+        <li><a href="_generated/semantique.processor.arrays.Collection.compose.html#semantique.processor.arrays.Collection.compose">(semantique.processor.arrays.Collection method)</a>
 </li>
       </ul></li>
-      <li><a href="_generated/semantique.CubeCollectionProxy.concatenate.html#semantique.CubeCollectionProxy.concatenate">concatenate() (semantique.CubeCollectionProxy method)</a>
+      <li><a href="_generated/semantique.CollectionProxy.concatenate.html#semantique.CollectionProxy.concatenate">concatenate() (semantique.CollectionProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.concatenate.html#semantique.processor.structures.CubeCollection.concatenate">(semantique.processor.structures.CubeCollection method)</a>
-</li>
-      </ul></li>
-      <li><a href="_generated/semantique.concept.html#semantique.concept">concept() (in module semantique)</a>
-</li>
-      <li><a href="_generated/semantique.factbase.GeotiffArchive.config.html#semantique.factbase.GeotiffArchive.config">config (semantique.factbase.GeotiffArchive property)</a>
-
-      <ul>
-        <li><a href="_generated/semantique.factbase.Opendatacube.config.html#semantique.factbase.Opendatacube.config">(semantique.factbase.Opendatacube property)</a>
+        <li><a href="_generated/semantique.processor.arrays.Collection.concatenate.html#semantique.processor.arrays.Collection.concatenate">(semantique.processor.arrays.Collection method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.factbase.Opendatacube.connection.html#semantique.factbase.Opendatacube.connection">connection (semantique.factbase.Opendatacube property)</a>
+      <li><a href="_generated/semantique.concept.html#semantique.concept">concept() (in module semantique)</a>
+</li>
+      <li><a href="_generated/semantique.datacube.GeotiffArchive.config.html#semantique.datacube.GeotiffArchive.config">config (semantique.datacube.GeotiffArchive property)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.datacube.Opendatacube.config.html#semantique.datacube.Opendatacube.config">(semantique.datacube.Opendatacube property)</a>
+</li>
+      </ul></li>
+      <li><a href="_generated/semantique.datacube.Opendatacube.connection.html#semantique.datacube.Opendatacube.connection">connection (semantique.datacube.Opendatacube property)</a>
 </li>
       <li><a href="_generated/semantique.processor.utils.convert_datetime64.html#semantique.processor.utils.convert_datetime64">convert_datetime64() (in module semantique.processor.utils)</a>
 </li>
       <li><a href="_generated/semantique.processor.reducers.count_.html#semantique.processor.reducers.count_">count_() (in module semantique.processor.reducers)</a>
 </li>
-      <li><a href="_generated/semantique.processor.utils.create_extent_cube.html#semantique.processor.utils.create_extent_cube">create_extent_cube() (in module semantique.processor.utils)</a>
-</li>
       <li><a href="_generated/semantique.extent.SpatialExtent.crs.html#semantique.extent.SpatialExtent.crs">crs (semantique.extent.SpatialExtent property)</a>
 
       <ul>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.crs.html#semantique.processor.arrays.SemanticArray.crs">(semantique.processor.arrays.SemanticArray property)</a>
+</li>
         <li><a href="_generated/semantique.processor.core.QueryProcessor.crs.html#semantique.processor.core.QueryProcessor.crs">(semantique.processor.core.QueryProcessor property)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.Cube.crs.html#semantique.processor.structures.Cube.crs">(semantique.processor.structures.Cube property)</a>
-</li>
       </ul></li>
-      <li><a href="_generated/semantique.processor.structures.Cube.html#semantique.processor.structures.Cube">Cube (class in semantique.processor.structures)</a>
-</li>
       <li><a href="_generated/semantique.processor.operators.cube_root_.html#semantique.processor.operators.cube_root_">cube_root_() (in module semantique.processor.operators)</a>
-</li>
-      <li><a href="_generated/semantique.processor.structures.CubeCollection.html#semantique.processor.structures.CubeCollection">CubeCollection (class in semantique.processor.structures)</a>
-</li>
-      <li><a href="_generated/semantique.CubeCollectionProxy.html#semantique.CubeCollectionProxy">CubeCollectionProxy (class in semantique)</a>
-</li>
-      <li><a href="_generated/semantique.CubeProxy.html#semantique.CubeProxy">CubeProxy (class in semantique)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1029,13 +1086,17 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.extent.TemporalExtent.discretize.html#semantique.extent.TemporalExtent.discretize">discretize() (semantique.extent.TemporalExtent method)</a>
+      <li><a href="_generated/semantique.datacube.Datacube.html#semantique.datacube.Datacube">Datacube (class in semantique.datacube)</a>
 </li>
-      <li><a href="_generated/semantique.processor.operators.divide_.html#semantique.processor.operators.divide_">divide_() (in module semantique.processor.operators)</a>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.datacube.html#semantique.processor.core.QueryProcessor.datacube">datacube (semantique.processor.core.QueryProcessor property)</a>
+</li>
+      <li><a href="_generated/semantique.extent.TemporalExtent.discretize.html#semantique.extent.TemporalExtent.discretize">discretize() (semantique.extent.TemporalExtent method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.processor.structures.Cube.drop_non_dimension_coords.html#semantique.processor.structures.Cube.drop_non_dimension_coords">drop_non_dimension_coords() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.operators.divide_.html#semantique.processor.operators.divide_">divide_() (in module semantique.processor.operators)</a>
+</li>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.drop_non_dimension_coords.html#semantique.processor.arrays.SemanticArray.drop_non_dimension_coords">drop_non_dimension_coords() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
       <li><a href="_generated/semantique.processor.types.DTYPE_MAPPING.html#semantique.processor.types.DTYPE_MAPPING">DTYPE_MAPPING (in module semantique.processor.types)</a>
 </li>
@@ -1050,29 +1111,25 @@
       <li><a href="_generated/semantique.exceptions.EmptyDataError.html#semantique.exceptions.EmptyDataError">EmptyDataError</a>
 </li>
       <li><a href="_generated/semantique.extent.TemporalExtent.end.html#semantique.extent.TemporalExtent.end">end (semantique.extent.TemporalExtent property)</a>
-
-      <ul>
-        <li><a href="_generated/semantique.processor.values.ValueRange.end.html#semantique.processor.values.ValueRange.end">(semantique.processor.values.ValueRange property)</a>
 </li>
-      </ul></li>
       <li><a href="_generated/semantique.entity.html#semantique.entity">entity() (in module semantique)</a>
 </li>
       <li><a href="_generated/semantique.processor.operators.equal_.html#semantique.processor.operators.equal_">equal_() (in module semantique.processor.operators)</a>
 </li>
-      <li><a href="_generated/semantique.CubeCollectionProxy.evaluate.html#semantique.CubeCollectionProxy.evaluate">evaluate() (semantique.CubeCollectionProxy method)</a>
+      <li><a href="_generated/semantique.ArrayProxy.evaluate.html#semantique.ArrayProxy.evaluate">evaluate() (semantique.ArrayProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.CubeProxy.evaluate.html#semantique.CubeProxy.evaluate">(semantique.CubeProxy method)</a>
+        <li><a href="_generated/semantique.CollectionProxy.evaluate.html#semantique.CollectionProxy.evaluate">(semantique.CollectionProxy method)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.Cube.evaluate.html#semantique.processor.structures.Cube.evaluate">(semantique.processor.structures.Cube method)</a>
+        <li><a href="_generated/semantique.processor.arrays.Collection.evaluate.html#semantique.processor.arrays.Collection.evaluate">(semantique.processor.arrays.Collection method)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.evaluate.html#semantique.processor.structures.CubeCollection.evaluate">(semantique.processor.structures.CubeCollection method)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.evaluate.html#semantique.processor.arrays.SemanticArray.evaluate">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.event.html#semantique.event">event() (in module semantique)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.operators.exclusive_or_.html#semantique.processor.operators.exclusive_or_">exclusive_or_() (in module semantique.processor.operators)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.execute.html#semantique.processor.core.QueryProcessor.execute">execute() (semantique.processor.core.QueryProcessor method)</a>
@@ -1085,14 +1142,14 @@
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.extent.html#semantique.processor.core.QueryProcessor.extent">extent (semantique.processor.core.QueryProcessor property)</a>
 </li>
-      <li><a href="_generated/semantique.CubeCollectionProxy.extract.html#semantique.CubeCollectionProxy.extract">extract() (semantique.CubeCollectionProxy method)</a>
+      <li><a href="_generated/semantique.ArrayProxy.extract.html#semantique.ArrayProxy.extract">extract() (semantique.ArrayProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.CubeProxy.extract.html#semantique.CubeProxy.extract">(semantique.CubeProxy method)</a>
+        <li><a href="_generated/semantique.CollectionProxy.extract.html#semantique.CollectionProxy.extract">(semantique.CollectionProxy method)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.Cube.extract.html#semantique.processor.structures.Cube.extract">(semantique.processor.structures.Cube method)</a>
+        <li><a href="_generated/semantique.processor.arrays.Collection.extract.html#semantique.processor.arrays.Collection.extract">(semantique.processor.arrays.Collection method)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.extract.html#semantique.processor.structures.CubeCollection.extract">(semantique.processor.structures.CubeCollection method)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.extract.html#semantique.processor.arrays.SemanticArray.extract">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1101,37 +1158,37 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.factbase.Factbase.html#semantique.factbase.Factbase">Factbase (class in semantique.factbase)</a>
-</li>
-      <li><a href="_generated/semantique.processor.core.QueryProcessor.factbase.html#semantique.processor.core.QueryProcessor.factbase">factbase (semantique.processor.core.QueryProcessor property)</a>
-</li>
       <li><a href="_generated/semantique.extent.SpatialExtent.features.html#semantique.extent.SpatialExtent.features">features (semantique.extent.SpatialExtent property)</a>
 </li>
-      <li><a href="_generated/semantique.CubeCollectionProxy.filter.html#semantique.CubeCollectionProxy.filter">filter() (semantique.CubeCollectionProxy method)</a>
+      <li><a href="_generated/semantique.ArrayProxy.filter.html#semantique.ArrayProxy.filter">filter() (semantique.ArrayProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.CubeProxy.filter.html#semantique.CubeProxy.filter">(semantique.CubeProxy method)</a>
+        <li><a href="_generated/semantique.CollectionProxy.filter.html#semantique.CollectionProxy.filter">(semantique.CollectionProxy method)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.Cube.filter.html#semantique.processor.structures.Cube.filter">(semantique.processor.structures.Cube method)</a>
+        <li><a href="_generated/semantique.processor.arrays.Collection.filter.html#semantique.processor.arrays.Collection.filter">(semantique.processor.arrays.Collection method)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.filter.html#semantique.processor.structures.CubeCollection.filter">(semantique.processor.structures.CubeCollection method)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.filter.html#semantique.processor.arrays.SemanticArray.filter">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
       </ul></li>
-      <li><a href="_generated/semantique.CubeCollectionProxy.filter_space.html#semantique.CubeCollectionProxy.filter_space">filter_space() (semantique.CubeCollectionProxy method)</a>
+      <li><a href="_generated/semantique.ArrayProxy.filter_space.html#semantique.ArrayProxy.filter_space">filter_space() (semantique.ArrayProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.CubeProxy.filter_space.html#semantique.CubeProxy.filter_space">(semantique.CubeProxy method)</a>
+        <li><a href="_generated/semantique.CollectionProxy.filter_space.html#semantique.CollectionProxy.filter_space">(semantique.CollectionProxy method)</a>
+</li>
+      </ul></li>
+      <li><a href="_generated/semantique.ArrayProxy.filter_time.html#semantique.ArrayProxy.filter_time">filter_time() (semantique.ArrayProxy method)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.CollectionProxy.filter_time.html#semantique.CollectionProxy.filter_time">(semantique.CollectionProxy method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.CubeCollectionProxy.filter_time.html#semantique.CubeCollectionProxy.filter_time">filter_time() (semantique.CubeCollectionProxy method)</a>
-
-      <ul>
-        <li><a href="_generated/semantique.CubeProxy.filter_time.html#semantique.CubeProxy.filter_time">(semantique.CubeProxy method)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.find_spatial_dims.html#semantique.processor.arrays.SemanticArray.find_spatial_dims">find_spatial_dims() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
-      </ul></li>
       <li><a href="_generated/semantique.processor.reducers.first_.html#semantique.processor.reducers.first_">first_() (in module semantique.processor.reducers)</a>
+</li>
+      <li><a href="_generated/semantique.processor.operators.floor_.html#semantique.processor.operators.floor_">floor_() (in module semantique.processor.operators)</a>
 </li>
       <li><a href="_generated/semantique.extent.SpatialExtent.from_feature.html#semantique.extent.SpatialExtent.from_feature">from_feature() (semantique.extent.SpatialExtent class method)</a>
 </li>
@@ -1147,9 +1204,11 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.geometries.html#semantique.geometries">geometries() (in module semantique)</a>
+      <li><a href="_generated/semantique.geometry.html#semantique.geometry">geometry() (in module semantique)</a>
 </li>
-      <li><a href="_generated/semantique.factbase.GeotiffArchive.html#semantique.factbase.GeotiffArchive">GeotiffArchive (class in semantique.factbase)</a>
+      <li><a href="_generated/semantique.datacube.GeotiffArchive.html#semantique.datacube.GeotiffArchive">GeotiffArchive (class in semantique.datacube)</a>
+</li>
+      <li><a href="_generated/semantique.processor.utils.get_null.html#semantique.processor.utils.get_null">get_null() (in module semantique.processor.utils)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.get_operator.html#semantique.processor.core.QueryProcessor.get_operator">get_operator() (semantique.processor.core.QueryProcessor method)</a>
 </li>
@@ -1165,17 +1224,17 @@
 </li>
       <li><a href="_generated/semantique.processor.operators.greater_equal_.html#semantique.processor.operators.greater_equal_">greater_equal_() (in module semantique.processor.operators)</a>
 </li>
-      <li><a href="_generated/semantique.processor.structures.Cube.grid_points.html#semantique.processor.structures.Cube.grid_points">grid_points (semantique.processor.structures.Cube property)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.grid_points.html#semantique.processor.arrays.SemanticArray.grid_points">grid_points (semantique.processor.arrays.SemanticArray property)</a>
 </li>
-      <li><a href="_generated/semantique.CubeProxy.groupby.html#semantique.CubeProxy.groupby">groupby() (semantique.CubeProxy method)</a>
+      <li><a href="_generated/semantique.ArrayProxy.groupby.html#semantique.ArrayProxy.groupby">groupby() (semantique.ArrayProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.structures.Cube.groupby.html#semantique.processor.structures.Cube.groupby">(semantique.processor.structures.Cube method)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.groupby.html#semantique.processor.arrays.SemanticArray.groupby">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
       </ul></li>
-      <li><a href="_generated/semantique.CubeProxy.groupby_space.html#semantique.CubeProxy.groupby_space">groupby_space() (semantique.CubeProxy method)</a>
+      <li><a href="_generated/semantique.ArrayProxy.groupby_space.html#semantique.ArrayProxy.groupby_space">groupby_space() (semantique.ArrayProxy method)</a>
 </li>
-      <li><a href="_generated/semantique.CubeProxy.groupby_time.html#semantique.CubeProxy.groupby_time">groupby_time() (semantique.CubeProxy method)</a>
+      <li><a href="_generated/semantique.ArrayProxy.groupby_time.html#semantique.ArrayProxy.groupby_time">groupby_time() (semantique.ArrayProxy method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1183,6 +1242,8 @@
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_assign.html#semantique.processor.core.QueryProcessor.handle_assign">handle_assign() (semantique.processor.core.QueryProcessor method)</a>
+</li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_collection.html#semantique.processor.core.QueryProcessor.handle_collection">handle_collection() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_compose.html#semantique.processor.core.QueryProcessor.handle_compose">handle_compose() (semantique.processor.core.QueryProcessor method)</a>
@@ -1197,31 +1258,39 @@
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_filter.html#semantique.processor.core.QueryProcessor.handle_filter">handle_filter() (semantique.processor.core.QueryProcessor method)</a>
 </li>
-      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_geometries.html#semantique.processor.core.QueryProcessor.handle_geometries">handle_geometries() (semantique.processor.core.QueryProcessor method)</a>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_geometry.html#semantique.processor.core.QueryProcessor.handle_geometry">handle_geometry() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_groupby.html#semantique.processor.core.QueryProcessor.handle_groupby">handle_groupby() (semantique.processor.core.QueryProcessor method)</a>
+</li>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_interval.html#semantique.processor.core.QueryProcessor.handle_interval">handle_interval() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_label.html#semantique.processor.core.QueryProcessor.handle_label">handle_label() (semantique.processor.core.QueryProcessor method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_layer.html#semantique.processor.core.QueryProcessor.handle_layer">handle_layer() (semantique.processor.core.QueryProcessor method)</a>
+</li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_merge.html#semantique.processor.core.QueryProcessor.handle_merge">handle_merge() (semantique.processor.core.QueryProcessor method)</a>
+</li>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_name.html#semantique.processor.core.QueryProcessor.handle_name">handle_name() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_processing_chain.html#semantique.processor.core.QueryProcessor.handle_processing_chain">handle_processing_chain() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_reduce.html#semantique.processor.core.QueryProcessor.handle_reduce">handle_reduce() (semantique.processor.core.QueryProcessor method)</a>
 </li>
-      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_resource.html#semantique.processor.core.QueryProcessor.handle_resource">handle_resource() (semantique.processor.core.QueryProcessor method)</a>
-</li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_result.html#semantique.processor.core.QueryProcessor.handle_result">handle_result() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_self.html#semantique.processor.core.QueryProcessor.handle_self">handle_self() (semantique.processor.core.QueryProcessor method)</a>
 </li>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_set.html#semantique.processor.core.QueryProcessor.handle_set">handle_set() (semantique.processor.core.QueryProcessor method)</a>
+</li>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_shift.html#semantique.processor.core.QueryProcessor.handle_shift">handle_shift() (semantique.processor.core.QueryProcessor method)</a>
+</li>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_smooth.html#semantique.processor.core.QueryProcessor.handle_smooth">handle_smooth() (semantique.processor.core.QueryProcessor method)</a>
+</li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_time_instant.html#semantique.processor.core.QueryProcessor.handle_time_instant">handle_time_instant() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_time_interval.html#semantique.processor.core.QueryProcessor.handle_time_interval">handle_time_interval() (semantique.processor.core.QueryProcessor method)</a>
-</li>
-      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_value_label.html#semantique.processor.core.QueryProcessor.handle_value_label">handle_value_label() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_verb.html#semantique.processor.core.QueryProcessor.handle_verb">handle_verb() (semantique.processor.core.QueryProcessor method)</a>
 </li>
@@ -1233,72 +1302,74 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.operators.in_.html#semantique.processor.operators.in_">in_() (in module semantique.processor.operators)</a>
 </li>
+      <li><a href="_generated/semantique.processor.utils.inf_as_null.html#semantique.processor.utils.inf_as_null">inf_as_null() (in module semantique.processor.utils)</a>
+</li>
       <li><a href="_generated/semantique.processor.types.TypePromoter.input_labels.html#semantique.processor.types.TypePromoter.input_labels">input_labels (semantique.processor.types.TypePromoter property)</a>
 </li>
       <li><a href="_generated/semantique.processor.types.TypePromoter.input_types.html#semantique.processor.types.TypePromoter.input_types">input_types (semantique.processor.types.TypePromoter property)</a>
 </li>
       <li><a href="_generated/semantique.processor.operators.intersects_.html#semantique.processor.operators.intersects_">intersects_() (in module semantique.processor.operators)</a>
 </li>
-      <li><a href="_generated/semantique.exceptions.InvalidBuildingBlockError.html#semantique.exceptions.InvalidBuildingBlockError">InvalidBuildingBlockError</a>
+      <li><a href="_generated/semantique.processor.values.Interval.html#semantique.processor.values.Interval">Interval (class in semantique.processor.values)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.exceptions.InvalidValueRangeError.html#semantique.exceptions.InvalidValueRangeError">InvalidValueRangeError</a>
+      <li><a href="_generated/semantique.interval.html#semantique.interval">interval() (in module semantique)</a>
+</li>
+      <li><a href="_generated/semantique.exceptions.InvalidBuildingBlockError.html#semantique.exceptions.InvalidBuildingBlockError">InvalidBuildingBlockError</a>
+</li>
+      <li><a href="_generated/semantique.exceptions.InvalidIntervalError.html#semantique.exceptions.InvalidIntervalError">InvalidIntervalError</a>
 </li>
       <li><a href="_generated/semantique.exceptions.InvalidValueTypeError.html#semantique.exceptions.InvalidValueTypeError">InvalidValueTypeError</a>
 </li>
-      <li><a href="_generated/semantique.processor.operators.invert_.html#semantique.processor.operators.invert_">invert_() (in module semantique.processor.operators)</a>
-</li>
-      <li><a href="_generated/semantique.processor.structures.Cube.is_empty.html#semantique.processor.structures.Cube.is_empty">is_empty (semantique.processor.structures.Cube property)</a>
+      <li><a href="_generated/semantique.processor.arrays.Collection.is_empty.html#semantique.processor.arrays.Collection.is_empty">is_empty (semantique.processor.arrays.Collection property)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.is_empty.html#semantique.processor.structures.CubeCollection.is_empty">(semantique.processor.structures.CubeCollection property)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.is_empty.html#semantique.processor.arrays.SemanticArray.is_empty">(semantique.processor.arrays.SemanticArray property)</a>
 </li>
       </ul></li>
+      <li><a href="_generated/semantique.processor.operators.is_missing_.html#semantique.processor.operators.is_missing_">is_missing_() (in module semantique.processor.operators)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.CubeCollectionProxy.label.html#semantique.CubeCollectionProxy.label">label() (semantique.CubeCollectionProxy method)</a>
-
-      <ul>
-        <li><a href="_generated/semantique.CubeProxy.label.html#semantique.CubeProxy.label">(semantique.CubeProxy method)</a>
+      <li><a href="_generated/semantique.label.html#semantique.label">label() (in module semantique)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.Cube.label.html#semantique.processor.structures.Cube.label">(semantique.processor.structures.Cube method)</a>
-</li>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.label.html#semantique.processor.structures.CubeCollection.label">(semantique.processor.structures.CubeCollection method)</a>
-</li>
-      </ul></li>
       <li><a href="_generated/semantique.processor.reducers.last_.html#semantique.processor.reducers.last_">last_() (in module semantique.processor.reducers)</a>
 </li>
-      <li><a href="_generated/semantique.factbase.Factbase.layout.html#semantique.factbase.Factbase.layout">layout (semantique.factbase.Factbase property)</a>
+      <li><a href="_generated/semantique.layer.html#semantique.layer">layer() (in module semantique)</a>
+</li>
+      <li><a href="_generated/semantique.datacube.Datacube.layout.html#semantique.datacube.Datacube.layout">layout (semantique.datacube.Datacube property)</a>
 
       <ul>
-        <li><a href="_generated/semantique.factbase.GeotiffArchive.layout.html#semantique.factbase.GeotiffArchive.layout">(semantique.factbase.GeotiffArchive property)</a>
+        <li><a href="_generated/semantique.datacube.GeotiffArchive.layout.html#semantique.datacube.GeotiffArchive.layout">(semantique.datacube.GeotiffArchive property)</a>
 </li>
-        <li><a href="_generated/semantique.factbase.Opendatacube.layout.html#semantique.factbase.Opendatacube.layout">(semantique.factbase.Opendatacube property)</a>
+        <li><a href="_generated/semantique.datacube.Opendatacube.layout.html#semantique.datacube.Opendatacube.layout">(semantique.datacube.Opendatacube property)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.operators.less_.html#semantique.processor.operators.less_">less_() (in module semantique.processor.operators)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.operators.less_equal_.html#semantique.processor.operators.less_equal_">less_equal_() (in module semantique.processor.operators)</a>
 </li>
-      <li><a href="_generated/semantique.factbase.Factbase.lookup.html#semantique.factbase.Factbase.lookup">lookup() (semantique.factbase.Factbase method)</a>
+      <li><a href="_generated/semantique.datacube.Datacube.lookup.html#semantique.datacube.Datacube.lookup">lookup() (semantique.datacube.Datacube method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.factbase.GeotiffArchive.lookup.html#semantique.factbase.GeotiffArchive.lookup">(semantique.factbase.GeotiffArchive method)</a>
+        <li><a href="_generated/semantique.datacube.GeotiffArchive.lookup.html#semantique.datacube.GeotiffArchive.lookup">(semantique.datacube.GeotiffArchive method)</a>
 </li>
-        <li><a href="_generated/semantique.factbase.Opendatacube.lookup.html#semantique.factbase.Opendatacube.lookup">(semantique.factbase.Opendatacube method)</a>
+        <li><a href="_generated/semantique.datacube.Opendatacube.lookup.html#semantique.datacube.Opendatacube.lookup">(semantique.datacube.Opendatacube method)</a>
 </li>
-        <li><a href="_generated/semantique.ontology.Ontology.lookup.html#semantique.ontology.Ontology.lookup">(semantique.ontology.Ontology method)</a>
+        <li><a href="_generated/semantique.mapping.Mapping.lookup.html#semantique.mapping.Mapping.lookup">(semantique.mapping.Mapping method)</a>
 </li>
-        <li><a href="_generated/semantique.ontology.Semantique.lookup.html#semantique.ontology.Semantique.lookup">(semantique.ontology.Semantique method)</a>
+        <li><a href="_generated/semantique.mapping.Semantique.lookup.html#semantique.mapping.Semantique.lookup">(semantique.mapping.Semantique method)</a>
 </li>
       </ul></li>
+      <li><a href="_generated/semantique.processor.values.Interval.lower.html#semantique.processor.values.Interval.lower">lower (semantique.processor.values.Interval property)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -1307,16 +1378,20 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.types.TypePromoter.manual.html#semantique.processor.types.TypePromoter.manual">manual (semantique.processor.types.TypePromoter property)</a>
 </li>
+      <li><a href="_generated/semantique.mapping.Mapping.html#semantique.mapping.Mapping">Mapping (class in semantique.mapping)</a>
+</li>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.mapping.html#semantique.processor.core.QueryProcessor.mapping">mapping (semantique.processor.core.QueryProcessor property)</a>
+</li>
       <li><a href="_generated/semantique.processor.reducers.max_.html#semantique.processor.reducers.max_">max_() (in module semantique.processor.reducers)</a>
 </li>
       <li><a href="_generated/semantique.processor.reducers.mean_.html#semantique.processor.reducers.mean_">mean_() (in module semantique.processor.reducers)</a>
 </li>
       <li><a href="_generated/semantique.processor.reducers.median_.html#semantique.processor.reducers.median_">median_() (in module semantique.processor.reducers)</a>
 </li>
-      <li><a href="_generated/semantique.CubeCollectionProxy.merge.html#semantique.CubeCollectionProxy.merge">merge() (semantique.CubeCollectionProxy method)</a>
+      <li><a href="_generated/semantique.CollectionProxy.merge.html#semantique.CollectionProxy.merge">merge() (semantique.CollectionProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.merge.html#semantique.processor.structures.CubeCollection.merge">(semantique.processor.structures.CubeCollection method)</a>
+        <li><a href="_generated/semantique.processor.arrays.Collection.merge.html#semantique.processor.arrays.Collection.merge">(semantique.processor.arrays.Collection method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1341,21 +1416,31 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.reducers.n_.html#semantique.processor.reducers.n_">n_() (in module semantique.processor.reducers)</a>
 </li>
+      <li><a href="_generated/semantique.ArrayProxy.name.html#semantique.ArrayProxy.name">name() (semantique.ArrayProxy method)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.processor.arrays.Collection.name.html#semantique.processor.arrays.Collection.name">(semantique.processor.arrays.Collection method)</a>
+</li>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.name.html#semantique.processor.arrays.SemanticArray.name">(semantique.processor.arrays.SemanticArray method)</a>
+</li>
+      </ul></li>
       <li><a href="_generated/semantique.processor.operators.natural_logarithm_.html#semantique.processor.operators.natural_logarithm_">natural_logarithm_() (in module semantique.processor.operators)</a>
+</li>
+      <li><a href="_generated/semantique.processor.reducers.none_.html#semantique.processor.reducers.none_">none_() (in module semantique.processor.reducers)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_generated/semantique.processor.operators.normalized_difference_.html#semantique.processor.operators.normalized_difference_">normalized_difference_() (in module semantique.processor.operators)</a>
+</li>
+      <li><a href="_generated/semantique.processor.operators.not_.html#semantique.processor.operators.not_">not_() (in module semantique.processor.operators)</a>
 </li>
       <li><a href="_generated/semantique.processor.operators.not_equal_.html#semantique.processor.operators.not_equal_">not_equal_() (in module semantique.processor.operators)</a>
 </li>
       <li><a href="_generated/semantique.processor.operators.not_in_.html#semantique.processor.operators.not_in_">not_in_() (in module semantique.processor.operators)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.processor.utils.np_allnull.html#semantique.processor.utils.np_allnull">np_allnull() (in module semantique.processor.utils)</a>
+      <li><a href="_generated/semantique.processor.operators.not_missing_.html#semantique.processor.operators.not_missing_">not_missing_() (in module semantique.processor.operators)</a>
 </li>
-      <li><a href="_generated/semantique.processor.utils.np_inf_as_null.html#semantique.processor.utils.np_inf_as_null">np_inf_as_null() (in module semantique.processor.utils)</a>
-</li>
-      <li><a href="_generated/semantique.processor.utils.np_null.html#semantique.processor.utils.np_null">np_null() (in module semantique.processor.utils)</a>
-</li>
-      <li><a href="_generated/semantique.processor.utils.np_null_as_zero.html#semantique.processor.utils.np_null_as_zero">np_null_as_zero() (in module semantique.processor.utils)</a>
+      <li><a href="_generated/semantique.processor.utils.null_as_zero.html#semantique.processor.utils.null_as_zero">null_as_zero() (in module semantique.processor.utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1363,18 +1448,14 @@
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.ontology.Ontology.html#semantique.ontology.Ontology">Ontology (class in semantique.ontology)</a>
-</li>
-      <li><a href="_generated/semantique.processor.core.QueryProcessor.ontology.html#semantique.processor.core.QueryProcessor.ontology">ontology (semantique.processor.core.QueryProcessor property)</a>
-</li>
-      <li><a href="_generated/semantique.factbase.Opendatacube.html#semantique.factbase.Opendatacube">Opendatacube (class in semantique.factbase)</a>
+      <li><a href="_generated/semantique.datacube.Opendatacube.html#semantique.datacube.Opendatacube">Opendatacube (class in semantique.datacube)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.operators.html#semantique.processor.core.QueryProcessor.operators">operators (semantique.processor.core.QueryProcessor property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.optimize.html#semantique.processor.core.QueryProcessor.optimize">optimize() (semantique.processor.core.QueryProcessor method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.operators.or_.html#semantique.processor.operators.or_">or_() (in module semantique.processor.operators)</a>
 </li>
       <li><a href="_generated/semantique.processor.types.TypePromoter.output_labels.html#semantique.processor.types.TypePromoter.output_labels">output_labels (semantique.processor.types.TypePromoter property)</a>
@@ -1392,6 +1473,8 @@
       <li><a href="_generated/semantique.processor.utils.parse_coords_component.html#semantique.processor.utils.parse_coords_component">parse_coords_component() (in module semantique.processor.utils)</a>
 </li>
       <li><a href="_generated/semantique.processor.utils.parse_datetime_component.html#semantique.processor.utils.parse_datetime_component">parse_datetime_component() (in module semantique.processor.utils)</a>
+</li>
+      <li><a href="_generated/semantique.processor.utils.parse_extent.html#semantique.processor.utils.parse_extent">parse_extent() (in module semantique.processor.utils)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -1427,14 +1510,14 @@
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.recipe.html#semantique.processor.core.QueryProcessor.recipe">recipe (semantique.processor.core.QueryProcessor property)</a>
 </li>
-      <li><a href="_generated/semantique.CubeCollectionProxy.reduce.html#semantique.CubeCollectionProxy.reduce">reduce() (semantique.CubeCollectionProxy method)</a>
+      <li><a href="_generated/semantique.ArrayProxy.reduce.html#semantique.ArrayProxy.reduce">reduce() (semantique.ArrayProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.CubeProxy.reduce.html#semantique.CubeProxy.reduce">(semantique.CubeProxy method)</a>
+        <li><a href="_generated/semantique.CollectionProxy.reduce.html#semantique.CollectionProxy.reduce">(semantique.CollectionProxy method)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.Cube.reduce.html#semantique.processor.structures.Cube.reduce">(semantique.processor.structures.Cube method)</a>
+        <li><a href="_generated/semantique.processor.arrays.Collection.reduce.html#semantique.processor.arrays.Collection.reduce">(semantique.processor.arrays.Collection method)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.reduce.html#semantique.processor.structures.CubeCollection.reduce">(semantique.processor.structures.CubeCollection method)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.reduce.html#semantique.processor.arrays.SemanticArray.reduce">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
       </ul></li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.reducers.html#semantique.processor.core.QueryProcessor.reducers">reducers (semantique.processor.core.QueryProcessor property)</a>
@@ -1443,15 +1526,13 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.processor.structures.Cube.regularize.html#semantique.processor.structures.Cube.regularize">regularize() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.Collection.regularize.html#semantique.processor.arrays.Collection.regularize">regularize() (semantique.processor.arrays.Collection method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.regularize.html#semantique.processor.structures.CubeCollection.regularize">(semantique.processor.structures.CubeCollection method)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.regularize.html#semantique.processor.arrays.SemanticArray.regularize">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
       </ul></li>
-      <li><a href="_generated/semantique.processor.structures.Cube.reproject.html#semantique.processor.structures.Cube.reproject">reproject() (semantique.processor.structures.Cube method)</a>
-</li>
-      <li><a href="_generated/semantique.resource.html#semantique.resource">resource() (in module semantique)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.reproject.html#semantique.processor.arrays.SemanticArray.reproject">reproject() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.respond.html#semantique.processor.core.QueryProcessor.respond">respond() (semantique.processor.core.QueryProcessor method)</a>
 </li>
@@ -1459,12 +1540,12 @@
 </li>
       <li><a href="_generated/semantique.result.html#semantique.result">result() (in module semantique)</a>
 </li>
-      <li><a href="_generated/semantique.factbase.Factbase.retrieve.html#semantique.factbase.Factbase.retrieve">retrieve() (semantique.factbase.Factbase method)</a>
+      <li><a href="_generated/semantique.datacube.Datacube.retrieve.html#semantique.datacube.Datacube.retrieve">retrieve() (semantique.datacube.Datacube method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.factbase.GeotiffArchive.retrieve.html#semantique.factbase.GeotiffArchive.retrieve">(semantique.factbase.GeotiffArchive method)</a>
+        <li><a href="_generated/semantique.datacube.GeotiffArchive.retrieve.html#semantique.datacube.GeotiffArchive.retrieve">(semantique.datacube.GeotiffArchive method)</a>
 </li>
-        <li><a href="_generated/semantique.factbase.Opendatacube.retrieve.html#semantique.factbase.Opendatacube.retrieve">(semantique.factbase.Opendatacube method)</a>
+        <li><a href="_generated/semantique.datacube.Opendatacube.retrieve.html#semantique.datacube.Opendatacube.retrieve">(semantique.datacube.Opendatacube method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1475,44 +1556,64 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.self.html#semantique.self">self() (in module semantique)</a>
 </li>
-      <li><a href="_generated/semantique.ontology.Semantique.html#semantique.ontology.Semantique">Semantique (class in semantique.ontology)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.html#semantique.processor.arrays.SemanticArray">SemanticArray (class in semantique.processor.arrays)</a>
 </li>
-      <li><a href="_generated/semantique.processor.structures.Cube.spatial_dimension.html#semantique.processor.structures.Cube.spatial_dimension">spatial_dimension (semantique.processor.structures.Cube property)</a>
+      <li><a href="_generated/semantique.mapping.Semantique.html#semantique.mapping.Semantique">Semantique (class in semantique.mapping)</a>
 </li>
-      <li><a href="_generated/semantique.processor.core.QueryProcessor.spatial_resolution.html#semantique.processor.core.QueryProcessor.spatial_resolution">spatial_resolution (semantique.processor.core.QueryProcessor property)</a>
+      <li><a href="_generated/semantique.set.html#semantique.set">set() (in module semantique)</a>
+</li>
+      <li><a href="_generated/semantique.ArrayProxy.shift.html#semantique.ArrayProxy.shift">shift() (semantique.ArrayProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.structures.Cube.spatial_resolution.html#semantique.processor.structures.Cube.spatial_resolution">(semantique.processor.structures.Cube property)</a>
+        <li><a href="_generated/semantique.CollectionProxy.shift.html#semantique.CollectionProxy.shift">(semantique.CollectionProxy method)</a>
+</li>
+        <li><a href="_generated/semantique.processor.arrays.Collection.shift.html#semantique.processor.arrays.Collection.shift">(semantique.processor.arrays.Collection method)</a>
+</li>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.shift.html#semantique.processor.arrays.SemanticArray.shift">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
       </ul></li>
-      <li><a href="_generated/semantique.extent.SpatialExtent.html#semantique.extent.SpatialExtent">SpatialExtent (class in semantique.extent)</a>
-</li>
-      <li><a href="_generated/semantique.processor.structures.CubeCollection.sq.html#semantique.processor.structures.CubeCollection.sq">sq (semantique.processor.structures.CubeCollection property)</a>
+      <li><a href="_generated/semantique.ArrayProxy.smooth.html#semantique.ArrayProxy.smooth">smooth() (semantique.ArrayProxy method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.values.ValueRange.sq.html#semantique.processor.values.ValueRange.sq">(semantique.processor.values.ValueRange property)</a>
+        <li><a href="_generated/semantique.CollectionProxy.smooth.html#semantique.CollectionProxy.smooth">(semantique.CollectionProxy method)</a>
+</li>
+        <li><a href="_generated/semantique.processor.arrays.Collection.smooth.html#semantique.processor.arrays.Collection.smooth">(semantique.processor.arrays.Collection method)</a>
+</li>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.smooth.html#semantique.processor.arrays.SemanticArray.smooth">(semantique.processor.arrays.SemanticArray method)</a>
+</li>
+      </ul></li>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.spatial_dimension.html#semantique.processor.arrays.SemanticArray.spatial_dimension">spatial_dimension (semantique.processor.arrays.SemanticArray property)</a>
+</li>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.spatial_resolution.html#semantique.processor.arrays.SemanticArray.spatial_resolution">spatial_resolution (semantique.processor.arrays.SemanticArray property)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.processor.core.QueryProcessor.spatial_resolution.html#semantique.processor.core.QueryProcessor.spatial_resolution">(semantique.processor.core.QueryProcessor property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_generated/semantique.extent.SpatialExtent.html#semantique.extent.SpatialExtent">SpatialExtent (class in semantique.extent)</a>
+</li>
+      <li><a href="_generated/semantique.processor.arrays.Collection.sq.html#semantique.processor.arrays.Collection.sq">sq (semantique.processor.arrays.Collection property)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.processor.values.Interval.sq.html#semantique.processor.values.Interval.sq">(semantique.processor.values.Interval property)</a>
 </li>
       </ul></li>
       <li><a href="_generated/semantique.processor.operators.square_root_.html#semantique.processor.operators.square_root_">square_root_() (in module semantique.processor.operators)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.factbase.GeotiffArchive.src.html#semantique.factbase.GeotiffArchive.src">src (semantique.factbase.GeotiffArchive property)</a>
+      <li><a href="_generated/semantique.datacube.GeotiffArchive.src.html#semantique.datacube.GeotiffArchive.src">src (semantique.datacube.GeotiffArchive property)</a>
 </li>
-      <li><a href="_generated/semantique.processor.structures.Cube.stack_spatial_dims.html#semantique.processor.structures.Cube.stack_spatial_dims">stack_spatial_dims() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.Collection.stack_spatial_dims.html#semantique.processor.arrays.Collection.stack_spatial_dims">stack_spatial_dims() (semantique.processor.arrays.Collection method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.stack_spatial_dims.html#semantique.processor.structures.CubeCollection.stack_spatial_dims">(semantique.processor.structures.CubeCollection method)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.stack_spatial_dims.html#semantique.processor.arrays.SemanticArray.stack_spatial_dims">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
       </ul></li>
       <li><a href="_generated/semantique.processor.reducers.standard_deviation_.html#semantique.processor.reducers.standard_deviation_">standard_deviation_() (in module semantique.processor.reducers)</a>
 </li>
       <li><a href="_generated/semantique.extent.TemporalExtent.start.html#semantique.extent.TemporalExtent.start">start (semantique.extent.TemporalExtent property)</a>
-
-      <ul>
-        <li><a href="_generated/semantique.processor.values.ValueRange.start.html#semantique.processor.values.ValueRange.start">(semantique.processor.values.ValueRange property)</a>
 </li>
-      </ul></li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.store_default_operators.html#semantique.processor.core.QueryProcessor.store_default_operators">store_default_operators() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.store_default_reducers.html#semantique.processor.core.QueryProcessor.store_default_reducers">store_default_reducers() (semantique.processor.core.QueryProcessor method)</a>
@@ -1527,7 +1628,7 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.processor.structures.Cube.temporal_dimension.html#semantique.processor.structures.Cube.temporal_dimension">temporal_dimension (semantique.processor.structures.Cube property)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.temporal_dimension.html#semantique.processor.arrays.SemanticArray.temporal_dimension">temporal_dimension (semantique.processor.arrays.SemanticArray property)</a>
 </li>
       <li><a href="_generated/semantique.extent.TemporalExtent.html#semantique.extent.TemporalExtent">TemporalExtent (class in semantique.extent)</a>
 </li>
@@ -1535,13 +1636,13 @@
 </li>
       <li><a href="_generated/semantique.time_interval.html#semantique.time_interval">time_interval() (in module semantique)</a>
 </li>
-      <li><a href="_generated/semantique.processor.structures.Cube.to_csv.html#semantique.processor.structures.Cube.to_csv">to_csv() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.to_csv.html#semantique.processor.arrays.SemanticArray.to_csv">to_csv() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
-      <li><a href="_generated/semantique.processor.structures.Cube.to_dataframe.html#semantique.processor.structures.Cube.to_dataframe">to_dataframe() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.to_dataframe.html#semantique.processor.arrays.SemanticArray.to_dataframe">to_dataframe() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
-      <li><a href="_generated/semantique.processor.structures.Cube.to_geodataframe.html#semantique.processor.structures.Cube.to_geodataframe">to_geodataframe() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.to_geodataframe.html#semantique.processor.arrays.SemanticArray.to_geodataframe">to_geodataframe() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
-      <li><a href="_generated/semantique.processor.structures.Cube.to_geotiff.html#semantique.processor.structures.Cube.to_geotiff">to_geotiff() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.to_geotiff.html#semantique.processor.arrays.SemanticArray.to_geotiff">to_geotiff() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
       <li><a href="_generated/semantique.exceptions.TooManyDimensionsError.html#semantique.exceptions.TooManyDimensionsError">TooManyDimensionsError</a>
 </li>
@@ -1549,18 +1650,18 @@
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.track_types.html#semantique.processor.core.QueryProcessor.track_types">track_types (semantique.processor.core.QueryProcessor property)</a>
 </li>
-      <li><a href="_generated/semantique.ontology.Ontology.translate.html#semantique.ontology.Ontology.translate">translate() (semantique.ontology.Ontology method)</a>
+      <li><a href="_generated/semantique.mapping.Mapping.translate.html#semantique.mapping.Mapping.translate">translate() (semantique.mapping.Mapping method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.ontology.Semantique.translate.html#semantique.ontology.Semantique.translate">(semantique.ontology.Semantique method)</a>
+        <li><a href="_generated/semantique.mapping.Semantique.translate.html#semantique.mapping.Semantique.translate">(semantique.mapping.Semantique method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.processor.structures.Cube.trim.html#semantique.processor.structures.Cube.trim">trim() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.Collection.trim.html#semantique.processor.arrays.Collection.trim">trim() (semantique.processor.arrays.Collection method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.trim.html#semantique.processor.structures.CubeCollection.trim">(semantique.processor.structures.CubeCollection method)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.trim.html#semantique.processor.arrays.SemanticArray.trim">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
       </ul></li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.trim_filter.html#semantique.processor.core.QueryProcessor.trim_filter">trim_filter (semantique.processor.core.QueryProcessor property)</a>
@@ -1571,19 +1672,19 @@
 </li>
       <li><a href="_generated/semantique.processor.types.TypePromoter.html#semantique.processor.types.TypePromoter">TypePromoter (class in semantique.processor.types)</a>
 </li>
-      <li><a href="_generated/semantique.extent.TemporalExtent.tz.html#semantique.extent.TemporalExtent.tz">tz (semantique.extent.TemporalExtent property)</a>
+      <li><a href="_generated/semantique.datacube.GeotiffArchive.tz.html#semantique.datacube.GeotiffArchive.tz">tz (semantique.datacube.GeotiffArchive property)</a>
 
       <ul>
-        <li><a href="_generated/semantique.factbase.GeotiffArchive.tz.html#semantique.factbase.GeotiffArchive.tz">(semantique.factbase.GeotiffArchive property)</a>
+        <li><a href="_generated/semantique.datacube.Opendatacube.tz.html#semantique.datacube.Opendatacube.tz">(semantique.datacube.Opendatacube property)</a>
 </li>
-        <li><a href="_generated/semantique.factbase.Opendatacube.tz.html#semantique.factbase.Opendatacube.tz">(semantique.factbase.Opendatacube property)</a>
+        <li><a href="_generated/semantique.extent.TemporalExtent.tz.html#semantique.extent.TemporalExtent.tz">(semantique.extent.TemporalExtent property)</a>
+</li>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.tz.html#semantique.processor.arrays.SemanticArray.tz">(semantique.processor.arrays.SemanticArray property)</a>
 </li>
         <li><a href="_generated/semantique.processor.core.QueryProcessor.tz.html#semantique.processor.core.QueryProcessor.tz">(semantique.processor.core.QueryProcessor property)</a>
 </li>
-        <li><a href="_generated/semantique.processor.structures.Cube.tz.html#semantique.processor.structures.Cube.tz">(semantique.processor.structures.Cube property)</a>
-</li>
       </ul></li>
-      <li><a href="_generated/semantique.processor.structures.Cube.tz_convert.html#semantique.processor.structures.Cube.tz_convert">tz_convert() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.tz_convert.html#semantique.processor.arrays.SemanticArray.tz_convert">tz_convert() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1599,25 +1700,25 @@
 </li>
       <li><a href="_generated/semantique.exceptions.UnknownLabelError.html#semantique.exceptions.UnknownLabelError">UnknownLabelError</a>
 </li>
-      <li><a href="_generated/semantique.exceptions.UnknownOperatorError.html#semantique.exceptions.UnknownOperatorError">UnknownOperatorError</a>
+      <li><a href="_generated/semantique.exceptions.UnknownLayerError.html#semantique.exceptions.UnknownLayerError">UnknownLayerError</a>
 </li>
-      <li><a href="_generated/semantique.exceptions.UnknownReducerError.html#semantique.exceptions.UnknownReducerError">UnknownReducerError</a>
+      <li><a href="_generated/semantique.exceptions.UnknownOperatorError.html#semantique.exceptions.UnknownOperatorError">UnknownOperatorError</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.exceptions.UnknownResourceError.html#semantique.exceptions.UnknownResourceError">UnknownResourceError</a>
+      <li><a href="_generated/semantique.exceptions.UnknownReducerError.html#semantique.exceptions.UnknownReducerError">UnknownReducerError</a>
 </li>
       <li><a href="_generated/semantique.exceptions.UnknownResultError.html#semantique.exceptions.UnknownResultError">UnknownResultError</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.unstack_results.html#semantique.processor.core.QueryProcessor.unstack_results">unstack_results (semantique.processor.core.QueryProcessor property)</a>
 </li>
-      <li><a href="_generated/semantique.processor.structures.Cube.unstack_spatial_dims.html#semantique.processor.structures.Cube.unstack_spatial_dims">unstack_spatial_dims() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.Collection.unstack_spatial_dims.html#semantique.processor.arrays.Collection.unstack_spatial_dims">unstack_spatial_dims() (semantique.processor.arrays.Collection method)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.structures.CubeCollection.unstack_spatial_dims.html#semantique.processor.structures.CubeCollection.unstack_spatial_dims">(semantique.processor.structures.CubeCollection method)</a>
+        <li><a href="_generated/semantique.processor.arrays.SemanticArray.unstack_spatial_dims.html#semantique.processor.arrays.SemanticArray.unstack_spatial_dims">(semantique.processor.arrays.SemanticArray method)</a>
 </li>
       </ul></li>
-      <li><a href="_generated/semantique.processor.core.QueryProcessor.update_list_elements.html#semantique.processor.core.QueryProcessor.update_list_elements">update_list_elements() (semantique.processor.core.QueryProcessor method)</a>
+      <li><a href="_generated/semantique.processor.values.Interval.upper.html#semantique.processor.values.Interval.upper">upper (semantique.processor.values.Interval property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1625,22 +1726,16 @@
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.value_label.html#semantique.value_label">value_label() (in module semantique)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.value_labels.html#semantique.processor.arrays.SemanticArray.value_labels">value_labels (semantique.processor.arrays.SemanticArray property)</a>
 </li>
-      <li><a href="_generated/semantique.processor.structures.Cube.value_labels.html#semantique.processor.structures.Cube.value_labels">value_labels (semantique.processor.structures.Cube property)</a>
-</li>
-      <li><a href="_generated/semantique.value_range.html#semantique.value_range">value_range() (in module semantique)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.processor.structures.Cube.value_type.html#semantique.processor.structures.Cube.value_type">value_type (semantique.processor.structures.Cube property)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.value_type.html#semantique.processor.arrays.SemanticArray.value_type">value_type (semantique.processor.arrays.SemanticArray property)</a>
 
       <ul>
-        <li><a href="_generated/semantique.processor.values.ValueRange.value_type.html#semantique.processor.values.ValueRange.value_type">(semantique.processor.values.ValueRange property)</a>
+        <li><a href="_generated/semantique.processor.values.Interval.value_type.html#semantique.processor.values.Interval.value_type">(semantique.processor.values.Interval property)</a>
 </li>
       </ul></li>
-      <li><a href="_generated/semantique.processor.values.ValueRange.html#semantique.processor.values.ValueRange">ValueRange (class in semantique.processor.values)</a>
-</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.reducers.variance_.html#semantique.processor.reducers.variance_">variance_() (in module semantique.processor.reducers)</a>
 </li>
   </ul></td>
@@ -1649,19 +1744,11 @@
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.processor.structures.Cube.write_crs.html#semantique.processor.structures.Cube.write_crs">write_crs() (semantique.processor.structures.Cube method)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.write_crs.html#semantique.processor.arrays.SemanticArray.write_crs">write_crs() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.processor.structures.Cube.write_tz.html#semantique.processor.structures.Cube.write_tz">write_tz() (semantique.processor.structures.Cube method)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="X">X</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.processor.structures.Cube.xy_dimensions.html#semantique.processor.structures.Cube.xy_dimensions">xy_dimensions (semantique.processor.structures.Cube property)</a>
+      <li><a href="_generated/semantique.processor.arrays.SemanticArray.write_tz.html#semantique.processor.arrays.SemanticArray.write_tz">write_tz() (semantique.processor.arrays.SemanticArray method)</a>
 </li>
   </ul></td>
 </tr></table>

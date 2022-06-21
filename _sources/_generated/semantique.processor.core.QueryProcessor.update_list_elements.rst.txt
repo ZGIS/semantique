@@ -1,6 +1,0 @@
-﻿semantique.processor.core.QueryProcessor.update\_list\_elements
-===============================================================
-
-.. currentmodule:: semantique.processor.core
-
-.. automethod:: QueryProcessor.update_list_elements

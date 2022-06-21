@@ -1,0 +1,6 @@
+﻿semantique.processor.arrays.SemanticArray.is\_empty
+===================================================
+
+.. currentmodule:: semantique.processor.arrays
+
+.. autoproperty:: SemanticArray.is_empty

@@ -1,0 +1,6 @@
+﻿semantique.processor.arrays.SemanticArray.find\_spatial\_dims
+=============================================================
+
+.. currentmodule:: semantique.processor.arrays
+
+.. automethod:: SemanticArray.find_spatial_dims

@@ -1,6 +1,0 @@
-﻿semantique.factbase.Opendatacube.tz
-===================================
-
-.. currentmodule:: semantique.factbase
-
-.. autoproperty:: Opendatacube.tz

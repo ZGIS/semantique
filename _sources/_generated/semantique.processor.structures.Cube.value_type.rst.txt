@@ -1,6 +1,0 @@
-﻿semantique.processor.structures.Cube.value\_type
-================================================
-
-.. currentmodule:: semantique.processor.structures
-
-.. autoproperty:: Cube.value_type

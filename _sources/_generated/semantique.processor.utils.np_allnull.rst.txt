@@ -1,6 +1,0 @@
-﻿semantique.processor.utils.np\_allnull
-======================================
-
-.. currentmodule:: semantique.processor.utils
-
-.. autofunction:: np_allnull

@@ -1,6 +1,0 @@
-﻿semantique.exceptions.UnknownResourceError
-==========================================
-
-.. currentmodule:: semantique.exceptions
-
-.. autoexception:: UnknownResourceError

@@ -1,6 +1,0 @@
-﻿semantique.factbase.Factbase.retrieve
-=====================================
-
-.. currentmodule:: semantique.factbase
-
-.. automethod:: Factbase.retrieve

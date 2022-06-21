@@ -1,6 +1,0 @@
-﻿semantique.processor.values.ValueRange.start
-============================================
-
-.. currentmodule:: semantique.processor.values
-
-.. autoproperty:: ValueRange.start

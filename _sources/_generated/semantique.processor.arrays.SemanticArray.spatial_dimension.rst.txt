@@ -1,0 +1,6 @@
+﻿semantique.processor.arrays.SemanticArray.spatial\_dimension
+============================================================
+
+.. currentmodule:: semantique.processor.arrays
+
+.. autoproperty:: SemanticArray.spatial_dimension

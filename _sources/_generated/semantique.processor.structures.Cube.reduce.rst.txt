@@ -1,6 +1,0 @@
-﻿semantique.processor.structures.Cube.reduce
-===========================================
-
-.. currentmodule:: semantique.processor.structures
-
-.. automethod:: Cube.reduce

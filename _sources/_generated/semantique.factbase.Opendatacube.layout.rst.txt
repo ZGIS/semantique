@@ -1,6 +1,0 @@
-﻿semantique.factbase.Opendatacube.layout
-=======================================
-
-.. currentmodule:: semantique.factbase
-
-.. autoproperty:: Opendatacube.layout

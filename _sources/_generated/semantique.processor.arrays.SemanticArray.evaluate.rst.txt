@@ -1,0 +1,6 @@
+﻿semantique.processor.arrays.SemanticArray.evaluate
+==================================================
+
+.. currentmodule:: semantique.processor.arrays
+
+.. automethod:: SemanticArray.evaluate

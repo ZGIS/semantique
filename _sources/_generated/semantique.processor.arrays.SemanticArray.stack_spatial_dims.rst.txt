@@ -1,0 +1,6 @@
+﻿semantique.processor.arrays.SemanticArray.stack\_spatial\_dims
+==============================================================
+
+.. currentmodule:: semantique.processor.arrays
+
+.. automethod:: SemanticArray.stack_spatial_dims

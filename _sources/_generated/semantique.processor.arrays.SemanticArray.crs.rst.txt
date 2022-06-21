@@ -1,0 +1,6 @@
+﻿semantique.processor.arrays.SemanticArray.crs
+=============================================
+
+.. currentmodule:: semantique.processor.arrays
+
+.. autoproperty:: SemanticArray.crs

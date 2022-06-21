@@ -1,6 +1,0 @@
-﻿semantique.CubeProxy.groupby
-============================
-
-.. currentmodule:: semantique
-
-.. automethod:: CubeProxy.groupby

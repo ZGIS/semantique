@@ -1,6 +1,0 @@
-﻿semantique.processor.structures.Cube.evaluate
-=============================================
-
-.. currentmodule:: semantique.processor.structures
-
-.. automethod:: Cube.evaluate
