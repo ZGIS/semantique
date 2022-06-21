@@ -126,35 +126,15 @@ class SemanticArray():
       return None
 
   @property
-  def xy_dimensions(self):
-    """:obj:`list`: Names of respectively the X and Y dimensions of the array."""
-    spatial_dim = self.spatial_dimension
-    if spatial_dim is None:
-      all_dims = self._obj.dims
-    else:
-      all_dims = self.extract(spatial_dim).unstack().dims
-    candidates = [
-      ["x", "y"],
-      ["X", "Y"],
-      ["longitude", "latitude"],
-      ["lon", "lat"],
-    ]
-    for pair in candidates:
-      if all([dim in all_dims for dim in pair]):
-        return pair
-    return None
-
-  @property
   def grid_points(self):
     """:obj:`geopandas.GeoSeries`: Spatial grid points of the array."""
-    # Extract names of spatial dimensions.
-    space_dim = self.spatial_dimension
-    if space_dim is None:
-      return None
-    xy_dims = self.xy_dimensions
     # Extract spatial coordinates.
-    xcoords = self._obj[space_dim][xy_dims[0]]
-    ycoords = self._obj[space_dim][xy_dims[1]]
+    spatial_dim = self.spatial_dimension
+    if spatial_dim is None:
+      return None
+    coords = self.extract(spatial_dim).unstack()
+    xcoords = coords[coords.dims[1]]
+    ycoords = coords[coords.dims[0]]
     # Return grid points as geometries.
     points = gpd.points_from_xy(xcoords, ycoords)
     return gpd.GeoSeries(points, crs = self.crs)
@@ -221,12 +201,14 @@ class SemanticArray():
         If the given dimension does not contain the given component.
 
     """
+    # Extract dimension coordinates.
     try:
       coords = self._obj[dimension]
     except KeyError:
       raise exceptions.UnknownDimensionError(
         f"Dimension '{dimension}' is not present in the input object"
       )
+    # Extract component of dimensions coordinates if specified.
     if component is None:
       out = coords
     else:
@@ -243,11 +225,10 @@ class SemanticArray():
         else:
           out = utils.parse_datetime_component(component, out)
       else:
-        try:
-          if component in self.xy_dimensions:
+        spatial_dim = self.spatial_dimension
+        if spatial_dim is not None and dimension == spatial_dim:
+          if component != "feature":
             out = utils.parse_coords_component(out)
-        except TypeError:
-          pass
     out._variable = out._variable.to_base_variable()
     if not track_types:
       del out.sq.value_type
@@ -421,13 +402,15 @@ class SemanticArray():
     -----------
       dimension : :obj:`str`
         Name of the dimension to apply the reduction function to.
-      operator : :obj:`callable`
+      reducer : :obj:`callable`
         The reducer function to be applied.
       track_types : :obj:`bool`
         Should the reducer promote the value type of the output object, based
         on the value type of the input object?
       **kwargs:
-        Additional keyword arguments passed on to the reducer function.
+        Additional keyword arguments passed on to the reducer function. These
+        should not include a keyword argument "dim", which is reserved for
+        specifying the dimension to reduce over.
 
     Returns
     --------
@@ -443,7 +426,102 @@ class SemanticArray():
       raise exceptions.UnknownDimensionError(
         f"Dimension '{dimension}' is not present in the input object"
       )
-    out = reducer(self._obj, dimension, track_types = track_types, **kwargs)
+    out = reducer(self._obj, track_types = track_types, dim = dimension, **kwargs)
+    return out
+
+  def shift(self, dimension, steps, **kwargs):
+    """Apply the shift verb to the array.
+
+    The shift verb shifts the values in an array a given amount of steps along
+    a dimension.
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension to shift along.
+      steps : :obj:`int`
+        Amount of steps each value should be shifted. A negative integer will
+        result in a shift to the left, while a positive integer will result in
+        a shift to the right.
+      **kwargs:
+        Ignored.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    Raises
+    ------
+      :obj:`exceptions.UnknownDimensionError`
+        If a dimension with the given name is not present in the array.
+
+    """
+    if dimension not in self._obj.dims:
+      raise exceptions.UnknownDimensionError(
+        f"Dimension '{dimension}' is not present in the input object"
+      )
+    out = self._obj.shift({dimension: steps})
+    return out
+
+  def smooth(self, dimension, reducer, size, track_types = True, **kwargs):
+    """Apply the smooth verb to the array.
+
+    The smooth verb smoothes the values in an array by applying a reducer
+    function to a rolling window along a dimension.
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension to smooth along.
+      reducer : :obj:`callable`
+        The reducer function to be applied to the rolling window.
+      size : :obj:`int`
+        Size k defining the extent of the rolling window. The pixel being
+        smoothed will always be in the center of the window, with k pixels at
+        its left and k pixels at its right. If the dimension to smooth over is
+        the spatial dimension, the size will be used for both the X and Y
+        dimension, forming a square window with the smoothed pixel in the
+        middle.
+      track_types : :obj:`bool`
+        Should the reducer promote the value type of the output object, based
+        on the value type of the input object?
+      **kwargs:
+        Additional keyword arguments passed on to the reducer function. These
+        should not include a keyword argument "dim", which is reserved for
+        specifying the dimension to reduce over.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    Raises
+    ------
+      :obj:`exceptions.UnknownDimensionError`
+        If a dimension with the given name is not present in the array.
+
+    """
+    if dimension not in self._obj.dims:
+      raise exceptions.UnknownDimensionError(
+        f"Dimension '{dimension}' is not present in the input object"
+      )
+    # Create the rolling window object.
+    # Spatial dimension needs special treatment because it is stacked.
+    if dimension == self.spatial_dimension:
+      spatial = True
+      coords = self.extract(dimension).unstack()
+      x_dim = coords.dims[1]
+      y_dim = coords.dims[0]
+      obj = self._obj.unstack(dimension)
+      obj = obj.rolling({x_dim: size, y_dim: size}, center = True)
+    else:
+      spatial = False
+      obj = self._obj.rolling({dimension: size}, center = True)
+    # Apply the reducer to each window.
+    out = reducer(obj, track_types = track_types, **kwargs)
+    # Stack x and y dimensions back together if dimension was space.
+    if spatial:
+      out = out.stack({dimension: [y_dim, x_dim]})
+      out[dimension].sq.value_type = "coords"
     return out
 
   def align_with(self, other):
@@ -518,21 +596,21 @@ class SemanticArray():
         The trimmed input array.
 
     """
-    space = self.spatial_dimension
-    if force_regular and space is not None:
+    spatial_dim = self.spatial_dimension
+    if force_regular and spatial_dim is not None:
       # Trim all dimensions normally except the spatial dimension.
       out = self._obj
       all_dims = out.dims
-      trim_dims = [d for d in all_dims if d != space]
-      # Trim spatial dimensions separately while preserving regularity.
-      # Hence trimming only at the edges of the spatial dimensions.
-      # First unstack spatial dimension into x and y dimensions.
-      out = out.unstack(space)
-      xy_dims = self.xy_dimensions
-      y_dim = xy_dims[1]
-      x_dim = xy_dims[0]
-      # For the x and y dimensions:
+      trim_dims = [d for d in all_dims if d != spatial_dim]
+      # Trim spatial X and Y dimensions separately while preserving regularity.
+      # Hence trimming only at the edges of the spatial X and Y dimensions.
+      # First determine the names of the X and Y dimensions.
+      coords = self.extract(spatial_dim).unstack()
+      x_dim = coords.dims[1]
+      y_dim = coords.dims[0]
+      # For the X and Y dimensions:
       # Find the smallest and largest coordinates containing valid values.
+      out = out.unstack(spatial_dim)
       y_idxs = np.nonzero(out.count(trim_dims + [x_dim]).data)[0]
       x_idxs = np.nonzero(out.count(trim_dims + [y_dim]).data)[0]
       y_slice = slice(y_idxs.min(), y_idxs.max() + 1)
@@ -540,8 +618,8 @@ class SemanticArray():
       # Limit the x and y coordinates to only those ranges.
       out = out.isel({y_dim: y_slice, x_dim: x_slice})
       # Stack x and y dimensions back together.
-      out = out.stack({space: [y_dim, x_dim]})
-      out[space].sq.value_type = "coords"
+      out = out.stack({spatial_dim: [y_dim, x_dim]})
+      out[spatial_dim].sq.value_type = "coords"
     else:
       # Trim all dimensions normally.
       out = self._obj
@@ -566,22 +644,25 @@ class SemanticArray():
         The regularized input array.
 
     """
-    space = self.spatial_dimension
-    if space is None:
+    spatial_dim = self.spatial_dimension
+    if spatial_dim is None:
       return self._obj
-    obj = self._obj.unstack(space)
-    res = self.spatial_resolution
     # Extract x and y dimensions.
-    xydims = self.xy_dimensions
-    yname = xydims[1]
-    ycoords = obj[yname]
-    xname = xydims[0]
-    xcoords = obj[xname]
+    coords = self.extract(spatial_dim).unstack()
+    xname = coords.dims[1]
+    yname = coords.dims[0]
+    xcoords = coords[xname]
+    ycoords = coords[yname]
     # Update x and y dimensions.
+    res = self.spatial_resolution
     ycoords = np.arange(ycoords[0], ycoords[-1] + res[0], res[0])
     xcoords = np.arange(xcoords[0], xcoords[-1] + res[1], res[1])
-    out = obj.reindex({yname: ycoords, xname: xcoords})
-    return out.stack({space: [yname, xname]})
+    out = self._obj.unstack(spatial_dim)
+    out = out.reindex({yname: ycoords, xname: xcoords})
+    # Stack x and y dimensions back together.
+    out = out.stack({spatial_dim: [yname, xname]})
+    out[spatial_dim].sq.value_type = "coords"
+    return out
 
   def reproject(self, crs, **kwargs):
     """Reproject the spatial coordinates of the array into a different CRS.
@@ -603,13 +684,20 @@ class SemanticArray():
         The input array with reprojected spatial coordinates.
 
     """
-    space = self.spatial_dimension
-    if space is None:
+    spatial_dim = self.spatial_dimension
+    if spatial_dim is None:
       return self._obj
-    obj = self.unstack(space)
+    # To make rioxarray work:
+    # Array needs to have unstacked spatial dimensions.
+    # Array can have only the spatial_ref non-dimension coordinate.
+    obj = self.unstack(spatial_dim)
     obj = obj.sq.drop_non_dimension_coords(keep = ["spatial_ref"])
+    # Reproject.
     out = obj.rio.reproject(crs, **kwargs)
-    out = out.sq.stack_spatial_dims(name = space).sq.write_tz(self.tz)
+    # Stack spatial dimensions back together.
+    out = out.sq.stack_spatial_dims(name = spatial_dim)
+    # Recover temporal non-dimension coordinate.
+    out = out.sq.write_tz(self.tz)
     return out
 
   def tz_convert(self, tz, **kwargs):
@@ -700,24 +788,49 @@ class SemanticArray():
     obj["temporal_ref"].attrs["zone"] = zone
     return obj
 
+  def find_spatial_dims(self):
+    """Find spatial X and Y dimensions in an unstacked array.
+
+    Returns
+    --------
+      :obj:`list` of :obj:`str`
+        The names of respectively the spatial X and Y dimension. If they could
+        not be found, ``None`` is returned.
+
+    """
+    candidates = [
+      ["x", "y"],
+      ["X", "Y"],
+      ["longitude", "latitude"],
+      ["lon", "lat"],
+    ]
+    for pair in candidates:
+      if all([dim in self._obj.dims for dim in pair]):
+        return pair
+    return None
+
   def stack_spatial_dims(self, name = "space"):
-    """Stack the spatial X and Y dimensions into a single spatial dimension.
+    """Stack spatial X and Y dimensions into a single spatial dimension.
 
     Parameters
     -----------
-    name : :obj:`str`
-      Name that should be given to the stacked dimension.
+      name : :obj:`str`
+        Name to give to the stacked spatial dimension.
 
     Returns
     --------
       :obj:`xarray.DataArray`
-        The input array with stacked spatial dimensions.
+        The input array with a multi-index spatial dimension. If no X and Y
+        dimensions could be found, the input array is returned without
+        modifications.
 
     """
-    xy_dims = self.xy_dimensions
+    xy_dims = self.find_spatial_dims()
     if xy_dims is None:
       return self._obj
-    return self._obj.stack({name: xy_dims[::-1]})
+    out = self._obj.stack({name: xy_dims[::-1]})
+    out[name].sq.value_type = "coords"
+    return out
 
   def unstack_spatial_dims(self):
     """Unstack the spatial dimension into separate X and Y dimensions.
@@ -725,7 +838,9 @@ class SemanticArray():
     Returns
     --------
       :obj:`xarray.DataArray`
-        The input array with unstacked spatial dimensions.
+        The input array with unstacked spatial dimensions. If no spatial
+        dimension could be found, the input array is returned without
+        modifications.
 
     """
     dim = self.spatial_dimension
@@ -800,22 +915,13 @@ class SemanticArray():
       :obj:`geopandas.GeoDataFrame`
         The converted input array
 
-    Raises
-    ------
-      :obj:`exceptions.MissingDimensionError`
-        If the array does not have spatial dimensions.
-
     """
-    # Make sure spatial dimensions are present.
-    spatial_dims = self.xy_dimensions
-    if spatial_dims is None:
-      raise exceptions.MissingDimensionError(
-        "GeoDataFrame conversion requires spatial dimensions"
-      )
+    obj = self.unstack_spatial_dims()
     # Convert to dataframe.
     df = self.to_dataframe().reset_index()
     # Create geometries.
-    geoms = gpd.points_from_xy(df[spatial_dims[0]], df[spatial_dims[1]])
+    xy_dims = obj.sq.find_spatial_dims()
+    geoms = gpd.points_from_xy(df[xy_dims[0]], df[xy_dims[1]])
     # Convert to geodataframe
     gdf = gpd.GeoDataFrame(df, geometry = geoms, crs = self.crs)
     # Reproject if needed.
@@ -877,19 +983,12 @@ class SemanticArray():
 
     Raises
     ------
-      :obj:`exceptions.MissingDimensionError`
-        If the array does not have spatial dimensions.
       :obj:`exceptions.TooManyDimensionsError`
         If the array has more than three dimensions, including the two unstacked
         spatial dimensions. More than three dimensions is currently not
         supported by the export functionality of rasterio.
 
     """
-    # Make sure spatial dimensions are present.
-    if self.xy_dimensions is None:
-      raise exceptions.MissingDimensionError(
-        "GeoTIFF export requires spatial dimensions"
-      )
     obj = self.unstack_spatial_dims()
     # Remove non-dimension coordinates but not 'spatial_ref'.
     # That one is needed by rioxarray to determine the CRS of the data.
@@ -1201,6 +1300,36 @@ class Collection(list):
     args = tuple([dimension, reducer, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
+    return out
+
+  def shift(self, dimension, steps, **kwargs):
+    """Apply the shift verb to all arrays in the collection.
+
+    See :meth:`SemanticArray.shift`
+
+    Returns
+    -------
+      :obj:`Collection`
+
+    """
+    args = tuple([dimension, steps])
+    out = copy.deepcopy(self)
+    out[:] = [x.sq.shift(*args, **kwargs) for x in out]
+    return out
+
+  def smooth(self, dimension, reducer, size, track_types = True, **kwargs):
+    """Apply the smooth verb to all arrays in the collection.
+
+    See :meth:`SemanticArray.smooth`
+
+    Returns
+    -------
+      :obj:`Collection`
+
+    """
+    args = tuple([dimension, reducer, size, track_types])
+    out = copy.deepcopy(self)
+    out[:] = [x.sq.smooth(*args, **kwargs) for x in out]
     return out
 
   def trim(self, force_regular = True):

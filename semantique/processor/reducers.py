@@ -10,20 +10,20 @@ from semantique.processor.utils import get_null, allnull, null_as_zero
 # STATISTICAL REDUCERS
 #
 
-def mean_(x, dimension, track_types = True, **kwargs):
+def mean_(x, track_types = True, **kwargs):
   """Calculate the mean of a set of values.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -49,25 +49,25 @@ def mean_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "mean")
     promoter.check()
   f = lambda x, axis: np.nanmean(x, axis = axis)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def median_(x, dimension, track_types = True, **kwargs):
+def median_(x, track_types = True, **kwargs):
   """Return the median value in a set.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -93,25 +93,25 @@ def median_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "median")
     promoter.check()
   f = lambda x, axis: np.nanmedian(x, axis = axis)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def mode_(x, dimension, track_types = True, **kwargs):
+def mode_(x, track_types = True, **kwargs):
   """Return the most occuring value in a set.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -144,25 +144,25 @@ def mode_(x, dimension, track_types = True, **kwargs):
   def f(x, axis):
     values = stats.mode(x, axis = axis, nan_policy = "omit")[0].squeeze(axis = axis)
     return np.where(allnull(x, axis), get_null(x), values)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def max_(x, dimension, track_types = True, **kwargs):
+def max_(x, track_types = True, **kwargs):
   """Return the maximum value in a set.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -188,25 +188,25 @@ def max_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "max")
     promoter.check()
   f = lambda x, axis: np.nanmax(x, axis)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def min_(x, dimension, track_types = True, **kwargs):
+def min_(x, track_types = True, **kwargs):
   """Return the minimum value in a set.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -232,25 +232,25 @@ def min_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "min")
     promoter.check()
   f = lambda x, axis: np.nanmin(x, axis)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def range_(x, dimension, track_types = True, **kwargs):
+def range_(x, track_types = True, **kwargs):
   """Return the difference between the maximum and minimum values in a set.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -282,25 +282,25 @@ def range_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "range")
     promoter.check()
   f = lambda x, axis: np.subtract(np.nanmax(x, axis), np.nanmin(x, axis))
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def n_(x, dimension, track_types = True, **kwargs):
+def n_(x, track_types = True, **kwargs):
   """Return the number of observations in a set.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -332,25 +332,25 @@ def n_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "n")
     promoter.check()
   f = lambda x, axis: np.nansum(pd.notnull(x), axis)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def product_(x, dimension, track_types = True, **kwargs):
+def product_(x, track_types = True, **kwargs):
   """Calculate the product of a set of values.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -376,25 +376,25 @@ def product_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "product")
     promoter.check()
   f = lambda x, axis: np.where(allnull(x, axis), np.nan, np.nanprod(x, axis))
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def standard_deviation_(x, dimension, track_types = True, **kwargs):
+def standard_deviation_(x, track_types = True, **kwargs):
   """Calculate the standard deviation of a set of values.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -420,25 +420,25 @@ def standard_deviation_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "standard_deviation")
     promoter.check()
   f = lambda x, axis: np.nanstd(x, axis = axis)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def sum_(x, dimension, track_types = True, **kwargs):
+def sum_(x, track_types = True, **kwargs):
   """Calculate the sum of a set of values.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -464,25 +464,25 @@ def sum_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "sum")
     promoter.check()
   f = lambda x, axis: np.where(allnull(x, axis), np.nan, np.nansum(x, axis))
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def variance_(x, dimension, track_types = True, **kwargs):
+def variance_(x, track_types = True, **kwargs):
   """Calculate the variance of a set of values.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -508,7 +508,7 @@ def variance_(x, dimension, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "variance")
     promoter.check()
   f = lambda x, axis: np.nanvar(x, axis = axis)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -517,20 +517,20 @@ def variance_(x, dimension, track_types = True, **kwargs):
 # BOOLEAN REDUCERS
 #
 
-def all_(x, dimension, track_types = True, **kwargs):
+def all_(x, track_types = True, **kwargs):
   """Test if all values in a set are true.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -555,28 +555,28 @@ def all_(x, dimension, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "all")
     promoter.check()
-  def f(x, y):
+  def f(x, axis):
     values = np.all(x, axis)
     return np.where(allnull(x, axis), np.nan, values)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def any_(x, dimension, track_types = True, **kwargs):
+def any_(x, track_types = True, **kwargs):
   """Test if at least one value in a set is true.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -609,25 +609,25 @@ def any_(x, dimension, track_types = True, **kwargs):
   def f(x, axis):
     values = np.any(null_as_zero(x), axis)
     return np.where(allnull(x, axis), np.nan, values)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def none_(x, dimension, track_types = True, **kwargs):
+def none_(x, track_types = True, **kwargs):
   """Test if none of the values in a set are true.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -660,7 +660,7 @@ def none_(x, dimension, track_types = True, **kwargs):
   def f(x, axis):
     values = np.logical_not(np.any(null_as_zero(x), axis))
     return np.where(allnull(x, axis), np.nan, values)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -669,20 +669,20 @@ def none_(x, dimension, track_types = True, **kwargs):
 # OCCURENCE REDUCERS
 #
 
-def count_(x, dimension, track_types = True, **kwargs):
+def count_(x, track_types = True, **kwargs):
   """Count the number of true values in a set.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -710,25 +710,25 @@ def count_(x, dimension, track_types = True, **kwargs):
   def f(x, axis):
     values = np.count_nonzero(null_as_zero(x), axis)
     return np.where(allnull(x, axis), np.nan, values)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def percentage_(x, dimension, track_types = True, **kwargs):
+def percentage_(x, track_types = True, **kwargs):
   """Calculate the percentage of true values in a set.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -764,7 +764,7 @@ def percentage_(x, dimension, track_types = True, **kwargs):
     part = np.where(allnull(x, axis), np.nan, part)
     whole = np.sum(pd.notnull(x), axis)
     return np.multiply(np.divide(part, whole), 100)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
@@ -773,20 +773,20 @@ def percentage_(x, dimension, track_types = True, **kwargs):
 # POSITIONAL REDUCERS
 #
 
-def first_(x, dimension, track_types = True, **kwargs):
+def first_(x, track_types = True, **kwargs):
   """Return the first value in a set.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -821,25 +821,25 @@ def first_(x, dimension, track_types = True, **kwargs):
     is_value = pd.notnull(x)
     is_first = np.equal(np.cumsum(np.cumsum(is_value, axis), axis), 1)
     return np.nanmax(np.where(is_first, x, get_null(x)), axis)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def last_(x, dimension, track_types = True, **kwargs):
+def last_(x, track_types = True, **kwargs):
   """Return the last value in a set.
 
   Parameters
   ----------
     x : :obj:`xarray.DataArray`
       The array to be reduced.
-    dimension : :obj:`str`
-      Name of the dimension to apply the reducer function to.
     track_types : :obj:`bool`
       Should the reducer promote the value type of the output object, based
       on the value type of the input object?
     **kwargs:
-      Ignored.
+      Additional keyword arguments. If the reducer has to be applied to a
+      specific dimension, the keyword argument "dim" with as value the name
+      of the targeted dimension should be specified here.
 
   Returns
   -------
@@ -875,7 +875,7 @@ def last_(x, dimension, track_types = True, **kwargs):
     is_value = pd.notnull(xflipped)
     is_first = np.equal(np.cumsum(np.cumsum(is_value, axis), axis), 1)
     return np.nanmax(np.where(is_first, xflipped, get_null(x)), axis)
-  out = x.reduce(f, dim = dimension)
+  out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
   return out

@@ -384,13 +384,89 @@ class ArrayProxy(dict):
     kwargs.update({"dimension": dimension, "reducer": reducer})
     return self._append_verb("reduce", **kwargs)
 
+  def shift(self, dimension, steps, **kwargs):
+    """Shift the values in an array.
+
+    Shifts the pixel values a given number of steps along a given dimension.
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension to shift along.
+      steps : :obj:`int`
+        Amount of steps each value should be shifted. A negative integer will
+        result in a shift to the left, while a positive integer will result in
+        a shift to the right.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`SemanticArray.shift <processor.structures.SemanticArray.shift>`.
+
+    Returns
+    --------
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> import semantique as sq
+    >>> sq.entity("water").shift("time", 1)
+
+    """
+    kwargs.update({"dimension": dimension, "steps": steps})
+    return self._append_verb("shift", **kwargs)
+
+  def smooth(self, dimension, reducer, size, **kwargs):
+    """Smooth the values in an array.
+
+    Smoothes the pixel values by applying a moving window function along a
+    given dimension.
+
+    The moving window functions are reducer functions that reduce the values in
+    the window to a single value. See `here`_ for an overview of the built-in
+    reducer functions that can be chosen from (they should be referred to by
+    their name, without the underscore at the end).
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension to smooth along.
+      reducer : :obj:`str`
+        Name of the reducer function to be used to reduce the values in the
+        moving window.
+      size : :obj:`int`
+        Size k defining the extent of the rolling window. The pixel being
+        smoothed will always be in the center of the window, with k pixels at
+        its left and k pixels at its right. If the dimension to smooth over is
+        the spatial dimension, the size will be used for both the X and Y
+        dimension, forming a square window with the smoothed pixel in the
+        middle.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :obj:`SemanticArray.smooth <processor.structures.SemanticArray.smooth>`.
+
+    Returns
+    --------
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> import semantique as sq
+    >>> sq.entity("water").smooth("time", "any", 1)
+
+    .. _here:
+      https://zgis.github.io/semantique/reference.html#reducer-functions
+
+    """
+    kwargs.update({"dimension": dimension, "reducer": reducer, "size": size})
+    return self._append_verb("smooth", **kwargs)
+
+
   def name(self, name, **kwargs):
-    """Assign a name to an array.
+    """Give a name to an array.
 
     Parameters
     -----------
       name : :obj:`str`
-        Name to be assigned to the input.
+        Name to be given to the input.
       **kwargs:
         Additional keyword arguments passed on to
         :obj:`SemanticArray.name <processor.structures.SemanticArray.name>`.
@@ -612,6 +688,32 @@ class CollectionProxy(dict):
     """
     kwargs.update({"dimension": dimension, "reducer": reducer})
     return self._append_verb("reduce", **kwargs)
+
+  def shift(self, dimension, steps, **kwargs):
+    """Apply the shift verb to each array in a collection.
+
+    See :meth:`ArrayProxy.shift`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    """
+    kwargs.update({"dimension": dimension, "steps": steps})
+    return self._append_verb("shift", **kwargs)
+
+  def smooth(self, dimension, reducer, size, **kwargs):
+    """Apply the smooth verb to each array in a collection.
+
+    See :meth:`ArrayProxy.smooth`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    """
+    kwargs.update({"dimension": dimension, "reducer": reducer, "size": size})
+    return self._append_verb("smooth", **kwargs)
 
 def concept(*reference, property = None):
   """Reference to a semantic concept.

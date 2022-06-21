@@ -718,6 +718,45 @@ class QueryProcessor():
     # Call verb.
     return self.call_verb("reduce", params)
 
+  def handle_shift(self, block):
+    """Handler for the shift verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "shift".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+
+    """
+    return self.call_verb("shift", block["params"])
+
+  def handle_smooth(self, block):
+    """Handler for the smooth verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "smooth".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.structures.Collection>`
+
+    """
+    # Get function parameters.
+    params = copy.deepcopy(block["params"])
+    # Obtain reducer function.
+    params["reducer"] = self.get_reducer(params["reducer"])
+    # Set other function parameters.
+    params["track_types"] = self._track_types
+    # Call verb.
+    return self.call_verb("smooth", params)
+
   def handle_compose(self, block):
     """Handler for the compose verb.
 

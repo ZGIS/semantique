@@ -206,7 +206,6 @@ class SpatialExtent(dict):
     # Stack the two spatial dimensions into one if requested.
     if stack:
       raster_obj = raster_obj.sq.stack_spatial_dims()
-      raster_obj["space"].sq.value_type = "coords"
     return raster_obj
 
 class TemporalExtent(dict):
