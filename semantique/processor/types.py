@@ -90,6 +90,10 @@ TYPE_PROMOTION_MANUALS = {
     "numerical": {"numerical": "numerical"},
     "__preserve_labels__": 0
   },
+  "normalized_difference": {
+    "numerical": {"numerical": "numerical"},
+    "__preserve_labels__": 0
+  },
   "and": {
     "binary": {"binary": "binary"},
     "__preserve_labels__": 1

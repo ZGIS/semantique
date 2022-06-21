@@ -11,7 +11,7 @@ from semantique.processor.utils import get_null, null_as_zero
 #
 
 def not_(x, track_types = True, **kwargs):
-  """Compute the boolean inverse of x.
+  """Test if x is not true.
 
   Parameters
   ----------
@@ -108,10 +108,6 @@ def is_missing_(x, track_types = True, **kwargs):
   if track_types:
     out = promoter.promote(out)
   return out
-
-#
-# NUMERICAL UNIVARIATE OPERATORS
-#
 
 def absolute_(x, track_types = True, **kwargs):
   """Compute the absolute value of x.
@@ -694,6 +690,64 @@ def subtract_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "subtract")
     promoter.check()
   f = lambda x, y: np.subtract(x, y)
+  y = xr.DataArray(y).sq.align_with(x)
+  out = xr.apply_ufunc(f, x, y)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
+def normalized_difference_(x, y, track_types = True, **kwargs):
+  """Compute the normalized difference between x and y.
+
+  The normalized difference is used to calculate common indices in remote
+  sensing, such as the normalized difference vegetation index (NDVI) or the
+  normalized difference water index (NDWI). It is defined as (x - y) / (x + y).
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Array containing the operands at the left-hand side of each
+      expression.
+    y :
+      Operands at the right-hand side of each expression. May be a constant,
+      meaning that the same value is used in each expression. May also be
+      another array which can be aligned to the same shape as array ``x``.
+      In the latter case, when evaluating the expression for a pixel in array
+      ``x`` the second operand is the value of the pixel in array ``y`` that
+      has the same dimension coordinates.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input objects?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      An array with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the first layer of keys being the supported value types of
+    ``x``, the second layer of keys being the supported value types of ``y``
+    given the value type of ``x``, and the corresponding value being the
+    promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["normalized_difference"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, y, function = "normalized_difference")
+    promoter.check()
+  f = lambda x, y: np.divide(np.subtract(x, y), np.add(x, y))
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y)
   if track_types:
