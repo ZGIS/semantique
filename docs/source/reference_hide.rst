@@ -11,37 +11,37 @@
    :template: inherited.rst
    :nosignatures:
 
-   CubeProxy
-   CubeCollectionProxy
+   ArrayProxy
+   CollectionProxy
 
 .. autosummary::
    :toctree: _generated/
 
    QueryRecipe.execute
 
-   ontology.Ontology.lookup
-   ontology.Ontology.translate
+   mapping.Mapping.lookup
+   mapping.Mapping.translate
 
-   ontology.Semantique.lookup
-   ontology.Semantique.translate
+   mapping.Semantique.lookup
+   mapping.Semantique.translate
 
-   factbase.Factbase.layout
-   factbase.Factbase.lookup
-   factbase.Factbase.retrieve
+   datacube.Datacube.layout
+   datacube.Datacube.lookup
+   datacube.Datacube.retrieve
 
-   factbase.Opendatacube.layout
-   factbase.Opendatacube.connection
-   factbase.Opendatacube.tz
-   factbase.Opendatacube.config
-   factbase.Opendatacube.lookup
-   factbase.Opendatacube.retrieve
+   datacube.Opendatacube.layout
+   datacube.Opendatacube.connection
+   datacube.Opendatacube.tz
+   datacube.Opendatacube.config
+   datacube.Opendatacube.lookup
+   datacube.Opendatacube.retrieve
 
-   factbase.GeotiffArchive.layout
-   factbase.GeotiffArchive.src
-   factbase.GeotiffArchive.tz
-   factbase.GeotiffArchive.config
-   factbase.GeotiffArchive.lookup
-   factbase.GeotiffArchive.retrieve
+   datacube.GeotiffArchive.layout
+   datacube.GeotiffArchive.src
+   datacube.GeotiffArchive.tz
+   datacube.GeotiffArchive.config
+   datacube.GeotiffArchive.lookup
+   datacube.GeotiffArchive.retrieve
 
    extent.SpatialExtent.features
    extent.SpatialExtent.crs
@@ -58,8 +58,8 @@
 
    processor.core.QueryProcessor.response
    processor.core.QueryProcessor.recipe
-   processor.core.QueryProcessor.factbase
-   processor.core.QueryProcessor.ontology
+   processor.core.QueryProcessor.datacube
+   processor.core.QueryProcessor.mapping
    processor.core.QueryProcessor.extent
    processor.core.QueryProcessor.crs
    processor.core.QueryProcessor.spatial_resolution
@@ -76,7 +76,7 @@
    processor.core.QueryProcessor.respond
    processor.core.QueryProcessor.call_handler
    processor.core.QueryProcessor.handle_concept
-   processor.core.QueryProcessor.handle_resource
+   processor.core.QueryProcessor.handle_layer
    processor.core.QueryProcessor.handle_result
    processor.core.QueryProcessor.handle_self
    processor.core.QueryProcessor.handle_collection
@@ -85,18 +85,22 @@
    processor.core.QueryProcessor.handle_evaluate
    processor.core.QueryProcessor.handle_extract
    processor.core.QueryProcessor.handle_filter
+   processor.core.QueryProcessor.handle_assign
    processor.core.QueryProcessor.handle_groupby
-   processor.core.QueryProcessor.handle_label
    processor.core.QueryProcessor.handle_reduce
+   processor.core.QueryProcessor.handle_shift
+   processor.core.QueryProcessor.handle_smooth
+   processor.core.QueryProcessor.handle_name
    processor.core.QueryProcessor.handle_compose
    processor.core.QueryProcessor.handle_concatenate
    processor.core.QueryProcessor.handle_merge
-   processor.core.QueryProcessor.handle_value_label
-   processor.core.QueryProcessor.handle_geometries
+   processor.core.QueryProcessor.handle_label
+   processor.core.QueryProcessor.handle_set
+   processor.core.QueryProcessor.handle_interval
+   processor.core.QueryProcessor.handle_geometry
    processor.core.QueryProcessor.handle_time_instant
    processor.core.QueryProcessor.handle_time_interval
    processor.core.QueryProcessor.call_verb
-   processor.core.QueryProcessor.update_list_elements
    processor.core.QueryProcessor.add_operator
    processor.core.QueryProcessor.get_operator
    processor.core.QueryProcessor.store_default_operators
@@ -104,56 +108,62 @@
    processor.core.QueryProcessor.get_reducer
    processor.core.QueryProcessor.store_default_reducers
 
-   processor.structures.Cube.value_type
-   processor.structures.Cube.value_labels
-   processor.structures.Cube.crs
-   processor.structures.Cube.spatial_resolution
-   processor.structures.Cube.tz
-   processor.structures.Cube.is_empty
-   processor.structures.Cube.temporal_dimension
-   processor.structures.Cube.spatial_dimension
-   processor.structures.Cube.xy_dimensions
-   processor.structures.Cube.grid_points
-   processor.structures.Cube.evaluate
-   processor.structures.Cube.extract
-   processor.structures.Cube.filter
-   processor.structures.Cube.groupby
-   processor.structures.Cube.label
-   processor.structures.Cube.reduce
-   processor.structures.Cube.align_with
-   processor.structures.Cube.trim
-   processor.structures.Cube.regularize
-   processor.structures.Cube.reproject
-   processor.structures.Cube.tz_convert
-   processor.structures.Cube.write_crs
-   processor.structures.Cube.write_tz
-   processor.structures.Cube.stack_spatial_dims
-   processor.structures.Cube.unstack_spatial_dims
-   processor.structures.Cube.drop_non_dimension_coords
-   processor.structures.Cube.to_dataframe
-   processor.structures.Cube.to_geodataframe
-   processor.structures.Cube.to_csv
-   processor.structures.Cube.to_geotiff
+   processor.arrays.SemanticArray.value_type
+   processor.arrays.SemanticArray.value_labels
+   processor.arrays.SemanticArray.crs
+   processor.arrays.SemanticArray.spatial_resolution
+   processor.arrays.SemanticArray.tz
+   processor.arrays.SemanticArray.is_empty
+   processor.arrays.SemanticArray.temporal_dimension
+   processor.arrays.SemanticArray.spatial_dimension
+   processor.arrays.SemanticArray.grid_points
+   processor.arrays.SemanticArray.evaluate
+   processor.arrays.SemanticArray.extract
+   processor.arrays.SemanticArray.filter
+   processor.arrays.SemanticArray.assign
+   processor.arrays.SemanticArray.groupby
+   processor.arrays.SemanticArray.reduce
+   processor.arrays.SemanticArray.shift
+   processor.arrays.SemanticArray.smooth
+   processor.arrays.SemanticArray.name
+   processor.arrays.SemanticArray.align_with
+   processor.arrays.SemanticArray.trim
+   processor.arrays.SemanticArray.regularize
+   processor.arrays.SemanticArray.reproject
+   processor.arrays.SemanticArray.tz_convert
+   processor.arrays.SemanticArray.write_crs
+   processor.arrays.SemanticArray.write_tz
+   processor.arrays.SemanticArray.find_spatial_dims
+   processor.arrays.SemanticArray.stack_spatial_dims
+   processor.arrays.SemanticArray.unstack_spatial_dims
+   processor.arrays.SemanticArray.drop_non_dimension_coords
+   processor.arrays.SemanticArray.to_dataframe
+   processor.arrays.SemanticArray.to_geodataframe
+   processor.arrays.SemanticArray.to_csv
+   processor.arrays.SemanticArray.to_geotiff
 
-   processor.structures.CubeCollection.sq
-   processor.structures.CubeCollection.is_empty
-   processor.structures.CubeCollection.compose
-   processor.structures.CubeCollection.concatenate
-   processor.structures.CubeCollection.merge
-   processor.structures.CubeCollection.evaluate
-   processor.structures.CubeCollection.extract
-   processor.structures.CubeCollection.filter
-   processor.structures.CubeCollection.label
-   processor.structures.CubeCollection.reduce
-   processor.structures.CubeCollection.trim
-   processor.structures.CubeCollection.regularize
-   processor.structures.CubeCollection.stack_spatial_dims
-   processor.structures.CubeCollection.unstack_spatial_dims
+   processor.arrays.Collection.sq
+   processor.arrays.Collection.is_empty
+   processor.arrays.Collection.compose
+   processor.arrays.Collection.concatenate
+   processor.arrays.Collection.merge
+   processor.arrays.Collection.evaluate
+   processor.arrays.Collection.extract
+   processor.arrays.Collection.filter
+   processor.arrays.Collection.assign
+   processor.arrays.Collection.reduce
+   processor.arrays.Collection.shift
+   processor.arrays.Collection.smooth
+   processor.arrays.Collection.name
+   processor.arrays.Collection.trim
+   processor.arrays.Collection.regularize
+   processor.arrays.Collection.stack_spatial_dims
+   processor.arrays.Collection.unstack_spatial_dims
 
-   processor.values.ValueRange.sq
-   processor.values.ValueRange.start
-   processor.values.ValueRange.end
-   processor.values.ValueRange.value_type
+   processor.values.Interval.sq
+   processor.values.Interval.lower
+   processor.values.Interval.upper
+   processor.values.Interval.value_type
 
    processor.types.TypePromoter.manual
    processor.types.TypePromoter.input_types

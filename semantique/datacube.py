@@ -12,7 +12,7 @@ from abc import abstractmethod
 from semantique import exceptions
 
 class Datacube():
-  """Base class for EO data cube representations.
+  """Base class for EO data cube configurations.
 
   Parameters
   ----------
@@ -289,10 +289,11 @@ class Opendatacube(Datacube):
     return data
 
 class GeotiffArchive(Datacube):
-  """EO data cube format for zipped GeoTIFF files.
+  """EO data cube configuration for zipped GeoTIFF files.
 
-  This simple EO data cube format assumes each data layer is a GeoTIFF file, and
-  that all layers together are bundled in a ZIP archive.
+  This simple EO data cube configuration assumes each data layer is a GeoTIFF
+  file, and that all layers together are bundled in a ZIP archive. It is meant
+  for demonstration purposes.
 
   Parameters
   ----------
