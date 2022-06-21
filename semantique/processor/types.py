@@ -42,6 +42,15 @@ TYPE_PROMOTION_MANUALS = {
     "datetime": "binary",
     "__preserve_labels__": 0
   },
+  "not_missing": {
+    "binary": "binary",
+    "nominal": "binary",
+    "numerical": "binary",
+    "ordinal": "binary",
+    "coords": "binary",
+    "datetime": "binary",
+    "__preserve_labels__": 0
+  },
   "absolute": {
     "numerical": "numerical",
     "__preserve_labels__": 0

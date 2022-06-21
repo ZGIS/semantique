@@ -109,6 +109,49 @@ def is_missing_(x, track_types = True, **kwargs):
     out = promoter.promote(out)
   return out
 
+def not_missing_(x, track_types = True, **kwargs):
+  """Test if x is a valid observation.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Array containing the values to apply the operator to.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      An array with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["not_missing"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, function = "not_missing")
+    promoter.check()
+  f = lambda x: pd.notnull(x)
+  out = xr.apply_ufunc(f, x)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
 def absolute_(x, track_types = True, **kwargs):
   """Compute the absolute value of x.
 

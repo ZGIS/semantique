@@ -190,6 +190,7 @@ Univariate operators
 
    processor.operators.not_
    processor.operators.is_missing_
+   processor.operators.not_missing_
    processor.operators.absolute_
    processor.operators.exponential_
    processor.operators.cube_root_
