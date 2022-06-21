@@ -1,7 +1,7 @@
 {
   "appearance": {
-    "Color type": {
-      "description": "Colour categories (medium granularity)",
+    "colortype": {
+      "description": "Color categories produced by SIAM (medium granularity)",
       "type": "categorical",
       "values": [
         {
@@ -194,12 +194,20 @@
     }
   },
   "atmosphere": {
-    "Color type": {
-      "description": "Colour categories (medium granularity)",
+    "colortype": {
+      "description": "Color categories produced by SIAM (medium granularity)",
       "type": "categorical",
       "values": [
-        {"id": 25, "label":"CL", "description": "Cloud"},
-        {"id": 26, "label": "SMKPLM", "description": "Smoke Plume"}
+        {
+          "id": 25,
+          "label":"CL",
+          "description": "Cloud"
+        },
+        {
+          "id": 26,
+          "label": "SMKPLM",
+          "description": "Smoke Plume"
+        }
       ],
       "file": "colortype.geotiff",
       "times": [
@@ -210,11 +218,15 @@
     }
   },
   "artifacts": {
-    "Color type": {
-      "description": "Colour categories (medium granularity)",
+    "colortype": {
+      "description": "Color categories produced by SIAM (medium granularity)",
       "type": "categorical",
       "values": [
-        {"id": 33, "label":"UN", "description": "Unknown classification"}
+        {
+          "id": 33,
+          "label":"UN",
+          "description": "Unknown classification"
+        }
       ],
       "file": "colortype.geotiff",
       "times": [
@@ -233,7 +245,6 @@
         "max": 10000,
         "precision": 1
       },
-      "role": "red",
       "file": "red.geotiff",
       "times": [
         "2019-12-15T10:17:33.408715",
@@ -249,7 +260,6 @@
         "max": 10000,
         "precision": 1
       },
-      "role": "green",
       "file": "green.geotiff",
       "times": [
         "2019-12-15T10:17:33.408715",
@@ -265,7 +275,6 @@
         "max": 10000,
         "precision": 1
       },
-      "role": "blue",
       "file": "blue.geotiff",
       "times": [
         "2019-12-15T10:17:33.408715",

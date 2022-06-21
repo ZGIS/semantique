@@ -4,10 +4,10 @@
       "color": {
         "type": "processing_chain",
         "with": {
-          "type": "resource",
+          "type": "layer",
           "reference": [
             "appearance",
-            "Color type"
+            "colortype"
           ]
         },
         "do": [
@@ -31,10 +31,10 @@
       "color": {
         "type": "processing_chain",
         "with": {
-          "type": "resource",
+          "type": "layer",
           "reference": [
             "appearance",
-            "Color type"
+            "colortype"
           ]
         },
         "do": [
@@ -60,10 +60,10 @@
       "color": {
         "type": "processing_chain",
         "with": {
-          "type": "resource",
+          "type": "layer",
           "reference": [
             "appearance",
-            "Color type"
+            "colortype"
           ]
         },
         "do": [
@@ -88,10 +88,10 @@
       "color": {
         "type": "processing_chain",
         "with": {
-          "type": "resource",
+          "type": "layer",
           "reference": [
             "atmosphere",
-            "Color type"
+            "colortype"
           ]
         },
         "do": [
@@ -110,10 +110,10 @@
       "color": {
         "type": "processing_chain",
         "with": {
-          "type": "resource",
+          "type": "layer",
           "reference": [
             "appearance",
-            "Color type"
+            "colortype"
           ]
         },
         "do": [
