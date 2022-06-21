@@ -33,6 +33,15 @@ TYPE_PROMOTION_MANUALS = {
     "binary": "binary",
     "__preserve_labels__": 1
   },
+  "is_missing": {
+    "binary": "binary",
+    "nominal": "binary",
+    "numerical": "binary",
+    "ordinal": "binary",
+    "coords": "binary",
+    "datetime": "binary",
+    "__preserve_labels__": 0
+  },
   "absolute": {
     "numerical": "numerical",
     "__preserve_labels__": 0
@@ -372,11 +381,14 @@ def get_value_type(x):
   try:
     vtype = x.sq.value_type
   except AttributeError:
-    if isinstance(x, GeoDataFrame):
-      vtype = "geometry"
-    else:
-      x = np.array(x)
-      vtype = None
+    try:
+      vtype = x.obj.sq.value_type
+    except AttributeError:
+      if isinstance(x, GeoDataFrame):
+        vtype = "geometry"
+      else:
+        x = np.array(x)
+        vtype = None
   if vtype is None:
     dtype = x.dtype.kind
     try:
@@ -409,7 +421,10 @@ def get_value_labels(x):
   try:
     vlabs = x.sq.value_labels
   except AttributeError:
-    vlabs = None
+    try:
+      vlabs = x.obj.sq.value_labels
+    except AttributeError:
+      vlabs = None
   return vlabs
 
 class TypePromoter:

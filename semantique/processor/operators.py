@@ -7,7 +7,7 @@ from semantique.processor.values import Interval
 from semantique.processor.utils import get_null, null_as_zero
 
 #
-# BOOLEAN UNIVARIATE OPERATORS
+# UNIVARIATE OPERATORS
 #
 
 def not_(x, track_types = True, **kwargs):
@@ -48,6 +48,62 @@ def not_(x, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "not")
     promoter.check()
   f = lambda x: np.where(pd.notnull(x), np.logical_not(x), np.nan)
+  out = xr.apply_ufunc(f, x)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
+def is_missing_(x, track_types = True, **kwargs):
+  """Test if x is a missing observation.
+
+  Missing values can occur because of several reasons:
+
+  * The observed value is removed by the filter verb.
+
+  * The observed value is erroneous.
+
+  * The area of interest spans multiple orbits. In practice this means that
+    the timestamps at which observations where made differ within the area of
+    interest. The time dimensions contains all these timestamps as coordinates.
+    For a single location in space, the time coordinates at which no
+    observation was made are filled with null values (i.e. the observation is
+    marked as "missing").
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Array containing the values to apply the operator to.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      An array with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["is_missing"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, function = "is_missing")
+    promoter.check()
+  f = lambda x: pd.isnull(x)
   out = xr.apply_ufunc(f, x)
   if track_types:
     out = promoter.promote(out)
