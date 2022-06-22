@@ -200,26 +200,14 @@ class Opendatacube(Datacube):
         The retrieved subset of the EO data cube.
 
     """
-    # Get metadata.
+    # Solve the reference by obtaining the corresponding metadata object.
     metadata = self.lookup(*reference)
-    # Create a template array that tells ODC the shape of the requested data.
-    # This is the given extent modified to be correctly understood by ODC:
-    # --> Time dimension values should be in the data cubes native timezone.
-    # --> Spatial dimensions should be unstacked.
-    # --> Class should be `xarray.Dataset` instead of `xarray.DataArray`.
-    # Note that the CRS does not have to be in the data cubes native CRS.
-    # ODC takes care of spatial transformations internally.
-    if extent.sq.spatial_dimension is None:
-      raise exceptions.MissingDimensionError(
-        "Cannot retrieve data in an extent without a spatial dimension"
-      )
-    shape = extent.sq.tz_convert(self.tz).sq.unstack_spatial_dims().to_dataset()
-    # Load data from ODC.
-    data = self._load_data(shape, metadata)
-    # Format data back into the same structure as the given extent.
-    data = self._format_data(data, extent, metadata)
-    # Mask invalid data with nan values.
-    data = self._mask_data(data)
+    # Load the data values from the EO data cube.
+    data = self._load(metadata, extent)
+    # Format loaded data.
+    data = self._format(data, metadata, extent)
+    # Mask invalid data.
+    data = self._mask(data)
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
@@ -229,18 +217,34 @@ class Opendatacube(Datacube):
     # Return only if there is still valid data left.
     if data.sq.is_empty:
       raise exceptions.EmptyDataError(
-        f"Data for product '{metadata['product']}' and "
-        f"measurement '{metadata['name']}' contains only missing data "
-        f"values within the given spatio-temporal extent"
+        f"Data layer '{reference}' does not contain valid data within the "
+        "specified spatio-temporal extent"
       )
     return data
 
-  def _load_data(self, shape, metadata):
+  def _load(self, metadata, extent):
+    # Check if extent is valid.
+    if extent.sq.temporal_dimension is None:
+      raise exceptions.MissingDimensionError(
+        "Cannot retrieve data in an extent without a temporal dimension"
+      )
+    if extent.sq.spatial_dimension is None:
+      raise exceptions.MissingDimensionError(
+        "Cannot retrieve data in an extent without a spatial dimension"
+      )
+    # Create a template for the data to be loaded.
+    # This is the given extent modified to be correctly understood by ODC:
+    # --> Time dimension values should be in the data cubes native timezone.
+    # --> Spatial dimensions should be unstacked.
+    # --> Class should be `xarray.Dataset` instead of `xarray.DataArray`.
+    # Note that the CRS does not have to be in the data cubes native CRS.
+    # ODC takes care of spatial transformations internally.
+    like = extent.sq.tz_convert(self.tz).sq.unstack_spatial_dims().to_dataset()
     # Call ODC load function to load data as xarray dataset.
     data = self.connection.load(
       product = metadata["product"],
       measurements = [metadata["name"]],
-      like = shape,
+      like = like,
       resampling = self.config["resamplers"][metadata["type"]],
       group_by = "solar_day" if self.config["group_by_solar_day"] else None
     )
@@ -249,13 +253,12 @@ class Opendatacube(Datacube):
       data = data[metadata["name"]]
     except KeyError:
       raise exceptions.EmptyDataError(
-        f"Cannot find data for product '{metadata['product']}' and "
-        f"measurement '{metadata['name']}' within the given "
-        f"spatio-temporal extent"
+        f"Data layer '{reference}' does not contain data within the "
+        "specified spatio-temporal extent"
       )
     return data
 
-  def _format_data(self, data, extent, metadata):
+  def _format(self, data, metadata, extent):
     # Step I: Convert time coordinates back into the original timezone.
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
@@ -279,7 +282,7 @@ class Opendatacube(Datacube):
     data["feature"].sq.value_labels = extent["feature"].sq.value_labels
     return data
 
-  def _mask_data(self, data):
+  def _mask(self, data):
     # Step I: Mask nodata values.
     data = masking.mask_invalid_data(data)
     # Step II: Mask values outside of the spatial extent.
@@ -402,31 +405,35 @@ class GeotiffArchive(Datacube):
         The retrieved subset of the EO data cube.
 
     """
-    # Get metadata.
+    # Solve the reference by obtaining the corresponding metadata object.
     metadata = self.lookup(*reference)
     # Load data.
     # This loads all data in the layer into memory (NOT EFFICIENT!).
-    data = self._load_data(metadata)
-    # Take the spatio-temporal subset of all data.
-    data = self._subset_data(data, extent, metadata)
-    # Format data back into the same structure as the given extent.
-    data = self._format_data(data, extent, metadata)
-    # Mask invalid data with nan values.
-    data = self._mask_data(data)
+    data = self._load(metadata)
+    # Subset the loaded data in space and time.
+    data = self._subset(data, metadata, extent)
+    # Format the loaded data.
+    data = self._format(data, metadata, extent)
+    # Mask invalid data.
+    data = self._mask(data)
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
     # See https://github.com/whisperingpixel/iq-factbase/issues/19.
     # TODO: Find a better way to handle this with less memory footprint.
     data = data.astype("float")
-    # Add name.
-    data.name = os.path.splitext(metadata["file"])[0]
+    # Return only if there is still valid data left.
+    if data.sq.is_empty:
+      raise exceptions.EmptyDataError(
+        f"Data layer '{reference}' does not contain valid data within the "
+        "specified spatio-temporal extent"
+      )
     return data
 
-  def _load_data(self, metadata):
+  def _load(self, metadata):
     return rioxarray.open_rasterio("zip://" + self.src + "!" + metadata["file"])
 
-  def _subset_data(self, data, extent, metadata):
+  def _subset(self, data, metadata, extent):
     # Subset temporally.
     if extent.sq.temporal_dimension is None:
       raise exceptions.MissingDimensionError(
@@ -443,13 +450,19 @@ class GeotiffArchive(Datacube):
       raise exceptions.MissingDimensionError(
         "Cannot retrieve data in an extent without a spatial dimension"
       )
-    shape = extent.sq.unstack_spatial_dims()
-    resample_name = self.config["resamplers"][metadata["type"]]
-    resample_func = getattr(rasterio.enums.Resampling, resample_name)
-    data = data.rio.reproject_match(shape, resampling = resample_func)
+    bounds = extent.sq.unstack_spatial_dims()
+    resampler_name = self.config["resamplers"][metadata["type"]]
+    resampler_func = getattr(rasterio.enums.Resampling, resampler_name)
+    data = data.rio.reproject_match(bounds, resampling = resampler_func)
+    # Check if there is still data left after subsetting.
+    if data.sq.is_empty:
+      raise exceptions.EmptyDataError(
+        f"Data layer '{reference}' does not contain data within the "
+        "specified spatio-temporal extent"
+      )
     return data
 
-  def _format_data(self, data, extent, metadata):
+  def _format(self, data, metadata, extent):
     # Step I: Convert time coordinates back into the original timezone.
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
@@ -471,9 +484,11 @@ class GeotiffArchive(Datacube):
     data["time"].sq.value_type = "datetime"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
     data["feature"].sq.value_labels = extent["feature"].sq.value_labels
+    # Step V: Give the array a name.
+    data.name = os.path.splitext(metadata["file"])[0]
     return data
 
-  def _mask_data(self, data):
+  def _mask(self, data):
     # Step I: Mask nodata values.
     data = data.where(data != data.rio.nodata)
     data.rio.write_nodata(data.rio.nodata, encoded = True, inplace = True)
