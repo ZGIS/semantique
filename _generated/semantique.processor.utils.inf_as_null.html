@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.processor.types.TypePromoter" href="semantique.processor.types.TypePromoter.html" />
+    <link rel="next" title="semantique.processor.utils.datetime64_as_unix" href="semantique.processor.utils.datetime64_as_unix.html" />
     <link rel="prev" title="semantique.processor.utils.null_as_zero" href="semantique.processor.utils.null_as_zero.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -657,11 +657,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
     </a>
@@ -679,6 +674,16 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      semantique.processor.utils.inf_as_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.datetime64_as_unix.html">
+     semantique.processor.utils.datetime64_as_unix
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -916,11 +921,11 @@
 <h1>semantique.processor.utils.inf_as_null<a class="headerlink" href="#semantique-processor-utils-inf-as-null" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="semantique.processor.utils.inf_as_null">
-<span class="sig-prename descclassname"><span class="pre">semantique.processor.utils.</span></span><span class="sig-name descname"><span class="pre">inf_as_null</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/utils.py#L81-L94"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.utils.inf_as_null" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert all infinite values in a numpy array to null values.</p>
+<span class="sig-prename descclassname"><span class="pre">semantique.processor.utils.</span></span><span class="sig-name descname"><span class="pre">inf_as_null</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/utils.py#L51-L68"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.utils.inf_as_null" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert all infinite values in an array to null values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.22)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.array</span></code></a>) – The input array.</p>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> or <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.22)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.array</span></code></a>) – The input array.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="(in NumPy v1.22)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.array</span></code></a></p>
@@ -943,10 +948,10 @@
             <p class="prev-next-title">semantique.processor.utils.null_as_zero</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.processor.types.TypePromoter.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.processor.utils.datetime64_as_unix.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.processor.types.TypePromoter</p>
+        <p class="prev-next-title">semantique.processor.utils.datetime64_as_unix</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

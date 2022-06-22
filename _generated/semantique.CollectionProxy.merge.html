@@ -657,11 +657,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
     </a>
@@ -679,6 +674,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.inf_as_null.html">
      semantique.processor.utils.inf_as_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.datetime64_as_unix.html">
+     semantique.processor.utils.datetime64_as_unix
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -916,7 +921,7 @@
 <h1>semantique.CollectionProxy.merge<a class="headerlink" href="#semantique-collectionproxy-merge" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.CollectionProxy.merge">
-<span class="sig-prename descclassname"><span class="pre">CollectionProxy.</span></span><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reducer</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L681-L708"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.CollectionProxy.merge" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CollectionProxy.</span></span><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reducer</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L683-L710"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.CollectionProxy.merge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merge pixel values of multiple arrays into a single value per pixel.</p>
 <p>The values of corresponding pixels (i.e. having the same dimension
 coordinates) are merged by applying a reducer function. See <a href="#id1"><span class="problematic" id="id2">`here`_</span></a> for an

@@ -657,11 +657,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
     </a>
@@ -679,6 +674,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.inf_as_null.html">
      semantique.processor.utils.inf_as_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.datetime64_as_unix.html">
+     semantique.processor.utils.datetime64_as_unix
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -916,7 +921,7 @@
 <h1>semantique.ArrayProxy.assign_space<a class="headerlink" href="#semantique-arrayproxy-assign-space" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.ArrayProxy.assign_space">
-<span class="sig-prename descclassname"><span class="pre">ArrayProxy.</span></span><span class="sig-name descname"><span class="pre">assign_space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L317-L349"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.ArrayProxy.assign_space" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ArrayProxy.</span></span><span class="sig-name descname"><span class="pre">assign_space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L319-L351"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.ArrayProxy.assign_space" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assign spatial coordinates as values to the pixels in an array.</p>
 <p>This verb is a shortcut for first extracting the spatial dimension with
 the <a class="reference internal" href="semantique.ArrayProxy.extract.html#semantique.ArrayProxy.extract" title="semantique.ArrayProxy.extract"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract()</span></code></a> verb (optionally only a specific component of that

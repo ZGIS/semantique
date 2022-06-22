@@ -324,11 +324,12 @@ Utils
    processor.utils.parse_extent
    processor.utils.parse_datetime_component
    processor.utils.parse_coords_component
-   processor.utils.convert_datetime64
    processor.utils.get_null
    processor.utils.allnull
    processor.utils.null_as_zero
    processor.utils.inf_as_null
+   processor.utils.datetime64_as_unix
+   processor.utils.convert_datetime64
 
 Value type handling
 -------------------

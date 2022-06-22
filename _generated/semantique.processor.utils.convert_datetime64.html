@@ -35,8 +35,8 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.processor.utils.get_null" href="semantique.processor.utils.get_null.html" />
-    <link rel="prev" title="semantique.processor.utils.parse_coords_component" href="semantique.processor.utils.parse_coords_component.html" />
+    <link rel="next" title="semantique.processor.types.TypePromoter" href="semantique.processor.types.TypePromoter.html" />
+    <link rel="prev" title="semantique.processor.utils.datetime64_as_unix" href="semantique.processor.utils.datetime64_as_unix.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -656,11 +656,6 @@
      semantique.processor.utils.parse_coords_component
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     semantique.processor.utils.convert_datetime64
-    </a>
-   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
@@ -679,6 +674,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.inf_as_null.html">
      semantique.processor.utils.inf_as_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.utils.datetime64_as_unix.html">
+     semantique.processor.utils.datetime64_as_unix
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -916,7 +921,7 @@
 <h1>semantique.processor.utils.convert_datetime64<a class="headerlink" href="#semantique-processor-utils-convert-datetime64" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="semantique.processor.utils.convert_datetime64">
-<span class="sig-prename descclassname"><span class="pre">semantique.processor.utils.</span></span><span class="sig-name descname"><span class="pre">convert_datetime64</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz_to</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/utils.py#L5-L33"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.utils.convert_datetime64" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">semantique.processor.utils.</span></span><span class="sig-name descname"><span class="pre">convert_datetime64</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz_to</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/utils.py#L92-L120"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.utils.convert_datetime64" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a numpy datetime object to a different timezone.</p>
 <p>Numpy datetime objects do not have native support for timezones anymore.
 Therefore pandas is used to convert between different timezones.</p>
@@ -948,17 +953,17 @@ of any class inheriting from <a class="reference external" href="https://docs.py
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="semantique.processor.utils.parse_coords_component.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="semantique.processor.utils.datetime64_as_unix.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">semantique.processor.utils.parse_coords_component</p>
+            <p class="prev-next-title">semantique.processor.utils.datetime64_as_unix</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.processor.utils.get_null.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.processor.types.TypePromoter.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.processor.utils.get_null</p>
+        <p class="prev-next-title">semantique.processor.types.TypePromoter</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

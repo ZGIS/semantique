@@ -657,11 +657,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
     </a>
@@ -679,6 +674,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.processor.utils.inf_as_null.html">
      semantique.processor.utils.inf_as_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.datetime64_as_unix.html">
+     semantique.processor.utils.datetime64_as_unix
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
+     semantique.processor.utils.convert_datetime64
     </a>
    </li>
    <li class="toctree-l2">
@@ -1690,20 +1695,23 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.parse_coords_component.html#semantique.processor.utils.parse_coords_component" title="semantique.processor.utils.parse_coords_component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.parse_coords_component</span></code></a></p></td>
 <td><p>Parse spatial coordinate arrays.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html#semantique.processor.utils.convert_datetime64" title="semantique.processor.utils.convert_datetime64"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.convert_datetime64</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.get_null.html#semantique.processor.utils.get_null" title="semantique.processor.utils.get_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.get_null</span></code></a></p></td>
+<td><p>Return the appropriate nodata value for an array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.allnull.html#semantique.processor.utils.allnull" title="semantique.processor.utils.allnull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.allnull</span></code></a></p></td>
+<td><p>Test whether all elements along a given axis in an array are null.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.null_as_zero.html#semantique.processor.utils.null_as_zero" title="semantique.processor.utils.null_as_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.null_as_zero</span></code></a></p></td>
+<td><p>Convert all null values in an array to 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.inf_as_null.html#semantique.processor.utils.inf_as_null" title="semantique.processor.utils.inf_as_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.inf_as_null</span></code></a></p></td>
+<td><p>Convert all infinite values in an array to null values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.datetime64_as_unix.html#semantique.processor.utils.datetime64_as_unix" title="semantique.processor.utils.datetime64_as_unix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.datetime64_as_unix</span></code></a></p></td>
+<td><p>Convert datetime64 values in an array to unix time values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html#semantique.processor.utils.convert_datetime64" title="semantique.processor.utils.convert_datetime64"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.convert_datetime64</span></code></a></p></td>
 <td><p>Convert a numpy datetime object to a different timezone.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.get_null.html#semantique.processor.utils.get_null" title="semantique.processor.utils.get_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.get_null</span></code></a></p></td>
-<td><p>Return the appropriate nodata value for a numpy array.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.allnull.html#semantique.processor.utils.allnull" title="semantique.processor.utils.allnull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.allnull</span></code></a></p></td>
-<td><p>Test whether all elements along a given axis in a numpy array are null.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.null_as_zero.html#semantique.processor.utils.null_as_zero" title="semantique.processor.utils.null_as_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.null_as_zero</span></code></a></p></td>
-<td><p>Convert all null values in a numpy array to 0.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.inf_as_null.html#semantique.processor.utils.inf_as_null" title="semantique.processor.utils.inf_as_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.inf_as_null</span></code></a></p></td>
-<td><p>Convert all infinite values in a numpy array to null values.</p></td>
 </tr>
 </tbody>
 </table>
