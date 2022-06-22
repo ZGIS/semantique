@@ -2,6 +2,93 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
+def get_null(x):
+  """Return the appropriate nodata value for an array.
+
+  For arrays of datetime values ``NaT`` is returned. For other arrays ``nan``
+  is returned.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray` or :obj:`numpy.array`
+      The input array.
+
+  """
+  return np.datetime64("NaT") if x.dtype.kind == "M" else np.nan
+
+def allnull(x, axis):
+  """Test whether all elements along a given axis in an array are null.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray` or :obj:`numpy.array`
+      The input array.
+    axis : :obj:`int`
+      Axis along which the tests are performed.
+
+  Return
+  -------
+    :obj:`numpy.array`
+
+  """
+  return np.equal(np.sum(pd.notnull(x), axis = axis), 0)
+
+def null_as_zero(x):
+  """Convert all null values in an array to 0.
+
+  Parameters
+  -----------
+    x : :obj:`xarray.DataArray` or :obj:`numpy.array`
+      The input array.
+
+  Return
+  ------
+    :obj:`numpy.array`
+
+  """
+  return np.where(pd.isnull(x), 0, x)
+
+def inf_as_null(x):
+  """Convert all infinite values in an array to null values.
+
+  Parameters
+  -----------
+    x : :obj:`xarray.DataArray` or :obj:`numpy.array`
+      The input array.
+
+  Return
+  ------
+    :obj:`numpy.array`
+
+  """
+  try:
+    is_inf = np.isinf(x)
+  except TypeError:
+    return x
+  return np.where(is_inf, get_null(x), x)
+
+def datetime64_as_unix(x):
+  """Convert datetime64 values in an array to unix time values.
+
+  Unix time values are the number of seconds since 1970-01-01.
+
+  Parameters
+  -----------
+    x : :obj:`xarray.DataArray` or :obj:`numpy.array`
+      The input array containing :obj:`numpy.datetime64` values.
+
+  Return
+  ------
+    :obj:`numpy.array`
+
+  """
+  if not x.dtype.kind == "M":
+    return x
+  # Type conversion assigns a specific integer to null values.
+  # We want them to be just null.
+  unix = np.array(x).astype("<M8[s]").astype(int)
+  return np.where(pd.notnull(x), unix, np.nan)
+
 def convert_datetime64(obj, tz_from, tz_to, **kwargs):
   """Convert a numpy datetime object to a different timezone.
 
@@ -31,67 +118,6 @@ def convert_datetime64(obj, tz_from, tz_to, **kwargs):
   """
   obj_new = pd.Timestamp(obj).tz_localize(tz_from).tz_convert(tz_to, **kwargs)
   return np.datetime64(obj_new.tz_localize(None))
-
-def get_null(x):
-  """Return the appropriate nodata value for a numpy array.
-
-  For arrays of datetime values ``NaT`` is returned. For other arrays ``nan``
-  is returned.
-
-  Parameters
-  ----------
-    x : :obj:`numpy.array`
-      The input array.
-
-  """
-  return np.datetime64("NaT") if x.dtype.kind == "M" else np.nan
-
-def allnull(x, axis):
-  """Test whether all elements along a given axis in a numpy array are null.
-
-  Parameters
-  ----------
-    x : :obj:`numpy.array`
-      The input array.
-    axis : :obj:`int`
-      Axis along which the tests are performed.
-
-  Return
-  -------
-    :obj:`numpy.array`
-
-  """
-  return np.equal(np.sum(pd.notnull(x), axis = axis), 0)
-
-def null_as_zero(x):
-  """Convert all null values in a numpy array to 0.
-
-  Parameters
-  -----------
-    x : :obj:`numpy.array`
-      The input array.
-
-  Return
-  ------
-    :obj:`numpy.array`
-
-  """
-  return np.where(pd.isnull(x), 0, x)
-
-def inf_as_null(x):
-  """Convert all infinite values in a numpy array to null values.
-
-  Parameters
-  -----------
-    x : :obj:`numpy.array`
-      The input array.
-
-  Return
-  ------
-    :obj:`numpy.array`
-
-  """
-  return np.where(np.isinf(x), np.nan, x)
 
 def parse_extent(spatial_extent, temporal_extent, spatial_resolution,
                  temporal_resolution = None, crs = None, tz = None, trim = True):

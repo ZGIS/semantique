@@ -1033,26 +1033,41 @@ class SemanticArray():
 
     Raises
     ------
+      :obj:`exceptions.InvalidValueTypeError`
+        If the value type of the array is not supported by the GeoTIFF exporter.
       :obj:`exceptions.TooManyDimensionsError`
         If the array has more than three dimensions, including the two unstacked
         spatial dimensions. More than three dimensions is currently not
         supported by the export functionality of rasterio.
 
     """
+    # Get array to export.
     obj = self.unstack_spatial_dims()
+    # Initialize GDAL configuration parameters.
+    config = {}
     # Remove non-dimension coordinates but not 'spatial_ref'.
     # That one is needed by rioxarray to determine the CRS of the data.
     obj = obj.sq.drop_non_dimension_coords(keep = ["spatial_ref"])
     # Reproject data if requested.
     if output_crs is not None:
       obj = obj.rio.reproject(output_crs)
-    # Initialize GDAL configuration parameters.
-    config = {}
+    # Many GeoTIFF visualizers cannot handle Inf values.
+    # Therefore we convert all Inf values to NaN values.
+    obj.values = utils.inf_as_null(obj)
+    # The GeoTIFF exporter cannot handle datetime values.
+    # Therefore we convert all datetime values to numeric values (unix time).
+    obj.values = utils.datetime64_as_unix(obj)
     # GDAL has limited support for numpy dtypes.
     # Therefore dtype conversion might be needed in some cases.
     dtype = obj.dtype
     if not rasterio.dtypes.check_dtype(dtype):
-      dtype = rasterio.dtypes.get_minimum_dtype(obj)
+      try:
+        dtype = rasterio.dtypes.get_minimum_dtype(obj)
+      except TypeError:
+        vtype = obj.sq.value_type
+        raise exceptions.InvalidValueTypeError(
+          f"GeoTIFF exporter has no support for value type '{vtype}'"
+        )
     config["dtype"] = dtype
     # GDAL support COG export only since version 3.1.
     if cloud_optimized:
