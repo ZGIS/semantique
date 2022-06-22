@@ -926,16 +926,16 @@
 <p>This simple EO data cube configuration assumes each data layer is a GeoTIFF
 file, and that all layers together are bundled in a ZIP archive. It is meant
 for demonstration purposes.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>layout</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>) – The layout file describing the EO data cube. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, an empty
 EO data cube is constructed.</p></li>
 <li><p><strong>src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Path to the ZIP archive containing the data layers.</p></li>
 <li><p><strong>tz</strong> – Timezone of the temporal coordinates in the EO data cube. Can be given as
 <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> referring to the name of a timezone in the tz database, or
 as instance of any class inheriting from <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.tzinfo" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.tzinfo</span></code></a>.</p></li>
-<li><p><strong>**config</strong> – Additional keyword arguments tuning the data retrieval configuration.
+<li><p><strong>**config</strong> – <p>Additional keyword arguments tuning the data retrieval configuration.
 Valid options are:</p>
 <ul>
 <li><p><strong>value_type_mapping</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>): How do value type encodings in
@@ -959,7 +959,7 @@ type in the layout file. Valid techniques are:</p>
 </div>
 </li>
 </ul>
-</li>
+</p></li>
 </ul>
 </dd>
 </dl>

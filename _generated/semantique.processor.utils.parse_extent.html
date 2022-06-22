@@ -943,21 +943,21 @@ negative number.</p></li>
 defined in pandas, e.g. “D” for a daily frequency. These aliases can
 have multiples, e.g. “5D”. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, only the start and end
 instants of the extent will be temporal coordinates in the array.</p></li>
-<li><p><strong>crs</strong> (<strong>optional</strong>) – Coordinate reference system in which the spatial coordinates of the array
+<li><p><strong>crs</strong> (<em>optional</em>) – Coordinate reference system in which the spatial coordinates of the array
 should be expressed. Can be given as any object understood by the
 initializer of <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/api/crs/crs.html#pyproj.crs.CRS" title="(in pyproj v3.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyproj.crs.CRS</span></code></a>. This includes
 <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/api/crs/crs.html#pyproj.crs.CRS" title="(in pyproj v3.3.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyproj.crs.CRS</span></code></a> objects themselves, as well as EPSG codes and WKT
 strings. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, the CRS of the provided spatial extent is used.</p></li>
-<li><p><strong>tz</strong> (<strong>optional</strong>) – Timezone in which the temporal coordinates of the array should be
+<li><p><strong>tz</strong> (<em>optional</em>) – Timezone in which the temporal coordinates of the array should be
 expressed. Can be given as <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> referring to the name of a time
 zone in the tz database, or as instance of any class inheriting from
 <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.tzinfo" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.tzinfo</span></code></a>. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, the timezone of the provided
 temporal extent is used.</p></li>
-<li><p><strong>trim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the array be trimmed before returning? Trimming means that all
-coordinates for which all values are null, are dropped from the array.
-The spatial dimension (if present) is treated differently, by trimming
-it only at the edges, and thus maintaining the regularity of the spatial
-dimension.</p></li>
+<li><p><strong>trim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the array be trimmed before returning?
+Trimming means that dimension coordinates for which all values are
+missing are removed from the array. The spatial dimension is treated
+differently, by trimming it only at the edges, and thus maintaining
+its regularity.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

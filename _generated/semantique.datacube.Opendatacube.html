@@ -925,21 +925,21 @@
 <dd><p>Opendatacube specific EO data cube configuration.</p>
 <p>This class is an interface to Opendatacube backends. See the
 <a class="reference external" href="https://datacube-core.readthedocs.io/en/latest/index.html">Opendatacube manual</a> for details.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>layout</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>) – The layout file describing the EO data cube. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, an empty
 EO data cube is constructed.</p></li>
 <li><p><strong>connection</strong> (<a class="reference external" href="https://datacube-core.readthedocs.io/en/latest/api/core-classes/datacube.html#datacube.Datacube" title="(in Open Data Cube v1.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datacube.Datacube</span></code></a>) – Opendatacube interface object allowing to read from the data cube.</p></li>
 <li><p><strong>tz</strong> – Timezone of the temporal coordinates in the EO data cube. Can be given as
 <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> referring to the name of a timezone in the tz database, or
 as instance of any class inheriting from <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.tzinfo" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.tzinfo</span></code></a>.</p></li>
-<li><p><strong>**config</strong> – Additional keyword arguments tuning the data retrieval configuration.
+<li><p><strong>**config</strong> – <p>Additional keyword arguments tuning the data retrieval configuration.
 Valid options are:</p>
 <ul>
 <li><p><strong>group_by_solar_day</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>): Should the time dimension be
 resampled to the day level, using solar day to keep scenes together?
-Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
 <li><p><strong>value_type_mapping</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>): How do value type encodings in
 the metadata objects map to the value types used by semantique?
 Defaults to:</p>
@@ -961,7 +961,7 @@ type in the layout file. Valid techniques are:</p>
 </div>
 </li>
 </ul>
-</li>
+</p></li>
 </ul>
 </dd>
 </dl>

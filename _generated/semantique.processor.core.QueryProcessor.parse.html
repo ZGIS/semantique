@@ -926,13 +926,14 @@ converted all together into a single object which will be used internally
 for further processing of the query. Hence, query parsing takes care of
 initializing a <a class="reference internal" href="semantique.processor.core.QueryProcessor.html#semantique.processor.core.QueryProcessor" title="semantique.processor.core.QueryProcessor"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryProcessor</span></code></a> instance. It also rasterizes the
 given spatial extent and combines it with the temporal extent into a single
-spatio-temporal array (see <a class="reference internal" href="semantique.processor.utils.parse_extent.html#semantique.processor.utils.parse_extent" title="semantique.processor.utils.parse_extent"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_extent</span></code></a>).</p>
+spatio-temporal array (see <code class="xref py py-func docutils literal notranslate"><span class="pre">parse_extent()</span></code>
+&lt;semantique.processor.utils.parse_extent&gt;`).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>recipe</strong> (<a class="reference internal" href="semantique.QueryRecipe.html#semantique.QueryRecipe" title="semantique.QueryRecipe"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryRecipe</span></code></a>) – The query recipe to be processed.</p></li>
-<li><p><strong>datacube</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Datacube</span></code>) – The datacube instance to process the query against.</p></li>
-<li><p><strong>mapping</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>) – The mapping instance to process the query against.</p></li>
+<li><p><strong>datacube</strong> (<a class="reference internal" href="semantique.datacube.Datacube.html#semantique.datacube.Datacube" title="semantique.datacube.Datacube"><code class="xref py py-class docutils literal notranslate"><span class="pre">Datacube</span></code></a>) – The datacube instance to process the query against.</p></li>
+<li><p><strong>mapping</strong> (<a class="reference internal" href="semantique.mapping.Mapping.html#semantique.mapping.Mapping" title="semantique.mapping.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>) – The mapping instance to process the query against.</p></li>
 <li><p><strong>space</strong> (<a class="reference internal" href="semantique.extent.SpatialExtent.html#semantique.extent.SpatialExtent" title="semantique.extent.SpatialExtent"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpatialExtent</span></code></a>) – The spatial extent in which the query should be processed.</p></li>
 <li><p><strong>time</strong> (<a class="reference internal" href="semantique.extent.TemporalExtent.html#semantique.extent.TemporalExtent" title="semantique.extent.TemporalExtent"><code class="xref py py-class docutils literal notranslate"><span class="pre">TemporalExtent</span></code></a>) – The temporal extent in which the query should be processed.</p></li>
 <li><p><strong>spatial_resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a>) – Spatial resolution in which the query should be processed. Should be
@@ -942,12 +943,12 @@ the y-axis, x is the cell size along the x-axis, and both are given as
 These values should include the direction of the axes. For most CRSs,
 the y-axis has a negative direction, and hence the cell size along the
 y-axis is given as a negative number.</p></li>
-<li><p><strong>crs</strong> (<strong>optional</strong>) – Spatial coordinate reference system in which the query should be
+<li><p><strong>crs</strong> (<em>optional</em>) – Spatial coordinate reference system in which the query should be
 processed. Can be given as any object understood by the initializer of
 <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/api/crs/crs.html#pyproj.crs.CRS" title="(in pyproj v3.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyproj.crs.CRS</span></code></a>. This includes <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/api/crs/crs.html#pyproj.crs.CRS" title="(in pyproj v3.3.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyproj.crs.CRS</span></code></a> objects
 themselves, as well as EPSG codes and WKT strings. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, the
 CRS of the provided spatial extent is used.</p></li>
-<li><p><strong>tz</strong> (<strong>optional</strong>) – Time zone in which the query should be processed. Can be given as
+<li><p><strong>tz</strong> (<em>optional</em>) – Time zone in which the query should be processed. Can be given as
 <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> referring to the name of a time zone in the tz database, or
 as instance of any class inheriting from <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.tzinfo" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.tzinfo</span></code></a>. If
 <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, the timezone of the provided temporal extent is used.</p></li>

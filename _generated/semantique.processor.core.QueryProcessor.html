@@ -927,8 +927,8 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>recipe</strong> (<a class="reference internal" href="semantique.QueryRecipe.html#semantique.QueryRecipe" title="semantique.QueryRecipe"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryRecipe</span></code></a>) – The query recipe to be processed.</p></li>
-<li><p><strong>datacube</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Datacube</span></code>) – The datacube instance to process the query against.</p></li>
-<li><p><strong>mapping</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>) – The mapping instance to process the query against.</p></li>
+<li><p><strong>datacube</strong> (<a class="reference internal" href="semantique.datacube.Datacube.html#semantique.datacube.Datacube" title="semantique.datacube.Datacube"><code class="xref py py-class docutils literal notranslate"><span class="pre">Datacube</span></code></a>) – The datacube instance to process the query against.</p></li>
+<li><p><strong>mapping</strong> (<a class="reference internal" href="semantique.mapping.Mapping.html#semantique.mapping.Mapping" title="semantique.mapping.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>) – The mapping instance to process the query against.</p></li>
 <li><p><strong>extent</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – The spatio-temporal extent in which the query should be processed. Should
 be given as an array with a temporal dimension as well as a stacked
 spatial dimension, such as returned by
@@ -949,15 +949,15 @@ when applying processes, and promote them if necessary? Keeping track of
 value types also means throwing errors whenever a value type is not
 supported by a specific process.</p></li>
 <li><p><strong>trim_filter</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should arrays be trimmed after a filter verb is applied to them?
-Trimming means that all coordinates for which all values are nodata, are
-dropped from the array. The spatial dimension (if present) is treated
-differently, by trimming it only at the edges, and thus maintaining the
-regularity of the spatial dimension.</p></li>
+Trimming means that dimension coordinates for which all values are
+missing are removed from the array. The spatial dimension is treated
+differently, by trimming it only at the edges, and thus maintaining
+its regularity.</p></li>
 <li><p><strong>trim_results</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should result arrays be trimmed before returning the response?
-Trimming means that all coordinates for which all values are nodata, are
-dropped from the array. The spatial dimension (if present) is treated
-differently, by trimming it only at the edges, and thus maintaining the
-regularity of the spatial dimension.</p></li>
+Trimming means that dimension coordinates for which all values are
+missing are removed from the array. The spatial dimension is treated
+differently, by trimming it only at the edges, and thus maintaining
+its regularity.</p></li>
 <li><p><strong>unstack_results</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the spatial dimension (if present) in result arrays be
 unstacked into respectively the separate x and y dimensions before
 returning the response?</p></li>

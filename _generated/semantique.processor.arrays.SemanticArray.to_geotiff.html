@@ -929,9 +929,9 @@
 regular GeoTIFF? Ignored when a GDAL version &lt; 3.1 is used. These GDAL
 versions do not have a COG driver, and the written GeoTIFF will always
 be a regular GeoTIFF.</p></li>
-<li><p><strong>compress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the written file be compressed? If <code class="docutils literal notranslate"><span class="pre">True</span></code>, LZW compression is
-used.</p></li>
-<li><p><strong>output_crs</strong> (<strong>optional</strong>) – Spatial coordinate reference system of the written GeoTIFF. Can be
+<li><p><strong>compress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the written file be compressed? If <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>, LZW compression
+is used.</p></li>
+<li><p><strong>output_crs</strong> (<em>optional</em>) – Spatial coordinate reference system of the written GeoTIFF. Can be
 given as any object understood by the initializer of
 <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/api/crs/crs.html#pyproj.crs.CRS" title="(in pyproj v3.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyproj.crs.CRS</span></code></a>. This includes <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/api/crs/crs.html#pyproj.crs.CRS" title="(in pyproj v3.3.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyproj.crs.CRS</span></code></a> objects
 themselves, as well as EPSG codes and WKT strings. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, the
