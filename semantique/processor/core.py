@@ -53,16 +53,16 @@ class QueryProcessor():
       supported by a specific process.
     trim_filter : :obj:`bool`
       Should arrays be trimmed after a filter verb is applied to them?
-      Trimming means that all coordinates for which all values are nodata, are
-      dropped from the array. The spatial dimension (if present) is treated
-      differently, by trimming it only at the edges, and thus maintaining the
-      regularity of the spatial dimension.
+      Trimming means that dimension coordinates for which all values are
+      missing are removed from the array. The spatial dimension is treated
+      differently, by trimming it only at the edges, and thus maintaining
+      its regularity.
     trim_results : :obj:`bool`
       Should result arrays be trimmed before returning the response?
-      Trimming means that all coordinates for which all values are nodata, are
-      dropped from the array. The spatial dimension (if present) is treated
-      differently, by trimming it only at the edges, and thus maintaining the
-      regularity of the spatial dimension.
+      Trimming means that dimension coordinates for which all values are
+      missing are removed from the array. The spatial dimension is treated
+      differently, by trimming it only at the edges, and thus maintaining
+      its regularity.
     unstack_results : :obj:`bool`
       Should the spatial dimension (if present) in result arrays be
       unstacked into respectively the separate x and y dimensions before
@@ -224,7 +224,7 @@ class QueryProcessor():
     for further processing of the query. Hence, query parsing takes care of
     initializing a :class:`QueryProcessor` instance. It also rasterizes the
     given spatial extent and combines it with the temporal extent into a single
-    spatio-temporal array (see :func:`parse_extent
+    spatio-temporal array (see :func:`parse_extent`
     <semantique.processor.utils.parse_extent>`).
 
     Parameters
@@ -390,7 +390,7 @@ class QueryProcessor():
 
     Returns
     --------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or :obj:`Collection`
         The processed building block.
 
     Raises

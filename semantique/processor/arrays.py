@@ -630,14 +630,14 @@ class SemanticArray():
   def trim(self, force_regular = True):
     """Trim the dimensions of the array.
 
-    Trimming means that all coordinates for which all values are nodata, are
-    dropped from the array.
+    Trimming means that all dimension coordinates for which all values are
+    missing are removed from the array.
 
     Parameters
     ----------
       force_regular : :obj:`bool`
         If spatial dimensions are present, should the regularity of these
-        dimensions be preserved? If ``True`` the spatial dimensions are
+        dimensions be preserved? If :obj:`True` the spatial dimensions are
         trimmed only at their edges.
 
     Returns
@@ -845,7 +845,7 @@ class SemanticArray():
     --------
       :obj:`list` of :obj:`str`
         The names of respectively the spatial X and Y dimension. If they could
-        not be found, ``None`` is returned.
+        not be found, :obj:`None` is returned.
 
     """
     candidates = [
@@ -1017,8 +1017,8 @@ class SemanticArray():
         versions do not have a COG driver, and the written GeoTIFF will always
         be a regular GeoTIFF.
       compress : :obj:`bool`
-        Should the written file be compressed? If ``True``, LZW compression is
-        used.
+        Should the written file be compressed? If :obj:`True`, LZW compression
+        is used.
       output_crs : optional
         Spatial coordinate reference system of the written GeoTIFF. Can be
         given as any object understood by the initializer of

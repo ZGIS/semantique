@@ -160,11 +160,11 @@ def parse_extent(spatial_extent, temporal_extent, spatial_resolution,
       :class:`datetime.tzinfo`. If :obj:`None`, the timezone of the provided
       temporal extent is used.
     trim : :obj:`bool`
-      Should the array be trimmed before returning? Trimming means that all
-      coordinates for which all values are null, are dropped from the array.
-      The spatial dimension (if present) is treated differently, by trimming
-      it only at the edges, and thus maintaining the regularity of the spatial
-      dimension.
+      Should the array be trimmed before returning?
+      Trimming means that dimension coordinates for which all values are
+      missing are removed from the array. The spatial dimension is treated
+      differently, by trimming it only at the edges, and thus maintaining
+      its regularity.
 
   Returns
   -------

@@ -100,7 +100,7 @@ class Opendatacube(Datacube):
 
       * **group_by_solar_day** (:obj:`bool`): Should the time dimension be
         resampled to the day level, using solar day to keep scenes together?
-        Defaults to ``True``.
+        Defaults to :obj:`True`.
 
       * **value_type_mapping** (:obj:`dict`): How do value type encodings in
         the metadata objects map to the value types used by semantique?

@@ -81,7 +81,7 @@ class ArrayProxy(dict):
         Ignored when the operator is univariate.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.evaluate> <processor.arrays.SemanticArray.evaluate>>`.
+        :meth:`SemanticArray.evaluate> <processor.arrays.SemanticArray.evaluate>`.
 
     Returns
     --------
@@ -114,7 +114,7 @@ class ArrayProxy(dict):
         coordinates.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.extract <processor.arrays.SemanticArray.extract>`.
+        :meth:`SemanticArray.extract <processor.arrays.SemanticArray.extract>`.
 
     Returns
     --------
@@ -149,7 +149,7 @@ class ArrayProxy(dict):
         input.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.filter <processor.arrays.SemanticArray.filter>`.
+        :meth:`SemanticArray.filter <processor.arrays.SemanticArray.filter>`.
 
     Returns
     --------
@@ -186,7 +186,7 @@ class ArrayProxy(dict):
         side operand to be used in the expression.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.filter <processor.arrays.SemanticArray.filter>`.
+        :meth:`SemanticArray.filter <processor.arrays.SemanticArray.filter>`.
 
     Returns
     --------
@@ -226,7 +226,7 @@ class ArrayProxy(dict):
         side operand to be used in the expression.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.filter <processor.arrays.SemanticArray.filter>`.
+        :meth:`SemanticArray.filter <processor.arrays.SemanticArray.filter>`.
 
     Returns
     --------
@@ -264,7 +264,7 @@ class ArrayProxy(dict):
         input.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.assign <processor.arrays.SemanticArray.assign>`.
+        :meth:`SemanticArray.assign <processor.arrays.SemanticArray.assign>`.
 
     Returns
     --------
@@ -298,7 +298,7 @@ class ArrayProxy(dict):
         be extracted, e.g. *year*, *month* or *day*.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.assign <processor.arrays.SemanticArray.assign>`.
+        :meth:`SemanticArray.assign <processor.arrays.SemanticArray.assign>`.
 
     Returns
     --------
@@ -332,7 +332,7 @@ class ArrayProxy(dict):
         be extracted, e.g. *feature*.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.assign <processor.arrays.SemanticArray.assign>`.
+        :meth:`SemanticArray.assign <processor.arrays.SemanticArray.assign>`.
 
     Returns
     --------
@@ -367,7 +367,7 @@ class ArrayProxy(dict):
         corresponds to a group.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.groupby <processor.arrays.SemanticArray.groupby>`.
+        :meth:`SemanticArray.groupby <processor.arrays.SemanticArray.groupby>`.
 
     Returns
     --------
@@ -399,7 +399,7 @@ class ArrayProxy(dict):
         multiple groupers.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.groupby <processor.arrays.SemanticArray.groupby>`.
+        :meth:`SemanticArray.groupby <processor.arrays.SemanticArray.groupby>`.
 
     Returns
     --------
@@ -436,7 +436,7 @@ class ArrayProxy(dict):
         components, in case the groups should be defined by multiple groupers.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.groupby <processor.arrays.SemanticArray.groupby>`.
+        :meth:`SemanticArray.groupby <processor.arrays.SemanticArray.groupby>`.
 
     Returns
     --------
@@ -476,7 +476,7 @@ class ArrayProxy(dict):
         Name of the reducer function to be applied.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.reduce <processor.arrays.SemanticArray.reduce>`.
+        :meth:`SemanticArray.reduce <processor.arrays.SemanticArray.reduce>`.
 
     Returns
     --------
@@ -509,7 +509,7 @@ class ArrayProxy(dict):
         a shift to the right.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.shift <processor.arrays.SemanticArray.shift>`.
+        :meth:`SemanticArray.shift <processor.arrays.SemanticArray.shift>`.
 
     Returns
     --------
@@ -551,7 +551,7 @@ class ArrayProxy(dict):
         middle.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.smooth <processor.arrays.SemanticArray.smooth>`.
+        :meth:`SemanticArray.smooth <processor.arrays.SemanticArray.smooth>`.
 
     Returns
     --------
@@ -579,7 +579,7 @@ class ArrayProxy(dict):
         Name to be given to the input.
       **kwargs:
         Additional keyword arguments passed on to
-        :obj:`SemanticArray.name <processor.arrays.SemanticArray.name>`.
+        :meth:`SemanticArray.name <processor.arrays.SemanticArray.name>`.
 
     Returns
     --------
@@ -704,6 +704,9 @@ class CollectionProxy(dict):
     --------
     >>> import semantique as sq
     >>> sq.collection(sq.entity("water"), sq.entity("ice")).merge("or")
+
+    .. _here:
+      https://zgis.github.io/semantique/reference.html#reducer-functions
 
     """
     kwargs.update({"reducer": reducer})

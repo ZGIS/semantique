@@ -394,7 +394,7 @@ def get_value_type(x):
   -------
     :obj:`str`
       The determined value type. If no value type could be determined for the
-      given object, the function will return ``None``.
+      given object, the function will return :obj:`None`.
 
   .. _numpy dtype:
     https://numpy.org/doc/stable/reference/arrays.dtypes.html
@@ -437,7 +437,7 @@ def get_value_labels(x):
     :obj:`dict`
       The obtained value labels as a dictionary containing value-label pairs.
       If the object does not have value labels stored, the function will return
-      ``None``.
+      :obj:`None`.
 
   """
   try:
@@ -470,7 +470,7 @@ class TypePromoter:
     function : :obj:`str`, optional
       Name of the operation.
     manual : :obj:`dict`, optional
-      Type promotion manual of the operation. If ``None``, the worker will try
+      Type promotion manual of the operation. If :obj:`None`, the worker will try
       to obtain the manual from the built-in :data:`TYPE_PROMOTION_MANUALS`
       dictionary, using the operation name (see the ``function`` parameter) as
       search key.
