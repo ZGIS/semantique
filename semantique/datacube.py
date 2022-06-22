@@ -281,10 +281,9 @@ class Opendatacube(Datacube):
 
   def _mask_data(self, data):
     # Step I: Mask nodata values.
-    # What is considered 'nodata' is defined in the datacubes metadata.
     data = masking.mask_invalid_data(data)
     # Step II: Mask values outside of the spatial extent.
-    # This is needed since ODC loads data for the bbox of the extent.
+    # This is needed since data are initially loaded the bbox of the extent.
     data = data.where(data["feature"].notnull())
     return data
 
@@ -406,11 +405,14 @@ class GeotiffArchive(Datacube):
     # Get metadata.
     metadata = self.lookup(*reference)
     # Load data.
+    # This loads all data in the layer into memory (NOT EFFICIENT!).
     data = self._load_data(metadata)
-    # Take a spatio-temporal subset of the data.
+    # Take the spatio-temporal subset of all data.
     data = self._subset_data(data, extent, metadata)
     # Format data back into the same structure as the given extent.
     data = self._format_data(data, extent, metadata)
+    # Mask invalid data with nan values.
+    data = self._mask_data(data)
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
@@ -469,4 +471,13 @@ class GeotiffArchive(Datacube):
     data["time"].sq.value_type = "datetime"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
     data["feature"].sq.value_labels = extent["feature"].sq.value_labels
+    return data
+
+  def _mask_data(self, data):
+    # Step I: Mask nodata values.
+    data = data.where(data != data.rio.nodata)
+    data.rio.write_nodata(data.rio.nodata, encoded = True, inplace = True)
+    # Step II: Mask values outside of the spatial extent.
+    # This is needed since data are initially loaded the bbox of the extent.
+    data = data.where(data["feature"].notnull())
     return data
