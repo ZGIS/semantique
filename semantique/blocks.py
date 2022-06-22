@@ -23,6 +23,8 @@ def _parse_filter_expression(*args):
 def _parse_second_operand(x):
   if isinstance(x, (list, tuple, builtins.set)):
     out = set(x) # Note this is the def of set in this module, not built-in.
+  else:
+    out = x
   return out
 
 class ArrayProxy(dict):
