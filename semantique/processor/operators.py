@@ -1086,8 +1086,8 @@ def in_(x, y, track_types = True, **kwargs):
     promoter.check()
   def f(x, y):
     if isinstance(y, Interval):
-      a = np.greater_equal(x, y.start)
-      b = np.less_equal(x, y.end)
+      a = np.greater_equal(x, y.lower)
+      b = np.less_equal(x, y.upper)
       return np.where(pd.notnull(x), np.logical_and(a, b), np.nan)
     else:
       return np.where(pd.notnull(x), np.isin(x, y), np.nan)
@@ -1195,8 +1195,8 @@ def not_in_(x, y, track_types = True, **kwargs):
     promoter.check()
   def f(x, y):
     if isinstance(y, Interval):
-      a = np.less(x, y.start)
-      b = np.greater(x, y.end)
+      a = np.less(x, y.lower)
+      b = np.greater(x, y.upper)
       return np.where(pd.notnull(x), np.logical_or(a, b), np.nan)
     else:
       return np.where(pd.notnull(x), np.isin(x, y, invert = True), np.nan)

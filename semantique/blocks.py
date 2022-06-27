@@ -22,7 +22,7 @@ def _parse_filter_expression(*args):
 
 def _parse_second_operand(x):
   if isinstance(x, (list, tuple, builtins.set)):
-    out = set(x) # Note this is the def of set in this module, not built-in.
+    out = set(*x) # Note this is the def of set in this module, not built-in.
   else:
     out = x
   return out
@@ -591,7 +591,7 @@ class ArrayProxy(dict):
     >>> sq.entity("water").name("foo")
 
     """
-    kwargs.update({"name": name})
+    kwargs.update({"value": name})
     return self._append_verb("name", **kwargs)
 
 class CollectionProxy(dict):
@@ -1212,7 +1212,7 @@ def set(*members):
   >>> sq.set(21, 22, 23, 24)
 
   """
-  obj = {"type": "set", "content": list(builtins.set(members))}
+  obj = {"type": "set", "content": list(members)}
   return obj
 
 def interval(a, b):

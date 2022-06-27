@@ -133,8 +133,8 @@ class SemanticArray():
     if spatial_dim is None:
       return None
     coords = self.extract(spatial_dim).unstack()
-    xcoords = coords[coords.dims[1]]
-    ycoords = coords[coords.dims[0]]
+    xcoords = self._obj[spatial_dim][coords.dims[1]]
+    ycoords = self._obj[spatial_dim][coords.dims[0]]
     # Return grid points as geometries.
     points = gpd.points_from_xy(xcoords, ycoords)
     return gpd.GeoSeries(points, crs = self.crs)
@@ -554,14 +554,14 @@ class SemanticArray():
       out[dimension].sq.value_type = "coords"
     return out
 
-  def name(self, name, **kwargs):
+  def name(self, value, **kwargs):
     """Apply the name verb to the array.
 
     The name verb assigns a name to an array.
 
     Parameters
     -----------
-      name : :obj:`str`
+      value : :obj:`str`
         Character sting to be assigned as name to the input array.
       **kwargs:
         Ignored.
@@ -571,7 +571,7 @@ class SemanticArray():
       :obj:`xarray.DataArray`
 
     """
-    out = self._obj.rename(name)
+    out = self._obj.rename(value)
     return out
 
   def align_with(self, other):
@@ -1398,7 +1398,7 @@ class Collection(list):
     out[:] = [x.sq.smooth(*args, **kwargs) for x in out]
     return out
 
-  def name(self, name, **kwargs):
+  def name(self, value, **kwargs):
     """Apply the name verb to all arrays in the collection.
 
     See :meth:`SemanticArray.name`
@@ -1409,7 +1409,7 @@ class Collection(list):
 
     """
     out = copy.deepcopy(self)
-    out[:] = [x.sq.name(name, **kwargs) for x in out]
+    out[:] = [x.sq.name(value, **kwargs) for x in out]
     return out
 
   def trim(self, force_regular = True):
