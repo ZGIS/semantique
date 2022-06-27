@@ -923,12 +923,12 @@
 <dd><p>Discretize the temporal extent into an array.</p>
 <p>Discretizing the temporal extent creates a one-dimensional regular grid
 that covers the entire temporal extent. Each grid cell corresponds to a
-single time instant within this extent, and gets the <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.datetime64" title="(in NumPy v1.22)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.datetime64</span></code></a>
+single time instant within this extent, and gets the <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.datetime64" title="(in NumPy v1.23)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.datetime64</span></code></a>
 object belonging to that instant assigned as value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.tseries.offsets.DateOffset.html#pandas.tseries.offsets.DateOffset" title="(in pandas v1.4.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.tseries.offsets.DateOffset</span></code></a>) – Temporal resolution of the grid. Can be given as offset alias as
+<li><p><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.tseries.offsets.DateOffset.html#pandas.tseries.offsets.DateOffset" title="(in pandas v1.4.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.tseries.offsets.DateOffset</span></code></a>) – Temporal resolution of the grid. Can be given as offset alias as
 defined in <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html">pandas</a>, e.g. “D” for a daily frequency. These aliases can
 have multiples, e.g. “5D”. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, only the bounds of the
 extent will be coordinates in the grid.</p></li>
