@@ -569,13 +569,12 @@ class ArrayProxy(dict):
     kwargs.update({"dimension": dimension, "reducer": reducer, "size": size})
     return self._append_verb("smooth", **kwargs)
 
-
-  def name(self, name, **kwargs):
+  def name(self, value, **kwargs):
     """Give a name to an array.
 
     Parameters
     -----------
-      name : :obj:`str`
+      value : :obj:`str`
         Name to be given to the input.
       **kwargs:
         Additional keyword arguments passed on to
@@ -591,7 +590,7 @@ class ArrayProxy(dict):
     >>> sq.entity("water").name("foo")
 
     """
-    kwargs.update({"value": name})
+    kwargs.update({"value": value})
     return self._append_verb("name", **kwargs)
 
 class CollectionProxy(dict):
