@@ -361,21 +361,16 @@ class QueryProcessor():
     # Trim result arrays if requested.
     # This means we drop all coordinates for which all values are nan.
     if self._trim_results:
-      def trim(obj):
-        out = obj.sq.trim()
-        logger.debug(f"Trimmed result '{out.name}':\n{out}")
-        return out
+      trim = lambda x: x.sq.trim()
       self._response = {k: trim(v) for k, v in self._response.items()}
     # Unstack spatial dimensions if requested.
     if self._unstack_results:
-      def unstack(obj):
-        out = obj.sq.unstack_spatial_dims()
-        logger.debug(f"Unstacked result '{out.name}':\n{out}")
-        return out
+      unstack = lambda x: x.sq.unstack_spatial_dims()
       self._response = {k: unstack(v) for k, v in self._response.items()}
     # Return.
     out = self._response
     logger.info("Finished preparing response")
+    logger.debug(f"Responding:\n{out}")
     return out
 
   def call_handler(self, block, key = "type"):
