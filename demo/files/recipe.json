@@ -1,5 +1,5 @@
 {
-  "water_map": {
+  "blue_map": {
     "type": "processing_chain",
     "with": {
       "type": "concept",
@@ -19,7 +19,7 @@
       }
     ]
   },
-  "vegetation_map": {
+  "green_map": {
     "type": "processing_chain",
     "with": {
       "type": "concept",
@@ -39,7 +39,7 @@
       }
     ]
   },
-  "water_time_series": {
+  "blue_curve": {
     "type": "processing_chain",
     "with": {
       "type": "concept",
@@ -54,12 +54,32 @@
         "name": "reduce",
         "params": {
           "dimension": "space",
-          "reducer": "percentage"
+          "reducer": "count"
         }
       }
     ]
   },
-  "avg_water_count": {
+  "green_curve": {
+    "type": "processing_chain",
+    "with": {
+      "type": "concept",
+      "reference": [
+        "entity",
+        "vegetation"
+      ]
+    },
+    "do": [
+      {
+        "type": "verb",
+        "name": "reduce",
+        "params": {
+          "dimension": "space",
+          "reducer": "count"
+        }
+      }
+    ]
+  },
+  "blue_stat": {
     "type": "processing_chain",
     "with": {
       "type": "concept",
@@ -87,13 +107,13 @@
       }
     ]
   },
-  "summed_count": {
+  "green_stat": {
     "type": "processing_chain",
     "with": {
       "type": "concept",
       "reference": [
         "entity",
-        "water"
+        "vegetation"
       ]
     },
     "do": [
@@ -107,29 +127,10 @@
       },
       {
         "type": "verb",
-        "name": "evaluate",
+        "name": "reduce",
         "params": {
-          "operator": "add",
-          "y": {
-            "type": "processing_chain",
-            "with": {
-              "type": "concept",
-              "reference": [
-                "entity",
-                "vegetation"
-              ]
-            },
-            "do": [
-              {
-                "type": "verb",
-                "name": "reduce",
-                "params": {
-                  "dimension": "time",
-                  "reducer": "count"
-                }
-              }
-            ]
-          }
+          "dimension": "space",
+          "reducer": "mean"
         }
       }
     ]
