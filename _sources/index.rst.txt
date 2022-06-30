@@ -22,6 +22,7 @@ semantique: Semantic Querying in Earth Observation Data Cubes
 
    User Guide <guide>
    API Reference <reference>
+   Gallery <_notebooks/gallery.nblink>
    Changelog <changelog>
 
 .. toctree::

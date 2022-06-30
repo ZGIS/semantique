@@ -37,6 +37,8 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Reference" href="../reference.html" />
+    <link rel="prev" title="References" href="references.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -85,18 +87,40 @@
   Documentation
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../guide.html">
    User Guide
   </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="recipes.html">
+     Writing and executing query recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="references.html">
+     References
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Verbs
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../reference.html">
    API Reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -799,6 +823,11 @@
   </ul>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="gallery.html">
+   Gallery
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../changelog.html">
    Changelog
   </a>
@@ -1429,7 +1458,7 @@ context = {
 <h3>Evaluate<a class="headerlink" href="#Evaluate" title="Permalink to this headline">¶</a></h3>
 <p>The evaluate verb evaluates an expression for each pixel in an array. These expressions can take many different forms, but each of them accepts the value of a specific pixel in the input array and applies some operator to it. The result of that operation is the new value of that particular pixel in the output array. That is, the output array always has the <em>same shape</em> as the input array. Below, we will show different forms of expressions, and the built-in
 <a class="reference external" href="https://zgis.github.io/semantique/reference.html#operator-functions">operators</a> that semantique offers for them. For advanced users, it is also possible to define their own custom operators, which will be explained in <a class="reference external" href="#User-defined-operators">another section</a>.</p>
-<p>When using the evaluate verb, it is important to be aware of the <em>value type</em> of the input array(s). For example, they may contain nominal, ordinal, binary or numerical data. Different operators may only support specific (combinations of) value types. For details, see here.</p>
+<p>When using the evaluate verb, it is important to be aware of the <em>value type</em> of the input array(s). For example, they may contain nominal, ordinal, binary or numerical data. Different operators may only support specific (combinations of) value types. For details, see <a class="reference external" href="advanced.ipynb#Tracking-value-types">here</a>.</p>
 <div class="section" id="Univariate-expressions">
 <h4>Univariate expressions<a class="headerlink" href="#Univariate-expressions" title="Permalink to this headline">¶</a></h4>
 <p>The simplest form of expressions are the univariate expressions. For each pixel value <span class="math notranslate nohighlight">\(x_{i}\)</span> in input array <span class="math notranslate nohighlight">\(X\)</span>, these expressions <em>only</em> consider <span class="math notranslate nohighlight">\(x_{i}\)</span>, and apply an operator to it. That is, the expression is of the following form.</p>
@@ -8012,7 +8041,7 @@ Attributes:
 <p><img alt="evaluate_align_same_dims" src="../_images/evaluate_align1.png" /></p>
 <p>Secondly, consider a case where <span class="math notranslate nohighlight">\(Y\)</span> has one or more dimensions with exactly the same coordinate values as <span class="math notranslate nohighlight">\(X\)</span>, but does not have <em>all</em> the dimensions that <span class="math notranslate nohighlight">\(X\)</span> has. In that case, we can align <span class="math notranslate nohighlight">\(Y\)</span> with <span class="math notranslate nohighlight">\(X\)</span> by duplicating its values along those dimensions that are missing. This does <em>not</em> work vice versa. When cube <span class="math notranslate nohighlight">\(Y\)</span> has more dimensions that cube <span class="math notranslate nohighlight">\(X\)</span>, there is no clear way to define how to subset the values in <span class="math notranslate nohighlight">\(Y\)</span> to match the shape of <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <p><img alt="evaluate_align_missing_dims" src="../_images/evaluate_align2.png" /></p>
-<p>Alignment is something you have to be aware of to understand how bivariate expressions are evaluated. However, it is not something you have to do for yourself. Internally, the query processor takes care of it. See the Advanced usage notebook for details on that.</p>
+<p>Alignment is something you have to be aware of to understand how bivariate expressions are evaluated. However, it is not something you have to do for yourself. Internally, the query processor takes care of it. See the <a class="reference external" href="advanced.ipynb#Aligning-cubes-to-each-other">Advanced usage notebook</a> for details on that.</p>
 </div>
 </div>
 <div class="section" id="Extract">
@@ -16193,7 +16222,7 @@ Attributes:
 <li><p><code class="docutils literal notranslate"><span class="pre">last</span></code>: Returns the last value of each slice <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
 </ul>
 <p>It is important to mention that nodata values are <strong>ignored</strong> by the reducer functions! That is, for example, when a slice has the values <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">nan,</span> <span class="pre">1]</span></code> the <code class="docutils literal notranslate"><span class="pre">all</span></code> reducer will return “true” and the <code class="docutils literal notranslate"><span class="pre">percentage</span></code> reducer will return 100. A reducer will only return a nodata value when <em>all</em> values in a slice are nodata values.</p>
-<p>Also, when using the reduce verb, it is important to be aware of the <em>value type</em> of the input array(s). For example, they may contain nominal, ordinal, binary or numerical data. Different reducers may only support specific value types. For details, see here.</p>
+<p>Also, when using the reduce verb, it is important to be aware of the <em>value type</em> of the input array(s). For example, they may contain nominal, ordinal, binary or numerical data. Different reducers may only support specific value types. For details, see <a class="reference external" href="advanced.ipynb#Tracking-value-types">here</a>.</p>
 <p>Having said that, lets show some examples. The reduce verb takes as first argument the name of the dimension to be reduced over, and as second argument the reducer function to be applied.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[96]:
@@ -23498,7 +23527,21 @@ Attributes:
               
         
             <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="references.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">References</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../reference.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API Reference</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>

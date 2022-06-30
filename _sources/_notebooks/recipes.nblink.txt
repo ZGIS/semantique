@@ -1,0 +1,3 @@
+{
+    "path": "../../../demo/recipes.ipynb"
+}
