@@ -12,6 +12,11 @@ import warnings
 from semantique import exceptions
 from semantique.processor import operators, utils
 
+SPACE = "space"
+TIME = "time"
+X = "x"
+Y = "y"
+
 @xr.register_dataarray_accessor("sq")
 class Array():
   """Internal representation of a semantic array.
@@ -114,31 +119,13 @@ class Array():
       return False
 
   @property
-  def temporal_dimension(self):
-    """:obj:`str`: Name of the temporal dimension of the array."""
-    if "time" in self._obj.dims:
-      return "time"
-    else:
-      return None
-
-  @property
-  def spatial_dimension(self):
-    """:obj:`str`: Name of the spatial dimension of the array."""
-    if "space" in self._obj.dims:
-      return "space"
-    else:
-      return None
-
-  @property
   def grid_points(self):
     """:obj:`geopandas.GeoSeries`: Spatial grid points of the array."""
-    # Extract spatial coordinates.
-    spatial_dim = self.spatial_dimension
-    if spatial_dim is None:
+    if SPACE not in self._obj.dims:
       return None
-    coords = self.extract(spatial_dim).unstack()
-    xcoords = self._obj[spatial_dim][coords.dims[1]]
-    ycoords = self._obj[spatial_dim][coords.dims[0]]
+    # Extract spatial coordinates.
+    xcoords = self._obj[SPACE][X]
+    ycoords = self._obj[SPACE][Y]
     # Return grid points as geometries.
     points = gpd.points_from_xy(xcoords, ycoords)
     return gpd.GeoSeries(points, crs = self.crs)
@@ -233,10 +220,8 @@ class Array():
         else:
           out = utils.parse_datetime_component(component, out)
       else:
-        spatial_dim = self.spatial_dimension
-        if spatial_dim is not None and dimension == spatial_dim:
-          if component != "feature":
-            out = utils.parse_coords_component(out)
+        if dimension == SPACE and component in [X, Y]:
+          out = utils.parse_coords_component(out)
     out._variable = out._variable.to_base_variable()
     if not track_types:
       del out.sq.value_type
@@ -509,13 +494,13 @@ class Array():
       )
     # Shift values.
     # Spatial dimension needs special treatment if coord is specified.
-    if dimension == self.spatial_dimension and coord is not None:
+    if dimension == SPACE and coord is not None:
       obj = self._obj.unstack(dimension)
       if coord not in obj.dims:
         raise exceptions.UnknownComponentError(
           f"Spatial dimension does not have coordinate '{coord}'"
         )
-      out = obj.shift({coord: steps}).sq.stack_spatial_dims(name = dimension)
+      out = obj.shift({coord: steps}).sq.stack_spatial_dims()
     else:
       out = self._obj.shift({dimension: steps})
     # Trim and return.
@@ -581,14 +566,11 @@ class Array():
     size = size * 2 + 1
     # Create the rolling window object.
     # Spatial dimension needs special treatment because it is stacked.
-    if dimension == self.spatial_dimension:
+    if dimension == SPACE:
       spatial = True
-      coords = self.extract(dimension).unstack()
-      x_dim = coords.dims[1]
-      y_dim = coords.dims[0]
       obj = self._obj.unstack(dimension)
       if coord is None:
-        obj = obj.rolling({x_dim: size, y_dim: size}, center = True)
+        obj = obj.rolling({X: size, Y: size}, center = True)
       else:
         if coord not in obj.dims:
           raise exceptions.UnknownComponentError(
@@ -600,11 +582,9 @@ class Array():
       obj = self._obj.rolling({dimension: size}, center = True)
     # Apply the reducer to each window.
     out = reducer(obj, track_types = track_types, **kwargs)
-    # Stack x and y dimensions back together if dimension was space.
+    # Stack, trim and return.
     if spatial:
-      out = out.stack({dimension: [y_dim, x_dim]})
-      out[dimension].sq.value_type = "coords"
-    # Trim and return.
+      out = out.sq.stack_spatial_dims()
     if trim:
       out = out.sq.trim()
     return out
@@ -705,39 +685,29 @@ class Array():
         The trimmed input array.
 
     """
-    spatial_dim = self.spatial_dimension
-    if force_regular and spatial_dim is not None:
-      # Trim all dimensions normally except the spatial dimension.
-      out = self._obj
-      all_dims = out.dims
-      trim_dims = [d for d in all_dims if d != spatial_dim]
-      # Trim spatial X and Y dimensions separately while preserving regularity.
-      # Hence trimming only at the edges of the spatial X and Y dimensions.
-      # First determine the names of the X and Y dimensions.
-      coords = self.extract(spatial_dim).unstack()
-      x_dim = coords.dims[1]
-      y_dim = coords.dims[0]
-      # For the X and Y dimensions:
-      # Find the smallest and largest coordinates containing valid values.
-      out = out.unstack(spatial_dim)
-      y_idxs = np.nonzero(out.count(trim_dims + [x_dim]).data)[0]
-      x_idxs = np.nonzero(out.count(trim_dims + [y_dim]).data)[0]
+    out = self._obj # Initialize
+    all_dims = out.dims
+    if force_regular and SPACE in all_dims:
+      # Apply regular trimming to all but the spatial dimension.
+      regular_dims = [d for d in all_dims if d != SPACE]
+      for dim in regular_dims:
+        other_dims = [d for d in all_dims if d != dim]
+        out = out.isel({dim: out.count(other_dims) > 0})
+      # Find the smallest and largest spatial coords containing valid values.
+      out = out.unstack(SPACE)
+      y_idxs = np.nonzero(out.count(regular_dims + [X]).data)[0]
+      x_idxs = np.nonzero(out.count(regular_dims + [Y]).data)[0]
       y_slice = slice(y_idxs.min(), y_idxs.max() + 1)
       x_slice = slice(x_idxs.min(), x_idxs.max() + 1)
       # Limit the x and y coordinates to only those ranges.
-      out = out.isel({y_dim: y_slice, x_dim: x_slice})
+      out = out.isel({Y: y_slice, X: x_slice})
       # Stack x and y dimensions back together.
-      out = out.stack({spatial_dim: [y_dim, x_dim]})
-      out[spatial_dim].sq.value_type = "coords"
+      out = out.sq.stack_spatial_dims()
     else:
       # Trim all dimensions normally.
-      out = self._obj
-      all_dims = out.dims
-      trim_dims = all_dims
-    # Apply normal trimming to the selected dimensions.
-    for dim in trim_dims:
-      other_dims = [d for d in all_dims if d != dim]
-      out = out.isel({dim: out.count(other_dims) > 0})
+      for dim in all_dims:
+        other_dims = [d for d in all_dims if d != dim]
+        out = out.isel({dim: out.count(other_dims) > 0})
     return out
 
   def regularize(self):
@@ -753,24 +723,18 @@ class Array():
         The regularized input array.
 
     """
-    spatial_dim = self.spatial_dimension
-    if spatial_dim is None:
+    if SPACE not in self._obj.dims:
       return self._obj
-    # Extract x and y dimensions.
-    coords = self.extract(spatial_dim).unstack()
-    xname = coords.dims[1]
-    yname = coords.dims[0]
-    xcoords = coords[xname]
-    ycoords = coords[yname]
-    # Update x and y dimensions.
+    # Extract spatial coordinates.
+    xcoords = self._obj[SPACE][X]
+    ycoords = self._obj[SPACE][Y]
+    # Update spatial coordinates.
     res = self.spatial_resolution
-    ycoords = np.arange(ycoords[0], ycoords[-1] + res[0], res[0])
     xcoords = np.arange(xcoords[0], xcoords[-1] + res[1], res[1])
-    out = self._obj.unstack(spatial_dim)
-    out = out.reindex({yname: ycoords, xname: xcoords})
-    # Stack x and y dimensions back together.
-    out = out.stack({spatial_dim: [yname, xname]})
-    out[spatial_dim].sq.value_type = "coords"
+    ycoords = np.arange(ycoords[0], ycoords[-1] + res[0], res[0])
+    # Reindex array.
+    out = self._obj.unstack(SPACE).reindex({Y: ycoords, X: xcoords})
+    out = out.sq.stack_spatial_dims()
     return out
 
   def reproject(self, crs, **kwargs):
@@ -793,19 +757,18 @@ class Array():
         The input array with reprojected spatial coordinates.
 
     """
-    spatial_dim = self.spatial_dimension
-    if spatial_dim is None:
+    if SPACE not in self._obj.dims:
       return self._obj
     # To make rioxarray work:
     # Array needs to have unstacked spatial dimensions.
     # Array can have only the spatial_ref non-dimension coordinate.
-    obj = self.unstack(spatial_dim)
+    obj = self._obj.unstack(SPACE)
     obj = obj.sq.drop_non_dimension_coords(keep = ["spatial_ref"])
     # Reproject.
     out = obj.rio.reproject(crs, **kwargs)
     # Stack spatial dimensions back together.
-    out = out.sq.stack_spatial_dims(name = spatial_dim)
-    # Recover temporal non-dimension coordinate.
+    out = out.sq.stack_spatial_dims()
+    # Recover other non-dimension coordinates.
     out = out.sq.write_tz(self.tz)
     return out
 
@@ -828,12 +791,11 @@ class Array():
         The input array with converted temporal coordinates.
 
     """
-    time = self.temporal_dimension
-    if time is None:
+    if TIME not in self._obj.dims:
       return self._obj
-    src = self._obj[time].data
+    src = self._obj[TIME].data
     trg = [utils.convert_datetime64(x, self.tz, tz, **kwargs) for x in src]
-    out = self._obj.assign_coords({time: trg}).sq.write_tz(tz)
+    out = self._obj.assign_coords({TIME: trg}).sq.write_tz(tz)
     return out
 
   def write_crs(self, crs, inplace = False):
@@ -897,34 +859,8 @@ class Array():
     obj["temporal_ref"].attrs["zone"] = zone
     return obj
 
-  def find_spatial_dims(self):
-    """Find spatial X and Y dimensions in an unstacked array.
-
-    Returns
-    --------
-      :obj:`list` of :obj:`str`
-        The names of respectively the spatial X and Y dimension. If they could
-        not be found, :obj:`None` is returned.
-
-    """
-    candidates = [
-      ["x", "y"],
-      ["X", "Y"],
-      ["longitude", "latitude"],
-      ["lon", "lat"],
-    ]
-    for pair in candidates:
-      if all([dim in self._obj.dims for dim in pair]):
-        return pair
-    return None
-
-  def stack_spatial_dims(self, name = "space"):
+  def stack_spatial_dims(self):
     """Stack spatial X and Y dimensions into a single spatial dimension.
-
-    Parameters
-    -----------
-      name : :obj:`str`
-        Name to give to the stacked spatial dimension.
 
     Returns
     --------
@@ -934,11 +870,8 @@ class Array():
         modifications.
 
     """
-    xy_dims = self.find_spatial_dims()
-    if xy_dims is None:
-      return self._obj
-    out = self._obj.stack({name: xy_dims[::-1]})
-    out[name].sq.value_type = "coords"
+    out = self._obj.stack({SPACE: [Y, X]})
+    out[SPACE].sq.value_type = "coords"
     return out
 
   def unstack_spatial_dims(self):
@@ -952,10 +885,9 @@ class Array():
         modifications.
 
     """
-    dim = self.spatial_dimension
-    if dim is None:
+    if SPACE not in self._obj.dims:
       return self._obj
-    return self._obj.unstack(dim)
+    return self._obj.unstack(SPACE)
 
   def drop_non_dimension_coords(self, keep = None):
     """Drop non-dimension coordinates from the array.
@@ -1029,12 +961,10 @@ class Array():
         The converted input array
 
     """
-    obj = self.unstack_spatial_dims()
     # Convert to dataframe.
     df = self.to_dataframe().reset_index()
     # Create geometries.
-    xy_dims = obj.sq.find_spatial_dims()
-    geoms = gpd.points_from_xy(df[xy_dims[0]], df[xy_dims[1]])
+    geoms = gpd.points_from_xy(df[X], df[Y])
     # Convert to geodataframe
     gdf = gpd.GeoDataFrame(df, geometry = geoms, crs = self.crs)
     # Reproject if needed.

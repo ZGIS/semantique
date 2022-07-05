@@ -114,8 +114,6 @@
    processor.arrays.Array.spatial_resolution
    processor.arrays.Array.tz
    processor.arrays.Array.is_empty
-   processor.arrays.Array.temporal_dimension
-   processor.arrays.Array.spatial_dimension
    processor.arrays.Array.grid_points
    processor.arrays.Array.evaluate
    processor.arrays.Array.extract
@@ -133,7 +131,6 @@
    processor.arrays.Array.tz_convert
    processor.arrays.Array.write_crs
    processor.arrays.Array.write_tz
-   processor.arrays.Array.find_spatial_dims
    processor.arrays.Array.stack_spatial_dims
    processor.arrays.Array.unstack_spatial_dims
    processor.arrays.Array.drop_non_dimension_coords

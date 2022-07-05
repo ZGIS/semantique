@@ -10,6 +10,7 @@ from datacube.utils import masking
 from abc import abstractmethod
 
 from semantique import exceptions
+from semantique.processor.arrays import SPACE, TIME, X, Y
 
 class Datacube():
   """Base class for EO data cube configurations.
@@ -238,11 +239,11 @@ class Opendatacube(Datacube):
 
   def _load(self, metadata, extent):
     # Check if extent is valid.
-    if extent.sq.temporal_dimension is None:
+    if TIME not in extent.dims:
       raise exceptions.MissingDimensionError(
         "Cannot retrieve data in an extent without a temporal dimension"
       )
-    if extent.sq.spatial_dimension is None:
+    if SPACE not in extent.dims:
       raise exceptions.MissingDimensionError(
         "Cannot retrieve data in an extent without a spatial dimension"
       )
@@ -277,9 +278,11 @@ class Opendatacube(Datacube):
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
     # Step II: Stack spatial dimensions back into a single 'space' dimension.
+    # --> Make sure X and Y dims have the correct names.
+    data = data.rename({data.rio.y_dim: Y, data.rio.x_dim: X})
     data = data.sq.stack_spatial_dims()
     # Step III: Add spatial feature indices as coordinates.
-    data.coords["feature"] = ("space", extent["feature"].data)
+    data.coords["feature"] = (SPACE, extent["feature"].data)
     # Step IV: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
     # --> Mapping from category labels to indices for all categorical data.
@@ -290,8 +293,8 @@ class Opendatacube(Datacube):
       for x in metadata["values"]:
         value_labels[x["id"]] = x["label"]
       data.sq.value_labels = value_labels
-    data["space"].sq.value_type = "coords"
-    data["time"].sq.value_type = "datetime"
+    data[SPACE].sq.value_type = "coords"
+    data[TIME].sq.value_type = "datetime"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
     data["feature"].sq.value_labels = extent["feature"].sq.value_labels
     return data
@@ -463,18 +466,18 @@ class GeotiffArchive(Datacube):
 
   def _subset(self, data, metadata, extent):
     # Subset temporally.
-    if extent.sq.temporal_dimension is None:
+    if TIME not in extent.dims:
       raise exceptions.MissingDimensionError(
         "Cannot retrieve data in an extent without a temporal dimension"
       )
-    bounds = extent.sq.tz_convert(self.tz)[extent.sq.temporal_dimension].values
+    bounds = extent.sq.tz_convert(self.tz)[TIME].values
     times = [np.datetime64(x) for x in metadata["times"]]
     keep = [x >= bounds[0] and x <= bounds[1] for x in times]
     data = data.sel({"band": keep})
     data = data.rename({"band": "time"})
     data = data.assign_coords({"time": [x for x, y in zip(times, keep) if y]})
     # Subset spatially.
-    if extent.sq.spatial_dimension is None:
+    if SPACE not in extent.dims:
       raise exceptions.MissingDimensionError(
         "Cannot retrieve data in an extent without a spatial dimension"
       )
@@ -495,9 +498,11 @@ class GeotiffArchive(Datacube):
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
     # Step II: Stack spatial dimensions back into a single 'space' dimension.
+    # --> Make sure X and Y dims have the correct names.
+    data = data.rename({data.rio.y_dim: Y, data.rio.x_dim: X})
     data = data.sq.stack_spatial_dims()
     # Step III: Add spatial feature indices as coordinates.
-    data.coords["feature"] = ("space", extent["feature"].data)
+    data.coords["feature"] = (SPACE, extent["feature"].data)
     # Step IV: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
     # --> Mapping from category labels to indices for all categorical data.
@@ -508,8 +513,8 @@ class GeotiffArchive(Datacube):
       for x in metadata["values"]:
         value_labels[x["id"]] = x["label"]
       data.sq.value_labels = value_labels
-    data["space"].sq.value_type = "coords"
-    data["time"].sq.value_type = "datetime"
+    data[SPACE].sq.value_type = "coords"
+    data[TIME].sq.value_type = "datetime"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
     data["feature"].sq.value_labels = extent["feature"].sq.value_labels
     # Step V: Give the array a name.

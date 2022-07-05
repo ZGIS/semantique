@@ -1,6 +1,10 @@
+import rioxarray
+
 import numpy as np
 import pandas as pd
 import xarray as xr
+
+from semantique.processor.arrays import SPACE, TIME, X, Y
 
 def get_null(x):
   """Return the appropriate nodata value for an array.
@@ -175,17 +179,21 @@ def parse_extent(spatial_extent, temporal_extent, spatial_resolution,
 
   """
   # Rasterize spatial extent.
-  space = spatial_extent.rasterize(spatial_resolution, crs, stack = True)
+  space = spatial_extent.rasterize(spatial_resolution, crs)
+  # Stack spatial dimensions.
+  # Make sure X and Y dims have the correct names.
+  space = space.rename({space.rio.y_dim: Y, space.rio.x_dim: X})
+  space = space.sq.stack_spatial_dims()
   # Add spatial feature indices as coordinates.
-  space.coords["feature"] = ("space", space.data)
+  space.coords["feature"] = (SPACE, space.data)
   space["feature"].name = "feature"
   space["feature"].sq.value_type = space.sq.value_type
   space["feature"].sq.value_labels = space.sq.value_labels
   # Discretize temporal extent.
   time = temporal_extent.discretize(temporal_resolution, tz)
   # Combine rasterized spatial extent with discretized temporal extent.
-  extent = space.expand_dims({"time": time})
-  extent["time"].sq.value_type = "datetime"
+  extent = space.expand_dims({TIME: time})
+  extent[TIME].sq.value_type = "datetime"
   # Add temporal reference.
   extent = extent.sq.write_tz(time.sq.tz)
   # Trim the extent array if requested.

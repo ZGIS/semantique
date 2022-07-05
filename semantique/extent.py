@@ -139,7 +139,7 @@ class SpatialExtent(dict):
     geodf = gpd.GeoDataFrame.from_features([geojs], **kwargs)
     return cls(geodf)
 
-  def rasterize(self, resolution, crs = None, stack = False):
+  def rasterize(self, resolution, crs = None):
     """Rasterize the spatial extent into an array.
 
     Rasterizing the spatial extent creates a rectangular two-dimensional
@@ -167,9 +167,6 @@ class SpatialExtent(dict):
         :class:`pyproj.crs.CRS`. This includes :obj:`pyproj.crs.CRS` objects
         themselves, as well as EPSG codes and WKT strings. If :obj:`None`, the
         CRS of the extent itself is used.
-      stack : :obj:`bool`
-        Boolean defining if the two spatial dimensions of the grid should be
-        stacked into a single, multi-indexed "space" dimension.
 
     Returns
     -------
@@ -203,9 +200,6 @@ class SpatialExtent(dict):
       names = ["feature_" + str(i) for i in indices]
     raster_obj.sq.value_type = "nominal"
     raster_obj.sq.value_labels = {k:v for k, v in zip(indices, names)}
-    # Stack the two spatial dimensions into one if requested.
-    if stack:
-      raster_obj = raster_obj.sq.stack_spatial_dims()
     return raster_obj
 
 class TemporalExtent(dict):

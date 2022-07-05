@@ -5,6 +5,7 @@ import xarray as xr
 from semantique.processor.types import TypePromoter
 from semantique.processor.values import Interval
 from semantique.processor.utils import get_null, null_as_zero
+from semantique.processor.arrays import SPACE
 
 #
 # UNIVARIATE OPERATORS
@@ -1490,7 +1491,7 @@ def intersects_(x, y, track_types = True, **kwargs):
   except AttributeError:
     y = y.sq.trim().sq.grid_points.envelope.unary_union
   values = x.sq.grid_points.intersects(y).astype(int)
-  coords = x[x.sq.spatial_dimension].coords
+  coords = x[SPACE].coords
   out = xr.DataArray(values, coords = coords).sq.align_with(x)
   if track_types:
     out = promoter.promote(out)
