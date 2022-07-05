@@ -4,6 +4,8 @@ from semantique.recipe import QueryRecipe
 
 import semantique.datacube
 import semantique.mapping
+import semantique.operators
+import semantique.reducers
 
 import pkg_resources
 

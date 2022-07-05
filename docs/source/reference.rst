@@ -145,6 +145,142 @@ Special values
    time_instant
    time_interval
 
+Operators
+----------
+
+Univariate operators
+~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   operators.NOT
+   operators.IS_MISSING
+   operators.NOT_MISSING
+   operators.ABSOLUTE
+   operators.EXPONENTIAL
+   operators.CUBE_ROOT
+   operators.NATURAL_LOGARITHM
+   operators.SQUARE_ROOT
+   operators.FLOOR
+   operators.CEILING
+
+Algebraic operators
+~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   operators.ADD
+   operators.DIVIDE
+   operators.MULTIPLY
+   operators.POWER
+   operators.SUBTRACT
+   operators.NORMALIZED_DIFFERENCE
+
+Boolean operators
+~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   operators.AND
+   operators.OR
+   operators.EXCLUSIVE_OR
+
+Relational operators
+~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   operators.EQUAL
+   operators.NOT_EQUAL
+   operators.IN
+   operators.NOT_IN
+   operators.GREATER
+   operators.GREATER_EQUAL
+   operators.LESS
+   operators.LESS_EQUAL
+
+
+Spatial relational operators
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   operators.INTERSECTS
+
+Temporal relational operators
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   operators.AFTER
+   operators.BEFORE
+   operators.DURING
+
+Reducers
+---------
+
+Statistical reducers
+~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   reducers.MEAN
+   reducers.MEDIAN
+   reducers.MODE
+   reducers.MAX
+   reducers.MIN
+   reducers.RANGE
+   reducers.N
+   reducers.PRODUCT
+   reducers.STANDARD_DEVIATION
+   reducers.SUM
+   reducers.VARIANCE
+
+Boolean reducers
+~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   reducers.ALL
+   reducers.ANY
+   reducers.NONE
+
+Occurence reducers
+~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   reducers.COUNT
+   reducers.PERCENTAGE
+
+Positional reducers
+~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   reducers.FIRST
+   reducers.LAST
+
 Processor
 ==========
 

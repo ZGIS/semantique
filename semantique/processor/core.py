@@ -1066,7 +1066,7 @@ class QueryProcessor():
 
     """
     try:
-      obj = self._operators[name]
+      obj = self._operators[name.lower()]
     except KeyError:
       raise exceptions.UnknownOperatorError(
         f"Operator '{name}' is not defined"
@@ -1118,7 +1118,7 @@ class QueryProcessor():
 
     """
     try:
-      obj = self._reducers[name]
+      obj = self._reducers[name.lower()]
     except KeyError:
       raise exceptions.UnknownReducerError(
         f"Reducer '{name}' is not defined"
