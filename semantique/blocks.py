@@ -94,11 +94,9 @@ class ArrayProxy(dict):
     >>> sq.entity("water").evaluate("or", sq.entity("vegetation"))
 
     """
-    if y is None:
-      kwargs.update({"operator": operator})
-    else:
-      y = _parse_second_operand(y)
-      kwargs.update({"operator": operator, "y": y})
+    kwargs.update({"operator": operator})
+    if y is not None:
+      kwargs.update({"y": _parse_second_operand(y)})
     return self._append_verb("evaluate", **kwargs)
 
   def extract(self, dimension, component = None, **kwargs):
@@ -127,10 +125,9 @@ class ArrayProxy(dict):
     >>> sq.entity("water").extract("time", "year")
 
     """
-    if component is None:
-      kwargs.update({"dimension": dimension})
-    else:
-      kwargs.update({"dimension": dimension, "component": component})
+    kwargs.update({"dimension": dimension})
+    if component is not None:
+      kwargs.update({"component": component})
     return self._append_verb("extract", **kwargs)
 
   def filter(self, filterer, **kwargs):
@@ -277,10 +274,9 @@ class ArrayProxy(dict):
     >>> sq.entity("water").assign(sq.self().extract("time", "year"))
 
     """
-    if at is None:
-      kwargs.update({"y": y})
-    else:
-      kwargs.update({"y": y, "at": at})
+    kwargs.update({"y": y})
+    if at is not None:
+      kwargs.update({"at": at})
     return self._append_verb("assign", **kwargs)
 
   def assign_time(self, component = None, **kwargs):
@@ -494,7 +490,7 @@ class ArrayProxy(dict):
     kwargs.update({"dimension": dimension, "reducer": reducer})
     return self._append_verb("reduce", **kwargs)
 
-  def shift(self, dimension, steps, **kwargs):
+  def shift(self, dimension, steps, coord = None, **kwargs):
     """Shift the values in an array.
 
     Shifts the pixel values a given number of steps along a given dimension.
@@ -507,6 +503,12 @@ class ArrayProxy(dict):
         Amount of steps each value should be shifted. A negative integer will
         result in a shift to the left, while a positive integer will result in
         a shift to the right.
+      coord : :obj:`str`
+        Either "x" or "y", specifying if values should be shifted in
+        respectively the X or Y direction of the spatial dimension. If
+        :obj:`None`, a shift along the spatial dimension follows the pixel
+        order defined by the CRS, e.g. starting in the top-left and moving down
+        each column. Ignored when ``dimension`` is not the spatial dimension.
       **kwargs:
         Additional keyword arguments passed on to
         :meth:`Array.shift <processor.arrays.Array.shift>`.
@@ -519,12 +521,15 @@ class ArrayProxy(dict):
     --------
     >>> import semantique as sq
     >>> sq.entity("water").shift("time", 1)
+    >>> sq.entity("water").shift("space", -1, coord = "x")
 
     """
     kwargs.update({"dimension": dimension, "steps": steps})
+    if coord is not None:
+      kwargs.update({"coord": coord})
     return self._append_verb("shift", **kwargs)
 
-  def smooth(self, dimension, reducer, size, **kwargs):
+  def smooth(self, dimension, reducer, size, coord = None, **kwargs):
     """Smooth the values in an array.
 
     Smoothes the pixel values by applying a moving window function along a
@@ -546,9 +551,15 @@ class ArrayProxy(dict):
         Size k defining the extent of the rolling window. The pixel being
         smoothed will always be in the center of the window, with k pixels at
         its left and k pixels at its right. If the dimension to smooth over is
-        the spatial dimension, the size will be used for both the X and Y
-        dimension, forming a square window with the smoothed pixel in the
-        middle.
+        the spatial dimension and ``coord`` is not specified, the size will be
+        used for both the X and Y dimension, forming a square window with the
+        smoothed pixel in the middle.
+      coord : :obj:`str`
+        Either "x" or "y", specifying if the moving window should be constructed
+        in respectively the X or Y direction of the spatial dimension. If
+        :obj:`None`, the window is constructed in both directions, forming a
+        two-dimensional square. Ignored when ``dimension`` is not the spatial
+        dimension.
       **kwargs:
         Additional keyword arguments passed on to
         :meth:`Array.smooth <processor.arrays.Array.smooth>`.
@@ -567,6 +578,8 @@ class ArrayProxy(dict):
 
     """
     kwargs.update({"dimension": dimension, "reducer": reducer, "size": size})
+    if coord is not None:
+      kwargs.update({"coord": coord})
     return self._append_verb("smooth", **kwargs)
 
   def name(self, value, **kwargs):
@@ -721,10 +734,9 @@ class CollectionProxy(dict):
       :obj:`CollectionProxy`
 
     """
-    if y is None:
-      kwargs.update({"operator": operator})
-    else:
-      kwargs.update({"operator": operator, "y": y})
+    kwargs.update({"operator": operator})
+    if y is not None:
+      kwargs.update({"y": _parse_second_operand(y)})
     return self._append_verb("evaluate", **kwargs)
 
   def extract(self, dimension, component = None, **kwargs):
@@ -737,10 +749,9 @@ class CollectionProxy(dict):
       :obj:`CollectionProxy`
 
     """
-    if component is None:
-      kwargs.update({"dimension": dimension})
-    else:
-      kwargs.update({"dimension": dimension, "component": component})
+    kwargs.update({"dimension": dimension})
+    if component is not None:
+      kwargs.update({"component": component})
     return self._append_verb("extract", **kwargs)
 
   def filter(self, filterer, **kwargs):
@@ -798,8 +809,10 @@ class CollectionProxy(dict):
       :obj:`CollectionProxy`
 
     """
-    kwargs.update({"filterer": filterer})
-    return self._append_verb("filter", **kwargs)
+    kwargs.update({"y": y})
+    if at is not None:
+      kwargs.update({"at": at})
+    return self._append_verb("assign", **kwargs)
 
   def assign_time(self, component = None, **kwargs):
     """Apply the assign_time verb to each array in a collection.
@@ -844,7 +857,7 @@ class CollectionProxy(dict):
     kwargs.update({"dimension": dimension, "reducer": reducer})
     return self._append_verb("reduce", **kwargs)
 
-  def shift(self, dimension, steps, **kwargs):
+  def shift(self, dimension, steps, coord = None, **kwargs):
     """Apply the shift verb to each array in a collection.
 
     See :meth:`ArrayProxy.shift`.
@@ -855,9 +868,11 @@ class CollectionProxy(dict):
 
     """
     kwargs.update({"dimension": dimension, "steps": steps})
+    if coord is not None:
+      kwargs.update({"coord": coord})
     return self._append_verb("shift", **kwargs)
 
-  def smooth(self, dimension, reducer, size, **kwargs):
+  def smooth(self, dimension, reducer, size, coord = None, **kwargs):
     """Apply the smooth verb to each array in a collection.
 
     See :meth:`ArrayProxy.smooth`.
@@ -868,6 +883,8 @@ class CollectionProxy(dict):
 
     """
     kwargs.update({"dimension": dimension, "reducer": reducer, "size": size})
+    if coord is not None:
+      kwargs.update({"coord": coord})
     return self._append_verb("smooth", **kwargs)
 
 def concept(*reference, property = None):

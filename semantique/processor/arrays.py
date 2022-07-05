@@ -37,6 +37,10 @@ class Array():
   def __init__(self, xarray_obj):
     self._obj = xarray_obj
 
+  #
+  # PROPERTIES
+  #
+
   @property
   def value_type(self):
     """:obj:`str`: The value type of the array.
@@ -109,7 +113,7 @@ class Array():
     except TypeError:
       return False
 
-  @ property
+  @property
   def temporal_dimension(self):
     """:obj:`str`: Name of the temporal dimension of the array."""
     if "time" in self._obj.dims:
@@ -138,6 +142,10 @@ class Array():
     # Return grid points as geometries.
     points = gpd.points_from_xy(xcoords, ycoords)
     return gpd.GeoSeries(points, crs = self.crs)
+
+  #
+  # VERBS
+  #
 
   def evaluate(self, operator, y = None, track_types = True, **kwargs):
     """Apply the evaluate verb to the array.
@@ -173,7 +181,7 @@ class Array():
   def extract(self, dimension, component = None, track_types = True, **kwargs):
     """Apply the extract verb to the array.
 
-    The extract verb extracts coordinate labels of a dimension as a new data
+    The extract verb extracts coordinate labels of a dimension as a new
     array.
 
     Parameters
@@ -456,7 +464,7 @@ class Array():
     out = reducer(self._obj, track_types = track_types, dim = dimension, **kwargs)
     return out
 
-  def shift(self, dimension, steps, **kwargs):
+  def shift(self, dimension, steps, coord = None, **kwargs):
     """Apply the shift verb to the array.
 
     The shift verb shifts the values in an array a given amount of steps along
@@ -470,6 +478,12 @@ class Array():
         Amount of steps each value should be shifted. A negative integer will
         result in a shift to the left, while a positive integer will result in
         a shift to the right.
+      coord : :obj:`str`
+        Either "x" or "y", specifying if values should be shifted in
+        respectively the X or Y direction of the spatial dimension. If
+        :obj:`None`, a shift along the spatial dimension follows the pixel
+        order defined by the CRS, e.g. starting in the top-left and moving down
+        each column. Ignored when ``dimension`` is not the spatial dimension.
       **kwargs:
         Ignored.
 
@@ -483,14 +497,26 @@ class Array():
         If a dimension with the given name is not present in the array.
 
     """
+    # Check dimension presence.
     if dimension not in self._obj.dims:
       raise exceptions.UnknownDimensionError(
         f"Dimension '{dimension}' is not present in the input object"
       )
-    out = self._obj.shift({dimension: steps})
+    # Shift values.
+    # Spatial dimension needs special treatment if coord is specified.
+    if dimension == self.spatial_dimension and coord is not None:
+      obj = self._obj.unstack(dimension)
+      if coord not in obj.dims:
+        raise exceptions.UnknownComponentError(
+          f"Spatial dimension does not have coordinate '{coord}'"
+        )
+      out = obj.shift({coord: steps}).sq.stack_spatial_dims(name = dimension)
+    else:
+      out = self._obj.shift({dimension: steps})
     return out
 
-  def smooth(self, dimension, reducer, size, track_types = True, **kwargs):
+  def smooth(self, dimension, reducer, size, coord = None, track_types = True,
+             **kwargs):
     """Apply the smooth verb to the array.
 
     The smooth verb smoothes the values in an array by applying a reducer
@@ -506,9 +532,15 @@ class Array():
         Size k defining the extent of the rolling window. The pixel being
         smoothed will always be in the center of the window, with k pixels at
         its left and k pixels at its right. If the dimension to smooth over is
-        the spatial dimension, the size will be used for both the X and Y
-        dimension, forming a square window with the smoothed pixel in the
-        middle.
+        the spatial dimension and ``coord`` is not specified, the size will be
+        used for both the X and Y dimension, forming a square window with the
+        smoothed pixel in the middle.
+      coord : :obj:`str`
+        Either "x" or "y", specifying if the moving window should be constructed
+        in respectively the X or Y direction of the spatial dimension. If
+        :obj:`None`, the window is constructed in both directions, forming a
+        two-dimensional square. Ignored when ``dimension`` is not the spatial
+        dimension.
       track_types : :obj:`bool`
         Should the reducer promote the value type of the output object, based
         on the value type of the input object?
@@ -542,7 +574,14 @@ class Array():
       x_dim = coords.dims[1]
       y_dim = coords.dims[0]
       obj = self._obj.unstack(dimension)
-      obj = obj.rolling({x_dim: size, y_dim: size}, center = True)
+      if coord is None:
+        obj = obj.rolling({x_dim: size, y_dim: size}, center = True)
+      else:
+        if coord not in obj.dims:
+          raise exceptions.UnknownComponentError(
+            f"Spatial dimension does not have coordinate '{coord}'"
+          )
+        obj = obj.rolling({coord: size}, center = True)
     else:
       spatial = False
       obj = self._obj.rolling({dimension: size}, center = True)
@@ -573,6 +612,10 @@ class Array():
     """
     out = self._obj.rename(value)
     return out
+
+  #
+  # INTERNAL PROCESSING
+  #
 
   def align_with(self, other):
     """Align the array to the shape of another array.
@@ -923,6 +966,10 @@ class Array():
     else:
       drop = set(self._obj.coords) - set(self._obj.dims) - set(keep)
     return self._obj.reset_coords(drop, drop = True)
+
+  #
+  # CONVERTERS
+  #
 
   def to_dataframe(self):
     """Convert the array to a pandas DataFrame.
