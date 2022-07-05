@@ -103,22 +103,32 @@ class Opendatacube(Datacube):
         Defaults to :obj:`True`.
 
       * **value_type_mapping** (:obj:`dict`): How do value type encodings in
-        the metadata objects map to the value types used by semantique?
-        Defaults to: ::
+        the layout map to the value types used by semantique?
+        Defaults to a one-to-one mapping: ::
 
-          {"categorical": "ordinal", "continuous": "numerical"}
+          {
+            "nominal": "nominal",
+            "ordinal": "ordinal",
+            "binary": "binary",
+            "numerical": "numerical"
+          }
 
       * **resamplers** (:obj:`dict`): When data need to be resampled to a
         different spatial and/or temporal resolution, what resampling technique
         should be used? Should be specified separately for each possible value
-        type in the layout file. Valid techniques are: ::
+        type in the layout. Valid techniques are: ::
 
           'nearest', 'average', 'bilinear', 'cubic', 'cubic_spline',
           'lanczos', 'mode', 'gauss',  'max', 'min', 'med', 'q1', 'q3'
 
         Defaults to: ::
 
-          {"categorical": "nearest", "continuous": "nearest"}
+          {
+            "nominal": "nearest",
+            "ordinal": "nearest",
+            "binary": "nearest",
+            "numerical": "nearest"
+          }
 
   .. _Opendatacube manual:
     https://datacube-core.readthedocs.io/en/latest/index.html
@@ -161,12 +171,16 @@ class Opendatacube(Datacube):
     return {
       "group_by_solar_day": True,
       "value_type_mapping": {
-        "categorical": "ordinal",
-        "continuous": "numerical"
+        "nominal": "nominal",
+        "ordinal": "ordinal",
+        "binary": "binary",
+        "numerical": "numerical"
       },
       "resamplers": {
-        "categorical": "nearest",
-        "continuous": "nearest"
+        "nominal": "nearest",
+        "ordinal": "nearest",
+        "binary": "nearest",
+        "numerical": "nearest"
       }
     }
 
@@ -313,22 +327,32 @@ class GeotiffArchive(Datacube):
       Valid options are:
 
       * **value_type_mapping** (:obj:`dict`): How do value type encodings in
-        the metadata objects map to the value types used by semantique?
-        Defaults to: ::
+        the layout map to the value types used by semantique?
+        Defaults to a one-to-one mapping: ::
 
-          {"categorical": "ordinal", "continuous": "numerical"}
+          {
+            "nominal": "nominal",
+            "ordinal": "ordinal",
+            "binary": "binary",
+            "numerical": "numerical"
+          }
 
       * **resamplers** (:obj:`dict`): When data need to be resampled to a
         different spatial and/or temporal resolution, what resampling technique
         should be used? Should be specified separately for each possible value
-        type in the layout file. Valid techniques are: ::
+        type in the layout. Valid techniques are: ::
 
           'nearest', 'average', 'bilinear', 'cubic', 'cubic_spline',
           'lanczos', 'mode', 'gauss',  'max', 'min', 'med', 'q1', 'q3'
 
         Defaults to: ::
 
-          {"categorical": "nearest", "continuous": "nearest"}
+          {
+            "nominal": "nearest",
+            "ordinal": "nearest",
+            "binary": "nearest",
+            "numerical": "nearest"
+          }
 
   """
 
@@ -366,12 +390,16 @@ class GeotiffArchive(Datacube):
   def _default_config(self):
     return {
       "value_type_mapping": {
-        "categorical": "ordinal",
-        "continuous": "numerical"
+        "nominal": "nominal",
+        "ordinal": "ordinal",
+        "binary": "binary",
+        "numerical": "numerical"
       },
       "resamplers": {
-        "categorical": "nearest",
-        "continuous": "nearest"
+        "nominal": "nearest",
+        "ordinal": "nearest",
+        "binary": "nearest",
+        "numerical": "nearest"
       }
     }
 
