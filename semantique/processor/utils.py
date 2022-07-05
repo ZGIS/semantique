@@ -5,8 +5,8 @@ import xarray as xr
 def get_null(x):
   """Return the appropriate nodata value for an array.
 
-  For arrays of datetime values ``NaT`` is returned. For other arrays ``nan``
-  is returned.
+  For arrays of datetime values NaT (not a time) is returned. For other arrays
+  NaN (not a number) is returned.
 
   Parameters
   ----------
@@ -136,7 +136,7 @@ def parse_extent(spatial_extent, temporal_extent, spatial_resolution,
       Temporal extent.
     spatial_resolution : :obj:`list`
       Spatial resolution of the array. Should be given as a list in the format
-      `[y, x]`, where y is the cell size along the y-axis, x is the cell size
+      *[y, x]*, where y is the cell size along the y-axis, x is the cell size
       along the x-axis, and both are given as :obj:`int` or :obj:`float`
       value expressed in the units of the CRS. These values should include
       the direction of the axes. For most CRSs, the y-axis has a negative
@@ -199,8 +199,8 @@ def parse_datetime_component(name, obj):
 
   The `datetime accessors`_ of :obj:`xarray.DataArray` objects are treated in
   semantique as a component of the temporal dimension. Parsing them includes
-  adding :attr:`value_type <semantique.processor.arrays.SemanticArray.value_type>`
-  and :attr:`value_label <semantique.processor.arrays.SemanticArray.value_labels>`
+  adding :attr:`value_type <semantique.processor.arrays.Array.value_type>`
+  and :attr:`value_label <semantique.processor.arrays.Array.value_labels>`
   properties as well as in some cases re-organize the values in the array.
 
   Parameters
@@ -278,7 +278,7 @@ def parse_coords_component(obj):
   objects are treated in semantique as components of a stacked spatial
   dimension, i.e. a multi-indexed dimension. Parsing these individual
   coordinate arrays includes adding a relevant
-  :attr:`value_type <semantique.processor.arrays.SemanticArray.value_type>`
+  :attr:`value_type <semantique.processor.arrays.Array.value_type>`
   property.
 
   Parameters

@@ -13,7 +13,7 @@ from semantique import exceptions
 from semantique.processor import operators, utils
 
 @xr.register_dataarray_accessor("sq")
-class SemanticArray():
+class Array():
   """Internal representation of a semantic array.
 
   This data structure is modelled as an accessor of :class:`xarray.DataArray`.
@@ -1112,10 +1112,9 @@ class Collection(list):
     """self: Semantique accessor.
 
     This is merely provided to ensure compatible behaviour with
-    :obj:`SemanticArray <semantique.processor.arrays.SemanticArray>`
-    objects, which are modelled as an accessor to :obj:`xarray.DataArray`
-    objects. It allows to call all other properties and methods through the
-    prefix ``.sq``.
+    :obj:`Array <semantique.processor.arrays.Array>` objects, which are
+    modelled as an accessor to :obj:`xarray.DataArray` objects. It allows to
+    call all other properties and methods through the prefix ``.sq``.
 
     """
     return self
@@ -1296,7 +1295,7 @@ class Collection(list):
   def evaluate(self, operator, y = None, track_types = True, **kwargs):
     """Apply the evaluate verb to all arrays in the collection.
 
-    See :meth:`SemanticArray.evaluate`
+    See :meth:`Array.evaluate`
 
     Returns
     -------
@@ -1311,7 +1310,7 @@ class Collection(list):
   def extract(self, dimension, component = None, **kwargs):
     """Apply the extract verb to all arrays in the collection.
 
-    See :meth:`SemanticArray.extract`
+    See :meth:`Array.extract`
 
     Returns
     -------
@@ -1326,7 +1325,7 @@ class Collection(list):
   def filter(self, filterer, trim = True, track_types = True, **kwargs):
     """Apply the filter verb to all arrays in the collection.
 
-    See :meth:`SemanticArray.filter`
+    See :meth:`Array.filter`
 
     Returns
     -------
@@ -1341,7 +1340,7 @@ class Collection(list):
   def assign(self, y, at = None, track_types = True, **kwargs):
     """Apply the assign verb to all arrays in the collection.
 
-    See :meth:`SemanticArray.assign`
+    See :meth:`Array.assign`
 
     Returns
     -------
@@ -1356,7 +1355,7 @@ class Collection(list):
   def reduce(self, dimension, reducer, track_types = True, **kwargs):
     """Apply the reduce verb to all arrays in the collection.
 
-    See :meth:`SemanticArray.reduce`
+    See :meth:`Array.reduce`
 
     Returns
     -------
@@ -1371,7 +1370,7 @@ class Collection(list):
   def shift(self, dimension, steps, **kwargs):
     """Apply the shift verb to all arrays in the collection.
 
-    See :meth:`SemanticArray.shift`
+    See :meth:`Array.shift`
 
     Returns
     -------
@@ -1386,7 +1385,7 @@ class Collection(list):
   def smooth(self, dimension, reducer, size, track_types = True, **kwargs):
     """Apply the smooth verb to all arrays in the collection.
 
-    See :meth:`SemanticArray.smooth`
+    See :meth:`Array.smooth`
 
     Returns
     -------
@@ -1401,7 +1400,7 @@ class Collection(list):
   def name(self, value, **kwargs):
     """Apply the name verb to all arrays in the collection.
 
-    See :meth:`SemanticArray.name`
+    See :meth:`Array.name`
 
     Returns
     -------
@@ -1415,7 +1414,7 @@ class Collection(list):
   def trim(self, force_regular = True):
     """Trim the dimensions of all arrays in the collection.
 
-    See :meth:`SemanticArray.trim`
+    See :meth:`Array.trim`
 
     Returns
     -------
@@ -1429,7 +1428,7 @@ class Collection(list):
   def regularize(self):
     """Regularize the spatial dimension of all arrays in the collection.
 
-    See :meth:`SemanticArray.regularize`
+    See :meth:`Array.regularize`
 
     Returns
     -------
@@ -1443,7 +1442,7 @@ class Collection(list):
   def stack_spatial_dims(self, name = "space"):
     """Stack the spatial dimensions for all arrays in the collection.
 
-    See :meth:`SemanticArray.stack_spatial_dims`
+    See :meth:`Array.stack_spatial_dims`
 
     Returns
     -------
@@ -1457,7 +1456,7 @@ class Collection(list):
   def unstack_spatial_dims(self):
     """Unstack the spatial dimensions for all arrays in the collection.
 
-    See :meth:`SemanticArray.unstack_spatial_dims`
+    See :meth:`Array.unstack_spatial_dims`
 
     Returns
     -------

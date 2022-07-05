@@ -29,10 +29,9 @@ class Interval(list):
     """self: Semantique accessor.
 
     This is merely provided to ensure compatible behaviour with
-    :obj:`SemanticArray <semantique.processor.arrays.SemanticArray>`
-    objects, which are modelled as an accessor to :obj:`xarray.DataArray`
-    objects. It allows to call all other properties and methods through the
-    prefix ``.sq``.
+    :obj:`Array <semantique.processor.arrays.Array>` objects, which are
+    modelled as an accessor to :obj:`xarray.DataArray` objects. It allows to
+    call all other properties and methods through the prefix ``.sq``.
 
     """
     return self

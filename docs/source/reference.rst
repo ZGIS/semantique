@@ -165,7 +165,7 @@ Array objects
    :template: inherited.rst
    :nosignatures:
 
-   processor.arrays.SemanticArray
+   processor.arrays.Array
    processor.arrays.Collection
 
 Special value objects
