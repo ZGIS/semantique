@@ -1,6 +1,0 @@
-﻿semantique.processor.arrays.SemanticArray.extract
-=================================================
-
-.. currentmodule:: semantique.processor.arrays
-
-.. automethod:: SemanticArray.extract

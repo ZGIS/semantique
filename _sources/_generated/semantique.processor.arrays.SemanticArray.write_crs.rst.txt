@@ -1,6 +1,0 @@
-﻿semantique.processor.arrays.SemanticArray.write\_crs
-====================================================
-
-.. currentmodule:: semantique.processor.arrays
-
-.. automethod:: SemanticArray.write_crs

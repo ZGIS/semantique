@@ -1,6 +1,0 @@
-﻿semantique.processor.arrays.SemanticArray.write\_tz
-===================================================
-
-.. currentmodule:: semantique.processor.arrays
-
-.. automethod:: SemanticArray.write_tz

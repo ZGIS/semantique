@@ -1,6 +1,0 @@
-﻿semantique.processor.arrays.SemanticArray.grid\_points
-======================================================
-
-.. currentmodule:: semantique.processor.arrays
-
-.. autoproperty:: SemanticArray.grid_points

@@ -1,6 +1,0 @@
-﻿semantique.processor.arrays.SemanticArray.to\_geotiff
-=====================================================
-
-.. currentmodule:: semantique.processor.arrays
-
-.. automethod:: SemanticArray.to_geotiff

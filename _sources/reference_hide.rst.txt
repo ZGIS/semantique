@@ -108,39 +108,36 @@
    processor.core.QueryProcessor.get_reducer
    processor.core.QueryProcessor.store_default_reducers
 
-   processor.arrays.SemanticArray.value_type
-   processor.arrays.SemanticArray.value_labels
-   processor.arrays.SemanticArray.crs
-   processor.arrays.SemanticArray.spatial_resolution
-   processor.arrays.SemanticArray.tz
-   processor.arrays.SemanticArray.is_empty
-   processor.arrays.SemanticArray.temporal_dimension
-   processor.arrays.SemanticArray.spatial_dimension
-   processor.arrays.SemanticArray.grid_points
-   processor.arrays.SemanticArray.evaluate
-   processor.arrays.SemanticArray.extract
-   processor.arrays.SemanticArray.filter
-   processor.arrays.SemanticArray.assign
-   processor.arrays.SemanticArray.groupby
-   processor.arrays.SemanticArray.reduce
-   processor.arrays.SemanticArray.shift
-   processor.arrays.SemanticArray.smooth
-   processor.arrays.SemanticArray.name
-   processor.arrays.SemanticArray.align_with
-   processor.arrays.SemanticArray.trim
-   processor.arrays.SemanticArray.regularize
-   processor.arrays.SemanticArray.reproject
-   processor.arrays.SemanticArray.tz_convert
-   processor.arrays.SemanticArray.write_crs
-   processor.arrays.SemanticArray.write_tz
-   processor.arrays.SemanticArray.find_spatial_dims
-   processor.arrays.SemanticArray.stack_spatial_dims
-   processor.arrays.SemanticArray.unstack_spatial_dims
-   processor.arrays.SemanticArray.drop_non_dimension_coords
-   processor.arrays.SemanticArray.to_dataframe
-   processor.arrays.SemanticArray.to_geodataframe
-   processor.arrays.SemanticArray.to_csv
-   processor.arrays.SemanticArray.to_geotiff
+   processor.arrays.Array.value_type
+   processor.arrays.Array.value_labels
+   processor.arrays.Array.crs
+   processor.arrays.Array.spatial_resolution
+   processor.arrays.Array.tz
+   processor.arrays.Array.is_empty
+   processor.arrays.Array.grid_points
+   processor.arrays.Array.evaluate
+   processor.arrays.Array.extract
+   processor.arrays.Array.filter
+   processor.arrays.Array.assign
+   processor.arrays.Array.groupby
+   processor.arrays.Array.reduce
+   processor.arrays.Array.shift
+   processor.arrays.Array.smooth
+   processor.arrays.Array.name
+   processor.arrays.Array.align_with
+   processor.arrays.Array.trim
+   processor.arrays.Array.regularize
+   processor.arrays.Array.reproject
+   processor.arrays.Array.tz_convert
+   processor.arrays.Array.write_crs
+   processor.arrays.Array.write_tz
+   processor.arrays.Array.stack_spatial_dims
+   processor.arrays.Array.unstack_spatial_dims
+   processor.arrays.Array.drop_non_dimension_coords
+   processor.arrays.Array.to_dataframe
+   processor.arrays.Array.to_geodataframe
+   processor.arrays.Array.to_csv
+   processor.arrays.Array.to_geotiff
 
    processor.arrays.Collection.sq
    processor.arrays.Collection.is_empty
