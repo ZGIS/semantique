@@ -3,7 +3,7 @@ MEAN = "mean"
 
 This reducer function calculates the mean of a set of values.
 
-See: :func:`processor.operators.mean_`
+See: :func:`semantique.processor.reducers.mean_`
 
 """
 
@@ -12,7 +12,7 @@ MEDIAN = "median"
 
 This reducer function calculates the median value in a set.
 
-See: :func:`processor.operators.median_`
+See: :func:`semantique.processor.reducers.median_`
 
 """
 
@@ -21,7 +21,7 @@ MODE = "mode"
 
 This reducer function returns the most occuring value in a set.
 
-See: :func:`processor.operators.mode_`
+See: :func:`semantique.processor.reducers.mode_`
 
 """
 
@@ -30,7 +30,7 @@ MAX = "max"
 
 This reducer function returns the maximum value in a set.
 
-See: :func:`processor.operators.max_`
+See: :func:`semantique.processor.reducers.max_`
 
 """
 
@@ -39,7 +39,7 @@ MIN = "min"
 
 This reducer function returns the minimum value in a set.
 
-See: :func:`processor.operators.min_`
+See: :func:`semantique.processor.reducers.min_`
 
 """
 
@@ -49,7 +49,7 @@ RANGE = "range"
 This reducer function returns the difference between the maximum and minimum
 values in a set.
 
-See: :func:`processor.operators.range_`
+See: :func:`semantique.processor.reducers.range_`
 
 """
 
@@ -58,7 +58,7 @@ N = "n"
 
 This reducer function returns the number of observations in a set.
 
-See: :func:`processor.operators.n_`
+See: :func:`semantique.processor.reducers.n_`
 
 """
 
@@ -67,7 +67,7 @@ PRODUCT = "product"
 
 This reducer function calculates the product of a set of values.
 
-See: :func:`processor.operators.product_`
+See: :func:`semantique.processor.reducers.product_`
 
 """
 
@@ -76,7 +76,7 @@ STANDARD_DEVIATION = "standard_deviation"
 
 This reducer function calculates the standard deviation of a set of values.
 
-See: :func:`processor.operators.standard_deviation_`
+See: :func:`semantique.processor.reducers.standard_deviation_`
 
 """
 
@@ -85,7 +85,7 @@ SUM = "sum"
 
 This reducer function calculates the sum of a set of values.
 
-See: :func:`processor.operators.sum_`
+See: :func:`semantique.processor.reducers.sum_`
 
 """
 
@@ -94,7 +94,7 @@ VARIANCE = "variance"
 
 This reducer function calculates the variance of a set of values.
 
-See: :func:`processor.operators.variance_`
+See: :func:`semantique.processor.reducers.variance_`
 
 """
 
@@ -103,7 +103,7 @@ ALL = "all"
 
 This reducer function tests if all values in a set are true.
 
-See: :func:`processor.operators.all_`
+See: :func:`semantique.processor.reducers.all_`
 
 """
 
@@ -112,7 +112,7 @@ ANY = "any"
 
 This reducer function tests if at least one value in a set is true.
 
-See: :func:`processor.operators.any_`
+See: :func:`semantique.processor.reducers.any_`
 
 """
 
@@ -121,7 +121,7 @@ NONE = "none"
 
 This reducer function tests if none of the values in a set are true.
 
-See: :func:`processor.operators.none_`
+See: :func:`semantique.processor.reducers.none_`
 
 """
 
@@ -130,7 +130,7 @@ COUNT = "count"
 
 This reducer function counts the number of true values in a set.
 
-See: :func:`processor.operators.count_`
+See: :func:`semantique.processor.reducers.count_`
 
 """
 
@@ -139,7 +139,7 @@ PERCENTAGE = "percentage"
 
 This reducer function calculates the percentage of true values in a set.
 
-See: :func:`processor.operators.percentage_`
+See: :func:`semantique.processor.reducers.percentage_`
 
 """
 
@@ -148,7 +148,7 @@ FIRST = "first"
 
 This reducer function returns the first value in a set.
 
-See: :func:`processor.operators.first_`
+See: :func:`semantique.processor.reducers.first_`
 
 """
 
@@ -157,6 +157,6 @@ LAST = "last"
 
 This reducer function returns the last value in a set.
 
-See: :func:`processor.operators.last_`
+See: :func:`semantique.processor.reducers.last_`
 
 """

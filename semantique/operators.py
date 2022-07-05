@@ -3,7 +3,7 @@ NOT = "not"
 
 This operator tests if x is not true.
 
-See: :func:`processor.operators.not_`
+See: :func:`semantique.processor.operators.not_`
 
 """
 
@@ -12,7 +12,7 @@ IS_MISSING = "is_missing"
 
 This operator tests if x is a missing observation.
 
-See: :func:`processor.operators.is_missing_`
+See: :func:`semantique.processor.operators.is_missing_`
 
 """
 
@@ -21,7 +21,7 @@ NOT_MISSING = "not_missing"
 
 This operator tests if x is a valid observation.
 
-See: :func:`processor.operators.not_missing_`
+See: :func:`semantique.processor.operators.not_missing_`
 
 """
 
@@ -30,7 +30,7 @@ ABSOLUTE = "absolute"
 
 This operator computes the absolute value of x.
 
-See: :func:`processor.operators.absolute_`
+See: :func:`semantique.processor.operators.absolute_`
 
 """
 
@@ -39,7 +39,7 @@ CEILING = "ceiling"
 
 This operator computes the ceiling of x.
 
-See: :func:`processor.operators.ceiling_`
+See: :func:`semantique.processor.operators.ceiling_`
 
 """
 
@@ -48,7 +48,7 @@ CUBE_ROOT = "cube_root"
 
 This operator computes the cube root of x.
 
-See: :func:`processor.operators.cube_root_`
+See: :func:`semantique.processor.operators.cube_root_`
 
 """
 
@@ -57,7 +57,7 @@ EXPONENTIAL = "exponential"
 
 This operator computes the exponential function of x.
 
-See: :func:`processor.operators.exponential_`
+See: :func:`semantique.processor.operators.exponential_`
 
 """
 
@@ -66,7 +66,7 @@ FLOOR = "floor"
 
 This operator computes the floor of x.
 
-See: :func:`processor.operators.floor_`
+See: :func:`semantique.processor.operators.floor_`
 
 """
 
@@ -75,7 +75,7 @@ NATURAL_LOGARITHM = "natural_logarithm"
 
 This operator computes the natural logarithm of x.
 
-See: :func:`processor.operators.natural_logarithm_`
+See: :func:`semantique.processor.operators.natural_logarithm_`
 
 """
 
@@ -84,7 +84,7 @@ SQUARE_ROOT = "square_root"
 
 This operator computes the square root of x.
 
-See: :func:`processor.operators.square_root_`
+See: :func:`semantique.processor.operators.square_root_`
 
 """
 
@@ -93,7 +93,7 @@ ADD = "add"
 
 This operator adds y to x.
 
-See: :func:`processor.operators.add_`
+See: :func:`semantique.processor.operators.add_`
 
 """
 
@@ -102,7 +102,7 @@ DIVIDE = "divide"
 
 This operator divides x by y.
 
-See: :func:`processor.operators.divide_`
+See: :func:`semantique.processor.operators.divide_`
 
 """
 
@@ -111,7 +111,7 @@ MULTIPLY = "multiply"
 
 This operator multiplies x by y.
 
-See: :func:`processor.operators.multiply_`
+See: :func:`semantique.processor.operators.multiply_`
 
 """
 
@@ -120,7 +120,7 @@ POWER = "power"
 
 This operator raises x to the yth power.
 
-See: :func:`processor.operators.power_`
+See: :func:`semantique.processor.operators.power_`
 
 """
 
@@ -129,7 +129,7 @@ SUBTRACT = "subtract"
 
 This operator subtracts y from x.
 
-See: :func:`processor.operators.subtract_`
+See: :func:`semantique.processor.operators.subtract_`
 
 """
 
@@ -138,7 +138,7 @@ NORMALIZED_DIFFERENCE = "normalized_difference"
 
 This operator computes the normalized difference between x and y.
 
-See: :func:`processor.operators.normalized_difference_`
+See: :func:`semantique.processor.operators.normalized_difference_`
 
 """
 
@@ -147,7 +147,7 @@ AND = "and"
 
 This operator tests if both x and y are true.
 
-See: :func:`processor.operators.and_`
+See: :func:`semantique.processor.operators.and_`
 
 """
 
@@ -156,7 +156,7 @@ OR = "or"
 
 This operator tests if at least one of x and y are true.
 
-See: :func:`processor.operators.or_`
+See: :func:`semantique.processor.operators.or_`
 
 """
 
@@ -165,7 +165,7 @@ EXCLUSIVE_OR = "exclusive_or"
 
 This operator tests if either x or y is true but not both.
 
-See: :func:`processor.operators.exclusive_or_`
+See: :func:`semantique.processor.operators.exclusive_or_`
 
 """
 
@@ -174,7 +174,7 @@ EQUAL = "equal"
 
 This operator tests if x is equal to y.
 
-See: :func:`processor.operators.equal_`
+See: :func:`semantique.processor.operators.equal_`
 
 """
 
@@ -183,7 +183,7 @@ IN = "in"
 
 This operator tests if x is a member of set y.
 
-See: :func:`processor.operators.in_`
+See: :func:`semantique.processor.operators.in_`
 
 """
 
@@ -192,7 +192,7 @@ NOT_EQUAL = "not_equal"
 
 This operator tests if x is not equal to y.
 
-See: :func:`processor.operators.not_equal_`
+See: :func:`semantique.processor.operators.not_equal_`
 
 """
 
@@ -201,7 +201,7 @@ NOT_IN = "not_in"
 
 This operator tests if x is not a member of set y.
 
-See: :func:`processor.operators.not_in_`
+See: :func:`semantique.processor.operators.not_in_`
 
 """
 
@@ -210,7 +210,7 @@ GREATER = "greater"
 
 This operator tests if x is greater than y.
 
-See: :func:`processor.operators.greater_`
+See: :func:`semantique.processor.operators.greater_`
 
 """
 
@@ -219,7 +219,7 @@ GREATER_EQUAL = "greater_equal"
 
 This operator tests if x is greater than or equal to y.
 
-See: :func:`processor.operators.greater_equal_`
+See: :func:`semantique.processor.operators.greater_equal_`
 
 """
 
@@ -228,7 +228,7 @@ LESS = "less"
 
 This operator tests if x is less than y.
 
-See: :func:`processor.operators.less_`
+See: :func:`semantique.processor.operators.less_`
 
 """
 
@@ -237,7 +237,7 @@ LESS_EQUAL = "less_equal"
 
 This operator tests if x is less than or equal to y.
 
-See: :func:`processor.operators.less_equal_`
+See: :func:`semantique.processor.operators.less_equal_`
 
 """
 
@@ -246,7 +246,7 @@ INTERSECTS = "intersects"
 
 This operator tests if x spatially intersects with y.
 
-See: :func:`processor.operators.intersects_`
+See: :func:`semantique.processor.operators.intersects_`
 
 """
 
@@ -255,7 +255,7 @@ AFTER = "after"
 
 This operator tests if x comes after y.
 
-See: :func:`processor.operators.after_`
+See: :func:`semantique.processor.operators.after_`
 
 """
 
@@ -264,7 +264,7 @@ BEFORE = "before"
 
 This operator tests if x comes before y.
 
-See: :func:`processor.operators.before_`
+See: :func:`semantique.processor.operators.before_`
 
 """
 
@@ -273,6 +273,6 @@ DURING = "during"
 
 This operator tests if x is during interval y.
 
-See: :func:`processor.operators.during_`
+See: :func:`semantique.processor.operators.during_`
 
 """

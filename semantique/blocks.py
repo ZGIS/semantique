@@ -81,7 +81,7 @@ class ArrayProxy(dict):
         Ignored when the operator is univariate.
       **kwargs:
         Additional keyword arguments passed on to
-        :meth:`Array.evaluate> <processor.arrays.Array.evaluate>`.
+        :meth:`Array.evaluate <processor.arrays.Array.evaluate>`.
 
     Returns
     --------
@@ -243,7 +243,7 @@ class ArrayProxy(dict):
     return self._append_verb("filter", **kwargs)
 
   def assign(self, y, at = None, **kwargs):
-    """Assign new values to the pixels in the array.
+    """Assign new values to the pixels in an array.
 
     Assigns a new value to each non-missing observation in the input, without
     any computation. Optionally, it assigns these new values only to a subset
@@ -491,7 +491,7 @@ class ArrayProxy(dict):
     return self._append_verb("reduce", **kwargs)
 
   def shift(self, dimension, steps, coord = None, **kwargs):
-    """Shift the values in an array.
+    """Shift the values in an array along a dimension.
 
     Shifts the pixel values a given number of steps along a given dimension.
 
@@ -530,7 +530,7 @@ class ArrayProxy(dict):
     return self._append_verb("shift", **kwargs)
 
   def smooth(self, dimension, reducer, size, coord = None, **kwargs):
-    """Smooth the values in an array.
+    """Smooth the values in an array through a moving window.
 
     Smoothes the pixel values by applying a moving window function along a
     given dimension.
