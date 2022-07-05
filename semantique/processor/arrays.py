@@ -464,7 +464,7 @@ class Array():
     out = reducer(self._obj, track_types = track_types, dim = dimension, **kwargs)
     return out
 
-  def shift(self, dimension, steps, coord = None, **kwargs):
+  def shift(self, dimension, steps, coord = None, trim = False, **kwargs):
     """Apply the shift verb to the array.
 
     The shift verb shifts the values in an array a given amount of steps along
@@ -484,6 +484,11 @@ class Array():
         :obj:`None`, a shift along the spatial dimension follows the pixel
         order defined by the CRS, e.g. starting in the top-left and moving down
         each column. Ignored when ``dimension`` is not the spatial dimension.
+      trim : :obj:`bool`
+        Should the shifted array be trimmed before returning? Trimming means
+        that dimension coordinates for which all values are missing are removed
+        from the array. The spatial dimension is treated differently, by
+        trimming it only at the edges, and thus maintaining its regularity.
       **kwargs:
         Ignored.
 
@@ -513,10 +518,13 @@ class Array():
       out = obj.shift({coord: steps}).sq.stack_spatial_dims(name = dimension)
     else:
       out = self._obj.shift({dimension: steps})
+    # Trim and return.
+    if trim:
+      out = out.sq.trim()
     return out
 
-  def smooth(self, dimension, reducer, size, coord = None, track_types = True,
-             **kwargs):
+  def smooth(self, dimension, reducer, size, coord = None, trim = False,
+             track_types = True, **kwargs):
     """Apply the smooth verb to the array.
 
     The smooth verb smoothes the values in an array by applying a reducer
@@ -541,6 +549,11 @@ class Array():
         :obj:`None`, the window is constructed in both directions, forming a
         two-dimensional square. Ignored when ``dimension`` is not the spatial
         dimension.
+      trim : :obj:`bool`
+        Should the smoothed array be trimmed before returning? Trimming means
+        that dimension coordinates for which all values are missing are removed
+        from the array. The spatial dimension is treated differently, by
+        trimming it only at the edges, and thus maintaining its regularity.
       track_types : :obj:`bool`
         Should the reducer promote the value type of the output object, based
         on the value type of the input object?
@@ -591,6 +604,9 @@ class Array():
     if spatial:
       out = out.stack({dimension: [y_dim, x_dim]})
       out[dimension].sq.value_type = "coords"
+    # Trim and return.
+    if trim:
+      out = out.sq.trim()
     return out
 
   def name(self, value, **kwargs):
@@ -1414,7 +1430,7 @@ class Collection(list):
     out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
     return out
 
-  def shift(self, dimension, steps, **kwargs):
+  def shift(self, dimension, steps, coord = None, trim = False, **kwargs):
     """Apply the shift verb to all arrays in the collection.
 
     See :meth:`Array.shift`
@@ -1424,12 +1440,13 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([dimension, steps])
+    args = tuple([dimension, steps, coord, trim])
     out = copy.deepcopy(self)
     out[:] = [x.sq.shift(*args, **kwargs) for x in out]
     return out
 
-  def smooth(self, dimension, reducer, size, track_types = True, **kwargs):
+  def smooth(self, dimension, reducer, size, coord = None, trim = False,
+             track_types = True, **kwargs):
     """Apply the smooth verb to all arrays in the collection.
 
     See :meth:`Array.smooth`
@@ -1439,7 +1456,7 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([dimension, reducer, size, track_types])
+    args = tuple([dimension, reducer, size, coord, trim, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.smooth(*args, **kwargs) for x in out]
     return out
