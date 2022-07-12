@@ -12,10 +12,17 @@ import warnings
 from semantique import exceptions
 from semantique.processor import operators, utils
 
-SPACE = "space"
 TIME = "time"
+""":obj:`str` : Reserved name for the temporal dimension."""
+
+SPACE = "space"
+""":obj:`str` : Reserved name for the stacked spatial (X, Y) dimension."""
+
 X = "x"
+""":obj:`str` : Reserved name for the spatial X dimension."""
+
 Y = "y"
+""":obj:`str` : Reserved name for the spatial Y dimension."""
 
 @xr.register_dataarray_accessor("sq")
 class Array():
