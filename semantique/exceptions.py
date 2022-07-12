@@ -169,6 +169,17 @@ class MixedDimensionsError(Exception):
   """
   pass
 
+class ReservedDimensionError(Exception):
+  """Raised when a reserved dimension name is being used for a new dimension.
+
+  This occurs in functions that can add a new dimension to an array, such as
+  the concatenate verb. Semantique reserves specific dimension names for
+  respectively the temporal dimension and the spatial dimensions. These names
+  should not be used for any other dimension.
+
+  """
+  pass
+
 class MixedTimeZonesError(Exception):
   """Raised when the bounds of a time interval have differing time zones.
 

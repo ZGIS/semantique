@@ -26,7 +26,7 @@ Y = "y"
 
 @xr.register_dataarray_accessor("sq")
 class Array():
-  """Internal representation of a semantic array.
+  """Internal representation of a multi-dimensional array.
 
   This data structure is modelled as an accessor of :class:`xarray.DataArray`.
   Using accessors instead of the common class inheritance is recommended by the
@@ -1095,7 +1095,7 @@ class Array():
     return file
 
 class Collection(list):
-  """Internal representation of a collection of multiple semantic arrays.
+  """Internal representation of a collection of multiple arrays.
 
   Parameters
   ----------
@@ -1203,6 +1203,14 @@ class Collection(list):
         If ``track_types = True`` and the value types of the arrays in the
         collection are not all equal to each other.
 
+      :obj:`exceptions.MissingDimensionError`
+        If the dimension to concatenate along exists in some but not all
+        arrays in the collection.
+
+      :obj:`exceptions.ReservedDimensionError`
+        If the new dimension to concatenate along has one of the names that
+        semantique reserves for the temporal dimension or spatial dimensions.
+
     """
     # Check value types.
     if track_types:
@@ -1228,6 +1236,11 @@ class Collection(list):
         )
     else:
       # Concatenate over new dimension.
+      if dimension in [TIME, SPACE, X, Y]:
+        raise exceptions.ReservedDimensionError(
+          f"Dimension name '{dimension}' is reserved and should not be used "
+          "as a new dimension name"
+        )
       names = [x.name for x in self]
       coords = pd.Index(names, name = dimension, tupleize_cols = False)
       out = xr.concat([x for x in self], coords)
