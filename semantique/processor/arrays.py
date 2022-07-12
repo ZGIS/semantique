@@ -235,7 +235,7 @@ class Array():
       del out.sq.value_labels
     return out
 
-  def filter(self, filterer, trim = False, track_types = True, **kwargs):
+  def filter(self, filterer, track_types = True, **kwargs):
     """Apply the filter verb to the array.
 
     The filter verb filters the values in an array.
@@ -247,11 +247,6 @@ class Array():
         Each pixel in the input array will be kept if the pixel in the filterer
         with the same dimension coordinates is true, and dropped otherwise
         (i.e. assigned a missing data value).
-      trim : :obj:`bool`
-        Should the filtered array be trimmed before returning? Trimming means
-        that dimension coordinates for which all values are missing are removed
-        from the array. The spatial dimension is treated differently, by
-        trimming it only at the edges, and thus maintaining its regularity.
       track_types : :obj:`bool`
         Should it be checked that the filterer has value type *binary*?
       **kwargs:
@@ -279,8 +274,6 @@ class Array():
     filterer.values = utils.null_as_zero(filterer)
     # Apply filter.
     out = self._obj.where(filterer.sq.align_with(self._obj))
-    if trim:
-      out = out.sq.trim()
     return out
 
   def assign(self, y, at = None, track_types = True, **kwargs):
@@ -456,7 +449,7 @@ class Array():
     out = reducer(self._obj, track_types = track_types, dim = dimension, **kwargs)
     return out
 
-  def shift(self, dimension, steps, coord = None, trim = False, **kwargs):
+  def shift(self, dimension, steps, coord = None, **kwargs):
     """Apply the shift verb to the array.
 
     The shift verb shifts the values in an array a given amount of steps along
@@ -476,11 +469,6 @@ class Array():
         :obj:`None`, a shift along the spatial dimension follows the pixel
         order defined by the CRS, e.g. starting in the top-left and moving down
         each column. Ignored when ``dimension`` is not the spatial dimension.
-      trim : :obj:`bool`
-        Should the shifted array be trimmed before returning? Trimming means
-        that dimension coordinates for which all values are missing are removed
-        from the array. The spatial dimension is treated differently, by
-        trimming it only at the edges, and thus maintaining its regularity.
       **kwargs:
         Ignored.
 
@@ -510,13 +498,10 @@ class Array():
       out = obj.shift({coord: steps}).sq.stack_spatial_dims()
     else:
       out = self._obj.shift({dimension: steps})
-    # Trim and return.
-    if trim:
-      out = out.sq.trim()
     return out
 
-  def smooth(self, dimension, reducer, size, coord = None, trim = False,
-             track_types = True, **kwargs):
+  def smooth(self, dimension, reducer, size, coord = None, track_types = True,
+             **kwargs):
     """Apply the smooth verb to the array.
 
     The smooth verb smoothes the values in an array by applying a reducer
@@ -541,11 +526,6 @@ class Array():
         :obj:`None`, the window is constructed in both directions, forming a
         two-dimensional square. Ignored when ``dimension`` is not the spatial
         dimension.
-      trim : :obj:`bool`
-        Should the smoothed array be trimmed before returning? Trimming means
-        that dimension coordinates for which all values are missing are removed
-        from the array. The spatial dimension is treated differently, by
-        trimming it only at the edges, and thus maintaining its regularity.
       track_types : :obj:`bool`
         Should the reducer promote the value type of the output object, based
         on the value type of the input object?
@@ -589,11 +569,81 @@ class Array():
       obj = self._obj.rolling({dimension: size}, center = True)
     # Apply the reducer to each window.
     out = reducer(obj, track_types = track_types, **kwargs)
-    # Stack, trim and return.
+    # Stack and return.
     if spatial:
       out = out.sq.stack_spatial_dims()
-    if trim:
-      out = out.sq.trim()
+    return out
+
+  def trim(self, dimension = None, force_regular = True):
+    """Apply the trim verb to the array.
+
+    The trim verb trims the dimensions of an array, meaning that all dimension
+    coordinates for which all values are missing are removed from the array.
+
+    Parameters
+    ----------
+      dimension : :obj:`str`
+        Name of the dimension to be trimmed. If :obj:`None`, all dimensions
+        will be trimmed.
+      force_regular : :obj:`bool`
+        If the spatial dimension should be trimmed, should the regularity of
+        this dimension be preserved? If :obj:`True` the spatial dimensions are
+        trimmed only at their edges.
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+
+    Raises
+    ------
+      :obj:`exceptions.UnknownDimensionError`
+        If a dimension with the given name is not present in the array.
+
+    """
+    # Determine dimensions to be trimmed.
+    if dimension is None:
+      trim_dims = self._obj.dims # Trim all dims.
+    else:
+      if dimension not in self._obj.dims:
+        raise exceptions.UnknownDimensionError(
+          f"Dimension '{dimension}' is not present in the input object"
+        )
+      trim_dims = [dimension]
+    # Define sub-functions for regular and spatial trimming.
+    def _trim_regular(obj, dims):
+      for dim in dims:
+        other_dims = [d for d in obj.dims if d != dim]
+        out = obj.isel({dim: obj.count(other_dims) > 0})
+        return out
+    def _trim_space(obj, other_dims):
+      # obj = self._obj
+      # # Determine non-spatial dimensions.
+      # other_dims = [d for d in self._obj.dims if d != SPACE]
+      # Find the smallest and largest spatial coords containing valid values.
+      obj = obj.unstack(SPACE)
+      y_idxs = np.nonzero(obj.count(other_dims + [X]).data)[0]
+      x_idxs = np.nonzero(obj.count(other_dims + [Y]).data)[0]
+      y_slice = slice(y_idxs.min(), y_idxs.max() + 1)
+      x_slice = slice(x_idxs.min(), x_idxs.max() + 1)
+      # Limit the x and y coordinates to only those ranges.
+      out = obj.isel({Y: y_slice, X: x_slice})
+      # Stack x and y dimensions back together.
+      out = out.sq.stack_spatial_dims()
+      return out
+    # Trim.
+    obj = self._obj
+    if dimension is not None:
+      if force_regular and dimension == SPACE:
+        other_dims = [d for d in obj.dims if d != SPACE]
+        out = _trim_space(obj, other_dims)
+      else:
+        out = _trim_regular(obj, trim_dims)
+    else:
+      if force_regular and SPACE in obj.dims:
+        other_dims = [d for d in obj.dims if d != SPACE]
+        out = _trim_space(_trim_regular(obj, other_dims), other_dims)
+      else:
+        out = _trim_regular(obj, trim_dims)
     return out
 
   def name(self, value, **kwargs):
@@ -671,50 +721,6 @@ class Array():
         f"cannot be aligned with "
         f"input array '{self._obj.name if self._obj.name is not None else 'x'}'"
       )
-    return out
-
-  def trim(self, force_regular = True):
-    """Trim the dimensions of the array.
-
-    Trimming means that all dimension coordinates for which all values are
-    missing are removed from the array.
-
-    Parameters
-    ----------
-      force_regular : :obj:`bool`
-        If spatial dimensions are present, should the regularity of these
-        dimensions be preserved? If :obj:`True` the spatial dimensions are
-        trimmed only at their edges.
-
-    Returns
-    -------
-      :obj:`xarray.DataArray`
-        The trimmed input array.
-
-    """
-    out = self._obj # Initialize
-    all_dims = out.dims
-    if force_regular and SPACE in all_dims:
-      # Apply regular trimming to all but the spatial dimension.
-      regular_dims = [d for d in all_dims if d != SPACE]
-      for dim in regular_dims:
-        other_dims = [d for d in all_dims if d != dim]
-        out = out.isel({dim: out.count(other_dims) > 0})
-      # Find the smallest and largest spatial coords containing valid values.
-      out = out.unstack(SPACE)
-      y_idxs = np.nonzero(out.count(regular_dims + [X]).data)[0]
-      x_idxs = np.nonzero(out.count(regular_dims + [Y]).data)[0]
-      y_slice = slice(y_idxs.min(), y_idxs.max() + 1)
-      x_slice = slice(x_idxs.min(), x_idxs.max() + 1)
-      # Limit the x and y coordinates to only those ranges.
-      out = out.isel({Y: y_slice, X: x_slice})
-      # Stack x and y dimensions back together.
-      out = out.sq.stack_spatial_dims()
-    else:
-      # Trim all dimensions normally.
-      for dim in all_dims:
-        other_dims = [d for d in all_dims if d != dim]
-        out = out.isel({dim: out.count(other_dims) > 0})
     return out
 
   def regularize(self):
@@ -1335,7 +1341,7 @@ class Collection(list):
     out[:] = [x.sq.extract(*args, **kwargs) for x in out]
     return out
 
-  def filter(self, filterer, trim = True, track_types = True, **kwargs):
+  def filter(self, filterer, track_types = True, **kwargs):
     """Apply the filter verb to all arrays in the collection.
 
     See :meth:`Array.filter`
@@ -1345,7 +1351,7 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([filterer, trim, track_types])
+    args = tuple([filterer, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.filter(*args, **kwargs) for x in out]
     return out
@@ -1380,7 +1386,7 @@ class Collection(list):
     out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
     return out
 
-  def shift(self, dimension, steps, coord = None, trim = False, **kwargs):
+  def shift(self, dimension, steps, coord = None, **kwargs):
     """Apply the shift verb to all arrays in the collection.
 
     See :meth:`Array.shift`
@@ -1390,13 +1396,13 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([dimension, steps, coord, trim])
+    args = tuple([dimension, steps, coord])
     out = copy.deepcopy(self)
     out[:] = [x.sq.shift(*args, **kwargs) for x in out]
     return out
 
-  def smooth(self, dimension, reducer, size, coord = None, trim = False,
-             track_types = True, **kwargs):
+  def smooth(self, dimension, reducer, size, coord = None, track_types = True,
+             **kwargs):
     """Apply the smooth verb to all arrays in the collection.
 
     See :meth:`Array.smooth`
@@ -1406,9 +1412,24 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([dimension, reducer, size, coord, trim, track_types])
+    args = tuple([dimension, reducer, size, coord, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.smooth(*args, **kwargs) for x in out]
+    return out
+
+  def trim(self, dimension = None, force_regular = True, **kwargs):
+    """Apply the trim verb to all arrays in the collection.
+
+    See :meth:`Array.trim`
+
+    Returns
+    -------
+      :obj:`Collection`
+
+    """
+    args = tuple([dimension, force_regular])
+    out = copy.deepcopy(self)
+    out[:] = [x.sq.trim(*args, **kwargs) for x in out]
     return out
 
   def name(self, value, **kwargs):
@@ -1425,20 +1446,6 @@ class Collection(list):
     out[:] = [x.sq.name(value, **kwargs) for x in out]
     return out
 
-  def trim(self, force_regular = True):
-    """Trim the dimensions of all arrays in the collection.
-
-    See :meth:`Array.trim`
-
-    Returns
-    -------
-      :obj:`Collection`
-
-    """
-    out = copy.deepcopy(self)
-    out[:] = [x.sq.trim(force_regular) for x in out]
-    return out
-
   def regularize(self):
     """Regularize the spatial dimension of all arrays in the collection.
 
@@ -1453,7 +1460,7 @@ class Collection(list):
     out[:] = [x.sq.regularize() for x in out]
     return out
 
-  def stack_spatial_dims(self, name = "space"):
+  def stack_spatial_dims(self):
     """Stack the spatial dimensions for all arrays in the collection.
 
     See :meth:`Array.stack_spatial_dims`
@@ -1464,7 +1471,7 @@ class Collection(list):
 
     """
     out = copy.deepcopy(self)
-    out[:] = [x.sq.stack_spatial_dims(name) for x in out]
+    out[:] = [x.sq.stack_spatial_dims() for x in out]
     return out
 
   def unstack_spatial_dims(self):

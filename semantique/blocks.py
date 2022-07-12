@@ -582,6 +582,38 @@ class ArrayProxy(dict):
       kwargs.update({"coord": coord})
     return self._append_verb("smooth", **kwargs)
 
+  def trim(self, dimension = None, **kwargs):
+    """Trim the dimensions of an array.
+
+    Trimming means that all dimension coordinates for which all values are
+    missing are removed from the array. The spatial dimension is treated
+    differently, by trimming it only at the edges, and thus maintaining its
+    regularity.
+
+    Parameters
+    ----------
+      dimension : :obj:`str`
+        Name of the dimension to be trimmed. If :obj:`None`, all dimensions
+        will be trimmed.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :meth:`Array.trim <processor.arrays.Array.trim>`.
+
+    Returns
+    --------
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> import semantique as sq
+    >>> sq.entity("water").trim()
+    >>> sq.entity("water").trim("time")
+
+    """
+    if dimension is not None:
+      kwargs.update({"dimension": dimension})
+    return self._append_verb("trim", **kwargs)
+
   def name(self, value, **kwargs):
     """Give a name to an array.
 
@@ -886,6 +918,20 @@ class CollectionProxy(dict):
     if coord is not None:
       kwargs.update({"coord": coord})
     return self._append_verb("smooth", **kwargs)
+
+  def trim(self, dimension = None, **kwargs):
+    """Apply the trim verb to each array in a collection.
+
+    See :meth:`ArrayProxy.trim`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    """
+    if dimension is not None:
+      kwargs.update({"dimension": dimension})
+    return self._append_verb("trim", **kwargs)
 
 def concept(*reference, property = None):
   """Reference to a semantic concept.

@@ -51,29 +51,12 @@ class QueryProcessor():
       when applying processes, and promote them if necessary? Keeping track of
       value types also means throwing errors whenever a value type is not
       supported by a specific process.
-    trim_filter : :obj:`bool`
-      Should arrays be trimmed after a filter verb is applied to them?
-      Trimming means that dimension coordinates for which all values are
-      missing are removed from the array. The spatial dimension is treated
-      differently, by trimming it only at the edges, and thus maintaining
-      its regularity.
-    trim_results : :obj:`bool`
-      Should result arrays be trimmed before returning the response?
-      Trimming means that dimension coordinates for which all values are
-      missing are removed from the array. The spatial dimension is treated
-      differently, by trimming it only at the edges, and thus maintaining
-      its regularity.
-    unstack_results : :obj:`bool`
-      Should the spatial dimension (if present) in result arrays be
-      unstacked into respectively the separate x and y dimensions before
-      returning the response?
 
   """
 
   def __init__(self, recipe, datacube, mapping, extent, operators = None,
                extra_operators = None, reducers = None, extra_reducers = None,
-               track_types = True, trim_filter = False, trim_results = True,
-               unstack_results = True):
+               track_types = True):
     self._eval_obj = [None]
     self._response = {}
     self.recipe = recipe
@@ -81,9 +64,6 @@ class QueryProcessor():
     self.mapping = mapping
     self.extent = extent
     self.track_types = track_types
-    self.trim_filter = trim_filter
-    self.trim_results = trim_results
-    self.unstack_results = unstack_results
     if operators is None:
       self.store_default_operators()
     else:
@@ -186,33 +166,6 @@ class QueryProcessor():
   @track_types.setter
   def track_types(self, value):
     self._track_types = value
-
-  @property
-  def trim_filter(self):
-    """:obj:`bool`: Are arrays always trimmed after filtering."""
-    return self._trim_filter
-
-  @trim_filter.setter
-  def trim_filter(self, value):
-    self._trim_filter = value
-
-  @property
-  def trim_results(self):
-    """:obj:`bool`: Are result arrays trimmed before returning."""
-    return self._trim_results
-
-  @trim_results.setter
-  def trim_results(self, value):
-    self._trim_results = value
-
-  @property
-  def unstack_results(self):
-    """:obj:`bool`: Are result arrays unstacked before returning."""
-    return self._unstack_results
-
-  @unstack_results.setter
-  def unstack_results(self, value):
-    self._unstack_results = value
 
   @classmethod
   def parse(cls, recipe, datacube, mapping, space, time,
@@ -358,15 +311,9 @@ class QueryProcessor():
 
     """
     logger.info("Started preparing response")
-    # Trim result arrays if requested.
-    # This means we drop all coordinates for which all values are nan.
-    if self._trim_results:
-      trim = lambda x: x.sq.trim()
-      self._response = {k: trim(v) for k, v in self._response.items()}
-    # Unstack spatial dimensions if requested.
-    if self._unstack_results:
-      unstack = lambda x: x.sq.unstack_spatial_dims()
-      self._response = {k: unstack(v) for k, v in self._response.items()}
+    # Unstack spatial dimensions.
+    unstack = lambda x: x.sq.unstack_spatial_dims()
+    self._response = {k: unstack(v) for k, v in self._response.items()}
     # Return.
     out = self._response
     logger.info("Finished preparing response")
@@ -436,8 +383,7 @@ class QueryProcessor():
       eval_obj = self._get_eval_obj(),
       operators = self._operators,
       reducers = self._reducers,
-      track_types = self._track_types,
-      trim_filter = self._trim_filter
+      track_types = self._track_types
     )
     logger.debug(f"Translated concept {block['reference']}:\n{out}")
     return out
@@ -648,7 +594,6 @@ class QueryProcessor():
     # Evaluate filterer reference into an array.
     params["filterer"] = self.call_handler(params["filterer"])
     # Set other function parameters.
-    params["trim"] = self._trim_filter
     params["track_types"] = self._track_types
     # Call verb.
     return self.call_verb("filter", params)
@@ -774,6 +719,22 @@ class QueryProcessor():
     params["track_types"] = self._track_types
     # Call verb.
     return self.call_verb("smooth", params)
+
+  def handle_trim(self, block):
+    """Handler for the trim verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "trim".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+
+    """
+    return self.call_verb("trim", block["params"])
 
   def handle_name(self, block):
     """Handler for the name verb.
