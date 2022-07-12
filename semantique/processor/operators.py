@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 import xarray as xr
 
+from semantique.processor import utils
 from semantique.processor.types import TypePromoter
 from semantique.processor.values import Interval
-from semantique.processor.utils import get_null, null_as_zero
 from semantique.processor.arrays import SPACE
 
 #
@@ -850,7 +850,7 @@ def and_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "and")
     promoter.check()
   def f(x, y):
-    y = null_as_zero(y)
+    y = utils.null_as_zero(y)
     return np.where(pd.notnull(x), np.logical_and(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
@@ -913,7 +913,7 @@ def or_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "or")
     promoter.check()
   def f(x, y):
-    y = null_as_zero(y)
+    y = utils.null_as_zero(y)
     return np.where(pd.notnull(x), np.logical_or(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
@@ -976,7 +976,7 @@ def exclusive_or_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "exclusive_or")
     promoter.check()
   def f(x, y):
-    y = null_as_zero(y)
+    y = utils.null_as_zero(y)
     return np.where(pd.notnull(x), np.logical_xor(x, y), np.nan)
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
@@ -1743,7 +1743,7 @@ def assign_(x, y, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "assign")
     promoter.check()
-  f = lambda x, y: np.where(pd.notnull(x), y, get_null(y))
+  f = lambda x, y: np.where(pd.notnull(x), y, utils.get_null(y))
   y = xr.DataArray(y).sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
@@ -1801,7 +1801,7 @@ def assign_at_(x, y, z, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "assign_at")
     promoter.check()
-  f = lambda x, y, z: np.where(pd.notnull(x), np.where(z, y, x), get_null(y))
+  f = lambda x, y, z: np.where(pd.notnull(x), np.where(z, y, x), utils.get_null(y))
   y = xr.DataArray(y).sq.align_with(x)
   z = z.sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, z, keep_attrs = True)

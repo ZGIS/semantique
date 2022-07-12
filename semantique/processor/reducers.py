@@ -3,8 +3,8 @@ import numpy as np
 
 from scipy import stats
 
+from semantique.processor import utils
 from semantique.processor.types import TypePromoter
-from semantique.processor.utils import get_null, allnull, null_as_zero
 
 #
 # STATISTICAL REDUCERS
@@ -143,7 +143,7 @@ def mode_(x, track_types = True, **kwargs):
     promoter.check()
   def f(x, axis):
     values = stats.mode(x, axis = axis, nan_policy = "omit")[0].squeeze(axis = axis)
-    return np.where(allnull(x, axis), get_null(x), values)
+    return np.where(utils.allnull(x, axis), utils.get_null(x), values)
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -375,7 +375,7 @@ def product_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "product")
     promoter.check()
-  f = lambda x, axis: np.where(allnull(x, axis), np.nan, np.nanprod(x, axis))
+  f = lambda x, axis: np.where(utils.allnull(x, axis), np.nan, np.nanprod(x, axis))
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -463,7 +463,7 @@ def sum_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "sum")
     promoter.check()
-  f = lambda x, axis: np.where(allnull(x, axis), np.nan, np.nansum(x, axis))
+  f = lambda x, axis: np.where(utils.allnull(x, axis), np.nan, np.nansum(x, axis))
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -557,7 +557,7 @@ def all_(x, track_types = True, **kwargs):
     promoter.check()
   def f(x, axis):
     values = np.all(x, axis)
-    return np.where(allnull(x, axis), np.nan, values)
+    return np.where(utils.allnull(x, axis), np.nan, values)
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -607,8 +607,8 @@ def any_(x, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "any")
     promoter.check()
   def f(x, axis):
-    values = np.any(null_as_zero(x), axis)
-    return np.where(allnull(x, axis), np.nan, values)
+    values = np.any(utils.null_as_zero(x), axis)
+    return np.where(utils.allnull(x, axis), np.nan, values)
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -658,8 +658,8 @@ def none_(x, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "none")
     promoter.check()
   def f(x, axis):
-    values = np.logical_not(np.any(null_as_zero(x), axis))
-    return np.where(allnull(x, axis), np.nan, values)
+    values = np.logical_not(np.any(utils.null_as_zero(x), axis))
+    return np.where(utils.allnull(x, axis), np.nan, values)
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -708,8 +708,8 @@ def count_(x, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "count")
     promoter.check()
   def f(x, axis):
-    values = np.count_nonzero(null_as_zero(x), axis)
-    return np.where(allnull(x, axis), np.nan, values)
+    values = np.count_nonzero(utils.null_as_zero(x), axis)
+    return np.where(utils.allnull(x, axis), np.nan, values)
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -760,8 +760,8 @@ def percentage_(x, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "percentage")
     promoter.check()
   def f(x, axis):
-    part = np.count_nonzero(null_as_zero(x), axis)
-    part = np.where(allnull(x, axis), np.nan, part)
+    part = np.count_nonzero(utils.null_as_zero(x), axis)
+    part = np.where(utils.allnull(x, axis), np.nan, part)
     whole = np.sum(pd.notnull(x), axis)
     return np.multiply(np.divide(part, whole), 100)
   out = x.reduce(f, **kwargs)
@@ -820,7 +820,7 @@ def first_(x, track_types = True, **kwargs):
   def f(x, axis):
     is_value = pd.notnull(x)
     is_first = np.equal(np.cumsum(np.cumsum(is_value, axis), axis), 1)
-    return np.nanmax(np.where(is_first, x, get_null(x)), axis)
+    return np.nanmax(np.where(is_first, x, utils.get_null(x)), axis)
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -874,7 +874,7 @@ def last_(x, track_types = True, **kwargs):
     xflipped = np.flip(x, axis)
     is_value = pd.notnull(xflipped)
     is_first = np.equal(np.cumsum(np.cumsum(is_value, axis), axis), 1)
-    return np.nanmax(np.where(is_first, xflipped, get_null(x)), axis)
+    return np.nanmax(np.where(is_first, xflipped, utils.get_null(x)), axis)
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
