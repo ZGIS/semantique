@@ -99,6 +99,7 @@ Verbs for single data cubes
    ArrayProxy.reduce
    ArrayProxy.shift
    ArrayProxy.smooth
+   ArrayProxy.trim
 
 Verbs for data cube collections
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,6 +122,7 @@ Verbs for data cube collections
    CollectionProxy.reduce
    CollectionProxy.shift
    CollectionProxy.smooth
+   CollectionProxy.trim
 
 Utility verbs
 ~~~~~~~~~~~~~~
@@ -504,4 +506,5 @@ Exceptions
    exceptions.TooManyDimensionsError
    exceptions.MissingDimensionError
    exceptions.MixedDimensionsError
+   exceptions.ReservedDimensionError
    exceptions.MixedTimeZonesError
