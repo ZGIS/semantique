@@ -453,7 +453,7 @@ class ArrayProxy(dict):
     kwargs.update({"grouper": grouper})
     return self._append_verb("groupby", collector = True, **kwargs)
 
-  def reduce(self, dimension, reducer, **kwargs):
+  def reduce(self, reducer, dimension = None, **kwargs):
     """Reduce the dimensionality of an array.
 
     Reduces dimensionality by applying a reducer function that returns a single
@@ -466,10 +466,11 @@ class ArrayProxy(dict):
 
     Parameters
     -----------
-      dimension : :obj:`str`
-        Name of the dimension to be reduced.
-      operator : :obj:`str`
+      reducer : :obj:`str`
         Name of the reducer function to be applied.
+      dimension : :obj:`str`
+        Name of the dimension to apply the reduction function to. If
+        :obj:`None`, all dimensions are reduced.
       **kwargs:
         Additional keyword arguments passed on to
         :meth:`Array.reduce <processor.arrays.Array.reduce>`.
@@ -481,13 +482,15 @@ class ArrayProxy(dict):
     Examples
     --------
     >>> import semantique as sq
-    >>> sq.entity("water").reduce("time", "count")
+    >>> sq.entity("water").reduce("count", "time")
 
     .. _here:
       https://zgis.github.io/semantique/reference.html#reducer-functions
 
     """
-    kwargs.update({"dimension": dimension, "reducer": reducer})
+    kwargs.update({"reducer": reducer})
+    if dimension is not None:
+      kwargs.update({"dimension": dimension})
     return self._append_verb("reduce", **kwargs)
 
   def shift(self, dimension, steps, coord = None, **kwargs):
@@ -529,7 +532,7 @@ class ArrayProxy(dict):
       kwargs.update({"coord": coord})
     return self._append_verb("shift", **kwargs)
 
-  def smooth(self, dimension, reducer, size, coord = None, **kwargs):
+  def smooth(self, reducer, dimension, size, coord = None, **kwargs):
     """Smooth the values in an array through a moving window.
 
     Smoothes the pixel values by applying a moving window function along a
@@ -542,11 +545,11 @@ class ArrayProxy(dict):
 
     Parameters
     -----------
-      dimension : :obj:`str`
-        Name of the dimension to smooth along.
       reducer : :obj:`str`
         Name of the reducer function to be used to reduce the values in the
         moving window.
+      dimension : :obj:`str`
+        Name of the dimension to smooth along.
       size : :obj:`int`
         Size k defining the extent of the rolling window. The pixel being
         smoothed will always be in the center of the window, with k pixels at
@@ -571,7 +574,7 @@ class ArrayProxy(dict):
     Examples
     --------
     >>> import semantique as sq
-    >>> sq.entity("water").smooth("time", "any", 1)
+    >>> sq.entity("water").smooth("any", "time", 1)
 
     .. _here:
       https://zgis.github.io/semantique/reference.html#reducer-functions
@@ -903,7 +906,7 @@ class CollectionProxy(dict):
     kwargs.update({"y": y})
     return self._append_verb("assign", **kwargs)
 
-  def reduce(self, dimension, reducer, **kwargs):
+  def reduce(self, reducer, dimension = None, **kwargs):
     """Apply the reduce verb to each array in a collection.
 
     See :meth:`ArrayProxy.reduce`.
@@ -913,7 +916,9 @@ class CollectionProxy(dict):
       :obj:`CollectionProxy`
 
     """
-    kwargs.update({"dimension": dimension, "reducer": reducer})
+    kwargs.update({"reducer": reducer})
+    if dimension is not None:
+      kwargs.update({"dimension": dimension})
     return self._append_verb("reduce", **kwargs)
 
   def shift(self, dimension, steps, coord = None, **kwargs):
@@ -931,7 +936,7 @@ class CollectionProxy(dict):
       kwargs.update({"coord": coord})
     return self._append_verb("shift", **kwargs)
 
-  def smooth(self, dimension, reducer, size, coord = None, **kwargs):
+  def smooth(self, reducer, dimension, size, coord = None, **kwargs):
     """Apply the smooth verb to each array in a collection.
 
     See :meth:`ArrayProxy.smooth`.
@@ -941,7 +946,7 @@ class CollectionProxy(dict):
       :obj:`CollectionProxy`
 
     """
-    kwargs.update({"dimension": dimension, "reducer": reducer, "size": size})
+    kwargs.update({"reducer": reducer, "dimension": dimension, "size": size})
     if coord is not None:
       kwargs.update({"coord": coord})
     return self._append_verb("smooth", **kwargs)

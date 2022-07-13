@@ -415,17 +415,18 @@ class Array():
     out = Collection(groups)
     return out
 
-  def reduce(self, dimension, reducer, track_types = True, **kwargs):
+  def reduce(self, reducer, dimension = None, track_types = True, **kwargs):
     """Apply the reduce verb to the array.
 
     The reduce verb reduces the dimensionality of an array.
 
     Parameters
     -----------
-      dimension : :obj:`str`
-        Name of the dimension to apply the reduction function to.
       reducer : :obj:`callable`
         The reducer function to be applied.
+      dimension : :obj:`str`
+        Name of the dimension to apply the reduction function to. If
+        :obj:`None`, all dimensions are reduced.
       track_types : :obj:`bool`
         Should the reducer promote the value type of the output object, based
         on the value type of the input object?
@@ -444,11 +445,13 @@ class Array():
         If a dimension with the given name is not present in the array.
 
     """
-    if dimension not in self._obj.dims:
-      raise exceptions.UnknownDimensionError(
-        f"Dimension '{dimension}' is not present in the input object"
-      )
-    out = reducer(self._obj, track_types = track_types, dim = dimension, **kwargs)
+    if dimension is not None:
+      if dimension not in self._obj.dims:
+        raise exceptions.UnknownDimensionError(
+          f"Dimension '{dimension}' is not present in the input object"
+        )
+      kwargs["dim"] = dimension
+    out = reducer(self._obj, track_types = track_types, **kwargs)
     return out
 
   def shift(self, dimension, steps, coord = None, **kwargs):
@@ -502,7 +505,7 @@ class Array():
       out = self._obj.shift({dimension: steps})
     return out
 
-  def smooth(self, dimension, reducer, size, coord = None, track_types = True,
+  def smooth(self, reducer, dimension, size, coord = None, track_types = True,
              **kwargs):
     """Apply the smooth verb to the array.
 
@@ -511,10 +514,10 @@ class Array():
 
     Parameters
     -----------
-      dimension : :obj:`str`
-        Name of the dimension to smooth along.
       reducer : :obj:`callable`
         The reducer function to be applied to the rolling window.
+      dimension : :obj:`str`
+        Name of the dimension to smooth along.
       size : :obj:`int`
         Size k defining the extent of the rolling window. The pixel being
         smoothed will always be in the center of the window, with k pixels at
@@ -1365,7 +1368,7 @@ class Collection(list):
         )
     dim = "__sq__" # Temporary dimension.
     concat = self.concatenate(dim, track_types = False)
-    out = concat.sq.reduce(dim, reducer, track_types, **kwargs)
+    out = concat.sq.reduce(reducer, dim, track_types, **kwargs)
     return out
 
   def evaluate(self, operator, y = None, track_types = True, **kwargs):
@@ -1428,7 +1431,7 @@ class Collection(list):
     out[:] = [x.sq.assign(*args, **kwargs) for x in out]
     return out
 
-  def reduce(self, dimension, reducer, track_types = True, **kwargs):
+  def reduce(self, reducer, dimension = None, track_types = True, **kwargs):
     """Apply the reduce verb to all arrays in the collection.
 
     See :meth:`Array.reduce`
@@ -1438,7 +1441,7 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([dimension, reducer, track_types])
+    args = tuple([reducer, dimension, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
     return out
@@ -1458,7 +1461,7 @@ class Collection(list):
     out[:] = [x.sq.shift(*args, **kwargs) for x in out]
     return out
 
-  def smooth(self, dimension, reducer, size, coord = None, track_types = True,
+  def smooth(self, reducer, dimension, size, coord = None, track_types = True,
              **kwargs):
     """Apply the smooth verb to all arrays in the collection.
 
@@ -1469,7 +1472,7 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([dimension, reducer, size, coord, track_types])
+    args = tuple([reducer, dimension, size, coord, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.smooth(*args, **kwargs) for x in out]
     return out
