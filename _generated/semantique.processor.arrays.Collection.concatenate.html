@@ -100,6 +100,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/references.html">
      References
     </a>
@@ -107,6 +117,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -292,6 +307,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -359,6 +384,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1057,6 +1092,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1191,7 +1231,7 @@
 <h1>semantique.processor.arrays.Collection.concatenate<a class="headerlink" href="#semantique-processor-arrays-collection-concatenate" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.arrays.Collection.concatenate">
-<span class="sig-prename descclassname"><span class="pre">Collection.</span></span><span class="sig-name descname"><span class="pre">concatenate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nominal'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L1165-L1243"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Collection.concatenate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Collection.</span></span><span class="sig-name descname"><span class="pre">concatenate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nominal'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L1238-L1329"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Collection.concatenate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply the concatenate verb to the collection.</p>
 <p>The concatenate verb concatenates the arrays in the collection along a new
 or existing dimension.</p>
@@ -1214,8 +1254,14 @@ value type of its dimension coordinates be? Valid options are
 <dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a></p>
 </dd>
 <dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><a class="reference internal" href="semantique.exceptions.InvalidValueTypeError.html#semantique.exceptions.InvalidValueTypeError" title="semantique.exceptions.InvalidValueTypeError"><strong>exceptions.InvalidValueTypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">track_types</span> <span class="pre">=</span> <span class="pre">True</span></code> and the value types of the arrays in the
-    collection are not all equal to each other.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="semantique.exceptions.InvalidValueTypeError.html#semantique.exceptions.InvalidValueTypeError" title="semantique.exceptions.InvalidValueTypeError"><strong>exceptions.InvalidValueTypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">track_types</span> <span class="pre">=</span> <span class="pre">True</span></code> and the value types of the arrays in the
+    collection are not all equal to each other.</p></li>
+<li><p><a class="reference internal" href="semantique.exceptions.MissingDimensionError.html#semantique.exceptions.MissingDimensionError" title="semantique.exceptions.MissingDimensionError"><strong>exceptions.MissingDimensionError</strong></a> – If the dimension to concatenate along exists in some but not all
+    arrays in the collection.</p></li>
+<li><p><a class="reference internal" href="semantique.exceptions.ReservedDimensionError.html#semantique.exceptions.ReservedDimensionError" title="semantique.exceptions.ReservedDimensionError"><strong>exceptions.ReservedDimensionError</strong></a> – If the new dimension to concatenate along has one of the names that
+    semantique reserves for the temporal dimension or spatial dimensions.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

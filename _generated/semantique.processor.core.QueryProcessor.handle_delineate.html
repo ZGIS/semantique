@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>semantique.processor.core.QueryProcessor.trim_filter &#8212; semantique 0.1.0 documentation</title>
+    <title>semantique.processor.core.QueryProcessor.handle_delineate &#8212; semantique 0.1.0 documentation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -100,6 +100,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/references.html">
      References
     </a>
@@ -107,6 +117,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -292,6 +307,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -359,6 +384,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1057,6 +1092,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1136,7 +1176,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/_generated/semantique.processor.core.QueryProcessor.trim_filter.rst.txt"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/_generated/semantique.processor.core.QueryProcessor.handle_delineate.rst.txt"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.rst</button></a>
         <!-- Download PDF via print -->
@@ -1156,10 +1196,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_generated/semantique.processor.core.QueryProcessor.trim_filter.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_generated/semantique.processor.core.QueryProcessor.handle_delineate.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/_generated/semantique.processor.core.QueryProcessor.trim_filter.rst"><button
+        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/_generated/semantique.processor.core.QueryProcessor.handle_delineate.rst"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -1187,15 +1227,19 @@
         
               <div>
                 
-  <div class="section" id="semantique-processor-core-queryprocessor-trim-filter">
-<h1>semantique.processor.core.QueryProcessor.trim_filter<a class="headerlink" href="#semantique-processor-core-queryprocessor-trim-filter" title="Permalink to this headline">¶</a></h1>
-<dl class="py property">
-<dt class="sig sig-object py" id="semantique.processor.core.QueryProcessor.trim_filter">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">QueryProcessor.</span></span><span class="sig-name descname"><span class="pre">trim_filter</span></span><a class="headerlink" href="#semantique.processor.core.QueryProcessor.trim_filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Are arrays always trimmed after filtering.</p>
+  <div class="section" id="semantique-processor-core-queryprocessor-handle-delineate">
+<h1>semantique.processor.core.QueryProcessor.handle_delineate<a class="headerlink" href="#semantique-processor-core-queryprocessor-handle-delineate" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="semantique.processor.core.QueryProcessor.handle_delineate">
+<span class="sig-prename descclassname"><span class="pre">QueryProcessor.</span></span><span class="sig-name descname"><span class="pre">handle_delineate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/core.py#L739-L753"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.core.QueryProcessor.handle_delineate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for the delineate verb.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>block</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>) – Textual representation of a building block of type “verb” and name
+“delineate”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> or <a class="reference internal" href="semantique.processor.arrays.Collection.html#semantique.processor.arrays.Collection" title="semantique.processor.arrays.Collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Collection</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

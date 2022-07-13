@@ -19,6 +19,7 @@
       ~CollectionProxy.assign_time
       ~CollectionProxy.compose
       ~CollectionProxy.concatenate
+      ~CollectionProxy.delineate
       ~CollectionProxy.evaluate
       ~CollectionProxy.extract
       ~CollectionProxy.filter
@@ -28,6 +29,7 @@
       ~CollectionProxy.reduce
       ~CollectionProxy.shift
       ~CollectionProxy.smooth
+      ~CollectionProxy.trim
    
    
 

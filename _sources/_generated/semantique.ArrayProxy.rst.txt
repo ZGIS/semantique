@@ -17,6 +17,7 @@
       ~ArrayProxy.assign
       ~ArrayProxy.assign_space
       ~ArrayProxy.assign_time
+      ~ArrayProxy.delineate
       ~ArrayProxy.evaluate
       ~ArrayProxy.extract
       ~ArrayProxy.filter
@@ -29,6 +30,7 @@
       ~ArrayProxy.reduce
       ~ArrayProxy.shift
       ~ArrayProxy.smooth
+      ~ArrayProxy.trim
    
    
 

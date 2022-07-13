@@ -17,6 +17,7 @@
       ~Collection.assign
       ~Collection.compose
       ~Collection.concatenate
+      ~Collection.delineate
       ~Collection.evaluate
       ~Collection.extract
       ~Collection.filter

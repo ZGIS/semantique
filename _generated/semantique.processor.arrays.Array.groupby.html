@@ -100,6 +100,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/references.html">
      References
     </a>
@@ -107,6 +117,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -292,6 +307,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -359,6 +384,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1057,6 +1092,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1191,7 +1231,7 @@
 <h1>semantique.processor.arrays.Array.groupby<a class="headerlink" href="#semantique-processor-arrays-array-groupby" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.arrays.Array.groupby">
-<span class="sig-prename descclassname"><span class="pre">Array.</span></span><span class="sig-name descname"><span class="pre">groupby</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grouper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_as_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L327-L414"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array.groupby" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Array.</span></span><span class="sig-name descname"><span class="pre">groupby</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grouper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_as_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L329-L416"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array.groupby" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply the groupby verb to the array.</p>
 <p>The groupby verb groups the values in an array.</p>
 <dl class="field-list simple">

@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Verbs" href="verbs.html" />
-    <link rel="prev" title="Writing and executing query recipes" href="recipes.html" />
+    <link rel="prev" title="Representing an EO data cube" href="datacube.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -103,6 +103,16 @@
      Writing and executing query recipes
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      References
@@ -111,6 +121,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -296,6 +311,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -363,6 +388,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1061,6 +1096,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1715,8 +1755,8 @@ print(json.dumps(ref, indent = 2))
 <div class="section" id="Referencing-results">
 <h2>Referencing results<a class="headerlink" href="#Referencing-results" title="Permalink to this headline">¶</a></h2>
 <p>A query recipe can contain instructions for multiple results. Whenever instructions for a certain result get too long or complicated to be defined in one line, they can of course be broken up into several assignment operations. For example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">water_count</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
-<span class="n">vegetation_count</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;vegetation&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">water_count</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">vegetation_count</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;vegetation&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">)</span>
 <span class="n">recipe</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">QueryRecipe</span><span class="p">({</span><span class="s2">&quot;summed_count&quot;</span><span class="p">:</span> <span class="n">water_count</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">vegetation_count</span><span class="p">)})</span>
 </pre></div>
 </div>
@@ -1744,8 +1784,8 @@ print(json.dumps(ref, indent = 2))
 </div>
 <p>The same <em>summed_count</em> result as shown above can in this way also be formulated as shown below. The only difference here is that next to <em>summed_count</em>, the response will also contain <em>water_count</em> and <em>vegetation_count</em> as separate results.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recipe</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">QueryRecipe</span><span class="p">()</span>
-<span class="n">recipe</span><span class="p">[</span><span class="s2">&quot;water_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
-<span class="n">recipe</span><span class="p">[</span><span class="s2">&quot;vegetation_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;vegetation&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">recipe</span><span class="p">[</span><span class="s2">&quot;water_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">recipe</span><span class="p">[</span><span class="s2">&quot;vegetation_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;vegetation&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">)</span>
 <span class="n">recipe</span><span class="p">[</span><span class="s2">&quot;summed_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="s2">&quot;water_count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="s2">&quot;vegetation_count&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -1756,11 +1796,11 @@ print(json.dumps(ref, indent = 2))
 processing chain. It starts as the evaluated reference. This object will be the input to the first verb, which wrangles it into a different array. That array will then be the input to the second verb, which again wrangles it into a different array, etcetera. We use the term <strong>active evaluation object</strong> to refer to the input object at each stage of the processing chain. Hence, at the first verb, the active evaluation object is the evaluated reference. At the second verb, the active evaluation
 object is the output of the first verb, etcetera.</p>
 <p>Some verbs combine information of multiple inputs. For example, the evaluate() verb lets you evaluate bivariate expressions in which the left-hand side of the expression is the active evaluation object, and the right-hand side of the expression is another array. This leads to nested processing chains. For example, adding the values of a vegetation count map to the values of a water count map:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;vegetation&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;vegetation&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>But now what if we want to add the values of the water count map to themselves? Our recipe would look like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Here you see that the <em>same</em> processing chain that constructs the water count map occurs twice in the recipe. This does not only make the code longer and less readable, it also decreases processing time since solving the water reference and reducing the resulting array has to be done twice instead of once. Now we came at the point where we can show that it is useful to reference the active evaluation object itself. The
@@ -1785,7 +1825,7 @@ print(json.dumps(ref, indent = 2))
 </pre></div></div>
 </div>
 <p>This allows us to simplify the recipe above (and improve processing speed!):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">self</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">sq</span><span class="o">.</span><span class="n">self</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>Of course, the example above is trivial. Why would you add the active evaluation object to itself, when you can also just multiply it by 2. However, there are cases where the self-reference can be of real use. For example, when applying a self-filter (see here), when applying a filter based on dimension coordinates (see here), or when grouping an array along one of its dimensions (see here).</p>
@@ -1840,11 +1880,11 @@ print(json.dumps(ref, indent = 2))
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="recipes.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="datacube.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Writing and executing query recipes</p>
+            <p class="prev-next-title">Representing an EO data cube</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="verbs.html" title="next page">

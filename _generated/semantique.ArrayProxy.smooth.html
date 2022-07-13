@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.CollectionProxy.compose" href="semantique.CollectionProxy.compose.html" />
+    <link rel="next" title="semantique.ArrayProxy.trim" href="semantique.ArrayProxy.trim.html" />
     <link rel="prev" title="semantique.ArrayProxy.shift" href="semantique.ArrayProxy.shift.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -102,6 +102,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/references.html">
      References
     </a>
@@ -109,6 +119,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -294,6 +309,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -361,6 +386,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1059,6 +1094,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1193,7 +1233,7 @@
 <h1>semantique.ArrayProxy.smooth<a class="headerlink" href="#semantique-arrayproxy-smooth" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.ArrayProxy.smooth">
-<span class="sig-prename descclassname"><span class="pre">ArrayProxy.</span></span><span class="sig-name descname"><span class="pre">smooth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reducer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L532-L583"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.ArrayProxy.smooth" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ArrayProxy.</span></span><span class="sig-name descname"><span class="pre">smooth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reducer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L535-L586"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.ArrayProxy.smooth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Smooth the values in an array through a moving window.</p>
 <p>Smoothes the pixel values by applying a moving window function along a
 given dimension.</p>
@@ -1204,9 +1244,9 @@ their name, without the underscore at the end).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dimension</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the dimension to smooth along.</p></li>
 <li><p><strong>reducer</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the reducer function to be used to reduce the values in the
 moving window.</p></li>
+<li><p><strong>dimension</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the dimension to smooth along.</p></li>
 <li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>) – Size k defining the extent of the rolling window. The pixel being
 smoothed will always be in the center of the window, with k pixels at
 its left and k pixels at its right. If the dimension to smooth over is
@@ -1228,7 +1268,7 @@ dimension.</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">semantique</span> <span class="k">as</span> <span class="nn">sq</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">smooth</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;any&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">smooth</span><span class="p">(</span><span class="s2">&quot;any&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1248,10 +1288,10 @@ dimension.</p></li>
             <p class="prev-next-title">semantique.ArrayProxy.shift</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.CollectionProxy.compose.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.ArrayProxy.trim.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.CollectionProxy.compose</p>
+        <p class="prev-next-title">semantique.ArrayProxy.trim</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

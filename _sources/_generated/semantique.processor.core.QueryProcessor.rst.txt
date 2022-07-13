@@ -26,6 +26,7 @@
       ~QueryProcessor.handle_compose
       ~QueryProcessor.handle_concatenate
       ~QueryProcessor.handle_concept
+      ~QueryProcessor.handle_delineate
       ~QueryProcessor.handle_evaluate
       ~QueryProcessor.handle_extract
       ~QueryProcessor.handle_filter
@@ -45,6 +46,7 @@
       ~QueryProcessor.handle_smooth
       ~QueryProcessor.handle_time_instant
       ~QueryProcessor.handle_time_interval
+      ~QueryProcessor.handle_trim
       ~QueryProcessor.handle_verb
       ~QueryProcessor.optimize
       ~QueryProcessor.parse
@@ -70,9 +72,6 @@
       ~QueryProcessor.response
       ~QueryProcessor.spatial_resolution
       ~QueryProcessor.track_types
-      ~QueryProcessor.trim_filter
-      ~QueryProcessor.trim_results
       ~QueryProcessor.tz
-      ~QueryProcessor.unstack_results
    
    

@@ -102,6 +102,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/references.html">
      References
     </a>
@@ -109,6 +119,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -294,6 +309,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -361,6 +386,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1059,6 +1094,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1193,8 +1233,8 @@
 <h1>semantique.processor.arrays.Array<a class="headerlink" href="#semantique-processor-arrays-array" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.processor.arrays.Array">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.arrays.</span></span><span class="sig-name descname"><span class="pre">Array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L20-L1088"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Internal representation of a semantic array.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.arrays.</span></span><span class="sig-name descname"><span class="pre">Array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L29-L1161"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal representation of a multi-dimensional array.</p>
 <p>This data structure is modelled as an accessor of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>.
 Using accessors instead of the common class inheritance is recommended by the
 developers of xarray, see <a class="reference external" href="https://xarray.pydata.org/en/stable/internals/extending-xarray.html">here</a>. In practice, this means that each method
@@ -1210,7 +1250,7 @@ using the <code class="docutils literal notranslate"><span class="pre">.sq</span
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.arrays.Array.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L42-L43"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L51-L52"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -1229,67 +1269,70 @@ using the <code class="docutils literal notranslate"><span class="pre">.sq</span
 <tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.assign.html#semantique.processor.arrays.Array.assign" title="semantique.processor.arrays.Array.assign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign</span></code></a>(y[, at, track_types])</p></td>
 <td><p>Apply the assign verb to the array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.drop_non_dimension_coords.html#semantique.processor.arrays.Array.drop_non_dimension_coords" title="semantique.processor.arrays.Array.drop_non_dimension_coords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drop_non_dimension_coords</span></code></a>([keep])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.delineate.html#semantique.processor.arrays.Array.delineate" title="semantique.processor.arrays.Array.delineate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delineate</span></code></a>(**kwargs)</p></td>
+<td><p>Apply the delineate verb to the array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.drop_non_dimension_coords.html#semantique.processor.arrays.Array.drop_non_dimension_coords" title="semantique.processor.arrays.Array.drop_non_dimension_coords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drop_non_dimension_coords</span></code></a>([keep])</p></td>
 <td><p>Drop non-dimension coordinates from the array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.evaluate.html#semantique.processor.arrays.Array.evaluate" title="semantique.processor.arrays.Array.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(operator[, y, track_types])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.evaluate.html#semantique.processor.arrays.Array.evaluate" title="semantique.processor.arrays.Array.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(operator[, y, track_types])</p></td>
 <td><p>Apply the evaluate verb to the array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.extract.html#semantique.processor.arrays.Array.extract" title="semantique.processor.arrays.Array.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract</span></code></a>(dimension[, component, track_types])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.extract.html#semantique.processor.arrays.Array.extract" title="semantique.processor.arrays.Array.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract</span></code></a>(dimension[, component, track_types])</p></td>
 <td><p>Apply the extract verb to the array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.filter.html#semantique.processor.arrays.Array.filter" title="semantique.processor.arrays.Array.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(filterer[, trim, track_types])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.filter.html#semantique.processor.arrays.Array.filter" title="semantique.processor.arrays.Array.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(filterer[, track_types])</p></td>
 <td><p>Apply the filter verb to the array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.groupby.html#semantique.processor.arrays.Array.groupby" title="semantique.processor.arrays.Array.groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby</span></code></a>(grouper[, labels_as_names])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.groupby.html#semantique.processor.arrays.Array.groupby" title="semantique.processor.arrays.Array.groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby</span></code></a>(grouper[, labels_as_names])</p></td>
 <td><p>Apply the groupby verb to the array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.name.html#semantique.processor.arrays.Array.name" title="semantique.processor.arrays.Array.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a>(value, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.name.html#semantique.processor.arrays.Array.name" title="semantique.processor.arrays.Array.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a>(value, **kwargs)</p></td>
 <td><p>Apply the name verb to the array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.reduce.html#semantique.processor.arrays.Array.reduce" title="semantique.processor.arrays.Array.reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reduce</span></code></a>(dimension, reducer[, track_types])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.reduce.html#semantique.processor.arrays.Array.reduce" title="semantique.processor.arrays.Array.reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reduce</span></code></a>(reducer[, dimension, track_types])</p></td>
 <td><p>Apply the reduce verb to the array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.regularize.html#semantique.processor.arrays.Array.regularize" title="semantique.processor.arrays.Array.regularize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">regularize</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.regularize.html#semantique.processor.arrays.Array.regularize" title="semantique.processor.arrays.Array.regularize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">regularize</span></code></a>()</p></td>
 <td><p>Regularize the spatial dimension of the array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.reproject.html#semantique.processor.arrays.Array.reproject" title="semantique.processor.arrays.Array.reproject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reproject</span></code></a>(crs, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.reproject.html#semantique.processor.arrays.Array.reproject" title="semantique.processor.arrays.Array.reproject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reproject</span></code></a>(crs, **kwargs)</p></td>
 <td><p>Reproject the spatial coordinates of the array into a different CRS.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.shift.html#semantique.processor.arrays.Array.shift" title="semantique.processor.arrays.Array.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shift</span></code></a>(dimension, steps[, coord, trim])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.shift.html#semantique.processor.arrays.Array.shift" title="semantique.processor.arrays.Array.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shift</span></code></a>(dimension, steps[, coord])</p></td>
 <td><p>Apply the shift verb to the array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.smooth.html#semantique.processor.arrays.Array.smooth" title="semantique.processor.arrays.Array.smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth</span></code></a>(dimension, reducer, size[, coord, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.smooth.html#semantique.processor.arrays.Array.smooth" title="semantique.processor.arrays.Array.smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth</span></code></a>(reducer, dimension, size[, coord, ...])</p></td>
 <td><p>Apply the smooth verb to the array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.stack_spatial_dims.html#semantique.processor.arrays.Array.stack_spatial_dims" title="semantique.processor.arrays.Array.stack_spatial_dims"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stack_spatial_dims</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.stack_spatial_dims.html#semantique.processor.arrays.Array.stack_spatial_dims" title="semantique.processor.arrays.Array.stack_spatial_dims"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stack_spatial_dims</span></code></a>()</p></td>
 <td><p>Stack spatial X and Y dimensions into a single spatial dimension.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.to_csv.html#semantique.processor.arrays.Array.to_csv" title="semantique.processor.arrays.Array.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></a>(file)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.to_csv.html#semantique.processor.arrays.Array.to_csv" title="semantique.processor.arrays.Array.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></a>(file)</p></td>
 <td><p>Write the content of the array to a CSV file on disk.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.to_dataframe.html#semantique.processor.arrays.Array.to_dataframe" title="semantique.processor.arrays.Array.to_dataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dataframe</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.to_dataframe.html#semantique.processor.arrays.Array.to_dataframe" title="semantique.processor.arrays.Array.to_dataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dataframe</span></code></a>()</p></td>
 <td><p>Convert the array to a pandas DataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.to_geodataframe.html#semantique.processor.arrays.Array.to_geodataframe" title="semantique.processor.arrays.Array.to_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_geodataframe</span></code></a>([output_crs])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.to_geodataframe.html#semantique.processor.arrays.Array.to_geodataframe" title="semantique.processor.arrays.Array.to_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_geodataframe</span></code></a>([output_crs])</p></td>
 <td><p>Convert the array to a geopandas GeoDataFrame.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.to_geotiff.html#semantique.processor.arrays.Array.to_geotiff" title="semantique.processor.arrays.Array.to_geotiff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_geotiff</span></code></a>(file[, cloud_optimized, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.to_geotiff.html#semantique.processor.arrays.Array.to_geotiff" title="semantique.processor.arrays.Array.to_geotiff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_geotiff</span></code></a>(file[, cloud_optimized, ...])</p></td>
 <td><p>Write the content of the array to a GeoTIFF file on disk.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.trim.html#semantique.processor.arrays.Array.trim" title="semantique.processor.arrays.Array.trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trim</span></code></a>([force_regular])</p></td>
-<td><p>Trim the dimensions of the array.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.trim.html#semantique.processor.arrays.Array.trim" title="semantique.processor.arrays.Array.trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trim</span></code></a>([dimension, force_regular])</p></td>
+<td><p>Apply the trim verb to the array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.tz_convert.html#semantique.processor.arrays.Array.tz_convert" title="semantique.processor.arrays.Array.tz_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz_convert</span></code></a>(tz, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.tz_convert.html#semantique.processor.arrays.Array.tz_convert" title="semantique.processor.arrays.Array.tz_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz_convert</span></code></a>(tz, **kwargs)</p></td>
 <td><p>Convert the temporal coordinates of the array into a different timezone.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.unstack_spatial_dims.html#semantique.processor.arrays.Array.unstack_spatial_dims" title="semantique.processor.arrays.Array.unstack_spatial_dims"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unstack_spatial_dims</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.unstack_spatial_dims.html#semantique.processor.arrays.Array.unstack_spatial_dims" title="semantique.processor.arrays.Array.unstack_spatial_dims"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unstack_spatial_dims</span></code></a>()</p></td>
 <td><p>Unstack the spatial dimension into separate X and Y dimensions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.write_crs.html#semantique.processor.arrays.Array.write_crs" title="semantique.processor.arrays.Array.write_crs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_crs</span></code></a>(crs[, inplace])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.write_crs.html#semantique.processor.arrays.Array.write_crs" title="semantique.processor.arrays.Array.write_crs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_crs</span></code></a>(crs[, inplace])</p></td>
 <td><p>Store the CRS of the array as non-dimension coordinate.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.write_tz.html#semantique.processor.arrays.Array.write_tz" title="semantique.processor.arrays.Array.write_tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_tz</span></code></a>(tz[, inplace])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.arrays.Array.write_tz.html#semantique.processor.arrays.Array.write_tz" title="semantique.processor.arrays.Array.write_tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_tz</span></code></a>(tz[, inplace])</p></td>
 <td><p>Store the timezone of the array as non-dimension coordinate.</p></td>
 </tr>
 </tbody>

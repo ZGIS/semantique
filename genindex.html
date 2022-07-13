@@ -100,6 +100,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_notebooks/mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_notebooks/datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_notebooks/references.html">
      References
     </a>
@@ -107,6 +117,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_notebooks/verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_notebooks/processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -292,6 +307,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -359,6 +384,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1057,6 +1092,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1393,12 +1433,20 @@
 </li>
       <li><a href="_generated/semantique.processor.utils.datetime64_as_unix.html#semantique.processor.utils.datetime64_as_unix">datetime64_as_unix() (in module semantique.processor.utils)</a>
 </li>
+      <li><a href="_generated/semantique.ArrayProxy.delineate.html#semantique.ArrayProxy.delineate">delineate() (semantique.ArrayProxy method)</a>
+
+      <ul>
+        <li><a href="_generated/semantique.CollectionProxy.delineate.html#semantique.CollectionProxy.delineate">(semantique.CollectionProxy method)</a>
+</li>
+        <li><a href="_generated/semantique.processor.arrays.Array.delineate.html#semantique.processor.arrays.Array.delineate">(semantique.processor.arrays.Array method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.extent.TemporalExtent.discretize.html#semantique.extent.TemporalExtent.discretize">discretize() (semantique.extent.TemporalExtent method)</a>
 </li>
       <li><a href="_generated/semantique.operators.DIVIDE.html#semantique.operators.DIVIDE">DIVIDE (in module semantique.operators)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.operators.divide_.html#semantique.processor.operators.divide_">divide_() (in module semantique.processor.operators)</a>
 </li>
       <li><a href="_generated/semantique.processor.arrays.Array.drop_non_dimension_coords.html#semantique.processor.arrays.Array.drop_non_dimension_coords">drop_non_dimension_coords() (semantique.processor.arrays.Array method)</a>
@@ -1571,6 +1619,8 @@
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_concept.html#semantique.processor.core.QueryProcessor.handle_concept">handle_concept() (semantique.processor.core.QueryProcessor method)</a>
 </li>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_delineate.html#semantique.processor.core.QueryProcessor.handle_delineate">handle_delineate() (semantique.processor.core.QueryProcessor method)</a>
+</li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_evaluate.html#semantique.processor.core.QueryProcessor.handle_evaluate">handle_evaluate() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_extract.html#semantique.processor.core.QueryProcessor.handle_extract">handle_extract() (semantique.processor.core.QueryProcessor method)</a>
@@ -1610,6 +1660,8 @@
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_time_instant.html#semantique.processor.core.QueryProcessor.handle_time_instant">handle_time_instant() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_time_interval.html#semantique.processor.core.QueryProcessor.handle_time_interval">handle_time_interval() (semantique.processor.core.QueryProcessor method)</a>
+</li>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_trim.html#semantique.processor.core.QueryProcessor.handle_trim">handle_trim() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.handle_verb.html#semantique.processor.core.QueryProcessor.handle_verb">handle_verb() (semantique.processor.core.QueryProcessor method)</a>
 </li>
@@ -1891,10 +1943,10 @@
       </ul></li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.reducers.html#semantique.processor.core.QueryProcessor.reducers">reducers (semantique.processor.core.QueryProcessor property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.reflectance.html#semantique.reflectance">reflectance() (in module semantique)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.arrays.Array.regularize.html#semantique.processor.arrays.Array.regularize">regularize() (semantique.processor.arrays.Array method)</a>
 
       <ul>
@@ -1902,6 +1954,8 @@
 </li>
       </ul></li>
       <li><a href="_generated/semantique.processor.arrays.Array.reproject.html#semantique.processor.arrays.Array.reproject">reproject() (semantique.processor.arrays.Array method)</a>
+</li>
+      <li><a href="_generated/semantique.exceptions.ReservedDimensionError.html#semantique.exceptions.ReservedDimensionError">ReservedDimensionError</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.respond.html#semantique.processor.core.QueryProcessor.respond">respond() (semantique.processor.core.QueryProcessor method)</a>
 </li>
@@ -2029,16 +2083,16 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_generated/semantique.processor.arrays.Array.trim.html#semantique.processor.arrays.Array.trim">trim() (semantique.processor.arrays.Array method)</a>
+      <li><a href="_generated/semantique.ArrayProxy.trim.html#semantique.ArrayProxy.trim">trim() (semantique.ArrayProxy method)</a>
 
       <ul>
+        <li><a href="_generated/semantique.CollectionProxy.trim.html#semantique.CollectionProxy.trim">(semantique.CollectionProxy method)</a>
+</li>
+        <li><a href="_generated/semantique.processor.arrays.Array.trim.html#semantique.processor.arrays.Array.trim">(semantique.processor.arrays.Array method)</a>
+</li>
         <li><a href="_generated/semantique.processor.arrays.Collection.trim.html#semantique.processor.arrays.Collection.trim">(semantique.processor.arrays.Collection method)</a>
 </li>
       </ul></li>
-      <li><a href="_generated/semantique.processor.core.QueryProcessor.trim_filter.html#semantique.processor.core.QueryProcessor.trim_filter">trim_filter (semantique.processor.core.QueryProcessor property)</a>
-</li>
-      <li><a href="_generated/semantique.processor.core.QueryProcessor.trim_results.html#semantique.processor.core.QueryProcessor.trim_results">trim_results (semantique.processor.core.QueryProcessor property)</a>
-</li>
       <li><a href="_generated/semantique.processor.types.TYPE_PROMOTION_MANUALS.html#semantique.processor.types.TYPE_PROMOTION_MANUALS">TYPE_PROMOTION_MANUALS (in module semantique.processor.types)</a>
 </li>
       <li><a href="_generated/semantique.processor.types.TypePromoter.html#semantique.processor.types.TypePromoter">TypePromoter (class in semantique.processor.types)</a>
@@ -2073,15 +2127,13 @@
 </li>
       <li><a href="_generated/semantique.exceptions.UnknownLayerError.html#semantique.exceptions.UnknownLayerError">UnknownLayerError</a>
 </li>
-      <li><a href="_generated/semantique.exceptions.UnknownOperatorError.html#semantique.exceptions.UnknownOperatorError">UnknownOperatorError</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_generated/semantique.exceptions.UnknownOperatorError.html#semantique.exceptions.UnknownOperatorError">UnknownOperatorError</a>
+</li>
       <li><a href="_generated/semantique.exceptions.UnknownReducerError.html#semantique.exceptions.UnknownReducerError">UnknownReducerError</a>
 </li>
       <li><a href="_generated/semantique.exceptions.UnknownResultError.html#semantique.exceptions.UnknownResultError">UnknownResultError</a>
-</li>
-      <li><a href="_generated/semantique.processor.core.QueryProcessor.unstack_results.html#semantique.processor.core.QueryProcessor.unstack_results">unstack_results (semantique.processor.core.QueryProcessor property)</a>
 </li>
       <li><a href="_generated/semantique.processor.arrays.Array.unstack_spatial_dims.html#semantique.processor.arrays.Array.unstack_spatial_dims">unstack_spatial_dims() (semantique.processor.arrays.Array method)</a>
 

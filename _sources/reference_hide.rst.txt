@@ -67,9 +67,6 @@
    processor.core.QueryProcessor.operators
    processor.core.QueryProcessor.reducers
    processor.core.QueryProcessor.track_types
-   processor.core.QueryProcessor.trim_filter
-   processor.core.QueryProcessor.trim_results
-   processor.core.QueryProcessor.unstack_results
    processor.core.QueryProcessor.parse
    processor.core.QueryProcessor.optimize
    processor.core.QueryProcessor.execute
@@ -90,6 +87,8 @@
    processor.core.QueryProcessor.handle_reduce
    processor.core.QueryProcessor.handle_shift
    processor.core.QueryProcessor.handle_smooth
+   processor.core.QueryProcessor.handle_trim
+   processor.core.QueryProcessor.handle_delineate
    processor.core.QueryProcessor.handle_name
    processor.core.QueryProcessor.handle_compose
    processor.core.QueryProcessor.handle_concatenate
@@ -123,9 +122,10 @@
    processor.arrays.Array.reduce
    processor.arrays.Array.shift
    processor.arrays.Array.smooth
+   processor.arrays.Array.trim
+   processor.arrays.Array.delineate
    processor.arrays.Array.name
    processor.arrays.Array.align_with
-   processor.arrays.Array.trim
    processor.arrays.Array.regularize
    processor.arrays.Array.reproject
    processor.arrays.Array.tz_convert
@@ -151,8 +151,8 @@
    processor.arrays.Collection.reduce
    processor.arrays.Collection.shift
    processor.arrays.Collection.smooth
-   processor.arrays.Collection.name
    processor.arrays.Collection.trim
+   processor.arrays.Collection.name
    processor.arrays.Collection.regularize
    processor.arrays.Collection.stack_spatial_dims
    processor.arrays.Collection.unstack_spatial_dims

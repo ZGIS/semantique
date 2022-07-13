@@ -100,6 +100,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/references.html">
      References
     </a>
@@ -107,6 +117,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -292,6 +307,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -359,6 +384,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1057,6 +1092,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1191,7 +1231,7 @@
 <h1>semantique.ArrayProxy<a class="headerlink" href="#semantique-arrayproxy" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.ArrayProxy">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.</span></span><span class="sig-name descname"><span class="pre">ArrayProxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L30-L607"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.ArrayProxy" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.</span></span><span class="sig-name descname"><span class="pre">ArrayProxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L30-L669"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.ArrayProxy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Proxy object of an array.</p>
 <p>This proxy object serves as a placeholder for a multi-dimensional array. All
 array specific actions (i.e. <em>verbs</em>) can be called as methods of this object.
@@ -1230,41 +1270,47 @@ reference functions or by applying verbs to existing <a class="reference interna
 <tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.assign_time.html#semantique.ArrayProxy.assign_time" title="semantique.ArrayProxy.assign_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign_time</span></code></a>([component])</p></td>
 <td><p>Assign temporal coordinates as values to the pixels in an array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.evaluate.html#semantique.ArrayProxy.evaluate" title="semantique.ArrayProxy.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(operator[, y])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.delineate.html#semantique.ArrayProxy.delineate" title="semantique.ArrayProxy.delineate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delineate</span></code></a>([dimension])</p></td>
+<td><p>Delineate spatio-temporal objects in a binary array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.evaluate.html#semantique.ArrayProxy.evaluate" title="semantique.ArrayProxy.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(operator[, y])</p></td>
 <td><p>Evaluate an expression for each pixel in an array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.extract.html#semantique.ArrayProxy.extract" title="semantique.ArrayProxy.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract</span></code></a>(dimension[, component])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.extract.html#semantique.ArrayProxy.extract" title="semantique.ArrayProxy.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract</span></code></a>(dimension[, component])</p></td>
 <td><p>Extract coordinate labels of a dimension as a new array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.filter.html#semantique.ArrayProxy.filter" title="semantique.ArrayProxy.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(filterer, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.filter.html#semantique.ArrayProxy.filter" title="semantique.ArrayProxy.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(filterer, **kwargs)</p></td>
 <td><p>Filter the values in an array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.filter_space.html#semantique.ArrayProxy.filter_space" title="semantique.ArrayProxy.filter_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_space</span></code></a>(*filterer, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.filter_space.html#semantique.ArrayProxy.filter_space" title="semantique.ArrayProxy.filter_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_space</span></code></a>(*filterer, **kwargs)</p></td>
 <td><p>Filter an array along the spatial dimension.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.filter_time.html#semantique.ArrayProxy.filter_time" title="semantique.ArrayProxy.filter_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_time</span></code></a>(*filterer, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.filter_time.html#semantique.ArrayProxy.filter_time" title="semantique.ArrayProxy.filter_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_time</span></code></a>(*filterer, **kwargs)</p></td>
 <td><p>Filter an array along the temporal dimension.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.groupby.html#semantique.ArrayProxy.groupby" title="semantique.ArrayProxy.groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby</span></code></a>(grouper, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.groupby.html#semantique.ArrayProxy.groupby" title="semantique.ArrayProxy.groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby</span></code></a>(grouper, **kwargs)</p></td>
 <td><p>Group the values in an array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.groupby_space.html#semantique.ArrayProxy.groupby_space" title="semantique.ArrayProxy.groupby_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby_space</span></code></a>([component])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.groupby_space.html#semantique.ArrayProxy.groupby_space" title="semantique.ArrayProxy.groupby_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby_space</span></code></a>([component])</p></td>
 <td><p>Group an array along the spatial dimension.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.groupby_time.html#semantique.ArrayProxy.groupby_time" title="semantique.ArrayProxy.groupby_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby_time</span></code></a>([component])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.groupby_time.html#semantique.ArrayProxy.groupby_time" title="semantique.ArrayProxy.groupby_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupby_time</span></code></a>([component])</p></td>
 <td><p>Group an array along the temporal dimension.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.name.html#semantique.ArrayProxy.name" title="semantique.ArrayProxy.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a>(value, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.name.html#semantique.ArrayProxy.name" title="semantique.ArrayProxy.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a>(value, **kwargs)</p></td>
 <td><p>Give a name to an array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.reduce.html#semantique.ArrayProxy.reduce" title="semantique.ArrayProxy.reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reduce</span></code></a>(dimension, reducer, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.reduce.html#semantique.ArrayProxy.reduce" title="semantique.ArrayProxy.reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reduce</span></code></a>(reducer[, dimension])</p></td>
 <td><p>Reduce the dimensionality of an array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.shift.html#semantique.ArrayProxy.shift" title="semantique.ArrayProxy.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shift</span></code></a>(dimension, steps[, coord])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.shift.html#semantique.ArrayProxy.shift" title="semantique.ArrayProxy.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shift</span></code></a>(dimension, steps[, coord])</p></td>
 <td><p>Shift the values in an array along a dimension.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.smooth.html#semantique.ArrayProxy.smooth" title="semantique.ArrayProxy.smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth</span></code></a>(dimension, reducer, size[, coord])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.smooth.html#semantique.ArrayProxy.smooth" title="semantique.ArrayProxy.smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth</span></code></a>(reducer, dimension, size[, coord])</p></td>
 <td><p>Smooth the values in an array through a moving window.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.trim.html#semantique.ArrayProxy.trim" title="semantique.ArrayProxy.trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trim</span></code></a>([dimension])</p></td>
+<td><p>Trim the dimensions of an array.</p></td>
 </tr>
 </tbody>
 </table>

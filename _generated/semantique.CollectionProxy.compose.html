@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="semantique.CollectionProxy.concatenate" href="semantique.CollectionProxy.concatenate.html" />
-    <link rel="prev" title="semantique.ArrayProxy.smooth" href="semantique.ArrayProxy.smooth.html" />
+    <link rel="prev" title="semantique.ArrayProxy.delineate" href="semantique.ArrayProxy.delineate.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -102,6 +102,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/references.html">
      References
     </a>
@@ -109,6 +119,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_notebooks/verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_notebooks/processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -293,6 +308,16 @@
      semantique.ArrayProxy.smooth
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      semantique.CollectionProxy.compose
@@ -361,6 +386,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1059,6 +1094,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1193,7 +1233,7 @@
 <h1>semantique.CollectionProxy.compose<a class="headerlink" href="#semantique-collectionproxy-compose" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.CollectionProxy.compose">
-<span class="sig-prename descclassname"><span class="pre">CollectionProxy.</span></span><span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L640-L666"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.CollectionProxy.compose" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CollectionProxy.</span></span><span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L702-L728"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.CollectionProxy.compose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a categorical composition of multiple binary arrays.</p>
 <p>The categorical composition contains a value of 1 for each pixel being
 “true” in the first array of the collection, a value of 2 for each pixel
@@ -1225,11 +1265,11 @@ gets assigned a nodata value.</p>
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="semantique.ArrayProxy.smooth.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="semantique.ArrayProxy.delineate.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">semantique.ArrayProxy.smooth</p>
+            <p class="prev-next-title">semantique.ArrayProxy.delineate</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="semantique.CollectionProxy.concatenate.html" title="next page">

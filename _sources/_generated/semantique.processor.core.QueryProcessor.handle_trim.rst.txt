@@ -1,6 +1,6 @@
-﻿semantique.processor.core.QueryProcessor.trim\_filter
+﻿semantique.processor.core.QueryProcessor.handle\_trim
 =====================================================
 
 .. currentmodule:: semantique.processor.core
 
-.. autoproperty:: QueryProcessor.trim_filter
+.. automethod:: QueryProcessor.handle_trim

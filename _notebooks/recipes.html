@@ -37,7 +37,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="References" href="references.html" />
+    <link rel="next" title="Constructing a mapping" href="mapping.html" />
     <link rel="prev" title="User Guide" href="../guide.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -104,6 +104,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="references.html">
      References
     </a>
@@ -111,6 +121,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -296,6 +311,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -363,6 +388,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1061,6 +1096,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1207,6 +1247,28 @@
   <a class="reference internal nav-link" href="#Setting-the-context">
    Setting the context
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Representing-an-EO-data-cube">
+     Representing an EO data cube
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Importing-a-mapping">
+     Importing a mapping
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Setting-the-spatio-temporal-extent">
+     Setting the spatio-temporal extent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Collecting-the-full-context">
+     Collecting the full context
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#Executing-the-recipe">
@@ -1555,7 +1617,7 @@ in the <a class="reference internal" href="verbs.html"><span class="doc">Verbs n
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>count = sq.entity(&quot;water&quot;).reduce(&quot;time&quot;, &quot;count&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>count = sq.entity(&quot;water&quot;).reduce(&quot;count&quot;, &quot;time&quot;)
 print(json.dumps(count, indent = 2))
 </pre></div>
 </div>
@@ -1579,26 +1641,26 @@ print(json.dumps(count, indent = 2))
       &#34;type&#34;: &#34;verb&#34;,
       &#34;name&#34;: &#34;reduce&#34;,
       &#34;params&#34;: {
-        &#34;dimension&#34;: &#34;time&#34;,
-        &#34;reducer&#34;: &#34;count&#34;
+        &#34;reducer&#34;: &#34;count&#34;,
+        &#34;dimension&#34;: &#34;time&#34;
       }
     }
   ]
 }
 </pre></div></div>
 </div>
-<p>Note that the resulting object is still entirely textual, not contain any data nor Python code. The recipe can be made increasingly complex by adding more verbs to the chain, by nesting multiple processing chains into each other, or by modelling split-apply-combine structures. See the <a class="reference internal" href="gallery.html"><span class="doc">Gallery notebook</span></a> for several practical examples of query recipes.</p>
-<p>Now, lets fill our empty recipe with some result instructions. We can do so by adding each result as an element to the dictionary.</p>
+<p>Note that the resulting object is still entirely textual, not containing any data nor Python code. The recipe can be made increasingly complex by adding more verbs to the chain, by nesting multiple processing chains into each other, or by modelling split-apply-combine structures. See the <a class="reference internal" href="gallery.html"><span class="doc">Gallery notebook</span></a> for several practical examples of query recipes.</p>
+<p>Now, lets fill our empty recipe with some simple result instructions. We can do so by adding each result as an element to the dictionary.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe[&quot;blue_map&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;time&quot;, &quot;count&quot;)
-recipe[&quot;green_map&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;time&quot;, &quot;count&quot;)
-recipe[&quot;blue_curve&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;space&quot;, &quot;count&quot;)
-recipe[&quot;green_curve&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;space&quot;, &quot;count&quot;)
-recipe[&quot;blue_stat&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;time&quot;, &quot;count&quot;).reduce(&quot;space&quot;, &quot;mean&quot;)
-recipe[&quot;green_stat&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;time&quot;, &quot;count&quot;).reduce(&quot;space&quot;, &quot;mean&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe[&quot;blue_map&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;count&quot;, &quot;time&quot;)
+recipe[&quot;green_map&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;count&quot;, &quot;time&quot;)
+recipe[&quot;blue_curve&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;count&quot;, &quot;space&quot;)
+recipe[&quot;green_curve&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;count&quot;, &quot;space&quot;)
+recipe[&quot;blue_stat&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;count&quot;)
+recipe[&quot;green_stat&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;count&quot;)
 </pre></div>
 </div>
 </div>
@@ -1616,26 +1678,236 @@ recipe[&quot;green_stat&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;
 </div>
 <div class="section" id="Setting-the-context">
 <h2>Setting the context<a class="headerlink" href="#Setting-the-context" title="Permalink to this headline">¶</a></h2>
-<p><em>TO BE EXTENDED…</em></p>
+<p>When executing a query recipe, the context in which it should be executed needs to be provided. This includes the mapping that maps the referenced semantic concepts to data values, the EO data cube containing these data, and the bounds of a spatio-temporal extent. Note that the context should always fit the recipe. A recipe referencing the semantic concept <em>water</em> can never be executed against a mapping that does not define water, nor against a mapping that defines water in terms of data values
+that do not exist in the provided EO data cube.</p>
+<div class="section" id="Representing-an-EO-data-cube">
+<h3>Representing an EO data cube<a class="headerlink" href="#Representing-an-EO-data-cube" title="Permalink to this headline">¶</a></h3>
+<p>In semantique, an EO data cube is always represented by its layout. The layout is a JSON-structured file containing a metadata object for each data layer in the cube. The software expert should distribute it alongside the EO data cube, such that the application expert can use it to initialize a Python object that represents the cube. Such an object contains a retriever method allowing the query processor to retrieve data values from the cube.</p>
+<p>When initializing the data cube object, the application expert needs to know what the configuration of the cube is. A configuration is a specific way in which the cube is organized and how to interact with it. Each specific EO data cube configuration should have its own dedicated class in semantique. For more information on that, see the notebook on <a class="reference internal" href="datacube.html"><span class="doc">Representing an EO data cube</span></a>. Hence, to represent an EO data cube, the application expert should create an instance of the
+class that is dedicated to the specific configuration of that cube.</p>
+<p>Currently, there are two EO data cube configurations natively supported by semantique. The first one is the <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.datacube.Opendatacube.html">Opendatacube</a> class, dedicated to data cubes using the <a class="reference external" href="https://www.opendatacube.org/">Open Data Cube software</a>. The second one is the <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.datacube.GeotiffArchive.html">GeotiffArchive</a> class, dedicated to data cubes consisting of multiple
+GeoTIFF files compressed together in a ZIP archive. The latter format is much more primivite, and only intended for demonstration purposes or very basic use-cases. We use it in our documentation. For other EO data cube configurations, the software expert should write a dedicated class and provide it to the application expert.</p>
+<p>The EO data cube representation in semantique never contains the data themselves! Instead, a parameter should be provided that specifies the location of the data. How this paramater looks like, depends on the configuration of the cube. In the case of the Opendatacube class, it is an ODC-specific connection object, while in the case of the GeotiffArchive class, it is the file path to the ZIP-file containing the GeoTIFF files.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Load a mapping.
-with open(&quot;files/mapping.json&quot;, &quot;r&quot;) as file:
-    mapping = sq.mapping.Semantique(json.load(file))
-
-# Represent an EO data cube.
-with open(&quot;files/layout.json&quot;, &quot;r&quot;) as file:
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/layout.json&quot;, &quot;r&quot;) as file:
     dc = sq.datacube.GeotiffArchive(json.load(file), src = &quot;files/layers.zip&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Importing-a-mapping">
+<h3>Importing a mapping<a class="headerlink" href="#Importing-a-mapping" title="Permalink to this headline">¶</a></h3>
+<p>In semantique, a mapping is expected to be a JSON-structured file containing the rules that map each semantic concept to data values in an EO data cube. The EO expert should distribute the mapping, such that the application expert can load it into its Python session. With the loaded mapping, they can initialize a Python object that represents it. Such an object contains a translator method allowing the query processor to translate textual concept references.</p>
+<p>When initializing the mapping object, the application expert needs to know what the configuration of the mapping is. A configuration is a specific way in which the rules are formulated and how they should be executed. Each specific mapping configuration should have its own dedicated class in semantique. For more information on that, see the notebook on <a class="reference internal" href="mapping.html"><span class="doc">Constructing a mapping</span></a>. Hence, after loading a mapping, the application expert should create an instance of the class that is
+dedicated to the specific configuration of that mapping.</p>
+<p>Semantique provides its own native mapping configuration through the <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.mapping.Semantique.html">Semantique</a> class. For other mapping configurations, the EO expert should write a dedicated class and provide it to the application expert.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/mapping.json&quot;, &quot;r&quot;) as file:
+    mapping = sq.mapping.Semantique(json.load(file))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Setting-the-spatio-temporal-extent">
+<h3>Setting the spatio-temporal extent<a class="headerlink" href="#Setting-the-spatio-temporal-extent" title="Permalink to this headline">¶</a></h3>
+<p>To model a spatial extent, semantique contains the <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.extent.SpatialExtent.html">SpatialExtent</a> class. An instance of this class can be initialized by providing it any object that can be read by the <a class="reference external" href="https://geopandas.org/docs/reference/api/geopandas.GeoDataFrame.html">GeoDataFrame</a> initializer of the <a class="reference external" href="https://geopandas.org/en/stable/">geopandas</a> package. Any additional keyword arguments will be forwarded to this initializer. In
+practice, this means any GDAL-supported file format can be loaded into Python with <a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.read_file.html">geopandas.read_file()</a>, and then used to initialize a spatial extent. In our documentation we use a small, rectangular area around Zell am See in Salzbuger Land, Austria.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>geodf = gpd.read_file(&quot;files/footprint.geojson&quot;)
+geodf.explore()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
 
-# Set the spatio-temporal extent.
-space = sq.SpatialExtent(gpd.read_file(&quot;files/footprint.geojson&quot;))
-time = sq.TemporalExtent(&quot;2019-01-01&quot;, &quot;2020-12-31&quot;)
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
 
-# Collect the full context.
-# Including additional configuration parameters.
-context = {
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_c590a1c521a73e678c69fda2abb3db41 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            &lt;/style&gt;
+
+
+                    &lt;style&gt;
+                        .foliumtooltip {
+
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    &lt;/style&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_c590a1c521a73e678c69fda2abb3db41&quot; &gt;&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;script&gt;
+
+            var map_c590a1c521a73e678c69fda2abb3db41 = L.map(
+                &quot;map_c590a1c521a73e678c69fda2abb3db41&quot;,
+                {
+                    center: [47.32182848564892, 12.802874710259392],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+            L.control.scale().addTo(map_c590a1c521a73e678c69fda2abb3db41);
+
+
+
+
+
+            var tile_layer_bd25999e81206d9ed73e4749fd5651b2 = L.tileLayer(
+                &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_c590a1c521a73e678c69fda2abb3db41);
+
+
+            map_c590a1c521a73e678c69fda2abb3db41.fitBounds(
+                [[47.29549949362208, 12.763509083137114], [47.34815747767577, 12.84224033738167]],
+                {}
+            );
+
+
+        function geo_json_6668b51a1ca5ff757781045da0ec40fe_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
+            }
+        }
+        function geo_json_6668b51a1ca5ff757781045da0ec40fe_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0.75};
+            }
+        }
+        function geo_json_6668b51a1ca5ff757781045da0ec40fe_pointToLayer(feature, latlng) {
+            var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
+
+            let style = geo_json_6668b51a1ca5ff757781045da0ec40fe_styler(feature)
+            Object.assign(opts, style)
+
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_6668b51a1ca5ff757781045da0ec40fe_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                        geo_json_6668b51a1ca5ff757781045da0ec40fe.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                        const highlightStyle = geo_json_6668b51a1ca5ff757781045da0ec40fe_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_6668b51a1ca5ff757781045da0ec40fe = L.geoJson(null, {
+                onEachFeature: geo_json_6668b51a1ca5ff757781045da0ec40fe_onEachFeature,
+
+                style: geo_json_6668b51a1ca5ff757781045da0ec40fe_styler,
+                pointToLayer: geo_json_6668b51a1ca5ff757781045da0ec40fe_pointToLayer
+        });
+
+        function geo_json_6668b51a1ca5ff757781045da0ec40fe_add (data) {
+            geo_json_6668b51a1ca5ff757781045da0ec40fe
+                .addData(data)
+                .addTo(map_c590a1c521a73e678c69fda2abb3db41);
+        }
+            geo_json_6668b51a1ca5ff757781045da0ec40fe_add({&quot;bbox&quot;: [12.763509083137114, 47.29549949362208, 12.84224033738167, 47.34815747767577], &quot;features&quot;: [{&quot;bbox&quot;: [12.763509083137114, 47.29549949362208, 12.84224033738167, 47.34815747767577], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.763509083137114, 47.29745731209052], [12.766203393446109, 47.34815747767577], [12.84224033738167, 47.3461974559335], [12.83947215089213, 47.29549949362208], [12.763509083137114, 47.29745731209052]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+
+
+
+    geo_json_6668b51a1ca5ff757781045da0ec40fe.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create(&#x27;div&#x27;);
+
+    return div
+    }
+    ,{&quot;className&quot;: &quot;foliumtooltip&quot;, &quot;sticky&quot;: true});
+
+&lt;/script&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>space = sq.SpatialExtent(geodf)
+</pre></div>
+</div>
+</div>
+<p>To model a temporal extent, semantique contains the <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.extent.TemporalExtent.html">TemporalExtent</a> class. An instance of this class can be initialized by providing it lower and upper bound of a time interval. The given interval is treated as being closed at both sides, meaning both of its bounds are included in the interval. The bounds may be provided as character formatted dates, e.g. “2020-12-31” or “2020/12/31”, but also complete
+ISO8601 timestamps, e.g. “2020-12-31T14:37:22”. As long as the <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Timestamp.html">Timestamp</a> initializer of the <a class="reference external" href="https://pandas.pydata.org/">pandas</a> package can understand it, it is supported by semantique. Any additional keyword arguments will be forwarded to this initializer.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>time = sq.TemporalExtent(&quot;2019-01-01&quot;, &quot;2020-12-31&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Collecting-the-full-context">
+<h3>Collecting the full context<a class="headerlink" href="#Collecting-the-full-context" title="Permalink to this headline">¶</a></h3>
+<p>Now we can collect the full context in a single dictionary, which we can later provide when <a class="reference external" href="#Executing-the-recipe">executing the recipe</a>. In addition to the different components described above, we may add additional configuration parameters that tune the behaviour of the query processor. These include the desired coordinate reference system (CRS) in which spatial coordinates should be represented, as well as the time zone in which temporal coordinates should be represented. You should also
+provide the desired spatial resolution of the output, as a list containing respectively the y and x resolution in CRS units (i.e. usually meters for projected CRS and degrees for geographic CRS) and including direction. Note that for most CRS, that means that the first value (i.e. the y-value) of the resolution will always be negative. For other possible configuration parameters, see the notebook on <a class="reference internal" href="processor.html"><span class="doc">Internal query processing</span></a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>context = {
     &quot;datacube&quot;: dc,
     &quot;mapping&quot;: mapping,
     &quot;space&quot;: space,
@@ -1648,12 +1920,13 @@ context = {
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="Executing-the-recipe">
 <h2>Executing the recipe<a class="headerlink" href="#Executing-the-recipe" title="Permalink to this headline">¶</a></h2>
 <p>Now we are ready to execute our query recipe. Hooray! This step is quite simple. You call the <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.QueryRecipe.execute.html">execute()</a> method of our recipe object, and provide it with the required context. Then, just be a bit patient… Internally, the query processor will solve all references, evaluate them into arrays, and apply the verbs to them. In the notebook on <a class="reference external" href="processing.ipynb">Internal query processing</a> the internal
 implementation of query processing is described in some more detail.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response = recipe.execute(**context)
@@ -1662,7 +1935,7 @@ implementation of query processing is described in some more detail.</p>
 </div>
 <p>The response of the query processor is a dictionary which one element per result. Each of these elements is an array modelled as an instance of the <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/data-structures.html#dataarray">DataArray</a> class from the <a class="reference external" href="https://docs.xarray.dev/en/stable/">xarray</a> package. This package serves as the backbone for most of the analysis tasks the query processor performs.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for key in response:
@@ -1685,7 +1958,7 @@ green_stat: &lt;class &#39;xarray.core.dataarray.DataArray&#39;&gt;
 </div>
 <p>The dimensions the arrays depend on the actions that were called in the result instruction. Some results might only have spatial dimensions (i.e. a map):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response[&quot;blue_map&quot;]
@@ -1693,7 +1966,7 @@ green_stat: &lt;class &#39;xarray.core.dataarray.DataArray&#39;&gt;
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2063,23 +2336,23 @@ Coordinates:
   * y             (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
   * x             (x) float64 4.53e+06 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
 Attributes:
-    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'blue_map'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-9eb32d35-5f35-444c-9aad-93d4a9432e4f' class='xr-array-in' type='checkbox' checked><label for='section-9eb32d35-5f35-444c-9aad-93d4a9432e4f' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 ... 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</span></div><div class='xr-array-data'><pre>array([[1., 1., 1., ..., 0., 0., 0.],
+    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'blue_map'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-91e73078-3ef7-4c6f-be60-92eaff228fe0' class='xr-array-in' type='checkbox' checked><label for='section-91e73078-3ef7-4c6f-be60-92eaff228fe0' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 ... 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</span></div><div class='xr-array-data'><pre>array([[1., 1., 1., ..., 0., 0., 0.],
        [1., 1., 1., ..., 0., 0., 0.],
        [1., 1., 1., ..., 0., 0., 0.],
        ...,
        [0., 0., 0., ..., 0., 0., 0.],
        [0., 0., 0., ..., 0., 0., 0.],
-       [0., 0., 0., ..., 0., 0., 0.]])</pre></div></div></li><li class='xr-section-item'><input id='section-ac3f2b93-bc06-45ad-8f6a-b16885020b2c' class='xr-section-summary-in' type='checkbox'  checked><label for='section-ac3f2b93-bc06-45ad-8f6a-b16885020b2c' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-145c5b83-af0e-4fd2-b0ca-b9156d271d5b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-145c5b83-af0e-4fd2-b0ca-b9156d271d5b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-28400bc5-3037-4d8a-a245-2bad6dddcb2f' class='xr-var-data-in' type='checkbox'><label for='data-28400bc5-3037-4d8a-a245-2bad6dddcb2f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-a4334aa1-2c17-4c27-8a1d-524ada1d644a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a4334aa1-2c17-4c27-8a1d-524ada1d644a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-83f1c877-8a78-4323-bfb8-ff4e884fa555' class='xr-var-data-in' type='checkbox'><label for='data-83f1c877-8a78-4323-bfb8-ff4e884fa555' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>feature</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-44cf7889-6666-4eaa-ac61-d42ad9e6cf4c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-44cf7889-6666-4eaa-ac61-d42ad9e6cf4c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e70dfa2b-e9d6-490a-8538-c66d72a683e0' class='xr-var-data-in' type='checkbox'><label for='data-e70dfa2b-e9d6-490a-8538-c66d72a683e0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
+       [0., 0., 0., ..., 0., 0., 0.]])</pre></div></div></li><li class='xr-section-item'><input id='section-b4ef5ba0-154a-46fa-b45d-8d6f98c5ca07' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b4ef5ba0-154a-46fa-b45d-8d6f98c5ca07' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-0dd670ed-1dff-4b27-806b-90dd57176e99' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-0dd670ed-1dff-4b27-806b-90dd57176e99' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-88e46593-2c51-4a54-a053-02c6d755c98d' class='xr-var-data-in' type='checkbox'><label for='data-88e46593-2c51-4a54-a053-02c6d755c98d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-39de3bcf-322f-4a8b-8224-3e53894558ec' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-39de3bcf-322f-4a8b-8224-3e53894558ec' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-03cb4ea1-92ee-4430-bd3c-e80f1f4decbc' class='xr-var-data-in' type='checkbox'><label for='data-03cb4ea1-92ee-4430-bd3c-e80f1f4decbc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>feature</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-b9041d2b-4049-4edd-a20c-d32969aeb57e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b9041d2b-4049-4edd-a20c-d32969aeb57e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dba57dc5-2df2-43be-a508-b4206b46d65f' class='xr-var-data-in' type='checkbox'><label for='data-dba57dc5-2df2-43be-a508-b4206b46d65f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        ...,
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
-       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-485dc89b-cb9e-48b0-b77d-7e26a3f42ff9' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-485dc89b-cb9e-48b0-b77d-7e26a3f42ff9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-89ed2dcd-3240-4744-97e5-bb5f5b53f59d' class='xr-var-data-in' type='checkbox'><label for='data-89ed2dcd-3240-4744-97e5-bb5f5b53f59d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-8a2e3f66-853a-4aa0-b517-49bb04597153' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8a2e3f66-853a-4aa0-b517-49bb04597153' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3fc8c43c-8beb-44a6-85ac-185b039da30b' class='xr-var-data-in' type='checkbox'><label for='data-3fc8c43c-8beb-44a6-85ac-185b039da30b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f8438b0e-df48-430c-9b7f-ffafa086a47a' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f8438b0e-df48-430c-9b7f-ffafa086a47a' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
+       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-58a68fe8-2bf9-4f27-a797-e02493401f18' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-58a68fe8-2bf9-4f27-a797-e02493401f18' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8307f12c-574c-45c1-af54-54a50e9ed32c' class='xr-var-data-in' type='checkbox'><label for='data-8307f12c-574c-45c1-af54-54a50e9ed32c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-305eec9d-abf0-418b-81e4-be03b430b6d7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-305eec9d-abf0-418b-81e4-be03b430b6d7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b9107d36-d2f5-439a-8b36-cd92f9ea987e' class='xr-var-data-in' type='checkbox'><label for='data-b9107d36-d2f5-439a-8b36-cd92f9ea987e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-2560f2e4-046c-473e-8d91-709c5f03700c' class='xr-section-summary-in' type='checkbox'  checked><label for='section-2560f2e4-046c-473e-8d91-709c5f03700c' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
 </div>
 <p>Other results might only have the temporal dimension (i.e. a time series):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response[&quot;blue_curve&quot;]
@@ -2087,7 +2360,7 @@ Attributes:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2449,12 +2722,12 @@ Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'blue_curve'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-206cd257-6346-4643-b143-438ec1e4bae3' class='xr-array-in' type='checkbox' checked><label for='section-206cd257-6346-4643-b143-438ec1e4bae3' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.0 4.48e+04 7.861e+04</span></div><div class='xr-array-data'><pre>array([    0., 44804., 78607.])</pre></div></div></li><li class='xr-section-item'><input id='section-17d6f9ce-5662-4386-a996-0ef9dcb03660' class='xr-section-summary-in' type='checkbox'  checked><label for='section-17d6f9ce-5662-4386-a996-0ef9dcb03660' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-12-15T10:17:33.408715 ... 2...</div><input id='attrs-c7d5a337-749f-4f74-ae5f-cb19f2de52e5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c7d5a337-749f-4f74-ae5f-cb19f2de52e5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fc920ff5-d370-4614-aa59-ec1138af8abe' class='xr-var-data-in' type='checkbox'><label for='data-fc920ff5-d370-4614-aa59-ec1138af8abe' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>datetime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-12-15T10:17:33.408715000&#x27;, &#x27;2020-09-05T10:17:43.167942000&#x27;,
-       &#x27;2020-12-19T10:17:34.610661000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-b05e8121-3c9b-4ace-ab23-c02fc13f57f1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b05e8121-3c9b-4ace-ab23-c02fc13f57f1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-29c837c5-b350-47fe-a558-1a3f3b666e9f' class='xr-var-data-in' type='checkbox'><label for='data-29c837c5-b350-47fe-a558-1a3f3b666e9f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-55d8e1a0-cd48-4741-b1ad-6d8e796518db' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-55d8e1a0-cd48-4741-b1ad-6d8e796518db' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e5284225-ca93-4d11-afce-9c813f9c2278' class='xr-var-data-in' type='checkbox'><label for='data-e5284225-ca93-4d11-afce-9c813f9c2278' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-0c80c42f-da93-48e0-82d7-bc18398eee90' class='xr-section-summary-in' type='checkbox'  checked><label for='section-0c80c42f-da93-48e0-82d7-bc18398eee90' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
+    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'blue_curve'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 3</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-5f88d97b-1ae3-4f61-8807-76b9bc9ade34' class='xr-array-in' type='checkbox' checked><label for='section-5f88d97b-1ae3-4f61-8807-76b9bc9ade34' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.0 4.48e+04 7.861e+04</span></div><div class='xr-array-data'><pre>array([    0., 44804., 78607.])</pre></div></div></li><li class='xr-section-item'><input id='section-29e6cab7-9f2e-4c43-b740-5e1a8d82f703' class='xr-section-summary-in' type='checkbox'  checked><label for='section-29e6cab7-9f2e-4c43-b740-5e1a8d82f703' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-12-15T10:17:33.408715 ... 2...</div><input id='attrs-3d6ca4dd-15c5-4661-8602-581144379191' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3d6ca4dd-15c5-4661-8602-581144379191' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f56f8579-61f7-4968-9844-f3d85214bd3f' class='xr-var-data-in' type='checkbox'><label for='data-f56f8579-61f7-4968-9844-f3d85214bd3f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>datetime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-12-15T10:17:33.408715000&#x27;, &#x27;2020-09-05T10:17:43.167942000&#x27;,
+       &#x27;2020-12-19T10:17:34.610661000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-40a76aaf-4907-451f-94fc-6e464726054f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-40a76aaf-4907-451f-94fc-6e464726054f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9eb0a993-cce4-4655-bb42-b66354223247' class='xr-var-data-in' type='checkbox'><label for='data-9eb0a993-cce4-4655-bb42-b66354223247' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-9e767167-82e0-4559-a36f-2370f45588da' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9e767167-82e0-4559-a36f-2370f45588da' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-82cb19ca-ae70-4ab0-96f6-2be2ccf9db0b' class='xr-var-data-in' type='checkbox'><label for='data-82cb19ca-ae70-4ab0-96f6-2be2ccf9db0b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-95160475-1c1e-42ed-a8c1-74adf3c123ed' class='xr-section-summary-in' type='checkbox'  checked><label for='section-95160475-1c1e-42ed-a8c1-74adf3c123ed' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
 </div>
 <p>And other results might even be dimensionless (i.e. a single aggregated statistic):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response[&quot;blue_stat&quot;]
@@ -2462,7 +2735,7 @@ Attributes:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2818,18 +3091,18 @@ dl.xr-attrs {
   fill: currentColor;
 }
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;blue_stat&#x27; ()&gt;
-array(0.38055987)
+array(123411.)
 Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'blue_stat'</div></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-4c0f5e7d-b5eb-465d-aa13-3710ac16720c' class='xr-array-in' type='checkbox' checked><label for='section-4c0f5e7d-b5eb-465d-aa13-3710ac16720c' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.3806</span></div><div class='xr-array-data'><pre>array(0.38055987)</pre></div></div></li><li class='xr-section-item'><input id='section-39bbb76b-a3aa-4eee-85cb-e75373d9a2c6' class='xr-section-summary-in' type='checkbox'  checked><label for='section-39bbb76b-a3aa-4eee-85cb-e75373d9a2c6' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-e5519ba8-8c16-4e2c-9bda-a922e3f636fa' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e5519ba8-8c16-4e2c-9bda-a922e3f636fa' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ab9e0354-ec08-473a-b8af-d68b9e7e2acb' class='xr-var-data-in' type='checkbox'><label for='data-ab9e0354-ec08-473a-b8af-d68b9e7e2acb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-d8775ad9-ddcd-4aa5-b6c5-10b0292d98e9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d8775ad9-ddcd-4aa5-b6c5-10b0292d98e9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1e842b7e-7ccf-49b4-b0a9-ba045cb29cf7' class='xr-var-data-in' type='checkbox'><label for='data-1e842b7e-7ccf-49b4-b0a9-ba045cb29cf7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-53ab03af-23e3-41d7-84c3-e60a4c7f08d9' class='xr-section-summary-in' type='checkbox'  checked><label for='section-53ab03af-23e3-41d7-84c3-e60a4c7f08d9' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
+    value_type:  numerical</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'blue_stat'</div></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-33161e4e-7cd8-4966-8fdf-56fdfd1da369' class='xr-array-in' type='checkbox' checked><label for='section-33161e4e-7cd8-4966-8fdf-56fdfd1da369' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>1.234e+05</span></div><div class='xr-array-data'><pre>array(123411.)</pre></div></div></li><li class='xr-section-item'><input id='section-79571b57-70cf-485f-a1f8-15a3b7af8dd4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-79571b57-70cf-485f-a1f8-15a3b7af8dd4' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-63d5117c-72b0-4e72-84ee-879647474647' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-63d5117c-72b0-4e72-84ee-879647474647' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f838161d-27d2-43dd-835f-4dfebac38b52' class='xr-var-data-in' type='checkbox'><label for='data-f838161d-27d2-43dd-835f-4dfebac38b52' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-9a633d9b-d4aa-4642-a12d-2c01ab757f97' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9a633d9b-d4aa-4642-a12d-2c01ab757f97' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-408ee84f-a431-43df-a5f8-c918c4e4f829' class='xr-var-data-in' type='checkbox'><label for='data-408ee84f-a431-43df-a5f8-c918c4e4f829' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-3a3dd96c-a90d-4c92-997e-eed1e40859ed' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3a3dd96c-a90d-4c92-997e-eed1e40859ed' class='xr-section-summary' >Attributes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>numerical</dd></dl></div></li></ul></div></div></div>
 </div>
 <p>There may also be results that contain both the spatial and temporal dimension, as well as results that contain an additonal, thematic dimension.</p>
 <p>Since the result objects are <a class="reference external" href="http://xarray.pydata.org/en/stable/user-guide/data-structures.html#dataarray">DataArray</a> objects, we can use xarray for any further processing, and also to visualize the results. Again, see the <a class="reference external" href="http://xarray.pydata.org/en/stable/index.html">xarray documentation</a> for more details on what that package has to offer (which is a lot!). For now, we will just plot some of our obtained results to give an impression. In the <a class="reference internal" href="gallery.html"><span class="doc">Gallery notebook</span></a> you can
 find much more of such examples.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def make_plot(axis, array, colors, title):
@@ -2853,7 +3126,7 @@ plt.draw()
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/_notebooks_recipes_26_0.png" src="../_images/_notebooks_recipes_26_0.png" />
+<img alt="../_images/_notebooks_recipes_35_0.png" src="../_images/_notebooks_recipes_35_0.png" />
 </div>
 </div>
 </div>
@@ -2872,10 +3145,10 @@ plt.draw()
             <p class="prev-next-title">User Guide</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="references.html" title="next page">
+    <a class='right-next' id="next-link" href="mapping.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">References</p>
+        <p class="prev-next-title">Constructing a mapping</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

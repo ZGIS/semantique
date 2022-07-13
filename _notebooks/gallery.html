@@ -104,6 +104,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="references.html">
      References
     </a>
@@ -111,6 +121,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -296,6 +311,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -363,6 +388,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1061,6 +1096,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1526,7 +1566,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
@@ -1581,10 +1621,10 @@ context = {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
 
-recipe[&quot;water_count_time&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;time&quot;, &quot;count&quot;)
-recipe[&quot;vegetation_count_time&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;time&quot;, &quot;count&quot;)
-recipe[&quot;water_count_space&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;space&quot;, &quot;count&quot;)
-recipe[&quot;vegetation_count_space&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;space&quot;, &quot;count&quot;)
+recipe[&quot;water_count_time&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;count&quot;, &quot;time&quot;)
+recipe[&quot;vegetation_count_time&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;count&quot;, &quot;time&quot;)
+recipe[&quot;water_count_space&quot;] = sq.entity(&quot;water&quot;).reduce(&quot;count&quot;, &quot;space&quot;)
+recipe[&quot;vegetation_count_space&quot;] = sq.entity(&quot;vegetation&quot;).reduce(&quot;count&quot;, &quot;space&quot;)
 
 response = recipe.execute(**context)
 </pre></div>
@@ -1699,7 +1739,7 @@ blue_band = sq.reflectance(&quot;s2_band02&quot;)
 
 recipe[&quot;composite&quot;] = sq.collection(red_band, green_band, blue_band).\
     filter(sq.entity(&quot;cloud&quot;).evaluate(&quot;not&quot;)).\
-    reduce(&quot;time&quot;, &quot;median&quot;).\
+    reduce(&quot;median&quot;, &quot;time&quot;).\
     concatenate(&quot;band&quot;)
 
 response = recipe.execute(**context)
@@ -1740,7 +1780,7 @@ plt.draw()
 
 recipe[&quot;land_cover&quot;] = sq.collection(sq.entity(&quot;water&quot;), sq.entity(&quot;vegetation&quot;), sq.entity(&quot;builtup&quot;)).\
     compose().\
-    reduce(&quot;time&quot;, &quot;mode&quot;)
+    reduce(&quot;mode&quot;, &quot;time&quot;)
 
 response = recipe.execute(**context)
 </pre></div>
@@ -1782,10 +1822,10 @@ plt.draw()
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
 
 recipe[&quot;cloud_cover&quot;] = sq.entity(&quot;cloud&quot;).\
-    reduce(&quot;time&quot;, &quot;percentage&quot;)
+    reduce(&quot;percentage&quot;, &quot;time&quot;)
 
 recipe[&quot;snow_cover&quot;] = sq.entity(&quot;snow&quot;).\
-    reduce(&quot;time&quot;, &quot;percentage&quot;)
+    reduce(&quot;percentage&quot;, &quot;time&quot;)
 
 response = recipe.execute(**context)
 </pre></div>
@@ -1828,7 +1868,7 @@ plt.draw()
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
 
 recipe[&quot;cloud_free_images&quot;] = sq.entity(&quot;cloud&quot;).\
-    reduce(&quot;space&quot;, &quot;percentage&quot;).\
+    reduce(&quot;percentage&quot;, &quot;space&quot;).\
     evaluate(&quot;less&quot;, 10)
 
 response = recipe.execute(**context)
@@ -1940,7 +1980,7 @@ response = recipe.execute(**context)
             &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
             &lt;style&gt;
-                #map_6a9942411ad716dadda815123aa605c3 {
+                #map_45de7dcad35a2d0cd7704511f7e4a107 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -1968,13 +2008,13 @@ response = recipe.execute(**context)
 &lt;/head&gt;
 &lt;body&gt;
 
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_6a9942411ad716dadda815123aa605c3&quot; &gt;&lt;/div&gt;
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_45de7dcad35a2d0cd7704511f7e4a107&quot; &gt;&lt;/div&gt;
 
 &lt;/body&gt;
 &lt;script&gt;
 
-            var map_6a9942411ad716dadda815123aa605c3 = L.map(
-                &quot;map_6a9942411ad716dadda815123aa605c3&quot;,
+            var map_45de7dcad35a2d0cd7704511f7e4a107 = L.map(
+                &quot;map_45de7dcad35a2d0cd7704511f7e4a107&quot;,
                 {
                     center: [47.32110812526405, 12.808509961311596],
                     crs: L.CRS.EPSG3857,
@@ -1983,77 +2023,77 @@ response = recipe.execute(**context)
                     preferCanvas: false,
                 }
             );
-            L.control.scale().addTo(map_6a9942411ad716dadda815123aa605c3);
+            L.control.scale().addTo(map_45de7dcad35a2d0cd7704511f7e4a107);
 
 
 
 
 
-            var tile_layer_0c8aca89f335a49d213f822f8d3dc3d8 = L.tileLayer(
+            var tile_layer_02d7e69d85eb852c51338fe57bc68f93 = L.tileLayer(
                 &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_6a9942411ad716dadda815123aa605c3);
+            ).addTo(map_45de7dcad35a2d0cd7704511f7e4a107);
 
 
-            map_6a9942411ad716dadda815123aa605c3.fitBounds(
+            map_45de7dcad35a2d0cd7704511f7e4a107.fitBounds(
                 [[47.30444420302901, 12.799052458545688], [47.33777204749909, 12.817967464077503]],
                 {}
             );
 
 
-        function geo_json_6eacf2b3702a668fc9db713dbd532aa2_styler(feature) {
+        function geo_json_8424b943a55c182661c3033898fbe3e7_styler(feature) {
             switch(feature.id) {
                 default:
                     return {&quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
             }
         }
-        function geo_json_6eacf2b3702a668fc9db713dbd532aa2_highlighter(feature) {
+        function geo_json_8424b943a55c182661c3033898fbe3e7_highlighter(feature) {
             switch(feature.id) {
                 default:
                     return {&quot;fillOpacity&quot;: 0.75};
             }
         }
-        function geo_json_6eacf2b3702a668fc9db713dbd532aa2_pointToLayer(feature, latlng) {
+        function geo_json_8424b943a55c182661c3033898fbe3e7_pointToLayer(feature, latlng) {
             var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
 
-            let style = geo_json_6eacf2b3702a668fc9db713dbd532aa2_styler(feature)
+            let style = geo_json_8424b943a55c182661c3033898fbe3e7_styler(feature)
             Object.assign(opts, style)
 
             return new L.CircleMarker(latlng, opts)
         }
 
-        function geo_json_6eacf2b3702a668fc9db713dbd532aa2_onEachFeature(feature, layer) {
+        function geo_json_8424b943a55c182661c3033898fbe3e7_onEachFeature(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if(typeof e.target.setStyle === &quot;function&quot;){
-                        geo_json_6eacf2b3702a668fc9db713dbd532aa2.resetStyle(e.target);
+                        geo_json_8424b943a55c182661c3033898fbe3e7.resetStyle(e.target);
                     }
                 },
                 mouseover: function(e) {
                     if(typeof e.target.setStyle === &quot;function&quot;){
-                        const highlightStyle = geo_json_6eacf2b3702a668fc9db713dbd532aa2_highlighter(e.target.feature)
+                        const highlightStyle = geo_json_8424b943a55c182661c3033898fbe3e7_highlighter(e.target.feature)
                         e.target.setStyle(highlightStyle);
                     }
                 },
             });
         };
-        var geo_json_6eacf2b3702a668fc9db713dbd532aa2 = L.geoJson(null, {
-                onEachFeature: geo_json_6eacf2b3702a668fc9db713dbd532aa2_onEachFeature,
+        var geo_json_8424b943a55c182661c3033898fbe3e7 = L.geoJson(null, {
+                onEachFeature: geo_json_8424b943a55c182661c3033898fbe3e7_onEachFeature,
 
-                style: geo_json_6eacf2b3702a668fc9db713dbd532aa2_styler,
-                pointToLayer: geo_json_6eacf2b3702a668fc9db713dbd532aa2_pointToLayer
+                style: geo_json_8424b943a55c182661c3033898fbe3e7_styler,
+                pointToLayer: geo_json_8424b943a55c182661c3033898fbe3e7_pointToLayer
         });
 
-        function geo_json_6eacf2b3702a668fc9db713dbd532aa2_add (data) {
-            geo_json_6eacf2b3702a668fc9db713dbd532aa2
+        function geo_json_8424b943a55c182661c3033898fbe3e7_add (data) {
+            geo_json_8424b943a55c182661c3033898fbe3e7
                 .addData(data)
-                .addTo(map_6a9942411ad716dadda815123aa605c3);
+                .addTo(map_45de7dcad35a2d0cd7704511f7e4a107);
         }
-            geo_json_6eacf2b3702a668fc9db713dbd532aa2_add({&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.817967464077503, 47.33777204749909], &quot;features&quot;: [{&quot;bbox&quot;: [12.803868147852612, 47.33056389640604, 12.817967464077503, 47.33777204749909], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.803868147852612, 47.33091868331674], [12.817596157332153, 47.33056389640604], [12.817967464077503, 47.33741720662344], [12.804237649967712, 47.33777204749909], [12.803868147852612, 47.33091868331674]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Northern&quot;}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.815746431172713, 47.31514111553671], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.799052458545688, 47.30486091070503], [12.815190335969971, 47.30444420302901], [12.815746431172713, 47.3147243128484], [12.799605373818284, 47.31514111553671], [12.799052458545688, 47.30486091070503]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;1&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Southern&quot;}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+            geo_json_8424b943a55c182661c3033898fbe3e7_add({&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.817967464077503, 47.33777204749909], &quot;features&quot;: [{&quot;bbox&quot;: [12.803868147852612, 47.33056389640604, 12.817967464077503, 47.33777204749909], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.803868147852612, 47.33091868331674], [12.817596157332153, 47.33056389640604], [12.817967464077503, 47.33741720662344], [12.804237649967712, 47.33777204749909], [12.803868147852612, 47.33091868331674]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Northern&quot;}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.815746431172713, 47.31514111553671], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.799052458545688, 47.30486091070503], [12.815190335969971, 47.30444420302901], [12.815746431172713, 47.3147243128484], [12.799605373818284, 47.31514111553671], [12.799052458545688, 47.30486091070503]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;1&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Southern&quot;}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
 
 
 
-    geo_json_6eacf2b3702a668fc9db713dbd532aa2.bindTooltip(
+    geo_json_8424b943a55c182661c3033898fbe3e7.bindTooltip(
     function(layer){
     let div = L.DomUtil.create(&#x27;div&#x27;);
 
@@ -2079,7 +2119,7 @@ response = recipe.execute(**context)
 &lt;/script&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>new_context = copy.deepcopy(context)
@@ -2088,15 +2128,15 @@ new_context[&quot;space&quot;] = parcels
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
 
 recipe[&quot;avg_water_count_per_parcel&quot;] = sq.entity(&quot;water&quot;).\
-    reduce(&quot;time&quot;, &quot;count&quot;).\
+    reduce(&quot;count&quot;, &quot;time&quot;).\
     groupby(sq.self().extract(&quot;space&quot;, &quot;feature&quot;)).\
-    reduce(&quot;space&quot;, &quot;mean&quot;).\
+    reduce(&quot;mean&quot;, &quot;space&quot;).\
     concatenate(&quot;parcel&quot;)
 
 response = recipe.execute(**new_context)
@@ -2104,7 +2144,7 @@ response = recipe.execute(**new_context)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df = response[&quot;avg_water_count_per_parcel&quot;].sq.to_dataframe()
@@ -2113,7 +2153,7 @@ df
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2160,14 +2200,14 @@ df
 <h2>Seasonal aggregates<a class="headerlink" href="#Seasonal-aggregates" title="Permalink to this headline">¶</a></h2>
 <p>We create a water count map for each season in the data separately. We use the built-in “season” component of the time dimension, which defines seasons as: 1 = March, April, May; 2 = June, July, August; 3 = September, October, November; 4 = December, January, February.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
 
 recipe[&quot;water_count_per_season&quot;] = sq.entity(&quot;water&quot;).\
     groupby(sq.self().extract(&quot;time&quot;, &quot;season&quot;)).\
-    reduce(&quot;time&quot;, &quot;count&quot;).\
+    reduce(&quot;count&quot;, &quot;time&quot;).\
     concatenate(&quot;season&quot;)
 
 response = recipe.execute(**context)
@@ -2175,7 +2215,7 @@ response = recipe.execute(**context)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, (ax1, ax2) = plt.subplots(1, 2, figsize = (15, 5))
@@ -2210,7 +2250,7 @@ plt.draw()
 <h2>Time of first vegetation observation<a class="headerlink" href="#Time-of-first-vegetation-observation" title="Permalink to this headline">¶</a></h2>
 <p>Find for each spatial pixel at which timestamp vegetation was first observed.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
@@ -2218,7 +2258,7 @@ plt.draw()
 recipe[&quot;dates&quot;] = sq.entity(&quot;vegetation&quot;).\
     filter(sq.self()).\
     assign_time().\
-    reduce(&quot;time&quot;, &quot;first&quot;)
+    reduce(&quot;first&quot;, &quot;time&quot;)
 
 response = recipe.execute(**context)
 </pre></div>
@@ -2229,12 +2269,12 @@ response = recipe.execute(**context)
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/home/luuk/Documents/zgis/sen2cube/semantique/semantique/processor/reducers.py:823: RuntimeWarning: All-NaN slice encountered
-  return np.nanmax(np.where(is_first, x, get_null(x)), axis)
+/home/luuk/Documents/zgis/sen2cube/semantique/semantique/processor/reducers.py:833: RuntimeWarning: All-NaN slice encountered
+  return np.nanmax(np.where(is_first, x, utils.get_null(x)), axis)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(1, figsize = (7, 5))

@@ -16,6 +16,7 @@
       ~Array.__init__
       ~Array.align_with
       ~Array.assign
+      ~Array.delineate
       ~Array.drop_non_dimension_coords
       ~Array.evaluate
       ~Array.extract

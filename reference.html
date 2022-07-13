@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="semantique.QueryRecipe" href="_generated/semantique.QueryRecipe.html" />
-    <link rel="prev" title="Verbs" href="_notebooks/verbs.html" />
+    <link rel="prev" title="Internal query processing" href="_notebooks/processor.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -102,6 +102,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_notebooks/mapping.html">
+     Constructing mappings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_notebooks/datacube.html">
+     Representing EO data cubes
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_notebooks/references.html">
      References
     </a>
@@ -109,6 +119,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_notebooks/verbs.html">
      Verbs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_notebooks/processor.html">
+     Internal query processing
     </a>
    </li>
   </ul>
@@ -294,6 +309,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.trim.html">
+     semantique.ArrayProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.ArrayProxy.delineate.html">
+     semantique.ArrayProxy.delineate
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -361,6 +386,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.CollectionProxy.smooth.html">
      semantique.CollectionProxy.smooth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.trim.html">
+     semantique.CollectionProxy.trim
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.CollectionProxy.delineate.html">
+     semantique.CollectionProxy.delineate
     </a>
    </li>
    <li class="toctree-l2">
@@ -1059,6 +1094,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="_generated/semantique.exceptions.ReservedDimensionError.html">
+     semantique.exceptions.ReservedDimensionError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="_generated/semantique.exceptions.MixedTimeZonesError.html">
      semantique.exceptions.MixedTimeZonesError
     </a>
@@ -1603,6 +1643,12 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.ArrayProxy.smooth.html#semantique.ArrayProxy.smooth" title="semantique.ArrayProxy.smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayProxy.smooth</span></code></a></p></td>
 <td><p>Smooth the values in an array through a moving window.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.ArrayProxy.trim.html#semantique.ArrayProxy.trim" title="semantique.ArrayProxy.trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayProxy.trim</span></code></a></p></td>
+<td><p>Trim the dimensions of an array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.ArrayProxy.delineate.html#semantique.ArrayProxy.delineate" title="semantique.ArrayProxy.delineate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayProxy.delineate</span></code></a></p></td>
+<td><p>Delineate spatio-temporal objects in a binary array.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1655,6 +1701,12 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.CollectionProxy.smooth.html#semantique.CollectionProxy.smooth" title="semantique.CollectionProxy.smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CollectionProxy.smooth</span></code></a></p></td>
 <td><p>Apply the smooth verb to each array in a collection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.CollectionProxy.trim.html#semantique.CollectionProxy.trim" title="semantique.CollectionProxy.trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CollectionProxy.trim</span></code></a></p></td>
+<td><p>Apply the trim verb to each array in a collection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.CollectionProxy.delineate.html#semantique.CollectionProxy.delineate" title="semantique.CollectionProxy.delineate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CollectionProxy.delineate</span></code></a></p></td>
+<td><p>Apply the delineate verb to each array in a collection.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1992,10 +2044,10 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.arrays.Array.html#semantique.processor.arrays.Array" title="semantique.processor.arrays.Array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.arrays.Array</span></code></a></p></td>
-<td><p>Internal representation of a semantic array.</p></td>
+<td><p>Internal representation of a multi-dimensional array.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.processor.arrays.Collection.html#semantique.processor.arrays.Collection" title="semantique.processor.arrays.Collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.arrays.Collection</span></code></a></p></td>
-<td><p>Internal representation of a collection of multiple semantic arrays.</p></td>
+<td><p>Internal representation of a collection of multiple arrays.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2398,7 +2450,10 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.MixedDimensionsError.html#semantique.exceptions.MixedDimensionsError" title="semantique.exceptions.MixedDimensionsError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.MixedDimensionsError</span></code></a></p></td>
 <td><p>Raised when arrays in a collection have differing dimensions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.MixedTimeZonesError.html#semantique.exceptions.MixedTimeZonesError" title="semantique.exceptions.MixedTimeZonesError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.MixedTimeZonesError</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.ReservedDimensionError.html#semantique.exceptions.ReservedDimensionError" title="semantique.exceptions.ReservedDimensionError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.ReservedDimensionError</span></code></a></p></td>
+<td><p>Raised when a reserved dimension name is being used for a new dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/semantique.exceptions.MixedTimeZonesError.html#semantique.exceptions.MixedTimeZonesError" title="semantique.exceptions.MixedTimeZonesError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.MixedTimeZonesError</span></code></a></p></td>
 <td><p>Raised when the bounds of a time interval have differing time zones.</p></td>
 </tr>
 </tbody>
@@ -2412,11 +2467,11 @@
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="_notebooks/verbs.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="_notebooks/processor.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Verbs</p>
+            <p class="prev-next-title">Internal query processing</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="_generated/semantique.QueryRecipe.html" title="next page">
