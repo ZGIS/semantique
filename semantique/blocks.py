@@ -614,6 +614,33 @@ class ArrayProxy(dict):
       kwargs.update({"dimension": dimension})
     return self._append_verb("trim", **kwargs)
 
+  def delineate(self, dimension = None, **kwargs):
+    """Delineate spatio-temporal objects in a binary array.
+
+    Delineates spatio-temporal objects by finding sets of "true" pixels that
+    are connected in space-time, and assigning each of these sets an integer
+    index starting from 1. For the X and Y directions, queen neighborhoods are
+    used to define connectivity, while for the temporal direction, rook
+    neighborhoods are used to define connectivity.
+
+    Parameters
+    ----------
+      **kwargs:
+        Additional keyword arguments passed on to
+        :meth:`Array.delineate <processor.arrays.Array.delineate>`.
+
+    Returns
+    --------
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> import semantique as sq
+    >>> sq.entity("water").delineate()
+
+    """
+    return self._append_verb("delineate", **kwargs)
+
   def name(self, value, **kwargs):
     """Give a name to an array.
 
@@ -932,6 +959,18 @@ class CollectionProxy(dict):
     if dimension is not None:
       kwargs.update({"dimension": dimension})
     return self._append_verb("trim", **kwargs)
+
+  def delineate(self, dimension = None, **kwargs):
+    """Apply the delineate verb to each array in a collection.
+
+    See :meth:`ArrayProxy.delineate`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    """
+    return self._append_verb("delineate", **kwargs)
 
 def concept(*reference, property = None):
   """Reference to a semantic concept.

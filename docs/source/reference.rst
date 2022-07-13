@@ -100,6 +100,7 @@ Verbs for single data cubes
    ArrayProxy.shift
    ArrayProxy.smooth
    ArrayProxy.trim
+   ArrayProxy.delineate
 
 Verbs for data cube collections
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -123,6 +124,7 @@ Verbs for data cube collections
    CollectionProxy.shift
    CollectionProxy.smooth
    CollectionProxy.trim
+   CollectionProxy.delineate
 
 Utility verbs
 ~~~~~~~~~~~~~~

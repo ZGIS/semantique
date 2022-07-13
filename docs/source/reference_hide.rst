@@ -88,6 +88,7 @@
    processor.core.QueryProcessor.handle_shift
    processor.core.QueryProcessor.handle_smooth
    processor.core.QueryProcessor.handle_trim
+   processor.core.QueryProcessor.handle_delineate
    processor.core.QueryProcessor.handle_name
    processor.core.QueryProcessor.handle_compose
    processor.core.QueryProcessor.handle_concatenate
@@ -122,6 +123,7 @@
    processor.arrays.Array.shift
    processor.arrays.Array.smooth
    processor.arrays.Array.trim
+   processor.arrays.Array.delineate
    processor.arrays.Array.name
    processor.arrays.Array.align_with
    processor.arrays.Array.regularize

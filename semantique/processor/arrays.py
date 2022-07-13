@@ -9,6 +9,8 @@ import rasterio
 import rioxarray
 import warnings
 
+from scipy import ndimage
+
 from semantique import exceptions
 from semantique.processor import operators, utils
 
@@ -616,9 +618,6 @@ class Array():
         out = obj.isel({dim: obj.count(other_dims) > 0})
         return out
     def _trim_space(obj, other_dims):
-      # obj = self._obj
-      # # Determine non-spatial dimensions.
-      # other_dims = [d for d in self._obj.dims if d != SPACE]
       # Find the smallest and largest spatial coords containing valid values.
       obj = obj.unstack(SPACE)
       y_idxs = np.nonzero(obj.count(other_dims + [X]).data)[0]
@@ -644,6 +643,64 @@ class Array():
         out = _trim_space(_trim_regular(obj, other_dims), other_dims)
       else:
         out = _trim_regular(obj, trim_dims)
+    return out
+
+  def delineate(self, **kwargs):
+    """Apply the delineate verb to the array.
+
+    The delineate verb deliniates spatio-temporal objects in a binary array.
+
+    Parameters
+    -----------
+      **kwargs:
+        Ignored.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    """
+    obj = xr.apply_ufunc(utils.null_as_zero, self._obj)
+    dims = obj.dims
+    is_spatial = SPACE in dims
+    is_temporal = TIME in dims
+    if is_spatial and is_temporal:
+      if len(dims) > 2:
+        raise exceptions.TooManyDimensionsError(
+          f"Delineate is only supported for arrays with dimension '{TIME}' "
+          f"and/or '{SPACE}', not: {list(dims)}"
+        )
+      obj = obj.transpose(TIME, SPACE) # Make sure dimension order is correct.
+      obj = obj.unstack(SPACE) # Unstack spatial dims.
+      nb = np.array([
+        [[0,0,0],[0,1,0],[0,0,0]],
+        [[1,1,1],[1,1,1],[1,1,1]],
+        [[0,0,0],[0,1,0],[0,0,0]]
+      ])
+    elif is_spatial or is_temporal:
+      if len(dims) > 1:
+        raise exceptions.TooManyDimensionsError(
+          f"Delineate is only supported for arrays with dimension '{TIME}' "
+          f"and/or '{SPACE}', not: {list(dims)}"
+        )
+      if is_spatial:
+        obj = obj.unstack(SPACE)
+        nb = np.array([
+          [1,1,1],
+          [1,1,1],
+          [1,1,1]
+        ])
+      else:
+        nb = np.array([1,1,1])
+    else:
+      raise exceptions.MissingDimensionError(
+        f"Delineate is only supported for arrays with dimension '{TIME}' "
+        f"and/or '{SPACE}', not: {list(dims)}"
+      )
+    out = xr.apply_ufunc(lambda x, y: ndimage.label(x, y)[0], obj, nb)
+    if is_spatial:
+      out = out.sq.stack_spatial_dims()
+    out = out.where(pd.notnull(self._obj)) # Preserve nan.
     return out
 
   def name(self, value, **kwargs):
@@ -1430,6 +1487,20 @@ class Collection(list):
     args = tuple([dimension, force_regular])
     out = copy.deepcopy(self)
     out[:] = [x.sq.trim(*args, **kwargs) for x in out]
+    return out
+
+  def delineate(self, **kwargs):
+    """Apply the delineate verb to all arrays in the collection.
+
+    See :meth:`Array.delineate`
+
+    Returns
+    -------
+      :obj:`Collection`
+
+    """
+    out = copy.deepcopy(self)
+    out[:] = [x.sq.delineate(**kwargs) for x in out]
     return out
 
   def name(self, value, **kwargs):

@@ -736,6 +736,22 @@ class QueryProcessor():
     """
     return self.call_verb("trim", block["params"])
 
+  def handle_delineate(self, block):
+    """Handler for the delineate verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "delineate".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+
+    """
+    return self.call_verb("delineate", block["params"])
+
   def handle_name(self, block):
     """Handler for the name verb.
 
