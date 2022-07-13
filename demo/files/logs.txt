@@ -373,20 +373,8 @@ Attributes:
     long_name:     33SharedSpCt
     value_type:    binary
 Applied verb reduce:
-<xarray.DataArray 'water' (space: 16)>
-array([1., 0., 0., 0., 0., 0., 0., 1., 1., 0., 1., 0., 0., 0., 0., 0.])
-Coordinates:
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
-Attributes:
-    value_type:  numerical
-Applied verb reduce:
 <xarray.DataArray 'water' ()>
-array(0.25)
+array(4.)
 Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
@@ -455,20 +443,8 @@ Attributes:
     long_name:     33SharedSpCt
     value_type:    binary
 Applied verb reduce:
-<xarray.DataArray 'vegetation' (space: 16)>
-array([1., 2., 1., 2., 2., 2., 0., 1., 1., 1., 0., 1., 2., 0., 1., 2.])
-Coordinates:
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
-Attributes:
-    value_type:  numerical
-Applied verb reduce:
 <xarray.DataArray 'vegetation' ()>
-array(1.1875)
+array(19.)
 Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
@@ -518,13 +494,13 @@ Coordinates:
     temporal_ref  int64 0
 Attributes:
     value_type:  numerical, 'blue_stat': <xarray.DataArray 'blue_stat' ()>
-array(0.25)
+array(4.)
 Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
     value_type:  numerical, 'green_stat': <xarray.DataArray 'green_stat' ()>
-array(1.1875)
+array(19.)
 Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0

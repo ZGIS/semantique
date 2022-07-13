@@ -13,8 +13,8 @@
         "type": "verb",
         "name": "reduce",
         "params": {
-          "dimension": "time",
-          "reducer": "count"
+          "reducer": "count",
+          "dimension": "time"
         }
       }
     ]
@@ -33,8 +33,8 @@
         "type": "verb",
         "name": "reduce",
         "params": {
-          "dimension": "time",
-          "reducer": "count"
+          "reducer": "count",
+          "dimension": "time"
         }
       }
     ]
@@ -53,8 +53,8 @@
         "type": "verb",
         "name": "reduce",
         "params": {
-          "dimension": "space",
-          "reducer": "count"
+          "reducer": "count",
+          "dimension": "space"
         }
       }
     ]
@@ -73,8 +73,8 @@
         "type": "verb",
         "name": "reduce",
         "params": {
-          "dimension": "space",
-          "reducer": "count"
+          "reducer": "count",
+          "dimension": "space"
         }
       }
     ]
@@ -93,16 +93,7 @@
         "type": "verb",
         "name": "reduce",
         "params": {
-          "dimension": "time",
           "reducer": "count"
-        }
-      },
-      {
-        "type": "verb",
-        "name": "reduce",
-        "params": {
-          "dimension": "space",
-          "reducer": "mean"
         }
       }
     ]
@@ -121,16 +112,7 @@
         "type": "verb",
         "name": "reduce",
         "params": {
-          "dimension": "time",
           "reducer": "count"
-        }
-      },
-      {
-        "type": "verb",
-        "name": "reduce",
-        "params": {
-          "dimension": "space",
-          "reducer": "mean"
         }
       }
     ]
