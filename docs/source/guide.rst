@@ -8,6 +8,8 @@ The User Guide contains several notebooks that provide detailed documentation of
    :hidden:
 
    Writing and executing query recipes <_notebooks/recipes.nblink>
+   Constructing mappings <_notebooks/mapping.nblink>
+   Representing EO data cubes <_notebooks/datacube.nblink>
    References <_notebooks/references.nblink>
    Verbs <_notebooks/verbs.nblink>
    Internal query processing <_notebooks/processor.nblink>
