@@ -10,7 +10,7 @@ from datacube.utils import masking
 from abc import abstractmethod
 
 from semantique import exceptions
-from semantique.processor.arrays import SPACE, TIME, X, Y
+from semantique.dimensions import TIME, SPACE, X, Y
 
 class Datacube():
   """Base class for EO data cube configurations.

@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-from semantique.processor.arrays import SPACE, TIME, X, Y
+from semantique.dimensions import TIME, SPACE, X, Y
 
 def get_null(x):
   """Return the appropriate nodata value for an array.

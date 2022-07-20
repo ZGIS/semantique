@@ -5,7 +5,7 @@ import xarray as xr
 from semantique.processor import utils
 from semantique.processor.types import TypePromoter
 from semantique.processor.values import Interval
-from semantique.processor.arrays import SPACE
+from semantique.dimensions import SPACE
 
 #
 # UNIVARIATE OPERATORS
