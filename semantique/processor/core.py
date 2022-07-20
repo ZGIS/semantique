@@ -28,8 +28,8 @@ class QueryProcessor():
       The mapping instance to process the query against.
     extent : :obj:`xarray.DataArray`
       The spatio-temporal extent in which the query should be processed. Should
-      be given as an array with a temporal dimension as well as a stacked
-      spatial dimension, such as returned by
+      be given as an array with a temporal dimension and two spatial dimensions
+      such as returned by
       :func:`parse_extent <semantique.processor.utils.parse_extent>`.
     operators : :obj:`dict`
       Operator functions that may be used when evaluating expressions with the
@@ -296,27 +296,9 @@ class QueryProcessor():
       result.name = x
       self._response[x] = result
       logger.info(f"Finished executing result: '{x}'")
-    # Return.
-    out = self
-    logger.info("Finished executing the semantic query")
-    return out
-
-  def respond(self):
-    """Return the response of an executed semantic query.
-
-    Returns
-    -------
-      :obj:`dict` of :obj:`xarray.DataArray`
-        Dictionary containing result names as keys and result arrays as values.
-
-    """
-    logger.info("Started preparing response")
-    # Unstack spatial dimensions.
-    unstack = lambda x: x.sq.unstack_spatial_dims()
-    self._response = {k: unstack(v) for k, v in self._response.items()}
-    # Return.
+    # Post-process.
     out = self._response
-    logger.info("Finished preparing response")
+    logger.info("Finished executing the semantic query")
     logger.debug(f"Responding:\n{out}")
     return out
 
@@ -569,11 +551,7 @@ class QueryProcessor():
       :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
-    # Set function parameters.
-    params = copy.deepcopy(block["params"])
-    params["track_types"] = self._track_types
-    # Call verb.
-    return self.call_verb("extract", params)
+    return self.call_verb("extract", block["params"])
 
   def handle_filter(self, block):
     """Handler for the filter verb.

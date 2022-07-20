@@ -130,12 +130,13 @@ class Array():
   @property
   def grid_points(self):
     """:obj:`geopandas.GeoSeries`: Spatial grid points of the array."""
-    if SPACE not in self._obj.dims:
-      return None
-    # Extract spatial coordinates.
-    xcoords = self._obj[SPACE][X]
-    ycoords = self._obj[SPACE][Y]
-    # Return grid points as geometries.
+    if X not in self._obj.dims or Y not in self._obj.dims:
+      return self._obj
+    # Extract coordinates of spatial pixels.
+    cells = self.stack_spatial_dims()[SPACE]
+    xcoords = cells[X]
+    ycoords = cells[Y]
+    # Convert to point geometries.
     points = gpd.points_from_xy(xcoords, ycoords)
     return gpd.GeoSeries(points, crs = self.crs)
 
@@ -174,7 +175,7 @@ class Array():
     out = operator(*operands, track_types = track_types, **kwargs)
     return out
 
-  def extract(self, dimension, component = None, track_types = True, **kwargs):
+  def extract(self, dimension, component = None, **kwargs):
     """Apply the extract verb to the array.
 
     The extract verb extracts coordinate labels of a dimension as a new
@@ -188,8 +189,6 @@ class Array():
         Name of a specific component of the dimension coordinates to be
         extracted, e.g. *year*, *month* or *day* for temporal dimension
         coordinates.
-      track_types : :obj:`bool`
-        Should the extracted object get a value type assigned?
       **kwargs:
         Ignored.
 
@@ -205,36 +204,70 @@ class Array():
         If the given dimension does not contain the given component.
 
     """
-    # Extract dimension coordinates.
+    # Get array.
+    obj = self._obj
+    # Extract spatial or temporal dimension(s).
+    if dimension == TIME:
+      return self._extract_time(obj, component)
+    if dimension == SPACE:
+      return self._extract_space(obj, component)
+    # Extract any other dimension.
     try:
-      coords = self._obj[dimension]
+      out = obj[dimension]
     except KeyError:
       raise exceptions.UnknownDimensionError(
-        f"Dimension '{dimension}' is not present in the input object"
+        f"Dimension '{dimension}' is not present in the array"
       )
-    # Extract component of dimensions coordinates if specified.
+    if component is not None:
+      try:
+        out = out[component]
+      except KeyError:
+        raise exceptions.UnknownComponentError(
+          f"Component '{component}' is not defined for dimension '{dimension}'"
+        )
+    return out
+
+  @staticmethod
+  def _extract_space(obj, component = None):
     if component is None:
-      out = coords
+      try:
+        out = obj.sq.stack_spatial_dims()[SPACE]
+      except KeyError:
+        raise exceptions.UnknownDimensionError(
+          f"Spatial dimensions '{X}' and '{Y}' are not present in the array"
+        )
+      out._variable = out._variable.to_base_variable()
+      out = out.sq.unstack_spatial_dims()
+      out.sq.value_type = "coords"
     else:
       try:
-        out = coords[component]
+        out = obj[component]
+      except KeyError:
+        raise exceptions.UnknownComponentError(
+          f"Component '{component}' is not defined for dimension '{SPACE}'"
+        )
+    return out
+
+  @staticmethod
+  def _extract_time(obj, component = None):
+    try:
+      out = obj[TIME]
+    except KeyError:
+      raise exceptions.UnknownDimensionError(
+        f"Dimension '{TIME}' is not present in the array"
+      )
+    if component is not None:
+      try:
+        out = out[component]
       except KeyError:
         try:
-          out = getattr(coords.dt, component)
+          out = getattr(out.dt, component)
         except AttributeError:
           raise exceptions.UnknownComponentError(
-            f"Component '{component}' "
-            f"is not defined for dimension '{dimension}'"
+            f"Component '{component}' is not defined for dimension '{TIME}'"
           )
         else:
           out = utils.parse_datetime_component(component, out)
-      else:
-        if dimension == SPACE and component in [X, Y]:
-          out = utils.parse_coords_component(out)
-    out._variable = out._variable.to_base_variable()
-    if not track_types:
-      del out.sq.value_type
-      del out.sq.value_labels
     return out
 
   def filter(self, filterer, track_types = True, **kwargs):
@@ -354,7 +387,7 @@ class Array():
     Raises
     -------
       :obj:`exceptions.MissingDimensionError`
-        If the grouper dimension is not present in the input object.
+        If the grouper dimension is not present in the array.
       :obj:`exceptions.TooManyDimensionsError`
         If the grouper has more than one dimension.
       :obj:`exceptions.MixedDimensionsError`
@@ -445,16 +478,26 @@ class Array():
         If a dimension with the given name is not present in the array.
 
     """
+    # Get array and set reduction dimension.
+    obj = self._obj
     if dimension is not None:
-      if dimension not in self._obj.dims:
-        raise exceptions.UnknownDimensionError(
-          f"Dimension '{dimension}' is not present in the input object"
-        )
+      if dimension == SPACE:
+        if X not in obj.dims or Y not in obj.dims:
+          raise exceptions.UnknownDimensionError(
+            f"Spatial dimensions '{X}' and '{Y}' are not present in the array"
+          )
+        obj = self.stack_spatial_dims()
+      else:
+        if dimension not in obj.dims:
+          raise exceptions.UnknownDimensionError(
+            f"Dimension '{dimension}' is not present in the array"
+          )
       kwargs["dim"] = dimension
-    out = reducer(self._obj, track_types = track_types, **kwargs)
+    # Reduce.
+    out = reducer(obj, track_types = track_types, **kwargs)
     return out
 
-  def shift(self, dimension, steps, coord = None, **kwargs):
+  def shift(self, dimension, steps, **kwargs):
     """Apply the shift verb to the array.
 
     The shift verb shifts the values in an array a given amount of steps along
@@ -467,13 +510,9 @@ class Array():
       steps : :obj:`int`
         Amount of steps each value should be shifted. A negative integer will
         result in a shift to the left, while a positive integer will result in
-        a shift to the right.
-      coord : :obj:`str`
-        Either "x" or "y", specifying if values should be shifted in
-        respectively the X or Y direction of the spatial dimension. If
-        :obj:`None`, a shift along the spatial dimension follows the pixel
-        order defined by the CRS, e.g. starting in the top-left and moving down
-        each column. Ignored when ``dimension`` is not the spatial dimension.
+        a shift to the right. A shift along the spatial dimension follows the
+        pixel order defined by the CRS, e.g. starting in the top-left and
+        moving down each column.
       **kwargs:
         Ignored.
 
@@ -487,26 +526,29 @@ class Array():
         If a dimension with the given name is not present in the array.
 
     """
-    # Check dimension presence.
-    if dimension not in self._obj.dims:
-      raise exceptions.UnknownDimensionError(
-        f"Dimension '{dimension}' is not present in the input object"
-      )
-    # Shift values.
-    # Spatial dimension needs special treatment if coord is specified.
-    if dimension == SPACE and coord is not None:
-      obj = self._obj.unstack(dimension)
-      if coord not in obj.dims:
-        raise exceptions.UnknownComponentError(
-          f"Spatial dimension does not have coordinate '{coord}'"
+    # Get array.
+    obj = self._obj
+    if dimension == SPACE:
+      if X not in obj.dims or Y not in obj.dims:
+        raise exceptions.UnknownDimensionError(
+          f"Spatial dimensions '{X}' and '{Y}' are not present in the array"
         )
-      out = obj.shift({coord: steps}).sq.stack_spatial_dims()
+      obj = self.stack_spatial_dims()
+      stacked = True
     else:
-      out = self._obj.shift({dimension: steps})
+      if dimension not in obj.dims:
+        raise exceptions.UnknownDimensionError(
+          f"Dimension '{dimension}' is not present in the array"
+        )
+      stacked = False
+    # Shift values.
+    out = self._obj.shift({dimension: steps})
+    # Post-process.
+    if stacked:
+      out = out.sq.unstack_spatial_dims()
     return out
 
-  def smooth(self, reducer, dimension, size, coord = None, track_types = True,
-             **kwargs):
+  def smooth(self, reducer, dimension, size, track_types = True, **kwargs):
     """Apply the smooth verb to the array.
 
     The smooth verb smoothes the values in an array by applying a reducer
@@ -522,15 +564,9 @@ class Array():
         Size k defining the extent of the rolling window. The pixel being
         smoothed will always be in the center of the window, with k pixels at
         its left and k pixels at its right. If the dimension to smooth over is
-        the spatial dimension and ``coord`` is not specified, the size will be
-        used for both the X and Y dimension, forming a square window with the
-        smoothed pixel in the middle.
-      coord : :obj:`str`
-        Either "x" or "y", specifying if the moving window should be constructed
-        in respectively the X or Y direction of the spatial dimension. If
-        :obj:`None`, the window is constructed in both directions, forming a
-        two-dimensional square. Ignored when ``dimension`` is not the spatial
-        dimension.
+        the spatial dimension, the size will be used for both the X and Y
+        dimension, forming a square window with the smoothed pixel in the
+        middle.
       track_types : :obj:`bool`
         Should the reducer promote the value type of the output object, based
         on the value type of the input object?
@@ -549,51 +585,44 @@ class Array():
         If a dimension with the given name is not present in the array.
 
     """
-    if dimension not in self._obj.dims:
-      raise exceptions.UnknownDimensionError(
-        f"Dimension '{dimension}' is not present in the input object"
-      )
+    # Get array.
+    obj = self._obj
+    # Check dimension presence.
+    if dimension == SPACE:
+      if X not in obj.dims or Y not in obj.dims:
+        raise exceptions.UnknownDimensionError(
+          f"Spatial dimensions '{X}' and '{Y}' are not present in the array"
+        )
+    else:
+      if dimension not in obj.dims:
+        raise exceptions.UnknownDimensionError(
+          f"Dimension '{dimension}' is not present in the array"
+        )
     # Parse size.
     # Size parameter defines neighborhood size at each side of the pixel.
     size = size * 2 + 1
     # Create the rolling window object.
-    # Spatial dimension needs special treatment because it is stacked.
     if dimension == SPACE:
-      spatial = True
-      obj = self._obj.unstack(dimension)
-      if coord is None:
-        obj = obj.rolling({X: size, Y: size}, center = True)
-      else:
-        if coord not in obj.dims:
-          raise exceptions.UnknownComponentError(
-            f"Spatial dimension does not have coordinate '{coord}'"
-          )
-        obj = obj.rolling({coord: size}, center = True)
+      obj = obj.rolling({X: size, Y: size}, center = True)
     else:
-      spatial = False
-      obj = self._obj.rolling({dimension: size}, center = True)
+      obj = obj.rolling({dimension: size}, center = True)
     # Apply the reducer to each window.
     out = reducer(obj, track_types = track_types, **kwargs)
-    # Stack and return.
-    if spatial:
-      out = out.sq.stack_spatial_dims()
     return out
 
-  def trim(self, dimension = None, force_regular = True):
+  def trim(self, dimension = None):
     """Apply the trim verb to the array.
 
     The trim verb trims the dimensions of an array, meaning that all dimension
     coordinates for which all values are missing are removed from the array.
+    The spatial dimensions are only trimmed at their edges, to preserve their
+    regularity.
 
     Parameters
     ----------
       dimension : :obj:`str`
         Name of the dimension to be trimmed. If :obj:`None`, all dimensions
         will be trimmed.
-      force_regular : :obj:`bool`
-        If the spatial dimension should be trimmed, should the regularity of
-        this dimension be preserved? If :obj:`True` the spatial dimensions are
-        trimmed only at their edges.
 
     Returns
     -------
@@ -605,47 +634,45 @@ class Array():
         If a dimension with the given name is not present in the array.
 
     """
-    # Determine dimensions to be trimmed.
-    if dimension is None:
-      trim_dims = self._obj.dims # Trim all dims.
-    else:
-      if dimension not in self._obj.dims:
-        raise exceptions.UnknownDimensionError(
-          f"Dimension '{dimension}' is not present in the input object"
-        )
-      trim_dims = [dimension]
-    # Define sub-functions for regular and spatial trimming.
-    def _trim_regular(obj, dims):
-      for dim in dims:
-        other_dims = [d for d in obj.dims if d != dim]
-        out = obj.isel({dim: obj.count(other_dims) > 0})
-        return out
-    def _trim_space(obj, other_dims):
-      # Find the smallest and largest spatial coords containing valid values.
-      obj = obj.unstack(SPACE)
-      y_idxs = np.nonzero(obj.count(other_dims + [X]).data)[0]
-      x_idxs = np.nonzero(obj.count(other_dims + [Y]).data)[0]
-      y_slice = slice(y_idxs.min(), y_idxs.max() + 1)
-      x_slice = slice(x_idxs.min(), x_idxs.max() + 1)
-      # Limit the x and y coordinates to only those ranges.
-      out = obj.isel({Y: y_slice, X: x_slice})
-      # Stack x and y dimensions back together.
-      out = out.sq.stack_spatial_dims()
-      return out
-    # Trim.
     obj = self._obj
-    if dimension is not None:
-      if force_regular and dimension == SPACE:
-        other_dims = [d for d in obj.dims if d != SPACE]
-        out = _trim_space(obj, other_dims)
+    dims = obj.dims
+    if dimension is None:
+      if X in dims and Y in dims:
+        regular_dims = [d for d in dims if d not in [X, Y]]
+        out = self._trim_space(self._trim(obj, regular_dims))
       else:
-        out = _trim_regular(obj, trim_dims)
+        out = self._trim(obj, dims)
     else:
-      if force_regular and SPACE in obj.dims:
-        other_dims = [d for d in obj.dims if d != SPACE]
-        out = _trim_space(_trim_regular(obj, other_dims), other_dims)
+      if dimension == SPACE:
+        if X not in dims or Y not in dims:
+          raise exceptions.UnknownDimensionError(
+            f"Spatial dimensions '{X}' and '{Y}' are not present in the array"
+          )
+        out = self._trim_space(obj)
       else:
-        out = _trim_regular(obj, trim_dims)
+        if dimension not in obj.dims:
+          raise exceptions.UnknownDimensionError(
+            f"Dimension '{dimension}' is not present in the array"
+          )
+        out = self._trim(obj, [dimension])
+    return out
+
+  @staticmethod
+  def _trim(obj, dimensions):
+    for dim in dimensions:
+      other_dims = [d for d in obj.dims if d != dim]
+      out = obj.isel({dim: obj.count(other_dims) > 0})
+    return out
+
+  @staticmethod
+  def _trim_space(obj):
+    # Find the smallest and largest spatial coords containing valid values.
+    y_idxs = np.nonzero(obj.count(list(set(obj.dims) - set([Y]))).data)[0]
+    x_idxs = np.nonzero(obj.count(list(set(obj.dims) - set([X]))).data)[0]
+    y_slice = slice(y_idxs.min(), y_idxs.max() + 1)
+    x_slice = slice(x_idxs.min(), x_idxs.max() + 1)
+    # Limit the x and y coordinates to only those ranges.
+    out = obj.isel({Y: y_slice, X: x_slice})
     return out
 
   def delineate(self, **kwargs):
@@ -665,44 +692,44 @@ class Array():
     """
     obj = xr.apply_ufunc(utils.null_as_zero, self._obj)
     dims = obj.dims
-    is_spatial = SPACE in dims
+    is_spatial = X in dims and Y in dims
     is_temporal = TIME in dims
     if is_spatial and is_temporal:
-      if len(dims) > 2:
+      if len(dims) > 3:
         raise exceptions.TooManyDimensionsError(
           f"Delineate is only supported for arrays with dimension '{TIME}' "
-          f"and/or '{SPACE}', not: {list(dims)}"
+          f"and/or '[{Y},{X}]', not: {list(dims)}"
         )
-      obj = obj.transpose(TIME, SPACE) # Make sure dimension order is correct.
-      obj = obj.unstack(SPACE) # Unstack spatial dims.
+      obj = obj.transpose(TIME, Y, X) # Make sure dimension order is correct.
       nb = np.array([
         [[0,0,0],[0,1,0],[0,0,0]],
         [[1,1,1],[1,1,1],[1,1,1]],
         [[0,0,0],[0,1,0],[0,0,0]]
       ])
-    elif is_spatial or is_temporal:
+    elif is_spatial:
+      if len(dims) > 2:
+        raise exceptions.TooManyDimensionsError(
+          f"Delineate is only supported for arrays with dimension '{TIME}' "
+          f"and/or '[{Y},{X}]', not: {list(dims)}"
+        )
+      nb = np.array([
+        [1,1,1],
+        [1,1,1],
+        [1,1,1]
+      ])
+    elif is_temporal:
       if len(dims) > 1:
         raise exceptions.TooManyDimensionsError(
           f"Delineate is only supported for arrays with dimension '{TIME}' "
-          f"and/or '{SPACE}', not: {list(dims)}"
+          f"and/or '[{Y},{X}]', not: {list(dims)}"
         )
-      if is_spatial:
-        obj = obj.unstack(SPACE)
-        nb = np.array([
-          [1,1,1],
-          [1,1,1],
-          [1,1,1]
-        ])
-      else:
-        nb = np.array([1,1,1])
+      nb = np.array([1,1,1])
     else:
       raise exceptions.MissingDimensionError(
         f"Delineate is only supported for arrays with dimension '{TIME}' "
         f"and/or '{SPACE}', not: {list(dims)}"
       )
     out = xr.apply_ufunc(lambda x, y: ndimage.label(x, y)[0], obj, nb)
-    if is_spatial:
-      out = out.sq.stack_spatial_dims()
     out = out.where(pd.notnull(self._obj)) # Preserve nan.
     return out
 
@@ -796,18 +823,18 @@ class Array():
         The regularized input array.
 
     """
-    if SPACE not in self._obj.dims:
-      return self._obj
     # Extract spatial coordinates.
-    xcoords = self._obj[SPACE][X]
-    ycoords = self._obj[SPACE][Y]
+    try:
+      xcoords = self._obj[X]
+      ycoords = self._obj[Y]
+    except KeyError:
+      return self._obj
     # Update spatial coordinates.
     res = self.spatial_resolution
     xcoords = np.arange(xcoords[0], xcoords[-1] + res[1], res[1])
     ycoords = np.arange(ycoords[0], ycoords[-1] + res[0], res[0])
     # Reindex array.
-    out = self._obj.unstack(SPACE).reindex({Y: ycoords, X: xcoords})
-    out = out.sq.stack_spatial_dims()
+    out = self._obj.reindex({Y: ycoords, X: xcoords})
     return out
 
   def reproject(self, crs, **kwargs):
@@ -830,17 +857,13 @@ class Array():
         The input array with reprojected spatial coordinates.
 
     """
-    if SPACE not in self._obj.dims:
+    if X not in self._obj.dims or Y not in self._obj.dims:
       return self._obj
     # To make rioxarray work:
-    # Array needs to have unstacked spatial dimensions.
     # Array can have only the spatial_ref non-dimension coordinate.
-    obj = self._obj.unstack(SPACE)
-    obj = obj.sq.drop_non_dimension_coords(keep = ["spatial_ref"])
+    obj = self.drop_non_dimension_coords(keep = ["spatial_ref"])
     # Reproject.
     out = obj.rio.reproject(crs, **kwargs)
-    # Stack spatial dimensions back together.
-    out = out.sq.stack_spatial_dims()
     # Recover other non-dimension coordinates.
     out = out.sq.write_tz(self.tz)
     return out
@@ -958,9 +981,10 @@ class Array():
         modifications.
 
     """
-    if SPACE not in self._obj.dims:
-      return self._obj
-    return self._obj.unstack(SPACE)
+    out = self._obj.unstack(SPACE)
+    out[Y].sq.value_type = "numerical"
+    out[X].sq.value_type = "numerical"
+    return out
 
   def drop_non_dimension_coords(self, keep = None):
     """Drop non-dimension coordinates from the array.
@@ -1004,7 +1028,7 @@ class Array():
         The converted input array
 
     """
-    obj = self.drop_non_dimension_coords().sq.unstack_spatial_dims()
+    obj = self.drop_non_dimension_coords()
     # to_dataframe method does not work for zero-dimensional arrays.
     if len(self._obj.dims) == 0:
       out = pd.DataFrame([obj.values])
@@ -1108,7 +1132,7 @@ class Array():
 
     """
     # Get array to export.
-    obj = self.unstack_spatial_dims()
+    obj = self._obj
     # Initialize GDAL configuration parameters.
     config = {}
     # Remove non-dimension coordinates but not 'spatial_ref'.
@@ -1446,7 +1470,7 @@ class Collection(list):
     out[:] = [x.sq.reduce(*args, **kwargs) for x in out]
     return out
 
-  def shift(self, dimension, steps, coord = None, **kwargs):
+  def shift(self, dimension, steps, **kwargs):
     """Apply the shift verb to all arrays in the collection.
 
     See :meth:`Array.shift`
@@ -1456,13 +1480,12 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([dimension, steps, coord])
+    args = tuple([dimension, steps])
     out = copy.deepcopy(self)
     out[:] = [x.sq.shift(*args, **kwargs) for x in out]
     return out
 
-  def smooth(self, reducer, dimension, size, coord = None, track_types = True,
-             **kwargs):
+  def smooth(self, reducer, dimension, size, track_types = True, **kwargs):
     """Apply the smooth verb to all arrays in the collection.
 
     See :meth:`Array.smooth`
@@ -1472,12 +1495,12 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([reducer, dimension, size, coord, track_types])
+    args = tuple([reducer, dimension, size, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.smooth(*args, **kwargs) for x in out]
     return out
 
-  def trim(self, dimension = None, force_regular = True, **kwargs):
+  def trim(self, dimension = None, **kwargs):
     """Apply the trim verb to all arrays in the collection.
 
     See :meth:`Array.trim`
@@ -1487,7 +1510,7 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([dimension, force_regular])
+    args = tuple([dimension])
     out = copy.deepcopy(self)
     out[:] = [x.sq.trim(*args, **kwargs) for x in out]
     return out

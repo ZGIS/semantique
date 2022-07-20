@@ -73,4 +73,4 @@ class QueryRecipe(dict):
 
     """
     qp = QueryProcessor.parse(self, datacube, mapping, space, time, **config)
-    return qp.optimize().execute().respond()
+    return qp.optimize().execute()

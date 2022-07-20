@@ -70,8 +70,8 @@ class Datacube():
         The index of the data layer in the layout of the EO data cube.
       extent : :obj:`xarray.DataArray`
         Spatio-temporal extent in which the data should be retrieved. Should be
-        given as an array with a temporal dimension as well as a stacked
-        spatial dimension, such as returned by
+        given as an array with a temporal dimension and two spatial dimensions,
+        such as returned by
         :func:`parse_extent <semantique.processor.utils.parse_extent>`.
         The retrieved subset of the EO data cube will have the same extent.
 
@@ -204,8 +204,8 @@ class Opendatacube(Datacube):
         The index of the data layer in the layout of the EO data cube.
       extent : :obj:`xarray.DataArray`
         Spatio-temporal extent in which the data should be retrieved. Should be
-        given as an array with a temporal dimension as well as a stacked
-        spatial dimension, such as returned by
+        given as an array with a temporal dimension and two spatial dimensions,
+        such as returned by
         :func:`parse_extent <semantique.processor.utils.parse_extent>`.
         The retrieved subset of the EO data cube will have the same extent.
 
@@ -243,18 +243,17 @@ class Opendatacube(Datacube):
       raise exceptions.MissingDimensionError(
         "Cannot retrieve data in an extent without a temporal dimension"
       )
-    if SPACE not in extent.dims:
+    if X not in extent.dims or Y not in extent.dims:
       raise exceptions.MissingDimensionError(
-        "Cannot retrieve data in an extent without a spatial dimension"
+        "Cannot retrieve data in an extent without spatial dimensions"
       )
     # Create a template for the data to be loaded.
     # This is the given extent modified to be correctly understood by ODC:
     # --> Time dimension values should be in the data cubes native timezone.
-    # --> Spatial dimensions should be unstacked.
     # --> Class should be `xarray.Dataset` instead of `xarray.DataArray`.
     # Note that the CRS does not have to be in the data cubes native CRS.
     # ODC takes care of spatial transformations internally.
-    like = extent.sq.tz_convert(self.tz).sq.unstack_spatial_dims().to_dataset()
+    like = extent.sq.tz_convert(self.tz).to_dataset()
     # Call ODC load function to load data as xarray dataset.
     data = self.connection.load(
       product = metadata["product"],
@@ -277,13 +276,12 @@ class Opendatacube(Datacube):
     # Step I: Convert time coordinates back into the original timezone.
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
-    # Step II: Stack spatial dimensions back into a single 'space' dimension.
+    # Step II: Format spatial coordinates.
     # --> Make sure X and Y dims have the correct names.
+    # --> Add spatial feature indices as a non-dimension coordinate.
     data = data.rename({data.rio.y_dim: Y, data.rio.x_dim: X})
-    data = data.sq.stack_spatial_dims()
-    # Step III: Add spatial feature indices as coordinates.
-    data.coords["feature"] = (SPACE, extent["feature"].data)
-    # Step IV: Write semantique specific attributes.
+    data.coords["feature"] = ([Y, X], extent["feature"].data)
+    # Step III: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
     # --> Mapping from category labels to indices for all categorical data.
     vtype = self.config["value_type_mapping"][metadata["type"]]
@@ -293,8 +291,9 @@ class Opendatacube(Datacube):
       for x in metadata["values"]:
         value_labels[x["id"]] = x["label"]
       data.sq.value_labels = value_labels
-    data[SPACE].sq.value_type = "coords"
     data[TIME].sq.value_type = "datetime"
+    data[Y].sq.value_type = "numerical"
+    data[X].sq.value_type = "numerical"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
     data["feature"].sq.value_labels = extent["feature"].sq.value_labels
     return data
@@ -425,8 +424,8 @@ class GeotiffArchive(Datacube):
         The index of the data layer in the layout of the EO data cube.
       extent : :obj:`xarray.DataArray`
         Spatio-temporal extent in which the data should be retrieved. Should be
-        given as an array with a temporal dimension as well as a stacked
-        spatial dimension, such as returned by
+        given as an array with a temporal dimension and two spatial dimensions,
+        such as returned by
         :func:`parse_extent <semantique.processor.utils.parse_extent>`.
         The retrieved subset of the EO data cube will have the same extent.
 
@@ -477,14 +476,13 @@ class GeotiffArchive(Datacube):
     data = data.rename({"band": "time"})
     data = data.assign_coords({"time": [x for x, y in zip(times, keep) if y]})
     # Subset spatially.
-    if SPACE not in extent.dims:
+    if X not in extent.dims and Y not in extent.dims:
       raise exceptions.MissingDimensionError(
-        "Cannot retrieve data in an extent without a spatial dimension"
+        "Cannot retrieve data in an extent without spatial dimensions"
       )
-    bounds = extent.sq.unstack_spatial_dims()
     resampler_name = self.config["resamplers"][metadata["type"]]
     resampler_func = getattr(rasterio.enums.Resampling, resampler_name)
-    data = data.rio.reproject_match(bounds, resampling = resampler_func)
+    data = data.rio.reproject_match(extent, resampling = resampler_func)
     # Check if there is still data left after subsetting.
     if data.sq.is_empty:
       raise exceptions.EmptyDataError(
@@ -497,13 +495,12 @@ class GeotiffArchive(Datacube):
     # Step I: Convert time coordinates back into the original timezone.
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
-    # Step II: Stack spatial dimensions back into a single 'space' dimension.
+    # Step II: Format spatial coordinates.
     # --> Make sure X and Y dims have the correct names.
+    # --> Add spatial feature indices as a non-dimension coordinate.
     data = data.rename({data.rio.y_dim: Y, data.rio.x_dim: X})
-    data = data.sq.stack_spatial_dims()
-    # Step III: Add spatial feature indices as coordinates.
-    data.coords["feature"] = (SPACE, extent["feature"].data)
-    # Step IV: Write semantique specific attributes.
+    data.coords["feature"] = ([Y, X], extent["feature"].data)
+    # Step III: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
     # --> Mapping from category labels to indices for all categorical data.
     vtype = self.config["value_type_mapping"][metadata["type"]]
@@ -513,8 +510,9 @@ class GeotiffArchive(Datacube):
       for x in metadata["values"]:
         value_labels[x["id"]] = x["label"]
       data.sq.value_labels = value_labels
-    data[SPACE].sq.value_type = "coords"
     data[TIME].sq.value_type = "datetime"
+    data[Y].sq.value_type = "numerical"
+    data[X].sq.value_type = "numerical"
     data["feature"].sq.value_type = extent["feature"].sq.value_type
     data["feature"].sq.value_labels = extent["feature"].sq.value_labels
     # Step V: Give the array a name.

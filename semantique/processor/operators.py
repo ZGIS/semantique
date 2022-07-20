@@ -1491,8 +1491,8 @@ def intersects_(x, y, track_types = True, **kwargs):
   except AttributeError:
     y = y.sq.trim().sq.grid_points.envelope.unary_union
   values = x.sq.grid_points.intersects(y).astype(int)
-  coords = x[SPACE].coords
-  out = xr.DataArray(values, coords = coords).sq.align_with(x)
+  coords = x.sq.stack_spatial_dims()[SPACE].coords
+  out = xr.DataArray(values, coords = coords).sq.unstack_spatial_dims()
   if track_types:
     out = promoter.promote(out)
   return out

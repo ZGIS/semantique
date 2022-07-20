@@ -61,8 +61,8 @@ class Mapping(dict):
         single semantic array by a logical "and" operator.
       extent : :obj:`xarray.DataArray`
         Spatio-temporal extent in which the semantic concept should be
-        translated. Should be given as an array with a temporal dimension as
-        well as a stacked spatial dimension, such as returned by
+        translated. Should be given as an array with a temporal dimension and
+        two spatial dimensions, such as returned by
         :func:`parse_extent <semantique.processor.utils.parse_extent>`.
         The translated semantic concept will have the same extent.
       datacube : Datacube
@@ -111,8 +111,8 @@ class Semantique(Mapping):
         single semantic array by a logical "and" operator.
       extent : :obj:`xarray.DataArray`
         Spatio-temporal extent in which the semantic concept should be
-        translated. Should be given as an array with a temporal dimension as
-        well as a stacked spatial dimension, such as returned by
+        translated. Should be given as an array with a temporal dimension and
+        two spatial dimensions, such as returned by
         :func:`parse_extent <semantique.processor.utils.parse_extent>`.
         The translated semantic concept will have the same extent.
       datacube : Datacube

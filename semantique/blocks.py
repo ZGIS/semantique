@@ -493,7 +493,7 @@ class ArrayProxy(dict):
       kwargs.update({"dimension": dimension})
     return self._append_verb("reduce", **kwargs)
 
-  def shift(self, dimension, steps, coord = None, **kwargs):
+  def shift(self, dimension, steps, **kwargs):
     """Shift the values in an array along a dimension.
 
     Shifts the pixel values a given number of steps along a given dimension.
@@ -505,13 +505,9 @@ class ArrayProxy(dict):
       steps : :obj:`int`
         Amount of steps each value should be shifted. A negative integer will
         result in a shift to the left, while a positive integer will result in
-        a shift to the right.
-      coord : :obj:`str`
-        Either "x" or "y", specifying if values should be shifted in
-        respectively the X or Y direction of the spatial dimension. If
-        :obj:`None`, a shift along the spatial dimension follows the pixel
-        order defined by the CRS, e.g. starting in the top-left and moving down
-        each column. Ignored when ``dimension`` is not the spatial dimension.
+        a shift to the right. A shift along the spatial dimension follows the
+        pixel order defined by the CRS, e.g. starting in the top-left and
+        moving down each column.
       **kwargs:
         Additional keyword arguments passed on to
         :meth:`Array.shift <processor.arrays.Array.shift>`.
@@ -532,7 +528,7 @@ class ArrayProxy(dict):
       kwargs.update({"coord": coord})
     return self._append_verb("shift", **kwargs)
 
-  def smooth(self, reducer, dimension, size, coord = None, **kwargs):
+  def smooth(self, reducer, dimension, size, **kwargs):
     """Smooth the values in an array through a moving window.
 
     Smoothes the pixel values by applying a moving window function along a
@@ -554,15 +550,9 @@ class ArrayProxy(dict):
         Size k defining the extent of the rolling window. The pixel being
         smoothed will always be in the center of the window, with k pixels at
         its left and k pixels at its right. If the dimension to smooth over is
-        the spatial dimension and ``coord`` is not specified, the size will be
-        used for both the X and Y dimension, forming a square window with the
-        smoothed pixel in the middle.
-      coord : :obj:`str`
-        Either "x" or "y", specifying if the moving window should be constructed
-        in respectively the X or Y direction of the spatial dimension. If
-        :obj:`None`, the window is constructed in both directions, forming a
-        two-dimensional square. Ignored when ``dimension`` is not the spatial
-        dimension.
+        the spatial dimension, the size will be used for both the X and Y
+        dimension, forming a square window with the smoothed pixel in the
+        middle.
       **kwargs:
         Additional keyword arguments passed on to
         :meth:`Array.smooth <processor.arrays.Array.smooth>`.
@@ -589,9 +579,8 @@ class ArrayProxy(dict):
     """Trim the dimensions of an array.
 
     Trimming means that all dimension coordinates for which all values are
-    missing are removed from the array. The spatial dimension is treated
-    differently, by trimming it only at the edges, and thus maintaining its
-    regularity.
+    missing are removed from the array. The spatial dimensions are only trimmed
+    at their edges, to preserve their regularity.
 
     Parameters
     ----------
@@ -921,7 +910,7 @@ class CollectionProxy(dict):
       kwargs.update({"dimension": dimension})
     return self._append_verb("reduce", **kwargs)
 
-  def shift(self, dimension, steps, coord = None, **kwargs):
+  def shift(self, dimension, steps, **kwargs):
     """Apply the shift verb to each array in a collection.
 
     See :meth:`ArrayProxy.shift`.
@@ -932,11 +921,9 @@ class CollectionProxy(dict):
 
     """
     kwargs.update({"dimension": dimension, "steps": steps})
-    if coord is not None:
-      kwargs.update({"coord": coord})
     return self._append_verb("shift", **kwargs)
 
-  def smooth(self, reducer, dimension, size, coord = None, **kwargs):
+  def smooth(self, reducer, dimension, size, **kwargs):
     """Apply the smooth verb to each array in a collection.
 
     See :meth:`ArrayProxy.smooth`.
@@ -947,8 +934,6 @@ class CollectionProxy(dict):
 
     """
     kwargs.update({"reducer": reducer, "dimension": dimension, "size": size})
-    if coord is not None:
-      kwargs.update({"coord": coord})
     return self._append_verb("smooth", **kwargs)
 
   def trim(self, dimension = None, **kwargs):

@@ -180,13 +180,12 @@ def parse_extent(spatial_extent, temporal_extent, spatial_resolution,
   """
   # Rasterize spatial extent.
   space = spatial_extent.rasterize(spatial_resolution, crs)
-  # Stack spatial dimensions.
-  # Make sure X and Y dims have the correct names.
+  # Make sure X and Y dims have the correct names and value types.
   space = space.rename({space.rio.y_dim: Y, space.rio.x_dim: X})
-  space = space.sq.stack_spatial_dims()
+  space[Y].sq.value_type = "numerical"
+  space[X].sq.value_type = "numerical"
   # Add spatial feature indices as coordinates.
-  space.coords["feature"] = (SPACE, space.data)
-  space["feature"].name = "feature"
+  space.coords["feature"] = ([Y, X], space.data)
   space["feature"].sq.value_type = space.sq.value_type
   space["feature"].sq.value_labels = space.sq.value_labels
   # Discretize temporal extent.
@@ -277,28 +276,4 @@ def parse_datetime_component(name, obj):
     }
   else:
     obj.sq.value_type = "numerical"
-  return obj
-
-def parse_coords_component(obj):
-  """Parse spatial coordinate arrays.
-
-  The spatial x and y coordinates of each value in :obj:`xarray.DataArray`
-  objects are treated in semantique as components of a stacked spatial
-  dimension, i.e. a multi-indexed dimension. Parsing these individual
-  coordinate arrays includes adding a relevant
-  :attr:`value_type <semantique.processor.arrays.Array.value_type>`
-  property.
-
-  Parameters
-  -----------
-    obj : :obj:`xarray.DataArray`
-      Array containing spatial x or y coordinates.
-
-  Returns
-  --------
-    :obj:`xarray.DataArray`
-      Parsed spatial coordinate array.
-
-  """
-  obj.sq.value_type = "numerical"
   return obj
