@@ -356,11 +356,11 @@ class ArrayProxy(dict):
     Parameters
     -----------
       grouper : :obj:`ArrayProxy` or :obj:`CollectionProxy`
-        Proxy of an array containing a single dimension that is also
-        present in the input. Each unique value in this array corresponds
-        to a group. Alternatively it may be a proxy of a collection of such
-        one-dimensional arrays. Then, each unique combination of values
-        corresponds to a group.
+        Proxy of an array which can be aligned to the same shape as the input
+        array. Pixels in the input array that have equal values in the grouper
+        will be grouped together. Alternatively it may be a proxy of a
+        collection of such arrays. Then, pixels in the input array that have
+        equal values in all of the grouper arrays will be grouped together.
       **kwargs:
         Additional keyword arguments passed on to
         :meth:`Array.groupby <processor.arrays.Array.groupby>`.

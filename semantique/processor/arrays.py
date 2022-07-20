@@ -13,18 +13,7 @@ from scipy import ndimage
 
 from semantique import exceptions
 from semantique.processor import operators, utils
-
-TIME = "time"
-""":obj:`str` : Reserved name for the temporal dimension."""
-
-SPACE = "space"
-""":obj:`str` : Reserved name for the stacked spatial (X, Y) dimension."""
-
-X = "x"
-""":obj:`str` : Reserved name for the spatial X dimension."""
-
-Y = "y"
-""":obj:`str` : Reserved name for the spatial Y dimension."""
+from semantique.dimensions import TIME, SPACE, X, Y
 
 @xr.register_dataarray_accessor("sq")
 class Array():
@@ -108,7 +97,7 @@ class Array():
   @property
   def spatial_resolution(self):
     """:obj:`list`: Spatial resolution of the array in units of the CRS."""
-    return self._obj.sq.unstack_spatial_dims().rio.resolution()[::-1]
+    return self._obj.rio.resolution()[::-1]
 
   @property
   def tz(self):
@@ -281,7 +270,7 @@ class Array():
         Binary array which can be aligned to the same shape as the input array.
         Each pixel in the input array will be kept if the pixel in the filterer
         with the same dimension coordinates is true, and dropped otherwise
-        (i.e. assigned a missing data value).
+        (i.e. assigned a nodata value).
       track_types : :obj:`bool`
         Should it be checked that the filterer has value type *binary*?
       **kwargs:
@@ -367,13 +356,11 @@ class Array():
     Parameters
     -----------
       grouper : :obj:`xarray.DataArray` or :obj:`Collection`
-        Data array containing a single dimension that is also present in the
-        input array. The group to which each pixel in the input array will be
-        assigned depends on the value of the grouper that has the same
-        coordinate for that dimension. Alternatively it may be a array
-        collection in which each array meets the requirements above. In that
-        case, groups are defined by the unique combinations of corresponding
-        values in all collection members.
+        Array which can be aligned to the same shape as the input array. Pixels
+        in the input array that have equal values in the grouper will be
+        grouped together. Alternatively, it may be a collection of such arrays.
+        Then, pixels in the input array that have equal values in all of the
+        grouper arrays will be grouped together.
       labels_as_names : :obj:`bool`
         If value labels are defined, should they be used as group names instead
         of the values themselves?
@@ -387,38 +374,66 @@ class Array():
     Raises
     -------
       :obj:`exceptions.MissingDimensionError`
-        If the grouper dimension is not present in the array.
-      :obj:`exceptions.TooManyDimensionsError`
-        If the grouper has more than one dimension.
+        If the grouper is zero-dimensional.
+      :obj:`exceptions.UnknownDimensionError`
+        If the grouper contains dimensions that are not present in the input.
       :obj:`exceptions.MixedDimensionsError`
         If the grouper is a collection and its elements don't all have the same
         dimensions.
 
     """
-    # Validate grouper.
+    # Get dimensions of the input.
+    obj = self._obj
+    odims = obj.dims
+    # Get dimensions of the grouper(s).
     if isinstance(grouper, list):
-      multiple = True
-      dims = [x.dims for x in grouper]
+      is_list = True
+      gdims = [x.dims for x in grouper]
+      if not all([x == gdims[0] for x in gdims]):
+        raise exceptions.MixedDimensionsError(
+          "Dimensions of grouper arrays do not match"
+        )
     else:
-      multiple = False
-      dims = [grouper.dims]
-    if not all([len(x) == 1 for x in dims]):
-      raise exceptions.TooManyDimensionsError(
-        "Groupers must be one-dimensional"
-      )
-    if not all([x == dims[0] for x in dims]):
-      raise exceptions.MixedDimensionsError(
-        "Dimensions of grouper arrays do not match"
-      )
-    if not dims[0][0] in self._obj.dims:
+      is_list = False
+      gdims = [grouper.dims]
+      grouper = [grouper]
+    # Parse grouper.
+    # When grouper is multi-dimensional, dimensions should be stacked.
+    if len(gdims[0]) == 0:
       raise exceptions.MissingDimensionError(
-        f"Grouper dimension '{dims[0]}' does not exist in the input object"
+        "Cannot group with a zero-dimensional grouper"
       )
-    # Split input object into groups.
-    if multiple:
+    elif len(gdims[0]) == 1:
+      is_spatial = False
+      is_multidim = False
+      if not gdims[0][0] in odims:
+        raise exceptions.UnknownDimensionError(
+          f"Grouper dimension '{gdims[0][0]}' is not present in the array"
+        )
+    elif len(gdims[0]) == 2 and X in gdims[0] and Y in gdims[0]:
+      is_spatial = True
+      is_multidim = False
+      grouper = [x.sq.stack_spatial_dims() for x in grouper]
+      try:
+        obj = obj.sq.stack_spatial_dims()
+      except KeyError:
+        raise exceptions.UnknownDimensionError(
+          f"Spatial dimensions '{X}' and '{Y}' are not present in the array"
+        )
+    else:
+      is_spatial = False
+      is_multidim = True
+      if not all(x in odims for x in gdims[0]):
+        raise exceptions.UnknownDimensionError(
+            "Not all grouper dimensions are present in the array"
+          )
+      grouper = [x.sq.align_with(obj).sq.stack_all_dims() for x in grouper]
+      obj = obj.sq.stack_all_dims()
+    # Split input into groups based on unique grouper values.
+    if is_list:
       idx = pd.MultiIndex.from_arrays([x.data for x in grouper])
       dim = grouper[0].dims
-      partition = list(self._obj.groupby(xr.IndexVariable(dim, idx)))
+      partition = list(obj.groupby(xr.IndexVariable(dim, idx)))
       # Use value labels as group names if defined.
       if labels_as_names:
         labs = [x.sq.value_labels for x in grouper]
@@ -435,16 +450,24 @@ class Array():
       else:
         groups = [i[1].rename(i[0]) for i in partition]
     else:
-      partition = list(self._obj.groupby(grouper))
+      partition = list(obj.groupby(grouper[0]))
       # Use value labels as group names if defined.
       if labels_as_names:
-        labs = grouper.sq.value_labels
+        labs = grouper[0].sq.value_labels
         if labs is not None:
           groups = [i[1].rename(labs[i[0]]) for i in partition]
         else:
           groups = [i[1].rename(i[0]) for i in partition]
       else:
         groups = [i[1].rename(i[0]) for i in partition]
+    # Post-process.
+    # Stacked arrays must be unstacked again.
+    # It needs to be made sure that the spatial dimensions are regular.
+    if is_spatial:
+      groups = [x.sq.unstack_spatial_dims() for x in groups]
+    elif is_multidim:
+      groups = [x.sq.unstack_all_dims().sq.regularize() for x in groups]
+    # Collect and return.
     out = Collection(groups)
     return out
 
@@ -984,6 +1007,21 @@ class Array():
     out = self._obj.unstack(SPACE)
     out[Y].sq.value_type = "numerical"
     out[X].sq.value_type = "numerical"
+    return out
+
+  def stack_all_dims(self):
+    dimnames = self._obj.dims
+    dimtypes = [self._obj[x].sq.value_type for x in dimnames]
+    out = self._obj.stack(__all__ = dimnames)
+    out.attrs["dim_value_types"] = {k:v for k,v in zip(dimnames, dimtypes)}
+    return out
+
+  def unstack_all_dims(self):
+    out = self._obj.unstack()
+    if "dim_value_types" in self._obj.attrs:
+      for k, v in self._obj.attrs["dim_value_types"].items():
+        out[k].sq.value_type = v
+      del out.attrs["dim_value_types"]
     return out
 
   def drop_non_dimension_coords(self, keep = None):
