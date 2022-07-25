@@ -462,11 +462,19 @@ class Array():
         groups = [i[1].rename(i[0]) for i in partition]
     # Post-process.
     # Stacked arrays must be unstacked again.
-    # It needs to be made sure that the spatial dimensions are regular.
     if is_spatial:
       groups = [x.sq.unstack_spatial_dims() for x in groups]
     elif is_multidim:
+      # Multi-dimensional grouping may create irregular spatial dimensions.
+      # Therefore besides unstacking we also need to regularize the arrays.
       groups = [x.sq.unstack_all_dims().sq.regularize() for x in groups]
+      # Stacking messes up the spatial feature indices coordinate.
+      # We need to re-create this coordinate for each group array.
+      if "feature" in self._obj.coords:
+        def fix(x, y):
+          x["feature"] = y["feature"].reindex_like(x)
+          return x
+        groups = [fix(x, self._obj) for x in groups]
     # Collect and return.
     out = Collection(groups)
     return out
