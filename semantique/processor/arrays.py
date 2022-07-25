@@ -229,11 +229,16 @@ class Array():
       out = out.sq.unstack_spatial_dims()
       out.sq.value_type = "coords"
     else:
+      # Component "feature" should extract spatial feature indices.
+      if component == "feature":
+        cname = "spatial_feats"
+      else:
+        cname = component
       try:
-        out = obj[component]
+        out = obj[cname]
       except KeyError:
         raise exceptions.UnknownComponentError(
-          f"Component '{component}' is not defined for dimension '{SPACE}'"
+          f"Component '{cname}' is not defined for dimension '{SPACE}'"
         )
     return out
 
@@ -470,9 +475,9 @@ class Array():
       groups = [x.sq.unstack_all_dims().sq.regularize() for x in groups]
       # Stacking messes up the spatial feature indices coordinate.
       # We need to re-create this coordinate for each group array.
-      if "feature" in self._obj.coords:
+      if "spatial_feats" in self._obj.coords:
         def fix(x, y):
-          x["feature"] = y["feature"].reindex_like(x)
+          x["spatial_feats"] = y["spatial_feats"].reindex_like(x)
           return x
         groups = [fix(x, self._obj) for x in groups]
     # Collect and return.

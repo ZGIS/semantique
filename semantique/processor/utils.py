@@ -185,9 +185,9 @@ def parse_extent(spatial_extent, temporal_extent, spatial_resolution,
   space[Y].sq.value_type = "numerical"
   space[X].sq.value_type = "numerical"
   # Add spatial feature indices as coordinates.
-  space.coords["feature"] = ([Y, X], space.data)
-  space["feature"].sq.value_type = space.sq.value_type
-  space["feature"].sq.value_labels = space.sq.value_labels
+  space.coords["spatial_feats"] = ([Y, X], space.data)
+  space["spatial_feats"].sq.value_type = space.sq.value_type
+  space["spatial_feats"].sq.value_labels = space.sq.value_labels
   # Discretize temporal extent.
   time = temporal_extent.discretize(temporal_resolution, tz)
   # Combine rasterized spatial extent with discretized temporal extent.

@@ -280,7 +280,7 @@ class Opendatacube(Datacube):
     # --> Make sure X and Y dims have the correct names.
     # --> Add spatial feature indices as a non-dimension coordinate.
     data = data.rename({data.rio.y_dim: Y, data.rio.x_dim: X})
-    data.coords["feature"] = ([Y, X], extent["feature"].data)
+    data.coords["spatial_feats"] = ([Y, X], extent["spatial_feats"].data)
     # Step III: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
     # --> Mapping from category labels to indices for all categorical data.
@@ -294,8 +294,8 @@ class Opendatacube(Datacube):
     data[TIME].sq.value_type = "datetime"
     data[Y].sq.value_type = "numerical"
     data[X].sq.value_type = "numerical"
-    data["feature"].sq.value_type = extent["feature"].sq.value_type
-    data["feature"].sq.value_labels = extent["feature"].sq.value_labels
+    data["spatial_feats"].sq.value_type = extent["spatial_feats"].sq.value_type
+    data["spatial_feats"].sq.value_labels = extent["spatial_feats"].sq.value_labels
     return data
 
   def _mask(self, data):
@@ -303,7 +303,7 @@ class Opendatacube(Datacube):
     data = masking.mask_invalid_data(data)
     # Step II: Mask values outside of the spatial extent.
     # This is needed since data are initially loaded the bbox of the extent.
-    data = data.where(data["feature"].notnull())
+    data = data.where(data["spatial_feats"].notnull())
     return data
 
 class GeotiffArchive(Datacube):
@@ -499,7 +499,7 @@ class GeotiffArchive(Datacube):
     # --> Make sure X and Y dims have the correct names.
     # --> Add spatial feature indices as a non-dimension coordinate.
     data = data.rename({data.rio.y_dim: Y, data.rio.x_dim: X})
-    data.coords["feature"] = ([Y, X], extent["feature"].data)
+    data.coords["spatial_feats"] = ([Y, X], extent["spatial_feats"].data)
     # Step III: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
     # --> Mapping from category labels to indices for all categorical data.
@@ -513,8 +513,8 @@ class GeotiffArchive(Datacube):
     data[TIME].sq.value_type = "datetime"
     data[Y].sq.value_type = "numerical"
     data[X].sq.value_type = "numerical"
-    data["feature"].sq.value_type = extent["feature"].sq.value_type
-    data["feature"].sq.value_labels = extent["feature"].sq.value_labels
+    data["spatial_feats"].sq.value_type = extent["spatial_feats"].sq.value_type
+    data["spatial_feats"].sq.value_labels = extent["spatial_feats"].sq.value_labels
     # Step V: Give the array a name.
     data.name = os.path.splitext(metadata["file"])[0]
     return data
@@ -525,5 +525,5 @@ class GeotiffArchive(Datacube):
     data.rio.write_nodata(data.rio.nodata, encoded = True, inplace = True)
     # Step II: Mask values outside of the spatial extent.
     # This is needed since data are initially loaded the bbox of the extent.
-    data = data.where(data["feature"].notnull())
+    data = data.where(data["spatial_feats"].notnull())
     return data
