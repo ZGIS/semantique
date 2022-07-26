@@ -81,6 +81,7 @@ TYPE_PROMOTION_MANUALS = {
   },
   "add": {
     "numerical": {"numerical": "numerical"},
+    "binary": {"binary": "numerical"},
     "__preserve_labels__": 0
   },
   "divide": {
@@ -89,6 +90,7 @@ TYPE_PROMOTION_MANUALS = {
   },
   "multiply": {
     "numerical": {"numerical": "numerical"},
+    "binary": {"binary": "numerical"},
     "__preserve_labels__": 0
   },
   "power": {
@@ -97,6 +99,7 @@ TYPE_PROMOTION_MANUALS = {
   },
   "subtract": {
     "numerical": {"numerical": "numerical"},
+    "binary": {"binary": "numerical"},
     "__preserve_labels__": 0
   },
   "normalized_difference": {
@@ -241,6 +244,7 @@ TYPE_PROMOTION_MANUALS = {
   },
   "product": {
     "numerical": "numerical",
+    "binary": "binary",
     "__preserve_labels__": 0
   },
   "standard_deviation": {
@@ -249,6 +253,7 @@ TYPE_PROMOTION_MANUALS = {
   },
   "sum": {
     "numerical": "numerical",
+    "binary": "binary",
     "__preserve_labels__": 0
   },
   "variance": {
