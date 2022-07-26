@@ -524,8 +524,6 @@ class ArrayProxy(dict):
 
     """
     kwargs.update({"dimension": dimension, "steps": steps})
-    if coord is not None:
-      kwargs.update({"coord": coord})
     return self._append_verb("shift", **kwargs)
 
   def smooth(self, reducer, dimension, size, **kwargs):
@@ -571,8 +569,6 @@ class ArrayProxy(dict):
 
     """
     kwargs.update({"dimension": dimension, "reducer": reducer, "size": size})
-    if coord is not None:
-      kwargs.update({"coord": coord})
     return self._append_verb("smooth", **kwargs)
 
   def trim(self, dimension = None, **kwargs):
