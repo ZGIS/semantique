@@ -11,7 +11,7 @@ import warnings
 
 from scipy import ndimage
 
-from semantique import exceptions
+from semantique import exceptions, components
 from semantique.processor import operators, utils
 from semantique.dimensions import TIME, SPACE, X, Y
 
@@ -229,8 +229,8 @@ class Array():
       out = out.sq.unstack_spatial_dims()
       out.sq.value_type = "coords"
     else:
-      # Component "feature" should extract spatial feature indices.
-      if component == "feature":
+      # Component FEATURE should extract spatial feature indices.
+      if component == components.space.FEATURE:
         cname = "spatial_feats"
       else:
         cname = component

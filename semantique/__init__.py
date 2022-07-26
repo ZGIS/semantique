@@ -6,6 +6,8 @@ import semantique.datacube
 import semantique.mapping
 import semantique.operators
 import semantique.reducers
+import semantique.dimensions
+import semantique.components
 
 import pkg_resources
 

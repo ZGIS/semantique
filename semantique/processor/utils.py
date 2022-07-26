@@ -4,7 +4,8 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-from semantique.dimensions import TIME, SPACE, X, Y
+from semantique import components
+from semantique.dimensions import TIME, X, Y
 
 def get_null(x):
   """Return the appropriate nodata value for an array.
@@ -226,7 +227,7 @@ def parse_datetime_component(name, obj):
     https://xarray.pydata.org/en/stable/user-guide/time-series.html#datetime-components
 
   """
-  if name in ["dayofweek", "weekday"]:
+  if name == components.time.DAY_OF_WEEK:
     obj.sq.value_type = "ordinal"
     obj.sq.value_labels = {
       0: "Monday",
@@ -237,7 +238,7 @@ def parse_datetime_component(name, obj):
       5: "Saturday",
       6: "Sunday"
     }
-  elif name == "month":
+  elif name == components.time.MONTH:
     obj.sq.value_type = "ordinal"
     obj.sq.value_labels = {
       1: "January",
@@ -253,7 +254,7 @@ def parse_datetime_component(name, obj):
       11: "November",
       12: "December"
     }
-  elif name == "quarter":
+  elif name == components.time.QUARTER:
     obj.sq.value_type = "ordinal"
     obj.sq.value_labels = {
       1: "January, February, March",
@@ -261,7 +262,7 @@ def parse_datetime_component(name, obj):
       3: "July, August, September",
       4: "October, November, December"
     }
-  elif name == "season":
+  elif name == components.time.SEASON:
     # In xarray seasons get stored as strings.
     # We want to store them as integers instead.
     for k, v in zip(["MAM", "JJA", "SON", "DJF"], [1, 2, 3, 4]):
