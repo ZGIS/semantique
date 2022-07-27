@@ -728,6 +728,10 @@ class QueryProcessor():
       :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
+    # Get and update function parameters.
+    params = copy.deepcopy(block["params"])
+    params["track_types"] = self._track_types
+    # Call verb.
     return self.call_verb("delineate", block["params"])
 
   def handle_fill(self, block):

@@ -721,13 +721,16 @@ class Array():
     out = obj.isel({Y: y_slice, X: x_slice})
     return out
 
-  def delineate(self, **kwargs):
+  def delineate(self, track_types = True, **kwargs):
     """Apply the delineate verb to the array.
 
     The delineate verb deliniates spatio-temporal objects in a binary array.
 
     Parameters
     -----------
+      track_types : :obj:`bool`
+        Should the value type of the output object be promoted, and should it be
+        checked that the input has value type *binary*?
       **kwargs:
         Ignored.
 
@@ -736,10 +739,19 @@ class Array():
       :obj:`xarray.DataArray`
 
     """
+    # Get and check array.
     obj = xr.apply_ufunc(utils.null_as_zero, self._obj)
+    if track_types:
+      vtype = obj.sq.value_type
+      if vtype is not None and vtype != "binary":
+        raise exceptions.InvalidValueTypeError(
+          f"Array to be delineated must be of value type 'binary', not '{vtype}'"
+        )
+    # Inspect dimensions.
     dims = obj.dims
     is_spatial = X in dims and Y in dims
     is_temporal = TIME in dims
+    # Define neighborhood matrix.
     if is_spatial and is_temporal:
       if len(dims) > 3:
         raise exceptions.TooManyDimensionsError(
@@ -775,8 +787,12 @@ class Array():
         f"Delineate is only supported for arrays with dimension '{TIME}' "
         f"and/or '{SPACE}', not: {list(dims)}"
       )
+    # Delineate.
     out = xr.apply_ufunc(lambda x, y: ndimage.label(x, y)[0], obj, nb)
+    # Post-process.
     out = out.where(pd.notnull(self._obj)) # Preserve nan.
+    if track_types:
+      out.sq.value_type = "ordinal"
     return out
 
   def fill(method, track_types = True, **kwargs):
@@ -1575,12 +1591,11 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([dimension])
     out = copy.deepcopy(self)
-    out[:] = [x.sq.trim(*args, **kwargs) for x in out]
+    out[:] = [x.sq.trim(dimension, **kwargs) for x in out]
     return out
 
-  def delineate(self, **kwargs):
+  def delineate(self, track_types = True, **kwargs):
     """Apply the delineate verb to all arrays in the collection.
 
     See :meth:`Array.delineate`
@@ -1591,7 +1606,7 @@ class Collection(list):
 
     """
     out = copy.deepcopy(self)
-    out[:] = [x.sq.delineate(**kwargs) for x in out]
+    out[:] = [x.sq.delineate(track_types, **kwargs) for x in out]
     return out
 
   def fill(self, method, track_types = True, **kwargs):
