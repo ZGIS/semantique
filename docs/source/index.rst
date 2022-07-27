@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-semantique: Semantic Querying in Earth Observation Data Cubes
+Semantic querying in Earth observation data cubes
 ==============================================================
 
-**semantique** is a Python package that implements a structured framework for semantic querying in Earth observation data cubes. The package is under active development, and no stable release currently exists.
+**semantique** is a Python package that implements a structured framework for semantic querying in Earth observation data cubes, meaning that users can query the cube through an ontology. The package is under active development. The ideas and concepts behind the package are published in an academic paper, which we will link here as soon as the pre-print is available.
 
 .. toctree::
    :maxdepth: 2
@@ -37,10 +37,11 @@ semantique: Semantic Querying in Earth Observation Data Cubes
 Acknowledgements
 =================
 
-This is developed with support by the Austrian Research Promotion Agency (FFG) under the Austrian Space Application Programme (ASAP) within the projects Sen2Cube_ and SemantiX_.
+This is developed with support by the Austrian Research Promotion Agency (FFG) under the Austrian Space Application Programme (ASAP) within the projects Sen2Cube_, SemantiX_ and SIMS_.
 
 .. _Sen2Cube: https://projekte.ffg.at/projekt/2975644
 .. _SemantiX: https://projekte.ffg.at/projekt/3769928
+.. _SIMS: https://projekte.ffg.at/projekt/4052529
 
 Copyright
 ==========

@@ -796,6 +796,31 @@ class Array():
     return out
 
   def fill(method, track_types = True, **kwargs):
+    """ Apply the fill verb to the array.
+
+    The fill verbs fills nodata values with new, valid data values.
+
+    Parameters
+    -----------
+      method : :obj:`str`
+        Method to use for filling. One of "assign", "interpolate" or "smooth".
+      track_types : :obj:`bool`
+        Should the value type(s) of the input(s) be checked, and the value
+        type of the output be promoted, whenever applicable?
+      **kwargs"
+        Additional keyword arguments passed on to the filling function of the
+        specified method.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    Note
+    -----
+      The fill verb is not yet implemented. This method only serves as a
+      placeholder.
+
+    """
     raise NotImplementedError("The fill verb is not implemented yet")
 
   def name(self, value, **kwargs):

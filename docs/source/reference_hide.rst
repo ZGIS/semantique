@@ -56,6 +56,9 @@
    extent.TemporalExtent.end
    extent.TemporalExtent.discretize
 
+   components.time
+   components.space
+
    processor.core.QueryProcessor.response
    processor.core.QueryProcessor.recipe
    processor.core.QueryProcessor.datacube
@@ -70,7 +73,6 @@
    processor.core.QueryProcessor.parse
    processor.core.QueryProcessor.optimize
    processor.core.QueryProcessor.execute
-   processor.core.QueryProcessor.respond
    processor.core.QueryProcessor.call_handler
    processor.core.QueryProcessor.handle_concept
    processor.core.QueryProcessor.handle_layer
@@ -89,6 +91,7 @@
    processor.core.QueryProcessor.handle_smooth
    processor.core.QueryProcessor.handle_trim
    processor.core.QueryProcessor.handle_delineate
+   processor.core.QueryProcessor.handle_fill
    processor.core.QueryProcessor.handle_name
    processor.core.QueryProcessor.handle_compose
    processor.core.QueryProcessor.handle_concatenate
@@ -124,6 +127,7 @@
    processor.arrays.Array.smooth
    processor.arrays.Array.trim
    processor.arrays.Array.delineate
+   processor.arrays.Array.fill
    processor.arrays.Array.name
    processor.arrays.Array.align_with
    processor.arrays.Array.regularize
@@ -152,6 +156,8 @@
    processor.arrays.Collection.shift
    processor.arrays.Collection.smooth
    processor.arrays.Collection.trim
+   processor.arrays.Collection.delineate
+   processor.arrays.Collection.fill
    processor.arrays.Collection.name
    processor.arrays.Collection.regularize
    processor.arrays.Collection.stack_spatial_dims
