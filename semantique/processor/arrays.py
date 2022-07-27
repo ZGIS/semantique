@@ -1051,9 +1051,7 @@ class Array():
     Returns
     --------
       :obj:`xarray.DataArray`
-        The input array with a multi-index spatial dimension. If no X and Y
-        dimensions could be found, the input array is returned without
-        modifications.
+        The input array with a multi-index spatial dimension.
 
     """
     out = self._obj.stack({SPACE: [Y, X]})
@@ -1066,9 +1064,7 @@ class Array():
     Returns
     --------
       :obj:`xarray.DataArray`
-        The input array with unstacked spatial dimensions. If no spatial
-        dimension could be found, the input array is returned without
-        modifications.
+        The input array with unstacked spatial dimensions.
 
     """
     out = self._obj.unstack(SPACE)
@@ -1077,6 +1073,14 @@ class Array():
     return out
 
   def stack_all_dims(self):
+    """Stack all dimensions into a single multi-indexed dimension.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+        The input array with a single multi-index dimension named "__all__".
+
+    """
     dimnames = self._obj.dims
     dimtypes = [self._obj[x].sq.value_type for x in dimnames]
     out = self._obj.stack(__all__ = dimnames)
@@ -1084,6 +1088,14 @@ class Array():
     return out
 
   def unstack_all_dims(self):
+    """Unstack the single multi-indexed dimension back into separate dimensions.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+        The input array with unstacked dimensions.
+
+    """
     out = self._obj.unstack()
     if "dim_value_types" in self._obj.attrs:
       for k, v in self._obj.attrs["dim_value_types"].items():

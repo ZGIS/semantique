@@ -3,7 +3,7 @@
 API Reference
 ##############
 
-The API Reference contains auto-generated function documentation. This kind of documentation is meant to be concise and more technically oriented. The functions are grouped into different categories. As a regular user, you will mainly use the functions in the **Components** and **Building Blocks** categories, to prepare the different components of a semantic query, and to build and execute query recipes. The functions in the **Processor** category are those internally used for query processing, and mainly of interest for advanced users and developers. The **Exceptions** category contains the custom exception classes of semantique.
+The API Reference contains auto-generated function documentation. This kind of documentation is meant to be concise and more technically oriented. The functions are grouped into different categories. As a regular user, you will mainly use the functions in the **Components** and **Building Blocks** categories to build and execute query recipes within a specific context. The functions in the **Processor** category are those internally used for query processing, and mainly of interest for advanced users and developers. The **Exceptions** category contains the custom exception classes of semantique.
 
 Components
 ===========
