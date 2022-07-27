@@ -17,13 +17,6 @@ class TestExtract(unittest.TestCase):
     self.assertIsNone(testing.assert_equal(x.sq.extract("foo"), f))
     self.assertIsNone(testing.assert_equal(x.sq.extract("bar"), g))
 
-  def test_component(self):
-    x = xr.DataArray([[1, 2], [3, 4]], coords = {"foo": ["a", "b"], "bar": [0, 1]})
-    x = x.stack(fubar = ["foo", "bar"])
-    f = x.copy()
-    f.values = ["a", "a", "b", "b"]
-    self.assertIsNone(testing.assert_equal(x.sq.extract("fubar", "foo"), f))
-
 
 class TestFilter(unittest.TestCase):
 
