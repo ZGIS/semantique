@@ -1,16 +1,22 @@
 Started parsing the semantic query
 Parsed the spatio-temporal extent:
-<xarray.DataArray 'index' (time: 2, space: 16)>
-array([[1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
-       [1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]])
+<xarray.DataArray 'index' (time: 2, y: 4, x: 4)>
+array([[[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]],
+
+       [[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]]])
 Coordinates:
   * time          (time) datetime64[ns] 2019-01-01 2020-12-31
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
     spatial_ref   int64 0
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
 Attributes:
     name:          index
     long_name:     index
@@ -25,21 +31,28 @@ Started executing result: 'blue_map'
 Translating concept ['entity', 'water']
 Retrieving layer ['appearance', 'colortype']
 Retrieved layer ['appearance', 'colortype']:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[29., 29., 29., 29., 29., 29., 29., 29., 29., 29., 28., 29., 29.,
-        29., 29., 29.],
-       [ 4.,  4.,  1.,  2.,  1.,  1.,  8.,  4.,  6.,  1., 21.,  4.,  2.,
-        28.,  3.,  4.],
-       [21.,  4., 27.,  4.,  5.,  3., 28., 21., 21., 28., 28., 30.,  6.,
-        28., 27.,  4.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[29., 29., 29., 29.],
+        [29., 29., 29., 29.],
+        [29., 29., 28., 29.],
+        [29., 29., 29., 29.]],
+
+       [[ 4.,  4.,  1.,  2.],
+        [ 1.,  1.,  8.,  4.],
+        [ 6.,  1., 21.,  4.],
+        [ 2., 28.,  3.,  4.]],
+
+       [[21.,  4., 27.,  4.],
+        [ 5.,  3., 28., 21.],
+        [21., 28., 28., 30.],
+        [ 6., 28., 27.,  4.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -47,51 +60,73 @@ Attributes:
     value_type:    ordinal
     value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
 Applied verb evaluate:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0.],
-       [1., 0., 0., 0., 0., 0., 0., 1., 1., 0., 0., 0., 0., 0., 0., 0.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 1., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 0., 0., 0.],
+        [0., 0., 0., 1.],
+        [1., 0., 0., 0.],
+        [0., 0., 0., 0.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
     long_name:     33SharedSpCt
     value_type:    binary
 Translated concept ['entity', 'water']:
-<xarray.DataArray 'water' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0.],
-       [1., 0., 0., 0., 0., 0., 0., 1., 1., 0., 0., 0., 0., 0., 0., 0.]])
+<xarray.DataArray 'water' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 1., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 0., 0., 0.],
+        [0., 0., 0., 1.],
+        [1., 0., 0., 0.],
+        [0., 0., 0., 0.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
     long_name:     33SharedSpCt
     value_type:    binary
 Applied verb reduce:
-<xarray.DataArray 'water' (space: 16)>
-array([1., 0., 0., 0., 0., 0., 0., 1., 1., 0., 1., 0., 0., 0., 0., 0.])
+<xarray.DataArray 'water' (y: 4, x: 4)>
+array([[1., 0., 0., 0.],
+       [0., 0., 0., 1.],
+       [1., 0., 1., 0.],
+       [0., 0., 0., 0.]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     value_type:  numerical
 Finished executing result: 'blue_map'
@@ -99,21 +134,28 @@ Started executing result: 'green_map'
 Translating concept ['entity', 'vegetation']
 Retrieving layer ['appearance', 'colortype']
 Retrieved layer ['appearance', 'colortype']:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[29., 29., 29., 29., 29., 29., 29., 29., 29., 29., 28., 29., 29.,
-        29., 29., 29.],
-       [ 4.,  4.,  1.,  2.,  1.,  1.,  8.,  4.,  6.,  1., 21.,  4.,  2.,
-        28.,  3.,  4.],
-       [21.,  4., 27.,  4.,  5.,  3., 28., 21., 21., 28., 28., 30.,  6.,
-        28., 27.,  4.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[29., 29., 29., 29.],
+        [29., 29., 29., 29.],
+        [29., 29., 28., 29.],
+        [29., 29., 29., 29.]],
+
+       [[ 4.,  4.,  1.,  2.],
+        [ 1.,  1.,  8.,  4.],
+        [ 6.,  1., 21.,  4.],
+        [ 2., 28.,  3.,  4.]],
+
+       [[21.,  4., 27.,  4.],
+        [ 5.,  3., 28., 21.],
+        [21., 28., 28., 30.],
+        [ 6., 28., 27.,  4.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -121,51 +163,73 @@ Attributes:
     value_type:    ordinal
     value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
 Applied verb evaluate:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 0., 1., 1., 0., 1., 1.],
-       [0., 1., 0., 1., 1., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 1.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 1., 1., 1.],
+        [1., 1., 0., 1.],
+        [1., 1., 0., 1.],
+        [1., 0., 1., 1.]],
+
+       [[0., 1., 0., 1.],
+        [1., 1., 0., 0.],
+        [0., 0., 0., 0.],
+        [1., 0., 0., 1.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
     long_name:     33SharedSpCt
     value_type:    binary
 Translated concept ['entity', 'vegetation']:
-<xarray.DataArray 'vegetation' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 0., 1., 1., 0., 1., 1.],
-       [0., 1., 0., 1., 1., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 1.]])
+<xarray.DataArray 'vegetation' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 1., 1., 1.],
+        [1., 1., 0., 1.],
+        [1., 1., 0., 1.],
+        [1., 0., 1., 1.]],
+
+       [[0., 1., 0., 1.],
+        [1., 1., 0., 0.],
+        [0., 0., 0., 0.],
+        [1., 0., 0., 1.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
     long_name:     33SharedSpCt
     value_type:    binary
 Applied verb reduce:
-<xarray.DataArray 'vegetation' (space: 16)>
-array([1., 2., 1., 2., 2., 2., 0., 1., 1., 1., 0., 1., 2., 0., 1., 2.])
+<xarray.DataArray 'vegetation' (y: 4, x: 4)>
+array([[1., 2., 1., 2.],
+       [2., 2., 0., 1.],
+       [1., 1., 0., 1.],
+       [2., 0., 1., 2.]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     value_type:  numerical
 Finished executing result: 'green_map'
@@ -173,21 +237,28 @@ Started executing result: 'blue_curve'
 Translating concept ['entity', 'water']
 Retrieving layer ['appearance', 'colortype']
 Retrieved layer ['appearance', 'colortype']:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[29., 29., 29., 29., 29., 29., 29., 29., 29., 29., 28., 29., 29.,
-        29., 29., 29.],
-       [ 4.,  4.,  1.,  2.,  1.,  1.,  8.,  4.,  6.,  1., 21.,  4.,  2.,
-        28.,  3.,  4.],
-       [21.,  4., 27.,  4.,  5.,  3., 28., 21., 21., 28., 28., 30.,  6.,
-        28., 27.,  4.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[29., 29., 29., 29.],
+        [29., 29., 29., 29.],
+        [29., 29., 28., 29.],
+        [29., 29., 29., 29.]],
+
+       [[ 4.,  4.,  1.,  2.],
+        [ 1.,  1.,  8.,  4.],
+        [ 6.,  1., 21.,  4.],
+        [ 2., 28.,  3.,  4.]],
+
+       [[21.,  4., 27.,  4.],
+        [ 5.,  3., 28., 21.],
+        [21., 28., 28., 30.],
+        [ 6., 28., 27.,  4.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -195,36 +266,56 @@ Attributes:
     value_type:    ordinal
     value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
 Applied verb evaluate:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0.],
-       [1., 0., 0., 0., 0., 0., 0., 1., 1., 0., 0., 0., 0., 0., 0., 0.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 1., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 0., 0., 0.],
+        [0., 0., 0., 1.],
+        [1., 0., 0., 0.],
+        [0., 0., 0., 0.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
     long_name:     33SharedSpCt
     value_type:    binary
 Translated concept ['entity', 'water']:
-<xarray.DataArray 'water' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0.],
-       [1., 0., 0., 0., 0., 0., 0., 1., 1., 0., 0., 0., 0., 0., 0., 0.]])
+<xarray.DataArray 'water' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 1., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 0., 0., 0.],
+        [0., 0., 0., 1.],
+        [1., 0., 0., 0.],
+        [0., 0., 0., 0.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -244,21 +335,28 @@ Started executing result: 'green_curve'
 Translating concept ['entity', 'vegetation']
 Retrieving layer ['appearance', 'colortype']
 Retrieved layer ['appearance', 'colortype']:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[29., 29., 29., 29., 29., 29., 29., 29., 29., 29., 28., 29., 29.,
-        29., 29., 29.],
-       [ 4.,  4.,  1.,  2.,  1.,  1.,  8.,  4.,  6.,  1., 21.,  4.,  2.,
-        28.,  3.,  4.],
-       [21.,  4., 27.,  4.,  5.,  3., 28., 21., 21., 28., 28., 30.,  6.,
-        28., 27.,  4.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[29., 29., 29., 29.],
+        [29., 29., 29., 29.],
+        [29., 29., 28., 29.],
+        [29., 29., 29., 29.]],
+
+       [[ 4.,  4.,  1.,  2.],
+        [ 1.,  1.,  8.,  4.],
+        [ 6.,  1., 21.,  4.],
+        [ 2., 28.,  3.,  4.]],
+
+       [[21.,  4., 27.,  4.],
+        [ 5.,  3., 28., 21.],
+        [21., 28., 28., 30.],
+        [ 6., 28., 27.,  4.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -266,36 +364,56 @@ Attributes:
     value_type:    ordinal
     value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
 Applied verb evaluate:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 0., 1., 1., 0., 1., 1.],
-       [0., 1., 0., 1., 1., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 1.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 1., 1., 1.],
+        [1., 1., 0., 1.],
+        [1., 1., 0., 1.],
+        [1., 0., 1., 1.]],
+
+       [[0., 1., 0., 1.],
+        [1., 1., 0., 0.],
+        [0., 0., 0., 0.],
+        [1., 0., 0., 1.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
     long_name:     33SharedSpCt
     value_type:    binary
 Translated concept ['entity', 'vegetation']:
-<xarray.DataArray 'vegetation' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 0., 1., 1., 0., 1., 1.],
-       [0., 1., 0., 1., 1., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 1.]])
+<xarray.DataArray 'vegetation' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 1., 1., 1.],
+        [1., 1., 0., 1.],
+        [1., 1., 0., 1.],
+        [1., 0., 1., 1.]],
+
+       [[0., 1., 0., 1.],
+        [1., 1., 0., 0.],
+        [0., 0., 0., 0.],
+        [1., 0., 0., 1.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -315,21 +433,28 @@ Started executing result: 'blue_stat'
 Translating concept ['entity', 'water']
 Retrieving layer ['appearance', 'colortype']
 Retrieved layer ['appearance', 'colortype']:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[29., 29., 29., 29., 29., 29., 29., 29., 29., 29., 28., 29., 29.,
-        29., 29., 29.],
-       [ 4.,  4.,  1.,  2.,  1.,  1.,  8.,  4.,  6.,  1., 21.,  4.,  2.,
-        28.,  3.,  4.],
-       [21.,  4., 27.,  4.,  5.,  3., 28., 21., 21., 28., 28., 30.,  6.,
-        28., 27.,  4.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[29., 29., 29., 29.],
+        [29., 29., 29., 29.],
+        [29., 29., 28., 29.],
+        [29., 29., 29., 29.]],
+
+       [[ 4.,  4.,  1.,  2.],
+        [ 1.,  1.,  8.,  4.],
+        [ 6.,  1., 21.,  4.],
+        [ 2., 28.,  3.,  4.]],
+
+       [[21.,  4., 27.,  4.],
+        [ 5.,  3., 28., 21.],
+        [21., 28., 28., 30.],
+        [ 6., 28., 27.,  4.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -337,36 +462,56 @@ Attributes:
     value_type:    ordinal
     value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
 Applied verb evaluate:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0.],
-       [1., 0., 0., 0., 0., 0., 0., 1., 1., 0., 0., 0., 0., 0., 0., 0.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 1., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 0., 0., 0.],
+        [0., 0., 0., 1.],
+        [1., 0., 0., 0.],
+        [0., 0., 0., 0.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
     long_name:     33SharedSpCt
     value_type:    binary
 Translated concept ['entity', 'water']:
-<xarray.DataArray 'water' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0.],
-       [1., 0., 0., 0., 0., 0., 0., 1., 1., 0., 0., 0., 0., 0., 0., 0.]])
+<xarray.DataArray 'water' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 1., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 0., 0., 0.],
+        [0., 0., 0., 1.],
+        [1., 0., 0., 0.],
+        [0., 0., 0., 0.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -385,21 +530,28 @@ Started executing result: 'green_stat'
 Translating concept ['entity', 'vegetation']
 Retrieving layer ['appearance', 'colortype']
 Retrieved layer ['appearance', 'colortype']:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[29., 29., 29., 29., 29., 29., 29., 29., 29., 29., 28., 29., 29.,
-        29., 29., 29.],
-       [ 4.,  4.,  1.,  2.,  1.,  1.,  8.,  4.,  6.,  1., 21.,  4.,  2.,
-        28.,  3.,  4.],
-       [21.,  4., 27.,  4.,  5.,  3., 28., 21., 21., 28., 28., 30.,  6.,
-        28., 27.,  4.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[29., 29., 29., 29.],
+        [29., 29., 29., 29.],
+        [29., 29., 28., 29.],
+        [29., 29., 29., 29.]],
+
+       [[ 4.,  4.,  1.,  2.],
+        [ 1.,  1.,  8.,  4.],
+        [ 6.,  1., 21.,  4.],
+        [ 2., 28.,  3.,  4.]],
+
+       [[21.,  4., 27.,  4.],
+        [ 5.,  3., 28., 21.],
+        [21., 28., 28., 30.],
+        [ 6., 28., 27.,  4.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -407,36 +559,56 @@ Attributes:
     value_type:    ordinal
     value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
 Applied verb evaluate:
-<xarray.DataArray 'colortype' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 0., 1., 1., 0., 1., 1.],
-       [0., 1., 0., 1., 1., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 1.]])
+<xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 1., 1., 1.],
+        [1., 1., 0., 1.],
+        [1., 1., 0., 1.],
+        [1., 0., 1., 1.]],
+
+       [[0., 1., 0., 1.],
+        [1., 1., 0., 0.],
+        [0., 0., 0., 0.],
+        [1., 0., 0., 1.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
     long_name:     33SharedSpCt
     value_type:    binary
 Translated concept ['entity', 'vegetation']:
-<xarray.DataArray 'vegetation' (time: 3, space: 16)>
-array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-       [1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 0., 1., 1., 0., 1., 1.],
-       [0., 1., 0., 1., 1., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 1.]])
+<xarray.DataArray 'vegetation' (time: 3, y: 4, x: 4)>
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[1., 1., 1., 1.],
+        [1., 1., 0., 1.],
+        [1., 1., 0., 1.],
+        [1., 0., 1., 1.]],
+
+       [[0., 1., 0., 1.],
+        [1., 1., 0., 0.],
+        [0., 0., 0., 0.],
+        [1., 0., 0., 1.]]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
-  * space         (space) MultiIndex
-  - y             (space) float64 2.696e+06 2.696e+06 ... 2.692e+06 2.692e+06
-  - x             (space) float64 4.531e+06 4.532e+06 ... 4.534e+06 4.535e+06
-    feature       (space) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -452,8 +624,6 @@ Attributes:
     value_type:  numerical
 Finished executing result: 'green_stat'
 Finished executing the semantic query
-Started preparing response
-Finished preparing response
 Responding:
 {'blue_map': <xarray.DataArray 'blue_map' (y: 4, x: 4)>
 array([[1., 0., 0., 0.],
@@ -461,11 +631,11 @@ array([[1., 0., 0., 0.],
        [1., 0., 1., 0.],
        [0., 0., 0., 0.]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
     spatial_ref   int64 0
     temporal_ref  int64 0
     feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
 Attributes:
     value_type:  numerical, 'green_map': <xarray.DataArray 'green_map' (y: 4, x: 4)>
 array([[1., 2., 1., 2.],
@@ -473,11 +643,11 @@ array([[1., 2., 1., 2.],
        [1., 1., 0., 1.],
        [2., 0., 1., 2.]])
 Coordinates:
+  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
     spatial_ref   int64 0
     temporal_ref  int64 0
     feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
 Attributes:
     value_type:  numerical, 'blue_curve': <xarray.DataArray 'blue_curve' (time: 3)>
 array([0., 1., 3.])
