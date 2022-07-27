@@ -584,8 +584,8 @@ class Array():
       out = out.sq.unstack_spatial_dims()
     return out
 
-  def smooth(self, reducer, dimension, size, fill = False, track_types = True,
-             **kwargs):
+  def smooth(self, reducer, dimension, size, limit = 2, fill = False,
+             track_types = True, **kwargs):
     """Apply the smooth verb to the array.
 
     The smooth verb smoothes the values in an array by applying a reducer
@@ -604,6 +604,10 @@ class Array():
         the spatial dimension, the size will be used for both the X and Y
         dimension, forming a square window with the smoothed pixel in the
         middle.
+      limit : :obj:`int`
+        Minimum number of valid data values inside a window. If the window
+        contains less than this number of data values (excluding nodata) the
+        smoothed value will be nodata.
       fill : :obj:`bool`
         Should pixels with a nodata value also be smoothed?
       track_types : :obj:`bool`
@@ -642,9 +646,9 @@ class Array():
     size = size * 2 + 1
     # Create the rolling window object.
     if dimension == SPACE:
-      obj = obj.rolling({X: size, Y: size}, center = True)
+      obj = obj.rolling({X: size, Y: size}, center = True, min_periods = limit)
     else:
-      obj = obj.rolling({dimension: size}, center = True)
+      obj = obj.rolling({dimension: size}, center = True, min_periods = limit)
     # Apply the reducer to each window.
     out = reducer(obj, track_types = track_types, **kwargs)
     # Post-process.
@@ -1545,8 +1549,8 @@ class Collection(list):
     out[:] = [x.sq.shift(*args, **kwargs) for x in out]
     return out
 
-  def smooth(self, reducer, dimension, size, fill = False, track_types = True,
-             **kwargs):
+  def smooth(self, reducer, dimension, size, limit = 2, fill = False,
+             track_types = True, **kwargs):
     """Apply the smooth verb to all arrays in the collection.
 
     See :meth:`Array.smooth`
@@ -1556,7 +1560,7 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([reducer, dimension, size, fill, track_types])
+    args = tuple([reducer, dimension, size, limit, fill, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.smooth(*args, **kwargs) for x in out]
     return out
