@@ -584,7 +584,8 @@ class Array():
       out = out.sq.unstack_spatial_dims()
     return out
 
-  def smooth(self, reducer, dimension, size, track_types = True, **kwargs):
+  def smooth(self, reducer, dimension, size, fill = False, track_types = True,
+             **kwargs):
     """Apply the smooth verb to the array.
 
     The smooth verb smoothes the values in an array by applying a reducer
@@ -603,6 +604,8 @@ class Array():
         the spatial dimension, the size will be used for both the X and Y
         dimension, forming a square window with the smoothed pixel in the
         middle.
+      fill : :obj:`bool`
+        Should pixels with a nodata value also be smoothed?
       track_types : :obj:`bool`
         Should the reducer promote the value type of the output object, based
         on the value type of the input object?
@@ -644,6 +647,9 @@ class Array():
       obj = obj.rolling({dimension: size}, center = True)
     # Apply the reducer to each window.
     out = reducer(obj, track_types = track_types, **kwargs)
+    # Post-process.
+    if not fill:
+      out = out.where(pd.notnull(self._obj)) # Preserve nan.
     return out
 
   def trim(self, dimension = None):
@@ -1539,7 +1545,8 @@ class Collection(list):
     out[:] = [x.sq.shift(*args, **kwargs) for x in out]
     return out
 
-  def smooth(self, reducer, dimension, size, track_types = True, **kwargs):
+  def smooth(self, reducer, dimension, size, fill = False, track_types = True,
+             **kwargs):
     """Apply the smooth verb to all arrays in the collection.
 
     See :meth:`Array.smooth`
@@ -1549,7 +1556,7 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([reducer, dimension, size, track_types])
+    args = tuple([reducer, dimension, size, fill, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.smooth(*args, **kwargs) for x in out]
     return out
