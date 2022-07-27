@@ -432,6 +432,91 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.TIME.html">
+     semantique.dimensions.TIME
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.SPACE.html">
+     semantique.dimensions.SPACE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.X.html">
+     semantique.dimensions.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.Y.html">
+     semantique.dimensions.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.YEAR.html">
+     semantique.components.time.YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.SEASON.html">
+     semantique.components.time.SEASON
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.QUARTER.html">
+     semantique.components.time.QUARTER
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.MONTH.html">
+     semantique.components.time.MONTH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.WEEK.html">
+     semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY_OF_WEEK.html">
+     semantique.components.time.DAY_OF_WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY_OF_YEAR.html">
+     semantique.components.time.DAY_OF_YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.HOUR.html">
+     semantique.components.time.HOUR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.MINUTE.html">
+     semantique.components.time.MINUTE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.SECOND.html">
+     semantique.components.time.SECOND
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.X.html">
+     semantique.components.space.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.Y.html">
+     semantique.components.space.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.FEATURE.html">
+     semantique.components.space.FEATURE
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.operators.NOT.html">
      semantique.operators.NOT
     </a>
@@ -952,11 +1037,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
     </a>
@@ -1231,19 +1311,17 @@
 <h1>semantique.processor.arrays.Array.groupby<a class="headerlink" href="#semantique-processor-arrays-array-groupby" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.arrays.Array.groupby">
-<span class="sig-prename descclassname"><span class="pre">Array.</span></span><span class="sig-name descname"><span class="pre">groupby</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grouper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_as_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L329-L416"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array.groupby" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Array.</span></span><span class="sig-name descname"><span class="pre">groupby</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grouper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_as_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L356-L485"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array.groupby" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply the groupby verb to the array.</p>
 <p>The groupby verb groups the values in an array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>grouper</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> or <a class="reference internal" href="semantique.processor.arrays.Collection.html#semantique.processor.arrays.Collection" title="semantique.processor.arrays.Collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Collection</span></code></a>) – Data array containing a single dimension that is also present in the
-input array. The group to which each pixel in the input array will be
-assigned depends on the value of the grouper that has the same
-coordinate for that dimension. Alternatively it may be a array
-collection in which each array meets the requirements above. In that
-case, groups are defined by the unique combinations of corresponding
-values in all collection members.</p></li>
+<li><p><strong>grouper</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> or <a class="reference internal" href="semantique.processor.arrays.Collection.html#semantique.processor.arrays.Collection" title="semantique.processor.arrays.Collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Collection</span></code></a>) – Array which can be aligned to the same shape as the input array. Pixels
+in the input array that have equal values in the grouper will be
+grouped together. Alternatively, it may be a collection of such arrays.
+Then, pixels in the input array that have equal values in all of the
+grouper arrays will be grouped together.</p></li>
 <li><p><strong>labels_as_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – If value labels are defined, should they be used as group names instead
 of the values themselves?</p></li>
 <li><p><strong>**kwargs</strong> – Ignored.</p></li>
@@ -1254,8 +1332,8 @@ of the values themselves?</p></li>
 </dd>
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="semantique.exceptions.MissingDimensionError.html#semantique.exceptions.MissingDimensionError" title="semantique.exceptions.MissingDimensionError"><strong>exceptions.MissingDimensionError</strong></a> – If the grouper dimension is not present in the input object.</p></li>
-<li><p><a class="reference internal" href="semantique.exceptions.TooManyDimensionsError.html#semantique.exceptions.TooManyDimensionsError" title="semantique.exceptions.TooManyDimensionsError"><strong>exceptions.TooManyDimensionsError</strong></a> – If the grouper has more than one dimension.</p></li>
+<li><p><a class="reference internal" href="semantique.exceptions.MissingDimensionError.html#semantique.exceptions.MissingDimensionError" title="semantique.exceptions.MissingDimensionError"><strong>exceptions.MissingDimensionError</strong></a> – If the grouper is zero-dimensional.</p></li>
+<li><p><a class="reference internal" href="semantique.exceptions.UnknownDimensionError.html#semantique.exceptions.UnknownDimensionError" title="semantique.exceptions.UnknownDimensionError"><strong>exceptions.UnknownDimensionError</strong></a> – If the grouper contains dimensions that are not present in the input.</p></li>
 <li><p><a class="reference internal" href="semantique.exceptions.MixedDimensionsError.html#semantique.exceptions.MixedDimensionsError" title="semantique.exceptions.MixedDimensionsError"><strong>exceptions.MixedDimensionsError</strong></a> – If the grouper is a collection and its elements don’t all have the same
     dimensions.</p></li>
 </ul>

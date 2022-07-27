@@ -20,6 +20,7 @@
       ~Collection.delineate
       ~Collection.evaluate
       ~Collection.extract
+      ~Collection.fill
       ~Collection.filter
       ~Collection.merge
       ~Collection.name

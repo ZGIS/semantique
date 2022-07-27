@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.operators.NOT" href="semantique.operators.NOT.html" />
+    <link rel="next" title="semantique.dimensions.TIME" href="semantique.dimensions.TIME.html" />
     <link rel="prev" title="semantique.time_instant" href="semantique.time_instant.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -431,6 +431,91 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      semantique.time_interval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.TIME.html">
+     semantique.dimensions.TIME
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.SPACE.html">
+     semantique.dimensions.SPACE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.X.html">
+     semantique.dimensions.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.Y.html">
+     semantique.dimensions.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.YEAR.html">
+     semantique.components.time.YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.SEASON.html">
+     semantique.components.time.SEASON
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.QUARTER.html">
+     semantique.components.time.QUARTER
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.MONTH.html">
+     semantique.components.time.MONTH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.WEEK.html">
+     semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY_OF_WEEK.html">
+     semantique.components.time.DAY_OF_WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY_OF_YEAR.html">
+     semantique.components.time.DAY_OF_YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.HOUR.html">
+     semantique.components.time.HOUR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.MINUTE.html">
+     semantique.components.time.MINUTE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.SECOND.html">
+     semantique.components.time.SECOND
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.X.html">
+     semantique.components.space.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.Y.html">
+     semantique.components.space.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.FEATURE.html">
+     semantique.components.space.FEATURE
     </a>
    </li>
    <li class="toctree-l2">
@@ -954,11 +1039,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
     </a>
@@ -1233,7 +1313,7 @@
 <h1>semantique.time_interval<a class="headerlink" href="#semantique-time-interval" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="semantique.time_interval">
-<span class="sig-prename descclassname"><span class="pre">semantique.</span></span><span class="sig-name descname"><span class="pre">time_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L1425-L1465"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.time_interval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">semantique.</span></span><span class="sig-name descname"><span class="pre">time_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L1406-L1446"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.time_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Time interval.</p>
 <p>Object representing a set of timestamps that fall inside the given bounds of
 a time interval. The interval is closed at both sides, meaning that both of
@@ -1284,10 +1364,10 @@ interval, and can be understood by the query processor as such.</p>
             <p class="prev-next-title">semantique.time_instant</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.operators.NOT.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.dimensions.TIME.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.operators.NOT</p>
+        <p class="prev-next-title">semantique.dimensions.TIME</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

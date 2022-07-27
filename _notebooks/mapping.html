@@ -436,6 +436,91 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.dimensions.TIME.html">
+     semantique.dimensions.TIME
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.dimensions.SPACE.html">
+     semantique.dimensions.SPACE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.dimensions.X.html">
+     semantique.dimensions.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.dimensions.Y.html">
+     semantique.dimensions.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.YEAR.html">
+     semantique.components.time.YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.SEASON.html">
+     semantique.components.time.SEASON
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.QUARTER.html">
+     semantique.components.time.QUARTER
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.MONTH.html">
+     semantique.components.time.MONTH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.WEEK.html">
+     semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.DAY_OF_WEEK.html">
+     semantique.components.time.DAY_OF_WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.DAY_OF_YEAR.html">
+     semantique.components.time.DAY_OF_YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.HOUR.html">
+     semantique.components.time.HOUR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.MINUTE.html">
+     semantique.components.time.MINUTE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.SECOND.html">
+     semantique.components.time.SECOND
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.space.X.html">
+     semantique.components.space.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.space.Y.html">
+     semantique.components.space.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.space.FEATURE.html">
+     semantique.components.space.FEATURE
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.operators.NOT.html">
      semantique.operators.NOT
     </a>
@@ -956,11 +1041,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
     </a>
@@ -1223,6 +1303,34 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Content">
+   Content
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Prepare">
+   Prepare
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Structure">
+   Structure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#The-Semantique-configuration">
+   The Semantique configuration
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -1482,13 +1590,34 @@ div.rendered_html tbody tr:hover {
 <p>Explore this notebook interactively: <a class="reference external" href="https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo%2F_notebooks/mapping.nblink"><img alt="Binder" src="https://mybinder.org/badge.svg" /></a></p>
 <div class="section" id="Constructing-a-mapping">
 <h1>Constructing a mapping<a class="headerlink" href="#Constructing-a-mapping" title="Permalink to this headline">¶</a></h1>
+<p>A mapping is written by an EO expert and contains rules that map semantic concepts formalized in an ontology to data values stored in an EO data cube. As such, the mapping forms the connection between the semantic domain and the image domain.</p>
+<p>This notebook describes the data structures to represent a mapping in semantique, and shows how an EO expert can construct a mapping from scratch.</p>
+<div class="section" id="Content">
+<h2>Content<a class="headerlink" href="#Content" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#Structure">Structure</a></p></li>
+<li><p><a class="reference external" href="#The-Semantique-configuration">The Semantique configuration</a></p></li>
+</ul>
+</div>
+<div class="section" id="Prepare">
+<h2>Prepare<a class="headerlink" href="#Prepare" title="Permalink to this headline">¶</a></h2>
+<p>Import packages:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import semantique as sq
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="Structure">
+<h2>Structure<a class="headerlink" href="#Structure" title="Permalink to this headline">¶</a></h2>
+<p><em>To be added</em></p>
+</div>
+<div class="section" id="The-Semantique-configuration">
+<h2>The Semantique configuration<a class="headerlink" href="#The-Semantique-configuration" title="Permalink to this headline">¶</a></h2>
+<p><em>To be added</em></p>
 </div>
 </div>
 

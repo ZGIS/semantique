@@ -434,6 +434,91 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.TIME.html">
+     semantique.dimensions.TIME
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.SPACE.html">
+     semantique.dimensions.SPACE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.X.html">
+     semantique.dimensions.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.Y.html">
+     semantique.dimensions.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.YEAR.html">
+     semantique.components.time.YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.SEASON.html">
+     semantique.components.time.SEASON
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.QUARTER.html">
+     semantique.components.time.QUARTER
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.MONTH.html">
+     semantique.components.time.MONTH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.WEEK.html">
+     semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY_OF_WEEK.html">
+     semantique.components.time.DAY_OF_WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY_OF_YEAR.html">
+     semantique.components.time.DAY_OF_YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.HOUR.html">
+     semantique.components.time.HOUR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.MINUTE.html">
+     semantique.components.time.MINUTE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.SECOND.html">
+     semantique.components.time.SECOND
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.X.html">
+     semantique.components.space.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.Y.html">
+     semantique.components.space.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.FEATURE.html">
+     semantique.components.space.FEATURE
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.operators.NOT.html">
      semantique.operators.NOT
     </a>
@@ -954,11 +1039,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
     </a>
@@ -1233,7 +1313,7 @@
 <h1>semantique.processor.core.QueryProcessor<a class="headerlink" href="#semantique-processor-core-queryprocessor" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.processor.core.QueryProcessor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.core.</span></span><span class="sig-name descname"><span class="pre">QueryProcessor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recipe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datacube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reducers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_reducers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/core.py#L18-L1125"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.core.QueryProcessor" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.core.</span></span><span class="sig-name descname"><span class="pre">QueryProcessor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recipe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datacube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reducers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_reducers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/core.py#L18-L1128"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.core.QueryProcessor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Worker that takes care of processing a semantic query.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1241,9 +1321,9 @@
 <li><p><strong>recipe</strong> (<a class="reference internal" href="semantique.QueryRecipe.html#semantique.QueryRecipe" title="semantique.QueryRecipe"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryRecipe</span></code></a>) – The query recipe to be processed.</p></li>
 <li><p><strong>datacube</strong> (<a class="reference internal" href="semantique.datacube.Datacube.html#semantique.datacube.Datacube" title="semantique.datacube.Datacube"><code class="xref py py-class docutils literal notranslate"><span class="pre">Datacube</span></code></a>) – The datacube instance to process the query against.</p></li>
 <li><p><strong>mapping</strong> (<a class="reference internal" href="semantique.mapping.Mapping.html#semantique.mapping.Mapping" title="semantique.mapping.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>) – The mapping instance to process the query against.</p></li>
-<li><p><strong>extent</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – The spatio-temporal extent in which the query should be processed. Should
-be given as an array with a temporal dimension as well as a stacked
-spatial dimension, such as returned by
+<li><p><strong>extent</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – The spatio-temporal extent in which the query should be processed. Should
+be given as an array with a temporal dimension and two spatial dimensions
+such as returned by
 <a class="reference internal" href="semantique.processor.utils.parse_extent.html#semantique.processor.utils.parse_extent" title="semantique.processor.utils.parse_extent"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_extent</span></code></a>.</p></li>
 <li><p><strong>operators</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>) – Operator functions that may be used when evaluating expressions with the
 evaluate verb. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, all built-in operators in semantique will
@@ -1323,71 +1403,71 @@ supported by a specific process.</p></li>
 <tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_extract.html#semantique.processor.core.QueryProcessor.handle_extract" title="semantique.processor.core.QueryProcessor.handle_extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_extract</span></code></a>(block)</p></td>
 <td><p>Handler for the extract verb.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_filter.html#semantique.processor.core.QueryProcessor.handle_filter" title="semantique.processor.core.QueryProcessor.handle_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_filter</span></code></a>(block)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_fill.html#semantique.processor.core.QueryProcessor.handle_fill" title="semantique.processor.core.QueryProcessor.handle_fill"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_fill</span></code></a>(block)</p></td>
+<td><p>Handler for the fill verb.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_filter.html#semantique.processor.core.QueryProcessor.handle_filter" title="semantique.processor.core.QueryProcessor.handle_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_filter</span></code></a>(block)</p></td>
 <td><p>Handler for the filter verb.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_geometry.html#semantique.processor.core.QueryProcessor.handle_geometry" title="semantique.processor.core.QueryProcessor.handle_geometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_geometry</span></code></a>(block)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_geometry.html#semantique.processor.core.QueryProcessor.handle_geometry" title="semantique.processor.core.QueryProcessor.handle_geometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_geometry</span></code></a>(block)</p></td>
 <td><p>Handler for spatial vector geometries.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_groupby.html#semantique.processor.core.QueryProcessor.handle_groupby" title="semantique.processor.core.QueryProcessor.handle_groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_groupby</span></code></a>(block)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_groupby.html#semantique.processor.core.QueryProcessor.handle_groupby" title="semantique.processor.core.QueryProcessor.handle_groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_groupby</span></code></a>(block)</p></td>
 <td><p>Handler for the groupby verb.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_interval.html#semantique.processor.core.QueryProcessor.handle_interval" title="semantique.processor.core.QueryProcessor.handle_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_interval</span></code></a>(block)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_interval.html#semantique.processor.core.QueryProcessor.handle_interval" title="semantique.processor.core.QueryProcessor.handle_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_interval</span></code></a>(block)</p></td>
 <td><p>Handler for value intervals.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_label.html#semantique.processor.core.QueryProcessor.handle_label" title="semantique.processor.core.QueryProcessor.handle_label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_label</span></code></a>(block)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_label.html#semantique.processor.core.QueryProcessor.handle_label" title="semantique.processor.core.QueryProcessor.handle_label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_label</span></code></a>(block)</p></td>
 <td><p>Handler for value labels.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_layer.html#semantique.processor.core.QueryProcessor.handle_layer" title="semantique.processor.core.QueryProcessor.handle_layer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_layer</span></code></a>(block)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_layer.html#semantique.processor.core.QueryProcessor.handle_layer" title="semantique.processor.core.QueryProcessor.handle_layer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_layer</span></code></a>(block)</p></td>
 <td><p>Handler for data layer references.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_merge.html#semantique.processor.core.QueryProcessor.handle_merge" title="semantique.processor.core.QueryProcessor.handle_merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_merge</span></code></a>(block)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_merge.html#semantique.processor.core.QueryProcessor.handle_merge" title="semantique.processor.core.QueryProcessor.handle_merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_merge</span></code></a>(block)</p></td>
 <td><p>Handler for the merge verb.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_name.html#semantique.processor.core.QueryProcessor.handle_name" title="semantique.processor.core.QueryProcessor.handle_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_name</span></code></a>(block)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_name.html#semantique.processor.core.QueryProcessor.handle_name" title="semantique.processor.core.QueryProcessor.handle_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_name</span></code></a>(block)</p></td>
 <td><p>Handler for the name verb.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_processing_chain.html#semantique.processor.core.QueryProcessor.handle_processing_chain" title="semantique.processor.core.QueryProcessor.handle_processing_chain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_processing_chain</span></code></a>(block)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_processing_chain.html#semantique.processor.core.QueryProcessor.handle_processing_chain" title="semantique.processor.core.QueryProcessor.handle_processing_chain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_processing_chain</span></code></a>(block)</p></td>
 <td><p>Handler for processing chains.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_reduce.html#semantique.processor.core.QueryProcessor.handle_reduce" title="semantique.processor.core.QueryProcessor.handle_reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_reduce</span></code></a>(block)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_reduce.html#semantique.processor.core.QueryProcessor.handle_reduce" title="semantique.processor.core.QueryProcessor.handle_reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_reduce</span></code></a>(block)</p></td>
 <td><p>Handler for the reduce verb.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_result.html#semantique.processor.core.QueryProcessor.handle_result" title="semantique.processor.core.QueryProcessor.handle_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_result</span></code></a>(block)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_result.html#semantique.processor.core.QueryProcessor.handle_result" title="semantique.processor.core.QueryProcessor.handle_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_result</span></code></a>(block)</p></td>
 <td><p>Handler for result references.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_self.html#semantique.processor.core.QueryProcessor.handle_self" title="semantique.processor.core.QueryProcessor.handle_self"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_self</span></code></a>(block)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_self.html#semantique.processor.core.QueryProcessor.handle_self" title="semantique.processor.core.QueryProcessor.handle_self"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_self</span></code></a>(block)</p></td>
 <td><p>Handler for self references.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_set.html#semantique.processor.core.QueryProcessor.handle_set" title="semantique.processor.core.QueryProcessor.handle_set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_set</span></code></a>(block)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_set.html#semantique.processor.core.QueryProcessor.handle_set" title="semantique.processor.core.QueryProcessor.handle_set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_set</span></code></a>(block)</p></td>
 <td><p>Handler for value sets.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_shift.html#semantique.processor.core.QueryProcessor.handle_shift" title="semantique.processor.core.QueryProcessor.handle_shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_shift</span></code></a>(block)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_shift.html#semantique.processor.core.QueryProcessor.handle_shift" title="semantique.processor.core.QueryProcessor.handle_shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_shift</span></code></a>(block)</p></td>
 <td><p>Handler for the shift verb.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_smooth.html#semantique.processor.core.QueryProcessor.handle_smooth" title="semantique.processor.core.QueryProcessor.handle_smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_smooth</span></code></a>(block)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_smooth.html#semantique.processor.core.QueryProcessor.handle_smooth" title="semantique.processor.core.QueryProcessor.handle_smooth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_smooth</span></code></a>(block)</p></td>
 <td><p>Handler for the smooth verb.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_time_instant.html#semantique.processor.core.QueryProcessor.handle_time_instant" title="semantique.processor.core.QueryProcessor.handle_time_instant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_time_instant</span></code></a>(block)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_time_instant.html#semantique.processor.core.QueryProcessor.handle_time_instant" title="semantique.processor.core.QueryProcessor.handle_time_instant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_time_instant</span></code></a>(block)</p></td>
 <td><p>Handler for time instants.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_time_interval.html#semantique.processor.core.QueryProcessor.handle_time_interval" title="semantique.processor.core.QueryProcessor.handle_time_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_time_interval</span></code></a>(block)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_time_interval.html#semantique.processor.core.QueryProcessor.handle_time_interval" title="semantique.processor.core.QueryProcessor.handle_time_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_time_interval</span></code></a>(block)</p></td>
 <td><p>Handler for time intervals.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_trim.html#semantique.processor.core.QueryProcessor.handle_trim" title="semantique.processor.core.QueryProcessor.handle_trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_trim</span></code></a>(block)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_trim.html#semantique.processor.core.QueryProcessor.handle_trim" title="semantique.processor.core.QueryProcessor.handle_trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_trim</span></code></a>(block)</p></td>
 <td><p>Handler for the trim verb.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_verb.html#semantique.processor.core.QueryProcessor.handle_verb" title="semantique.processor.core.QueryProcessor.handle_verb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_verb</span></code></a>(block)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.handle_verb.html#semantique.processor.core.QueryProcessor.handle_verb" title="semantique.processor.core.QueryProcessor.handle_verb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_verb</span></code></a>(block)</p></td>
 <td><p>Handler for verbs.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.optimize.html#semantique.processor.core.QueryProcessor.optimize" title="semantique.processor.core.QueryProcessor.optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.optimize.html#semantique.processor.core.QueryProcessor.optimize" title="semantique.processor.core.QueryProcessor.optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize</span></code></a>()</p></td>
 <td><p>Optimize a semantic query.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.parse.html#semantique.processor.core.QueryProcessor.parse" title="semantique.processor.core.QueryProcessor.parse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse</span></code></a>(recipe, datacube, mapping, space, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.parse.html#semantique.processor.core.QueryProcessor.parse" title="semantique.processor.core.QueryProcessor.parse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse</span></code></a>(recipe, datacube, mapping, space, ...)</p></td>
 <td><p>Parse a semantic query.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.respond.html#semantique.processor.core.QueryProcessor.respond" title="semantique.processor.core.QueryProcessor.respond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">respond</span></code></a>()</p></td>
-<td><p>Return the response of an executed semantic query.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.store_default_operators.html#semantique.processor.core.QueryProcessor.store_default_operators" title="semantique.processor.core.QueryProcessor.store_default_operators"><code class="xref py py-obj docutils literal notranslate"><span class="pre">store_default_operators</span></code></a>()</p></td>
 <td><p>Store the built-in operators as supported operators.</p></td>

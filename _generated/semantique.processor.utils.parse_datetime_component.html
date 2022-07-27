@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.processor.utils.parse_coords_component" href="semantique.processor.utils.parse_coords_component.html" />
+    <link rel="next" title="semantique.processor.utils.get_null" href="semantique.processor.utils.get_null.html" />
     <link rel="prev" title="semantique.processor.utils.parse_extent" href="semantique.processor.utils.parse_extent.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -431,6 +431,91 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.time_interval.html">
      semantique.time_interval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.TIME.html">
+     semantique.dimensions.TIME
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.SPACE.html">
+     semantique.dimensions.SPACE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.X.html">
+     semantique.dimensions.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.Y.html">
+     semantique.dimensions.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.YEAR.html">
+     semantique.components.time.YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.SEASON.html">
+     semantique.components.time.SEASON
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.QUARTER.html">
+     semantique.components.time.QUARTER
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.MONTH.html">
+     semantique.components.time.MONTH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.WEEK.html">
+     semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY_OF_WEEK.html">
+     semantique.components.time.DAY_OF_WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY_OF_YEAR.html">
+     semantique.components.time.DAY_OF_YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.HOUR.html">
+     semantique.components.time.HOUR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.MINUTE.html">
+     semantique.components.time.MINUTE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.SECOND.html">
+     semantique.components.time.SECOND
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.X.html">
+     semantique.components.space.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.Y.html">
+     semantique.components.space.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.FEATURE.html">
+     semantique.components.space.FEATURE
     </a>
    </li>
    <li class="toctree-l2">
@@ -954,11 +1039,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
     </a>
@@ -1235,7 +1315,7 @@
 <dt class="sig sig-object py" id="semantique.processor.utils.parse_datetime_component">
 <span class="sig-prename descclassname"><span class="pre">semantique.processor.utils.</span></span><span class="sig-name descname"><span class="pre">parse_datetime_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/utils.py#L205-L280"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.utils.parse_datetime_component" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse datetime accessor arrays.</p>
-<p>The <a class="reference external" href="https://xarray.pydata.org/en/stable/user-guide/time-series.html#datetime-components">datetime accessors</a> of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> objects are treated in
+<p>The <a class="reference external" href="https://xarray.pydata.org/en/stable/user-guide/time-series.html#datetime-components">datetime accessors</a> of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> objects are treated in
 semantique as a component of the temporal dimension. Parsing them includes
 adding <a class="reference internal" href="semantique.processor.arrays.Array.value_type.html#semantique.processor.arrays.Array.value_type" title="semantique.processor.arrays.Array.value_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value_type</span></code></a>
 and <a class="reference internal" href="semantique.processor.arrays.Array.value_labels.html#semantique.processor.arrays.Array.value_labels" title="semantique.processor.arrays.Array.value_labels"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value_label</span></code></a>
@@ -1244,11 +1324,11 @@ properties as well as in some cases re-organize the values in the array.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the datetime component.</p></li>
-<li><p><strong>obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Xarray datetime accessor.</p></li>
+<li><p><strong>obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Xarray datetime accessor.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.3.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – Parsed datetime accessor.</p>
+<dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – Parsed datetime accessor.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1268,10 +1348,10 @@ properties as well as in some cases re-organize the values in the array.</p>
             <p class="prev-next-title">semantique.processor.utils.parse_extent</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantique.processor.utils.parse_coords_component.html" title="next page">
+    <a class='right-next' id="next-link" href="semantique.processor.utils.get_null.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.processor.utils.parse_coords_component</p>
+        <p class="prev-next-title">semantique.processor.utils.get_null</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

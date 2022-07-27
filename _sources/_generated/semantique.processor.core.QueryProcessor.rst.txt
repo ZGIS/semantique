@@ -29,6 +29,7 @@
       ~QueryProcessor.handle_delineate
       ~QueryProcessor.handle_evaluate
       ~QueryProcessor.handle_extract
+      ~QueryProcessor.handle_fill
       ~QueryProcessor.handle_filter
       ~QueryProcessor.handle_geometry
       ~QueryProcessor.handle_groupby
@@ -50,7 +51,6 @@
       ~QueryProcessor.handle_verb
       ~QueryProcessor.optimize
       ~QueryProcessor.parse
-      ~QueryProcessor.respond
       ~QueryProcessor.store_default_operators
       ~QueryProcessor.store_default_reducers
    

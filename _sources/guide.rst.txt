@@ -1,7 +1,7 @@
 User Guide
 ===========
 
-The User Guide contains several notebooks that provide detailed documentation of the functionalities the package offers. They combine textual explanations with code chunks, and should be suited both for new and advanced users. **Currently they are under construction and will be extended!**
+The User Guide contains several notebooks that provide detailed documentation of the functionalities the package offers. They combine textual explanations with code chunks, and should be suited both for new and advanced users. Some of the notebooks are still under construction and will be extended.
 
 .. toctree::
    :maxdepth: 2

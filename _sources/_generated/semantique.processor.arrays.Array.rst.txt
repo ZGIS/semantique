@@ -20,6 +20,7 @@
       ~Array.drop_non_dimension_coords
       ~Array.evaluate
       ~Array.extract
+      ~Array.fill
       ~Array.filter
       ~Array.groupby
       ~Array.name
@@ -28,6 +29,7 @@
       ~Array.reproject
       ~Array.shift
       ~Array.smooth
+      ~Array.stack_all_dims
       ~Array.stack_spatial_dims
       ~Array.to_csv
       ~Array.to_dataframe
@@ -35,6 +37,7 @@
       ~Array.to_geotiff
       ~Array.trim
       ~Array.tz_convert
+      ~Array.unstack_all_dims
       ~Array.unstack_spatial_dims
       ~Array.write_crs
       ~Array.write_tz

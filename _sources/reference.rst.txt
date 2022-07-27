@@ -149,6 +149,42 @@ Special values
    time_instant
    time_interval
 
+Dimensions
+-----------
+
+Reserved dimension names
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   dimensions.TIME
+   dimensions.SPACE
+   dimensions.X
+   dimensions.Y
+
+Dimension components
+~~~~~~~~~~~~~~~~~~~~~
+
+.. autosummary::
+   :toctree: _generated/
+   :nosignatures:
+
+   components.time.YEAR
+   components.time.SEASON
+   components.time.QUARTER
+   components.time.MONTH
+   components.time.WEEK
+   components.time.DAY_OF_WEEK
+   components.time.DAY_OF_YEAR
+   components.time.HOUR
+   components.time.MINUTE
+   components.time.SECOND
+   components.space.X
+   components.space.Y
+   components.space.FEATURE
+
 Operators
 ----------
 
@@ -463,7 +499,6 @@ Utils
 
    processor.utils.parse_extent
    processor.utils.parse_datetime_component
-   processor.utils.parse_coords_component
    processor.utils.get_null
    processor.utils.allnull
    processor.utils.null_as_zero

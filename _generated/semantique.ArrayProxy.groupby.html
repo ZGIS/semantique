@@ -434,6 +434,91 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.TIME.html">
+     semantique.dimensions.TIME
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.SPACE.html">
+     semantique.dimensions.SPACE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.X.html">
+     semantique.dimensions.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.dimensions.Y.html">
+     semantique.dimensions.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.YEAR.html">
+     semantique.components.time.YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.SEASON.html">
+     semantique.components.time.SEASON
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.QUARTER.html">
+     semantique.components.time.QUARTER
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.MONTH.html">
+     semantique.components.time.MONTH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.WEEK.html">
+     semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY_OF_WEEK.html">
+     semantique.components.time.DAY_OF_WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY_OF_YEAR.html">
+     semantique.components.time.DAY_OF_YEAR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.HOUR.html">
+     semantique.components.time.HOUR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.MINUTE.html">
+     semantique.components.time.MINUTE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.SECOND.html">
+     semantique.components.time.SECOND
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.X.html">
+     semantique.components.space.X
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.Y.html">
+     semantique.components.space.Y
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.space.FEATURE.html">
+     semantique.components.space.FEATURE
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.operators.NOT.html">
      semantique.operators.NOT
     </a>
@@ -954,11 +1039,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.utils.parse_coords_component.html">
-     semantique.processor.utils.parse_coords_component
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.utils.get_null.html">
      semantique.processor.utils.get_null
     </a>
@@ -1241,11 +1321,11 @@ correspond to a year.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>grouper</strong> (<a class="reference internal" href="semantique.ArrayProxy.html#semantique.ArrayProxy" title="semantique.ArrayProxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayProxy</span></code></a> or <a class="reference internal" href="semantique.CollectionProxy.html#semantique.CollectionProxy" title="semantique.CollectionProxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CollectionProxy</span></code></a>) – Proxy of an array containing a single dimension that is also
-present in the input. Each unique value in this array corresponds
-to a group. Alternatively it may be a proxy of a collection of such
-one-dimensional arrays. Then, each unique combination of values
-corresponds to a group.</p></li>
+<li><p><strong>grouper</strong> (<a class="reference internal" href="semantique.ArrayProxy.html#semantique.ArrayProxy" title="semantique.ArrayProxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayProxy</span></code></a> or <a class="reference internal" href="semantique.CollectionProxy.html#semantique.CollectionProxy" title="semantique.CollectionProxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CollectionProxy</span></code></a>) – Proxy of an array which can be aligned to the same shape as the input
+array. Pixels in the input array that have equal values in the grouper
+will be grouped together. Alternatively it may be a proxy of a
+collection of such arrays. Then, pixels in the input array that have
+equal values in all of the grouper arrays will be grouped together.</p></li>
 <li><p><strong>**kwargs</strong> – Additional keyword arguments passed on to
 <a class="reference internal" href="semantique.processor.arrays.Array.groupby.html#semantique.processor.arrays.Array.groupby" title="semantique.processor.arrays.Array.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Array.groupby</span></code></a>.</p></li>
 </ul>
