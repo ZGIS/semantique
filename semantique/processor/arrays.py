@@ -656,7 +656,7 @@ class Array():
       out = out.where(pd.notnull(self._obj)) # Preserve nan.
     return out
 
-  def trim(self, dimension = None):
+  def trim(self, dimension = None, **kwargs):
     """Apply the trim verb to the array.
 
     The trim verb trims the dimensions of an array, meaning that all dimension
