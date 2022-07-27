@@ -137,6 +137,8 @@
    processor.arrays.Array.write_tz
    processor.arrays.Array.stack_spatial_dims
    processor.arrays.Array.unstack_spatial_dims
+   processor.arrays.Array.stack_all_dims
+   processor.arrays.Array.unstack_all_dims
    processor.arrays.Array.drop_non_dimension_coords
    processor.arrays.Array.to_dataframe
    processor.arrays.Array.to_geodataframe
