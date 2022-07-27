@@ -730,6 +730,27 @@ class QueryProcessor():
     """
     return self.call_verb("delineate", block["params"])
 
+  def handle_fill(self, block):
+    """Handler for the fill verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "fill".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+
+    """
+    # Get function parameters.
+    params = copy.deepcopy(block["params"])
+    # Set other function parameters.
+    params["track_types"] = self._track_types
+    # Call verb.
+    return self.call_verb("fill", params)
+
   def handle_name(self, block):
     """Handler for the name verb.
 

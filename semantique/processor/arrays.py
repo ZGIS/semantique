@@ -769,6 +769,9 @@ class Array():
     out = out.where(pd.notnull(self._obj)) # Preserve nan.
     return out
 
+  def fill(method, track_types = True, **kwargs):
+    raise NotImplementedError("The fill verb is not implemented yet")
+
   def name(self, value, **kwargs):
     """Apply the name verb to the array.
 
@@ -1578,6 +1581,21 @@ class Collection(list):
     """
     out = copy.deepcopy(self)
     out[:] = [x.sq.delineate(**kwargs) for x in out]
+    return out
+
+  def fill(self, method, track_types = True, **kwargs):
+    """Apply the fill verb to all arrays in the collection.
+
+    See :meth:`Array.fill`
+
+    Returns
+    -------
+      :obj:`Collection`
+
+    """
+    args = tuple([method, track_types])
+    out = copy.deepcopy(self)
+    out[:] = [x.sq.fill(*args, **kwargs) for x in out]
     return out
 
   def name(self, value, **kwargs):
