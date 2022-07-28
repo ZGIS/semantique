@@ -77,8 +77,11 @@ html_theme_options = {
   "use_issues_button": True,
   "launch_buttons": {
     "binderhub_url": "https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo"
-  }
+  },
+  'logo_only': True
 }
+
+html_logo = "_images/logo.png"
 
 # -- Napoleon configuration ---------------------------------------------------
 
