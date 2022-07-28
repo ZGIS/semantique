@@ -11,12 +11,12 @@ array([[[1., 1., 1., 1.],
         [1., 1., 1., 1.],
         [1., 1., 1., 1.]]])
 Coordinates:
-  * time          (time) datetime64[ns] 2019-01-01 2020-12-31
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-    spatial_ref   int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
-    temporal_ref  int64 0
+  * time           (time) datetime64[ns] 2019-01-01 2020-12-31
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+    spatial_ref    int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+    temporal_ref   int64 0
 Attributes:
     name:          index
     long_name:     index
@@ -47,12 +47,12 @@ array([[[29., 29., 29., 29.],
         [21., 28., 28., 30.],
         [ 6., 28., 27.,  4.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -76,12 +76,12 @@ array([[[0., 0., 0., 0.],
         [1., 0., 0., 0.],
         [0., 0., 0., 0.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -104,12 +104,12 @@ array([[[0., 0., 0., 0.],
         [1., 0., 0., 0.],
         [0., 0., 0., 0.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -122,11 +122,11 @@ array([[1., 0., 0., 0.],
        [1., 0., 1., 0.],
        [0., 0., 0., 0.]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     value_type:  numerical
 Finished executing result: 'blue_map'
@@ -150,12 +150,12 @@ array([[[29., 29., 29., 29.],
         [21., 28., 28., 30.],
         [ 6., 28., 27.,  4.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -179,12 +179,12 @@ array([[[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [1., 0., 0., 1.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -207,12 +207,12 @@ array([[[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [1., 0., 0., 1.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -225,11 +225,11 @@ array([[1., 2., 1., 2.],
        [1., 1., 0., 1.],
        [2., 0., 1., 2.]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     value_type:  numerical
 Finished executing result: 'green_map'
@@ -253,12 +253,12 @@ array([[[29., 29., 29., 29.],
         [21., 28., 28., 30.],
         [ 6., 28., 27.,  4.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -282,12 +282,12 @@ array([[[0., 0., 0., 0.],
         [1., 0., 0., 0.],
         [0., 0., 0., 0.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -310,12 +310,12 @@ array([[[0., 0., 0., 0.],
         [1., 0., 0., 0.],
         [0., 0., 0., 0.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -351,12 +351,12 @@ array([[[29., 29., 29., 29.],
         [21., 28., 28., 30.],
         [ 6., 28., 27.,  4.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -380,12 +380,12 @@ array([[[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [1., 0., 0., 1.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -408,12 +408,12 @@ array([[[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [1., 0., 0., 1.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -449,12 +449,12 @@ array([[[29., 29., 29., 29.],
         [21., 28., 28., 30.],
         [ 6., 28., 27.,  4.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -478,12 +478,12 @@ array([[[0., 0., 0., 0.],
         [1., 0., 0., 0.],
         [0., 0., 0., 0.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -506,12 +506,12 @@ array([[[0., 0., 0., 0.],
         [1., 0., 0., 0.],
         [0., 0., 0., 0.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -546,12 +546,12 @@ array([[[29., 29., 29., 29.],
         [21., 28., 28., 30.],
         [ 6., 28., 27.,  4.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -575,12 +575,12 @@ array([[[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [1., 0., 0., 1.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -603,12 +603,12 @@ array([[[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [1., 0., 0., 1.]]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     scale_factor:  1.0
     add_offset:    0.0
@@ -631,11 +631,11 @@ array([[1., 0., 0., 0.],
        [1., 0., 1., 0.],
        [0., 0., 0., 0.]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     value_type:  numerical, 'green_map': <xarray.DataArray 'green_map' (y: 4, x: 4)>
 array([[1., 2., 1., 2.],
@@ -643,11 +643,11 @@ array([[1., 2., 1., 2.],
        [1., 1., 0., 1.],
        [2., 0., 1., 2.]])
 Coordinates:
-  * x             (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
-  * y             (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-    spatial_ref   int64 0
-    temporal_ref  int64 0
-    feature       (y, x) float64 1.0 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+  * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
+  * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
+    spatial_ref    int64 0
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     value_type:  numerical, 'blue_curve': <xarray.DataArray 'blue_curve' (time: 3)>
 array([0., 1., 3.])
