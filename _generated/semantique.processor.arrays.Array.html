@@ -1318,17 +1318,17 @@
 <dt class="sig sig-object py" id="semantique.processor.arrays.Array">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.processor.arrays.</span></span><span class="sig-name descname"><span class="pre">Array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L18-L1302"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Internal representation of a multi-dimensional array.</p>
-<p>This data structure is modelled as an accessor of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>.
+<p>This data structure is modelled as an accessor of <a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>.
 Using accessors instead of the common class inheritance is recommended by the
 developers of xarray, see <a class="reference external" href="https://xarray.pydata.org/en/stable/internals/extending-xarray.html">here</a>. In practice, this means that each method
-of this class can be called as method of <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> objects by
+of this class can be called as method of <a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> objects by
 using the <code class="docutils literal notranslate"><span class="pre">.sq</span></code> prefix:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xarray_obj</span><span class="o">.</span><span class="n">sq</span><span class="o">.</span><span class="n">method</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>xarray_obj</strong> (<a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – The content of the array.</p>
+<dd class="field-odd"><p><strong>xarray_obj</strong> (<a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – The content of the array.</p>
 </dd>
 </dl>
 <dl class="py method">

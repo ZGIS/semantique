@@ -1319,7 +1319,7 @@
 <span class="sig-prename descclassname"><span class="pre">semantique.processor.utils.</span></span><span class="sig-name descname"><span class="pre">parse_extent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spatial_extent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temporal_extent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temporal_resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/utils.py#L127-L203"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.utils.parse_extent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse the spatial and temporal extent into a spatio-temporal array.</p>
 <p>Internally the query processor uses a multi-dimensional array to represent
-the spatio-temporal extent of the query. This is an <a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>
+the spatio-temporal extent of the query. This is an <a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>
 and forms the base template for all arrays that are retrieved from the
 mapping during query processing.</p>
 <dl class="field-list simple">
@@ -1356,7 +1356,7 @@ its regularity.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><a class="reference external" href="https://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – A two-dimensional array with a spatial and temporal dimension. The
+<dd class="field-even"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – A two-dimensional array with a spatial and temporal dimension. The
 spatial dimension is a stacked dimension with each coordinate value
 being a tuple of the x and y coordinate of the corresponding cell.</p>
 </dd>
