@@ -1316,7 +1316,7 @@
 <h1>semantique.datacube.Opendatacube<a class="headerlink" href="#semantique-datacube-opendatacube" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.datacube.Opendatacube">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.datacube.</span></span><span class="sig-name descname"><span class="pre">Opendatacube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTC'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/datacube.py#L81-L307"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.datacube.Opendatacube" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.datacube.</span></span><span class="sig-name descname"><span class="pre">Opendatacube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTC'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/datacube.py#L81-L311"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.datacube.Opendatacube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Opendatacube specific EO data cube configuration.</p>
 <p>This class is an interface to Opendatacube backends. See the
 <a class="reference external" href="https://datacube-core.readthedocs.io/en/latest/index.html">Opendatacube manual</a> for details.</p>
@@ -1342,7 +1342,8 @@ Defaults to a one-to-one mapping:</p>
   <span class="s2">&quot;nominal&quot;</span><span class="p">:</span> <span class="s2">&quot;nominal&quot;</span><span class="p">,</span>
   <span class="s2">&quot;ordinal&quot;</span><span class="p">:</span> <span class="s2">&quot;ordinal&quot;</span><span class="p">,</span>
   <span class="s2">&quot;binary&quot;</span><span class="p">:</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;numerical&quot;</span><span class="p">:</span> <span class="s2">&quot;numerical&quot;</span>
+  <span class="s2">&quot;continuous&quot;</span><span class="p">:</span> <span class="s2">&quot;continuous&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;discrete&quot;</span><span class="p">:</span> <span class="s2">&quot;discrete&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1360,7 +1361,8 @@ type in the layout. Valid techniques are:</p>
   <span class="s2">&quot;nominal&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
   <span class="s2">&quot;ordinal&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
   <span class="s2">&quot;binary&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;numerical&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span>
+  <span class="s2">&quot;continuous&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;discrete&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1372,7 +1374,7 @@ type in the layout. Valid techniques are:</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.datacube.Opendatacube.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTC'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/datacube.py#L139-L146"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.datacube.Opendatacube.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTC'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/datacube.py#L141-L148"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.datacube.Opendatacube.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
