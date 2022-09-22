@@ -111,7 +111,8 @@ class Opendatacube(Datacube):
             "nominal": "nominal",
             "ordinal": "ordinal",
             "binary": "binary",
-            "numerical": "numerical"
+            "continuous": "continuous",
+            "discrete": "discrete"
           }
 
       * **resamplers** (:obj:`dict`): When data need to be resampled to a
@@ -128,7 +129,8 @@ class Opendatacube(Datacube):
             "nominal": "nearest",
             "ordinal": "nearest",
             "binary": "nearest",
-            "numerical": "nearest"
+            "continuous": "nearest",
+            "discrete": "nearest"
           }
 
   .. _Opendatacube manual:
@@ -175,13 +177,15 @@ class Opendatacube(Datacube):
         "nominal": "nominal",
         "ordinal": "ordinal",
         "binary": "binary",
-        "numerical": "numerical"
+        "continuous": "continuous",
+        "discrete": "discrete"
       },
       "resamplers": {
         "nominal": "nearest",
         "ordinal": "nearest",
         "binary": "nearest",
-        "numerical": "nearest"
+        "continuous": "nearest",
+        "discrete": "nearest"
       }
     }
 
@@ -292,8 +296,8 @@ class Opendatacube(Datacube):
         value_labels[x["id"]] = x["label"]
       data.sq.value_labels = value_labels
     data[TIME].sq.value_type = "datetime"
-    data[Y].sq.value_type = "numerical"
-    data[X].sq.value_type = "numerical"
+    data[Y].sq.value_type = "continuous"
+    data[X].sq.value_type = "continuous"
     data["spatial_feats"].sq.value_type = extent["spatial_feats"].sq.value_type
     data["spatial_feats"].sq.value_labels = extent["spatial_feats"].sq.value_labels
     return data
@@ -336,7 +340,8 @@ class GeotiffArchive(Datacube):
             "nominal": "nominal",
             "ordinal": "ordinal",
             "binary": "binary",
-            "numerical": "numerical"
+            "continuous": "continuous",
+            "discrete": "discrete"
           }
 
       * **resamplers** (:obj:`dict`): When data need to be resampled to a
@@ -353,7 +358,8 @@ class GeotiffArchive(Datacube):
             "nominal": "nearest",
             "ordinal": "nearest",
             "binary": "nearest",
-            "numerical": "nearest"
+            "continuous": "nearest",
+            "discrete": "nearest"
           }
 
   """
@@ -395,13 +401,15 @@ class GeotiffArchive(Datacube):
         "nominal": "nominal",
         "ordinal": "ordinal",
         "binary": "binary",
-        "numerical": "numerical"
+        "continuous": "continuous",
+        "discrete": "discrete"
       },
       "resamplers": {
         "nominal": "nearest",
         "ordinal": "nearest",
         "binary": "nearest",
-        "numerical": "nearest"
+        "continuous": "nearest",
+        "discrete": "nearest"
       }
     }
 
@@ -511,8 +519,8 @@ class GeotiffArchive(Datacube):
         value_labels[x["id"]] = x["label"]
       data.sq.value_labels = value_labels
     data[TIME].sq.value_type = "datetime"
-    data[Y].sq.value_type = "numerical"
-    data[X].sq.value_type = "numerical"
+    data[Y].sq.value_type = "continuous"
+    data[X].sq.value_type = "continuous"
     data["spatial_feats"].sq.value_type = extent["spatial_feats"].sq.value_type
     data["spatial_feats"].sq.value_labels = extent["spatial_feats"].sq.value_labels
     # Step V: Give the array a name.

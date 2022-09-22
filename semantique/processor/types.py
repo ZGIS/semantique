@@ -5,9 +5,9 @@ from semantique import exceptions
 
 DTYPE_MAPPING = {
   "b": "binary",
-  "i": ["numerical", "ordinal", "nominal"],
-  "u": ["numerical", "ordinal", "nominal"],
-  "f": "numerical",
+  "i": ["continuous", "discrete", "ordinal", "nominal"],
+  "u": ["continuous", "discrete", "ordinal", "nominal"],
+  "f": "continuous",
   "M": "datetime",
   "O": ["ordinal", "nominal"],
   "U": ["ordinal", "nominal"]
@@ -35,8 +35,9 @@ TYPE_PROMOTION_MANUALS = {
   },
   "is_missing": {
     "binary": "binary",
+    "continuous": "binary",
+    "discrete": "binary",
     "nominal": "binary",
-    "numerical": "binary",
     "ordinal": "binary",
     "coords": "binary",
     "datetime": "binary",
@@ -44,66 +45,78 @@ TYPE_PROMOTION_MANUALS = {
   },
   "not_missing": {
     "binary": "binary",
+    "continuous": "binary",
+    "discrete": "binary",
     "nominal": "binary",
-    "numerical": "binary",
     "ordinal": "binary",
     "coords": "binary",
     "datetime": "binary",
     "__preserve_labels__": 0
   },
   "absolute": {
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "discrete",
     "__preserve_labels__": 0
   },
   "ceiling": {
-    "numerical": "numerical",
+    "continuous": "discrete",
+    "discrete": "discrete",
     "__preserve_labels__": 0
   },
   "cube_root": {
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "exponential": {
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "floor": {
-    "numerical": "numerical",
+    "continuous": "discrete",
+    "discrete": "discrete",
     "__preserve_labels__": 0
   },
   "natural_logarithm": {
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "square_root": {
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "add": {
-    "numerical": {"numerical": "numerical"},
-    "binary": {"binary": "numerical"},
+    "binary": {"binary": "discrete"},
+    "continuous": {"continuous": "continuous", "discrete": "continuous"},
+    "discrete": {"continuous": "continuous", "discrete": "discrete"},
     "__preserve_labels__": 0
   },
   "divide": {
-    "numerical": {"numerical": "numerical"},
+    "continuous": {"continuous": "continuous", "discrete": "continuous"},
+    "discrete": {"continuous": "continuous", "discrete": "continuous"},
     "__preserve_labels__": 0
   },
   "multiply": {
-    "numerical": {"numerical": "numerical"},
-    "binary": {"binary": "numerical"},
+    "continuous": {"continuous": "continuous", "discrete": "continuous"},
+    "discrete": {"continuous": "continuous", "discrete": "discrete"},
     "__preserve_labels__": 0
   },
   "power": {
-    "numerical": {"numerical": "numerical"},
+    "continuous": {"continuous": "continuous", "discrete": "continuous"},
+    "discrete": {"continuous": "continuous", "discrete": "discrete"},
     "__preserve_labels__": 0
   },
   "subtract": {
-    "numerical": {"numerical": "numerical"},
-    "binary": {"binary": "numerical"},
+    "continuous": {"continuous": "continuous", "discrete": "continuous"},
+    "discrete": {"continuous": "continuous", "discrete": "discrete"},
     "__preserve_labels__": 0
   },
   "normalized_difference": {
-    "numerical": {"numerical": "numerical"},
+    "continuous": {"continuous": "continuous", "discrete": "continuous"},
+    "discrete": {"continuous": "continuous", "discrete": "continuous"},
     "__preserve_labels__": 0
   },
   "and": {
@@ -120,8 +133,9 @@ TYPE_PROMOTION_MANUALS = {
   },
   "equal": {
     "binary": {"binary": "binary"},
+    "continuous": {"continuous": "binary", "discrete": "binary"},
+    "discrete": {"continuous": "binary", "discrete": "binary"},
     "nominal": {"nominal": "binary"},
-    "numerical": {"numerical": "binary"},
     "ordinal": {"ordinal": "binary"},
     "coords": {"coords": "binary"},
     "datetime": {"datetime": "binary"},
@@ -129,8 +143,9 @@ TYPE_PROMOTION_MANUALS = {
   },
   "in": {
     "binary": {"binary": "binary"},
+    "continuous": {"continuous": "binary", "discrete": "binary"},
+    "discrete": {"continuous": "binary", "discrete": "binary"},
     "nominal": {"nominal": "binary"},
-    "numerical": {"numerical": "binary"},
     "ordinal": {"ordinal": "binary"},
     "coords": {"coords": "binary"},
     "datetime": {"datetime": "binary"},
@@ -138,8 +153,9 @@ TYPE_PROMOTION_MANUALS = {
   },
   "not_equal": {
     "binary": {"binary": "binary"},
+    "continuous": {"continuous": "binary", "discrete": "binary"},
+    "discrete": {"continuous": "binary", "discrete": "binary"},
     "nominal": {"nominal": "binary"},
-    "numerical": {"numerical": "binary"},
     "ordinal": {"ordinal": "binary"},
     "coords": {"coords": "binary"},
     "datetime": {"datetime": "binary"},
@@ -147,8 +163,9 @@ TYPE_PROMOTION_MANUALS = {
   },
   "not_in": {
     "binary": {"binary": "binary"},
+    "continuous": {"continuous": "binary", "discrete": "binary"},
+    "discrete": {"continuous": "binary", "discrete": "binary"},
     "nominal": {"nominal": "binary"},
-    "numerical": {"numerical": "binary"},
     "ordinal": {"ordinal": "binary"},
     "coords": {"coords": "binary"},
     "datetime": {"datetime": "binary"},
@@ -156,28 +173,32 @@ TYPE_PROMOTION_MANUALS = {
   },
   "greater": {
     "binary": {"binary": "binary",},
-    "numerical": {"numerical": "binary"},
+    "continuous": {"continuous": "binary", "discrete": "binary"},
+    "discrete": {"continuous": "binary", "discrete": "binary"},
     "ordinal": {"ordinal": "binary"},
     "datetime": {"datetime": "binary"},
     "__preserve_labels__": 0
   },
   "greater_equal": {
     "binary": {"binary": "binary",},
-    "numerical": {"numerical": "binary"},
+    "continuous": {"continuous": "binary", "discrete": "binary"},
+    "discrete": {"continuous": "binary", "discrete": "binary"},
     "ordinal": {"ordinal": "binary"},
     "datetime": {"datetime": "binary"},
     "__preserve_labels__": 0
   },
   "less": {
     "binary": {"binary": "binary",},
-    "numerical": {"numerical": "binary"},
+    "continuous": {"continuous": "binary", "discrete": "binary"},
+    "discrete": {"continuous": "binary", "discrete": "binary"},
     "ordinal": {"ordinal": "binary"},
     "datetime": {"datetime": "binary"},
     "__preserve_labels__": 0
   },
   "less_equal": {
     "binary": {"binary": "binary",},
-    "numerical": {"numerical": "binary"},
+    "continuous": {"continuous": "binary", "discrete": "binary"},
+    "discrete": {"continuous": "binary", "discrete": "binary"},
     "ordinal": {"ordinal": "binary"},
     "datetime": {"datetime": "binary"},
     "__preserve_labels__": 0
@@ -199,65 +220,76 @@ TYPE_PROMOTION_MANUALS = {
     "__preserve_labels__": 0
   },
   "mean": {
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "median": {
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "mode": {
     "binary": "binary",
+    "continuous": "continuous",
+    "discrete": "discrete",
     "nominal": "nominal",
-    "numerical": "numerical",
     "ordinal": "ordinal",
+    "coords": "coords",
     "datetime": "datetime",
     "__preserve_labels__": 1
   },
   "max": {
     "binary": "binary",
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "discrete",
     "ordinal": "ordinal",
     "datetime": "datetime",
     "__preserve_labels__": 1
   },
   "min": {
     "binary": "binary",
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "discrete",
     "ordinal": "ordinal",
     "datetime": "datetime",
     "__preserve_labels__": 1
   },
   "range": {
-    "numerical": "numerical",
-    "datetime": "numerical",
+    "continuous": "continuous",
+    "discrete": "discrete",
+    "datetime": "continuous",
     "__preserve_labels__": 0
   },
   "n": {
-    "binary": "numerical",
-    "nominal": "numerical",
-    "numerical": "numerical",
-    "ordinal": "numerical",
-    "coords": "numerical",
-    "datetime": "numerical",
+    "binary": "discrete",
+    "continuous": "discrete",
+    "discrete": "discrete",
+    "nominal": "discrete",
+    "ordinal": "discrete",
+    "coords": "discrete",
+    "datetime": "discrete",
     "__preserve_labels__": 0
   },
   "product": {
-    "numerical": "numerical",
-    "binary": "binary",
+    "continuous": "continuous",
+    "discrete": "discrete",
     "__preserve_labels__": 0
   },
   "standard_deviation": {
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "sum": {
-    "numerical": "numerical",
     "binary": "binary",
+    "continuous": "continuous",
+    "discrete": "discrete",
     "__preserve_labels__": 0
   },
   "variance": {
-    "numerical": "numerical",
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "all": {
@@ -273,26 +305,27 @@ TYPE_PROMOTION_MANUALS = {
     "__preserve_labels__": 1
   },
   "count": {
-    "binary": "numerical",
+    "binary": "discrete",
     "__preserve_labels__": 0
   },
   "percentage": {
-    "binary": "numerical",
+    "binary": "continuous",
     "__preserve_labels__": 0
   },
   "first": {
     "binary": "binary",
+    "continuous": "continuous",
+    "discrete": "discrete",
     "nominal": "nominal",
-    "numerical": "numerical",
     "ordinal": "ordinal",
-    "coords": "coords",
     "datetime": "datetime",
     "__preserve_labels__": 1
   },
   "last": {
     "binary": "binary",
+    "continuous": "continuous",
+    "discrete": "discrete",
     "nominal": "nominal",
-    "numerical": "numerical",
     "ordinal": "ordinal",
     "coords": "coords",
     "datetime": "datetime",
@@ -301,48 +334,63 @@ TYPE_PROMOTION_MANUALS = {
   "assign": {
     "binary": {
       "binary": "binary",
+      "continuous": "continuous",
+      "discrete": "discrete",
       "nominal": "nominal",
-      "numerical": "numerical",
+      "ordinal": "ordinal",
+      "coords": "coords",
+      "datetime": "datetime"
+    },
+    "continuous": {
+      "binary": "binary",
+      "continuous": "continuous",
+      "discrete": "discrete",
+      "nominal": "nominal",
+      "ordinal": "ordinal",
+      "coords": "coords",
+      "datetime": "datetime"
+    },
+    "discrete": {
+      "binary": "binary",
+      "continuous": "continuous",
+      "discrete": "discrete",
+      "nominal": "nominal",
       "ordinal": "ordinal",
       "coords": "coords",
       "datetime": "datetime"
     },
     "nominal": {
       "binary": "binary",
+      "continuous": "continuous",
+      "discrete": "discrete",
       "nominal": "nominal",
-      "numerical": "numerical",
-      "ordinal": "ordinal",
-      "coords": "coords",
-      "datetime": "datetime"
-    },
-    "numerical": {
-      "binary": "binary",
-      "nominal": "nominal",
-      "numerical": "numerical",
       "ordinal": "ordinal",
       "coords": "coords",
       "datetime": "datetime"
     },
     "ordinal": {
       "binary": "binary",
+      "continuous": "continuous",
+      "discrete": "discrete",
       "nominal": "nominal",
-      "numerical": "numerical",
       "ordinal": "ordinal",
       "coords": "coords",
       "datetime": "datetime"
     },
     "datetime": {
       "binary": "binary",
+      "continuous": "continuous",
+      "discrete": "discrete",
       "nominal": "nominal",
-      "numerical": "numerical",
       "ordinal": "ordinal",
       "coords": "coords",
       "datetime": "datetime"
     },
     "coords": {
       "binary": "binary",
+      "continuous": "continuous",
+      "discrete": "discrete",
       "nominal": "nominal",
-      "numerical": "numerical",
       "ordinal": "ordinal",
       "coords": "coords",
       "datetime": "datetime"
@@ -351,8 +399,9 @@ TYPE_PROMOTION_MANUALS = {
   },
   "assign_at": {
     "binary": {"binary": "binary"},
+    "continuous": {"continuous": "continuous", "discrete": "continuous"},
+    "discrete": {"continuous": "continuous", "discrete": "discrete"},
     "nominal": {"nominal": "nominal"},
-    "numerical": {"numerical": "numerical"},
     "ordinal": {"ordinal": "ordinal"},
     "datetime": {"datetime": "datetime"},
     "coords": {"coords": "coords"},
@@ -365,7 +414,7 @@ Whenever applying actions to an array, its value type might change. For
 example, when evaluating an expression (e.g. when evaluating an expression
 involving a comparison operator the resulting values are always binary) or
 applying a reducer (e.g. when counting the number of "true" values in a binary
-array the resulting values are numerical). This is called type promotion.
+array the resulting values are discrete). This is called type promotion.
 For each built-in operator and reducer function, this dictionary stores a
 manual that defines which value types are accepted as input, and what the value
 type of the output should be.
@@ -384,8 +433,9 @@ def get_value_type(x):
   differs from the very technical, computer-oriented `numpy dtype`_
   categorization, which contains e.g. :obj:`int`, :obj:`float`, etc. Instead,
   the semantique value type describes data on a more general, statistical
-  level. Currently it makes a distinction between three main value types:
-  ``numerical``, ``nominal``, ``ordinal`` and ``binary``. Additional value
+  level. Currently it makes a distinction between five main value types:
+  ``continuous`` and ``discrete`` for quantitative data and ``nominal``,
+  ``ordinal`` and ``binary`` for qualitative data. Additional value
   types exist for spatio-temporal data: ``datetime`` for timestamps,
   ``coords`` for spatial coordinate tuples, and ``geometry`` for spatial
   geometries stored in :obj:`geopandas.GeoDataFrame` objects.
@@ -461,7 +511,7 @@ class TypePromoter:
   For example, when evaluating an expression (e.g. when evaluating an expression
   involving a comparison operator the resulting values are always binary) or
   applying a reducer (e.g. when counting the number of "true" values in a binary
-  array the resulting values are numerical). This is called type promotion.
+  array the resulting values are discrete). This is called type promotion.
 
   This worker takes care of the type promotion during a specified operation. It
   can check if the value types of the operands are supported by the operation,
@@ -541,7 +591,7 @@ class TypePromoter:
     example, :func:`semantique.processor.reducers.any_` is only supported for
     arrays containing binary values, and
     :func:`semantique.processor.operators.sum_` is only supported for operands
-    that are both numerical.
+    that are both quantitative (i.e. continuous or discrete).
 
     This method obtains the value type of the operand/operands and uses the type
     promotion manual to determine if the operation supports this value type/the

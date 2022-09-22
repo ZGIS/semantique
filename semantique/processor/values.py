@@ -4,9 +4,9 @@ class Interval(list):
   """Object to represent a set of values within the bounds of an interval.
 
   The interval is closed at both sides, meaning that both of its bounds belong
-  to the set. By definition, the given bounds should be ordinal or numerical
-  values, and the lower bound should be smaller than or equal to the upper
-  bound.
+  to the set. By definition, the given bounds should be ordinal, continuous or
+  discrete values, and the lower bound should be smaller than or equal to the
+  upper bound.
 
   Parameters
   ----------
@@ -49,4 +49,4 @@ class Interval(list):
   @property
   def value_type(self):
     """:obj:`str`: The possible value types of the interval."""
-    return ["numerical", "ordinal"]
+    return ["continuous", "discrete", "ordinal"]

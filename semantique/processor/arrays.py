@@ -46,13 +46,7 @@ class Array():
 
   @property
   def value_type(self):
-    """:obj:`str`: The value type of the array.
-
-    Valid options are: ::
-
-      'numerical', 'nominal', 'ordinal', 'boolean'
-
-    """
+    """:obj:`str`: The value type of the array."""
     try:
       return self._obj.attrs["value_type"]
     except KeyError:
@@ -1068,8 +1062,8 @@ class Array():
 
     """
     out = self._obj.unstack(SPACE)
-    out[Y].sq.value_type = "numerical"
-    out[X].sq.value_type = "numerical"
+    out[Y].sq.value_type = "continuous"
+    out[X].sq.value_type = "continuous"
     return out
 
   def stack_all_dims(self):
@@ -1396,7 +1390,7 @@ class Collection(list):
       vtype : :obj:`str`:
         If the arrays are concatenated along a new dimension, what should the
         value type of its dimension coordinates be? Valid options are
-        "numerical", "nominal", "ordinal" and "boolean".
+        "continuous", "discrete", "nominal", "ordinal" and "binary".
       **kwargs:
         Ignored.
 

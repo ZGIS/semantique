@@ -183,8 +183,8 @@ def parse_extent(spatial_extent, temporal_extent, spatial_resolution,
   space = spatial_extent.rasterize(spatial_resolution, crs)
   # Make sure X and Y dims have the correct names and value types.
   space = space.rename({space.rio.y_dim: Y, space.rio.x_dim: X})
-  space[Y].sq.value_type = "numerical"
-  space[X].sq.value_type = "numerical"
+  space[Y].sq.value_type = "continuous"
+  space[X].sq.value_type = "continuous"
   # Add spatial feature indices as coordinates.
   space.coords["spatial_feats"] = ([Y, X], space.data)
   space["spatial_feats"].sq.value_type = space.sq.value_type
@@ -276,5 +276,5 @@ def parse_datetime_component(name, obj):
       4: "December, January, February"
     }
   else:
-    obj.sq.value_type = "numerical"
+    obj.sq.value_type = "discrete"
   return obj

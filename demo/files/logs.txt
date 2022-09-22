@@ -128,7 +128,7 @@ Coordinates:
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    value_type:  numerical
+    value_type:  discrete
 Finished executing result: 'blue_map'
 Started executing result: 'green_map'
 Translating concept ['entity', 'vegetation']
@@ -231,7 +231,7 @@ Coordinates:
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    value_type:  numerical
+    value_type:  discrete
 Finished executing result: 'green_map'
 Started executing result: 'blue_curve'
 Translating concept ['entity', 'water']
@@ -329,7 +329,7 @@ Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical
+    value_type:  discrete
 Finished executing result: 'blue_curve'
 Started executing result: 'green_curve'
 Translating concept ['entity', 'vegetation']
@@ -427,7 +427,7 @@ Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical
+    value_type:  discrete
 Finished executing result: 'green_curve'
 Started executing result: 'blue_stat'
 Translating concept ['entity', 'water']
@@ -524,7 +524,7 @@ Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical
+    value_type:  discrete
 Finished executing result: 'blue_stat'
 Started executing result: 'green_stat'
 Translating concept ['entity', 'vegetation']
@@ -621,7 +621,7 @@ Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical
+    value_type:  discrete
 Finished executing result: 'green_stat'
 Finished executing the semantic query
 Responding:
@@ -637,7 +637,7 @@ Coordinates:
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    value_type:  numerical, 'green_map': <xarray.DataArray 'green_map' (y: 4, x: 4)>
+    value_type:  discrete, 'green_map': <xarray.DataArray 'green_map' (y: 4, x: 4)>
 array([[1., 2., 1., 2.],
        [2., 2., 0., 1.],
        [1., 1., 0., 1.],
@@ -649,30 +649,30 @@ Coordinates:
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    value_type:  numerical, 'blue_curve': <xarray.DataArray 'blue_curve' (time: 3)>
+    value_type:  discrete, 'blue_curve': <xarray.DataArray 'blue_curve' (time: 3)>
 array([0., 1., 3.])
 Coordinates:
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical, 'green_curve': <xarray.DataArray 'green_curve' (time: 3)>
+    value_type:  discrete, 'green_curve': <xarray.DataArray 'green_curve' (time: 3)>
 array([ 0., 13.,  6.])
 Coordinates:
   * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical, 'blue_stat': <xarray.DataArray 'blue_stat' ()>
+    value_type:  discrete, 'blue_stat': <xarray.DataArray 'blue_stat' ()>
 array(4.)
 Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical, 'green_stat': <xarray.DataArray 'green_stat' ()>
+    value_type:  discrete, 'green_stat': <xarray.DataArray 'green_stat' ()>
 array(19.)
 Coordinates:
     spatial_ref   int64 0
     temporal_ref  int64 0
 Attributes:
-    value_type:  numerical}
+    value_type:  discrete}

@@ -163,7 +163,7 @@
       ]
     },
     "greenness": {
-      "type": "numerical",
+      "type": "continuous",
       "description": "Greenness",
       "values": {
         "min": 0,
@@ -178,7 +178,7 @@
       ]
     },
     "brightness": {
-      "type": "numerical",
+      "type": "continuous",
       "description": "Overall brightness",
       "values": {
         "min": 0,
@@ -239,7 +239,7 @@
   "reflectance": {
     "s2_band04": {
       "description": "Reflectance of Band 4 of Sentinel 2A or Sentinel 2B",
-      "type": "numerical",
+      "type": "continuous",
       "values": {
         "min": 0,
         "max": 10000,
@@ -254,7 +254,7 @@
     },
     "s2_band03": {
       "description": "Reflectance of Band 3 of Sentinel 2A or Sentinel 2B",
-      "type": "numerical",
+      "type": "continuous",
       "values": {
         "min": 0,
         "max": 10000,
@@ -269,7 +269,7 @@
     },
     "s2_band02": {
       "description": "Reflectance of Band 2 of Sentinel 2A or Sentinel 2B",
-      "type": "numerical",
+      "type": "continuous",
       "values": {
         "min": 0,
         "max": 10000,
@@ -284,7 +284,7 @@
     },
     "s2_band08": {
       "description": "Reflectance of Band 8 of Sentinel 2A or Sentinel 2B",
-      "type": "numerical",
+      "type": "continuous",
       "values": {
         "min": 0,
         "max": 10000,
