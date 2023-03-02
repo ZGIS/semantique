@@ -146,12 +146,16 @@ class SpatialExtent(dict):
 
     Rasterizing the spatial extent creates a rectangular two-dimensional
     regular grid that covers the bounding box of the extent. Each grid cell
-    corresponds to a spatial location within this bounding box. Cells whose
-    centroid does not intersect with the extent itself gets assigned a value
-    of 0. All other cells get assigned a positive integer, depending on which
+    corresponds to a spatial location within this bounding box. For cells, which
+    does not intersect with the extent itself gets assigned a value of 0. All
+    other cells get assigned a positive integer, depending on which
     of the features in the extent their centroid intersects with, i.e. a 1 if
     it intersects with the first feature in the extent, a 2 if it intersects
     with the second feature in the extent, et cetera.
+    The intersection method that is uses is as follows: If at least one
+    area object is present (Polygons and MultiPolygons) the intersection of the
+    cell centroid is used, otherwise (Multi)Lines and (Multi)Points a touch
+    intersection is used.
 
     Parameters
     ----------
