@@ -1314,16 +1314,20 @@
 <h1>semantique.extent.SpatialExtent.rasterize<a class="headerlink" href="#semantique-extent-spatialextent-rasterize" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.extent.SpatialExtent.rasterize">
-<span class="sig-prename descclassname"><span class="pre">SpatialExtent.</span></span><span class="sig-name descname"><span class="pre">rasterize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/extent.py#L144-L212"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.extent.SpatialExtent.rasterize" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">SpatialExtent.</span></span><span class="sig-name descname"><span class="pre">rasterize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/extent.py#L144-L216"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.extent.SpatialExtent.rasterize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rasterize the spatial extent into an array.</p>
 <p>Rasterizing the spatial extent creates a rectangular two-dimensional
 regular grid that covers the bounding box of the extent. Each grid cell
-corresponds to a spatial location within this bounding box. Cells whose
-centroid does not intersect with the extent itself gets assigned a value
-of 0. All other cells get assigned a positive integer, depending on which
+corresponds to a spatial location within this bounding box. For cells, which
+does not intersect with the extent itself gets assigned a value of 0. All
+other cells get assigned a positive integer, depending on which
 of the features in the extent their centroid intersects with, i.e. a 1 if
 it intersects with the first feature in the extent, a 2 if it intersects
-with the second feature in the extent, et cetera.</p>
+with the second feature in the extent, et cetera.
+The intersection method that is uses is as follows: If at least one
+area object is present (Polygons and MultiPolygons) the intersection of the
+cell centroid is used, otherwise (Multi)Lines and (Multi)Points a touch
+intersection is used.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
