@@ -1314,13 +1314,13 @@
 <h1>semantique.processor.types.TypePromoter.check<a class="headerlink" href="#semantique-processor-types-typepromoter-check" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.types.TypePromoter.check">
-<span class="sig-prename descclassname"><span class="pre">TypePromoter.</span></span><span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/types.py#L587-L635"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.types.TypePromoter.check" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">TypePromoter.</span></span><span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/types.py#L537-L585"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.types.TypePromoter.check" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the operation supports the operand value type(s).</p>
 <p>Specific operations may only be applicable to specific value types. For
 example, <a class="reference internal" href="semantique.processor.reducers.any_.html#semantique.processor.reducers.any_" title="semantique.processor.reducers.any_"><code class="xref py py-func docutils literal notranslate"><span class="pre">semantique.processor.reducers.any_()</span></code></a> is only supported for
 arrays containing binary values, and
 <code class="xref py py-func docutils literal notranslate"><span class="pre">semantique.processor.operators.sum_()</span></code> is only supported for operands
-that are both quantitative (i.e. continuous or discrete).</p>
+that are both numerical.</p>
 <p>This method obtains the value type of the operand/operands and uses the type
 promotion manual to determine if the operation supports this value type/the
 combination of these value types.</p>
@@ -1328,7 +1328,7 @@ combination of these value types.</p>
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><a class="reference internal" href="semantique.exceptions.InvalidValueTypeError.html#semantique.exceptions.InvalidValueTypeError" title="semantique.exceptions.InvalidValueTypeError"><strong>exceptions.InvalidValueTypeError</strong></a> – If the operation does not support the operand value type(s).</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.10)"><strong>ValueError</strong></a> – If the type promotion manual is missing.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.11)"><strong>ValueError</strong></a> – If the type promotion manual is missing.</p></li>
 </ul>
 </dd>
 </dl>

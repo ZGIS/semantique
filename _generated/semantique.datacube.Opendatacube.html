@@ -1316,39 +1316,38 @@
 <h1>semantique.datacube.Opendatacube<a class="headerlink" href="#semantique-datacube-opendatacube" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.datacube.Opendatacube">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.datacube.</span></span><span class="sig-name descname"><span class="pre">Opendatacube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTC'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/datacube.py#L81-L311"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.datacube.Opendatacube" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.datacube.</span></span><span class="sig-name descname"><span class="pre">Opendatacube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTC'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/datacube.py#L81-L307"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.datacube.Opendatacube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Opendatacube specific EO data cube configuration.</p>
 <p>This class is an interface to Opendatacube backends. See the
 <a class="reference external" href="https://datacube-core.readthedocs.io/en/latest/index.html">Opendatacube manual</a> for details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>layout</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>) – The layout file describing the EO data cube. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, an empty
+<li><p><strong>layout</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>) – The layout file describing the EO data cube. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, an empty
 EO data cube is constructed.</p></li>
 <li><p><strong>connection</strong> (<a class="reference external" href="https://datacube-core.readthedocs.io/en/latest/api/core-classes/datacube.html#datacube.Datacube" title="(in Open Data Cube v1.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datacube.Datacube</span></code></a>) – Opendatacube interface object allowing to read from the data cube.</p></li>
 <li><p><strong>tz</strong> – Timezone of the temporal coordinates in the EO data cube. Can be given as
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> referring to the name of a timezone in the tz database, or
-as instance of any class inheriting from <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.tzinfo" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.tzinfo</span></code></a>.</p></li>
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> referring to the name of a timezone in the tz database, or
+as instance of any class inheriting from <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.tzinfo" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.tzinfo</span></code></a>.</p></li>
 <li><p><strong>**config</strong> – <p>Additional keyword arguments tuning the data retrieval configuration.
 Valid options are:</p>
 <ul>
-<li><p><strong>group_by_solar_day</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>): Should the time dimension be
+<li><p><strong>group_by_solar_day</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>): Should the time dimension be
 resampled to the day level, using solar day to keep scenes together?
-Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
-<li><p><strong>value_type_mapping</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>): How do value type encodings in
+Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
+<li><p><strong>value_type_mapping</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>): How do value type encodings in
 the layout map to the value types used by semantique?
 Defaults to a one-to-one mapping:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;nominal&quot;</span><span class="p">:</span> <span class="s2">&quot;nominal&quot;</span><span class="p">,</span>
   <span class="s2">&quot;ordinal&quot;</span><span class="p">:</span> <span class="s2">&quot;ordinal&quot;</span><span class="p">,</span>
   <span class="s2">&quot;binary&quot;</span><span class="p">:</span> <span class="s2">&quot;binary&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;continuous&quot;</span><span class="p">:</span> <span class="s2">&quot;continuous&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;discrete&quot;</span><span class="p">:</span> <span class="s2">&quot;discrete&quot;</span>
+  <span class="s2">&quot;numerical&quot;</span><span class="p">:</span> <span class="s2">&quot;numerical&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </li>
-<li><p><strong>resamplers</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>): When data need to be resampled to a
+<li><p><strong>resamplers</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>): When data need to be resampled to a
 different spatial and/or temporal resolution, what resampling technique
 should be used? Should be specified separately for each possible value
 type in the layout. Valid techniques are:</p>
@@ -1361,8 +1360,7 @@ type in the layout. Valid techniques are:</p>
   <span class="s2">&quot;nominal&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
   <span class="s2">&quot;ordinal&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
   <span class="s2">&quot;binary&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;continuous&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;discrete&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span>
+  <span class="s2">&quot;numerical&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1374,7 +1372,7 @@ type in the layout. Valid techniques are:</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.datacube.Opendatacube.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTC'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/datacube.py#L141-L148"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.datacube.Opendatacube.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTC'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/datacube.py#L139-L146"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.datacube.Opendatacube.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>

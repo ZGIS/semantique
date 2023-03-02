@@ -2063,7 +2063,7 @@ response = recipe.execute(**context)
             &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
             &lt;style&gt;
-                #map_7f6271e8a0738c933068d7c9c458b80e {
+                #map_4ffee5093609754f7788bdb35a5b3771 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -2091,13 +2091,13 @@ response = recipe.execute(**context)
 &lt;/head&gt;
 &lt;body&gt;
 
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_7f6271e8a0738c933068d7c9c458b80e&quot; &gt;&lt;/div&gt;
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_4ffee5093609754f7788bdb35a5b3771&quot; &gt;&lt;/div&gt;
 
 &lt;/body&gt;
 &lt;script&gt;
 
-            var map_7f6271e8a0738c933068d7c9c458b80e = L.map(
-                &quot;map_7f6271e8a0738c933068d7c9c458b80e&quot;,
+            var map_4ffee5093609754f7788bdb35a5b3771 = L.map(
+                &quot;map_4ffee5093609754f7788bdb35a5b3771&quot;,
                 {
                     center: [47.32110812526405, 12.808509961311596],
                     crs: L.CRS.EPSG3857,
@@ -2106,77 +2106,77 @@ response = recipe.execute(**context)
                     preferCanvas: false,
                 }
             );
-            L.control.scale().addTo(map_7f6271e8a0738c933068d7c9c458b80e);
+            L.control.scale().addTo(map_4ffee5093609754f7788bdb35a5b3771);
 
 
 
 
 
-            var tile_layer_fc9775c18a2aa57295894fe8070c8e54 = L.tileLayer(
+            var tile_layer_6d512a78d532943fc2d5ab1856b05b6d = L.tileLayer(
                 &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_7f6271e8a0738c933068d7c9c458b80e);
+            ).addTo(map_4ffee5093609754f7788bdb35a5b3771);
 
 
-            map_7f6271e8a0738c933068d7c9c458b80e.fitBounds(
+            map_4ffee5093609754f7788bdb35a5b3771.fitBounds(
                 [[47.30444420302901, 12.799052458545688], [47.33777204749909, 12.817967464077503]],
                 {}
             );
 
 
-        function geo_json_33c5feaad0be1e6a127cbe224bc29f0b_styler(feature) {
+        function geo_json_764a59e248b3ef5e37943597e9c9a06c_styler(feature) {
             switch(feature.id) {
                 default:
                     return {&quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
             }
         }
-        function geo_json_33c5feaad0be1e6a127cbe224bc29f0b_highlighter(feature) {
+        function geo_json_764a59e248b3ef5e37943597e9c9a06c_highlighter(feature) {
             switch(feature.id) {
                 default:
                     return {&quot;fillOpacity&quot;: 0.75};
             }
         }
-        function geo_json_33c5feaad0be1e6a127cbe224bc29f0b_pointToLayer(feature, latlng) {
+        function geo_json_764a59e248b3ef5e37943597e9c9a06c_pointToLayer(feature, latlng) {
             var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
 
-            let style = geo_json_33c5feaad0be1e6a127cbe224bc29f0b_styler(feature)
+            let style = geo_json_764a59e248b3ef5e37943597e9c9a06c_styler(feature)
             Object.assign(opts, style)
 
             return new L.CircleMarker(latlng, opts)
         }
 
-        function geo_json_33c5feaad0be1e6a127cbe224bc29f0b_onEachFeature(feature, layer) {
+        function geo_json_764a59e248b3ef5e37943597e9c9a06c_onEachFeature(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if(typeof e.target.setStyle === &quot;function&quot;){
-                        geo_json_33c5feaad0be1e6a127cbe224bc29f0b.resetStyle(e.target);
+                        geo_json_764a59e248b3ef5e37943597e9c9a06c.resetStyle(e.target);
                     }
                 },
                 mouseover: function(e) {
                     if(typeof e.target.setStyle === &quot;function&quot;){
-                        const highlightStyle = geo_json_33c5feaad0be1e6a127cbe224bc29f0b_highlighter(e.target.feature)
+                        const highlightStyle = geo_json_764a59e248b3ef5e37943597e9c9a06c_highlighter(e.target.feature)
                         e.target.setStyle(highlightStyle);
                     }
                 },
             });
         };
-        var geo_json_33c5feaad0be1e6a127cbe224bc29f0b = L.geoJson(null, {
-                onEachFeature: geo_json_33c5feaad0be1e6a127cbe224bc29f0b_onEachFeature,
+        var geo_json_764a59e248b3ef5e37943597e9c9a06c = L.geoJson(null, {
+                onEachFeature: geo_json_764a59e248b3ef5e37943597e9c9a06c_onEachFeature,
 
-                style: geo_json_33c5feaad0be1e6a127cbe224bc29f0b_styler,
-                pointToLayer: geo_json_33c5feaad0be1e6a127cbe224bc29f0b_pointToLayer
+                style: geo_json_764a59e248b3ef5e37943597e9c9a06c_styler,
+                pointToLayer: geo_json_764a59e248b3ef5e37943597e9c9a06c_pointToLayer
         });
 
-        function geo_json_33c5feaad0be1e6a127cbe224bc29f0b_add (data) {
-            geo_json_33c5feaad0be1e6a127cbe224bc29f0b
+        function geo_json_764a59e248b3ef5e37943597e9c9a06c_add (data) {
+            geo_json_764a59e248b3ef5e37943597e9c9a06c
                 .addData(data)
-                .addTo(map_7f6271e8a0738c933068d7c9c458b80e);
+                .addTo(map_4ffee5093609754f7788bdb35a5b3771);
         }
-            geo_json_33c5feaad0be1e6a127cbe224bc29f0b_add({&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.817967464077503, 47.33777204749909], &quot;features&quot;: [{&quot;bbox&quot;: [12.803868147852612, 47.33056389640604, 12.817967464077503, 47.33777204749909], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.803868147852612, 47.33091868331674], [12.817596157332153, 47.33056389640604], [12.817967464077503, 47.33741720662344], [12.804237649967712, 47.33777204749909], [12.803868147852612, 47.33091868331674]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Northern&quot;}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.815746431172713, 47.31514111553671], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.799052458545688, 47.30486091070503], [12.815190335969971, 47.30444420302901], [12.815746431172713, 47.3147243128484], [12.799605373818284, 47.31514111553671], [12.799052458545688, 47.30486091070503]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;1&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Southern&quot;}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+            geo_json_764a59e248b3ef5e37943597e9c9a06c_add({&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.817967464077503, 47.33777204749909], &quot;features&quot;: [{&quot;bbox&quot;: [12.803868147852612, 47.33056389640604, 12.817967464077503, 47.33777204749909], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.803868147852612, 47.33091868331674], [12.817596157332153, 47.33056389640604], [12.817967464077503, 47.33741720662344], [12.804237649967712, 47.33777204749909], [12.803868147852612, 47.33091868331674]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Northern&quot;}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.815746431172713, 47.31514111553671], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.799052458545688, 47.30486091070503], [12.815190335969971, 47.30444420302901], [12.815746431172713, 47.3147243128484], [12.799605373818284, 47.31514111553671], [12.799052458545688, 47.30486091070503]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;1&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Southern&quot;}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
 
 
 
-    geo_json_33c5feaad0be1e6a127cbe224bc29f0b.bindTooltip(
+    geo_json_764a59e248b3ef5e37943597e9c9a06c.bindTooltip(
     function(layer){
     let div = L.DomUtil.create(&#x27;div&#x27;);
 

@@ -1321,8 +1321,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – The array to be reduced.</p></li>
-<li><p><strong>track_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the reducer promote the value type of the output object, based
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2023.2.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – The array to be reduced.</p></li>
+<li><p><strong>track_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the reducer promote the value type of the output object, based
 on the value type of the input object?</p></li>
 <li><p><strong>**kwargs</strong> – Additional keyword arguments. If the reducer has to be applied to a
 specific dimension, the keyword argument “dim” with as value the name
@@ -1330,7 +1330,7 @@ of the targeted dimension should be specified here.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2022.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – The reduced array.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2023.2.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – The reduced array.</p>
 </dd>
 </dl>
 <div class="admonition note">
@@ -1344,7 +1344,7 @@ null, it returns null.</p>
 <p>When tracking value types, this reducer uses the following type promotion
 manual, with the keys being the supported value types of <code class="docutils literal notranslate"><span class="pre">x</span></code>, and the
 corresponding value being the promoted value type of the output.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;binary&#39;: &#39;binary&#39;, &#39;continuous&#39;: &#39;continuous&#39;, &#39;discrete&#39;: &#39;discrete&#39;, &#39;nominal&#39;: &#39;nominal&#39;, &#39;ordinal&#39;: &#39;ordinal&#39;, &#39;coords&#39;: &#39;coords&#39;, &#39;datetime&#39;: &#39;datetime&#39;}
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;binary&#39;: &#39;binary&#39;, &#39;nominal&#39;: &#39;nominal&#39;, &#39;numerical&#39;: &#39;numerical&#39;, &#39;ordinal&#39;: &#39;ordinal&#39;, &#39;coords&#39;: &#39;coords&#39;, &#39;datetime&#39;: &#39;datetime&#39;}
 </pre></div>
 </div>
 </div>

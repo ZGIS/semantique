@@ -6,9 +6,7 @@
 Semantic querying in Earth observation data cubes
 ==============================================================
 
-**semantique** is a Python package that implements a structured framework for semantic querying in Earth observation data cubes, meaning that users can query the cube through an ontology. The ideas and concepts behind the package are published in an open-access academic paper, which can be found here_. Throughout the documentation we assume you are familiar with the general ideas and concepts that underlie the package. 
-
-..  here_: https://doi.org/10.5194/isprs-archives-XLVIII-4-W1-2022-503-2022
+**semantique** is a Python package that implements a structured framework for semantic querying in Earth observation data cubes, meaning that users can query the cube through an ontology. The package is under active development. The ideas and concepts behind the package are published in an academic paper, which we will link here as soon as the pre-print is available.
 
 .. toctree::
    :maxdepth: 2
