@@ -9,6 +9,8 @@ import pytz
 import rioxarray
 
 from pyproj.crs import CRS
+from functools import partial
+from geocube.rasterize import rasterize_image
 
 from semantique import exceptions
 
@@ -181,11 +183,18 @@ class SpatialExtent(dict):
     # Rasterize.
     vector_obj = self._features.reset_index()
     vector_obj["index"] = vector_obj["index"] + 1
+    # select intersection method based on the geometry types
+    # We want to use the touch intersection method for Polygons
+    # and Multipolygons
+    use_centroid_intersection = not any(
+      gtype in ["Polygon", "MultiPolygon"] for gtype in vector_obj.geometry.geom_types.values
+    )
     raster_obj = geocube.api.core.make_geocube(
       vector_data = vector_obj,
       measurements = ["index"],
       output_crs = crs,
       resolution = tuple(resolution),
+      rasterize_function = partial(rasterize_image, all_touched=use_centroid_intersection),
     )["index"]
     # Update spatial reference.
     # CRS information was already automatically included during rasterizing.
