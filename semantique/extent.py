@@ -188,8 +188,8 @@ class SpatialExtent(dict):
     vector_obj = self._features.reset_index()
     vector_obj["index"] = vector_obj["index"] + 1
     # select intersection method based on the geometry types
-    # We want to use the touch intersection method for Polygons
-    # and Multipolygons
+    # We want to use the intersection of cell centroids if
+    # there are Polygons and Multipolygons, otherwise touch.
     use_centroid_intersection = not any(
       gtype in ["Polygon", "MultiPolygon"] for gtype in vector_obj.geometry.geom_types.values
     )
