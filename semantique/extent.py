@@ -9,6 +9,8 @@ import pytz
 import rioxarray
 
 from pyproj.crs import CRS
+from functools import partial
+from geocube.rasterize import rasterize_image
 
 from semantique import exceptions
 
@@ -144,12 +146,18 @@ class SpatialExtent(dict):
 
     Rasterizing the spatial extent creates a rectangular two-dimensional
     regular grid that covers the bounding box of the extent. Each grid cell
-    corresponds to a spatial location within this bounding box. Cells whose
-    centroid does not intersect with the extent itself gets assigned a value
-    of 0. All other cells get assigned a positive integer, depending on which
-    of the features in the extent their centroid intersects with, i.e. a 1 if
-    it intersects with the first feature in the extent, a 2 if it intersects
-    with the second feature in the extent, et cetera.
+    corresponds to a spatial location within this bounding box. Cells that do
+    not intersect with the extent itself get assigned a value of 0. Cells that
+    do intersect with the extent itself get assigned a positive integer,
+    depending on which of the features in the extent they intersects with, i.e.
+    a 1 if they intersect with the first feature in the extent, a 2 if they
+    intersect with the second feature in the extent, et cetera.
+
+    If or not a cell intersects with the extent is defined as follows: if at
+    least one of the features in the extent has a (multi-)polygon geometry, the
+    spatial predicate function 'within' is applied to the the centroid of the
+    cells, while otherwise, the spatial predicate function 'touches' is applied
+    to the cell geometries themselves.
 
     Parameters
     ----------
@@ -179,13 +187,17 @@ class SpatialExtent(dict):
     else:
       crs = CRS(crs)
     # Rasterize.
-    vector_obj = self._features.reset_index()
+    vector_obj = self.features.reset_index()
     vector_obj["index"] = vector_obj["index"] + 1
+    # Select intersection method based on the geometry types.
+    geomtypes = vector_obj.geom_type
+    use_touch = not any([x in ["Polygon", "MultiPolygon"] for x in geomtypes])
     raster_obj = geocube.api.core.make_geocube(
       vector_data = vector_obj,
       measurements = ["index"],
       output_crs = crs,
       resolution = tuple(resolution),
+      rasterize_function = partial(rasterize_image, all_touched = use_touch)
     )["index"]
     # Update spatial reference.
     # CRS information was already automatically included during rasterizing.
