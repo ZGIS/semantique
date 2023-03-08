@@ -78,8 +78,8 @@ References
 Verbs
 ------
 
-Verbs for single data cubes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Verbs for single arrays
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
    :toctree: _generated/
@@ -102,8 +102,8 @@ Verbs for single data cubes
    ArrayProxy.trim
    ArrayProxy.delineate
 
-Verbs for data cube collections
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Verbs for array collections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autosummary::
    :toctree: _generated/
