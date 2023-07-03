@@ -1,4 +1,5 @@
 import numpy as np
+import xarray as xr
 
 import datacube
 import os
@@ -11,6 +12,13 @@ from abc import abstractmethod
 
 from semantique import exceptions
 from semantique.dimensions import TIME, SPACE, X, Y
+
+def _check_if_empty(data, reference):
+  if data.sq.is_empty:
+    raise exceptions.EmptyDataError(
+      f"Data layer '{reference}' does not contain data within the "
+      "specified spatio-temporal extent"
+    )
 
 class Datacube():
   """Base class for EO data cube configurations.
@@ -223,22 +231,18 @@ class Opendatacube(Datacube):
     metadata = self.lookup(*reference)
     # Load the data values from the EO data cube.
     data = self._load(metadata, extent)
+    _check_if_empty(data, reference)
     # Format loaded data.
     data = self._format(data, metadata, extent)
     # Mask invalid data.
     data = self._mask(data)
+    _check_if_empty(data, reference)
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
     # See https://github.com/whisperingpixel/iq-factbase/issues/19.
     # TODO: Find a better way to handle this with less memory footprint.
     data = data.astype("float")
-    # Return only if there is still valid data left.
-    if data.sq.is_empty:
-      raise exceptions.EmptyDataError(
-        f"Data layer '{reference}' does not contain valid data within the "
-        "specified spatio-temporal extent"
-      )
     return data
 
   def _load(self, metadata, extent):
@@ -272,10 +276,7 @@ class Opendatacube(Datacube):
     try:
       data = data[metadata["name"]]
     except KeyError:
-      raise exceptions.EmptyDataError(
-        f"Data layer '{reference}' does not contain data within the "
-        "specified spatio-temporal extent"
-      )
+      data = xr.DataArray()
     return data
 
   def _format(self, data, metadata, extent):
@@ -311,7 +312,7 @@ class Opendatacube(Datacube):
     # Step I: Mask nodata values.
     data = masking.mask_invalid_data(data)
     # Step II: Mask values outside of the spatial extent.
-    # This is needed since data are initially loaded the bbox of the extent.
+    # This is needed since data are initially loaded for the bbox of the extent.
     data = data.where(data["spatial_feats"].notnull())
     return data
 
@@ -454,22 +455,18 @@ class GeotiffArchive(Datacube):
     # This loads all data in the layer into memory (NOT EFFICIENT!).
     # Only after that is subsets the loaded data in space and time.
     data = self._load(metadata, extent)
+    _check_if_empty(data, reference)
     # Format the loaded data.
     data = self._format(data, metadata, extent)
     # Mask invalid data.
     data = self._mask(data)
+    _check_if_empty(data, reference)
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
     # See https://github.com/whisperingpixel/iq-factbase/issues/19.
     # TODO: Find a better way to handle this with less memory footprint.
     data = data.astype("float")
-    # Return only if there is still valid data left.
-    if data.sq.is_empty:
-      raise exceptions.EmptyDataError(
-        f"Data layer '{reference}' does not contain valid data within the "
-        "specified spatio-temporal extent"
-      )
     return data
 
   def _load(self, metadata, extent):
@@ -499,12 +496,7 @@ class GeotiffArchive(Datacube):
     resampler_name = self.config["resamplers"][metadata["type"]]
     resampler_func = getattr(rasterio.enums.Resampling, resampler_name)
     data = data.rio.reproject_match(like, resampling = resampler_func)
-    # Check if there is still data left after subsetting.
-    if data.sq.is_empty:
-      raise exceptions.EmptyDataError(
-        f"Data layer '{reference}' does not contain data within the "
-        "specified spatio-temporal extent"
-      )
+    # Return subsetted data.
     return data
 
   def _format(self, data, metadata, extent):
@@ -543,6 +535,6 @@ class GeotiffArchive(Datacube):
     data = data.where(data != data.rio.nodata)
     data.rio.write_nodata(data.rio.nodata, encoded = True, inplace = True)
     # Step II: Mask values outside of the spatial extent.
-    # This is needed since data are initially loaded the bbox of the extent.
+    # This is needed since data are initially loaded for the bbox of the extent.
     data = data.where(data["spatial_feats"].notnull())
     return data

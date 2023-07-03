@@ -105,10 +105,7 @@ class Array():
   @property
   def is_empty(self):
     """:obj:`bool`: Is the array empty."""
-    try:
-      return self._obj.values.size == 0 or not np.any(np.isfinite(self._obj))
-    except TypeError:
-      return False
+    return self._obj.values.size == 0 or not np.any(np.isfinite(self._obj))
 
   @property
   def grid_points(self):
