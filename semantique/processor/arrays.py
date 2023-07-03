@@ -1097,6 +1097,23 @@ class Array():
       del out.attrs["dim_value_types"]
     return out
 
+  def rename_dims(self, mapping):
+    """Rename one or more dimensions in the array.
+
+    Parameters
+    -----------
+      mapping : :obj:`dict`
+        Mapping from current to new dimension names.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+        The input array without renamed dimensions
+
+    """
+    new_indices = {v:k for k, v in mapping.items()}
+    return self._obj.swap_dims(mapping).set_index(new_indices)
+
   def drop_non_dimension_coords(self, keep = None):
     """Drop non-dimension coordinates from the array.
 

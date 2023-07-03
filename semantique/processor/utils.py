@@ -182,7 +182,7 @@ def parse_extent(spatial_extent, temporal_extent, spatial_resolution,
   # Rasterize spatial extent.
   space = spatial_extent.rasterize(spatial_resolution, crs)
   # Make sure X and Y dims have the correct names and value types.
-  space = space.rename({space.rio.y_dim: Y, space.rio.x_dim: X})
+  space = space.sq.rename_dims({space.rio.y_dim: Y, space.rio.x_dim: X})
   space[Y].sq.value_type = "continuous"
   space[X].sq.value_type = "continuous"
   # Add spatial feature indices as coordinates.

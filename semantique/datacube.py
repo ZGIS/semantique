@@ -253,11 +253,13 @@ class Opendatacube(Datacube):
       )
     # Create a template for the data to be loaded.
     # This is the given extent modified to be correctly understood by ODC:
+    # --> Time and space dimensions should have specific names.
     # --> Time dimension values should be in the data cubes native timezone.
     # --> Class should be `xarray.Dataset` instead of `xarray.DataArray`.
     # Note that the CRS does not have to be in the data cubes native CRS.
     # ODC takes care of spatial transformations internally.
-    like = extent.sq.tz_convert(self.tz).to_dataset()
+    names = {Y: "y", X: "x", TIME: "time"}
+    like = extent.sq.tz_convert(self.tz).sq.rename_dims(names).to_dataset()
     # Call ODC load function to load data as xarray dataset.
     data = self.connection.load(
       product = metadata["product"],
@@ -277,13 +279,16 @@ class Opendatacube(Datacube):
     return data
 
   def _format(self, data, metadata, extent):
-    # Step I: Convert time coordinates back into the original timezone.
+    # Step I: Format temporal coordinates.
+    # --> Make sure time dimension has the correct name.
+    # --> Convert time coordinates back into the original timezone.
+    data = data.sq.rename_dims({"time": TIME})
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
     # Step II: Format spatial coordinates.
     # --> Make sure X and Y dims have the correct names.
     # --> Add spatial feature indices as a non-dimension coordinate.
-    data = data.rename({data.rio.y_dim: Y, data.rio.x_dim: X})
+    data = data.sq.rename_dims({data.rio.y_dim: Y, data.rio.x_dim: X})
     data.coords["spatial_feats"] = ([Y, X], extent["spatial_feats"].data)
     # Step III: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
@@ -447,9 +452,8 @@ class GeotiffArchive(Datacube):
     metadata = self.lookup(*reference)
     # Load data.
     # This loads all data in the layer into memory (NOT EFFICIENT!).
-    data = self._load(metadata)
-    # Subset the loaded data in space and time.
-    data = self._subset(data, metadata, extent)
+    # Only after that is subsets the loaded data in space and time.
+    data = self._load(metadata, extent)
     # Format the loaded data.
     data = self._format(data, metadata, extent)
     # Mask invalid data.
@@ -468,29 +472,33 @@ class GeotiffArchive(Datacube):
       )
     return data
 
-  def _load(self, metadata):
-    return rioxarray.open_rasterio("zip://" + self.src + "!" + metadata["file"])
-
-  def _subset(self, data, metadata, extent):
-    # Subset temporally.
+  def _load(self, metadata, extent):
+    # Check if extent is valid.
     if TIME not in extent.dims:
       raise exceptions.MissingDimensionError(
         "Cannot retrieve data in an extent without a temporal dimension"
       )
-    bounds = extent.sq.tz_convert(self.tz)[TIME].values
-    times = [np.datetime64(x) for x in metadata["times"]]
-    keep = [x >= bounds[0] and x <= bounds[1] for x in times]
-    data = data.sel({"band": keep})
-    data = data.rename({"band": "time"})
-    data = data.assign_coords({"time": [x for x, y in zip(times, keep) if y]})
-    # Subset spatially.
     if X not in extent.dims and Y not in extent.dims:
       raise exceptions.MissingDimensionError(
         "Cannot retrieve data in an extent without spatial dimensions"
       )
+    # Load the complete layer.
+    data = rioxarray.open_rasterio("zip://" + self.src + "!" + metadata["file"])
+    # Prepare the extent for subsetting.
+    # This means dimension names need to be aligned to the loaded data.
+    # And the time values need to be converted into the loaded data timezone.
+    names = {Y: data.rio.y_dim, X: data.rio.x_dim, TIME: "band"}
+    like = extent.sq.tz_convert(self.tz).sq.rename_dims(names)
+    # Subset temporally.
+    bounds = like["band"].values
+    times = [np.datetime64(x) for x in metadata["times"]]
+    keep = [x >= bounds[0] and x <= bounds[1] for x in times]
+    data = data.sel({"band": keep})
+    data = data.assign_coords({"band": [x for x, y in zip(times, keep) if y]})
+    # Subset spatially.
     resampler_name = self.config["resamplers"][metadata["type"]]
     resampler_func = getattr(rasterio.enums.Resampling, resampler_name)
-    data = data.rio.reproject_match(extent, resampling = resampler_func)
+    data = data.rio.reproject_match(like, resampling = resampler_func)
     # Check if there is still data left after subsetting.
     if data.sq.is_empty:
       raise exceptions.EmptyDataError(
@@ -500,13 +508,16 @@ class GeotiffArchive(Datacube):
     return data
 
   def _format(self, data, metadata, extent):
-    # Step I: Convert time coordinates back into the original timezone.
+    # Step I: Format temporal coordinates.
+    # --> Make sure time dimension has the correct name.
+    # --> Convert time coordinates back into the original timezone.
+    data = data.sq.rename_dims({"band": TIME})
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
     # Step II: Format spatial coordinates.
     # --> Make sure X and Y dims have the correct names.
     # --> Add spatial feature indices as a non-dimension coordinate.
-    data = data.rename({data.rio.y_dim: Y, data.rio.x_dim: X})
+    data = data.sq.rename_dims({data.rio.y_dim: Y, data.rio.x_dim: X})
     data.coords["spatial_feats"] = ([Y, X], extent["spatial_feats"].data)
     # Step III: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
