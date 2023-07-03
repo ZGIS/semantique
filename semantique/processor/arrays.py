@@ -1289,7 +1289,7 @@ class Array():
     try:
       obj.rio.to_raster(file, **config)
     except rioxarray.exceptions.TooManyDimensions:
-      ndims = len(obj.dims) - 2
+      ndims = len(obj.dims)
       raise exceptions.TooManyDimensionsError(
         f"GeoTIFF export is only supported for 2D or 3D arrays, not {ndims}D"
       )
