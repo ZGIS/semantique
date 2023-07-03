@@ -28,6 +28,9 @@ class time():
   WEEK = "week"
   """:obj:`str` : Component storing the week number of a timestamp."""
 
+  DAY = "day"
+  """:obj:`str` : Component storing the day number of a timestamp."""
+
   DAY_OF_WEEK = "day_of_week"
   """:obj:`str` : Component storing the day of the week of a timestamp.
 
