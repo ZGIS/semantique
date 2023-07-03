@@ -488,7 +488,7 @@ class GeotiffArchive(Datacube):
     like = extent.sq.tz_convert(self.tz).sq.rename_dims(names)
     # Subset temporally.
     bounds = like["band"].values
-    times = [np.datetime64(x) for x in metadata["times"]]
+    times = [np.datetime64(x, "ns") for x in metadata["times"]]
     keep = [x >= bounds[0] and x <= bounds[1] for x in times]
     data = data.sel({"band": keep})
     data = data.assign_coords({"band": [x for x, y in zip(times, keep) if y]})

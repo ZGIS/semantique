@@ -122,7 +122,7 @@ def convert_datetime64(obj, tz_from, tz_to, **kwargs):
 
   """
   obj_new = pd.Timestamp(obj).tz_localize(tz_from).tz_convert(tz_to, **kwargs)
-  return np.datetime64(obj_new.tz_localize(None))
+  return np.datetime64(obj_new.tz_localize(None), "ns")
 
 def parse_extent(spatial_extent, temporal_extent, spatial_resolution,
                  temporal_resolution = None, crs = None, tz = None, trim = True):

@@ -338,7 +338,7 @@ class TemporalExtent(dict):
     if tz is None:
       tz = self.tz
     range_obj = range_obj.tz_convert(tz)
-    range_obj = [np.datetime64(x) for x in range_obj.tz_localize(None)]
+    range_obj = [np.datetime64(x, "ns") for x in range_obj.tz_localize(None)]
     array_obj = xr.DataArray(range_obj, dims = ["time"], coords = [range_obj])
     array_obj.sq.value_type = "datetime"
     array_obj = array_obj.sq.write_tz(tz)

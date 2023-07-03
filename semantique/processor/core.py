@@ -948,7 +948,7 @@ class QueryProcessor():
       :obj:`xarray.DataArray`
 
     """
-    dt = np.datetime64(block["content"]["start"])
+    dt = np.datetime64(block["content"]["start"], "ns")
     tz = pytz.timezone(block["content"]["tz"])
     if tz != self.tz.zone:
       dt = utils.convert_datetime64(dt, tz, self.tz)
@@ -969,8 +969,8 @@ class QueryProcessor():
       :obj:`xarray.DataArray`
 
     """
-    start = np.datetime64(block["content"]["start"])
-    end = np.datetime64(block["content"]["end"])
+    start = np.datetime64(block["content"]["start"], "ns")
+    end = np.datetime64(block["content"]["end"], "ns")
     tz = pytz.timezone(block["content"]["tz"])
     if tz != self.tz:
       start = utils.convert_datetime64(start, tz, self.tz)
