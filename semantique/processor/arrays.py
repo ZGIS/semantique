@@ -733,6 +733,15 @@ class Array():
     --------
       :obj:`xarray.DataArray`
 
+    Raises
+    -------
+      :obj:`exceptions.InvalidValueTypeError`
+        If ``track_types = True`` and the array is not binary.
+      :obj:`exceptions.TooManyDimensionsError`
+        If the array has more dimensions besides the spatial and/or temporal.
+      :obj:`exceptions.MissingDimensionError`
+        If the array has neither spatial nor temporal dimensions.
+
     """
     # Get and check array.
     obj = xr.apply_ufunc(utils.null_as_zero, self._obj)
@@ -790,33 +799,69 @@ class Array():
       out.sq.value_type = "ordinal"
     return out
 
-  def fill(method, track_types = True, **kwargs):
-    """ Apply the fill verb to the array.
+  def fill(self, dimension, method, track_types = True, **kwargs):
+    """Apply the fill verb to the array.
 
-    The fill verbs fills nodata values with new, valid data values.
+    The fill verb fills nodata values by interpolating valid data values.
 
     Parameters
     -----------
+      dimension : :obj:`str`
+        Name of the dimension along which to interpolate.
       method : :obj:`str`
-        Method to use for filling. One of "assign", "interpolate" or "smooth".
+        Interpolation method to use. One of nearest, linear or cubic.
       track_types : :obj:`bool`
         Should the value type(s) of the input(s) be checked, and the value
         type of the output be promoted, whenever applicable?
       **kwargs"
-        Additional keyword arguments passed on to the filling function of the
-        specified method.
+        Additional keyword arguments passed on to the interpolation function.
+        When interpolating along a single dimension, the interpolation function
+        is :meth:`xarray.DataArray.interpolate_na`.
+        When interpolation along the stacked space dimension, the interpolation
+        funtion is :meth:`rioxarray.raster_array.RasterArray.interpolate_na`.
 
     Returns
     --------
       :obj:`xarray.DataArray`
 
-    Note
-    -----
-      The fill verb is not yet implemented. This method only serves as a
-      placeholder.
+    Raises
+    ------
+      :obj:`exceptions.UnknownDimensionError`
+        If a dimension with the given name is not present in the array.
+      :obj:`exceptions.InvalidValueTypeError`
+        If ``track_types = True`` and the value type of the array is not
+        supported by the chosen interpolation method.
 
     """
-    raise NotImplementedError("The fill verb is not implemented yet")
+    obj = self._obj
+    # Check if arrays value type is supported by the interpolation method.
+    if track_types:
+      if method != "nearest":
+        vtype = obj.sq.value_type
+        if vtype is not None and vtype not in ["continuous", "discrete"]:
+          raise exceptions.InvalidValueTypeError(
+            f"Unsupported value type for interpolation method '{method}': '{vtype}'"
+          )
+    # Interpolate missing values.
+    # --> 2D interpolation for the stacked space dimension.
+    # --> 1D interpolation for any regular dimension.
+    if dimension == SPACE:
+      if X not in obj.dims or Y not in obj.dims:
+        raise exceptions.UnknownDimensionError(
+          f"Spatial dimensions '{X}' and '{Y}' are not present in the array"
+        )
+      if obj.rio.nodata is None:
+        nodata = utils.get_null(obj)
+        out = obj.rio.write_nodata(nodata).rio.interpolate_na(method, **kwargs)
+      else:
+        out = obj.rio.interpolate_na(method, **kwargs)
+    else:
+      if dimension not in obj.dims:
+        raise exceptions.UnknownDimensionError(
+          f"Dimension '{dimension}' is not present in the array"
+        )
+      out = obj.interpolate_na(dimension, method = method, **kwargs)
+    return out
 
   def name(self, value, **kwargs):
     """Apply the name verb to the array.
@@ -1702,7 +1747,7 @@ class Collection(list):
     out[:] = [x.sq.delineate(track_types, **kwargs) for x in out]
     return out
 
-  def fill(self, method, track_types = True, **kwargs):
+  def fill(self, dimension, method, track_types = True, **kwargs):
     """Apply the fill verb to all arrays in the collection.
 
     See :meth:`Array.fill`
@@ -1712,7 +1757,7 @@ class Collection(list):
       :obj:`Collection`
 
     """
-    args = tuple([method, track_types])
+    args = tuple([dimension, method, track_types])
     out = copy.deepcopy(self)
     out[:] = [x.sq.fill(*args, **kwargs) for x in out]
     return out

@@ -247,8 +247,8 @@ class ArrayProxy(dict):
 
     Assigns a new value to each non-missing observation in the input, without
     any computation. Optionally, it assigns these new values only to a subset
-    of pixels in the input. Which pixels these are is defined by the ``at``
-    argument.
+    of pixels (which may have missing values) in the input. Which pixels these
+    are is defined by the ``at`` argument.
 
     Parameters
     -----------
@@ -629,6 +629,40 @@ class ArrayProxy(dict):
     """
     return self._append_verb("delineate", **kwargs)
 
+  def fill(self, dimension, method, **kwargs):
+    """Fill nodata values in array by interpolating valid data values.
+
+    Fills nodata values by fitting an interpolation function to the valid
+    data values along a given dimension. When the specified dimension is the
+    stacked space dimension, 2D interpolation methods can be applied. For
+    regular dimensions, 1D interpolation methods are applied.
+
+    Parameters
+    -----------
+      dimension : :obj:`str`
+        Name of the dimension along which to interpolate.
+      method : :obj:`str`
+        Interpolation method to use. One of nearest, linear or cubic.
+      track_types : :obj:`bool`
+        Should the value type(s) of the input(s) be checked, and the value
+        type of the output be promoted, whenever applicable?
+      **kwargs:
+        Additional keyword arguments passed on to
+        :meth:`Array.fill <processor.arrays.Array.fill>`.
+
+    Returns
+    --------
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> import semantique as sq
+    >>> sq.entity("water").fill("time", "nearest")
+
+    """
+    kwargs.update({"dimension": dimension, "method": method})
+    return self._append_verb("fill", **kwargs)
+
   def name(self, value, **kwargs):
     """Give a name to an array.
 
@@ -957,6 +991,18 @@ class CollectionProxy(dict):
 
     """
     return self._append_verb("delineate", **kwargs)
+
+  def fill(self, method, dimension, **kwargs):
+    """Apply the fill verb to each array in a collection.
+
+    See :meth:`ArrayProxy.fill`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    """
+    return self._append_verb("fill", **kwargs)
 
 def concept(*reference, property = None):
   """Reference to a semantic concept.
