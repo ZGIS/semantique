@@ -1801,7 +1801,7 @@ def assign_at_(x, y, z, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, y, function = "assign_at")
     promoter.check()
-  f = lambda x, y, z: np.where(pd.notnull(x), np.where(z, y, x), utils.get_null(y))
+  f = lambda x, y, z: np.where(np.logical_and(pd.notnull(z), z), y, x)
   y = xr.DataArray(y).sq.align_with(x)
   z = z.sq.align_with(x)
   out = xr.apply_ufunc(f, x, y, z, keep_attrs = True)

@@ -303,8 +303,9 @@ class Array():
     """Apply the assign verb to the array.
 
     The assign verb assigns new values to the pixels in an array, without any
-    computation. It only assigns to non-missing pixels. Hence, pixels with
-    missing values in the input are always preserved in the output.
+    computation. Unless specifically stated through the ``at`` argument, it
+    does not assign new values to missing pixels (i.e. those pixels having a
+    missing value).
 
     Parameters
     ----------
