@@ -90,8 +90,11 @@ class Array():
 
   @property
   def spatial_resolution(self):
-    """:obj:`list`: Spatial resolution of the array in units of the CRS."""
-    return self._obj.rio.resolution()[::-1]
+    """:obj:`list`: Spatial resolution [x,y] of the array in units of the CRS."""
+    try:
+      return [self._obj[Y].attrs["resolution"], self._obj[X].attrs["resolution"]]
+    except KeyError:
+      return None
 
   @property
   def tz(self):
@@ -1034,6 +1037,50 @@ class Array():
       zone = pytz.timezone(tz).tzname(None)
     obj["temporal_ref"] = 0
     obj["temporal_ref"].attrs["zone"] = zone
+    return obj
+
+  def write_spatial_resolution(self, resolution = None, recompute = False,
+                               inplace = False):
+    """Store the spatial resolution of the array as dimension attributes.
+
+    The resolution of the spatial coordinates is stored as attribute of the
+    respective spatial dimensions.
+
+    Parameters
+    ----------
+      resolution:
+        The spatial resolution to store. Should be given as a list in the format
+        *[y, x]*, where y is the cell size along the y-axis, x is the cell size
+        along the x-axis, and both are given as :obj:`int` or :obj:`float`
+        value expressed in the units of the CRS. These values should include
+        the direction of the axes. For most CRSs, the y-axis has a negative
+        direction, and hence the cell size along the y-axis is given as a
+        negative number. If :obj:`None`, the spatial resolution will be
+        automatically inferred from the array.
+      recompute : :obj:`bool`
+        If the resolution is automatically inferred, should it be recomputed
+        based on the coordinate values, or read from the transform attribute if
+        present?
+      inplace : :obj:`bool`
+        Should the array be modified inplace?
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+        The input array with the spatial resolution stored as dimension
+        attributes.
+
+    """
+    obj = self._obj if inplace else copy.deepcopy(self._obj)
+    if resolution is None:
+      resolution = obj.rio.resolution(recalc = recompute)[::-1]
+    try:
+      obj[Y].attrs["resolution"] = resolution[0]
+      obj[X].attrs["resolution"] = resolution[1]
+    except KeyError:
+      raise exceptions.MissingDimensionError(
+        "Cannot write spatial resolution to an array without spatial dimensions"
+      )
     return obj
 
   def stack_spatial_dims(self):
