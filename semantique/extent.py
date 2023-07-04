@@ -5,7 +5,6 @@ import xarray as xr
 
 import copy
 import geocube.api.core
-import pytz
 import rioxarray
 
 from pyproj.crs import CRS
@@ -239,7 +238,6 @@ class TemporalExtent(dict):
   """
 
   def __init__(self, *bounds, **kwargs):
-    interval = True # By default assume given bounds form an interval.
     # Parse bounds.
     if len(bounds) > 1:
       if isinstance(bounds[0], TemporalExtent):
@@ -250,56 +248,70 @@ class TemporalExtent(dict):
         end = pd.Timestamp(bounds[-1].end, **kwargs)
       else:
         end = pd.Timestamp(bounds[-1], **kwargs)
+      self._type = "Interval"
     else:
       if isinstance(bounds[0], TemporalExtent):
         start = pd.Timestamp(bounds[0].start, **kwargs)
         end = pd.Timestamp(bounds[0].end, **kwargs)
+        self._type = bounds[0].type
       else:
         start = pd.Timestamp(bounds[0], **kwargs)
         end = start
-        interval = False
+        self._type = "Instant"
+    is_interval = self.type == "Interval"
     # Check if timezones of bounds are matching.
-    if interval and start.tz != end.tz:
+    if is_interval and start.tz != end.tz:
         raise exceptions.MixedTimeZonesError(
           f"Time interval has bounds with differing timezones: "
-          f"'{start.tz.zone}' and '{end.tz.zone}'"
+          f"'{start.tz.tzname(None)}' and '{end.tz.tzname(None)}'"
         )
     # Assign default timezone UTC if timezone is not known.
     if start.tz is None:
-      start = start.tz_localize(pytz.utc)
-      end = end.tz_localize(pytz.utc)
+      start = start.tz_localize("UTC")
+      end = end.tz_localize("UTC")
+    # Set properties.
+    self._start = start
+    self._end = end
+    self._tz = start.tz
     # Construct dict representation of the temporal extent.
-    if interval:
+    if is_interval:
       timejs = {
         "type": "Interval",
         "start": start.tz_localize(None).isoformat(),
         "end": end.tz_localize(None).isoformat(),
-        "tz": start.tz.zone
+        "tz": self.tzname
       }
     else:
       timejs = {
         "type": "Instant",
         "start": start.tz_localize(None).isoformat(),
-        "tz": start.tz.zone
+        "tz": self.tzname
       }
-    self._start = start
-    self._end = end
-    self._tz = start.tz
     super(TemporalExtent, self).__init__(timejs)
 
   @property
+  def type(self):
+    """:obj:`str`: Type of the extent, either interval or instant."""
+    return self._type
+
+  @property
   def tz(self):
-    """:obj:`datetime.tzinfo`: Timezone of the time instants."""
+    """:obj:`datetime.tzinfo`: Object representing the timezone of the extent."""
     return self._tz
 
   @property
+  def tzname(self):
+    """:obj:`str`: Name of the timezone of the extent."""
+    return self.tz.tzname(None)
+
+  @property
   def start(self):
-    """:obj:`pandas.Timestamp`: Lower bound of the temporal extent."""
+    """:obj:`pandas.Timestamp`: Lower bound of the extent."""
     return self._start
 
   @property
   def end(self):
-    """:obj:`pandas.Timestamp`: Upper bound of the temporal extent."""
+    """:obj:`pandas.Timestamp`: Upper bound of the extent."""
     return self._end
 
   def discretize(self, resolution = None, tz = None):

@@ -180,6 +180,14 @@ class ReservedDimensionError(Exception):
   """
   pass
 
+class UnknownTimeZoneError(Exception):
+  """Raised when a provided value is not a valid time zone specification.
+
+  This may occur when setting the timezone of a datacube representation.
+
+  """
+  pass
+
 class MixedTimeZonesError(Exception):
   """Raised when the bounds of a time interval have differing time zones.
 

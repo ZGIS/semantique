@@ -2,6 +2,7 @@ import numpy as np
 import xarray as xr
 
 import datacube
+import datetime
 import os
 import pytz
 import rasterio
@@ -175,7 +176,14 @@ class Opendatacube(Datacube):
 
   @tz.setter
   def tz(self, value):
-    self._tz = pytz.timezone(value)
+    if isinstance(value, datetime.tzinfo):
+      self._tz = value
+    elif isinstance(value, str):
+      self._tz = pytz.timezone(value)
+    else:
+      raise exceptions.UnknownTimeZoneError(
+        f"Cannot recognize {value} as a valid timezone specification"
+      )
 
   @property
   def _default_config(self):
@@ -398,7 +406,14 @@ class GeotiffArchive(Datacube):
 
   @tz.setter
   def tz(self, value):
-    self._tz = pytz.timezone(value)
+    if isinstance(value, datetime.tzinfo):
+      self._tz = value
+    elif isinstance(value, str):
+      self._tz = pytz.timezone(value)
+    else:
+      raise exceptions.UnknownTimeZoneError(
+        f"Cannot recognize {value} as a valid timezone specification"
+      )
 
   @property
   def _default_config(self):

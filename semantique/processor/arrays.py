@@ -1029,9 +1029,9 @@ class Array():
     """
     obj = self._obj if inplace else copy.deepcopy(self._obj)
     try:
-      zone = tz.zone
+      zone = tz.tzname(None)
     except AttributeError:
-      zone = pytz.timezone(tz).zone
+      zone = pytz.timezone(tz).tzname(None)
     obj["temporal_ref"] = 0
     obj["temporal_ref"].attrs["zone"] = zone
     return obj
