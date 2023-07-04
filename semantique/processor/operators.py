@@ -241,6 +241,51 @@ def ceiling_(x, track_types = True, **kwargs):
     out = promoter.promote(out)
   return out
 
+def cos_(x, track_types = True, **kwargs):
+  """Compute the cosine of x.
+
+  This operator assumes the values of x are angles in radians.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Array containing the values to apply the operator to.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      An array with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["cos"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, function = "cos")
+    promoter.check()
+  f = lambda x: np.cos(x)
+  out = xr.apply_ufunc(f, x, keep_attrs = True)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
 def cube_root_(x, track_types = True, **kwargs):
   """Compute the cube root of x.
 
@@ -423,6 +468,51 @@ def natural_logarithm_(x, track_types = True, **kwargs):
     out = promoter.promote(out)
   return out
 
+def sin_(x, track_types = True, **kwargs):
+  """Compute the sine of x.
+
+  This operator assumes the values of x are angles in radians.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Array containing the values to apply the operator to.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      An array with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["sin"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, function = "sin")
+    promoter.check()
+  f = lambda x: np.sin(x)
+  out = xr.apply_ufunc(f, x, keep_attrs = True)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
 def square_root_(x, track_types = True, **kwargs):
   """Compute the square root of x.
 
@@ -461,6 +551,51 @@ def square_root_(x, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "square_root")
     promoter.check()
   f = lambda x: np.sqrt(x)
+  out = xr.apply_ufunc(f, x, keep_attrs = True)
+  if track_types:
+    out = promoter.promote(out)
+  return out
+
+def tan_(x, track_types = True, **kwargs):
+  """Compute the tangent of x.
+
+  This operator assumes the values of x are angles in radians.
+
+  Parameters
+  ----------
+    x : :obj:`xarray.DataArray`
+      Array containing the values to apply the operator to.
+    track_types : :obj:`bool`
+      Should the operator promote the value type of the output object, based
+      on the value type of the input object?
+    **kwargs:
+      Ignored.
+
+  Returns
+  -------
+    :obj:`xarray.DataArray`
+      An array with the same shape as ``x`` containing the results of all
+      evaluated expressions.
+
+  Note
+  -----
+    When tracking value types, this operator uses the following type promotion
+    manual, with the keys being the supported value types of ``x``, and the
+    corresponding value being the promoted value type of the output.
+
+    .. exec_code::
+      :hide_code:
+
+      from semantique.processor.types import TYPE_PROMOTION_MANUALS
+      obj = TYPE_PROMOTION_MANUALS["tan"]
+      obj.pop("__preserve_labels__")
+      print(obj)
+
+  """
+  if track_types:
+    promoter = TypePromoter(x, function = "tan")
+    promoter.check()
+  f = lambda x: np.tan(x)
   out = xr.apply_ufunc(f, x, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)

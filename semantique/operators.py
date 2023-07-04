@@ -43,6 +43,15 @@ See: :func:`semantique.processor.operators.ceiling_`
 
 """
 
+COS = "cos"
+""":obj:`str` : Reference to operator function cos.
+
+This operator computes the cosine of x, assuming x is an angle in radians.
+
+See: :func:`semantique.processor.operators.cos_`
+
+"""
+
 CUBE_ROOT = "cube_root"
 """:obj:`str` : Reference to operator function cube_root.
 
@@ -79,12 +88,30 @@ See: :func:`semantique.processor.operators.natural_logarithm_`
 
 """
 
+SIN = "sin"
+""":obj:`str` : Reference to operator function sin.
+
+This operator computes the sine of x, assuming x is an angle in radians.
+
+See: :func:`semantique.processor.operators.sin_`
+
+"""
+
 SQUARE_ROOT = "square_root"
 """:obj:`str` : Reference to operator function square_root.
 
 This operator computes the square root of x.
 
 See: :func:`semantique.processor.operators.square_root_`
+
+"""
+
+TAN = "tan"
+""":obj:`str` : Reference to operator function tan.
+
+This operator computes the tangent of x, assuming x is an angle in radians.
+
+See: :func:`semantique.processor.operators.tan_`
 
 """
 

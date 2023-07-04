@@ -63,6 +63,11 @@ TYPE_PROMOTION_MANUALS = {
     "discrete": "discrete",
     "__preserve_labels__": 0
   },
+  "cos": {
+    "continuous": "discrete",
+    "discrete": "discrete",
+    "__preserve_labels__": 0
+  },
   "cube_root": {
     "continuous": "continuous",
     "discrete": "continuous",
@@ -83,9 +88,19 @@ TYPE_PROMOTION_MANUALS = {
     "discrete": "continuous",
     "__preserve_labels__": 0
   },
+  "sin": {
+    "continuous": "discrete",
+    "discrete": "discrete",
+    "__preserve_labels__": 0
+  },
   "square_root": {
     "continuous": "continuous",
     "discrete": "continuous",
+    "__preserve_labels__": 0
+  },
+  "tan": {
+    "continuous": "discrete",
+    "discrete": "discrete",
     "__preserve_labels__": 0
   },
   "add": {
