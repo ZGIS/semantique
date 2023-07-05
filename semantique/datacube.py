@@ -296,8 +296,10 @@ class Opendatacube(Datacube):
     data = data.sq.tz_convert(extent.sq.tz)
     # Step II: Format spatial coordinates.
     # --> Make sure X and Y dims have the correct names.
+    # --> Store resolution as an attribute of the spatial coordinate dimensions.
     # --> Add spatial feature indices as a non-dimension coordinate.
     data = data.sq.rename_dims({data.rio.y_dim: Y, data.rio.x_dim: X})
+    data = data.sq.write_spatial_resolution(extent.sq.spatial_resolution)
     data.coords["spatial_feats"] = ([Y, X], extent["spatial_feats"].data)
     # Step III: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
@@ -523,8 +525,10 @@ class GeotiffArchive(Datacube):
     data = data.sq.tz_convert(extent.sq.tz)
     # Step II: Format spatial coordinates.
     # --> Make sure X and Y dims have the correct names.
+    # --> Store resolution as an attribute of the spatial coordinate dimensions.
     # --> Add spatial feature indices as a non-dimension coordinate.
     data = data.sq.rename_dims({data.rio.y_dim: Y, data.rio.x_dim: X})
+    data = data.sq.write_spatial_resolution(extent.sq.spatial_resolution)
     data.coords["spatial_feats"] = ([Y, X], extent["spatial_feats"].data)
     # Step III: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.

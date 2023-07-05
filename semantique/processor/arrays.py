@@ -967,6 +967,8 @@ class Array():
       return self._obj
     # Update spatial coordinates.
     res = self.spatial_resolution
+    if res is None:
+      res = self.write_spatial_resolution(inplace = True).sq.spatial_resolution
     xcoords = np.arange(xcoords[0], xcoords[-1] + res[1], res[1])
     ycoords = np.arange(ycoords[0], ycoords[-1] + res[0], res[0])
     # Reindex array.
