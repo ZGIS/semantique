@@ -108,7 +108,13 @@ class Array():
   @property
   def is_empty(self):
     """:obj:`bool`: Is the array empty."""
-    return self._obj.values.size == 0 or not np.any(np.isfinite(self._obj))
+    try:
+      return self._obj.values.size == 0 or not np.any(np.isfinite(self._obj))
+    except TypeError:
+      # For some value types np.isfinite cannot be applied.
+      # This is the case e.g. for spatial coordinate tuples.
+      # However, given that these occur it already means the array is not empty.
+      return False
 
   @property
   def grid_points(self):
