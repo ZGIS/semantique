@@ -827,10 +827,17 @@ def first_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "first")
     promoter.check()
+  def get_first(col):
+    # The idea here is as follows:
+    # --> First mark non-missing values as True (i.e. 1).
+    # --> Then take twice the cumulative sum of this array.
+    # --> Only the first non-missing value will then be 1.
+    is_value = pd.notnull(col)
+    is_first = np.equal(np.cumsum(np.cumsum(is_value)), 1)
+    return col[np.argwhere(is_first)[0][0]]
   def f(x, axis = None):
-    is_value = pd.notnull(x)
-    is_first = np.equal(np.cumsum(np.cumsum(is_value, axis), axis), 1)
-    return np.nanmax(np.where(is_first, x, utils.get_null(x)), axis)
+    # Find the first non-missing value for each column along the dimension.
+    return np.apply_along_axis(get_first, axis, x)
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)
@@ -880,11 +887,19 @@ def last_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "last")
     promoter.check()
+  def get_first(col):
+    # The idea here is as follows:
+    # --> First mark non-missing values as True (i.e. 1).
+    # --> Then take twice the cumulative sum of this array.
+    # --> Only the first non-missing value will then be 1.
+    is_value = pd.notnull(col)
+    is_first = np.equal(np.cumsum(np.cumsum(is_value)), 1)
+    return col[np.argwhere(is_first)[0][0]]
   def f(x, axis = None):
+    # First flip the array such that last values become first values.
+    # Then find the first non-missing value for each column along the dimension.
     xflipped = np.flip(x, axis)
-    is_value = pd.notnull(xflipped)
-    is_first = np.equal(np.cumsum(np.cumsum(is_value, axis), axis), 1)
-    return np.nanmax(np.where(is_first, xflipped, utils.get_null(x)), axis)
+    return np.apply_along_axis(get_first, axis, xflipped)
   out = x.reduce(f, **kwargs)
   if track_types:
     out = promoter.promote(out)

@@ -10,8 +10,9 @@ from semantique.dimensions import TIME, X, Y
 def get_null(x):
   """Return the appropriate nodata value for an array.
 
-  For arrays of datetime values NaT (not a time) is returned. For other arrays
-  NaN (not a number) is returned.
+  For arrays of numbers NaN (i.e. not a number) is returned. For arrays of
+  datetime values NaT (not a time) is returned. For other arrays None is
+  returned.
 
   Parameters
   ----------
@@ -19,7 +20,12 @@ def get_null(x):
       The input array.
 
   """
-  return np.datetime64("NaT") if x.dtype.kind == "M" else np.nan
+  if x.dtype.kind in ["b", "i", "u", "f"]:
+    return np.nan
+  elif x.dtype.kind == "M":
+    return np.datetime64("NaT")
+  else:
+    return None
 
 def allnull(x, axis):
   """Test whether all elements along a given axis in an array are null.
