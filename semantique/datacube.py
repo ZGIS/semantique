@@ -1,6 +1,7 @@
 import numpy as np
 import xarray as xr
 
+import copy
 import datacube
 import datetime
 import os
@@ -215,6 +216,39 @@ class Opendatacube(Datacube):
     assert isinstance(value, dict)
     self._config = value
 
+  @property
+  def layout(self):
+    """:obj:`dict`: The layout file of the EO data cube."""
+    return self._layout
+
+  @layout.setter
+  def layout(self, value):
+    self._layout = {} if value is None else self._parse_layout(value)
+
+  def _parse_layout(self, obj):
+    def _parse(obj, ref):
+      is_layer = False
+      while not is_layer:
+        if all([x in obj for x in ["type", "values"]]):
+          obj["reference"] = copy.deepcopy(ref)
+          if isinstance(obj["values"], list):
+            vals = {}
+            vals["labels"] = {x["label"]:x["id"] for x in obj["values"]}
+            vals["descriptions"] = {x["description"]:x["id"] for x in obj["values"]}
+            obj["values"] = vals
+          del ref[-1]
+          is_layer = True
+        else:
+          ref.append(k)
+          for k, v in obj.items():
+            _parse(v, ref)
+    for k, v in obj.items():
+      ref = [k]
+      for k, v in v.items():
+        ref.append(k)
+        _parse(v, ref)
+    return obj
+
   def retrieve(self, *reference, extent):
     """Retrieve a data layer from the EO data cube.
 
@@ -304,12 +338,15 @@ class Opendatacube(Datacube):
     # Step III: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
     # --> Mapping from category labels to indices for all categorical data.
-    vtype = self.config["value_type_mapping"][metadata["type"]]
-    data.sq.value_type = vtype
-    if vtype in ["nominal", "ordinal"]:
+    data.sq.value_type = self.config["value_type_mapping"][metadata["type"]]
+    if isinstance(metadata["values"], list):
       value_labels = {}
       for x in metadata["values"]:
-        value_labels[x["id"]] = x["label"]
+        try:
+          label = x["label"]
+        except KeyError:
+          label = None
+        value_labels[x["id"]] = label
       data.sq.value_labels = value_labels
     data[TIME].sq.value_type = "datetime"
     data[Y].sq.value_type = "continuous"
@@ -446,6 +483,37 @@ class GeotiffArchive(Datacube):
     assert isinstance(value, dict)
     self._config = value
 
+  @property
+  def layout(self):
+    """:obj:`dict`: The layout file of the EO data cube."""
+    return self._layout
+
+  @layout.setter
+  def layout(self, value):
+    self._layout = {} if value is None else self._parse_layout(value)
+
+  def _parse_layout(self, obj):
+    def _parse(obj, ref):
+      is_layer = False
+      while not is_layer:
+        if all([x in obj for x in ["type", "values"]]):
+          obj["reference"] = copy.deepcopy(ref)
+          if isinstance(obj["values"], list):
+            obj["labels"] = {x["label"]:x["id"] for x in obj["values"]}
+            obj["descriptions"] = {x["description"]:x["id"] for x in obj["values"]}
+          del ref[-1]
+          is_layer = True
+        else:
+          ref.append(k)
+          for k, v in obj.items():
+            _parse(v, ref)
+    for k, v in obj.items():
+      ref = [k]
+      for k, v in v.items():
+        ref.append(k)
+        _parse(v, ref)
+    return obj
+
   def retrieve(self, *reference, extent):
     """Retrieve a data layer from the EO data cube.
 
@@ -535,12 +603,15 @@ class GeotiffArchive(Datacube):
     # Step III: Write semantique specific attributes.
     # --> Value types for the data and all dimension coordinates.
     # --> Mapping from category labels to indices for all categorical data.
-    vtype = self.config["value_type_mapping"][metadata["type"]]
-    data.sq.value_type = vtype
-    if vtype in ["nominal", "ordinal"]:
+    data.sq.value_type = self.config["value_type_mapping"][metadata["type"]]
+    if isinstance(metadata["values"], list):
       value_labels = {}
       for x in metadata["values"]:
-        value_labels[x["id"]] = x["label"]
+        try:
+          label = x["label"]
+        except KeyError:
+          label = None
+        value_labels[x["id"]] = label
       data.sq.value_labels = value_labels
     data[TIME].sq.value_type = "datetime"
     data[Y].sq.value_type = "continuous"
