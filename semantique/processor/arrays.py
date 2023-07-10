@@ -1409,11 +1409,20 @@ class Array():
     # Use LZW compression if compression is requested by user.
     if compress:
       config["compress"] = "LZW"
+    # If the array has an additional dimension next to the spatial ones:
+    # --> Convert array to dataset with the third dimension as variable.
+    # --> This will make rioxarray export dimension coords as band names.
+    ndims = len(obj.dims)
+    if ndims == 3:
+      non_spatial_dim = [x for x in obj.dims if x not in [X, Y]][0]
+      newobj = xr.Dataset()
+      for x in obj[non_spatial_dim].values:
+        newobj[str(x)] = obj.sel({non_spatial_dim: x}, drop = True)
+      obj = newobj
     # Write data to file.
     try:
       obj.rio.to_raster(file, **config)
     except rioxarray.exceptions.TooManyDimensions:
-      ndims = len(obj.dims)
       raise exceptions.TooManyDimensionsError(
         f"GeoTIFF export is only supported for 2D or 3D arrays, not {ndims}D"
       )
