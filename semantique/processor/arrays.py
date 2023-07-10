@@ -805,7 +805,8 @@ class Array():
       out.sq.value_type = "ordinal"
     return out
 
-  def fill(self, dimension, method, track_types = True, **kwargs):
+  def fill(self, dimension, method, extrapolate = True, track_types = True,
+           **kwargs):
     """Apply the fill verb to the array.
 
     The fill verb fills nodata values by interpolating valid data values.
@@ -815,7 +816,13 @@ class Array():
       dimension : :obj:`str`
         Name of the dimension along which to interpolate.
       method : :obj:`str`
-        Interpolation method to use. One of nearest, linear or cubic.
+        Interpolation method to use. One of nearest, linear or cubic. When
+        interpolation along the stacked space dimensions, the two-dimensional
+        versions of these interpolation methods are used, i.e. 2D nearest
+        neighbour, bilinear and bicubic.
+      extrapolate : :obj:`bool`
+        Should nodata values at the edge be extrapolated? Only applied to
+        one-dimensional interpolation.
       track_types : :obj:`bool`
         Should the value type(s) of the input(s) be checked, and the value
         type of the output be promoted, whenever applicable?
@@ -866,6 +873,8 @@ class Array():
         raise exceptions.UnknownDimensionError(
           f"Dimension '{dimension}' is not present in the array"
         )
+      if extrapolate:
+        kwargs.update({"fill_value": "extrapolate"})
       out = obj.interpolate_na(dimension, method = method, **kwargs)
     return out
 
