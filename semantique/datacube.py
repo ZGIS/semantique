@@ -505,7 +505,7 @@ class GeotiffArchive(Datacube):
     like = extent.sq.tz_convert(self.tz).sq.rename_dims(names)
     # Subset temporally.
     bounds = like["band"].values
-    times = [np.datetime64(x, "ns") for x in metadata["times"]]
+    times = [np.datetime64(x, "ns") for x in data.attrs["long_name"]]
     keep = [x >= bounds[0] and x <= bounds[1] for x in times]
     data = data.sel({"band": keep})
     data = data.assign_coords({"band": [x for x, y in zip(times, keep) if y]})
@@ -520,9 +520,11 @@ class GeotiffArchive(Datacube):
     # Step I: Format temporal coordinates.
     # --> Make sure time dimension has the correct name.
     # --> Convert time coordinates back into the original timezone.
+    # --> Delete the long_name attribute that stored the band names.
     data = data.sq.rename_dims({"band": TIME})
     data = data.sq.write_tz(self.tz)
     data = data.sq.tz_convert(extent.sq.tz)
+    del data.attrs["long_name"]
     # Step II: Format spatial coordinates.
     # --> Make sure X and Y dims have the correct names.
     # --> Store resolution as an attribute of the spatial coordinate dimensions.

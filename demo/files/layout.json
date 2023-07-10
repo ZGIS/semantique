@@ -155,12 +155,7 @@
           "description": "Flame"
         }
       ],
-      "file": "colortype.geotiff",
-      "times": [
-        "2019-12-15T10:17:33.408715",
-        "2020-09-05T10:17:43.167942",
-        "2020-12-19T10:17:34.610661"
-      ]
+      "file": "colortype.geotiff"
     },
     "greenness": {
       "type": "continuous",
@@ -170,12 +165,7 @@
         "max": null,
         "precision": 0.1
       },
-      "file": "greenness.geotiff",
-      "times": [
-        "2019-12-15T10:17:33.408715",
-        "2020-09-05T10:17:43.167942",
-        "2020-12-19T10:17:34.610661"
-      ]
+      "file": "greenness.geotiff"
     },
     "brightness": {
       "type": "continuous",
@@ -185,12 +175,7 @@
         "max": null,
         "precision": 1
       },
-      "file": "brightness.geotiff",
-      "times": [
-        "2019-12-15T10:17:33.408715",
-        "2020-09-05T10:17:43.167942",
-        "2020-12-19T10:17:34.610661"
-      ]
+      "file": "brightness.geotiff"
     }
   },
   "atmosphere": {
@@ -209,12 +194,7 @@
           "description": "Smoke Plume"
         }
       ],
-      "file": "colortype.geotiff",
-      "times": [
-        "2019-12-15T10:17:33.408715",
-        "2020-09-05T10:17:43.167942",
-        "2020-12-19T10:17:34.610661"
-      ]
+      "file": "colortype.geotiff"
     }
   },
   "artifacts": {
@@ -228,12 +208,7 @@
           "description": "Unknown classification"
         }
       ],
-      "file": "colortype.geotiff",
-      "times": [
-        "2019-12-15T10:17:33.408715",
-        "2020-09-05T10:17:43.167942",
-        "2020-12-19T10:17:34.610661"
-      ]
+      "file": "colortype.geotiff"
     }
   },
   "reflectance": {
@@ -245,12 +220,7 @@
         "max": 10000,
         "precision": 1
       },
-      "file": "red.geotiff",
-      "times": [
-        "2019-12-15T10:17:33.408715",
-        "2020-09-05T10:17:43.167942",
-        "2020-12-19T10:17:34.610661"
-      ]
+      "file": "red.geotiff"
     },
     "s2_band03": {
       "description": "Reflectance of Band 3 of Sentinel 2A or Sentinel 2B",
@@ -260,12 +230,7 @@
         "max": 10000,
         "precision": 1
       },
-      "file": "green.geotiff",
-      "times": [
-        "2019-12-15T10:17:33.408715",
-        "2020-09-05T10:17:43.167942",
-        "2020-12-19T10:17:34.610661"
-      ]
+      "file": "green.geotiff"
     },
     "s2_band02": {
       "description": "Reflectance of Band 2 of Sentinel 2A or Sentinel 2B",
@@ -275,12 +240,7 @@
         "max": 10000,
         "precision": 1
       },
-      "file": "blue.geotiff",
-      "times": [
-        "2019-12-15T10:17:33.408715",
-        "2020-09-05T10:17:43.167942",
-        "2020-12-19T10:17:34.610661"
-      ]
+      "file": "blue.geotiff"
     },
     "s2_band08": {
       "description": "Reflectance of Band 8 of Sentinel 2A or Sentinel 2B",
@@ -290,12 +250,7 @@
         "max": 10000,
         "precision": 1
       },
-      "file": "nir.geotiff",
-      "times": [
-        "2019-12-15T10:17:33.408715",
-        "2020-09-05T10:17:43.167942",
-        "2020-12-19T10:17:34.610661"
-      ]
+      "file": "nir.geotiff"
     }
   }
 }
