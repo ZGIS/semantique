@@ -834,7 +834,10 @@ def first_(x, track_types = True, **kwargs):
     # --> Only the first non-missing value will then be 1.
     is_value = pd.notnull(col)
     is_first = np.equal(np.cumsum(np.cumsum(is_value)), 1)
-    return col[np.argwhere(is_first)[0][0]]
+    if any(is_first):
+      return col[np.argwhere(is_first)[0][0]]
+    else:
+      return utils.get_null(x)
   def f(x, axis = None):
     # Find the first non-missing value for each column along the dimension.
     return np.apply_along_axis(get_first, axis, x)
@@ -894,7 +897,10 @@ def last_(x, track_types = True, **kwargs):
     # --> Only the first non-missing value will then be 1.
     is_value = pd.notnull(col)
     is_first = np.equal(np.cumsum(np.cumsum(is_value)), 1)
-    return col[np.argwhere(is_first)[0][0]]
+    if any(is_first):
+      return col[np.argwhere(is_first)[0][0]]
+    else:
+      return utils.get_null(x)
   def f(x, axis = None):
     # First flip the array such that last values become first values.
     # Then find the first non-missing value for each column along the dimension.
