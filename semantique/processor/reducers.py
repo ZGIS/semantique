@@ -144,7 +144,7 @@ def mode_(x, track_types = True, **kwargs):
     promoter = TypePromoter(x, function = "mode")
     promoter.check()
   def f(x, axis = None):
-    values = stats.mode(x, axis = axis, nan_policy = "omit")[0].squeeze(axis = axis)
+    values = stats.mode(x, axis = axis, nan_policy = "omit")[0]
     return np.where(utils.allnull(x, axis), utils.get_null(x), values)
   out = x.reduce(f, **kwargs)
   if track_types:
