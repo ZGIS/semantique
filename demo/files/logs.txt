@@ -49,16 +49,17 @@ array([[[29., 29., 29., 29.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    ordinal
-    value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     ordinal
+    value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -78,15 +79,16 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Translated concept ['entity', 'water']:
 <xarray.DataArray 'water' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -106,15 +108,16 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Applied verb reduce:
 <xarray.DataArray 'water' (y: 4, x: 4)>
 array([[1., 0., 0., 0.],
@@ -152,16 +155,17 @@ array([[[29., 29., 29., 29.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    ordinal
-    value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     ordinal
+    value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -181,15 +185,16 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Translated concept ['entity', 'vegetation']:
 <xarray.DataArray 'vegetation' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -209,15 +214,16 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Applied verb reduce:
 <xarray.DataArray 'vegetation' (y: 4, x: 4)>
 array([[1., 2., 1., 2.],
@@ -255,16 +261,17 @@ array([[[29., 29., 29., 29.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    ordinal
-    value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     ordinal
+    value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -284,15 +291,16 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Translated concept ['entity', 'water']:
 <xarray.DataArray 'water' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -312,21 +320,22 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Applied verb reduce:
 <xarray.DataArray 'water' (time: 3)>
 array([0., 1., 3.])
 Coordinates:
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
+  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     temporal_ref  int64 0
 Attributes:
     value_type:  discrete
@@ -353,16 +362,17 @@ array([[[29., 29., 29., 29.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    ordinal
-    value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     ordinal
+    value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -382,15 +392,16 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Translated concept ['entity', 'vegetation']:
 <xarray.DataArray 'vegetation' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -410,21 +421,22 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Applied verb reduce:
 <xarray.DataArray 'vegetation' (time: 3)>
 array([ 0., 13.,  6.])
 Coordinates:
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
+  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     temporal_ref  int64 0
 Attributes:
     value_type:  discrete
@@ -451,16 +463,17 @@ array([[[29., 29., 29., 29.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    ordinal
-    value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     ordinal
+    value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -480,15 +493,16 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Translated concept ['entity', 'water']:
 <xarray.DataArray 'water' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -508,15 +522,16 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Applied verb reduce:
 <xarray.DataArray 'water' ()>
 array(4.)
@@ -548,16 +563,17 @@ array([[[29., 29., 29., 29.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    ordinal
-    value_labels:  {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: 'W...
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     ordinal
+    value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -577,15 +593,16 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Translated concept ['entity', 'vegetation']:
 <xarray.DataArray 'vegetation' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -605,15 +622,16 @@ array([[[0., 0., 0., 0.],
 Coordinates:
   * x              (x) float64 4.531e+06 4.532e+06 4.534e+06 4.535e+06
   * y              (y) float64 2.696e+06 2.695e+06 2.693e+06 2.692e+06
-  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
     temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
-    scale_factor:  1.0
-    add_offset:    0.0
-    long_name:     33SharedSpCt
-    value_type:    binary
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary
 Applied verb reduce:
 <xarray.DataArray 'vegetation' ()>
 array(19.)
@@ -652,15 +670,15 @@ Attributes:
     value_type:  discrete, 'blue_curve': <xarray.DataArray 'blue_curve' (time: 3)>
 array([0., 1., 3.])
 Coordinates:
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
+  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     temporal_ref  int64 0
 Attributes:
     value_type:  discrete, 'green_curve': <xarray.DataArray 'green_curve' (time: 3)>
 array([ 0., 13.,  6.])
 Coordinates:
-  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     spatial_ref   int64 0
+  * time          (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-1...
     temporal_ref  int64 0
 Attributes:
     value_type:  discrete, 'blue_stat': <xarray.DataArray 'blue_stat' ()>

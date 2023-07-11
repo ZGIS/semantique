@@ -67,8 +67,9 @@
    processor.core.QueryProcessor.crs
    processor.core.QueryProcessor.spatial_resolution
    processor.core.QueryProcessor.tz
-   processor.core.QueryProcessor.operators
-   processor.core.QueryProcessor.reducers
+   processor.core.QueryProcessor.custom_verbs
+   processor.core.QueryProcessor.custom_operators
+   processor.core.QueryProcessor.custom_reducers
    processor.core.QueryProcessor.track_types
    processor.core.QueryProcessor.parse
    processor.core.QueryProcessor.optimize
@@ -93,6 +94,7 @@
    processor.core.QueryProcessor.handle_delineate
    processor.core.QueryProcessor.handle_fill
    processor.core.QueryProcessor.handle_name
+   processor.core.QueryProcessor.handle_apply_custom
    processor.core.QueryProcessor.handle_compose
    processor.core.QueryProcessor.handle_concatenate
    processor.core.QueryProcessor.handle_merge
@@ -102,13 +104,12 @@
    processor.core.QueryProcessor.handle_geometry
    processor.core.QueryProcessor.handle_time_instant
    processor.core.QueryProcessor.handle_time_interval
+   processor.core.QueryProcessor.add_custom_verb
    processor.core.QueryProcessor.call_verb
-   processor.core.QueryProcessor.add_operator
+   processor.core.QueryProcessor.add_custom_operator
    processor.core.QueryProcessor.get_operator
-   processor.core.QueryProcessor.store_default_operators
-   processor.core.QueryProcessor.add_reducer
+   processor.core.QueryProcessor.add_custom_reducer
    processor.core.QueryProcessor.get_reducer
-   processor.core.QueryProcessor.store_default_reducers
 
    processor.arrays.Array.value_type
    processor.arrays.Array.value_labels
@@ -129,6 +130,7 @@
    processor.arrays.Array.delineate
    processor.arrays.Array.fill
    processor.arrays.Array.name
+   processor.arrays.Array.apply_custom
    processor.arrays.Array.align_with
    processor.arrays.Array.regularize
    processor.arrays.Array.reproject
@@ -161,6 +163,7 @@
    processor.arrays.Collection.delineate
    processor.arrays.Collection.fill
    processor.arrays.Collection.name
+   processor.arrays.Collection.apply_custom
    processor.arrays.Collection.regularize
    processor.arrays.Collection.stack_spatial_dims
    processor.arrays.Collection.unstack_spatial_dims
