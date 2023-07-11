@@ -226,6 +226,7 @@ class Opendatacube(Datacube):
     self._layout = {} if value is None else self._parse_layout(value)
 
   def _parse_layout(self, obj):
+    # Makes the metadata objects of the data layers autocomplete friendly.
     def _parse(obj, ref):
       is_layer = False
       while not is_layer:
@@ -277,8 +278,7 @@ class Opendatacube(Datacube):
     # Format loaded data.
     data = self._format(data, metadata, extent)
     # Mask invalid data.
-    data = self._mask(data)
-    _check_if_empty(data, reference)
+    data = self._mask(data, metadata)
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
@@ -355,12 +355,26 @@ class Opendatacube(Datacube):
     data["spatial_feats"].sq.value_labels = extent["spatial_feats"].sq.value_labels
     return data
 
-  def _mask(self, data):
+  def _mask(self, data, metadata):
     # Step I: Mask nodata values.
     data = masking.mask_invalid_data(data)
     # Step II: Mask values outside of the spatial extent.
     # This is needed since data are initially loaded for the bbox of the extent.
     data = data.where(data["spatial_feats"].notnull())
+    # Step III: Mask values outside the specified value range.
+    # This value range is specified in the metadata object.
+    # For categorical data it contains all possible category indices.
+    # For numerical data it contains an lower and an upper bound.
+    if isinstance(metadata["values"], list):
+      indices = [x["id"] for x in metadata["values"]]
+      data = data.where(data.isin(indices))
+    else:
+      lower = metadata["values"]["min"]
+      upper = metadata["values"]["max"]
+      if lower is not None:
+        data = data.where(data >= lower)
+      if upper is not None:
+        data = data.where(data <= upper)
     return data
 
 class GeotiffArchive(Datacube):
@@ -493,6 +507,7 @@ class GeotiffArchive(Datacube):
     self._layout = {} if value is None else self._parse_layout(value)
 
   def _parse_layout(self, obj):
+    # Makes the metadata objects of the data layers autocomplete friendly.
     def _parse(obj, ref):
       is_layer = False
       while not is_layer:
@@ -544,8 +559,7 @@ class GeotiffArchive(Datacube):
     # Format the loaded data.
     data = self._format(data, metadata, extent)
     # Mask invalid data.
-    data = self._mask(data)
-    _check_if_empty(data, reference)
+    data = self._mask(data, metadata)
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
@@ -622,11 +636,24 @@ class GeotiffArchive(Datacube):
     data.name = os.path.splitext(metadata["file"])[0]
     return data
 
-  def _mask(self, data):
+  def _mask(self, data, metadata):
     # Step I: Mask nodata values.
     data = data.where(data != data.rio.nodata)
-    data.rio.write_nodata(data.rio.nodata, encoded = True, inplace = True)
     # Step II: Mask values outside of the spatial extent.
     # This is needed since data are initially loaded for the bbox of the extent.
     data = data.where(data["spatial_feats"].notnull())
+    # Step III: Mask values outside the specified value range.
+    # This value range is specified in the metadata object.
+    # For categorical data it contains all possible category indices.
+    # For numerical data it contains an lower and an upper bound.
+    if isinstance(metadata["values"], list):
+      indices = [x["id"] for x in metadata["values"]]
+      data = data.where(data.isin(indices))
+    else:
+      lower = metadata["values"]["min"]
+      upper = metadata["values"]["max"]
+      if lower is not None:
+        data = data.where(data >= lower)
+      if upper is not None:
+        data = data.where(data <= upper)
     return data
