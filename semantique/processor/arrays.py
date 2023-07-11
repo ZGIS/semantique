@@ -12,7 +12,7 @@ import warnings
 from scipy import ndimage
 
 from semantique import exceptions, components
-from semantique.processor import operators, utils
+from semantique.processor import operators, reducers, utils
 from semantique.dimensions import TIME, SPACE, X, Y
 
 @xr.register_dataarray_accessor("sq")
@@ -1560,8 +1560,25 @@ class Collection(list):
       if all(has_dim):
         # Concatenate over existing dimension.
         raw = xr.concat([x for x in self], dimension)
-        coords = raw.get_index(dimension)
-        clean = raw.isel({dimension: np.invert(coords.duplicated())})
+        has_duplicated_coords = any(raw.get_index(dimension).duplicated())
+        if has_duplicated_coords:
+          # If arrays have overlapping coordinates for this dimension:
+          # --> Choose the first non-missing value to be in the output.
+          # Do this by:
+          # --> Creating groups for each coordinate value.
+          # --> Merge these groups using the "first" reducer.
+          # --> Concatenate the merged groups back together.
+          def _merge_dups(obj):
+            coords = obj.get_index(dimension).values
+            if len(coords) > 1:
+              dups = [obj.isel({dimension: i}) for i, x in enumerate(coords)]
+              return Collection(dups).sq.merge(reducers.first_)
+            else:
+              return obj
+          groups = list(raw.groupby(dimension))
+          clean = xr.concat([_merge_dups(x[1]) for x in groups], dimension)
+        else:
+          clean = raw
         out = clean.sortby(dimension)
       else:
         raise exceptions.MissingDimensionError(
