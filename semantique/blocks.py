@@ -687,6 +687,35 @@ class ArrayProxy(dict):
     kwargs.update({"value": value})
     return self._append_verb("name", **kwargs)
 
+  def apply_custom(self, verb, **kwargs):
+    """Apply a user-defined verb to the array.
+
+    The implementation of the user-defined verb needs to be provided
+    through the ``custom_verbs` argument when executing the query
+    recipe. Only use this functionality when you know what you are
+    doing.
+
+    Parameters
+    -----------
+      verb : :obj:`str`
+        Name of the user-defined verb.
+      **kwargs:
+        Additional keyword arguments passed on to
+        :meth:`Array.apply_custom <processor.arrays.Array.apply_custom>`.
+
+    Returns
+    --------
+      :obj:`ArrayProxy`
+
+    Examples
+    --------
+    >>> import semantique as sq
+    >>> sq.entity("water").apply_custom("MyCustomVerb")
+
+    """
+    kwargs.update({"verb": verb})
+    return self._append_verb("apply_custom", **kwargs)
+
 class CollectionProxy(dict):
   """Proxy object of an array collection.
 
@@ -1003,6 +1032,20 @@ class CollectionProxy(dict):
 
     """
     return self._append_verb("fill", **kwargs)
+
+  def apply_custom(self, name, **kwargs):
+    """Apply a user-defined verb to each array in a collection.
+
+    See :meth:`ArrayProxy.apply_custom`.
+
+    Returns
+    --------
+      :obj:`CollectionProxy`
+
+    """
+    kwargs.update({"name": name})
+    return self._append_verb("apply_custom", **kwargs)
+
 
 def concept(*reference, property = None):
   """Reference to a semantic concept.

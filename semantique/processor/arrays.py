@@ -898,6 +898,28 @@ class Array():
     out = self._obj.rename(value)
     return out
 
+  def apply_custom(self, verb, track_types = True, **kwargs):
+    """Apply a user-defined verb to the array.
+
+    Parameters
+    -----------
+      verb : :obj:`callable`
+        Implementation of the custom verb which will be provided to
+        :meth:`xarray.DataArray.pipe`.
+      track_types : :obj:`bool`
+        Should the value type(s) of the input(s) be checked, and the value
+        type of the output be promoted, whenever applicable?
+      **kwargs:
+        Additional keyword arguments passed on to the verb function.
+
+    Returns
+    --------
+      :obj:`xarray.DataArray`
+
+    """
+    out = self._obj.pipe(verb, track_types = track_types, **kwargs)
+    return out
+
   #
   # INTERNAL PROCESSING
   #
@@ -1817,6 +1839,21 @@ class Collection(list):
     """
     out = copy.deepcopy(self)
     out[:] = [x.sq.name(value, **kwargs) for x in out]
+    return out
+
+  def apply_custom(self, verb, track_types = True, **kwargs):
+    """Apply a user-defined verb to all arrays in the collection.
+
+    See :meth:`Array.apply_custom`
+
+    Returns
+    -------
+      :obj:`Collection`
+
+    """
+    args = tuple([verb, track_types])
+    out = copy.deepcopy(self)
+    out[:] = [x.sq.apply_custom(*args, **kwargs) for x in out]
     return out
 
   def regularize(self):

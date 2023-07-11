@@ -8,10 +8,8 @@ import pyproj
 import pytz
 import warnings
 
-import semantique.processor.operators
-import semantique.processor.reducers
 from semantique import exceptions
-from semantique.processor import arrays, values, utils
+from semantique.processor import arrays, operators, reducers, values, utils
 
 logger = logging.getLogger(__name__)
 
@@ -31,21 +29,17 @@ class QueryProcessor():
       be given as an array with a temporal dimension and two spatial dimensions
       such as returned by
       :func:`parse_extent <semantique.processor.utils.parse_extent>`.
-    operators : :obj:`dict`
-      Operator functions that may be used when evaluating expressions with the
-      evaluate verb. If :obj:`None`, all built-in operators in semantique will
-      be provided automatically.
-    extra_operators : :obj:`dict`, optional
-      Operator functions that may be used when evaluating expressions with the
-      evaluate verb *in addition* to the built-in operators in semantique.
-    reducers : :obj:`dict`
-      Reducer functions that may be used when reducing array dimensions
-      with the reduce verb. If :obj:`None`, all built-in reducers in semantique
-      will be provided automatically.
-    extra_reducers : :obj:`dict`, optional
-      Reducer functions that may be used when reducing array dimensions
-      with the reduce verb *in addition* to the built-in reducers in
-      semantique.
+    custom_verbs : :obj:`dict`, optional
+      User-defined verbs that may be used when executing the query recipe in
+      addition to the built-in verbs in semantique.
+    custom_operators : :obj:`dict`, optional
+      User-defined operator functions that may be used when evaluating
+      expressions with the evaluate verb in addition to the built-in operators
+      in semantique. Built-in operators with the same name will be overwritten.
+    custom_reducers : :obj:`dict`, optional
+      User-defined reducer functions that may be used when reducing array
+      dimensions with the reduce verb in addition to the built-in reducers in
+      semantique. Built-in reducers with the same name will be overwritten.
     track_types : :obj:`bool`
       Should the query processor keep track of the value type of arrays
       when applying processes, and promote them if necessary? Keeping track of
@@ -54,8 +48,8 @@ class QueryProcessor():
 
   """
 
-  def __init__(self, recipe, datacube, mapping, extent, operators = None,
-               extra_operators = None, reducers = None, extra_reducers = None,
+  def __init__(self, recipe, datacube, mapping, extent, custom_verbs = None,
+               custom_operators = None, custom_reducers = None,
                track_types = True):
     self._eval_obj = [None]
     self._response = {}
@@ -64,18 +58,9 @@ class QueryProcessor():
     self.mapping = mapping
     self.extent = extent
     self.track_types = track_types
-    if operators is None:
-      self.store_default_operators()
-    else:
-      self.operators = operators
-    if extra_operators is not None:
-      self.operators.update(extra_operators)
-    if reducers is None:
-      self.store_default_reducers()
-    else:
-      self.reducers = reducers
-    if extra_reducers is not None:
-      self.reducers.update(extra_reducers)
+    self.custom_verbs = custom_verbs
+    self.custom_operators = custom_operators
+    self.custom_reducers = custom_reducers
 
   @property
   def response(self):
@@ -141,22 +126,31 @@ class QueryProcessor():
     return self._extent.sq.tz
 
   @property
-  def operators(self):
-    """:obj:`dict`: Supported operator functions for the evaluate verb."""
-    return self._operators
+  def custom_verbs(self):
+    """:obj:`dict`: User-defined verbs for query execution."""
+    return self._custom_verbs
 
-  @operators.setter
-  def operators(self, value):
-    self._operators = value
+  @custom_verbs.setter
+  def custom_verbs(self, value):
+    self._custom_verbs = {} if value is None else value
 
   @property
-  def reducers(self):
-    """:obj:`dict`: Supported reducer functions for the reduce verb."""
-    return self._reducers
+  def custom_operators(self):
+    """:obj:`dict`: User-defined operator functions for the evaluate verb."""
+    return self._custom_operators
 
-  @reducers.setter
-  def reducers(self, value):
-    self._reducers = value
+  @custom_operators.setter
+  def custom_operators(self, value):
+    self._custom_operators = {} if value is None else value
+
+  @property
+  def custom_reducers(self):
+    """:obj:`dict`: User-defined reducer functions for the reduce verb."""
+    return self._custom_reducers
+
+  @custom_reducers.setter
+  def custom_reducers(self, value):
+    self._custom_reducers = {} if value is None else value
 
   @property
   def track_types(self):
@@ -363,8 +357,9 @@ class QueryProcessor():
       extent = self._extent,
       datacube = self._datacube,
       eval_obj = self._get_eval_obj(),
-      operators = self._operators,
-      reducers = self._reducers,
+      custom_verbs = self._custom_verbs,
+      custom_operators = self._custom_operators,
+      custom_reducers = self._custom_reducers,
       track_types = self._track_types
     )
     logger.debug(f"Translated concept {block['reference']}:\n{out}")
@@ -771,6 +766,35 @@ class QueryProcessor():
     """
     return self.call_verb("name", block["params"])
 
+  def handle_apply_custom(self, block):
+    """Handler for the apply_custom verb.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "verb" and name
+        "apply_custom".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+
+    """
+    # Get function parameters.
+    params = copy.deepcopy(block["params"])
+    # Fetch the corresponding custom verb function.
+    try:
+      name = params["verb"]
+      func = self._custom_verbs[name]
+    except KeyError:
+      raise exceptions.UnknownVerbError(
+        f"Custom verb '{name}' is not defined"
+      )
+    params["verb"] = func
+    # Set other function parameters.
+    params["track_types"] = self._track_types
+    return self.call_verb("apply_custom", params)
+
   def handle_compose(self, block):
     """Handler for the compose verb.
 
@@ -979,6 +1003,20 @@ class QueryProcessor():
     logger.debug(f"Parsed time interval:\n{out}")
     return out
 
+  def add_custom_verb(self, name, function):
+    """Add a new verb to the set of user-defined verbs.
+
+    Parameters
+    ----------
+      name : :obj:`str`
+        Name of the verb to be added.
+      function : :obj:`callable`
+        Operator function to be added.
+
+    """
+    new = {name: function}
+    self._custom_verbs.update(new)
+
   def call_verb(self, name, params):
     """Apply a verb to the active evaluation object.
 
@@ -1011,8 +1049,8 @@ class QueryProcessor():
     logger.debug(f"Applied verb {name}:\n{out}")
     return out
 
-  def add_operator(self, name, function):
-    """Add a new operator to the set of supported operators.
+  def add_custom_operator(self, name, function):
+    """Add a new operator to the set of user-defined operators.
 
     Parameters
     ----------
@@ -1023,7 +1061,7 @@ class QueryProcessor():
 
     """
     new = {name: function}
-    self._operators.update(new)
+    self._custom_operators.update(new)
 
   def get_operator(self, name):
     """Obtain a supported operator function.
@@ -1045,26 +1083,21 @@ class QueryProcessor():
         found.
 
     """
+    # First try to get the operator from the dict of user-defined operators.
+    # Then try to get it from the module with built-in semantique operators.
     try:
-      obj = self._operators[name.lower()]
+      func = self._custom_operators[name]
     except KeyError:
-      raise exceptions.UnknownOperatorError(
-        f"Operator '{name}' is not defined"
-      )
-    return obj
+      try:
+        func = getattr(operators, f"{name}_")
+      except AttributeError:
+        raise exceptions.UnknownOperatorError(
+          f"Operator '{name}' is not defined"
+        )
+    return func
 
-  def store_default_operators(self):
-    """Store the built-in operators as supported operators."""
-    src = semantique.processor.operators
-    functions = dict(inspect.getmembers(src, inspect.isfunction))
-    functions = {k:v for k, v in functions.items() if k[0] != "_"}
-    out = {}
-    for f in functions:
-      out[f[:-1]] = functions[f]
-    self._operators = out
-
-  def add_reducer(self, name, function):
-    """Add a new reducer to the set of supported reducers.
+  def add_custom_reducer(self, name, function):
+    """Add a new reducer to the set of user-defined reducers.
 
     Parameters
     ----------
@@ -1075,7 +1108,7 @@ class QueryProcessor():
 
     """
     new = {name: function}
-    self._reducers.update(new)
+    self._custom_reducers.update(new)
 
   def get_reducer(self, name):
     """Obtain a supported reducer function.
@@ -1097,23 +1130,18 @@ class QueryProcessor():
         found.
 
     """
+    # First try to get the reducer from the dict of user-defined reducers.
+    # Then try to get it from the module with built-in semantique reducers.
     try:
-      obj = self._reducers[name.lower()]
+      func = self._custom_reducers[name]
     except KeyError:
-      raise exceptions.UnknownReducerError(
-        f"Reducer '{name}' is not defined"
-      )
-    return obj
-
-  def store_default_reducers(self):
-    """Store the built-in reducers as supported reducers."""
-    src = semantique.processor.reducers
-    functions = dict(inspect.getmembers(src, inspect.isfunction))
-    functions = {k:v for k, v in functions.items() if k[0] != "_"}
-    out = {}
-    for f in functions:
-      out[f[:-1]] = functions[f]
-    self._reducers = out
+      try:
+        func = getattr(reducers, f"{name}_")
+      except AttributeError:
+        raise exceptions.UnknownReducerError(
+          f"Reducer '{name}' is not defined"
+        )
+    return func
 
   def _get_eval_obj(self):
     return self._eval_obj[-1]

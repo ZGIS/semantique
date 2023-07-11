@@ -85,6 +85,16 @@ class UnknownResultError(Exception):
   """
   pass
 
+class UnknownVerbError(Exception):
+  """Raised when an undefined custom verb function is used.
+
+  This occurs because the user referenced a user-defined verb in the query
+  recipe but did not provide a function with that name as custom verb when
+  executing the recipe.
+
+  """
+  pass
+
 class UnknownReducerError(Exception):
   """Raised when an undefined reducer function is used.
 
