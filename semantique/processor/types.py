@@ -4,11 +4,11 @@ from geopandas import GeoDataFrame
 from semantique import exceptions
 
 DTYPE_MAPPING = {
-  "b": "binary",
+  "b": ["binary"],
   "i": ["continuous", "discrete", "ordinal", "nominal"],
   "u": ["continuous", "discrete", "ordinal", "nominal"],
-  "f": "continuous",
-  "M": "datetime",
+  "f": ["continuous"],
+  "M": ["datetime"],
   "O": ["ordinal", "nominal"],
   "U": ["ordinal", "nominal"]
 }
@@ -20,9 +20,9 @@ contains e.g. :obj:`int`, :obj:`float`, etc. Instead, the semantique value type
 describes data on a more general, statistical level. Each numpy data type can
 be mapped to one or semantique value types.
 
-In this mapping, numpy data types are expressed by their `.kind` property. If
-a numpy data type can be mapped to more than one semantique value type, these
-value types are stored in a list.
+In this mapping, numpy data types are expressed by their `.kind` property. Each
+numpy data type may be mapped to more than one semantique value type, meaning
+that it can represent any of these value types.
 
 .. _numpy dtype:
   https://numpy.org/doc/stable/reference/arrays.dtypes.html
@@ -462,9 +462,11 @@ def get_value_type(x):
 
   Returns
   -------
-    :obj:`str`
-      The determined value type. If no value type could be determined for the
-      given object, the function will return :obj:`None`.
+    :obj:`list`
+      A list containing the determined value type. If the object may be one of
+      multiple value types this list will have multiple elements. If no value
+      type could be determined for the given object, the function will return
+      :obj:`None`.
 
   .. _numpy dtype:
     https://numpy.org/doc/stable/reference/arrays.dtypes.html
@@ -487,6 +489,9 @@ def get_value_type(x):
       vtype = DTYPE_MAPPING[dtype]
     except KeyError:
       pass
+  else:
+    if not isinstance(vtype, (list, tuple)):
+      vtype = [vtype]
   return vtype
 
 def get_value_labels(x):
@@ -620,34 +625,40 @@ class TypePromoter:
         If the type promotion manual is missing.
 
     """
-    # Get value types of operands.
     intypes = self.input_types
-    try:
-      ytype = intypes[1]
-    except IndexError:
-      pass
-    else:
-      xtype = intypes[0]
-      if isinstance(ytype, (list, tuple)):
-        if xtype in ytype:
-          ytype = xtype
-        else:
-          ytype = ytype[0]
-      intypes = [xtype, ytype]
-    # Infer value type of output.
-    out = self.manual # Initialize before scanning.
-    if out is None:
+    outtype = None
+    manual = self.manual
+    if manual is None:
       raise ValueError(
         f"No type promotion manual defined for function '{self._function}'"
       )
-    for x in intypes:
-      try:
-        out = out[x]
-      except KeyError:
-        raise exceptions.InvalidValueTypeError(
-          f"Unsupported operand value type(s) for '{self._function}': {intypes}"
-        )
-    self._output_type = out
+    if len(intypes) == 1:
+      for x in intypes[0]:
+        try:
+          outtype = manual[x]
+          break
+        except KeyError:
+          continue
+    else:
+      if len(intypes[0]) == 1 and intypes[0][0] in intypes[1]:
+        try:
+          xtype = intypes[0][0]
+          outtype = manual[xtype][xtype]
+        except KeyError:
+          pass
+      if outtype is None:
+        combs = [(x, y) for x in intypes[0] for y in intypes[1]]
+        for ref in combs:
+          try:
+            outtype = manual[ref[0]][ref[1]]
+            break
+          except KeyError:
+            continue
+    if outtype is None:
+      raise exceptions.InvalidValueTypeError(
+        f"Unsupported operand value type(s) for '{self._function}': {intypes}"
+      )
+    self._output_type = outtype
 
   def promote(self, obj):
     """Promote the value type of the operation output.
