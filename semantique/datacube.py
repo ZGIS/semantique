@@ -8,19 +8,13 @@ import os
 import pytz
 import rasterio
 import rioxarray
+import warnings
 
 from datacube.utils import masking
 from abc import abstractmethod
 
 from semantique import exceptions
 from semantique.dimensions import TIME, SPACE, X, Y
-
-def _check_if_empty(data, reference):
-  if data.sq.is_empty:
-    raise exceptions.EmptyDataError(
-      f"Data layer '{reference}' does not contain data within the "
-      "specified spatio-temporal extent"
-    )
 
 class Datacube():
   """Base class for EO data cube configurations.
@@ -274,11 +268,20 @@ class Opendatacube(Datacube):
     metadata = self.lookup(*reference)
     # Load the data values from the EO data cube.
     data = self._load(metadata, extent)
-    _check_if_empty(data, reference)
+    if data.sq.is_empty:
+      raise exceptions.EmptyDataError(
+        f"Data layer '{reference}' does not contain data within the "
+        "specified spatio-temporal extent"
+      )
     # Format loaded data.
     data = self._format(data, metadata, extent)
     # Mask invalid data.
     data = self._mask(data)
+    if data.sq.is_empty:
+      warnings.warn(
+        f"All values for data layer '{reference}' are invalid within the "
+        "specified spatio-temporal extent"
+      )
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
@@ -541,11 +544,20 @@ class GeotiffArchive(Datacube):
     # This loads all data in the layer into memory (NOT EFFICIENT!).
     # Only after that is subsets the loaded data in space and time.
     data = self._load(metadata, extent)
-    _check_if_empty(data, reference)
-    # Format the loaded data.
+    if data.sq.is_empty:
+      raise exceptions.EmptyDataError(
+        f"Data layer '{reference}' does not contain data within the "
+        "specified spatio-temporal extent"
+      )
+    # Format loaded data.
     data = self._format(data, metadata, extent)
     # Mask invalid data.
     data = self._mask(data)
+    if data.sq.is_empty:
+      warnings.warn(
+        f"All values for data layer '{reference}' are invalid within the "
+        "specified spatio-temporal extent"
+      )
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
