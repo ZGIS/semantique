@@ -12,7 +12,14 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         activate-environment: semantique
-        environment-file: environment.yml
+    - name: install-package-requirements
+      shell: bash -l {0}
+      run: |
+        conda install geocube datacube
+    - name: install-package
+      shell: bash -l {0}
+      run: |
+        pip install -e .
     - name: install-build-requirements
       shell: bash -l {0}
       run: |
