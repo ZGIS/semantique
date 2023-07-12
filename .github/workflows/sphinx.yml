@@ -15,6 +15,8 @@ jobs:
     - name: install-package-requirements
       shell: bash -l {0}
       run: |
+        conda config --add channels conda-forge
+        conda config --set channel_priority strict
         conda install geocube datacube
     - name: install-package
       shell: bash -l {0}
