@@ -7,15 +7,15 @@ with open("README.md", encoding = "utf-8") as file:
 # List dependencies.
 dependencies = [
   'datacube>=1.8',
-  'geocube',
+  'geocube>=0.4.1',
   'geopandas',
-  'numpy',
-  'pandas',
+  'numpy>=1.21',
+  'pandas>=2.0',
   'pyproj>=3.0',
   'pytz',
   'rasterio',
-  'rioxarray',
-  'scipy',
+  'rioxarray>=0.14',
+  'scipy>=1.11',
   'setuptools',
   'xarray>=0.16'
 ]
@@ -31,6 +31,6 @@ setup(
   author = "Lucas van der Meer",
   author_email = "lucas.vandermeer@sbg.ac.at",
   packages = find_packages(),
-  python_requires = ">=3.7",
+  python_requires = ">=3.9",
   install_requires = dependencies
 )
