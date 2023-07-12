@@ -1374,7 +1374,7 @@
 <h1>semantique.mapping.Mapping.translate<a class="headerlink" href="#semantique-mapping-mapping-translate" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.mapping.Mapping.translate">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Mapping.</span></span><span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">property</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datacube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/mapping.py#L48-L77"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.mapping.Mapping.translate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Mapping.</span></span><span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">property</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datacube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/mapping.py#L48-L84"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.mapping.Mapping.translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract method for the translator function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1394,6 +1394,11 @@ The translated semantic concept will have the same extent.</p></li>
 contain processing chains that start with a self reference.</p></li>
 <li><p><strong>**config</strong> – Additional keyword arguments.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2023.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – The translated semantic concept, or property of a semantic concept, as
+an array. For each pixel it contains the quantified relation between
+the semantic concept and the data values in the datacube.</p>
 </dd>
 </dl>
 </dd></dl>

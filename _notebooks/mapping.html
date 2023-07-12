@@ -1673,14 +1673,825 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import geopandas as gpd
+import json
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="Structure">
 <h2>Structure<a class="headerlink" href="#Structure" title="Permalink to this headline">¶</a></h2>
-<p><em>To be added</em></p>
+<p>The rules in the mapping should support computational inference on the pixel level. That is, for each spatio-temporal location contained in the EO data cube, they should be able to quantify a relation to the semantic concept. Such a relation may be binary, stating if the concept was observed at the location (“true”) or not (“false”). However, relations may also be numeric (e.g. a probability that the concept was observed) or ordinal (e.g. “likely” or “very likely” that the concept was observed).</p>
+<p>When formulating the rules of a mapping the EO expert can specify the required data inputs through calls to the retriever of the EO data cube, and thus, does not have to be aware of the configuration of the cube. It is important to emphasize here that there is no limitation to formulate rules as a function of only the data values of the pixel to which they are applied. In order to quantify the relations more accurately, the EO expert may exploit all the values in the EO data cube. For example,
+they may analyze spatial or temporal patterns around the location of the pixel.</p>
+<p>How the rules are formulated in practice depends largely on the approach that the EO expert decides to take. This can be entirely knowledge-driven, but also hybrid approaches combining knowledge-driven and data-driven components are possible. For example, a rule may interpret the prediction of a machine learning classifier. Approaches can also differ in how they encode the formulated rules. We refer to all these different approaches as different configurations of a mapping.</p>
+<p>The structure of semantique is flexible and does not put any limitations on what the configuration of a mapping should be. Instead, it allows users to create their own class that implements their specific mapping configuration. Such a class should always inherit from the abstract base class <a class="reference external" href="https://zgis.github.io/semantique/semantique.mapping.Mapping.html">Mapping</a> that semantique contains.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>base = sq.mapping.Mapping()
+</pre></div>
+</div>
+</div>
+<p>The mapping base class inherits from the Python dictionary class, meaning that every mapping configuration should have the structure of a Python dictionary. In this dictionary, the names of semantic concepts are the keys and the rules that map them to data in an EO data cube are the values. The dictionary may have a nested structure formalizing a categorization of semantic concepts, e.g. the rules of the semantic concept water can be indexed by the key pair (“entity”, “water”) instead of only
+“water”. The depth of this index depends on the structure of the ontology to which the mapping refers.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>isinstance(base, dict)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+<p>The mapping base class requires each mapping configuration to have a <a class="reference external" href="https://zgis.github.io/semantique/semantique.mapping.Mapping.translate.html">translate()</a> method that implements the translator of the mapping, with fixed input and output types. The translator is an interface that exposes the rules in the mapping to the other components of the querying framework. Given a textual reference to a semantic concept, it is able to apply the corresponding rules to the data values in the EO data
+cube, and return for each pixel the quantified relation with the semantic concept. The exact implementation of the translator depends on the configuration of the mapping, but the inputs it accepts and the output it returns does not. Hence, the translator serves as a standardized API that allows other components of the framework to evaluate the rules in the mapping independent from its configuration.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>hasattr(base, &quot;translate&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+<p>It is important to note here that when evaluating a query recipe the query processor does not care at all what the configuration of the mapping is and how it translates semantic concept references. It only interacts with the translator function, and thus only cares about what input the translator function accepts, and in what format it returns the translated concepts.</p>
 </div>
 <div class="section" id="The-Semantique-configuration">
 <h2>The Semantique configuration<a class="headerlink" href="#The-Semantique-configuration" title="Permalink to this headline">¶</a></h2>
-<p><em>To be added</em></p>
+<p>Semantique formalizes its own native mapping configuration through the <a class="reference external" href="https://zgis.github.io/semantique/semantique.mapping.Semantique.html">Semantique</a> sub-class. It implements a knowledge-driven approach in which the EO expert formulates rules that quantify binary relations between properties of semantic concepts and data values, rather than directly from semantic concepts to data values. For example, a entity <em>lake</em> may be defined by its <em>color</em> (a blueish, water-like color) in
+combination with its <em>texture</em> (it has an approximately flat surface). These property relations are then combined with a logical “and” operator to quantify the relation for the semantic concept as a whole, meaning that the concept is only observed if all its properties are observed.</p>
+<p>To formulate the rules for each property, the EO expert can use the same building blocks as made available for <a class="reference internal" href="recipes.html"><span class="doc">writing query recipes</span></a>, and combine them into processing chains. However, where in a query recipe such a processing chain usually start with a reference to a semantic concept, in the mapping they will usually start with a reference to a data layer in the EO data cube.
+Such a reference can then be directly followed by an <a class="reference external" href="verbs#Evaluate">evaluate verb</a> that evaluates a condition on the data values of one or more layers. More complex rules can be formulated by utilizing more verbs, and nesting multiple processing chains into each other.</p>
+<p>Below we will show some examples on how you can construct rules with the Semantique mapping configuration. They are heavily simplified and don’t always make sense, but are meant mainly to get an idea of how the mapping construction works. First, we need to create an instance of the Semantique class, which inherits from the abstract base class Mapping. We can create an instance of it by providing a dictionary with rules that was shared with us. However, when creating a mapping from scratch, we
+start with an empty mapping, and iteratively fill it with rules afterwards.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping = sq.mapping.Semantique()
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>isinstance(mapping, sq.mapping.Mapping)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+<p>In our example, we will focus solely on defining entities, and use a one-layer categorization. That is, our only category is <em>entity</em>. The first step is to add this category as a key to the mapping. Its value can still be an empty dictionary. We will add the concept definitions afterwards.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping[&quot;entity&quot;] = {}
+</pre></div>
+</div>
+</div>
+<p>Now, we need to construct rules that define a binary relationship between the distinct properties of an entity and the data values in the EO data cube. That is, the rules should define for each pixel in our data if it meets a specific property (“true”), or not (“false”). As said, we can do this by applying the same building blocks as we did for constructing our query recipe, but now starting with a reference to a data layer in the EO data cube. For example: we utilize the (“appearance”,
+“colortype”) data layer in the EO data cube to define if a pixel has a water-like color. This is a layer of semantically enriched data and contains categorical values. The categories with indices 21, 22, 23 and 24 correspond to color combinations that <em>appear</em> to be water. Hence, we state that a pixel meets the color property of a lake when its value in the (“appearance”, “colortype”) corresponds with one of the above mentioned indices. Furthermore, we state that a pixel meets the texture
+property of a lake when its value in the (“topography”, “slope”) layer equals 0.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping[&quot;entity&quot;][&quot;lake&quot;] = {
+    &quot;color&quot;: sq.appearance(&quot;colortype&quot;).evaluate(&quot;in&quot;, [21, 22, 23, 24]),
+    &quot;texture&quot;: sq.topography(&quot;slope&quot;).evaluate(&quot;equal&quot;, 0)
+}
+</pre></div>
+</div>
+</div>
+<p>The way that semantique parses the layout of the EO data cube, you can also access labels and/or descriptions of category indices in an auto-complete friendly way.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/layout.json&quot;, &quot;r&quot;) as file:
+    dc = sq.datacube.GeotiffArchive(json.load(file), src = &quot;files/layers.zip&quot;)
+
+layout = dc.layout
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>descriptions = layout[&quot;appearance&quot;][&quot;colortype&quot;][&quot;descriptions&quot;]
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>indices = [
+    descriptions[&quot;Deep water or shadow&quot;],
+    descriptions[&quot;Shallow water or shadow&quot;],
+    descriptions[&quot;Turbid water or shadow&quot;],
+    descriptions[&quot;Salty Shallow Water&quot;]
+]
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping[&quot;entity&quot;][&quot;lake&quot;] = {
+    &quot;color&quot;: sq.appearance(&quot;colortype&quot;).evaluate(&quot;in&quot;, indices),
+    &quot;texture&quot;: sq.topography(&quot;slope&quot;).evaluate(&quot;equal&quot;, 0)
+}
+</pre></div>
+</div>
+</div>
+<p>Now we define a second entity <em>river</em>, which we say has the same color property of a lake, but instead has a non-zero slope.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping[&quot;entity&quot;][&quot;river&quot;] = {
+    &quot;color&quot;: sq.appearance(&quot;colortype&quot;).evaluate(&quot;in&quot;, [21, 22, 23, 24]),
+    &quot;texture&quot;: sq.topography(&quot;slope&quot;).evaluate(&quot;not_equal&quot;, 0)
+}
+</pre></div>
+</div>
+</div>
+<p>As you see, there is a relation between the entities <em>lake</em> and <em>river</em>. They share a property. However, we defined the same property twice. This is not needed, since you can always refer to other entities in the mapping, as well as to properties of these entities. In this way, you can intuitively model relations between different semantic concepts. Hence, the same <em>river</em> definition can also be structured as follows:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping[&quot;entity&quot;][&quot;river&quot;] = {
+    &quot;color&quot;: sq.entity(&quot;lake&quot;, property = &quot;color&quot;),
+    &quot;texture&quot;: sq.entity(&quot;lake&quot;, property = &quot;texture&quot;).evaluate(&quot;not&quot;)
+}
+</pre></div>
+</div>
+</div>
+<p>Or, to take it a step further, as below. Basically we are saying here that a <em>lake</em> has the color of <em>water</em> and the texture of a <em>plain</em> (again, we oversimplify here!).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping[&quot;entity&quot;][&quot;water&quot;] = {
+    &quot;color&quot;: sq.appearance(&quot;colortype&quot;).evaluate(&quot;in&quot;, [21, 22, 23, 24]),
+}
+
+mapping[&quot;entity&quot;][&quot;vegetation&quot;] = {
+    &quot;color&quot;: sq.appearance(&quot;colortype&quot;).evaluate(&quot;in&quot;, [1, 2, 3, 4, 5, 6]),
+}
+
+mapping[&quot;entity&quot;][&quot;plain&quot;] = {
+    &quot;color&quot;: sq.entity(&quot;vegetation&quot;, property = &quot;color&quot;),
+    &quot;texture&quot;: sq.topography(&quot;slope&quot;).evaluate(&quot;equal&quot;, 0)
+}
+
+mapping[&quot;entity&quot;][&quot;lake&quot;] = {
+    &quot;color&quot;: sq.entity(&quot;water&quot;, property = &quot;color&quot;),
+    &quot;texture&quot;: sq.entity(&quot;plain&quot;, property = &quot;texture&quot;)
+}
+
+mapping[&quot;entity&quot;][&quot;river&quot;] = {
+    &quot;color&quot;: sq.entity(&quot;water&quot;, property = &quot;color&quot;),
+    &quot;texture&quot;: sq.entity(&quot;plain&quot;, property = &quot;texture&quot;).evaluate(&quot;not&quot;)
+}
+</pre></div>
+</div>
+</div>
+<p>We can also model relationships in a way where some entity is the union of other entities.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping[&quot;entity&quot;][&quot;natural_area&quot;] = {
+    &quot;members&quot;: sq.collection(sq.entity(&quot;water&quot;), sq.entity(&quot;vegetation&quot;)).merge(&quot;or&quot;)
+}
+</pre></div>
+</div>
+</div>
+<p>It is also possible to include temporal information. For example, we only consider an observation to be part of a lake when over time more than 80% of the observations at that location are identified as water, excluding those observations that are identified as a cloud.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping[&quot;entity&quot;][&quot;lake&quot;] = {
+    &quot;color&quot;: sq.entity(&quot;water&quot;, property = &quot;color&quot;),
+    &quot;texture&quot;: sq.entity(&quot;plain&quot;, property = &quot;texture&quot;),
+    &quot;continuity&quot;: sq.entity(&quot;water&quot;, property = &quot;color&quot;).\
+        filter(sq.entity(&quot;cloud&quot;).evaluate(&quot;not&quot;)).\
+        reduce(&quot;percentage&quot;, &quot;time&quot;).\
+        evaluate(&quot;greater&quot;, 80)
+}
+</pre></div>
+</div>
+</div>
+<p>Besides referencing data layers or other entities, a ruleset may also start with a self reference. This means that when translating the semantic concept within a query recipe, the rules are applied to the array that at that moment is the active evaluation object of the query processor. This may sound slighlty overwhelming, but basically it allows for example to model custom seasons as being temporal entities, and use them as a
+temporal filter in a query recipe.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping[&quot;entity&quot;][&quot;harvest_season&quot;] = {
+    &quot;timespan&quot;: sq.self().extract(&quot;time&quot;, &quot;month&quot;).evaluate(&quot;in&quot;, [8, 9, 10])
+}
+
+recipe = sq.QueryRecipe()
+recipe[&quot;vegetation_during_harvest&quot;] = sq.entity(&quot;vegetation&quot;).filter(sq.entity(&quot;harvest_season&quot;))
+</pre></div>
+</div>
+</div>
+<p>The flexible structure with the building blocks of semantique make many more structures possible. Now you have an idea of how to construct a mapping from scratch using the built-in Semantique configuration, we move on and construct a complete mapping in one go. However, we use simpler rules as above, since our demo EO data cube only contains a very limited set of resources.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mapping = sq.mapping.Semantique()
+mapping[&quot;entity&quot;] = {}
+
+mapping[&quot;entity&quot;][&quot;water&quot;] = {&quot;color&quot;: sq.appearance(&quot;colortype&quot;).evaluate(&quot;in&quot;, [21, 22, 23, 24])}
+mapping[&quot;entity&quot;][&quot;vegetation&quot;] = {&quot;color&quot;: sq.appearance(&quot;colortype&quot;).evaluate(&quot;in&quot;, [1, 2, 3, 4, 5, 6])}
+mapping[&quot;entity&quot;][&quot;builtup&quot;] = {&quot;color&quot;: sq.appearance(&quot;colortype&quot;).evaluate(&quot;in&quot;, [13, 14, 15, 16, 17])}
+mapping[&quot;entity&quot;][&quot;cloud&quot;] = {&quot;color&quot;: sq.atmosphere(&quot;colortype&quot;).evaluate(&quot;equal&quot;, 25)}
+mapping[&quot;entity&quot;][&quot;snow&quot;] = {&quot;color&quot;: sq.appearance(&quot;colortype&quot;).evaluate(&quot;in&quot;, [29, 30])}
+</pre></div>
+</div>
+</div>
+<p>Our constructed mapping looks like <a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/demo/files/mapping.json">this</a>. We can easily export and share this mapping as a JSON file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/mapping.json&quot;, &quot;w&quot;) as file:
+    json.dump(mapping, file, indent = 2)
+</pre></div>
+</div>
+</div>
+<p>That also means that as non-EO-expert you don’t have to worry about constructing your own mapping from scratch. You can simply load a shared mapping and use it to initialize a Semantique mapping instance.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/mapping.json&quot;, &quot;r&quot;) as file:
+    rules = json.load(file)
+
+mapping = sq.mapping.Semantique(rules)
+</pre></div>
+</div>
+</div>
+<p>As mentioned, internally the query processor will only interact with the translator function of the provided mapping instance. To show how this works, we do need to provide a spatio-temporal extent inside which the concept needs to be translated and a EO data cube instance from which the translator can retrieve the referenced data layers. Also here, the translator only interacts with the retriever function of the EO data cube instance, and hence does not care what the configuration of the cube
+is.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from semantique.processor.utils import parse_extent
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>space = sq.SpatialExtent(gpd.read_file(&quot;files/footprint.geojson&quot;))
+time = sq.TemporalExtent(&quot;2019-01-01&quot;, &quot;2020-12-31&quot;)
+
+extent = parse_extent(space, time, spatial_resolution = [-10, 10], crs = 3035)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/layout.json&quot;, &quot;r&quot;) as file:
+    dc = sq.datacube.GeotiffArchive(json.load(file), src = &quot;files/layers.zip&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>water = mapping.translate(&quot;entity&quot;, &quot;water&quot;, extent = extent, datacube = dc)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>water
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;water&#x27; (time: 3, y: 563, x: 576)&gt;
+array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])
+Coordinates:
+  * x              (x) float64 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
+  * y              (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
+    spatial_ref    int64 0
+  * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
+    temporal_ref   int64 0
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+Attributes:
+    AREA_OR_POINT:  Area
+    scale_factor:   1.0
+    add_offset:     0.0
+    _FillValue:     1.7976931348623157e+308
+    value_type:     binary</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'water'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 3</li><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-6119919b-d4fe-4204-b4bb-28ae617b5d16' class='xr-array-in' type='checkbox' checked><label for='section-6119919b-d4fe-4204-b4bb-28ae617b5d16' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</span></div><div class='xr-array-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        [1., 1., 1., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></div></li><li class='xr-section-item'><input id='section-4c558a53-2144-4d64-b63d-de64b891763b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4c558a53-2144-4d64-b63d-de64b891763b' class='xr-section-summary' >Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-e23e8ba6-3646-4c16-ad00-604ca8fe3379' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e23e8ba6-3646-4c16-ad00-604ca8fe3379' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ec208c32-0ee0-4c1f-8770-9ebe664bdc13' class='xr-var-data-in' type='checkbox'><label for='data-ec208c32-0ee0-4c1f-8770-9ebe664bdc13' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x coordinate of projection</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>metre</dd><dt><span>resolution :</span></dt><dd>10</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-c498a0fc-5aeb-4871-a627-7c5a3f825685' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c498a0fc-5aeb-4871-a627-7c5a3f825685' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-18354d91-601e-4b5b-b9b4-7e2d18639f0d' class='xr-var-data-in' type='checkbox'><label for='data-18354d91-601e-4b5b-b9b4-7e2d18639f0d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y coordinate of projection</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>metre</dd><dt><span>resolution :</span></dt><dd>-10</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-884f5f8a-619e-49da-91aa-cc6b756195c7' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-884f5f8a-619e-49da-91aa-cc6b756195c7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-19ff6d6c-882d-436d-ad19-f453aa6944ab' class='xr-var-data-in' type='checkbox'><label for='data-19ff6d6c-882d-436d-ad19-f453aa6944ab' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-12-15T10:17:33.408715 ... 2...</div><input id='attrs-3e0c6a76-9bba-4c0e-9fa7-167c51c5cd3f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3e0c6a76-9bba-4c0e-9fa7-167c51c5cd3f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-740350be-f1b3-4f9e-af85-82247cec3f41' class='xr-var-data-in' type='checkbox'><label for='data-740350be-f1b3-4f9e-af85-82247cec3f41' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>datetime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-12-15T10:17:33.408715000&#x27;, &#x27;2020-09-05T10:17:43.167942000&#x27;,
+       &#x27;2020-12-19T10:17:34.610661000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-6c01528d-943a-4212-bc76-5b2ca456b915' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6c01528d-943a-4212-bc76-5b2ca456b915' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7b42fa70-a844-4895-b97b-03a1a4b90147' class='xr-var-data-in' type='checkbox'><label for='data-7b42fa70-a844-4895-b97b-03a1a4b90147' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_feats</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-a273f835-ab4b-4bb0-90ee-d17e8f2ce35e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a273f835-ab4b-4bb0-90ee-d17e8f2ce35e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0dfe8a7c-2861-42f6-8cad-404fe8681ca1' class='xr-var-data-in' type='checkbox'><label for='data-0dfe8a7c-2861-42f6-8cad-404fe8681ca1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
+       [1., 1., 1., ..., 1., 1., 1.],
+       [1., 1., 1., ..., 1., 1., 1.],
+       ...,
+       [1., 1., 1., ..., 1., 1., 1.],
+       [1., 1., 1., ..., 1., 1., 1.],
+       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b2864ba7-83ab-4962-8cc4-9305739e9207' class='xr-section-summary-in' type='checkbox'  ><label for='section-b2864ba7-83ab-4962-8cc4-9305739e9207' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-cbd544e2-a43b-41a0-9a53-24ae1eb883e9' class='xr-index-data-in' type='checkbox'/><label for='index-cbd544e2-a43b-41a0-9a53-24ae1eb883e9' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([4530115.0, 4530125.0, 4530135.0, 4530145.0, 4530155.0, 4530165.0,
+       4530175.0, 4530185.0, 4530195.0, 4530205.0,
+       ...
+       4535775.0, 4535785.0, 4535795.0, 4535805.0, 4535815.0, 4535825.0,
+       4535835.0, 4535845.0, 4535855.0, 4535865.0],
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=576))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-7c0aa926-e0d6-4623-a2c2-27d66b9b413c' class='xr-index-data-in' type='checkbox'/><label for='index-7c0aa926-e0d6-4623-a2c2-27d66b9b413c' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([2696625.0, 2696615.0, 2696605.0, 2696595.0, 2696585.0, 2696575.0,
+       2696565.0, 2696555.0, 2696545.0, 2696535.0,
+       ...
+       2691095.0, 2691085.0, 2691075.0, 2691065.0, 2691055.0, 2691045.0,
+       2691035.0, 2691025.0, 2691015.0, 2691005.0],
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=563))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-0feb9636-f329-4c36-b70d-86dce310f337' class='xr-index-data-in' type='checkbox'/><label for='index-0feb9636-f329-4c36-b70d-86dce310f337' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2019-12-15 10:17:33.408715&#x27;, &#x27;2020-09-05 10:17:43.167942&#x27;,
+               &#x27;2020-12-19 10:17:34.610661&#x27;],
+              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f44cd416-d658-4215-a5a2-bf27e2da9223' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f44cd416-d658-4215-a5a2-bf27e2da9223' class='xr-section-summary' >Attributes: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>scale_factor :</span></dt><dd>1.0</dd><dt><span>add_offset :</span></dt><dd>0.0</dd><dt><span>_FillValue :</span></dt><dd>1.7976931348623157e+308</dd><dt><span>value_type :</span></dt><dd>binary</dd></dl></div></li></ul></div></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>levels = [-0.5, 0.5, 1.5]
+legend = {&quot;ticks&quot;: [0, 1], &quot;label&quot;: &quot;is_water&quot;}
+colors = [&quot;lightgrey&quot;, &quot;deepskyblue&quot;]
+water.plot(x = &quot;x&quot;, y = &quot;y&quot;, col = &quot;time&quot;, colors = colors, levels = levels, cbar_kwargs = legend)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7f1f84f0d510&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/_notebooks_mapping_46_1.png" src="../_images/_notebooks_mapping_46_1.png" />
+</div>
+</div>
 </div>
 </div>
 
