@@ -320,6 +320,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.fill.html">
+     semantique.ArrayProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.apply_custom.html">
+     semantique.ArrayProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -400,6 +410,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.fill.html">
+     semantique.CollectionProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.apply_custom.html">
+     semantique.CollectionProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.ArrayProxy.name.html">
      semantique.ArrayProxy.name
     </a>
@@ -477,6 +497,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.components.time.WEEK.html">
      semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY.html">
+     semantique.components.time.DAY
     </a>
    </li>
    <li class="toctree-l2">
@@ -567,6 +592,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.operators.CEILING.html">
      semantique.operators.CEILING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.COS.html">
+     semantique.operators.COS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.SIN.html">
+     semantique.operators.SIN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.TAN.html">
+     semantique.operators.TAN
     </a>
    </li>
    <li class="toctree-l2">
@@ -832,6 +872,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.operators.ceiling_.html">
      semantique.processor.operators.ceiling_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.cos_.html">
+     semantique.processor.operators.cos_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.sin_.html">
+     semantique.processor.operators.sin_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.tan_.html">
+     semantique.processor.operators.tan_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1135,6 +1190,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownVerbError.html">
+     semantique.exceptions.UnknownVerbError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.UnknownReducerError.html">
      semantique.exceptions.UnknownReducerError
     </a>
@@ -1314,7 +1374,7 @@
 <h1>semantique.ArrayProxy<a class="headerlink" href="#semantique-arrayproxy" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.ArrayProxy">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.</span></span><span class="sig-name descname"><span class="pre">ArrayProxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L30-L654"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.ArrayProxy" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.</span></span><span class="sig-name descname"><span class="pre">ArrayProxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L30-L717"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.ArrayProxy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Proxy object of an array.</p>
 <p>This proxy object serves as a placeholder for a multi-dimensional array. All
 array specific actions (i.e. <em>verbs</em>) can be called as methods of this object.
@@ -1344,23 +1404,29 @@ reference functions or by applying verbs to existing <a class="reference interna
 <tr class="row-odd"><td><p><a class="reference internal" href="#semantique.ArrayProxy.__init__" title="semantique.ArrayProxy.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(obj)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.assign.html#semantique.ArrayProxy.assign" title="semantique.ArrayProxy.assign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign</span></code></a>(y[, at])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.apply_custom.html#semantique.ArrayProxy.apply_custom" title="semantique.ArrayProxy.apply_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_custom</span></code></a>(verb, **kwargs)</p></td>
+<td><p>Apply a user-defined verb to the array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.assign.html#semantique.ArrayProxy.assign" title="semantique.ArrayProxy.assign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign</span></code></a>(y[, at])</p></td>
 <td><p>Assign new values to the pixels in an array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.assign_space.html#semantique.ArrayProxy.assign_space" title="semantique.ArrayProxy.assign_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign_space</span></code></a>([component])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.assign_space.html#semantique.ArrayProxy.assign_space" title="semantique.ArrayProxy.assign_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign_space</span></code></a>([component])</p></td>
 <td><p>Assign spatial coordinates as values to the pixels in an array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.assign_time.html#semantique.ArrayProxy.assign_time" title="semantique.ArrayProxy.assign_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign_time</span></code></a>([component])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.assign_time.html#semantique.ArrayProxy.assign_time" title="semantique.ArrayProxy.assign_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign_time</span></code></a>([component])</p></td>
 <td><p>Assign temporal coordinates as values to the pixels in an array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.delineate.html#semantique.ArrayProxy.delineate" title="semantique.ArrayProxy.delineate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delineate</span></code></a>([dimension])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.delineate.html#semantique.ArrayProxy.delineate" title="semantique.ArrayProxy.delineate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delineate</span></code></a>([dimension])</p></td>
 <td><p>Delineate spatio-temporal objects in a binary array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.evaluate.html#semantique.ArrayProxy.evaluate" title="semantique.ArrayProxy.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(operator[, y])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.evaluate.html#semantique.ArrayProxy.evaluate" title="semantique.ArrayProxy.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(operator[, y])</p></td>
 <td><p>Evaluate an expression for each pixel in an array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.extract.html#semantique.ArrayProxy.extract" title="semantique.ArrayProxy.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract</span></code></a>(dimension[, component])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.extract.html#semantique.ArrayProxy.extract" title="semantique.ArrayProxy.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract</span></code></a>(dimension[, component])</p></td>
 <td><p>Extract coordinate labels of a dimension as a new array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.ArrayProxy.fill.html#semantique.ArrayProxy.fill" title="semantique.ArrayProxy.fill"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill</span></code></a>(dimension, method, **kwargs)</p></td>
+<td><p>Fill nodata values in array by interpolating valid data values.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="semantique.ArrayProxy.filter.html#semantique.ArrayProxy.filter" title="semantique.ArrayProxy.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(filterer, **kwargs)</p></td>
 <td><p>Filter the values in an array.</p></td>

@@ -23,6 +23,7 @@
 
    .. autosummary::
    
+      ~time.DAY
       ~time.DAY_OF_WEEK
       ~time.DAY_OF_YEAR
       ~time.HOUR

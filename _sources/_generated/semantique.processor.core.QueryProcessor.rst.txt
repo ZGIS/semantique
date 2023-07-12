@@ -14,13 +14,15 @@
    .. autosummary::
    
       ~QueryProcessor.__init__
-      ~QueryProcessor.add_operator
-      ~QueryProcessor.add_reducer
+      ~QueryProcessor.add_custom_operator
+      ~QueryProcessor.add_custom_reducer
+      ~QueryProcessor.add_custom_verb
       ~QueryProcessor.call_handler
       ~QueryProcessor.call_verb
       ~QueryProcessor.execute
       ~QueryProcessor.get_operator
       ~QueryProcessor.get_reducer
+      ~QueryProcessor.handle_apply_custom
       ~QueryProcessor.handle_assign
       ~QueryProcessor.handle_collection
       ~QueryProcessor.handle_compose
@@ -51,8 +53,6 @@
       ~QueryProcessor.handle_verb
       ~QueryProcessor.optimize
       ~QueryProcessor.parse
-      ~QueryProcessor.store_default_operators
-      ~QueryProcessor.store_default_reducers
    
    
 
@@ -63,12 +63,13 @@
    .. autosummary::
    
       ~QueryProcessor.crs
+      ~QueryProcessor.custom_operators
+      ~QueryProcessor.custom_reducers
+      ~QueryProcessor.custom_verbs
       ~QueryProcessor.datacube
       ~QueryProcessor.extent
       ~QueryProcessor.mapping
-      ~QueryProcessor.operators
       ~QueryProcessor.recipe
-      ~QueryProcessor.reducers
       ~QueryProcessor.response
       ~QueryProcessor.spatial_resolution
       ~QueryProcessor.track_types

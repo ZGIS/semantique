@@ -26,6 +26,8 @@
    
       ~TemporalExtent.end
       ~TemporalExtent.start
+      ~TemporalExtent.type
       ~TemporalExtent.tz
+      ~TemporalExtent.tzname
    
    

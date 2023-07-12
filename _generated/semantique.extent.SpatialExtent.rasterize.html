@@ -320,6 +320,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.fill.html">
+     semantique.ArrayProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.apply_custom.html">
+     semantique.ArrayProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -400,6 +410,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.fill.html">
+     semantique.CollectionProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.apply_custom.html">
+     semantique.CollectionProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.ArrayProxy.name.html">
      semantique.ArrayProxy.name
     </a>
@@ -477,6 +497,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.components.time.WEEK.html">
      semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY.html">
+     semantique.components.time.DAY
     </a>
    </li>
    <li class="toctree-l2">
@@ -567,6 +592,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.operators.CEILING.html">
      semantique.operators.CEILING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.COS.html">
+     semantique.operators.COS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.SIN.html">
+     semantique.operators.SIN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.TAN.html">
+     semantique.operators.TAN
     </a>
    </li>
    <li class="toctree-l2">
@@ -832,6 +872,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.operators.ceiling_.html">
      semantique.processor.operators.ceiling_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.cos_.html">
+     semantique.processor.operators.cos_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.sin_.html">
+     semantique.processor.operators.sin_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.tan_.html">
+     semantique.processor.operators.tan_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1135,6 +1190,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownVerbError.html">
+     semantique.exceptions.UnknownVerbError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.UnknownReducerError.html">
      semantique.exceptions.UnknownReducerError
     </a>
@@ -1314,7 +1374,7 @@
 <h1>semantique.extent.SpatialExtent.rasterize<a class="headerlink" href="#semantique-extent-spatialextent-rasterize" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.extent.SpatialExtent.rasterize">
-<span class="sig-prename descclassname"><span class="pre">SpatialExtent.</span></span><span class="sig-name descname"><span class="pre">rasterize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/extent.py#L144-L215"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.extent.SpatialExtent.rasterize" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">SpatialExtent.</span></span><span class="sig-name descname"><span class="pre">rasterize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/extent.py#L143-L204"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.extent.SpatialExtent.rasterize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rasterize the spatial extent into an array.</p>
 <p>Rasterizing the spatial extent creates a rectangular two-dimensional
 regular grid that covers the bounding box of the extent. Each grid cell
@@ -1324,11 +1384,6 @@ do intersect with the extent itself get assigned a positive integer,
 depending on which of the features in the extent they intersects with, i.e.
 a 1 if they intersect with the first feature in the extent, a 2 if they
 intersect with the second feature in the extent, et cetera.</p>
-<p>If or not a cell intersects with the extent is defined as follows: if at
-least one of the features in the extent has a (multi-)polygon geometry, the
-spatial predicate function ‘within’ is applied to the the centroid of the
-cells, while otherwise, the spatial predicate function ‘touches’ is applied
-to the cell geometries themselves.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1341,13 +1396,13 @@ direction, and hence the cell size along the y-axis is given as a
 negative number.</p></li>
 <li><p><strong>crs</strong> (<em>optional</em>) – Coordinate reference system in which the grid should be created. Can be
 given as any object understood by the initializer of
-<a class="reference external" href="https://pyproj4.github.io/pyproj/stable/api/crs/crs.html#pyproj.crs.CRS" title="(in pyproj v3.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyproj.crs.CRS</span></code></a>. This includes <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/api/crs/crs.html#pyproj.crs.CRS" title="(in pyproj v3.4.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyproj.crs.CRS</span></code></a> objects
+<a class="reference external" href="https://pyproj4.github.io/pyproj/stable/api/crs/crs.html#pyproj.crs.CRS" title="(in pyproj v3.6.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyproj.crs.CRS</span></code></a>. This includes <a class="reference external" href="https://pyproj4.github.io/pyproj/stable/api/crs/crs.html#pyproj.crs.CRS" title="(in pyproj v3.6.0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyproj.crs.CRS</span></code></a> objects
 themselves, as well as EPSG codes and WKT strings. If <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, the
 CRS of the extent itself is used.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2023.2.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2023.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

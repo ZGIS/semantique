@@ -1,0 +1,6 @@
+﻿semantique.processor.operators.tan\_
+====================================
+
+.. currentmodule:: semantique.processor.operators
+
+.. autofunction:: tan_

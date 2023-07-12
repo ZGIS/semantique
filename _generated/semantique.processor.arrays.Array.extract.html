@@ -320,6 +320,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.fill.html">
+     semantique.ArrayProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.apply_custom.html">
+     semantique.ArrayProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -400,6 +410,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.fill.html">
+     semantique.CollectionProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.apply_custom.html">
+     semantique.CollectionProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.ArrayProxy.name.html">
      semantique.ArrayProxy.name
     </a>
@@ -477,6 +497,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.components.time.WEEK.html">
      semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY.html">
+     semantique.components.time.DAY
     </a>
    </li>
    <li class="toctree-l2">
@@ -567,6 +592,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.operators.CEILING.html">
      semantique.operators.CEILING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.COS.html">
+     semantique.operators.COS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.SIN.html">
+     semantique.operators.SIN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.TAN.html">
+     semantique.operators.TAN
     </a>
    </li>
    <li class="toctree-l2">
@@ -832,6 +872,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.operators.ceiling_.html">
      semantique.processor.operators.ceiling_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.cos_.html">
+     semantique.processor.operators.cos_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.sin_.html">
+     semantique.processor.operators.sin_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.tan_.html">
+     semantique.processor.operators.tan_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1135,6 +1190,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownVerbError.html">
+     semantique.exceptions.UnknownVerbError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.UnknownReducerError.html">
      semantique.exceptions.UnknownReducerError
     </a>
@@ -1314,7 +1374,7 @@
 <h1>semantique.processor.arrays.Array.extract<a class="headerlink" href="#semantique-processor-arrays-array-extract" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.processor.arrays.Array.extract">
-<span class="sig-prename descclassname"><span class="pre">Array.</span></span><span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L161-L211"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array.extract" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Array.</span></span><span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/arrays.py#L167-L217"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.arrays.Array.extract" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply the extract verb to the array.</p>
 <p>The extract verb extracts coordinate labels of a dimension as a new
 array.</p>
@@ -1329,7 +1389,7 @@ coordinates.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2023.2.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2023.6.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a></p>
 </dd>
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><ul class="simple">

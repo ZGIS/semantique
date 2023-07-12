@@ -324,6 +324,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ArrayProxy.fill.html">
+     semantique.ArrayProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.ArrayProxy.apply_custom.html">
+     semantique.ArrayProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -404,6 +414,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CollectionProxy.fill.html">
+     semantique.CollectionProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.CollectionProxy.apply_custom.html">
+     semantique.CollectionProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.ArrayProxy.name.html">
      semantique.ArrayProxy.name
     </a>
@@ -481,6 +501,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.components.time.WEEK.html">
      semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.components.time.DAY.html">
+     semantique.components.time.DAY
     </a>
    </li>
    <li class="toctree-l2">
@@ -571,6 +596,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.operators.CEILING.html">
      semantique.operators.CEILING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.operators.COS.html">
+     semantique.operators.COS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.operators.SIN.html">
+     semantique.operators.SIN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.operators.TAN.html">
+     semantique.operators.TAN
     </a>
    </li>
    <li class="toctree-l2">
@@ -836,6 +876,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.processor.operators.ceiling_.html">
      semantique.processor.operators.ceiling_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.cos_.html">
+     semantique.processor.operators.cos_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.sin_.html">
+     semantique.processor.operators.sin_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.tan_.html">
+     semantique.processor.operators.tan_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1136,6 +1191,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../_generated/semantique.exceptions.UnknownResultError.html">
      semantique.exceptions.UnknownResultError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownVerbError.html">
+     semantique.exceptions.UnknownVerbError
     </a>
    </li>
    <li class="toctree-l2">
@@ -1856,7 +1916,7 @@ plt.draw()
 <h2>Land cover map<a class="headerlink" href="#Land-cover-map" title="Permalink to this headline">¶</a></h2>
 <p>Mapping for each location in space the most often observed semantic concept over time.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
@@ -1869,8 +1929,8 @@ response = recipe.execute(**context)
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(1, figsize = (7, 5))
@@ -1887,19 +1947,12 @@ plt.draw()
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/_notebooks_gallery_14_0.png" src="../_images/_notebooks_gallery_14_0.png" />
-</div>
-</div>
 </div>
 <div class="section" id="Cloud-and-snow-cover-maps">
 <h2>Cloud and snow cover maps<a class="headerlink" href="#Cloud-and-snow-cover-maps" title="Permalink to this headline">¶</a></h2>
 <p>Mapping for each location in space the percentages of times respectively cloud and snow were observed there.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
@@ -1914,8 +1967,8 @@ response = recipe.execute(**context)
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, (ax1, ax2) = plt.subplots(1, 2, figsize = (15, 5))
@@ -1933,19 +1986,12 @@ plt.draw()
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/_notebooks_gallery_17_0.png" src="../_images/_notebooks_gallery_17_0.png" />
-</div>
-</div>
 </div>
 <div class="section" id="Semantic-content-based-image-retrieval">
 <h2>Semantic content based image retrieval<a class="headerlink" href="#Semantic-content-based-image-retrieval" title="Permalink to this headline">¶</a></h2>
 <p>Check for each image if it has a cloud cover less than 10 percent.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
@@ -1958,251 +2004,36 @@ response = recipe.execute(**context)
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>response[&quot;cloud_free_images&quot;].astype(&quot;bool&quot;).sq.to_dataframe()
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>cloud_free_images</th>
-    </tr>
-    <tr>
-      <th>time</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2019-12-15 10:17:33.408715</th>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>2020-09-05 10:17:43.167942</th>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>2020-12-19 10:17:34.610661</th>
-      <td>True</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
 </div>
 <div class="section" id="Parcel-statistics">
 <h2>Parcel statistics<a class="headerlink" href="#Parcel-statistics" title="Permalink to this headline">¶</a></h2>
 <p>Using a spatial extent that consists of multiple non-overlapping spatial features, calculate the average water count over time per spatial feature.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>parcels = sq.SpatialExtent(gpd.read_file(&quot;files/parcels.geojson&quot;))
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>parcels.features.to_crs(4326).explore()
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
-&lt;head&gt;
-    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
-
-        &lt;script&gt;
-            L_NO_TOUCH = false;
-            L_DISABLE_3D = false;
-        &lt;/script&gt;
-
-    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
-    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
-    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
-
-            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
-                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
-            &lt;style&gt;
-                #map_7f6271e8a0738c933068d7c9c458b80e {
-                    position: relative;
-                    width: 100.0%;
-                    height: 100.0%;
-                    left: 0.0%;
-                    top: 0.0%;
-                }
-            &lt;/style&gt;
-
-
-                    &lt;style&gt;
-                        .foliumtooltip {
-
-                        }
-                       .foliumtooltip table{
-                            margin: auto;
-                        }
-                        .foliumtooltip tr{
-                            text-align: left;
-                        }
-                        .foliumtooltip th{
-                            padding: 2px; padding-right: 8px;
-                        }
-                    &lt;/style&gt;
-
-&lt;/head&gt;
-&lt;body&gt;
-
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_7f6271e8a0738c933068d7c9c458b80e&quot; &gt;&lt;/div&gt;
-
-&lt;/body&gt;
-&lt;script&gt;
-
-            var map_7f6271e8a0738c933068d7c9c458b80e = L.map(
-                &quot;map_7f6271e8a0738c933068d7c9c458b80e&quot;,
-                {
-                    center: [47.32110812526405, 12.808509961311596],
-                    crs: L.CRS.EPSG3857,
-                    zoom: 10,
-                    zoomControl: true,
-                    preferCanvas: false,
-                }
-            );
-            L.control.scale().addTo(map_7f6271e8a0738c933068d7c9c458b80e);
-
-
-
-
-
-            var tile_layer_fc9775c18a2aa57295894fe8070c8e54 = L.tileLayer(
-                &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
-                {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_7f6271e8a0738c933068d7c9c458b80e);
-
-
-            map_7f6271e8a0738c933068d7c9c458b80e.fitBounds(
-                [[47.30444420302901, 12.799052458545688], [47.33777204749909, 12.817967464077503]],
-                {}
-            );
-
-
-        function geo_json_33c5feaad0be1e6a127cbe224bc29f0b_styler(feature) {
-            switch(feature.id) {
-                default:
-                    return {&quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
-            }
-        }
-        function geo_json_33c5feaad0be1e6a127cbe224bc29f0b_highlighter(feature) {
-            switch(feature.id) {
-                default:
-                    return {&quot;fillOpacity&quot;: 0.75};
-            }
-        }
-        function geo_json_33c5feaad0be1e6a127cbe224bc29f0b_pointToLayer(feature, latlng) {
-            var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
-
-            let style = geo_json_33c5feaad0be1e6a127cbe224bc29f0b_styler(feature)
-            Object.assign(opts, style)
-
-            return new L.CircleMarker(latlng, opts)
-        }
-
-        function geo_json_33c5feaad0be1e6a127cbe224bc29f0b_onEachFeature(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if(typeof e.target.setStyle === &quot;function&quot;){
-                        geo_json_33c5feaad0be1e6a127cbe224bc29f0b.resetStyle(e.target);
-                    }
-                },
-                mouseover: function(e) {
-                    if(typeof e.target.setStyle === &quot;function&quot;){
-                        const highlightStyle = geo_json_33c5feaad0be1e6a127cbe224bc29f0b_highlighter(e.target.feature)
-                        e.target.setStyle(highlightStyle);
-                    }
-                },
-            });
-        };
-        var geo_json_33c5feaad0be1e6a127cbe224bc29f0b = L.geoJson(null, {
-                onEachFeature: geo_json_33c5feaad0be1e6a127cbe224bc29f0b_onEachFeature,
-
-                style: geo_json_33c5feaad0be1e6a127cbe224bc29f0b_styler,
-                pointToLayer: geo_json_33c5feaad0be1e6a127cbe224bc29f0b_pointToLayer
-        });
-
-        function geo_json_33c5feaad0be1e6a127cbe224bc29f0b_add (data) {
-            geo_json_33c5feaad0be1e6a127cbe224bc29f0b
-                .addData(data)
-                .addTo(map_7f6271e8a0738c933068d7c9c458b80e);
-        }
-            geo_json_33c5feaad0be1e6a127cbe224bc29f0b_add({&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.817967464077503, 47.33777204749909], &quot;features&quot;: [{&quot;bbox&quot;: [12.803868147852612, 47.33056389640604, 12.817967464077503, 47.33777204749909], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.803868147852612, 47.33091868331674], [12.817596157332153, 47.33056389640604], [12.817967464077503, 47.33741720662344], [12.804237649967712, 47.33777204749909], [12.803868147852612, 47.33091868331674]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Northern&quot;}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [12.799052458545688, 47.30444420302901, 12.815746431172713, 47.31514111553671], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[12.799052458545688, 47.30486091070503], [12.815190335969971, 47.30444420302901], [12.815746431172713, 47.3147243128484], [12.799605373818284, 47.31514111553671], [12.799052458545688, 47.30486091070503]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;1&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;Southern&quot;}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
-
-
-
-    geo_json_33c5feaad0be1e6a127cbe224bc29f0b.bindTooltip(
-    function(layer){
-    let div = L.DomUtil.create(&#x27;div&#x27;);
-
-    let handleObject = feature=&gt;typeof(feature)==&#x27;object&#x27; ? JSON.stringify(feature) : feature;
-    let fields = [&quot;name&quot;];
-    let aliases = [&quot;name&quot;];
-    let table = &#x27;&lt;table&gt;&#x27; +
-        String(
-        fields.map(
-        (v,i)=&gt;
-        `&lt;tr&gt;
-            &lt;th&gt;${aliases[i]}&lt;/th&gt;
-
-            &lt;td&gt;${handleObject(layer.feature.properties[v])}&lt;/td&gt;
-        &lt;/tr&gt;`).join(&#x27;&#x27;))
-    +&#x27;&lt;/table&gt;&#x27;;
-    div.innerHTML=table;
-
-    return div
-    }
-    ,{&quot;className&quot;: &quot;foliumtooltip&quot;, &quot;sticky&quot;: true});
-
-&lt;/script&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div>
-</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>new_context = copy.deepcopy(context)
@@ -2211,7 +2042,7 @@ new_context[&quot;space&quot;] = parcels
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
@@ -2226,8 +2057,8 @@ response = recipe.execute(**new_context)
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df = response[&quot;avg_water_count_per_parcel&quot;].sq.to_dataframe()
@@ -2235,55 +2066,12 @@ df
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>avg_water_count_per_parcel</th>
-    </tr>
-    <tr>
-      <th>parcel</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Northern</th>
-      <td>0.939145</td>
-    </tr>
-    <tr>
-      <th>Southern</th>
-      <td>1.175439</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
 </div>
 <div class="section" id="Seasonal-aggregates">
 <h2>Seasonal aggregates<a class="headerlink" href="#Seasonal-aggregates" title="Permalink to this headline">¶</a></h2>
 <p>We create a water count map for each season in the data separately. We use the built-in “season” component of the time dimension, which defines seasons as: 1 = March, April, May; 2 = June, July, August; 3 = September, October, November; 4 = December, January, February.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
@@ -2297,8 +2085,8 @@ response = recipe.execute(**context)
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, (ax1, ax2) = plt.subplots(1, 2, figsize = (15, 5))
@@ -2321,19 +2109,12 @@ plt.draw()
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/_notebooks_gallery_30_0.png" src="../_images/_notebooks_gallery_30_0.png" />
-</div>
-</div>
 </div>
 <div class="section" id="Time-of-first-vegetation-observation">
 <h2>Time of first vegetation observation<a class="headerlink" href="#Time-of-first-vegetation-observation" title="Permalink to this headline">¶</a></h2>
 <p>Find for each spatial pixel at which timestamp vegetation was first observed.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>recipe = sq.QueryRecipe()
@@ -2347,17 +2128,8 @@ response = recipe.execute(**context)
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/home/luuk/Documents/zgis/sen2cube/semantique/semantique/processor/reducers.py:833: RuntimeWarning: All-NaN slice encountered
-  return np.nanmax(np.where(is_first, x, utils.get_null(x)), axis)
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(1, figsize = (7, 5))
@@ -2369,13 +2141,6 @@ ax.set_title(&quot;First vegetation observation&quot;)
 plt.tight_layout()
 plt.draw()
 </pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/_notebooks_gallery_33_0.png" src="../_images/_notebooks_gallery_33_0.png" />
 </div>
 </div>
 </div>

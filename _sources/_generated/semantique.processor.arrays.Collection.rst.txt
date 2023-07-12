@@ -14,6 +14,7 @@
    .. autosummary::
    
       ~Collection.__init__
+      ~Collection.apply_custom
       ~Collection.assign
       ~Collection.compose
       ~Collection.concatenate

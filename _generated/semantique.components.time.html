@@ -320,6 +320,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.fill.html">
+     semantique.ArrayProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.apply_custom.html">
+     semantique.ArrayProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -400,6 +410,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.fill.html">
+     semantique.CollectionProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.apply_custom.html">
+     semantique.CollectionProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.ArrayProxy.name.html">
      semantique.ArrayProxy.name
     </a>
@@ -477,6 +497,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.components.time.WEEK.html">
      semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY.html">
+     semantique.components.time.DAY
     </a>
    </li>
    <li class="toctree-l2">
@@ -567,6 +592,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.operators.CEILING.html">
      semantique.operators.CEILING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.COS.html">
+     semantique.operators.COS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.SIN.html">
+     semantique.operators.SIN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.TAN.html">
+     semantique.operators.TAN
     </a>
    </li>
    <li class="toctree-l2">
@@ -832,6 +872,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.operators.ceiling_.html">
      semantique.processor.operators.ceiling_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.cos_.html">
+     semantique.processor.operators.cos_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.sin_.html">
+     semantique.processor.operators.sin_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.tan_.html">
+     semantique.processor.operators.tan_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1135,6 +1190,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownVerbError.html">
+     semantique.exceptions.UnknownVerbError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.UnknownReducerError.html">
      semantique.exceptions.UnknownReducerError
     </a>
@@ -1314,7 +1374,7 @@
 <h1>semantique.components.time<a class="headerlink" href="#semantique-components-time" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.components.time">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.components.</span></span><span class="sig-name descname"><span class="pre">time</span></span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/components.py#L3-L48"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.components.time" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.components.</span></span><span class="sig-name descname"><span class="pre">time</span></span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/components.py#L3-L51"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.components.time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Components of the time dimension.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.components.time.__init__">
@@ -1340,34 +1400,37 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.DAY_OF_WEEK.html#semantique.components.time.DAY_OF_WEEK" title="semantique.components.time.DAY_OF_WEEK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DAY_OF_WEEK</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.DAY.html#semantique.components.time.DAY" title="semantique.components.time.DAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DAY</span></code></a></p></td>
+<td><p>Component storing the day number of a timestamp.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.components.time.DAY_OF_WEEK.html#semantique.components.time.DAY_OF_WEEK" title="semantique.components.time.DAY_OF_WEEK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DAY_OF_WEEK</span></code></a></p></td>
 <td><p>Component storing the day of the week of a timestamp.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.components.time.DAY_OF_YEAR.html#semantique.components.time.DAY_OF_YEAR" title="semantique.components.time.DAY_OF_YEAR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DAY_OF_YEAR</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.DAY_OF_YEAR.html#semantique.components.time.DAY_OF_YEAR" title="semantique.components.time.DAY_OF_YEAR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DAY_OF_YEAR</span></code></a></p></td>
 <td><p>Component storing the day of the year of a timestamp.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.HOUR.html#semantique.components.time.HOUR" title="semantique.components.time.HOUR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HOUR</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.components.time.HOUR.html#semantique.components.time.HOUR" title="semantique.components.time.HOUR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HOUR</span></code></a></p></td>
 <td><p>Component storing the hour of a timestamp.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.components.time.MINUTE.html#semantique.components.time.MINUTE" title="semantique.components.time.MINUTE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MINUTE</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.MINUTE.html#semantique.components.time.MINUTE" title="semantique.components.time.MINUTE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MINUTE</span></code></a></p></td>
 <td><p>Component storing the minute of a timestamp.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.MONTH.html#semantique.components.time.MONTH" title="semantique.components.time.MONTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MONTH</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.components.time.MONTH.html#semantique.components.time.MONTH" title="semantique.components.time.MONTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MONTH</span></code></a></p></td>
 <td><p>Component storing the month number of a timestamp.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.components.time.QUARTER.html#semantique.components.time.QUARTER" title="semantique.components.time.QUARTER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QUARTER</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.QUARTER.html#semantique.components.time.QUARTER" title="semantique.components.time.QUARTER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QUARTER</span></code></a></p></td>
 <td><p>Component storing the year quarter of a timestamp.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.SEASON.html#semantique.components.time.SEASON" title="semantique.components.time.SEASON"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SEASON</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.components.time.SEASON.html#semantique.components.time.SEASON" title="semantique.components.time.SEASON"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SEASON</span></code></a></p></td>
 <td><p>Component storing the season of a timestamp.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.components.time.SECOND.html#semantique.components.time.SECOND" title="semantique.components.time.SECOND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECOND</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.SECOND.html#semantique.components.time.SECOND" title="semantique.components.time.SECOND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECOND</span></code></a></p></td>
 <td><p>Component storing the second of a timestamp.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.WEEK.html#semantique.components.time.WEEK" title="semantique.components.time.WEEK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WEEK</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.components.time.WEEK.html#semantique.components.time.WEEK" title="semantique.components.time.WEEK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WEEK</span></code></a></p></td>
 <td><p>Component storing the week number of a timestamp.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.components.time.YEAR.html#semantique.components.time.YEAR" title="semantique.components.time.YEAR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YEAR</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.components.time.YEAR.html#semantique.components.time.YEAR" title="semantique.components.time.YEAR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YEAR</span></code></a></p></td>
 <td><p>Component storing the year of a timestamp.</p></td>
 </tr>
 </tbody>

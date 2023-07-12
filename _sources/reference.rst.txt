@@ -101,6 +101,8 @@ Verbs for single arrays
    ArrayProxy.smooth
    ArrayProxy.trim
    ArrayProxy.delineate
+   ArrayProxy.fill
+   ArrayProxy.apply_custom
 
 Verbs for array collections
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,6 +127,8 @@ Verbs for array collections
    CollectionProxy.smooth
    CollectionProxy.trim
    CollectionProxy.delineate
+   CollectionProxy.fill
+   CollectionProxy.apply_custom
 
 Utility verbs
 ~~~~~~~~~~~~~~
@@ -176,6 +180,7 @@ Dimension components
    components.time.QUARTER
    components.time.MONTH
    components.time.WEEK
+   components.time.DAY
    components.time.DAY_OF_WEEK
    components.time.DAY_OF_YEAR
    components.time.HOUR
@@ -205,6 +210,9 @@ Univariate operators
    operators.SQUARE_ROOT
    operators.FLOOR
    operators.CEILING
+   operators.COS
+   operators.SIN
+   operators.TAN
 
 Algebraic operators
 ~~~~~~~~~~~~~~~~~~~~
@@ -374,6 +382,9 @@ Univariate operators
    processor.operators.square_root_
    processor.operators.floor_
    processor.operators.ceiling_
+   processor.operators.cos_
+   processor.operators.sin_
+   processor.operators.tan_
 
 Algebraic operators
 ~~~~~~~~~~~~~~~~~~~~
@@ -535,6 +546,7 @@ Exceptions
    exceptions.UnknownConceptError
    exceptions.UnknownLayerError
    exceptions.UnknownResultError
+   exceptions.UnknownVerbError
    exceptions.UnknownReducerError
    exceptions.UnknownOperatorError
    exceptions.UnknownDimensionError

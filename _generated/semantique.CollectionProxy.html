@@ -320,6 +320,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.fill.html">
+     semantique.ArrayProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.apply_custom.html">
+     semantique.ArrayProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -400,6 +410,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.fill.html">
+     semantique.CollectionProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.apply_custom.html">
+     semantique.CollectionProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.ArrayProxy.name.html">
      semantique.ArrayProxy.name
     </a>
@@ -477,6 +497,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.components.time.WEEK.html">
      semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY.html">
+     semantique.components.time.DAY
     </a>
    </li>
    <li class="toctree-l2">
@@ -567,6 +592,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.operators.CEILING.html">
      semantique.operators.CEILING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.COS.html">
+     semantique.operators.COS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.SIN.html">
+     semantique.operators.SIN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.TAN.html">
+     semantique.operators.TAN
     </a>
    </li>
    <li class="toctree-l2">
@@ -832,6 +872,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.operators.ceiling_.html">
      semantique.processor.operators.ceiling_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.cos_.html">
+     semantique.processor.operators.cos_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.sin_.html">
+     semantique.processor.operators.sin_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.tan_.html">
+     semantique.processor.operators.tan_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1135,6 +1190,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownVerbError.html">
+     semantique.exceptions.UnknownVerbError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.UnknownReducerError.html">
      semantique.exceptions.UnknownReducerError
     </a>
@@ -1314,7 +1374,7 @@
 <h1>semantique.CollectionProxy<a class="headerlink" href="#semantique-collectionproxy" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.CollectionProxy">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.</span></span><span class="sig-name descname"><span class="pre">CollectionProxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L656-L959"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.CollectionProxy" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.</span></span><span class="sig-name descname"><span class="pre">CollectionProxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L719-L1047"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.CollectionProxy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Proxy object of an array collection.</p>
 <p>This proxy object serves as a placeholder for a collection of multiple
 multi-dimensional arrays. All collection specific actions (i.e. <em>verbs</em>) can
@@ -1331,7 +1391,7 @@ reference functions or by applying verbs to existing <a class="reference interna
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.CollectionProxy.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L675-L676"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.CollectionProxy.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/blocks.py#L738-L739"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.CollectionProxy.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -1344,29 +1404,35 @@ reference functions or by applying verbs to existing <a class="reference interna
 <tr class="row-odd"><td><p><a class="reference internal" href="#semantique.CollectionProxy.__init__" title="semantique.CollectionProxy.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(obj)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.CollectionProxy.assign.html#semantique.CollectionProxy.assign" title="semantique.CollectionProxy.assign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign</span></code></a>(y[, at])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.CollectionProxy.apply_custom.html#semantique.CollectionProxy.apply_custom" title="semantique.CollectionProxy.apply_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_custom</span></code></a>(name, **kwargs)</p></td>
+<td><p>Apply a user-defined verb to each array in a collection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CollectionProxy.assign.html#semantique.CollectionProxy.assign" title="semantique.CollectionProxy.assign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign</span></code></a>(y[, at])</p></td>
 <td><p>Apply the assign verb to each array in a collection.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CollectionProxy.assign_space.html#semantique.CollectionProxy.assign_space" title="semantique.CollectionProxy.assign_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign_space</span></code></a>([component])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.CollectionProxy.assign_space.html#semantique.CollectionProxy.assign_space" title="semantique.CollectionProxy.assign_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign_space</span></code></a>([component])</p></td>
 <td><p>Apply the assign_space verb to each array in a collection.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.CollectionProxy.assign_time.html#semantique.CollectionProxy.assign_time" title="semantique.CollectionProxy.assign_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign_time</span></code></a>([component])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CollectionProxy.assign_time.html#semantique.CollectionProxy.assign_time" title="semantique.CollectionProxy.assign_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assign_time</span></code></a>([component])</p></td>
 <td><p>Apply the assign_time verb to each array in a collection.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CollectionProxy.compose.html#semantique.CollectionProxy.compose" title="semantique.CollectionProxy.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(**kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.CollectionProxy.compose.html#semantique.CollectionProxy.compose" title="semantique.CollectionProxy.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(**kwargs)</p></td>
 <td><p>Create a categorical composition of multiple binary arrays.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.CollectionProxy.concatenate.html#semantique.CollectionProxy.concatenate" title="semantique.CollectionProxy.concatenate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concatenate</span></code></a>(dimension, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CollectionProxy.concatenate.html#semantique.CollectionProxy.concatenate" title="semantique.CollectionProxy.concatenate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concatenate</span></code></a>(dimension, **kwargs)</p></td>
 <td><p>Concatenate multiple arrays along a new or existing dimension.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CollectionProxy.delineate.html#semantique.CollectionProxy.delineate" title="semantique.CollectionProxy.delineate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delineate</span></code></a>([dimension])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.CollectionProxy.delineate.html#semantique.CollectionProxy.delineate" title="semantique.CollectionProxy.delineate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delineate</span></code></a>([dimension])</p></td>
 <td><p>Apply the delineate verb to each array in a collection.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="semantique.CollectionProxy.evaluate.html#semantique.CollectionProxy.evaluate" title="semantique.CollectionProxy.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(operator[, y])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CollectionProxy.evaluate.html#semantique.CollectionProxy.evaluate" title="semantique.CollectionProxy.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(operator[, y])</p></td>
 <td><p>Apply the evaluate verb to each array in a collection.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CollectionProxy.extract.html#semantique.CollectionProxy.extract" title="semantique.CollectionProxy.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract</span></code></a>(dimension[, component])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.CollectionProxy.extract.html#semantique.CollectionProxy.extract" title="semantique.CollectionProxy.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract</span></code></a>(dimension[, component])</p></td>
 <td><p>Apply the extract verb to each array in a collection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.CollectionProxy.fill.html#semantique.CollectionProxy.fill" title="semantique.CollectionProxy.fill"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill</span></code></a>(method, dimension, **kwargs)</p></td>
+<td><p>Apply the fill verb to each array in a collection.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="semantique.CollectionProxy.filter.html#semantique.CollectionProxy.filter" title="semantique.CollectionProxy.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(filterer, **kwargs)</p></td>
 <td><p>Apply the filter verb to each array in a collection.</p></td>

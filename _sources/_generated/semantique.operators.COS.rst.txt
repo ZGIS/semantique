@@ -1,0 +1,6 @@
+﻿semantique.operators.COS
+========================
+
+.. currentmodule:: semantique.operators
+
+.. autodata:: COS

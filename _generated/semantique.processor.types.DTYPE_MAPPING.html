@@ -322,6 +322,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.fill.html">
+     semantique.ArrayProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.apply_custom.html">
+     semantique.ArrayProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -402,6 +412,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.fill.html">
+     semantique.CollectionProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.apply_custom.html">
+     semantique.CollectionProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.ArrayProxy.name.html">
      semantique.ArrayProxy.name
     </a>
@@ -479,6 +499,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.components.time.WEEK.html">
      semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY.html">
+     semantique.components.time.DAY
     </a>
    </li>
    <li class="toctree-l2">
@@ -569,6 +594,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.operators.CEILING.html">
      semantique.operators.CEILING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.COS.html">
+     semantique.operators.COS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.SIN.html">
+     semantique.operators.SIN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.TAN.html">
+     semantique.operators.TAN
     </a>
    </li>
    <li class="toctree-l2">
@@ -834,6 +874,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.operators.ceiling_.html">
      semantique.processor.operators.ceiling_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.cos_.html">
+     semantique.processor.operators.cos_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.sin_.html">
+     semantique.processor.operators.sin_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.tan_.html">
+     semantique.processor.operators.tan_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1137,6 +1192,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownVerbError.html">
+     semantique.exceptions.UnknownVerbError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.UnknownReducerError.html">
      semantique.exceptions.UnknownReducerError
     </a>
@@ -1316,16 +1376,16 @@
 <h1>semantique.processor.types.DTYPE_MAPPING<a class="headerlink" href="#semantique-processor-types-dtype-mapping" title="Permalink to this headline">¶</a></h1>
 <dl class="py data">
 <dt class="sig sig-object py" id="semantique.processor.types.DTYPE_MAPPING">
-<span class="sig-prename descclassname"><span class="pre">semantique.processor.types.</span></span><span class="sig-name descname"><span class="pre">DTYPE_MAPPING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'M':</span> <span class="pre">'datetime',</span> <span class="pre">'O':</span> <span class="pre">['ordinal',</span> <span class="pre">'nominal'],</span> <span class="pre">'U':</span> <span class="pre">['ordinal',</span> <span class="pre">'nominal'],</span> <span class="pre">'b':</span> <span class="pre">'binary',</span> <span class="pre">'f':</span> <span class="pre">'continuous',</span> <span class="pre">'i':</span> <span class="pre">['continuous',</span> <span class="pre">'discrete',</span> <span class="pre">'ordinal',</span> <span class="pre">'nominal'],</span> <span class="pre">'u':</span> <span class="pre">['continuous',</span> <span class="pre">'discrete',</span> <span class="pre">'ordinal',</span> <span class="pre">'nominal']}</span></em><a class="headerlink" href="#semantique.processor.types.DTYPE_MAPPING" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">semantique.processor.types.</span></span><span class="sig-name descname"><span class="pre">DTYPE_MAPPING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'M':</span> <span class="pre">['datetime'],</span> <span class="pre">'O':</span> <span class="pre">['ordinal',</span> <span class="pre">'nominal'],</span> <span class="pre">'U':</span> <span class="pre">['ordinal',</span> <span class="pre">'nominal'],</span> <span class="pre">'b':</span> <span class="pre">['binary'],</span> <span class="pre">'f':</span> <span class="pre">['continuous'],</span> <span class="pre">'i':</span> <span class="pre">['continuous',</span> <span class="pre">'discrete',</span> <span class="pre">'ordinal',</span> <span class="pre">'nominal'],</span> <span class="pre">'u':</span> <span class="pre">['continuous',</span> <span class="pre">'discrete',</span> <span class="pre">'ordinal',</span> <span class="pre">'nominal']}</span></em><a class="headerlink" href="#semantique.processor.types.DTYPE_MAPPING" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mapping between numpy data types and semantique value types.</p>
 <p>A semantique value type describes what kind of data an array contains. It differs
 from the very technical, computer-oriented <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.dtypes.html">numpy dtype</a> categorization, which
 contains e.g. <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a>, etc. Instead, the semantique value type
 describes data on a more general, statistical level. Each numpy data type can
 be mapped to one or semantique value types.</p>
-<p>In this mapping, numpy data types are expressed by their <cite>.kind</cite> property. If
-a numpy data type can be mapped to more than one semantique value type, these
-value types are stored in a list.</p>
+<p>In this mapping, numpy data types are expressed by their <cite>.kind</cite> property. Each
+numpy data type may be mapped to more than one semantique value type, meaning
+that it can represent any of these value types.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a></p>

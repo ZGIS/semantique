@@ -14,12 +14,14 @@
    .. autosummary::
    
       ~ArrayProxy.__init__
+      ~ArrayProxy.apply_custom
       ~ArrayProxy.assign
       ~ArrayProxy.assign_space
       ~ArrayProxy.assign_time
       ~ArrayProxy.delineate
       ~ArrayProxy.evaluate
       ~ArrayProxy.extract
+      ~ArrayProxy.fill
       ~ArrayProxy.filter
       ~ArrayProxy.filter_space
       ~ArrayProxy.filter_time

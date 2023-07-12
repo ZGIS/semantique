@@ -322,6 +322,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.fill.html">
+     semantique.ArrayProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.ArrayProxy.apply_custom.html">
+     semantique.ArrayProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.CollectionProxy.compose.html">
      semantique.CollectionProxy.compose
     </a>
@@ -402,6 +412,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.fill.html">
+     semantique.CollectionProxy.fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.CollectionProxy.apply_custom.html">
+     semantique.CollectionProxy.apply_custom
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.ArrayProxy.name.html">
      semantique.ArrayProxy.name
     </a>
@@ -479,6 +499,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.components.time.WEEK.html">
      semantique.components.time.WEEK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.components.time.DAY.html">
+     semantique.components.time.DAY
     </a>
    </li>
    <li class="toctree-l2">
@@ -569,6 +594,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.operators.CEILING.html">
      semantique.operators.CEILING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.COS.html">
+     semantique.operators.COS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.SIN.html">
+     semantique.operators.SIN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.TAN.html">
+     semantique.operators.TAN
     </a>
    </li>
    <li class="toctree-l2">
@@ -834,6 +874,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="semantique.processor.operators.ceiling_.html">
      semantique.processor.operators.ceiling_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.cos_.html">
+     semantique.processor.operators.cos_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.sin_.html">
+     semantique.processor.operators.sin_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.tan_.html">
+     semantique.processor.operators.tan_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1137,6 +1192,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="semantique.exceptions.UnknownVerbError.html">
+     semantique.exceptions.UnknownVerbError
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="semantique.exceptions.UnknownReducerError.html">
      semantique.exceptions.UnknownReducerError
     </a>
@@ -1316,20 +1376,20 @@
 <h1>semantique.extent.TemporalExtent<a class="headerlink" href="#semantique-extent-temporalextent" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="semantique.extent.TemporalExtent">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.extent.</span></span><span class="sig-name descname"><span class="pre">TemporalExtent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/extent.py#L217-L345"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.extent.TemporalExtent" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">semantique.extent.</span></span><span class="sig-name descname"><span class="pre">TemporalExtent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/extent.py#L206-L347"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.extent.TemporalExtent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dict-like representation of a temporal extent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>*bounds</strong> – Boundaries of the temporal extent. Should be given as objects that can be
-read by the initializer of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp" title="(in pandas v1.5.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Timestamp</span></code></a>. This includes
-<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp" title="(in pandas v1.5.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.Timestamp</span></code></a> objects themselves, as well as text
+read by the initializer of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp" title="(in pandas v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Timestamp</span></code></a>. This includes
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp" title="(in pandas v2.0.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.Timestamp</span></code></a> objects themselves, as well as text
 representations of time instants in different formats. If the temporal
 extent is a single time instant, a single boundary may be given. If the
 temporal extent is a time interval, the boundaries should be provided
 as <cite>(start, end)</cite>. This interval is assumed to be closed at both sides.</p></li>
 <li><p><strong>**kwargs</strong> – Additional keyword arguments forwarded to the initializer of
-<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp" title="(in pandas v1.5.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Timestamp</span></code></a>.</p></li>
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp" title="(in pandas v2.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Timestamp</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
@@ -1338,7 +1398,7 @@ as <cite>(start, end)</cite>. This interval is assumed to be closed at both side
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.extent.TemporalExtent.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/extent.py#L241-L288"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.extent.TemporalExtent.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/extent.py#L230-L280"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.extent.TemporalExtent.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -1364,13 +1424,19 @@ as <cite>(start, end)</cite>. This interval is assumed to be closed at both side
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="semantique.extent.TemporalExtent.end.html#semantique.extent.TemporalExtent.end" title="semantique.extent.TemporalExtent.end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end</span></code></a></p></td>
-<td><p>Upper bound of the temporal extent.</p></td>
+<td><p>Upper bound of the extent.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="semantique.extent.TemporalExtent.start.html#semantique.extent.TemporalExtent.start" title="semantique.extent.TemporalExtent.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start</span></code></a></p></td>
-<td><p>Lower bound of the temporal extent.</p></td>
+<td><p>Lower bound of the extent.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="semantique.extent.TemporalExtent.tz.html#semantique.extent.TemporalExtent.tz" title="semantique.extent.TemporalExtent.tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz</span></code></a></p></td>
-<td><p>Timezone of the time instants.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><p>Type of the extent, either interval or instant.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="semantique.extent.TemporalExtent.tz.html#semantique.extent.TemporalExtent.tz" title="semantique.extent.TemporalExtent.tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz</span></code></a></p></td>
+<td><p>Object representing the timezone of the extent.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tzname</span></code></p></td>
+<td><p>Name of the timezone of the extent.</p></td>
 </tr>
 </tbody>
 </table>

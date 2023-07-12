@@ -1,0 +1,6 @@
+﻿semantique.operators.SIN
+========================
+
+.. currentmodule:: semantique.operators
+
+.. autodata:: SIN

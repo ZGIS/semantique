@@ -1,0 +1,6 @@
+﻿semantique.processor.operators.cos\_
+====================================
+
+.. currentmodule:: semantique.processor.operators
+
+.. autofunction:: cos_

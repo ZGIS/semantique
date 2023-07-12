@@ -1,6 +1,0 @@
-﻿semantique.processor.core.QueryProcessor.store\_default\_operators
-==================================================================
-
-.. currentmodule:: semantique.processor.core
-
-.. automethod:: QueryProcessor.store_default_operators
