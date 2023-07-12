@@ -16,12 +16,15 @@
             "name": "evaluate",
             "params": {
               "operator": "in",
-              "y": [
-                21,
-                22,
-                23,
-                24
-              ]
+              "y": {
+                "type": "set",
+                "content": [
+                  21,
+                  22,
+                  23,
+                  24
+                ]
+              }
             }
           }
         ]
@@ -43,14 +46,17 @@
             "name": "evaluate",
             "params": {
               "operator": "in",
-              "y": [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6
-              ]
+              "y": {
+                "type": "set",
+                "content": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              }
             }
           }
         ]
@@ -72,13 +78,16 @@
             "name": "evaluate",
             "params": {
               "operator": "in",
-              "y": [
-                13,
-                14,
-                15,
-                16,
-                17
-              ]
+              "y": {
+                "type": "set",
+                "content": [
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ]
+              }
             }
           }
         ]
@@ -122,10 +131,13 @@
             "name": "evaluate",
             "params": {
               "operator": "in",
-              "y": [
-                29,
-                30
-              ]
+              "y": {
+                "type": "set",
+                "content": [
+                  29,
+                  30
+                ]
+              }
             }
           }
         ]

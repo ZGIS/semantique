@@ -73,6 +73,13 @@ class Mapping(dict):
       **config:
         Additional keyword arguments.
 
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+        The translated semantic concept, or property of a semantic concept, as
+        an array. For each pixel it contains the quantified relation between
+        the semantic concept and the data values in the datacube.
+
     """
     pass
 
@@ -128,7 +135,8 @@ class Semantique(Mapping):
     -------
       :obj:`xarray.DataArray`
         The translated semantic concept, or property of a semantic concept, as
-        a semantic array.
+        an array. For each pixel it contains the quantified relation between
+        the semantic concept and the data values in the datacube.
 
     """
     ruleset = self.lookup(*reference)
