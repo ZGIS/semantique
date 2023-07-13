@@ -8,7 +8,7 @@ with open("README.md", encoding = "utf-8") as file:
 dependencies = [
   'datacube>=1.8',
   'geocube>=0.4.1',
-  'geopandas',
+  'geopandas>=0.11',
   'numpy>=1.21',
   'pandas>=2.0',
   'pyproj>=3.0',
@@ -17,7 +17,7 @@ dependencies = [
   'rioxarray>=0.14',
   'scipy>=1.11',
   'setuptools',
-  'xarray>=0.16'
+  'xarray>=0.20'
 ]
 
 # Setup.
