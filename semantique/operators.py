@@ -43,12 +43,30 @@ See: :func:`semantique.processor.operators.ceiling_`
 
 """
 
-COS = "cos"
-""":obj:`str` : Reference to operator function cos.
+COSINE = "cosine"
+""":obj:`str` : Reference to operator function cosine.
 
 This operator computes the cosine of x, assuming x is an angle in radians.
 
-See: :func:`semantique.processor.operators.cos_`
+See: :func:`semantique.processor.operators.cosine_`
+
+"""
+
+COSECANT = "cosecant"
+""":obj:`str` : Reference to operator function cosecant.
+
+This operator computes the cosecant of x, assuming x is an angle in radians.
+
+See: :func:`semantique.processor.operators.cosecant_`
+
+"""
+
+COTANGENT = "cotangent"
+""":obj:`str` : Reference to operator function cotangent.
+
+This operator computes the cotangent of x, assuming x is an angle in radians.
+
+See: :func:`semantique.processor.operators.cotangent_`
 
 """
 
@@ -88,12 +106,21 @@ See: :func:`semantique.processor.operators.natural_logarithm_`
 
 """
 
-SIN = "sin"
-""":obj:`str` : Reference to operator function sin.
+SECANT = "secant"
+""":obj:`str` : Reference to operator function secant.
+
+This operator computes the secant of x, assuming x is an angle in radians.
+
+See: :func:`semantique.processor.operators.secant_`
+
+"""
+
+SINE = "sine"
+""":obj:`str` : Reference to operator function sine.
 
 This operator computes the sine of x, assuming x is an angle in radians.
 
-See: :func:`semantique.processor.operators.sin_`
+See: :func:`semantique.processor.operators.sine_`
 
 """
 
@@ -106,12 +133,30 @@ See: :func:`semantique.processor.operators.square_root_`
 
 """
 
-TAN = "tan"
-""":obj:`str` : Reference to operator function tan.
+TANGENT = "tangent"
+""":obj:`str` : Reference to operator function tangent.
 
 This operator computes the tangent of x, assuming x is an angle in radians.
 
-See: :func:`semantique.processor.operators.tan_`
+See: :func:`semantique.processor.operators.tangent_`
+
+"""
+
+TO_DEGREES = "to_degrees"
+""":obj:`str` : Reference to operator function to_degrees.
+
+This operator computes the angle in degrees, assuming x is an angle in radians.
+
+See: :func:`semantique.processor.operators.to_degrees_`
+
+"""
+
+TO_RADIANS = "to_radians"
+""":obj:`str` : Reference to operator function to_radians.
+
+This operator computes the angle in radians, assuming x is an angle in degrees.
+
+See: :func:`semantique.processor.operators.to_radians_`
 
 """
 

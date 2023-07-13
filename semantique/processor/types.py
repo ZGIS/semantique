@@ -63,9 +63,19 @@ TYPE_PROMOTION_MANUALS = {
     "discrete": "discrete",
     "__preserve_labels__": 0
   },
-  "cos": {
-    "continuous": "discrete",
-    "discrete": "discrete",
+  "cosine": {
+    "continuous": "continuous",
+    "discrete": "continuous",
+    "__preserve_labels__": 0
+  },
+  "cosecant": {
+    "continuous": "continuous",
+    "discrete": "continuous",
+    "__preserve_labels__": 0
+  },
+  "cotangent": {
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "cube_root": {
@@ -88,9 +98,14 @@ TYPE_PROMOTION_MANUALS = {
     "discrete": "continuous",
     "__preserve_labels__": 0
   },
-  "sin": {
-    "continuous": "discrete",
-    "discrete": "discrete",
+  "secant": {
+    "continuous": "continuous",
+    "discrete": "continuous",
+    "__preserve_labels__": 0
+  },
+  "sine": {
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "square_root": {
@@ -98,9 +113,19 @@ TYPE_PROMOTION_MANUALS = {
     "discrete": "continuous",
     "__preserve_labels__": 0
   },
-  "tan": {
-    "continuous": "discrete",
-    "discrete": "discrete",
+  "tangent": {
+    "continuous": "continuous",
+    "discrete": "continuous",
+    "__preserve_labels__": 0
+  },
+  "to_degrees": {
+    "continuous": "continuous",
+    "discrete": "continuous",
+    "__preserve_labels__": 0
+  },
+  "to_radians": {
+    "continuous": "continuous",
+    "discrete": "continuous",
     "__preserve_labels__": 0
   },
   "add": {
