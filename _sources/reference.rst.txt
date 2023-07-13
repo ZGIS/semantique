@@ -210,9 +210,14 @@ Univariate operators
    operators.SQUARE_ROOT
    operators.FLOOR
    operators.CEILING
-   operators.COS
-   operators.SIN
-   operators.TAN
+   operators.COSINE
+   operators.SINE
+   operators.TANGENT
+   operators.SECANT
+   operators.COSECANT
+   operators.COTANGENT
+   operators.TO_DEGREES
+   operators.TO_RADIANS
 
 Algebraic operators
 ~~~~~~~~~~~~~~~~~~~~
@@ -382,9 +387,14 @@ Univariate operators
    processor.operators.square_root_
    processor.operators.floor_
    processor.operators.ceiling_
-   processor.operators.cos_
-   processor.operators.sin_
-   processor.operators.tan_
+   processor.operators.cosine_
+   processor.operators.sine_
+   processor.operators.tangent_
+   processor.operators.secant_
+   processor.operators.cosecant_
+   processor.operators.cotangent_
+   processor.operators.to_degrees_
+   processor.operators.to_radians_
 
 Algebraic operators
 ~~~~~~~~~~~~~~~~~~~~

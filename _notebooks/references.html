@@ -599,18 +599,43 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.COS.html">
-     semantique.operators.COS
+    <a class="reference internal" href="../_generated/semantique.operators.COSINE.html">
+     semantique.operators.COSINE
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.SIN.html">
-     semantique.operators.SIN
+    <a class="reference internal" href="../_generated/semantique.operators.SINE.html">
+     semantique.operators.SINE
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.TAN.html">
-     semantique.operators.TAN
+    <a class="reference internal" href="../_generated/semantique.operators.TANGENT.html">
+     semantique.operators.TANGENT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.operators.SECANT.html">
+     semantique.operators.SECANT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.operators.COSECANT.html">
+     semantique.operators.COSECANT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.operators.COTANGENT.html">
+     semantique.operators.COTANGENT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.operators.TO_DEGREES.html">
+     semantique.operators.TO_DEGREES
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.operators.TO_RADIANS.html">
+     semantique.operators.TO_RADIANS
     </a>
    </li>
    <li class="toctree-l2">
@@ -879,18 +904,43 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.cos_.html">
-     semantique.processor.operators.cos_
+    <a class="reference internal" href="../_generated/semantique.processor.operators.cosine_.html">
+     semantique.processor.operators.cosine_
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.sin_.html">
-     semantique.processor.operators.sin_
+    <a class="reference internal" href="../_generated/semantique.processor.operators.sine_.html">
+     semantique.processor.operators.sine_
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.tan_.html">
-     semantique.processor.operators.tan_
+    <a class="reference internal" href="../_generated/semantique.processor.operators.tangent_.html">
+     semantique.processor.operators.tangent_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.secant_.html">
+     semantique.processor.operators.secant_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.cosecant_.html">
+     semantique.processor.operators.cosecant_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.cotangent_.html">
+     semantique.processor.operators.cotangent_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.to_degrees_.html">
+     semantique.processor.operators.to_degrees_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../_generated/semantique.processor.operators.to_radians_.html">
+     semantique.processor.operators.to_radians_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1819,7 +1869,7 @@ itself.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ref = sq.layer(&quot;s2_band01&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ref = sq.layer(&quot;s2_band02&quot;)
 print(json.dumps(ref, indent = 2))
 </pre></div>
 </div>
@@ -1832,7 +1882,7 @@ print(json.dumps(ref, indent = 2))
 {
   &#34;type&#34;: &#34;layer&#34;,
   &#34;reference&#34;: [
-    &#34;s2_band01&#34;
+    &#34;s2_band02&#34;
   ]
 }
 </pre></div></div>
@@ -1842,7 +1892,7 @@ print(json.dumps(ref, indent = 2))
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ref = sq.layer(&quot;reflectance&quot;, &quot;s2_band01&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ref = sq.layer(&quot;reflectance&quot;, &quot;s2_band02&quot;)
 print(json.dumps(ref, indent = 2))
 </pre></div>
 </div>
@@ -1856,7 +1906,7 @@ print(json.dumps(ref, indent = 2))
   &#34;type&#34;: &#34;layer&#34;,
   &#34;reference&#34;: [
     &#34;reflectance&#34;,
-    &#34;s2_band01&#34;
+    &#34;s2_band02&#34;
   ]
 }
 </pre></div></div>
@@ -1874,7 +1924,7 @@ print(json.dumps(ref, indent = 2))
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ref = sq.reflectance(&quot;s2_band01&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ref = sq.reflectance(&quot;s2_band02&quot;)
 print(json.dumps(ref, indent = 2))
 </pre></div>
 </div>
@@ -1888,7 +1938,48 @@ print(json.dumps(ref, indent = 2))
   &#34;type&#34;: &#34;layer&#34;,
   &#34;reference&#34;: [
     &#34;reflectance&#34;,
-    &#34;s2_band01&#34;
+    &#34;s2_band02&#34;
+  ]
+}
+</pre></div></div>
+</div>
+<p>The way that semantique parses the layout also allows for easy auto-completion, for example when using jupyter notebooks.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/layout.json&quot;, &quot;r&quot;) as file:
+    dc = sq.datacube.GeotiffArchive(json.load(file), src = &quot;files/layers.zip&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>layout = dc.layout
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ref = sq.layer(*layout[&quot;reflectance&quot;][&quot;s2_band02&quot;][&quot;reference&quot;])
+print(json.dumps(ref, indent = 2))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+  &#34;type&#34;: &#34;layer&#34;,
+  &#34;reference&#34;: [
+    &#34;reflectance&#34;,
+    &#34;s2_band02&#34;
   ]
 }
 </pre></div></div>
@@ -1906,7 +1997,7 @@ print(json.dumps(ref, indent = 2))
 <p>After executing this recipe, the response will contain a single result, i.e. <em>summed_count</em>. However, one might also want to obtain the water count and vegetation count maps as separate results themselves. At that point, it is good to know that processing chains may be started with a reference to a previously defined result, using the <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.result.html">result()</a> function. This allows to re-use other result definitions inside a new result
 definition. For example:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ref = sq.result(&quot;water_count&quot;)
@@ -1949,7 +2040,7 @@ object is the output of the first verb, etcetera.</p>
 <p>Here you see that the <em>same</em> processing chain that constructs the water count map occurs twice in the recipe. This does not only make the code longer and less readable, it also decreases processing time since solving the water reference and reducing the resulting array has to be done twice instead of once. Now we came at the point where we can show that it is useful to reference the active evaluation object itself. The
 <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.self.html">self()</a> function can be used for that, without the need to provide any arguments.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ref = sq.self()
@@ -1980,7 +2071,7 @@ print(json.dumps(ref, indent = 2))
 in which you start with a main input object, and add the other objects along the way. This might not feel fitting for every use-case.</p>
 <p>The <a class="reference external" href="https://zgis.github.io/semantique/_generated/semantique.collection.html">collection()</a> function can be used to reference collections. It can be provided with as many singular references as needed. For example:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ref = sq.collection(sq.entity(&quot;water&quot;), sq.entity(&quot;vegetation&quot;))

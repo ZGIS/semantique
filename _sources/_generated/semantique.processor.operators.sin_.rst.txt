@@ -1,6 +1,0 @@
-﻿semantique.processor.operators.sin\_
-====================================
-
-.. currentmodule:: semantique.processor.operators
-
-.. autofunction:: sin_

@@ -1,6 +1,0 @@
-﻿semantique.operators.TAN
-========================
-
-.. currentmodule:: semantique.operators
-
-.. autodata:: TAN

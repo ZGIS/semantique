@@ -597,18 +597,43 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.operators.COS.html">
-     semantique.operators.COS
+    <a class="reference internal" href="semantique.operators.COSINE.html">
+     semantique.operators.COSINE
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.operators.SIN.html">
-     semantique.operators.SIN
+    <a class="reference internal" href="semantique.operators.SINE.html">
+     semantique.operators.SINE
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.operators.TAN.html">
-     semantique.operators.TAN
+    <a class="reference internal" href="semantique.operators.TANGENT.html">
+     semantique.operators.TANGENT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.SECANT.html">
+     semantique.operators.SECANT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.COSECANT.html">
+     semantique.operators.COSECANT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.COTANGENT.html">
+     semantique.operators.COTANGENT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.TO_DEGREES.html">
+     semantique.operators.TO_DEGREES
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.operators.TO_RADIANS.html">
+     semantique.operators.TO_RADIANS
     </a>
    </li>
    <li class="toctree-l2">
@@ -877,18 +902,43 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.operators.cos_.html">
-     semantique.processor.operators.cos_
+    <a class="reference internal" href="semantique.processor.operators.cosine_.html">
+     semantique.processor.operators.cosine_
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.operators.sin_.html">
-     semantique.processor.operators.sin_
+    <a class="reference internal" href="semantique.processor.operators.sine_.html">
+     semantique.processor.operators.sine_
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="semantique.processor.operators.tan_.html">
-     semantique.processor.operators.tan_
+    <a class="reference internal" href="semantique.processor.operators.tangent_.html">
+     semantique.processor.operators.tangent_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.secant_.html">
+     semantique.processor.operators.secant_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.cosecant_.html">
+     semantique.processor.operators.cosecant_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.cotangent_.html">
+     semantique.processor.operators.cotangent_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.to_degrees_.html">
+     semantique.processor.operators.to_degrees_
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="semantique.processor.operators.to_radians_.html">
+     semantique.processor.operators.to_radians_
     </a>
    </li>
    <li class="toctree-l2">
@@ -1376,7 +1426,7 @@
 <h1>semantique.processor.operators.after_<a class="headerlink" href="#semantique-processor-operators-after" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="semantique.processor.operators.after_">
-<span class="sig-prename descclassname"><span class="pre">semantique.processor.operators.</span></span><span class="sig-name descname"><span class="pre">after_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/operators.py#L1639-L1700"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.operators.after_" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">semantique.processor.operators.</span></span><span class="sig-name descname"><span class="pre">after_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/processor/operators.py#L1873-L1934"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.processor.operators.after_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test if x comes after y.</p>
 <p>This is a specific temporal relational operator meant to be evaluated with
 a temporal coordinate as left-hand side operand, and a
