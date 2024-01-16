@@ -2,7 +2,7 @@ sphinx>=4.5.0
 nbconvert>=6.5.0
 nbsphinx>=0.8.8
 nbsphinx-link>=1.3.0
-m2r2==0.3.2
+m2r2>=0.3.3
 sphinxemoji>=0.2.0
 sphinx-book-theme>=0.1.7
 sphinx-exec-code>=0.6
