@@ -103,6 +103,12 @@ class Opendatacube(Datacube):
       Additional keyword arguments tuning the data retrieval configuration.
       Valid options are:
 
+      * **trim** (:obj:`bool`): Should each retrieved data layer be trimmed?
+        Trimming means that dimension coordinates for which all values are
+        missing are removed from the array. The spatial dimensions are trimmed
+        only at the edges, to maintain their regularity. Defaults to
+        :obj:`True`.
+
       * **group_by_solar_day** (:obj:`bool`): Should the time dimension be
         resampled to the day level, using solar day to keep scenes together?
         Defaults to :obj:`True`.
@@ -183,6 +189,7 @@ class Opendatacube(Datacube):
   @property
   def _default_config(self):
     return {
+      "trim": True,
       "group_by_solar_day": True,
       "value_type_mapping": {
         "nominal": "nominal",
@@ -280,6 +287,10 @@ class Opendatacube(Datacube):
         f"All values for data layer '{reference}' are invalid within the "
         "specified spatio-temporal extent"
       )
+    # Trim the array if requested.
+    # This will remove dimension coordinates with only missing or invalid data.
+    if self.config["trim"]:
+      data = data.sq.trim()
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
@@ -386,6 +397,12 @@ class GeotiffArchive(Datacube):
       Additional keyword arguments tuning the data retrieval configuration.
       Valid options are:
 
+      * **trim** (:obj:`bool`): Should each retrieved data layer be trimmed?
+        Trimming means that dimension coordinates for which all values are
+        missing are removed from the array. The spatial dimensions are trimmed
+        only at the edges, to maintain their regularity. Defaults to
+        :obj:`True`.
+
       * **value_type_mapping** (:obj:`dict`): How do value type encodings in
         the layout map to the value types used by semantique?
         Defaults to a one-to-one mapping: ::
@@ -458,6 +475,7 @@ class GeotiffArchive(Datacube):
   @property
   def _default_config(self):
     return {
+      "trim": True,
       "value_type_mapping": {
         "nominal": "nominal",
         "ordinal": "ordinal",
@@ -556,6 +574,10 @@ class GeotiffArchive(Datacube):
         f"All values for data layer '{reference}' are invalid within the "
         "specified spatio-temporal extent"
       )
+    # Trim the array if requested.
+    # This will remove dimension coordinates with only missing or invalid data.
+    if self.config["trim"]:
+      data = data.sq.trim()
     # PROVISIONAL FIX: Convert value type to float.
     # Sentinel-2 data may be loaded as unsigned integers.
     # This gives problems e.g. with divisions that return negative values.
