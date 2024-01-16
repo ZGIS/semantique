@@ -68,6 +68,9 @@ html_theme = 'sphinx_book_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_logo = "_static/logo.png"
+html_favicon = "_static/logo.png"
+
 html_theme_options = {
   "repository_url": "https://github.com/ZGIS/semantique",
   "repository_branch": "main",
@@ -79,11 +82,9 @@ html_theme_options = {
     "binderhub_url": "https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo"
   },
   "logo": {
-    "image_dark": "_images/logo_dark.png"
+    "image_dark": "_static/logo_dark.png"
   }
 }
-
-html_logo = "_images/logo.png"
 
 # -- Napoleon configuration ---------------------------------------------------
 

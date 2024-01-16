@@ -3,7 +3,7 @@
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo%2Ftest.ipynb)
 
-<img src="docs/source/_images/logo.png" align="right" width="150" />
+<img src="docs/source/_static/logo.png" align="right" width="150" />
 
 `semantique` is a Python package that implements a structured framework for semantic querying in Earth observation data cubes, meaning that users can query the cube through an ontology.
 ## Content
