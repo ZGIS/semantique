@@ -79,10 +79,11 @@ html_theme_options = {
     "binderhub_url": "https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo"
   },
   "logo": {
-    "image_light": "_images/logo_light.png",
     "image_dark": "_images/logo_dark.png"
   }
 }
+
+html_logo = "_images/logo.png"
 
 # -- Napoleon configuration ---------------------------------------------------
 
