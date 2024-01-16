@@ -227,10 +227,8 @@ class Opendatacube(Datacube):
         if all([x in obj for x in ["type", "values"]]):
           obj["reference"] = copy.deepcopy(ref)
           if isinstance(obj["values"], list):
-            vals = {}
-            vals["labels"] = {x["label"]:x["id"] for x in obj["values"]}
-            vals["descriptions"] = {x["description"]:x["id"] for x in obj["values"]}
-            obj["values"] = vals
+            obj["labels"] = {x["label"]:x["id"] for x in obj["values"]}
+            obj["descriptions"] = {x["description"]:x["id"] for x in obj["values"]}
           del ref[-1]
           is_layer = True
         else:
