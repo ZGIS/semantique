@@ -1,1725 +1,666 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Representing an EO data cube &#8212; semantique 0.1.0 documentation</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
 
-    
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script src="../_static/documentation_options.js?v=a1637f0b"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_notebooks/datacube';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="References" href="references.html" />
     <link rel="prev" title="Constructing a mapping" href="mapping.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
         
       
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
       
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Getting started
- </span>
-</p>
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="semantique 0.1.0 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="semantique 0.1.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../installation.html">
-   Installation
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Documentation
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../guide.html">
-   User Guide
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="recipes.html">
-     Writing and executing query recipes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="mapping.html">
-     Constructing mappings
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Representing EO data cubes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="references.html">
-     References
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="verbs.html">
-     Verbs
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="processor.html">
-     Internal query processing
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../reference.html">
-   API Reference
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.QueryRecipe.html">
-     semantique.QueryRecipe
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.mapping.Mapping.html">
-     semantique.mapping.Mapping
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.mapping.Semantique.html">
-     semantique.mapping.Semantique
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.datacube.Datacube.html">
-     semantique.datacube.Datacube
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.datacube.Opendatacube.html">
-     semantique.datacube.Opendatacube
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.datacube.GeotiffArchive.html">
-     semantique.datacube.GeotiffArchive
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.extent.SpatialExtent.html">
-     semantique.extent.SpatialExtent
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.extent.TemporalExtent.html">
-     semantique.extent.TemporalExtent
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.concept.html">
-     semantique.concept
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.entity.html">
-     semantique.entity
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.event.html">
-     semantique.event
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.layer.html">
-     semantique.layer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.appearance.html">
-     semantique.appearance
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.artifacts.html">
-     semantique.artifacts
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.atmosphere.html">
-     semantique.atmosphere
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reflectance.html">
-     semantique.reflectance
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.topography.html">
-     semantique.topography
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.result.html">
-     semantique.result
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.self.html">
-     semantique.self
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.collection.html">
-     semantique.collection
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.evaluate.html">
-     semantique.ArrayProxy.evaluate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.extract.html">
-     semantique.ArrayProxy.extract
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.filter.html">
-     semantique.ArrayProxy.filter
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.filter_time.html">
-     semantique.ArrayProxy.filter_time
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.filter_space.html">
-     semantique.ArrayProxy.filter_space
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.assign.html">
-     semantique.ArrayProxy.assign
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.assign_time.html">
-     semantique.ArrayProxy.assign_time
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.assign_space.html">
-     semantique.ArrayProxy.assign_space
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.groupby.html">
-     semantique.ArrayProxy.groupby
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.groupby_time.html">
-     semantique.ArrayProxy.groupby_time
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.groupby_space.html">
-     semantique.ArrayProxy.groupby_space
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.reduce.html">
-     semantique.ArrayProxy.reduce
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.shift.html">
-     semantique.ArrayProxy.shift
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.smooth.html">
-     semantique.ArrayProxy.smooth
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.trim.html">
-     semantique.ArrayProxy.trim
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.delineate.html">
-     semantique.ArrayProxy.delineate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.fill.html">
-     semantique.ArrayProxy.fill
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.apply_custom.html">
-     semantique.ArrayProxy.apply_custom
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.compose.html">
-     semantique.CollectionProxy.compose
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.concatenate.html">
-     semantique.CollectionProxy.concatenate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.merge.html">
-     semantique.CollectionProxy.merge
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.evaluate.html">
-     semantique.CollectionProxy.evaluate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.extract.html">
-     semantique.CollectionProxy.extract
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.filter.html">
-     semantique.CollectionProxy.filter
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.filter_time.html">
-     semantique.CollectionProxy.filter_time
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.filter_space.html">
-     semantique.CollectionProxy.filter_space
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.assign.html">
-     semantique.CollectionProxy.assign
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.assign_time.html">
-     semantique.CollectionProxy.assign_time
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.assign_space.html">
-     semantique.CollectionProxy.assign_space
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.reduce.html">
-     semantique.CollectionProxy.reduce
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.shift.html">
-     semantique.CollectionProxy.shift
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.smooth.html">
-     semantique.CollectionProxy.smooth
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.trim.html">
-     semantique.CollectionProxy.trim
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.delineate.html">
-     semantique.CollectionProxy.delineate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.fill.html">
-     semantique.CollectionProxy.fill
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.CollectionProxy.apply_custom.html">
-     semantique.CollectionProxy.apply_custom
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.ArrayProxy.name.html">
-     semantique.ArrayProxy.name
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.label.html">
-     semantique.label
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.set.html">
-     semantique.set
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.interval.html">
-     semantique.interval
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.geometry.html">
-     semantique.geometry
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.time_instant.html">
-     semantique.time_instant
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.time_interval.html">
-     semantique.time_interval
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.dimensions.TIME.html">
-     semantique.dimensions.TIME
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.dimensions.SPACE.html">
-     semantique.dimensions.SPACE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.dimensions.X.html">
-     semantique.dimensions.X
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.dimensions.Y.html">
-     semantique.dimensions.Y
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.YEAR.html">
-     semantique.components.time.YEAR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.SEASON.html">
-     semantique.components.time.SEASON
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.QUARTER.html">
-     semantique.components.time.QUARTER
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.MONTH.html">
-     semantique.components.time.MONTH
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.WEEK.html">
-     semantique.components.time.WEEK
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.DAY.html">
-     semantique.components.time.DAY
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.DAY_OF_WEEK.html">
-     semantique.components.time.DAY_OF_WEEK
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.DAY_OF_YEAR.html">
-     semantique.components.time.DAY_OF_YEAR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.HOUR.html">
-     semantique.components.time.HOUR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.MINUTE.html">
-     semantique.components.time.MINUTE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.time.SECOND.html">
-     semantique.components.time.SECOND
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.space.X.html">
-     semantique.components.space.X
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.space.Y.html">
-     semantique.components.space.Y
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.components.space.FEATURE.html">
-     semantique.components.space.FEATURE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.NOT.html">
-     semantique.operators.NOT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.IS_MISSING.html">
-     semantique.operators.IS_MISSING
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.NOT_MISSING.html">
-     semantique.operators.NOT_MISSING
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.ABSOLUTE.html">
-     semantique.operators.ABSOLUTE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.EXPONENTIAL.html">
-     semantique.operators.EXPONENTIAL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.CUBE_ROOT.html">
-     semantique.operators.CUBE_ROOT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.NATURAL_LOGARITHM.html">
-     semantique.operators.NATURAL_LOGARITHM
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.SQUARE_ROOT.html">
-     semantique.operators.SQUARE_ROOT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.FLOOR.html">
-     semantique.operators.FLOOR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.CEILING.html">
-     semantique.operators.CEILING
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.COSINE.html">
-     semantique.operators.COSINE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.SINE.html">
-     semantique.operators.SINE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.TANGENT.html">
-     semantique.operators.TANGENT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.SECANT.html">
-     semantique.operators.SECANT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.COSECANT.html">
-     semantique.operators.COSECANT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.COTANGENT.html">
-     semantique.operators.COTANGENT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.TO_DEGREES.html">
-     semantique.operators.TO_DEGREES
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.TO_RADIANS.html">
-     semantique.operators.TO_RADIANS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.ADD.html">
-     semantique.operators.ADD
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.DIVIDE.html">
-     semantique.operators.DIVIDE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.MULTIPLY.html">
-     semantique.operators.MULTIPLY
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.POWER.html">
-     semantique.operators.POWER
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.SUBTRACT.html">
-     semantique.operators.SUBTRACT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.NORMALIZED_DIFFERENCE.html">
-     semantique.operators.NORMALIZED_DIFFERENCE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.AND.html">
-     semantique.operators.AND
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.OR.html">
-     semantique.operators.OR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.EXCLUSIVE_OR.html">
-     semantique.operators.EXCLUSIVE_OR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.EQUAL.html">
-     semantique.operators.EQUAL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.NOT_EQUAL.html">
-     semantique.operators.NOT_EQUAL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.IN.html">
-     semantique.operators.IN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.NOT_IN.html">
-     semantique.operators.NOT_IN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.GREATER.html">
-     semantique.operators.GREATER
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.GREATER_EQUAL.html">
-     semantique.operators.GREATER_EQUAL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.LESS.html">
-     semantique.operators.LESS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.LESS_EQUAL.html">
-     semantique.operators.LESS_EQUAL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.INTERSECTS.html">
-     semantique.operators.INTERSECTS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.AFTER.html">
-     semantique.operators.AFTER
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.BEFORE.html">
-     semantique.operators.BEFORE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.operators.DURING.html">
-     semantique.operators.DURING
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.MEAN.html">
-     semantique.reducers.MEAN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.MEDIAN.html">
-     semantique.reducers.MEDIAN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.MODE.html">
-     semantique.reducers.MODE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.MAX.html">
-     semantique.reducers.MAX
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.MIN.html">
-     semantique.reducers.MIN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.RANGE.html">
-     semantique.reducers.RANGE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.N.html">
-     semantique.reducers.N
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.PRODUCT.html">
-     semantique.reducers.PRODUCT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.STANDARD_DEVIATION.html">
-     semantique.reducers.STANDARD_DEVIATION
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.SUM.html">
-     semantique.reducers.SUM
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.VARIANCE.html">
-     semantique.reducers.VARIANCE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.ALL.html">
-     semantique.reducers.ALL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.ANY.html">
-     semantique.reducers.ANY
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.NONE.html">
-     semantique.reducers.NONE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.COUNT.html">
-     semantique.reducers.COUNT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.PERCENTAGE.html">
-     semantique.reducers.PERCENTAGE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.FIRST.html">
-     semantique.reducers.FIRST
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.reducers.LAST.html">
-     semantique.reducers.LAST
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.core.QueryProcessor.html">
-     semantique.processor.core.QueryProcessor
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.arrays.Array.html">
-     semantique.processor.arrays.Array
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.arrays.Collection.html">
-     semantique.processor.arrays.Collection
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.values.Interval.html">
-     semantique.processor.values.Interval
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.not_.html">
-     semantique.processor.operators.not_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.is_missing_.html">
-     semantique.processor.operators.is_missing_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.not_missing_.html">
-     semantique.processor.operators.not_missing_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.absolute_.html">
-     semantique.processor.operators.absolute_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.exponential_.html">
-     semantique.processor.operators.exponential_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.cube_root_.html">
-     semantique.processor.operators.cube_root_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.natural_logarithm_.html">
-     semantique.processor.operators.natural_logarithm_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.square_root_.html">
-     semantique.processor.operators.square_root_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.floor_.html">
-     semantique.processor.operators.floor_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.ceiling_.html">
-     semantique.processor.operators.ceiling_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.cosine_.html">
-     semantique.processor.operators.cosine_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.sine_.html">
-     semantique.processor.operators.sine_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.tangent_.html">
-     semantique.processor.operators.tangent_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.secant_.html">
-     semantique.processor.operators.secant_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.cosecant_.html">
-     semantique.processor.operators.cosecant_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.cotangent_.html">
-     semantique.processor.operators.cotangent_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.to_degrees_.html">
-     semantique.processor.operators.to_degrees_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.to_radians_.html">
-     semantique.processor.operators.to_radians_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.add_.html">
-     semantique.processor.operators.add_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.divide_.html">
-     semantique.processor.operators.divide_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.multiply_.html">
-     semantique.processor.operators.multiply_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.power_.html">
-     semantique.processor.operators.power_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.subtract_.html">
-     semantique.processor.operators.subtract_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.normalized_difference_.html">
-     semantique.processor.operators.normalized_difference_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.and_.html">
-     semantique.processor.operators.and_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.or_.html">
-     semantique.processor.operators.or_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.exclusive_or_.html">
-     semantique.processor.operators.exclusive_or_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.equal_.html">
-     semantique.processor.operators.equal_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.not_equal_.html">
-     semantique.processor.operators.not_equal_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.in_.html">
-     semantique.processor.operators.in_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.not_in_.html">
-     semantique.processor.operators.not_in_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.greater_.html">
-     semantique.processor.operators.greater_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.greater_equal_.html">
-     semantique.processor.operators.greater_equal_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.less_.html">
-     semantique.processor.operators.less_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.less_equal_.html">
-     semantique.processor.operators.less_equal_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.intersects_.html">
-     semantique.processor.operators.intersects_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.after_.html">
-     semantique.processor.operators.after_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.before_.html">
-     semantique.processor.operators.before_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.operators.during_.html">
-     semantique.processor.operators.during_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.mean_.html">
-     semantique.processor.reducers.mean_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.median_.html">
-     semantique.processor.reducers.median_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.mode_.html">
-     semantique.processor.reducers.mode_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.max_.html">
-     semantique.processor.reducers.max_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.min_.html">
-     semantique.processor.reducers.min_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.range_.html">
-     semantique.processor.reducers.range_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.n_.html">
-     semantique.processor.reducers.n_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.product_.html">
-     semantique.processor.reducers.product_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.standard_deviation_.html">
-     semantique.processor.reducers.standard_deviation_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.sum_.html">
-     semantique.processor.reducers.sum_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.variance_.html">
-     semantique.processor.reducers.variance_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.all_.html">
-     semantique.processor.reducers.all_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.any_.html">
-     semantique.processor.reducers.any_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.none_.html">
-     semantique.processor.reducers.none_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.count_.html">
-     semantique.processor.reducers.count_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.percentage_.html">
-     semantique.processor.reducers.percentage_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.first_.html">
-     semantique.processor.reducers.first_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.reducers.last_.html">
-     semantique.processor.reducers.last_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_extent.html">
-     semantique.processor.utils.parse_extent
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.get_null.html">
-     semantique.processor.utils.get_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.allnull.html">
-     semantique.processor.utils.allnull
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.null_as_zero.html">
-     semantique.processor.utils.null_as_zero
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.inf_as_null.html">
-     semantique.processor.utils.inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.datetime64_as_unix.html">
-     semantique.processor.utils.datetime64_as_unix
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.types.TypePromoter.html">
-     semantique.processor.types.TypePromoter
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.types.get_value_type.html">
-     semantique.processor.types.get_value_type
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.types.get_value_labels.html">
-     semantique.processor.types.get_value_labels
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.types.DTYPE_MAPPING.html">
-     semantique.processor.types.DTYPE_MAPPING
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.processor.types.TYPE_PROMOTION_MANUALS.html">
-     semantique.processor.types.TYPE_PROMOTION_MANUALS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.AlignmentError.html">
-     semantique.exceptions.AlignmentError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.EmptyDataError.html">
-     semantique.exceptions.EmptyDataError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.InvalidValueTypeError.html">
-     semantique.exceptions.InvalidValueTypeError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.InvalidIntervalError.html">
-     semantique.exceptions.InvalidIntervalError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.InvalidBuildingBlockError.html">
-     semantique.exceptions.InvalidBuildingBlockError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownConceptError.html">
-     semantique.exceptions.UnknownConceptError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownLayerError.html">
-     semantique.exceptions.UnknownLayerError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownResultError.html">
-     semantique.exceptions.UnknownResultError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownVerbError.html">
-     semantique.exceptions.UnknownVerbError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownReducerError.html">
-     semantique.exceptions.UnknownReducerError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownOperatorError.html">
-     semantique.exceptions.UnknownOperatorError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownDimensionError.html">
-     semantique.exceptions.UnknownDimensionError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownComponentError.html">
-     semantique.exceptions.UnknownComponentError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.UnknownLabelError.html">
-     semantique.exceptions.UnknownLabelError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.TooManyDimensionsError.html">
-     semantique.exceptions.TooManyDimensionsError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.MissingDimensionError.html">
-     semantique.exceptions.MissingDimensionError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.MixedDimensionsError.html">
-     semantique.exceptions.MixedDimensionsError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.ReservedDimensionError.html">
-     semantique.exceptions.ReservedDimensionError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../_generated/semantique.exceptions.MixedTimeZonesError.html">
-     semantique.exceptions.MixedTimeZonesError
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="gallery.html">
-   Gallery
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../changelog.html">
-   Changelog
-  </a>
- </li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../guide.html">User Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="recipes.html">Writing and executing query recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapping.html">Constructing mappings</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Representing EO data cubes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verbs.html">Verbs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processor.html">Internal query processing</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Community
- </span>
-</p>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.QueryRecipe.html">semantique.QueryRecipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.mapping.Mapping.html">semantique.mapping.Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.mapping.Semantique.html">semantique.mapping.Semantique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.datacube.Datacube.html">semantique.datacube.Datacube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.datacube.Opendatacube.html">semantique.datacube.Opendatacube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.datacube.GeotiffArchive.html">semantique.datacube.GeotiffArchive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.extent.SpatialExtent.html">semantique.extent.SpatialExtent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.extent.TemporalExtent.html">semantique.extent.TemporalExtent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.concept.html">semantique.concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.entity.html">semantique.entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.event.html">semantique.event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.layer.html">semantique.layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.appearance.html">semantique.appearance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.artifacts.html">semantique.artifacts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.atmosphere.html">semantique.atmosphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reflectance.html">semantique.reflectance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.topography.html">semantique.topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.result.html">semantique.result</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.self.html">semantique.self</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.collection.html">semantique.collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.evaluate.html">semantique.ArrayProxy.evaluate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.extract.html">semantique.ArrayProxy.extract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.filter.html">semantique.ArrayProxy.filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.filter_time.html">semantique.ArrayProxy.filter_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.filter_space.html">semantique.ArrayProxy.filter_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.assign.html">semantique.ArrayProxy.assign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.assign_time.html">semantique.ArrayProxy.assign_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.assign_space.html">semantique.ArrayProxy.assign_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.groupby.html">semantique.ArrayProxy.groupby</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.groupby_time.html">semantique.ArrayProxy.groupby_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.groupby_space.html">semantique.ArrayProxy.groupby_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.reduce.html">semantique.ArrayProxy.reduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.shift.html">semantique.ArrayProxy.shift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.smooth.html">semantique.ArrayProxy.smooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.trim.html">semantique.ArrayProxy.trim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.delineate.html">semantique.ArrayProxy.delineate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.fill.html">semantique.ArrayProxy.fill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.apply_custom.html">semantique.ArrayProxy.apply_custom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.compose.html">semantique.CollectionProxy.compose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.concatenate.html">semantique.CollectionProxy.concatenate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.merge.html">semantique.CollectionProxy.merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.evaluate.html">semantique.CollectionProxy.evaluate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.extract.html">semantique.CollectionProxy.extract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.filter.html">semantique.CollectionProxy.filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.filter_time.html">semantique.CollectionProxy.filter_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.filter_space.html">semantique.CollectionProxy.filter_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.assign.html">semantique.CollectionProxy.assign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.assign_time.html">semantique.CollectionProxy.assign_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.assign_space.html">semantique.CollectionProxy.assign_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.reduce.html">semantique.CollectionProxy.reduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.shift.html">semantique.CollectionProxy.shift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.smooth.html">semantique.CollectionProxy.smooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.trim.html">semantique.CollectionProxy.trim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.delineate.html">semantique.CollectionProxy.delineate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.fill.html">semantique.CollectionProxy.fill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.CollectionProxy.apply_custom.html">semantique.CollectionProxy.apply_custom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.ArrayProxy.name.html">semantique.ArrayProxy.name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.label.html">semantique.label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.set.html">semantique.set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.interval.html">semantique.interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.geometry.html">semantique.geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.time_instant.html">semantique.time_instant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.time_interval.html">semantique.time_interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.dimensions.TIME.html">semantique.dimensions.TIME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.dimensions.SPACE.html">semantique.dimensions.SPACE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.dimensions.X.html">semantique.dimensions.X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.dimensions.Y.html">semantique.dimensions.Y</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.YEAR.html">semantique.components.time.YEAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.SEASON.html">semantique.components.time.SEASON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.QUARTER.html">semantique.components.time.QUARTER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.MONTH.html">semantique.components.time.MONTH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.WEEK.html">semantique.components.time.WEEK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.DAY.html">semantique.components.time.DAY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.DAY_OF_WEEK.html">semantique.components.time.DAY_OF_WEEK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.DAY_OF_YEAR.html">semantique.components.time.DAY_OF_YEAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.HOUR.html">semantique.components.time.HOUR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.MINUTE.html">semantique.components.time.MINUTE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.time.SECOND.html">semantique.components.time.SECOND</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.space.X.html">semantique.components.space.X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.space.Y.html">semantique.components.space.Y</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.components.space.FEATURE.html">semantique.components.space.FEATURE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.NOT.html">semantique.operators.NOT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.IS_MISSING.html">semantique.operators.IS_MISSING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.NOT_MISSING.html">semantique.operators.NOT_MISSING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.ABSOLUTE.html">semantique.operators.ABSOLUTE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.EXPONENTIAL.html">semantique.operators.EXPONENTIAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.CUBE_ROOT.html">semantique.operators.CUBE_ROOT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.NATURAL_LOGARITHM.html">semantique.operators.NATURAL_LOGARITHM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.SQUARE_ROOT.html">semantique.operators.SQUARE_ROOT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.FLOOR.html">semantique.operators.FLOOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.CEILING.html">semantique.operators.CEILING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.COSINE.html">semantique.operators.COSINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.SINE.html">semantique.operators.SINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.TANGENT.html">semantique.operators.TANGENT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.SECANT.html">semantique.operators.SECANT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.COSECANT.html">semantique.operators.COSECANT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.COTANGENT.html">semantique.operators.COTANGENT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.TO_DEGREES.html">semantique.operators.TO_DEGREES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.TO_RADIANS.html">semantique.operators.TO_RADIANS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.ADD.html">semantique.operators.ADD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.DIVIDE.html">semantique.operators.DIVIDE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.MULTIPLY.html">semantique.operators.MULTIPLY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.POWER.html">semantique.operators.POWER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.SUBTRACT.html">semantique.operators.SUBTRACT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.NORMALIZED_DIFFERENCE.html">semantique.operators.NORMALIZED_DIFFERENCE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.AND.html">semantique.operators.AND</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.OR.html">semantique.operators.OR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.EXCLUSIVE_OR.html">semantique.operators.EXCLUSIVE_OR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.EQUAL.html">semantique.operators.EQUAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.NOT_EQUAL.html">semantique.operators.NOT_EQUAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.IN.html">semantique.operators.IN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.NOT_IN.html">semantique.operators.NOT_IN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.GREATER.html">semantique.operators.GREATER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.GREATER_EQUAL.html">semantique.operators.GREATER_EQUAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.LESS.html">semantique.operators.LESS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.LESS_EQUAL.html">semantique.operators.LESS_EQUAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.INTERSECTS.html">semantique.operators.INTERSECTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.AFTER.html">semantique.operators.AFTER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.BEFORE.html">semantique.operators.BEFORE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.operators.DURING.html">semantique.operators.DURING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.MEAN.html">semantique.reducers.MEAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.MEDIAN.html">semantique.reducers.MEDIAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.MODE.html">semantique.reducers.MODE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.MAX.html">semantique.reducers.MAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.MIN.html">semantique.reducers.MIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.RANGE.html">semantique.reducers.RANGE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.N.html">semantique.reducers.N</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.PRODUCT.html">semantique.reducers.PRODUCT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.STANDARD_DEVIATION.html">semantique.reducers.STANDARD_DEVIATION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.SUM.html">semantique.reducers.SUM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.VARIANCE.html">semantique.reducers.VARIANCE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.ALL.html">semantique.reducers.ALL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.ANY.html">semantique.reducers.ANY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.NONE.html">semantique.reducers.NONE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.COUNT.html">semantique.reducers.COUNT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.PERCENTAGE.html">semantique.reducers.PERCENTAGE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.FIRST.html">semantique.reducers.FIRST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.reducers.LAST.html">semantique.reducers.LAST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.core.QueryProcessor.html">semantique.processor.core.QueryProcessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.arrays.Array.html">semantique.processor.arrays.Array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.arrays.Collection.html">semantique.processor.arrays.Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.values.Interval.html">semantique.processor.values.Interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.not_.html">semantique.processor.operators.not_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.is_missing_.html">semantique.processor.operators.is_missing_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.not_missing_.html">semantique.processor.operators.not_missing_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.absolute_.html">semantique.processor.operators.absolute_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.exponential_.html">semantique.processor.operators.exponential_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.cube_root_.html">semantique.processor.operators.cube_root_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.natural_logarithm_.html">semantique.processor.operators.natural_logarithm_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.square_root_.html">semantique.processor.operators.square_root_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.floor_.html">semantique.processor.operators.floor_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.ceiling_.html">semantique.processor.operators.ceiling_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.cosine_.html">semantique.processor.operators.cosine_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.sine_.html">semantique.processor.operators.sine_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.tangent_.html">semantique.processor.operators.tangent_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.secant_.html">semantique.processor.operators.secant_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.cosecant_.html">semantique.processor.operators.cosecant_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.cotangent_.html">semantique.processor.operators.cotangent_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.to_degrees_.html">semantique.processor.operators.to_degrees_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.to_radians_.html">semantique.processor.operators.to_radians_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.add_.html">semantique.processor.operators.add_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.divide_.html">semantique.processor.operators.divide_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.multiply_.html">semantique.processor.operators.multiply_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.power_.html">semantique.processor.operators.power_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.subtract_.html">semantique.processor.operators.subtract_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.normalized_difference_.html">semantique.processor.operators.normalized_difference_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.and_.html">semantique.processor.operators.and_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.or_.html">semantique.processor.operators.or_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.exclusive_or_.html">semantique.processor.operators.exclusive_or_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.equal_.html">semantique.processor.operators.equal_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.not_equal_.html">semantique.processor.operators.not_equal_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.in_.html">semantique.processor.operators.in_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.not_in_.html">semantique.processor.operators.not_in_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.greater_.html">semantique.processor.operators.greater_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.greater_equal_.html">semantique.processor.operators.greater_equal_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.less_.html">semantique.processor.operators.less_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.less_equal_.html">semantique.processor.operators.less_equal_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.intersects_.html">semantique.processor.operators.intersects_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.after_.html">semantique.processor.operators.after_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.before_.html">semantique.processor.operators.before_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.operators.during_.html">semantique.processor.operators.during_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.mean_.html">semantique.processor.reducers.mean_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.median_.html">semantique.processor.reducers.median_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.mode_.html">semantique.processor.reducers.mode_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.max_.html">semantique.processor.reducers.max_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.min_.html">semantique.processor.reducers.min_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.range_.html">semantique.processor.reducers.range_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.n_.html">semantique.processor.reducers.n_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.product_.html">semantique.processor.reducers.product_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.standard_deviation_.html">semantique.processor.reducers.standard_deviation_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.sum_.html">semantique.processor.reducers.sum_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.variance_.html">semantique.processor.reducers.variance_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.all_.html">semantique.processor.reducers.all_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.any_.html">semantique.processor.reducers.any_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.none_.html">semantique.processor.reducers.none_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.count_.html">semantique.processor.reducers.count_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.percentage_.html">semantique.processor.reducers.percentage_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.first_.html">semantique.processor.reducers.first_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.reducers.last_.html">semantique.processor.reducers.last_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.utils.parse_extent.html">semantique.processor.utils.parse_extent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.utils.parse_datetime_component.html">semantique.processor.utils.parse_datetime_component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.utils.get_null.html">semantique.processor.utils.get_null</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.utils.allnull.html">semantique.processor.utils.allnull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.utils.null_as_zero.html">semantique.processor.utils.null_as_zero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.utils.inf_as_null.html">semantique.processor.utils.inf_as_null</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.utils.datetime64_as_unix.html">semantique.processor.utils.datetime64_as_unix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.utils.convert_datetime64.html">semantique.processor.utils.convert_datetime64</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.types.TypePromoter.html">semantique.processor.types.TypePromoter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.types.get_value_type.html">semantique.processor.types.get_value_type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.types.get_value_labels.html">semantique.processor.types.get_value_labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.types.DTYPE_MAPPING.html">semantique.processor.types.DTYPE_MAPPING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.processor.types.TYPE_PROMOTION_MANUALS.html">semantique.processor.types.TYPE_PROMOTION_MANUALS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.AlignmentError.html">semantique.exceptions.AlignmentError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.EmptyDataError.html">semantique.exceptions.EmptyDataError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.InvalidValueTypeError.html">semantique.exceptions.InvalidValueTypeError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.InvalidIntervalError.html">semantique.exceptions.InvalidIntervalError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.InvalidBuildingBlockError.html">semantique.exceptions.InvalidBuildingBlockError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.UnknownConceptError.html">semantique.exceptions.UnknownConceptError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.UnknownLayerError.html">semantique.exceptions.UnknownLayerError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.UnknownResultError.html">semantique.exceptions.UnknownResultError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.UnknownVerbError.html">semantique.exceptions.UnknownVerbError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.UnknownReducerError.html">semantique.exceptions.UnknownReducerError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.UnknownOperatorError.html">semantique.exceptions.UnknownOperatorError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.UnknownDimensionError.html">semantique.exceptions.UnknownDimensionError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.UnknownComponentError.html">semantique.exceptions.UnknownComponentError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.UnknownLabelError.html">semantique.exceptions.UnknownLabelError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.TooManyDimensionsError.html">semantique.exceptions.TooManyDimensionsError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.MissingDimensionError.html">semantique.exceptions.MissingDimensionError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.MixedDimensionsError.html">semantique.exceptions.MixedDimensionsError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.ReservedDimensionError.html">semantique.exceptions.ReservedDimensionError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.exceptions.MixedTimeZonesError.html">semantique.exceptions.MixedTimeZonesError</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../code_of_conduct.html">
-   Code of Conduct
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../contributing.html">
-   Contributing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference external" href="https://github.com/ZGIS/semantique">
-   GitHub repository
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../code_of_conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/ZGIS/semantique">GitHub repository</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/_notebooks/datacube.nblink.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.nblink</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ZGIS/semantique" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ZGIS/semantique/edit/main/docs/source/_notebooks/datacube.nblink" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_notebooks/datacube.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ZGIS/semantique"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2F_notebooks/datacube.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/_notebooks/datacube.nblink"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/_notebooks/datacube.nblink" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.nblink</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-        </div>
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Representing an EO data cube</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#Content">
-   Content
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#Prepare">
-   Prepare
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#Structure">
-   Structure
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#The-Opendatacube-configuration">
-   The Opendatacube configuration
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#The-Geotiffarchive-configuration">
-   The Geotiffarchive configuration
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Content">Content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Prepare">Prepare</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Structure">Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-Opendatacube-configuration">The Opendatacube configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-Geotiffarchive-configuration">The Geotiffarchive configuration</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
-  
-<style>
-/* CSS for nbsphinx extension */
-
-/* remove conflicting styling from Sphinx themes */
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt *,
-div.nbinput.container div.input_area pre,
-div.nboutput.container div.output_area pre,
-div.nbinput.container div.input_area .highlight,
-div.nboutput.container div.output_area .highlight {
-    border: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-}
-
-div.nbinput.container > div[class*=highlight],
-div.nboutput.container > div[class*=highlight] {
-    margin: 0;
-}
-
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt * {
-    background: none;
-}
-
-div.nboutput.container div.output_area .highlight,
-div.nboutput.container div.output_area pre {
-    background: unset;
-}
-
-div.nboutput.container div.output_area div.highlight {
-    color: unset;  /* override Pygments text color */
-}
-
-/* avoid gaps between output lines */
-div.nboutput.container div[class*=highlight] pre {
-    line-height: normal;
-}
-
-/* input/output containers */
-div.nbinput.container,
-div.nboutput.container {
-    display: -webkit-flex;
-    display: flex;
-    align-items: flex-start;
-    margin: 0;
-    width: 100%;
-}
-@media (max-width: 540px) {
-    div.nbinput.container,
-    div.nboutput.container {
-        flex-direction: column;
-    }
-}
-
-/* input container */
-div.nbinput.container {
-    padding-top: 5px;
-}
-
-/* last container */
-div.nblast.container {
-    padding-bottom: 5px;
-}
-
-/* input prompt */
-div.nbinput.container div.prompt pre {
-    color: #307FC1;
-}
-
-/* output prompt */
-div.nboutput.container div.prompt pre {
-    color: #BF5B3D;
-}
-
-/* all prompts */
-div.nbinput.container div.prompt,
-div.nboutput.container div.prompt {
-    width: 4.5ex;
-    padding-top: 5px;
-    position: relative;
-    user-select: none;
-}
-
-div.nbinput.container div.prompt > div,
-div.nboutput.container div.prompt > div {
-    position: absolute;
-    right: 0;
-    margin-right: 0.3ex;
-}
-
-@media (max-width: 540px) {
-    div.nbinput.container div.prompt,
-    div.nboutput.container div.prompt {
-        width: unset;
-        text-align: left;
-        padding: 0.4em;
-    }
-    div.nboutput.container div.prompt.empty {
-        padding: 0;
-    }
-
-    div.nbinput.container div.prompt > div,
-    div.nboutput.container div.prompt > div {
-        position: unset;
-    }
-}
-
-/* disable scrollbars on prompts */
-div.nbinput.container div.prompt pre,
-div.nboutput.container div.prompt pre {
-    overflow: hidden;
-}
-
-/* input/output area */
-div.nbinput.container div.input_area,
-div.nboutput.container div.output_area {
-    -webkit-flex: 1;
-    flex: 1;
-    overflow: auto;
-}
-@media (max-width: 540px) {
-    div.nbinput.container div.input_area,
-    div.nboutput.container div.output_area {
-        width: 100%;
-    }
-}
-
-/* input area */
-div.nbinput.container div.input_area {
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
-    /*background: #f5f5f5;*/
-}
-
-/* override MathJax center alignment in output cells */
-div.nboutput.container div[class*=MathJax] {
-    text-align: left !important;
-}
-
-/* override sphinx.ext.imgmath center alignment in output cells */
-div.nboutput.container div.math p {
-    text-align: left;
-}
-
-/* standard error */
-div.nboutput.container div.output_area.stderr {
-    background: #fdd;
-}
-
-/* ANSI colors */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-default-inverse-fg { color: #FFFFFF; }
-.ansi-default-inverse-bg { background-color: #000000; }
-
-.ansi-bold { font-weight: bold; }
-.ansi-underline { text-decoration: underline; }
-
-
-div.nbinput.container div.input_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight].math,
-div.nboutput.container div.output_area.rendered_html,
-div.nboutput.container div.output_area > div.output_javascript,
-div.nboutput.container div.output_area:not(.rendered_html) > img{
-    padding: 5px;
-    margin: 0;
-}
-
-/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
-div.nbinput.container div.input_area > div[class^='highlight'],
-div.nboutput.container div.output_area > div[class^='highlight']{
-    overflow-y: hidden;
-}
-
-/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt .copybtn {
-    display: none;
-}
-
-/* Some additional styling taken form the Jupyter notebook CSS */
-div.rendered_html table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: black;
-  font-size: 12px;
-  table-layout: fixed;
-}
-div.rendered_html thead {
-  border-bottom: 1px solid black;
-  vertical-align: bottom;
-}
-div.rendered_html tr,
-div.rendered_html th,
-div.rendered_html td {
-  text-align: right;
-  vertical-align: middle;
-  padding: 0.5em 0.5em;
-  line-height: normal;
-  white-space: normal;
-  max-width: none;
-  border: none;
-}
-div.rendered_html th {
-  font-weight: bold;
-}
-div.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-div.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
-</style>
-<p>Explore this notebook interactively: <a class="reference external" href="https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo%2F_notebooks/datacube.nblink"><img alt="Binder" src="https://mybinder.org/badge.svg" /></a></p>
-<div class="section" id="Representing-an-EO-data-cube">
-<h1>Representing an EO data cube<a class="headerlink" href="#Representing-an-EO-data-cube" title="Permalink to this headline">¶</a></h1>
-<p>An EO data cube stores and organizes EO data, and possibly also additional data from other sources (e.g. a digital surface model). It falls entirely within the image domain of the framework and is constructed and managed by a software expert.</p>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>Explore this notebook interactively: <a class="reference external" href="https://mybinder.org/v2/gh/ZGIS/semantique/HEAD?labpath=demo%2F_notebooks/datacube.nblink"><img alt="Binder" src="https://mybinder.org/badge.svg" /></a></p>
+<section id="Representing-an-EO-data-cube">
+<h1>Representing an EO data cube<a class="headerlink" href="#Representing-an-EO-data-cube" title="Link to this heading">#</a></h1>
+<p>An EO data cube stores and organizes EO data, and possibly also additional data from other sources (e.g. a digital surface model). It falls entirely within the image domain of the framework and is constructed and managed by a software expert.</p>
 <p>This notebook describes the data structures to represent an EO data cube in semantique, and how to interact with it.</p>
-<div class="section" id="Content">
-<h2>Content<a class="headerlink" href="#Content" title="Permalink to this headline">¶</a></h2>
+<section id="Content">
+<h2>Content<a class="headerlink" href="#Content" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="#Structure">Structure</a></p></li>
-<li><p><a class="reference external" href="#The-Opendatacube-configuration">The Opendatacube configuration</a></p></li>
-<li><p><a class="reference external" href="#The-Geotiffarchive-configuration">The Geotiffarchive configuration</a></p></li>
+<li><p><a class="reference internal" href="#Structure"><span class="std std-ref">Structure</span></a></p></li>
+<li><p><a class="reference internal" href="#The-Opendatacube-configuration"><span class="std std-ref">The Opendatacube configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#The-Geotiffarchive-configuration"><span class="std std-ref">The Geotiffarchive configuration</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="Prepare">
-<h2>Prepare<a class="headerlink" href="#Prepare" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Prepare">
+<h2>Prepare<a class="headerlink" href="#Prepare" title="Link to this heading">#</a></h2>
 <p>Import packages:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -1738,9 +679,9 @@ import json
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Structure">
-<h2>Structure<a class="headerlink" href="#Structure" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Structure">
+<h2>Structure<a class="headerlink" href="#Structure" title="Link to this heading">#</a></h2>
 <p>There is not a single standard on how an EO data cube should be implemented in practice. Many approaches exist, which we refer to as different <em>configurations</em> of an EO data cube. The structure of semantique is flexible and does not put any limitations on what the configuration of an EO data cube should be. Instead, it allows expert users to create their own class that represents their specific EO data cube configuration. Such a class should always inherit from the abstract base class
 <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.Datacube.html">Datacube</a> that semantique contains. Such a base class can be seen as a blueprint for any object that represents an EO data cube. Do note that an EO data cube representation in semantique never contains the data values of the cube themselves. Instead, it will have some property that allows the retriever to access the actual storage location. How this property looks like will depend on the configuration of the EO data cube.</p>
 <div class="nbinput nblast docutils container">
@@ -1751,9 +692,9 @@ import json
 </pre></div>
 </div>
 </div>
-<p>To ensure interoperability, an EO data cube representation of any configuration is required to contain two standard elements. The first one is the layout, which is generally provided when initializing an instance of an EO data cube class and stored inside the <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.Datacube.layout.html">layout</a> property. The layout is a repository containing a description of the content of the EO data cube. Each distinct data layer in the cube (e.g. the
+<p>To ensure interoperability, an EO data cube representation of any configuration is required to contain two standard elements. The first one is the layout, which is generally provided when initializing an instance of an EO data cube class and stored inside the <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.Datacube.layout.html">layout</a> property. The layout is a repository containing a description of the content of the EO data cube. Each distinct data layer in the cube (e.g. the
 different spectral bands) should be described by a dedicated metadata object in the layout that can be indexed by a unique name assigned to that layer. This metadata object provides information about the values in the layer, but also about where it can be found inside the structure of the cube. In semantique, the layout is always expected to have the structure of a Python dictionary. In this dictionary, the names of data layers are the keys and the metadata objects (which themselves are a
-dictionary as well) are the values. The dictionary may have a nested structure formalizing a categorization of data layers, e.g. the metadata object of the data layer “blue band” can be indexed by the key pair (“reflectance”, “blue band”) instead of only “blue band”.</p>
+dictionary as well) are the values. The dictionary may have a nested structure formalizing a categorization of data layers, e.g. the metadata object of the data layer “blue band” can be indexed by the key pair (“reflectance”, “blue band”) instead of only “blue band”.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -1791,9 +732,9 @@ True
 </pre></div></div>
 </div>
 <p>It is important to note here that when evaluating a query recipe the query processor does not care at all what the configuration of the EO data cube is and how it retrieves data. It only interacts with the retriever function, and thus only cares about what input the retriever function accepts, and in what format it returns the retrieved data.</p>
-</div>
-<div class="section" id="The-Opendatacube-configuration">
-<h2>The Opendatacube configuration<a class="headerlink" href="#The-Opendatacube-configuration" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="The-Opendatacube-configuration">
+<h2>The Opendatacube configuration<a class="headerlink" href="#The-Opendatacube-configuration" title="Link to this heading">#</a></h2>
 <p>Through the <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.Opendatacube.html">Opendatacube</a> sub-class semantique has built-in support for EO data cubes that are deployed using the <a class="reference external" href="https://www.opendatacube.org/">Open Data Cube software</a>. It contains a retriever that knows how to interact with the Python API of Open Data Cube.</p>
 <p>To initialize a representation of such a data cube, you need to provide a valid layout dictionary and a <a class="reference external" href="https://opendatacube.readthedocs.io/en/latest/api/core-classes/datacube.html">Datacube object</a> that allows the retriever to interact with the actual data storage. A valid layout for this configuration means that the metadata objects for each data layer should contain at least the following keys and values:</p>
 <ul class="simple">
@@ -1814,11 +755,11 @@ True
     <span class="n">dc</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">datacube</span><span class="o">.</span><span class="n">Opendatacube</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">odc_obj</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="The-Geotiffarchive-configuration">
-<h2>The Geotiffarchive configuration<a class="headerlink" href="#The-Geotiffarchive-configuration" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="The-Geotiffarchive-configuration">
+<h2>The Geotiffarchive configuration<a class="headerlink" href="#The-Geotiffarchive-configuration" title="Link to this heading">#</a></h2>
 <p>Besides the Opendatacube configuration, semantique contains a second built-in EO data cube configuration called <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.Geotiffarchive.html">Geotiffarchive</a>. This configuration is targeted at small data cubes that are nothing more than a zipped archive of multiple GeoTIFF files, each having two spatial and one temporal dimension. Given the nature of GeoTIFF, the time dimension will be recognized as “band dimension”, and therefore the time
-coordinates should be stored as band description for each band. Be aware that the Geotiffarchive configuration in semantique is mainly meant for demonstration purposes, and the retriever function is not optimized for performance (e.g. the full GeoTIFF is loaded into memory before subsetting in space and time).</p>
+coordinates should be stored as band description for each band. Be aware that the Geotiffarchive configuration in semantique is mainly meant for demonstration purposes, and the retriever function is not optimized for performance (e.g. the full GeoTIFF is loaded into memory before subsetting in space and time).</p>
 <p>To initialize a representation of a Geotiffarchive data cube, you need to provide a valid layout dictionary and the filepath to the zipped archive of GeoTIFF files. A valid layout for this configuration means that the metadata objects for each data layer should contain at least the following keys and values:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">file</span></code>: The filename of the GeoTIFF file in which the values for the data layer are stored.</p></li>
@@ -2294,7 +1235,7 @@ Attributes:
     add_offset:     0.0
     _FillValue:     1.7976931348623157e+308
     value_type:     ordinal
-    value_labels:   {1: &#x27;SVHNIR&#x27;, 2: &#x27;SVLNIR&#x27;, 3: &#x27;AVHNIR&#x27;, 4: &#x27;AVLNIR&#x27;, 5: &#x27;...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'colortype'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 3</li><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-a39fec5a-5c5d-4472-991f-9a7bfd5496ae' class='xr-array-in' type='checkbox' checked><label for='section-a39fec5a-5c5d-4472-991f-9a7bfd5496ae' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>29.0 29.0 29.0 29.0 29.0 29.0 29.0 ... 4.0 3.0 3.0 27.0 27.0 27.0 27.0</span></div><div class='xr-array-data'><pre>array([[[29., 29., 29., ..., 29., 29., 29.],
+    value_labels:   {1: &#x27;SVHNIR&#x27;, 2: &#x27;SVLNIR&#x27;, 3: &#x27;AVHNIR&#x27;, 4: &#x27;AVLNIR&#x27;, 5: &#x27;...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'colortype'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 3</li><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-b71f00ad-9e09-4e73-a8f6-16a331736ca0' class='xr-array-in' type='checkbox' checked><label for='section-b71f00ad-9e09-4e73-a8f6-16a331736ca0' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>29.0 29.0 29.0 29.0 29.0 29.0 29.0 ... 4.0 3.0 3.0 27.0 27.0 27.0 27.0</span></div><div class='xr-array-data'><pre>array([[[29., 29., 29., ..., 29., 29., 29.],
         [29., 29., 29., ..., 29., 29., 29.],
         [29., 29., 29., ...,  5., 29., 29.],
         ...,
@@ -2316,26 +1257,26 @@ Attributes:
         ...,
         [ 3.,  3.,  3., ...,  3., 27., 27.],
         [ 3., 27.,  3., ..., 27., 27., 27.],
-        [27.,  3.,  7., ..., 27., 27., 27.]]])</pre></div></div></li><li class='xr-section-item'><input id='section-462885cd-bc60-4545-8115-198d90158af5' class='xr-section-summary-in' type='checkbox'  checked><label for='section-462885cd-bc60-4545-8115-198d90158af5' class='xr-section-summary' >Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-50d3c4b4-2d10-41c2-912c-c128a64c8e39' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-50d3c4b4-2d10-41c2-912c-c128a64c8e39' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-20d429e1-ffe3-4100-9e54-06eb4abe6d9a' class='xr-var-data-in' type='checkbox'><label for='data-20d429e1-ffe3-4100-9e54-06eb4abe6d9a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x coordinate of projection</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>metre</dd><dt><span>resolution :</span></dt><dd>10</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-250fdf60-b6c8-464f-aa3d-b2799889c77b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-250fdf60-b6c8-464f-aa3d-b2799889c77b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-12f6cf10-32d6-4415-90d0-a3ff98db85d4' class='xr-var-data-in' type='checkbox'><label for='data-12f6cf10-32d6-4415-90d0-a3ff98db85d4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y coordinate of projection</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>metre</dd><dt><span>resolution :</span></dt><dd>-10</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-30638e64-28c7-4c2f-a4ea-77b219e26791' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-30638e64-28c7-4c2f-a4ea-77b219e26791' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7c9cde35-4d18-410c-954e-d750f11a377e' class='xr-var-data-in' type='checkbox'><label for='data-7c9cde35-4d18-410c-954e-d750f11a377e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-12-15T10:17:33.408715 ... 2...</div><input id='attrs-92f21ebe-f1f8-40fe-b246-67cb5a0cc255' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-92f21ebe-f1f8-40fe-b246-67cb5a0cc255' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f7869b54-895e-489b-abbd-390bfe1173f0' class='xr-var-data-in' type='checkbox'><label for='data-f7869b54-895e-489b-abbd-390bfe1173f0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>datetime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-12-15T10:17:33.408715000&#x27;, &#x27;2020-09-05T10:17:43.167942000&#x27;,
-       &#x27;2020-12-19T10:17:34.610661000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-4a750668-e93b-4196-b597-c381608ac7fe' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4a750668-e93b-4196-b597-c381608ac7fe' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-30e6f7e4-7624-43ae-bb25-f259b486c5c7' class='xr-var-data-in' type='checkbox'><label for='data-30e6f7e4-7624-43ae-bb25-f259b486c5c7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_feats</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-e99d3a17-55d6-4838-a662-d5903f08fcac' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e99d3a17-55d6-4838-a662-d5903f08fcac' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d5212282-5654-4450-8aab-255ab818d6e5' class='xr-var-data-in' type='checkbox'><label for='data-d5212282-5654-4450-8aab-255ab818d6e5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
+        [27.,  3.,  7., ..., 27., 27., 27.]]])</pre></div></div></li><li class='xr-section-item'><input id='section-94402d7b-23df-469a-bc10-c05d60f7fab2' class='xr-section-summary-in' type='checkbox'  checked><label for='section-94402d7b-23df-469a-bc10-c05d60f7fab2' class='xr-section-summary' >Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-54cf643c-cc23-4ef7-946d-bcf5b8192d3b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-54cf643c-cc23-4ef7-946d-bcf5b8192d3b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6c4d65d7-b8c5-40cf-991b-cdb338130544' class='xr-var-data-in' type='checkbox'><label for='data-6c4d65d7-b8c5-40cf-991b-cdb338130544' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x coordinate of projection</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>metre</dd><dt><span>resolution :</span></dt><dd>10</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-8222a5d2-28ce-4dae-b58b-0137bfac5656' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8222a5d2-28ce-4dae-b58b-0137bfac5656' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0d053680-70f2-468b-9346-cf7e1bb4589f' class='xr-var-data-in' type='checkbox'><label for='data-0d053680-70f2-468b-9346-cf7e1bb4589f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y coordinate of projection</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>metre</dd><dt><span>resolution :</span></dt><dd>-10</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-a805c35f-cf80-42ef-b21d-896bc5dd467a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a805c35f-cf80-42ef-b21d-896bc5dd467a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c813b220-c703-4923-a2b9-5ab7fc4a0974' class='xr-var-data-in' type='checkbox'><label for='data-c813b220-c703-4923-a2b9-5ab7fc4a0974' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-12-15T10:17:33.408715 ... 2...</div><input id='attrs-6ab5c4b8-12f6-4259-8051-3c9169272e37' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6ab5c4b8-12f6-4259-8051-3c9169272e37' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-67a0e85e-c85f-4e4f-9ea4-98204c39e160' class='xr-var-data-in' type='checkbox'><label for='data-67a0e85e-c85f-4e4f-9ea4-98204c39e160' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>datetime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-12-15T10:17:33.408715000&#x27;, &#x27;2020-09-05T10:17:43.167942000&#x27;,
+       &#x27;2020-12-19T10:17:34.610661000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-fdee1b25-3d8e-4737-887d-c4d3a6723bc8' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fdee1b25-3d8e-4737-887d-c4d3a6723bc8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ffe74255-a6b1-40ba-8035-dfd8fdd95c82' class='xr-var-data-in' type='checkbox'><label for='data-ffe74255-a6b1-40ba-8035-dfd8fdd95c82' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_feats</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-ca3b24b3-3cb2-4370-ad06-d1c3891c88f5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ca3b24b3-3cb2-4370-ad06-d1c3891c88f5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-635f60c9-a7da-452f-94eb-6c1f6c056709' class='xr-var-data-in' type='checkbox'><label for='data-635f60c9-a7da-452f-94eb-6c1f6c056709' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        ...,
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
-       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c8adae4a-3862-4dd6-ad7b-f9c9b87564cd' class='xr-section-summary-in' type='checkbox'  ><label for='section-c8adae4a-3862-4dd6-ad7b-f9c9b87564cd' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-7e3f97c9-858a-4685-a28b-970c3159531b' class='xr-index-data-in' type='checkbox'/><label for='index-7e3f97c9-858a-4685-a28b-970c3159531b' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([4530115.0, 4530125.0, 4530135.0, 4530145.0, 4530155.0, 4530165.0,
+       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6c2bd845-6442-4068-bbb1-d633fdac9112' class='xr-section-summary-in' type='checkbox'  ><label for='section-6c2bd845-6442-4068-bbb1-d633fdac9112' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-da2186ac-795c-4eae-820d-3dd3e79f7c83' class='xr-index-data-in' type='checkbox'/><label for='index-da2186ac-795c-4eae-820d-3dd3e79f7c83' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([4530115.0, 4530125.0, 4530135.0, 4530145.0, 4530155.0, 4530165.0,
        4530175.0, 4530185.0, 4530195.0, 4530205.0,
        ...
        4535775.0, 4535785.0, 4535795.0, 4535805.0, 4535815.0, 4535825.0,
        4535835.0, 4535845.0, 4535855.0, 4535865.0],
-      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=576))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-28cb8f35-574d-42ca-9661-7a40525f2ee9' class='xr-index-data-in' type='checkbox'/><label for='index-28cb8f35-574d-42ca-9661-7a40525f2ee9' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([2696625.0, 2696615.0, 2696605.0, 2696595.0, 2696585.0, 2696575.0,
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=576))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-64048294-dcc9-4098-9f1f-812ec944b9b5' class='xr-index-data-in' type='checkbox'/><label for='index-64048294-dcc9-4098-9f1f-812ec944b9b5' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([2696625.0, 2696615.0, 2696605.0, 2696595.0, 2696585.0, 2696575.0,
        2696565.0, 2696555.0, 2696545.0, 2696535.0,
        ...
        2691095.0, 2691085.0, 2691075.0, 2691065.0, 2691055.0, 2691045.0,
        2691035.0, 2691025.0, 2691015.0, 2691005.0],
-      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=563))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-a6ca79ee-e342-4561-aa7e-37342a6f1dc1' class='xr-index-data-in' type='checkbox'/><label for='index-a6ca79ee-e342-4561-aa7e-37342a6f1dc1' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2019-12-15 10:17:33.408715&#x27;, &#x27;2020-09-05 10:17:43.167942&#x27;,
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=563))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-4a59ace0-f762-4a51-9775-bb9d3cec541c' class='xr-index-data-in' type='checkbox'/><label for='index-4a59ace0-f762-4a51-9775-bb9d3cec541c' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2019-12-15 10:17:33.408715&#x27;, &#x27;2020-09-05 10:17:43.167942&#x27;,
                &#x27;2020-12-19 10:17:34.610661&#x27;],
-              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-3d572c91-7f94-4535-b17f-dbb32162ccb9' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3d572c91-7f94-4535-b17f-dbb32162ccb9' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>scale_factor :</span></dt><dd>1.0</dd><dt><span>add_offset :</span></dt><dd>0.0</dd><dt><span>_FillValue :</span></dt><dd>1.7976931348623157e+308</dd><dt><span>value_type :</span></dt><dd>ordinal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;SVHNIR&#x27;, 2: &#x27;SVLNIR&#x27;, 3: &#x27;AVHNIR&#x27;, 4: &#x27;AVLNIR&#x27;, 5: &#x27;WV&#x27;, 6: &#x27;SHV&#x27;, 7: &#x27;SHRBRHNIR&#x27;, 8: &#x27;SHRBRLNIR&#x27;, 9: &#x27;HRBCR&#x27;, 10: &#x27;WR&#x27;, 11: &#x27;PB&#x27;, 12: &#x27;GH&#x27;, 13: &#x27;VBBB&#x27;, 14: &#x27;BBB&#x27;, 15: &#x27;SBB&#x27;, 16: &#x27;ABB&#x27;, 17: &#x27;DBB&#x27;, 18: &#x27;WBBorSHB&#x27;, 19: &#x27;NIRPBB&#x27;, 20: &#x27;BA&#x27;, 21: &#x27;DPWASH&#x27;, 22: &#x27;SLWASH&#x27;, 23: &#x27;TWASH&#x27;, 24: &#x27;SASLWA&#x27;, 27: &#x27;TNCLV&#x27;, 28: &#x27;TNCLWA_BB&#x27;, 29: &#x27;SN&#x27;, 30: &#x27;SHSN&#x27;, 31: &#x27;SH&#x27;, 32: &#x27;FLAME&#x27;}</dd></dl></div></li></ul></div></div></div>
+              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cb2dde0b-e9d8-46b3-bbcb-bc8b7be44d3b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-cb2dde0b-e9d8-46b3-bbcb-bc8b7be44d3b' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>scale_factor :</span></dt><dd>1.0</dd><dt><span>add_offset :</span></dt><dd>0.0</dd><dt><span>_FillValue :</span></dt><dd>1.7976931348623157e+308</dd><dt><span>value_type :</span></dt><dd>ordinal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;SVHNIR&#x27;, 2: &#x27;SVLNIR&#x27;, 3: &#x27;AVHNIR&#x27;, 4: &#x27;AVLNIR&#x27;, 5: &#x27;WV&#x27;, 6: &#x27;SHV&#x27;, 7: &#x27;SHRBRHNIR&#x27;, 8: &#x27;SHRBRLNIR&#x27;, 9: &#x27;HRBCR&#x27;, 10: &#x27;WR&#x27;, 11: &#x27;PB&#x27;, 12: &#x27;GH&#x27;, 13: &#x27;VBBB&#x27;, 14: &#x27;BBB&#x27;, 15: &#x27;SBB&#x27;, 16: &#x27;ABB&#x27;, 17: &#x27;DBB&#x27;, 18: &#x27;WBBorSHB&#x27;, 19: &#x27;NIRPBB&#x27;, 20: &#x27;BA&#x27;, 21: &#x27;DPWASH&#x27;, 22: &#x27;SLWASH&#x27;, 23: &#x27;TWASH&#x27;, 24: &#x27;SASLWA&#x27;, 27: &#x27;TNCLV&#x27;, 28: &#x27;TNCLWA_BB&#x27;, 29: &#x27;SN&#x27;, 30: &#x27;SHSN&#x27;, 31: &#x27;SH&#x27;, 32: &#x27;FLAME&#x27;}</dd></dl></div></li></ul></div></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -2396,7 +1337,7 @@ colortype.plot(x = &quot;x&quot;, y = &quot;y&quot;, col = &quot;time&quot;, lev
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;xarray.plot.facetgrid.FacetGrid at 0x7f8dc76172d0&gt;
+&lt;xarray.plot.facetgrid.FacetGrid at 0x7fece228ca50&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -2406,48 +1347,107 @@ colortype.plot(x = &quot;x&quot;, y = &quot;y&quot;, col = &quot;time&quot;, lev
 <img alt="../_images/_notebooks_datacube_21_1.png" src="../_images/_notebooks_datacube_21_1.png" />
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
-              </div>
+                </article>
               
-        
-            <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="mapping.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Constructing a mapping</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mapping.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Constructing a mapping</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="references.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="references.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">References</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-        
-        </div>
-    </div>
-    <footer class="footer">
-    <div class="container">
-      <p>
-        
-            &copy; Copyright 2021, Department of Geoinformatics – Z_GIS.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Content">Content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Prepare">Prepare</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Structure">Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-Opendatacube-configuration">The Opendatacube configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-Geotiffarchive-configuration">The Geotiffarchive configuration</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
 
+  <p class="copyright">
+    
+      © Copyright 2021, Department of Geoinformatics – Z_GIS.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

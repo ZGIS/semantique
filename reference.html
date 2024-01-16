@@ -1,1709 +1,723 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="./" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>API Reference &#8212; semantique 0.1.0 documentation</title>
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
 
-    
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
-
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <script src="_static/documentation_options.js?v=a1637f0b"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="semantique.QueryRecipe" href="_generated/semantique.QueryRecipe.html" />
     <link rel="prev" title="Internal query processing" href="_notebooks/processor.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Getting started
- </span>
-</p>
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="semantique 0.1.0 documentation - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="semantique 0.1.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="installation.html">
-   Installation
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Documentation
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="guide.html">
-   User Guide
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/recipes.html">
-     Writing and executing query recipes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/mapping.html">
-     Constructing mappings
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/datacube.html">
-     Representing EO data cubes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/references.html">
-     References
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/verbs.html">
-     Verbs
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_notebooks/processor.html">
-     Internal query processing
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
-   API Reference
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.QueryRecipe.html">
-     semantique.QueryRecipe
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.mapping.Mapping.html">
-     semantique.mapping.Mapping
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.mapping.Semantique.html">
-     semantique.mapping.Semantique
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.datacube.Datacube.html">
-     semantique.datacube.Datacube
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.datacube.Opendatacube.html">
-     semantique.datacube.Opendatacube
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.datacube.GeotiffArchive.html">
-     semantique.datacube.GeotiffArchive
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.extent.SpatialExtent.html">
-     semantique.extent.SpatialExtent
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.extent.TemporalExtent.html">
-     semantique.extent.TemporalExtent
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.concept.html">
-     semantique.concept
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.entity.html">
-     semantique.entity
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.event.html">
-     semantique.event
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.layer.html">
-     semantique.layer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.appearance.html">
-     semantique.appearance
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.artifacts.html">
-     semantique.artifacts
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.atmosphere.html">
-     semantique.atmosphere
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reflectance.html">
-     semantique.reflectance
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.topography.html">
-     semantique.topography
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.result.html">
-     semantique.result
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.self.html">
-     semantique.self
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.collection.html">
-     semantique.collection
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.evaluate.html">
-     semantique.ArrayProxy.evaluate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.extract.html">
-     semantique.ArrayProxy.extract
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.filter.html">
-     semantique.ArrayProxy.filter
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.filter_time.html">
-     semantique.ArrayProxy.filter_time
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.filter_space.html">
-     semantique.ArrayProxy.filter_space
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.assign.html">
-     semantique.ArrayProxy.assign
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.assign_time.html">
-     semantique.ArrayProxy.assign_time
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.assign_space.html">
-     semantique.ArrayProxy.assign_space
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.groupby.html">
-     semantique.ArrayProxy.groupby
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.groupby_time.html">
-     semantique.ArrayProxy.groupby_time
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.groupby_space.html">
-     semantique.ArrayProxy.groupby_space
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.reduce.html">
-     semantique.ArrayProxy.reduce
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.shift.html">
-     semantique.ArrayProxy.shift
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.smooth.html">
-     semantique.ArrayProxy.smooth
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.trim.html">
-     semantique.ArrayProxy.trim
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.delineate.html">
-     semantique.ArrayProxy.delineate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.fill.html">
-     semantique.ArrayProxy.fill
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.apply_custom.html">
-     semantique.ArrayProxy.apply_custom
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.compose.html">
-     semantique.CollectionProxy.compose
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.concatenate.html">
-     semantique.CollectionProxy.concatenate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.merge.html">
-     semantique.CollectionProxy.merge
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.evaluate.html">
-     semantique.CollectionProxy.evaluate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.extract.html">
-     semantique.CollectionProxy.extract
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.filter.html">
-     semantique.CollectionProxy.filter
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.filter_time.html">
-     semantique.CollectionProxy.filter_time
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.filter_space.html">
-     semantique.CollectionProxy.filter_space
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.assign.html">
-     semantique.CollectionProxy.assign
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.assign_time.html">
-     semantique.CollectionProxy.assign_time
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.assign_space.html">
-     semantique.CollectionProxy.assign_space
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.reduce.html">
-     semantique.CollectionProxy.reduce
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.shift.html">
-     semantique.CollectionProxy.shift
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.smooth.html">
-     semantique.CollectionProxy.smooth
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.trim.html">
-     semantique.CollectionProxy.trim
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.delineate.html">
-     semantique.CollectionProxy.delineate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.fill.html">
-     semantique.CollectionProxy.fill
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.CollectionProxy.apply_custom.html">
-     semantique.CollectionProxy.apply_custom
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.ArrayProxy.name.html">
-     semantique.ArrayProxy.name
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.label.html">
-     semantique.label
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.set.html">
-     semantique.set
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.interval.html">
-     semantique.interval
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.geometry.html">
-     semantique.geometry
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.time_instant.html">
-     semantique.time_instant
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.time_interval.html">
-     semantique.time_interval
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.dimensions.TIME.html">
-     semantique.dimensions.TIME
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.dimensions.SPACE.html">
-     semantique.dimensions.SPACE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.dimensions.X.html">
-     semantique.dimensions.X
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.dimensions.Y.html">
-     semantique.dimensions.Y
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.YEAR.html">
-     semantique.components.time.YEAR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.SEASON.html">
-     semantique.components.time.SEASON
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.QUARTER.html">
-     semantique.components.time.QUARTER
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.MONTH.html">
-     semantique.components.time.MONTH
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.WEEK.html">
-     semantique.components.time.WEEK
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.DAY.html">
-     semantique.components.time.DAY
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.DAY_OF_WEEK.html">
-     semantique.components.time.DAY_OF_WEEK
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.DAY_OF_YEAR.html">
-     semantique.components.time.DAY_OF_YEAR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.HOUR.html">
-     semantique.components.time.HOUR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.MINUTE.html">
-     semantique.components.time.MINUTE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.time.SECOND.html">
-     semantique.components.time.SECOND
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.space.X.html">
-     semantique.components.space.X
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.space.Y.html">
-     semantique.components.space.Y
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.components.space.FEATURE.html">
-     semantique.components.space.FEATURE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.NOT.html">
-     semantique.operators.NOT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.IS_MISSING.html">
-     semantique.operators.IS_MISSING
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.NOT_MISSING.html">
-     semantique.operators.NOT_MISSING
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.ABSOLUTE.html">
-     semantique.operators.ABSOLUTE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.EXPONENTIAL.html">
-     semantique.operators.EXPONENTIAL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.CUBE_ROOT.html">
-     semantique.operators.CUBE_ROOT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.NATURAL_LOGARITHM.html">
-     semantique.operators.NATURAL_LOGARITHM
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.SQUARE_ROOT.html">
-     semantique.operators.SQUARE_ROOT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.FLOOR.html">
-     semantique.operators.FLOOR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.CEILING.html">
-     semantique.operators.CEILING
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.COSINE.html">
-     semantique.operators.COSINE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.SINE.html">
-     semantique.operators.SINE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.TANGENT.html">
-     semantique.operators.TANGENT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.SECANT.html">
-     semantique.operators.SECANT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.COSECANT.html">
-     semantique.operators.COSECANT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.COTANGENT.html">
-     semantique.operators.COTANGENT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.TO_DEGREES.html">
-     semantique.operators.TO_DEGREES
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.TO_RADIANS.html">
-     semantique.operators.TO_RADIANS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.ADD.html">
-     semantique.operators.ADD
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.DIVIDE.html">
-     semantique.operators.DIVIDE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.MULTIPLY.html">
-     semantique.operators.MULTIPLY
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.POWER.html">
-     semantique.operators.POWER
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.SUBTRACT.html">
-     semantique.operators.SUBTRACT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.NORMALIZED_DIFFERENCE.html">
-     semantique.operators.NORMALIZED_DIFFERENCE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.AND.html">
-     semantique.operators.AND
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.OR.html">
-     semantique.operators.OR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.EXCLUSIVE_OR.html">
-     semantique.operators.EXCLUSIVE_OR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.EQUAL.html">
-     semantique.operators.EQUAL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.NOT_EQUAL.html">
-     semantique.operators.NOT_EQUAL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.IN.html">
-     semantique.operators.IN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.NOT_IN.html">
-     semantique.operators.NOT_IN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.GREATER.html">
-     semantique.operators.GREATER
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.GREATER_EQUAL.html">
-     semantique.operators.GREATER_EQUAL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.LESS.html">
-     semantique.operators.LESS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.LESS_EQUAL.html">
-     semantique.operators.LESS_EQUAL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.INTERSECTS.html">
-     semantique.operators.INTERSECTS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.AFTER.html">
-     semantique.operators.AFTER
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.BEFORE.html">
-     semantique.operators.BEFORE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.operators.DURING.html">
-     semantique.operators.DURING
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.MEAN.html">
-     semantique.reducers.MEAN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.MEDIAN.html">
-     semantique.reducers.MEDIAN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.MODE.html">
-     semantique.reducers.MODE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.MAX.html">
-     semantique.reducers.MAX
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.MIN.html">
-     semantique.reducers.MIN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.RANGE.html">
-     semantique.reducers.RANGE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.N.html">
-     semantique.reducers.N
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.PRODUCT.html">
-     semantique.reducers.PRODUCT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.STANDARD_DEVIATION.html">
-     semantique.reducers.STANDARD_DEVIATION
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.SUM.html">
-     semantique.reducers.SUM
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.VARIANCE.html">
-     semantique.reducers.VARIANCE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.ALL.html">
-     semantique.reducers.ALL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.ANY.html">
-     semantique.reducers.ANY
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.NONE.html">
-     semantique.reducers.NONE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.COUNT.html">
-     semantique.reducers.COUNT
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.PERCENTAGE.html">
-     semantique.reducers.PERCENTAGE
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.FIRST.html">
-     semantique.reducers.FIRST
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.reducers.LAST.html">
-     semantique.reducers.LAST
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.core.QueryProcessor.html">
-     semantique.processor.core.QueryProcessor
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.arrays.Array.html">
-     semantique.processor.arrays.Array
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.arrays.Collection.html">
-     semantique.processor.arrays.Collection
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.values.Interval.html">
-     semantique.processor.values.Interval
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.not_.html">
-     semantique.processor.operators.not_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.is_missing_.html">
-     semantique.processor.operators.is_missing_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.not_missing_.html">
-     semantique.processor.operators.not_missing_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.absolute_.html">
-     semantique.processor.operators.absolute_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.exponential_.html">
-     semantique.processor.operators.exponential_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.cube_root_.html">
-     semantique.processor.operators.cube_root_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.natural_logarithm_.html">
-     semantique.processor.operators.natural_logarithm_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.square_root_.html">
-     semantique.processor.operators.square_root_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.floor_.html">
-     semantique.processor.operators.floor_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.ceiling_.html">
-     semantique.processor.operators.ceiling_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.cosine_.html">
-     semantique.processor.operators.cosine_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.sine_.html">
-     semantique.processor.operators.sine_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.tangent_.html">
-     semantique.processor.operators.tangent_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.secant_.html">
-     semantique.processor.operators.secant_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.cosecant_.html">
-     semantique.processor.operators.cosecant_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.cotangent_.html">
-     semantique.processor.operators.cotangent_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.to_degrees_.html">
-     semantique.processor.operators.to_degrees_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.to_radians_.html">
-     semantique.processor.operators.to_radians_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.add_.html">
-     semantique.processor.operators.add_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.divide_.html">
-     semantique.processor.operators.divide_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.multiply_.html">
-     semantique.processor.operators.multiply_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.power_.html">
-     semantique.processor.operators.power_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.subtract_.html">
-     semantique.processor.operators.subtract_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.normalized_difference_.html">
-     semantique.processor.operators.normalized_difference_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.and_.html">
-     semantique.processor.operators.and_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.or_.html">
-     semantique.processor.operators.or_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.exclusive_or_.html">
-     semantique.processor.operators.exclusive_or_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.equal_.html">
-     semantique.processor.operators.equal_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.not_equal_.html">
-     semantique.processor.operators.not_equal_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.in_.html">
-     semantique.processor.operators.in_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.not_in_.html">
-     semantique.processor.operators.not_in_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.greater_.html">
-     semantique.processor.operators.greater_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.greater_equal_.html">
-     semantique.processor.operators.greater_equal_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.less_.html">
-     semantique.processor.operators.less_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.less_equal_.html">
-     semantique.processor.operators.less_equal_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.intersects_.html">
-     semantique.processor.operators.intersects_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.after_.html">
-     semantique.processor.operators.after_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.before_.html">
-     semantique.processor.operators.before_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.operators.during_.html">
-     semantique.processor.operators.during_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.mean_.html">
-     semantique.processor.reducers.mean_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.median_.html">
-     semantique.processor.reducers.median_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.mode_.html">
-     semantique.processor.reducers.mode_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.max_.html">
-     semantique.processor.reducers.max_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.min_.html">
-     semantique.processor.reducers.min_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.range_.html">
-     semantique.processor.reducers.range_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.n_.html">
-     semantique.processor.reducers.n_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.product_.html">
-     semantique.processor.reducers.product_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.standard_deviation_.html">
-     semantique.processor.reducers.standard_deviation_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.sum_.html">
-     semantique.processor.reducers.sum_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.variance_.html">
-     semantique.processor.reducers.variance_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.all_.html">
-     semantique.processor.reducers.all_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.any_.html">
-     semantique.processor.reducers.any_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.none_.html">
-     semantique.processor.reducers.none_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.count_.html">
-     semantique.processor.reducers.count_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.percentage_.html">
-     semantique.processor.reducers.percentage_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.first_.html">
-     semantique.processor.reducers.first_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.reducers.last_.html">
-     semantique.processor.reducers.last_
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.parse_extent.html">
-     semantique.processor.utils.parse_extent
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html">
-     semantique.processor.utils.parse_datetime_component
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.get_null.html">
-     semantique.processor.utils.get_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.allnull.html">
-     semantique.processor.utils.allnull
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.null_as_zero.html">
-     semantique.processor.utils.null_as_zero
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.inf_as_null.html">
-     semantique.processor.utils.inf_as_null
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.datetime64_as_unix.html">
-     semantique.processor.utils.datetime64_as_unix
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">
-     semantique.processor.utils.convert_datetime64
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.html">
-     semantique.processor.types.TypePromoter
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.types.get_value_type.html">
-     semantique.processor.types.get_value_type
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.types.get_value_labels.html">
-     semantique.processor.types.get_value_labels
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.types.DTYPE_MAPPING.html">
-     semantique.processor.types.DTYPE_MAPPING
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.processor.types.TYPE_PROMOTION_MANUALS.html">
-     semantique.processor.types.TYPE_PROMOTION_MANUALS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.AlignmentError.html">
-     semantique.exceptions.AlignmentError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.EmptyDataError.html">
-     semantique.exceptions.EmptyDataError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.InvalidValueTypeError.html">
-     semantique.exceptions.InvalidValueTypeError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.InvalidIntervalError.html">
-     semantique.exceptions.InvalidIntervalError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.InvalidBuildingBlockError.html">
-     semantique.exceptions.InvalidBuildingBlockError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.UnknownConceptError.html">
-     semantique.exceptions.UnknownConceptError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.UnknownLayerError.html">
-     semantique.exceptions.UnknownLayerError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.UnknownResultError.html">
-     semantique.exceptions.UnknownResultError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.UnknownVerbError.html">
-     semantique.exceptions.UnknownVerbError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.UnknownReducerError.html">
-     semantique.exceptions.UnknownReducerError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.UnknownOperatorError.html">
-     semantique.exceptions.UnknownOperatorError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.UnknownDimensionError.html">
-     semantique.exceptions.UnknownDimensionError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.UnknownComponentError.html">
-     semantique.exceptions.UnknownComponentError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.UnknownLabelError.html">
-     semantique.exceptions.UnknownLabelError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.TooManyDimensionsError.html">
-     semantique.exceptions.TooManyDimensionsError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.MissingDimensionError.html">
-     semantique.exceptions.MissingDimensionError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.MixedDimensionsError.html">
-     semantique.exceptions.MixedDimensionsError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.ReservedDimensionError.html">
-     semantique.exceptions.ReservedDimensionError
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="_generated/semantique.exceptions.MixedTimeZonesError.html">
-     semantique.exceptions.MixedTimeZonesError
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="_notebooks/gallery.html">
-   Gallery
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="changelog.html">
-   Changelog
-  </a>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/recipes.html">Writing and executing query recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/mapping.html">Constructing mappings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/datacube.html">Representing EO data cubes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/references.html">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/verbs.html">Verbs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/processor.html">Internal query processing</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Community
- </span>
-</p>
+</li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.QueryRecipe.html">semantique.QueryRecipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.mapping.Mapping.html">semantique.mapping.Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.mapping.Semantique.html">semantique.mapping.Semantique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.datacube.Datacube.html">semantique.datacube.Datacube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.datacube.Opendatacube.html">semantique.datacube.Opendatacube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.datacube.GeotiffArchive.html">semantique.datacube.GeotiffArchive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.extent.SpatialExtent.html">semantique.extent.SpatialExtent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.extent.TemporalExtent.html">semantique.extent.TemporalExtent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.concept.html">semantique.concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.entity.html">semantique.entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.event.html">semantique.event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.layer.html">semantique.layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.appearance.html">semantique.appearance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.artifacts.html">semantique.artifacts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.atmosphere.html">semantique.atmosphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reflectance.html">semantique.reflectance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.topography.html">semantique.topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.result.html">semantique.result</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.self.html">semantique.self</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.collection.html">semantique.collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.evaluate.html">semantique.ArrayProxy.evaluate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.extract.html">semantique.ArrayProxy.extract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.filter.html">semantique.ArrayProxy.filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.filter_time.html">semantique.ArrayProxy.filter_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.filter_space.html">semantique.ArrayProxy.filter_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.assign.html">semantique.ArrayProxy.assign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.assign_time.html">semantique.ArrayProxy.assign_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.assign_space.html">semantique.ArrayProxy.assign_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.groupby.html">semantique.ArrayProxy.groupby</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.groupby_time.html">semantique.ArrayProxy.groupby_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.groupby_space.html">semantique.ArrayProxy.groupby_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.reduce.html">semantique.ArrayProxy.reduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.shift.html">semantique.ArrayProxy.shift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.smooth.html">semantique.ArrayProxy.smooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.trim.html">semantique.ArrayProxy.trim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.delineate.html">semantique.ArrayProxy.delineate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.fill.html">semantique.ArrayProxy.fill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.apply_custom.html">semantique.ArrayProxy.apply_custom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.compose.html">semantique.CollectionProxy.compose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.concatenate.html">semantique.CollectionProxy.concatenate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.merge.html">semantique.CollectionProxy.merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.evaluate.html">semantique.CollectionProxy.evaluate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.extract.html">semantique.CollectionProxy.extract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.filter.html">semantique.CollectionProxy.filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.filter_time.html">semantique.CollectionProxy.filter_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.filter_space.html">semantique.CollectionProxy.filter_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.assign.html">semantique.CollectionProxy.assign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.assign_time.html">semantique.CollectionProxy.assign_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.assign_space.html">semantique.CollectionProxy.assign_space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.reduce.html">semantique.CollectionProxy.reduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.shift.html">semantique.CollectionProxy.shift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.smooth.html">semantique.CollectionProxy.smooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.trim.html">semantique.CollectionProxy.trim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.delineate.html">semantique.CollectionProxy.delineate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.fill.html">semantique.CollectionProxy.fill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.CollectionProxy.apply_custom.html">semantique.CollectionProxy.apply_custom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.ArrayProxy.name.html">semantique.ArrayProxy.name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.label.html">semantique.label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.set.html">semantique.set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.interval.html">semantique.interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.geometry.html">semantique.geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.time_instant.html">semantique.time_instant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.time_interval.html">semantique.time_interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.dimensions.TIME.html">semantique.dimensions.TIME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.dimensions.SPACE.html">semantique.dimensions.SPACE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.dimensions.X.html">semantique.dimensions.X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.dimensions.Y.html">semantique.dimensions.Y</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.YEAR.html">semantique.components.time.YEAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.SEASON.html">semantique.components.time.SEASON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.QUARTER.html">semantique.components.time.QUARTER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.MONTH.html">semantique.components.time.MONTH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.WEEK.html">semantique.components.time.WEEK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.DAY.html">semantique.components.time.DAY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.DAY_OF_WEEK.html">semantique.components.time.DAY_OF_WEEK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.DAY_OF_YEAR.html">semantique.components.time.DAY_OF_YEAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.HOUR.html">semantique.components.time.HOUR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.MINUTE.html">semantique.components.time.MINUTE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.time.SECOND.html">semantique.components.time.SECOND</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.space.X.html">semantique.components.space.X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.space.Y.html">semantique.components.space.Y</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.components.space.FEATURE.html">semantique.components.space.FEATURE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.NOT.html">semantique.operators.NOT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.IS_MISSING.html">semantique.operators.IS_MISSING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.NOT_MISSING.html">semantique.operators.NOT_MISSING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.ABSOLUTE.html">semantique.operators.ABSOLUTE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.EXPONENTIAL.html">semantique.operators.EXPONENTIAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.CUBE_ROOT.html">semantique.operators.CUBE_ROOT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.NATURAL_LOGARITHM.html">semantique.operators.NATURAL_LOGARITHM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.SQUARE_ROOT.html">semantique.operators.SQUARE_ROOT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.FLOOR.html">semantique.operators.FLOOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.CEILING.html">semantique.operators.CEILING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.COSINE.html">semantique.operators.COSINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.SINE.html">semantique.operators.SINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.TANGENT.html">semantique.operators.TANGENT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.SECANT.html">semantique.operators.SECANT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.COSECANT.html">semantique.operators.COSECANT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.COTANGENT.html">semantique.operators.COTANGENT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.TO_DEGREES.html">semantique.operators.TO_DEGREES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.TO_RADIANS.html">semantique.operators.TO_RADIANS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.ADD.html">semantique.operators.ADD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.DIVIDE.html">semantique.operators.DIVIDE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.MULTIPLY.html">semantique.operators.MULTIPLY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.POWER.html">semantique.operators.POWER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.SUBTRACT.html">semantique.operators.SUBTRACT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.NORMALIZED_DIFFERENCE.html">semantique.operators.NORMALIZED_DIFFERENCE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.AND.html">semantique.operators.AND</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.OR.html">semantique.operators.OR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.EXCLUSIVE_OR.html">semantique.operators.EXCLUSIVE_OR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.EQUAL.html">semantique.operators.EQUAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.NOT_EQUAL.html">semantique.operators.NOT_EQUAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.IN.html">semantique.operators.IN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.NOT_IN.html">semantique.operators.NOT_IN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.GREATER.html">semantique.operators.GREATER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.GREATER_EQUAL.html">semantique.operators.GREATER_EQUAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.LESS.html">semantique.operators.LESS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.LESS_EQUAL.html">semantique.operators.LESS_EQUAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.INTERSECTS.html">semantique.operators.INTERSECTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.AFTER.html">semantique.operators.AFTER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.BEFORE.html">semantique.operators.BEFORE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.operators.DURING.html">semantique.operators.DURING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.MEAN.html">semantique.reducers.MEAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.MEDIAN.html">semantique.reducers.MEDIAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.MODE.html">semantique.reducers.MODE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.MAX.html">semantique.reducers.MAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.MIN.html">semantique.reducers.MIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.RANGE.html">semantique.reducers.RANGE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.N.html">semantique.reducers.N</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.PRODUCT.html">semantique.reducers.PRODUCT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.STANDARD_DEVIATION.html">semantique.reducers.STANDARD_DEVIATION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.SUM.html">semantique.reducers.SUM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.VARIANCE.html">semantique.reducers.VARIANCE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.ALL.html">semantique.reducers.ALL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.ANY.html">semantique.reducers.ANY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.NONE.html">semantique.reducers.NONE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.COUNT.html">semantique.reducers.COUNT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.PERCENTAGE.html">semantique.reducers.PERCENTAGE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.FIRST.html">semantique.reducers.FIRST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.LAST.html">semantique.reducers.LAST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.core.QueryProcessor.html">semantique.processor.core.QueryProcessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.arrays.Array.html">semantique.processor.arrays.Array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.arrays.Collection.html">semantique.processor.arrays.Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.values.Interval.html">semantique.processor.values.Interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.not_.html">semantique.processor.operators.not_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.is_missing_.html">semantique.processor.operators.is_missing_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.not_missing_.html">semantique.processor.operators.not_missing_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.absolute_.html">semantique.processor.operators.absolute_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.exponential_.html">semantique.processor.operators.exponential_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.cube_root_.html">semantique.processor.operators.cube_root_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.natural_logarithm_.html">semantique.processor.operators.natural_logarithm_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.square_root_.html">semantique.processor.operators.square_root_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.floor_.html">semantique.processor.operators.floor_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.ceiling_.html">semantique.processor.operators.ceiling_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.cosine_.html">semantique.processor.operators.cosine_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.sine_.html">semantique.processor.operators.sine_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.tangent_.html">semantique.processor.operators.tangent_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.secant_.html">semantique.processor.operators.secant_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.cosecant_.html">semantique.processor.operators.cosecant_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.cotangent_.html">semantique.processor.operators.cotangent_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.to_degrees_.html">semantique.processor.operators.to_degrees_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.to_radians_.html">semantique.processor.operators.to_radians_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.add_.html">semantique.processor.operators.add_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.divide_.html">semantique.processor.operators.divide_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.multiply_.html">semantique.processor.operators.multiply_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.power_.html">semantique.processor.operators.power_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.subtract_.html">semantique.processor.operators.subtract_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.normalized_difference_.html">semantique.processor.operators.normalized_difference_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.and_.html">semantique.processor.operators.and_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.or_.html">semantique.processor.operators.or_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.exclusive_or_.html">semantique.processor.operators.exclusive_or_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.equal_.html">semantique.processor.operators.equal_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.not_equal_.html">semantique.processor.operators.not_equal_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.in_.html">semantique.processor.operators.in_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.not_in_.html">semantique.processor.operators.not_in_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.greater_.html">semantique.processor.operators.greater_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.greater_equal_.html">semantique.processor.operators.greater_equal_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.less_.html">semantique.processor.operators.less_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.less_equal_.html">semantique.processor.operators.less_equal_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.intersects_.html">semantique.processor.operators.intersects_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.after_.html">semantique.processor.operators.after_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.before_.html">semantique.processor.operators.before_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.operators.during_.html">semantique.processor.operators.during_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.mean_.html">semantique.processor.reducers.mean_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.median_.html">semantique.processor.reducers.median_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.mode_.html">semantique.processor.reducers.mode_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.max_.html">semantique.processor.reducers.max_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.min_.html">semantique.processor.reducers.min_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.range_.html">semantique.processor.reducers.range_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.n_.html">semantique.processor.reducers.n_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.product_.html">semantique.processor.reducers.product_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.standard_deviation_.html">semantique.processor.reducers.standard_deviation_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.sum_.html">semantique.processor.reducers.sum_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.variance_.html">semantique.processor.reducers.variance_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.all_.html">semantique.processor.reducers.all_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.any_.html">semantique.processor.reducers.any_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.none_.html">semantique.processor.reducers.none_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.count_.html">semantique.processor.reducers.count_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.percentage_.html">semantique.processor.reducers.percentage_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.first_.html">semantique.processor.reducers.first_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.reducers.last_.html">semantique.processor.reducers.last_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.utils.parse_extent.html">semantique.processor.utils.parse_extent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.utils.parse_datetime_component.html">semantique.processor.utils.parse_datetime_component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.utils.get_null.html">semantique.processor.utils.get_null</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.utils.allnull.html">semantique.processor.utils.allnull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.utils.null_as_zero.html">semantique.processor.utils.null_as_zero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.utils.inf_as_null.html">semantique.processor.utils.inf_as_null</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.utils.datetime64_as_unix.html">semantique.processor.utils.datetime64_as_unix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.utils.convert_datetime64.html">semantique.processor.utils.convert_datetime64</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.html">semantique.processor.types.TypePromoter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.types.get_value_type.html">semantique.processor.types.get_value_type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.types.get_value_labels.html">semantique.processor.types.get_value_labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.types.DTYPE_MAPPING.html">semantique.processor.types.DTYPE_MAPPING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.types.TYPE_PROMOTION_MANUALS.html">semantique.processor.types.TYPE_PROMOTION_MANUALS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.AlignmentError.html">semantique.exceptions.AlignmentError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.EmptyDataError.html">semantique.exceptions.EmptyDataError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.InvalidValueTypeError.html">semantique.exceptions.InvalidValueTypeError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.InvalidIntervalError.html">semantique.exceptions.InvalidIntervalError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.InvalidBuildingBlockError.html">semantique.exceptions.InvalidBuildingBlockError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.UnknownConceptError.html">semantique.exceptions.UnknownConceptError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.UnknownLayerError.html">semantique.exceptions.UnknownLayerError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.UnknownResultError.html">semantique.exceptions.UnknownResultError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.UnknownVerbError.html">semantique.exceptions.UnknownVerbError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.UnknownReducerError.html">semantique.exceptions.UnknownReducerError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.UnknownOperatorError.html">semantique.exceptions.UnknownOperatorError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.UnknownDimensionError.html">semantique.exceptions.UnknownDimensionError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.UnknownComponentError.html">semantique.exceptions.UnknownComponentError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.UnknownLabelError.html">semantique.exceptions.UnknownLabelError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.TooManyDimensionsError.html">semantique.exceptions.TooManyDimensionsError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.MissingDimensionError.html">semantique.exceptions.MissingDimensionError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.MixedDimensionsError.html">semantique.exceptions.MixedDimensionsError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.ReservedDimensionError.html">semantique.exceptions.ReservedDimensionError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.exceptions.MixedTimeZonesError.html">semantique.exceptions.MixedTimeZonesError</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_notebooks/gallery.html">Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Community</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="code_of_conduct.html">
-   Code of Conduct
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="contributing.html">
-   Contributing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference external" href="https://github.com/ZGIS/semantique">
-   GitHub repository
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/ZGIS/semantique">GitHub repository</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/reference.rst.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.rst</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ZGIS/semantique" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ZGIS/semantique/edit/main/docs/source/reference.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2Freference.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ZGIS/semantique"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ZGIS/semantique/issues/new?title=Issue%20on%20page%20%2Freference.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ZGIS/semantique/edit/main/docs/source/reference.rst"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/reference.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-        </div>
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>API Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#components">
-   Components
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recipe">
-     Recipe
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mapping">
-     Mapping
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#eo-data-cube">
-     EO data cube
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spatio-temporal-extent">
-     Spatio-temporal extent
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#building-blocks">
-   Building blocks
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#references">
-     References
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#verbs">
-     Verbs
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#verbs-for-single-arrays">
-       Verbs for single arrays
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#verbs-for-array-collections">
-       Verbs for array collections
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#utility-verbs">
-       Utility verbs
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#special-values">
-     Special values
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dimensions">
-     Dimensions
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reserved-dimension-names">
-       Reserved dimension names
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#dimension-components">
-       Dimension components
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operators">
-     Operators
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#univariate-operators">
-       Univariate operators
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#algebraic-operators">
-       Algebraic operators
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#boolean-operators">
-       Boolean operators
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#relational-operators">
-       Relational operators
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#spatial-relational-operators">
-       Spatial relational operators
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#temporal-relational-operators">
-       Temporal relational operators
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reducers">
-     Reducers
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#statistical-reducers">
-       Statistical reducers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#boolean-reducers">
-       Boolean reducers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#occurence-reducers">
-       Occurence reducers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#positional-reducers">
-       Positional reducers
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#processor">
-   Processor
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#core">
-     Core
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#array-objects">
-     Array objects
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#special-value-objects">
-     Special value objects
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operator-functions">
-     Operator functions
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       Univariate operators
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
-       Algebraic operators
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id3">
-       Boolean operators
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id4">
-       Relational operators
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id5">
-       Spatial relational operators
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id6">
-       Temporal relational operators
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reducer-functions">
-     Reducer functions
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
-       Statistical reducers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id8">
-       Boolean reducers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id9">
-       Occurence reducers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id10">
-       Positional reducers
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#utils">
-     Utils
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#value-type-handling">
-     Value type handling
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exceptions">
-   Exceptions
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components">Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recipe">Recipe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping">Mapping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eo-data-cube">EO data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatio-temporal-extent">Spatio-temporal extent</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-blocks">Building blocks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verbs">Verbs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#verbs-for-single-arrays">Verbs for single arrays</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#verbs-for-array-collections">Verbs for array collections</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#utility-verbs">Utility verbs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-values">Special values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensions">Dimensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reserved-dimension-names">Reserved dimension names</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dimension-components">Dimension components</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operators">Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-operators">Univariate operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#algebraic-operators">Algebraic operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-operators">Boolean operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relational-operators">Relational operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-relational-operators">Spatial relational operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-relational-operators">Temporal relational operators</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducers">Reducers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-reducers">Statistical reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-reducers">Boolean reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#occurence-reducers">Occurence reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#positional-reducers">Positional reducers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processor">Processor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core">Core</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-objects">Array objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-value-objects">Special value objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operator-functions">Operator functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Univariate operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Algebraic operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Boolean operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Relational operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Spatial relational operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Temporal relational operators</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducer-functions">Reducer functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Statistical reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Boolean reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Occurence reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Positional reducers</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utils">Utils</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-type-handling">Value type handling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
-  <div class="section" id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
 <p>The API Reference contains auto-generated function documentation. This kind of documentation is meant to be concise and more technically oriented. The functions are grouped into different categories. As a regular user, you will mainly use the functions in the <strong>Components</strong> and <strong>Building Blocks</strong> categories to build and execute query recipes within a specific context. The functions in the <strong>Processor</strong> category are those internally used for query processing, and mainly of interest for advanced users and developers. The <strong>Exceptions</strong> category contains the custom exception classes of semantique.</p>
-<div class="section" id="components">
-<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="recipe">
-<h3>Recipe<a class="headerlink" href="#recipe" title="Permalink to this headline">¶</a></h3>
+<section id="components">
+<h2>Components<a class="headerlink" href="#components" title="Link to this heading">#</a></h2>
+<section id="recipe">
+<h3>Recipe<a class="headerlink" href="#recipe" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.QueryRecipe.html#semantique.QueryRecipe" title="semantique.QueryRecipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QueryRecipe</span></code></a></p></td>
 <td><p>Dict-like container to store instructions of a query recipe.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="mapping">
-<h3>Mapping<a class="headerlink" href="#mapping" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mapping">
+<h3>Mapping<a class="headerlink" href="#mapping" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.mapping.Mapping.html#semantique.mapping.Mapping" title="semantique.mapping.Mapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapping.Mapping</span></code></a></p></td>
 <td><p>Base class for mapping configurations.</p></td>
@@ -1713,14 +727,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="eo-data-cube">
-<h3>EO data cube<a class="headerlink" href="#eo-data-cube" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="eo-data-cube">
+<h3>EO data cube<a class="headerlink" href="#eo-data-cube" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.datacube.Datacube.html#semantique.datacube.Datacube" title="semantique.datacube.Datacube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datacube.Datacube</span></code></a></p></td>
 <td><p>Base class for EO data cube configurations.</p></td>
@@ -1733,14 +743,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="spatio-temporal-extent">
-<h3>Spatio-temporal extent<a class="headerlink" href="#spatio-temporal-extent" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="spatio-temporal-extent">
+<h3>Spatio-temporal extent<a class="headerlink" href="#spatio-temporal-extent" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.extent.SpatialExtent.html#semantique.extent.SpatialExtent" title="semantique.extent.SpatialExtent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extent.SpatialExtent</span></code></a></p></td>
 <td><p>Dict-like representation of a spatial extent.</p></td>
@@ -1750,17 +756,13 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="building-blocks">
-<h2>Building blocks<a class="headerlink" href="#building-blocks" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="building-blocks">
+<h2>Building blocks<a class="headerlink" href="#building-blocks" title="Link to this heading">#</a></h2>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.concept.html#semantique.concept" title="semantique.concept"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concept</span></code></a></p></td>
 <td><p>Reference to a semantic concept.</p></td>
@@ -1800,16 +802,12 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="verbs">
-<h3>Verbs<a class="headerlink" href="#verbs" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="verbs-for-single-arrays">
-<h4>Verbs for single arrays<a class="headerlink" href="#verbs-for-single-arrays" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="verbs">
+<h3>Verbs<a class="headerlink" href="#verbs" title="Link to this heading">#</a></h3>
+<section id="verbs-for-single-arrays">
+<h4>Verbs for single arrays<a class="headerlink" href="#verbs-for-single-arrays" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.ArrayProxy.evaluate.html#semantique.ArrayProxy.evaluate" title="semantique.ArrayProxy.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayProxy.evaluate</span></code></a></p></td>
 <td><p>Evaluate an expression for each pixel in an array.</p></td>
@@ -1867,14 +865,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="verbs-for-array-collections">
-<h4>Verbs for array collections<a class="headerlink" href="#verbs-for-array-collections" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="verbs-for-array-collections">
+<h4>Verbs for array collections<a class="headerlink" href="#verbs-for-array-collections" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.CollectionProxy.compose.html#semantique.CollectionProxy.compose" title="semantique.CollectionProxy.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CollectionProxy.compose</span></code></a></p></td>
 <td><p>Create a categorical composition of multiple binary arrays.</p></td>
@@ -1932,29 +926,21 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="utility-verbs">
-<h4>Utility verbs<a class="headerlink" href="#utility-verbs" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="utility-verbs">
+<h4>Utility verbs<a class="headerlink" href="#utility-verbs" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.ArrayProxy.name.html#semantique.ArrayProxy.name" title="semantique.ArrayProxy.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayProxy.name</span></code></a></p></td>
 <td><p>Give a name to an array.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="special-values">
-<h3>Special values<a class="headerlink" href="#special-values" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="special-values">
+<h3>Special values<a class="headerlink" href="#special-values" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.label.html#semantique.label" title="semantique.label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">label</span></code></a></p></td>
 <td><p>Character label of a numeric index.</p></td>
@@ -1976,16 +962,12 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="dimensions">
-<h3>Dimensions<a class="headerlink" href="#dimensions" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="reserved-dimension-names">
-<h4>Reserved dimension names<a class="headerlink" href="#reserved-dimension-names" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="dimensions">
+<h3>Dimensions<a class="headerlink" href="#dimensions" title="Link to this heading">#</a></h3>
+<section id="reserved-dimension-names">
+<h4>Reserved dimension names<a class="headerlink" href="#reserved-dimension-names" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.dimensions.TIME.html#semantique.dimensions.TIME" title="semantique.dimensions.TIME"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dimensions.TIME</span></code></a></p></td>
 <td><p>Reserved dimension name for the temporal dimension.</p></td>
@@ -2001,14 +983,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="dimension-components">
-<h4>Dimension components<a class="headerlink" href="#dimension-components" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="dimension-components">
+<h4>Dimension components<a class="headerlink" href="#dimension-components" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.components.time.YEAR.html#semantique.components.time.YEAR" title="semantique.components.time.YEAR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">components.time.YEAR</span></code></a></p></td>
 <td><p>Component storing the year of a timestamp.</p></td>
@@ -2054,17 +1032,13 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="operators">
-<h3>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="univariate-operators">
-<h4>Univariate operators<a class="headerlink" href="#univariate-operators" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="operators">
+<h3>Operators<a class="headerlink" href="#operators" title="Link to this heading">#</a></h3>
+<section id="univariate-operators">
+<h4>Univariate operators<a class="headerlink" href="#univariate-operators" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.operators.NOT.html#semantique.operators.NOT" title="semantique.operators.NOT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operators.NOT</span></code></a></p></td>
 <td><p>Reference to operator function not.</p></td>
@@ -2122,14 +1096,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="algebraic-operators">
-<h4>Algebraic operators<a class="headerlink" href="#algebraic-operators" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="algebraic-operators">
+<h4>Algebraic operators<a class="headerlink" href="#algebraic-operators" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.operators.ADD.html#semantique.operators.ADD" title="semantique.operators.ADD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operators.ADD</span></code></a></p></td>
 <td><p>Reference to operator function add.</p></td>
@@ -2151,14 +1121,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="boolean-operators">
-<h4>Boolean operators<a class="headerlink" href="#boolean-operators" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="boolean-operators">
+<h4>Boolean operators<a class="headerlink" href="#boolean-operators" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.operators.AND.html#semantique.operators.AND" title="semantique.operators.AND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operators.AND</span></code></a></p></td>
 <td><p>Reference to operator function and.</p></td>
@@ -2171,14 +1137,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="relational-operators">
-<h4>Relational operators<a class="headerlink" href="#relational-operators" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="relational-operators">
+<h4>Relational operators<a class="headerlink" href="#relational-operators" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.operators.EQUAL.html#semantique.operators.EQUAL" title="semantique.operators.EQUAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operators.EQUAL</span></code></a></p></td>
 <td><p>Reference to operator function equal.</p></td>
@@ -2206,28 +1168,20 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="spatial-relational-operators">
-<h4>Spatial relational operators<a class="headerlink" href="#spatial-relational-operators" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="spatial-relational-operators">
+<h4>Spatial relational operators<a class="headerlink" href="#spatial-relational-operators" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.operators.INTERSECTS.html#semantique.operators.INTERSECTS" title="semantique.operators.INTERSECTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operators.INTERSECTS</span></code></a></p></td>
 <td><p>Reference to operator function intersects.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="temporal-relational-operators">
-<h4>Temporal relational operators<a class="headerlink" href="#temporal-relational-operators" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="temporal-relational-operators">
+<h4>Temporal relational operators<a class="headerlink" href="#temporal-relational-operators" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.operators.AFTER.html#semantique.operators.AFTER" title="semantique.operators.AFTER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operators.AFTER</span></code></a></p></td>
 <td><p>Reference to operator function after.</p></td>
@@ -2240,17 +1194,13 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="reducers">
-<h3>Reducers<a class="headerlink" href="#reducers" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="statistical-reducers">
-<h4>Statistical reducers<a class="headerlink" href="#statistical-reducers" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="reducers">
+<h3>Reducers<a class="headerlink" href="#reducers" title="Link to this heading">#</a></h3>
+<section id="statistical-reducers">
+<h4>Statistical reducers<a class="headerlink" href="#statistical-reducers" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.reducers.MEAN.html#semantique.reducers.MEAN" title="semantique.reducers.MEAN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reducers.MEAN</span></code></a></p></td>
 <td><p>Reference to reducer function mean.</p></td>
@@ -2287,14 +1237,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="boolean-reducers">
-<h4>Boolean reducers<a class="headerlink" href="#boolean-reducers" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="boolean-reducers">
+<h4>Boolean reducers<a class="headerlink" href="#boolean-reducers" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.reducers.ALL.html#semantique.reducers.ALL" title="semantique.reducers.ALL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reducers.ALL</span></code></a></p></td>
 <td><p>Reference to reducer function all.</p></td>
@@ -2307,14 +1253,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="occurence-reducers">
-<h4>Occurence reducers<a class="headerlink" href="#occurence-reducers" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="occurence-reducers">
+<h4>Occurence reducers<a class="headerlink" href="#occurence-reducers" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.reducers.COUNT.html#semantique.reducers.COUNT" title="semantique.reducers.COUNT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reducers.COUNT</span></code></a></p></td>
 <td><p>Reference to reducer function count.</p></td>
@@ -2324,14 +1266,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="positional-reducers">
-<h4>Positional reducers<a class="headerlink" href="#positional-reducers" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="positional-reducers">
+<h4>Positional reducers<a class="headerlink" href="#positional-reducers" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.reducers.FIRST.html#semantique.reducers.FIRST" title="semantique.reducers.FIRST"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reducers.FIRST</span></code></a></p></td>
 <td><p>Reference to reducer function first.</p></td>
@@ -2341,32 +1279,24 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-</div>
-<div class="section" id="processor">
-<h2>Processor<a class="headerlink" href="#processor" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="core">
-<h3>Core<a class="headerlink" href="#core" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="processor">
+<h2>Processor<a class="headerlink" href="#processor" title="Link to this heading">#</a></h2>
+<section id="core">
+<h3>Core<a class="headerlink" href="#core" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.core.QueryProcessor.html#semantique.processor.core.QueryProcessor" title="semantique.processor.core.QueryProcessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.core.QueryProcessor</span></code></a></p></td>
 <td><p>Worker that takes care of processing a semantic query.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="array-objects">
-<h3>Array objects<a class="headerlink" href="#array-objects" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="array-objects">
+<h3>Array objects<a class="headerlink" href="#array-objects" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.arrays.Array.html#semantique.processor.arrays.Array" title="semantique.processor.arrays.Array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.arrays.Array</span></code></a></p></td>
 <td><p>Internal representation of a multi-dimensional array.</p></td>
@@ -2376,30 +1306,22 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="special-value-objects">
-<h3>Special value objects<a class="headerlink" href="#special-value-objects" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="special-value-objects">
+<h3>Special value objects<a class="headerlink" href="#special-value-objects" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.values.Interval.html#semantique.processor.values.Interval" title="semantique.processor.values.Interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.values.Interval</span></code></a></p></td>
 <td><p>Object to represent a set of values within the bounds of an interval.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="operator-functions">
-<h3>Operator functions<a class="headerlink" href="#operator-functions" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id1">
-<h4>Univariate operators<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="operator-functions">
+<h3>Operator functions<a class="headerlink" href="#operator-functions" title="Link to this heading">#</a></h3>
+<section id="id1">
+<h4>Univariate operators<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.operators.not_.html#semantique.processor.operators.not_" title="semantique.processor.operators.not_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.operators.not_</span></code></a></p></td>
 <td><p>Test if x is not true.</p></td>
@@ -2457,14 +1379,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id2">
-<h4>Algebraic operators<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id2">
+<h4>Algebraic operators<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.operators.add_.html#semantique.processor.operators.add_" title="semantique.processor.operators.add_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.operators.add_</span></code></a></p></td>
 <td><p>Add y to x.</p></td>
@@ -2486,14 +1404,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id3">
-<h4>Boolean operators<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id3">
+<h4>Boolean operators<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.operators.and_.html#semantique.processor.operators.and_" title="semantique.processor.operators.and_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.operators.and_</span></code></a></p></td>
 <td><p>Test if both x and y are true.</p></td>
@@ -2506,14 +1420,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id4">
-<h4>Relational operators<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id4">
+<h4>Relational operators<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.operators.equal_.html#semantique.processor.operators.equal_" title="semantique.processor.operators.equal_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.operators.equal_</span></code></a></p></td>
 <td><p>Test if x is equal to y.</p></td>
@@ -2541,28 +1451,20 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id5">
-<h4>Spatial relational operators<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id5">
+<h4>Spatial relational operators<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.operators.intersects_.html#semantique.processor.operators.intersects_" title="semantique.processor.operators.intersects_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.operators.intersects_</span></code></a></p></td>
 <td><p>Test if x spatially intersects with y.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id6">
-<h4>Temporal relational operators<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id6">
+<h4>Temporal relational operators<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.operators.after_.html#semantique.processor.operators.after_" title="semantique.processor.operators.after_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.operators.after_</span></code></a></p></td>
 <td><p>Test if x comes after y.</p></td>
@@ -2575,17 +1477,13 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="reducer-functions">
-<h3>Reducer functions<a class="headerlink" href="#reducer-functions" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id7">
-<h4>Statistical reducers<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="reducer-functions">
+<h3>Reducer functions<a class="headerlink" href="#reducer-functions" title="Link to this heading">#</a></h3>
+<section id="id7">
+<h4>Statistical reducers<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.mean_.html#semantique.processor.reducers.mean_" title="semantique.processor.reducers.mean_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.mean_</span></code></a></p></td>
 <td><p>Calculate the mean of a set of values.</p></td>
@@ -2622,14 +1520,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id8">
-<h4>Boolean reducers<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id8">
+<h4>Boolean reducers<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.all_.html#semantique.processor.reducers.all_" title="semantique.processor.reducers.all_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.all_</span></code></a></p></td>
 <td><p>Test if all values in a set are true.</p></td>
@@ -2642,14 +1536,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id9">
-<h4>Occurence reducers<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id9">
+<h4>Occurence reducers<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.count_.html#semantique.processor.reducers.count_" title="semantique.processor.reducers.count_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.count_</span></code></a></p></td>
 <td><p>Count the number of true values in a set.</p></td>
@@ -2659,14 +1549,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id10">
-<h4>Positional reducers<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id10">
+<h4>Positional reducers<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.reducers.first_.html#semantique.processor.reducers.first_" title="semantique.processor.reducers.first_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.reducers.first_</span></code></a></p></td>
 <td><p>Return the first value in a set.</p></td>
@@ -2676,15 +1562,11 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="utils">
-<h3>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="utils">
+<h3>Utils<a class="headerlink" href="#utils" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.utils.parse_extent.html#semantique.processor.utils.parse_extent" title="semantique.processor.utils.parse_extent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.utils.parse_extent</span></code></a></p></td>
 <td><p>Parse the spatial and temporal extent into a spatio-temporal array.</p></td>
@@ -2712,14 +1594,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="value-type-handling">
-<h3>Value type handling<a class="headerlink" href="#value-type-handling" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="value-type-handling">
+<h3>Value type handling<a class="headerlink" href="#value-type-handling" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.processor.types.TypePromoter.html#semantique.processor.types.TypePromoter" title="semantique.processor.types.TypePromoter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.types.TypePromoter</span></code></a></p></td>
 <td><p>Worker that takes care of promoting value types during an operation.</p></td>
@@ -2738,15 +1616,11 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="exceptions">
-<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">#</a></h2>
 <table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/semantique.exceptions.AlignmentError.html#semantique.exceptions.AlignmentError" title="semantique.exceptions.AlignmentError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exceptions.AlignmentError</span></code></a></p></td>
 <td><p>Raised when an array cannot be aligned to a given shape.</p></td>
@@ -2807,48 +1681,166 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
+</section>
+</section>
 
 
-              </div>
+                </article>
               
-        
-            <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="_notebooks/processor.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Internal query processing</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_notebooks/processor.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Internal query processing</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="_generated/semantique.QueryRecipe.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="_generated/semantique.QueryRecipe.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">semantique.QueryRecipe</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-        
-        </div>
-    </div>
-    <footer class="footer">
-    <div class="container">
-      <p>
-        
-            &copy; Copyright 2021, Department of Geoinformatics – Z_GIS.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components">Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recipe">Recipe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping">Mapping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eo-data-cube">EO data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatio-temporal-extent">Spatio-temporal extent</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-blocks">Building blocks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verbs">Verbs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#verbs-for-single-arrays">Verbs for single arrays</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#verbs-for-array-collections">Verbs for array collections</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#utility-verbs">Utility verbs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-values">Special values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensions">Dimensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reserved-dimension-names">Reserved dimension names</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dimension-components">Dimension components</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operators">Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-operators">Univariate operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#algebraic-operators">Algebraic operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-operators">Boolean operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relational-operators">Relational operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-relational-operators">Spatial relational operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-relational-operators">Temporal relational operators</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducers">Reducers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-reducers">Statistical reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-reducers">Boolean reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#occurence-reducers">Occurence reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#positional-reducers">Positional reducers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processor">Processor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core">Core</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-objects">Array objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-value-objects">Special value objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operator-functions">Operator functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Univariate operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Algebraic operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Boolean operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Relational operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Spatial relational operators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Temporal relational operators</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducer-functions">Reducer functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Statistical reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Boolean reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Occurence reducers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Positional reducers</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utils">Utils</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-type-handling">Value type handling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
 
+  <p class="copyright">
+    
+      © Copyright 2021, Department of Geoinformatics – Z_GIS.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
