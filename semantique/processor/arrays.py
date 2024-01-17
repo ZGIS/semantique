@@ -254,6 +254,14 @@ class Array():
       try:
         out = out[component]
       except KeyError:
+        aliases = {
+          "day_of_week": "dayofweek",
+          "day_of_year": "dayofyear"
+        }
+        try:
+          component = aliases[component]
+        except KeyError:
+          pass
         try:
           out = getattr(out.dt, component)
         except AttributeError:

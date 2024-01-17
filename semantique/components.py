@@ -31,14 +31,14 @@ class time():
   DAY = "day"
   """:obj:`str` : Component storing the day number of a timestamp."""
 
-  DAY_OF_WEEK = "day_of_week"
+  DAY_OF_WEEK = "dayofweek"
   """:obj:`str` : Component storing the day of the week of a timestamp.
 
   The first day of the week is considered Monday, with an index of 0.
 
   """
 
-  DAY_OF_YEAR = "day_of_year"
+  DAY_OF_YEAR = "dayofyear"
   """:obj:`str` : Component storing the day of the year of a timestamp."""
 
   HOUR = "hour"
