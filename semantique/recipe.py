@@ -63,7 +63,7 @@ class QueryRecipe(dict):
     >>> recipe["map"] = sq.entity("water").reduce("time", "count")
     >>> recipe["series"] = sq.entity("water").reduce("space", "count")
 
-    >>> dc = sq.datacube.GeotiffArchive("files/layout.json", src = "layers.zip")
+    >>> dc = sq.datacube.GeotiffArchive("files/layout_gtiff.json", src = "layers_gtiff.zip")
     >>> mapping = sq.mapping.Semantique("files/mapping.json")
     >>> space = sq.SpatialExtent(gpd.read_file("files/footprint.geojson"))
     >>> time = sq.TemporalExtent("2019-01-01", "2020-12-31")

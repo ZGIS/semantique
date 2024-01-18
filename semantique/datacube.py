@@ -6,8 +6,10 @@ import datacube
 import datetime
 import os
 import pytz
+import pystac
 import rasterio
 import rioxarray
+import stackstac
 import warnings
 
 from datacube.utils import masking
@@ -661,3 +663,292 @@ class GeotiffArchive(Datacube):
     # This is needed since data are initially loaded for the bbox of the extent.
     data = data.where(data["spatial_feats"].notnull())
     return data
+
+
+class STACCube(Datacube):
+    """
+    EO data cube configuration for results from STAC searches.
+
+    STACCube loads data from an item collection and fetches the data into an xarray.
+
+    Parameters
+    ----------
+      layout : :obj:`dict`
+        The layout file describing the EO data cube. If :obj:`None`, an empty
+        EO data cube is constructed.
+      src : :obj:`pystac.item_collection.ItemCollection` or `list of pystac.item.Item`
+        The item search result from a previous STAC search as a src to build the datacube
+      **config:
+        Additional keyword arguments tuning the data retrieval configuration.
+        Valid options are:
+
+        * **trim** (:obj:`bool`): Should each retrieved data layer be trimmed?
+          Trimming means that dimension coordinates for which all values are
+          missing are removed from the array. The spatial dimensions are trimmed
+          only at the edges, to maintain their regularity. Defaults to
+          :obj:`True`.
+
+        * **group_by_solar_day** (:obj:`bool`): Should the time dimension be
+          resampled to the day level, using solar day to keep scenes together?
+          Defaults to :obj:`True`.
+
+        * **value_type_mapping** (:obj:`dict`): How do value type encodings in
+          the layout map to the value types used by semantique?
+          Defaults to a one-to-one mapping: ::
+
+            {
+              "nominal": "nominal",
+              "ordinal": "ordinal",
+              "binary": "binary",
+              "continuous": "continuous",
+              "discrete": "discrete"
+            }
+
+        * **resamplers** (:obj:`dict`): When data need to be resampled to a
+          different spatial and/or temporal resolution, what resampling technique
+          should be used? Should be specified separately for each possible value
+          type in the layout. Valid techniques are: ::
+
+            'nearest', 'average', 'bilinear', 'cubic', 'cubic_spline',
+            'lanczos', 'mode', 'gauss',  'max', 'min', 'med', 'q1', 'q3'
+
+          Defaults to: ::
+
+            {
+              "nominal": "nearest",
+              "ordinal": "nearest",
+              "binary": "nearest",
+              "continuous": "bilinear",
+              "discrete": "nearest"
+            }
+
+    """
+
+    def __init__(self, layout=None, src=None, **config):
+        super(STACCube, self).__init__(layout)
+        self.src = src
+        # Timezone of the temporal coordinates is infered from the pystac search results
+        # & automatically converted to UTC internally - result is given back as datetime64[ns]
+        self.tz = "UTC"
+        # Update default configuration parameters with provided ones.
+        params = self._default_config
+        params.update(config)
+        self.config = params
+
+    @property
+    def src(self):
+        """:obj:`pystac.item_collection.ItemCollection` or :obj:`list of pystac.item.Item`:
+        The item search result from a previous STAC search."""
+        return self._src
+
+    @src.setter
+    def src(self, value):
+        if value is not None:
+            assert np.all([isinstance(x, pystac.item.Item) for x in value])
+        self._src = value
+
+    @property
+    def _default_config(self):
+        return {
+            "trim": True,
+            "group_by_solar_day": True,
+            "value_type_mapping": {
+                "nominal": "nominal",
+                "ordinal": "ordinal",
+                "binary": "binary",
+                "continuous": "continuous",
+                "discrete": "discrete",
+            },
+            "resamplers": {
+                "nominal": "nearest",
+                "ordinal": "nearest",
+                "binary": "nearest",
+                "continuous": "bilinear",
+                "discrete": "nearest",
+            },
+        }
+
+    @property
+    def config(self):
+        """:obj:`dict`: Configuration settings for data retrieval."""
+        return self._config
+
+    @config.setter
+    def config(self, value):
+        assert isinstance(value, dict)
+        self._config = value
+
+    @property
+    def layout(self):
+        """:obj:`dict`: The layout file of the EO data cube."""
+        return self._layout
+
+    @layout.setter
+    def layout(self, value):
+        self._layout = {} if value is None else self._parse_layout(value)
+
+    def _parse_layout(self, obj):
+        # Makes the metadata objects of the data layers autocomplete friendly.
+        def _parse(obj, ref):
+            is_layer = False
+            while not is_layer:
+                if all([x in obj for x in ["type", "values"]]):
+                    obj["reference"] = copy.deepcopy(ref)
+                    if isinstance(obj["values"], list):
+                        obj["labels"] = {x["label"]: x["id"] for x in obj["values"]}
+                        obj["descriptions"] = {
+                            x["description"]: x["id"] for x in obj["values"]
+                        }
+                    del ref[-1]
+                    is_layer = True
+                else:
+                    ref.append(k)
+                    for k, v in obj.items():
+                        _parse(v, ref)
+
+        for k, v in obj.items():
+            ref = [k]
+            for k, v in v.items():
+                ref.append(k)
+                _parse(v, ref)
+        return obj
+
+    def retrieve(self, *reference, extent):
+        """Retrieve a data layer from the EO data cube.
+
+        Parameters
+        ----------
+          *reference:
+            The index of the data layer in the layout of the EO data cube.
+          extent : :obj:`xarray.DataArray`
+            Spatio-temporal extent in which the data should be retrieved. Should be
+            given as an array with a temporal dimension and two spatial dimensions,
+            such as returned by
+            :func:`parse_extent <semantique.processor.utils.parse_extent>`.
+            The retrieved subset of the EO data cube will have the same extent.
+
+        Returns
+        -------
+          :obj:`xarray.DataArray`
+            The retrieved subset of the EO data cube.
+
+        """
+        # Solve the reference by obtaining the corresponding metadata object.
+        metadata = self.lookup(*reference)
+        # Load the data values from the EO data cube.
+        data = self._load(metadata, extent)
+        if data.sq.is_empty:
+            raise exceptions.EmptyDataError(
+                f"Data layer '{reference}' does not contain data within the "
+                "specified spatio-temporal extent"
+            )
+        # Format loaded data.
+        data = self._format(data, metadata, extent)
+        # Mask invalid data.
+        data = self._mask(data)
+        if data.sq.is_empty:
+            warnings.warn(
+                f"All values for data layer '{reference}' are invalid within the "
+                "specified spatio-temporal extent"
+            )
+        # Trim the array if requested.
+        # This will remove dimension coordinates with only missing or invalid data.
+        if self.config["trim"]:
+            data = data.sq.trim()
+        return data
+
+    def _load(self, metadata, extent):
+        # check if extent is valid
+        if TIME not in extent.dims:
+            raise exceptions.MissingDimensionError(
+                "Cannot retrieve data in an extent without a temporal dimension"
+            )
+        if X not in extent.dims and Y not in extent.dims:
+            raise exceptions.MissingDimensionError(
+                "Cannot retrieve data in an extent without spatial dimensions"
+            )
+
+        # retrieve spatial bounds, resolution & epsg
+        # note: round to avoid binary format <-> floating-point number inconsistencies
+        bounds = tuple(np.array(extent.rio.bounds()).round(8))
+        res = tuple(np.abs(extent.rio.resolution()).round(8))
+        epsg = int(str(extent.rio.crs)[5:])
+
+        # retrieve resampler
+        resampler_name = self.config["resamplers"][metadata["type"]]
+        resampler_func = getattr(rasterio.enums.Resampling, resampler_name)
+
+        # load data
+        data = stackstac.stack(
+            self.src,
+            assets=[metadata["name"]],
+            resampling=resampler_func,
+            bounds=bounds,
+            epsg=epsg,
+            resolution=res,
+            dtype="float32",
+        )
+
+        # subset temporally
+        bounds = extent.sq.tz_convert(self.tz).time.values
+        keep = ((data.time >= bounds[0]) & (data.time < bounds[1])).values
+        data = data.sel(time=keep)
+
+        # mosaicking in case of temporal grouping
+        if self.config["group_by_solar_day"]:
+            if len(data.time):
+                # convert datetimes to daily granularity - resample by day
+                days = data.time.astype("datetime64[D]")
+                data = data.groupby(days).first(skipna=True)
+                data["time"] = data.time.astype("datetime64[D]").values
+
+        # retrieve dataset as xarray, fetches data from STAC-linked data source
+        data = data.compute()
+        return data
+
+    def _format(self, data, metadata, extent):
+        # Step I: Drop unnecessary dimensions & coordinates.
+        data = data.squeeze(dim="band", drop=True)
+        keep_coords = ["time", data.rio.x_dim, data.rio.y_dim]
+        drop_coords = [x for x in list(data.coords) if x not in keep_coords]
+        data = data.drop_vars(drop_coords)
+        # Step II: Format temporal coordinates.
+        # --> Make sure time dimension has the correct name.
+        # --> Convert time coordinates back into the original timezone.
+        data = data.sq.rename_dims({"time": TIME})
+        data = data.sq.write_tz(self.tz)
+        data = data.sq.tz_convert(extent.sq.tz)
+        # Step III: Format spatial coordinates.
+        # --> Make sure X and Y dims have the correct names.
+        # --> Store resolution as an attribute of the spatial coordinate dimensions.
+        # --> Add spatial feature indices as a non-dimension coordinate.
+        data = data.sq.rename_dims({data.rio.y_dim: Y, data.rio.x_dim: X})
+        data = data.sq.write_spatial_resolution(extent.sq.spatial_resolution)
+        data.coords["spatial_feats"] = ([Y, X], extent["spatial_feats"].data)
+        # Step IV: Write semantique specific attributes.
+        # --> Value types for the data and all dimension coordinates.
+        # --> Mapping from category labels to indices for all categorical data.
+        data.sq.value_type = self.config["value_type_mapping"][metadata["type"]]
+        if isinstance(metadata["values"], list):
+            value_labels = {}
+            for x in metadata["values"]:
+                try:
+                    label = x["label"]
+                except KeyError:
+                    label = None
+                value_labels[x["id"]] = label
+            data.sq.value_labels = value_labels
+        data[TIME].sq.value_type = "datetime"
+        data[Y].sq.value_type = "continuous"
+        data[X].sq.value_type = "continuous"
+        data["spatial_feats"].sq.value_type = extent["spatial_feats"].sq.value_type
+        data["spatial_feats"].sq.value_labels = extent["spatial_feats"].sq.value_labels
+        return data
+
+    def _mask(self, data):
+        # Step I: Mask nodata values.
+        data = data.where(data != data.rio.nodata)
+        # Step II: Mask values outside of the spatial extent.
+        # This is needed since data are initially loaded for the bbox of the extent.
+        data = data.where(data["spatial_feats"].notnull())
+        return data
