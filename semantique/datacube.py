@@ -692,6 +692,18 @@ class STACCube(Datacube):
           resampled to the day level, using solar day to keep scenes together?
           Defaults to :obj:`True`.
 
+        * **dtype** (:obj:`str`): Dtype of the data source. Will be converted to
+        float32/float64 prior to passing it to the semantique processor.
+        Defaults to :obj:`float32`.
+
+        * **na_value** (:obj:`int`): NA value as encoded in the original data
+        Defaults to :obj:`np.nan`.
+
+        * **dask_params** (:obj:`dict`): Parameters passed to the .compute() function
+        when fetching data via the stackstac API. Can be used to control the parallelism
+        in fetching data. Defaults to :obj:`None`, i.e. to use the threaded scheduler as
+        set by dask as a default for arrays.
+
         * **value_type_mapping** (:obj:`dict`): How do value type encodings in
           the layout map to the value types used by semantique?
           Defaults to a one-to-one mapping: ::
@@ -752,6 +764,9 @@ class STACCube(Datacube):
         return {
             "trim": True,
             "group_by_solar_day": True,
+            "dtype": "float32",
+            "na_value": np.nan,
+            "dask_params": None,
             "value_type_mapping": {
                 "nominal": "nominal",
                 "ordinal": "ordinal",
@@ -878,7 +893,7 @@ class STACCube(Datacube):
         resampler_name = self.config["resamplers"][metadata["type"]]
         resampler_func = getattr(rasterio.enums.Resampling, resampler_name)
 
-        # load data
+        # load data, i.e. fetch data from links in STAC results
         data = stackstac.stack(
             self.src,
             assets=[metadata["name"]],
@@ -886,8 +901,10 @@ class STACCube(Datacube):
             bounds=bounds,
             epsg=epsg,
             resolution=res,
-            dtype="float32",
+            fill_value=self.config["na_value"],
+            dtype=self.config["dtype"],
         )
+        data = data.compute(**(self.config["dask_params"] or {}))
 
         # subset temporally
         bounds = extent.sq.tz_convert(self.tz).time.values
@@ -895,15 +912,25 @@ class STACCube(Datacube):
         data = data.sel(time=keep)
 
         # mosaicking in case of temporal grouping
+        # convert datetimes to daily granularity - resample by day
+        def _mosaic_ints(x, axis=0, na_value=np.nan):
+            max_idx = np.argmax(x != na_value, axis=axis)
+            # handle cases where all values are na_value
+            all_na = np.all(x == na_value, axis=axis)
+            chosen = np.choose(max_idx, x)
+            # where all values are na_value, fill with na_value, else use chosen value
+            return np.where(all_na, np.full(chosen.shape, na_value, dtype=x.dtype), chosen)
+
         if self.config["group_by_solar_day"]:
             if len(data.time):
-                # convert datetimes to daily granularity - resample by day
                 days = data.time.astype("datetime64[D]")
-                data = data.groupby(days).first(skipna=True)
+                if data.dtype.kind == "f":
+                    data = data.where(data != self.config["na_value"])
+                    data = data.groupby(days).first(skipna=True)
+                else:
+                    data = data.groupby(days).reduce(_mosaic_ints, na_value=self.config["na_value"])
                 data["time"] = data.time.astype("datetime64[D]").values
 
-        # retrieve dataset as xarray, fetches data from STAC-linked data source
-        data = data.compute()
         return data
 
     def _format(self, data, metadata, extent):
@@ -947,6 +974,7 @@ class STACCube(Datacube):
 
     def _mask(self, data):
         # Step I: Mask nodata values.
+        data = data.where(data != self.config["na_value"])
         data = data.where(data != data.rio.nodata)
         # Step II: Mask values outside of the spatial extent.
         # This is needed since data are initially loaded for the bbox of the extent.
