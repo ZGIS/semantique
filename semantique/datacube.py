@@ -923,13 +923,13 @@ class STACCube(Datacube):
 
         if self.config["group_by_solar_day"]:
             if len(data.time):
-                days = data.time.astype("datetime64[D]")
+                days = data.time.astype("datetime64[ns]").dt.floor("D")
                 if data.dtype.kind == "f":
                     data = data.where(data != self.config["na_value"])
-                    data = data.groupby(days).first(skipna=True)
+                    data = data.groupby(days).first(skipna=True).rename({"floor": "time"})
                 else:
-                    data = data.groupby(days).reduce(_mosaic_ints, na_value=self.config["na_value"])
-                data["time"] = data.time.astype("datetime64[D]").values
+                    data = data.groupby(days).reduce(_mosaic_ints, na_value=self.config["na_value"]).rename({"floor": "time"})
+                data["time"] = data.time.values
 
         return data
 
