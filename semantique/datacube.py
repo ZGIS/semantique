@@ -903,6 +903,8 @@ class STACCube(Datacube):
             resolution=res,
             fill_value=self.config["na_value"],
             dtype=self.config["dtype"],
+            xy_coords="center",
+            snap_bounds=False
         )
         data = data.compute(**(self.config["dask_params"] or {}))
 
