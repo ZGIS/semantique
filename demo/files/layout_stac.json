@@ -1,0 +1,208 @@
+{
+    "reflectance": {
+        "s2_band01": {
+            "name": "coastal",
+            "description": "Coastal aerosol band (~443nm; 60m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 1.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band02": {
+            "name": "blue",
+            "description": "Blue band (~494nm; 10m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 2.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "role": "blue",
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band03": {
+            "name": "green",
+            "description": "Green band (~560nm; 10m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 3.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "role": "green",
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band04": {
+            "name": "red",
+            "description": "Red band (~665nm; 10m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 4.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "role": "red",
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band05": {
+            "name": "rededge1",
+            "description": "Vegetation red edge (VRE) band (~704nm; 20m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 5.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band06": {
+            "name": "rededge2",
+            "description": "Vegetation red edge (VRE) band (~740nm; 20m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 6.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band07": {
+            "name": "rededge3",
+            "description": "Vegetation red edge (VRE) band (~781nm; 20m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 7.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band08": {
+            "name": "nir",
+            "description": "Near infrared (NIR) band (~834nm; 10m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 8.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band08A": {
+            "name": "nir08",
+            "description": "Narrow near infrared (NIR) band (~864nm; 20m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 8A.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band09": {
+            "name": "nir09",
+            "description": "Water vapour band (~944nm; 60m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 9.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band11": {
+            "name": "swir16",
+            "description": "Shortwave infrared (SWIR) band (~1612nm; 20m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 11.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "copyright": "Contains modified Copernicus data."
+        },
+        "s2_band12": {
+            "name": "swir22",
+            "description": "Shortwave infrared (SWIR) band (~2195nm; 20m spatial resolution). Top of atmosphere (TOA) reflectance captured by the multi-spectral instrument (MSI) of Sentinel-2A or Sentinel-2B as band 12.",
+            "type": "continuous",
+            "values": {
+                "min": 0,
+                "max": 1,
+                "precision": 1
+            },
+            "copyright": "Contains modified Copernicus data."
+        }
+    },
+    "appearance": {
+        "scl": {
+            "name": "scl",
+            "description": "SCL categories (as provided by Sen2Cor processor)",
+            "type": "ordinal",
+            "values": [
+                {
+                    "id": 0,
+                    "label": "mask",
+                    "description": "no data"
+                },
+                {
+                    "id": 1,
+                    "label": "saturated",
+                    "description": "saturated/defective"
+                },
+                {
+                    "id": 2,
+                    "label": "dark",
+                    "description": "dark areas"
+                },
+                {
+                    "id": 3,
+                    "label": "shadow",
+                    "description": "cloud shadows"
+                },
+                {
+                    "id": 4,
+                    "label": "vegetation",
+                    "description": "vegetation"
+                },
+                {
+                    "id": 5,
+                    "label": "bare",
+                    "description": "not vegetated"
+                },
+                {
+                    "id": 6,
+                    "label": "water",
+                    "description": "water"
+                },
+                {
+                    "id": 7,
+                    "label": "unknown",
+                    "description": "unclassified"
+                },
+                {
+                    "id": 8,
+                    "label": "cl_med",
+                    "description": "cloud medium probability"
+                },
+                {
+                    "id": 9,
+                    "label": "cl_high",
+                    "description": "cloud high probability"
+                },
+                {
+                    "id": 10,
+                    "label": "cl_cirrus",
+                    "description": "cloud (thin cirrus)"
+                },
+                {
+                    "id": 11,
+                    "label": "snow",
+                    "description": "snow"
+                }
+            ]
+        }
+    }
+}

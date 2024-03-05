@@ -43,6 +43,12 @@
    datacube.GeotiffArchive.lookup
    datacube.GeotiffArchive.retrieve
 
+   datacube.STACCube.layout
+   datacube.STACCube.src
+   datacube.STACCube.config
+   datacube.STACCube.lookup
+   datacube.STACCube.retrieve
+
    extent.SpatialExtent.features
    extent.SpatialExtent.crs
    extent.SpatialExtent.from_geojson

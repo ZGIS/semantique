@@ -5,9 +5,13 @@ import copy
 import datacube
 import datetime
 import os
+import planetary_computer as pc
 import pytz
+import pystac
+import pystac_client
 import rasterio
 import rioxarray
+import stackstac
 import warnings
 
 from datacube.utils import masking
@@ -15,6 +19,7 @@ from abc import abstractmethod
 
 from semantique import exceptions
 from semantique.dimensions import TIME, SPACE, X, Y
+from semantique.exceptions import EmptyDataError
 
 class Datacube():
   """Base class for EO data cube configurations.
@@ -661,3 +666,376 @@ class GeotiffArchive(Datacube):
     # This is needed since data are initially loaded for the bbox of the extent.
     data = data.where(data["spatial_feats"].notnull())
     return data
+
+
+class STACCube(Datacube):
+    """
+    EO data cube configuration for results from STAC searches.
+
+    STACCube loads data from an item collection and fetches the data into an xarray.
+
+    Parameters
+    ----------
+      layout : :obj:`dict`
+        The layout file describing the EO data cube. If :obj:`None`, an empty
+        EO data cube is constructed.
+      src : :obj:`pystac.item_collection.ItemCollection` or `list of pystac.item.Item`
+        The item search result from a previous STAC search as a src to build the datacube
+      **config:
+        Additional keyword arguments tuning the data retrieval configuration.
+        Valid options are:
+
+        * **trim** (:obj:`bool`): Should each retrieved data layer be trimmed?
+          Trimming means that dimension coordinates for which all values are
+          missing are removed from the array. The spatial dimensions are trimmed
+          only at the edges, to maintain their regularity. Defaults to
+          :obj:`True`.
+
+        * **group_by_solar_day** (:obj:`bool`): Should the time dimension be
+          resampled to the day level, using solar day to keep scenes together?
+          Defaults to :obj:`True`.
+
+        * **dtype** (:obj:`str`): Dtype of the data source. Will be converted to
+        float32/float64 prior to passing it to the semantique processor.
+        Defaults to :obj:`float32`.
+
+        * **na_value** (:obj:`int`): NA value as encoded in the original data
+        Defaults to :obj:`np.nan`.
+
+        * **dask_params** (:obj:`dict`): Parameters passed to the .compute() function
+        when fetching data via the stackstac API. Can be used to control the parallelism
+        in fetching data. Defaults to :obj:`None`, i.e. to use the threaded scheduler as
+        set by dask as a default for arrays.
+
+        * **value_type_mapping** (:obj:`dict`): How do value type encodings in
+          the layout map to the value types used by semantique?
+          Defaults to a one-to-one mapping: ::
+
+            {
+              "nominal": "nominal",
+              "ordinal": "ordinal",
+              "binary": "binary",
+              "continuous": "continuous",
+              "discrete": "discrete"
+            }
+
+        * **resamplers** (:obj:`dict`): When data need to be resampled to a
+          different spatial and/or temporal resolution, what resampling technique
+          should be used? Should be specified separately for each possible value
+          type in the layout. Valid techniques are: ::
+
+            'nearest', 'average', 'bilinear', 'cubic', 'cubic_spline',
+            'lanczos', 'mode', 'gauss',  'max', 'min', 'med', 'q1', 'q3'
+
+          Defaults to: ::
+
+            {
+              "nominal": "nearest",
+              "ordinal": "nearest",
+              "binary": "nearest",
+              "continuous": "bilinear",
+              "discrete": "nearest"
+            }
+
+    """
+
+    def __init__(self, layout=None, src=None, **config):
+        super(STACCube, self).__init__(layout)
+        self.src = src
+        # Timezone of the temporal coordinates is infered from the pystac search results
+        # & automatically converted to UTC internally - result is given back as datetime64[ns]
+        self.tz = "UTC"
+        # Update default configuration parameters with provided ones.
+        params = self._default_config
+        params.update(config)
+        self.config = params
+
+    @property
+    def src(self):
+        """:obj:`pystac.item_collection.ItemCollection` or :obj:`list of pystac.item.Item`:
+        The item search result from a previous STAC search."""
+        return self._src
+
+    @src.setter
+    def src(self, value):
+        if value is not None:
+            assert np.all([isinstance(x, pystac.item.Item) for x in value])
+        self._src = value
+
+    @property
+    def _default_config(self):
+        return {
+            "trim": True,
+            "group_by_solar_day": True,
+            "dtype": "float32",
+            "na_value": np.nan,
+            "dask_params": None,
+            "value_type_mapping": {
+                "nominal": "nominal",
+                "ordinal": "ordinal",
+                "binary": "binary",
+                "continuous": "continuous",
+                "discrete": "discrete",
+            },
+            "resamplers": {
+                "nominal": "nearest",
+                "ordinal": "nearest",
+                "binary": "nearest",
+                "continuous": "bilinear",
+                "discrete": "nearest",
+            },
+        }
+
+    @property
+    def config(self):
+        """:obj:`dict`: Configuration settings for data retrieval."""
+        return self._config
+
+    @config.setter
+    def config(self, value):
+        assert isinstance(value, dict)
+        self._config = value
+
+    @property
+    def layout(self):
+        """:obj:`dict`: The layout file of the EO data cube."""
+        return self._layout
+
+    @layout.setter
+    def layout(self, value):
+        self._layout = {} if value is None else self._parse_layout(value)
+
+    def _parse_layout(self, obj):
+        # Function to recursively parse and metadata objects to make them autocomplete friendly
+        def _parse(current_obj, ref_path):
+            if "type" in current_obj and "values" in current_obj:
+                current_obj["reference"] = copy.deepcopy(ref_path)
+                if isinstance(current_obj["values"], list):
+                    current_obj["labels"] = {
+                        item["label"]: item["id"] for item in current_obj["values"]
+                    }
+                    current_obj["descriptions"] = {
+                        item["description"]: item["id"]
+                        for item in current_obj["values"]
+                    }
+                return
+
+            # If not a "layer", traverse deeper into the object.
+            for key, value in current_obj.items():
+                if isinstance(value, dict):
+                    new_ref_path = ref_path + [key]
+                    _parse(value, new_ref_path)
+
+        # Start parsing from the root object.
+        for key, value in obj.items():
+            if isinstance(value, dict):
+                _parse(value, [key])
+        return obj
+
+    def retrieve(self, *reference, extent):
+        """Retrieve a data layer from the EO data cube.
+
+        Parameters
+        ----------
+          *reference:
+            The index of the data layer in the layout of the EO data cube.
+          extent : :obj:`xarray.DataArray`
+            Spatio-temporal extent in which the data should be retrieved. Should be
+            given as an array with a temporal dimension and two spatial dimensions,
+            such as returned by
+            :func:`parse_extent <semantique.processor.utils.parse_extent>`.
+            The retrieved subset of the EO data cube will have the same extent.
+
+        Returns
+        -------
+          :obj:`xarray.DataArray`
+            The retrieved subset of the EO data cube.
+
+        """
+        # Solve the reference by obtaining the corresponding metadata object.
+        metadata = self.lookup(*reference)
+        # Load the data values from the EO data cube.
+        data = self._load(metadata, extent)
+        if data.sq.is_empty:
+            raise exceptions.EmptyDataError(
+                f"Data layer '{reference}' does not contain data within the "
+                "specified spatio-temporal extent"
+            )
+        # Format loaded data.
+        data = self._format(data, metadata, extent)
+        # Mask invalid data.
+        data = self._mask(data)
+        if data.sq.is_empty:
+            warnings.warn(
+                f"All values for data layer '{reference}' are invalid within the "
+                "specified spatio-temporal extent"
+            )
+        # Trim the array if requested.
+        # This will remove dimension coordinates with only missing or invalid data.
+        if self.config["trim"]:
+            data = data.sq.trim()
+        return data
+
+    def _load(self, metadata, extent):
+        # check if extent is valid
+        if TIME not in extent.dims:
+            raise exceptions.MissingDimensionError(
+                "Cannot retrieve data in an extent without a temporal dimension"
+            )
+        if X not in extent.dims and Y not in extent.dims:
+            raise exceptions.MissingDimensionError(
+                "Cannot retrieve data in an extent without spatial dimensions"
+            )
+
+        # retrieve spatial bounds, resolution & epsg
+        # note: round to avoid binary format <-> floating-point number inconsistencies
+        s_bounds = tuple(np.array(extent.rio.bounds()).round(8))
+        res = tuple(np.abs(extent.rio.resolution()).round(8))
+        epsg = int(str(extent.rio.crs)[5:])
+
+        # retrieve resampler
+        resampler_name = self.config["resamplers"][metadata["type"]]
+        resampler_func = getattr(rasterio.enums.Resampling, resampler_name)
+
+        # actual data loading, i.e. fetch data from links in STAC results
+        retry, max_retries = 0, 1
+        while retry <= max_retries:
+            try:
+                # subset temporally
+                times = [
+                    np.datetime64(x.get_datetime().replace(tzinfo=None)) for x in self.src
+                ]
+                t_bounds = extent.sq.tz_convert(self.tz).time.values
+                keep = (times >= t_bounds[0]) & (times < t_bounds[1])
+                item_coll = [x for x, k in zip(self.src, keep) if k]
+
+                # load data, i.e. fetch data from links in STAC results
+                data = stackstac.stack(
+                    item_coll,
+                    assets=[metadata["name"]],
+                    resampling=resampler_func,
+                    bounds=s_bounds,
+                    epsg=epsg,
+                    resolution=res,
+                    fill_value=self.config["na_value"],
+                    dtype=self.config["dtype"],
+                    xy_coords="center",
+                    snap_bounds=False
+                )
+                data = data.compute(**(self.config["dask_params"] or {}))
+                break
+
+            # re-authenticate data access
+            except Exception as e:
+                if isinstance(e, ValueError) and str(e) == "No items":
+                    raise EmptyDataError
+                else:
+                    if retry == 0:
+                        self.src = self._sign_metadata(self.src)
+                    retry += 1
+                    if retry > max_retries:
+                        raise
+
+        # mosaicking in case of temporal grouping
+        # convert datetimes to daily granularity - resample by day
+        def _mosaic_ints(x, axis=0, na_value=np.nan):
+            max_idx = np.argmax(x != na_value, axis=axis)
+            # handle cases where all values are na_value
+            all_na = np.all(x == na_value, axis=axis)
+            chosen = np.choose(max_idx, x)
+            # where all values are na_value, fill with na_value, else use chosen value
+            return np.where(all_na, np.full(chosen.shape, na_value, dtype=x.dtype), chosen)
+
+        if self.config["group_by_solar_day"]:
+            if len(data.time):
+                days = data.time.astype("datetime64[ns]").dt.floor("D")
+                if data.dtype.kind == "f":
+                    data = data.where(data != self.config["na_value"])
+                    data = data.groupby(days).first(skipna=True).rename({"floor": "time"})
+                else:
+                    data = data.groupby(days).reduce(_mosaic_ints, na_value=self.config["na_value"]).rename({"floor": "time"})
+                data["time"] = data.time.values
+
+        return data
+
+    def _format(self, data, metadata, extent):
+        # Step I: Set band as array name.
+        data.name = str(data["band"][0].values)
+        data = data.squeeze(dim="band", drop=True)
+        # Step II: Drop unnecessary dimensions & coordinates.
+        keep_coords = ["time", data.rio.x_dim, data.rio.y_dim]
+        drop_coords = [x for x in list(data.coords) if x not in keep_coords]
+        data = data.drop_vars(drop_coords)
+        # Step III: Format temporal coordinates.
+        # --> Make sure time dimension has the correct name.
+        # --> Convert time coordinates back into the original timezone.
+        data = data.sq.rename_dims({"time": TIME})
+        data = data.sq.write_tz(self.tz)
+        data = data.sq.tz_convert(extent.sq.tz)
+        # Step IV: Format spatial coordinates.
+        # --> Make sure X and Y dims have the correct names.
+        # --> Store resolution as an attribute of the spatial coordinate dimensions.
+        # --> Add spatial feature indices as a non-dimension coordinate.
+        data = data.sq.rename_dims({data.rio.y_dim: Y, data.rio.x_dim: X})
+        data = data.sq.write_spatial_resolution(extent.sq.spatial_resolution)
+        data.coords["spatial_feats"] = ([Y, X], extent["spatial_feats"].data)
+        # Step V: Write semantique specific attributes.
+        # --> Value types for the data and all dimension coordinates.
+        # --> Mapping from category labels to indices for all categorical data.
+        data.sq.value_type = self.config["value_type_mapping"][metadata["type"]]
+        if isinstance(metadata["values"], list):
+            value_labels = {}
+            for x in metadata["values"]:
+                try:
+                    label = x["label"]
+                except KeyError:
+                    label = None
+                value_labels[x["id"]] = label
+            data.sq.value_labels = value_labels
+        data[TIME].sq.value_type = "datetime"
+        data[Y].sq.value_type = "continuous"
+        data[X].sq.value_type = "continuous"
+        data["spatial_feats"].sq.value_type = extent["spatial_feats"].sq.value_type
+        data["spatial_feats"].sq.value_labels = extent["spatial_feats"].sq.value_labels
+        return data
+
+    def _mask(self, data):
+        # Step I: Mask nodata values.
+        data = data.where(data != self.config["na_value"])
+        data = data.where(data != data.rio.nodata)
+        # Step II: Mask values outside of the spatial extent.
+        # This is needed since data are initially loaded for the bbox of the extent.
+        data = data.where(data["spatial_feats"].notnull())
+        return data
+
+    def _sign_metadata(self, data):
+        # retrieve collections root & item ids
+        items = list(data)
+        item_ids = [x.id for x in items]
+        roots = [x.get_root_link().href for x in items]
+        # create dictionary grouped by collection
+        curr_colls = {}
+        for c, id, item in zip(roots, item_ids, items):
+            if c not in curr_colls:
+                curr_colls[c] = {"ids": [], "items": []}
+            curr_colls[c]["ids"].append(id)
+            curr_colls[c]["items"].append(item)
+        # define collections requiring authentication
+        # dict with collection and modifier
+        auth_colls = {}
+        auth_colls = {
+            "https://planetarycomputer.microsoft.com/api/stac/v1": pc.sign_inplace
+        }
+        # update signature for items
+        updated_items = []
+        for coll in curr_colls.keys():
+            if coll in auth_colls.keys():
+                # perform search again to renew authentification
+                client = pystac_client.Client.open(coll, modifier=auth_colls[coll])
+                item_search = client.search(ids=curr_colls[coll]["ids"])
+                updated_items.extend(list(item_search.items()))
+            else:
+                updated_items.extend(curr_colls[coll]["items"])
+        # return signed items
+        updated_coll = pystac.ItemCollection(updated_items)
+        return updated_coll

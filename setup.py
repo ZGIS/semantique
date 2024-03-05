@@ -13,10 +13,13 @@ dependencies = [
   'pandas>=2.0',
   'pyproj>=3.0',
   'pytz',
+  'pystac',
+  'pystac-client',
   'rasterio',
   'rioxarray>=0.14',
   'scipy>=1.11',
   'setuptools',
+  'stackstac>=0.5.0',
   'xarray>=0.20'
 ]
 
