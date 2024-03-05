@@ -149,8 +149,7 @@ class Semantique(Mapping):
       if len(properties) == 1:
         out = properties[0]
       else:
-        func = getattr(reducers, "all_")
-        out = Collection(properties).merge(func)
+        out = Collection(properties).merge(reducers.all_)
     else:
       try:
         property = ruleset[property]

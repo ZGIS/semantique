@@ -232,7 +232,7 @@ class Opendatacube(Datacube):
     self._layout = {} if value is None else self._parse_layout(value)
 
   def _parse_layout(self, obj):
-    # Function to recursively parse and metadata objects to make them autocomplete friendly
+    # Recursively parse metadata objects to make them autocomplete friendly.
     def _parse(current_obj, ref_path):
       if "type" in current_obj and "values" in current_obj:
         current_obj["reference"] = copy.deepcopy(ref_path)
@@ -245,13 +245,11 @@ class Opendatacube(Datacube):
                 for item in current_obj["values"]
             }
         return
-
       # If not a "layer", traverse deeper into the object.
       for key, value in current_obj.items():
         if isinstance(value, dict):
           new_ref_path = ref_path + [key]
           _parse(value, new_ref_path)
-
     # Start parsing from the root object.
     for key, value in obj.items():
       if isinstance(value, dict):
@@ -521,7 +519,7 @@ class GeotiffArchive(Datacube):
     self._layout = {} if value is None else self._parse_layout(value)
 
   def _parse_layout(self, obj):
-    # Function to recursively parse and metadata objects to make them autocomplete friendly
+    # Recursively parse metadata objects to make them autocomplete friendly.
     def _parse(current_obj, ref_path):
       if "type" in current_obj and "values" in current_obj:
         current_obj["reference"] = copy.deepcopy(ref_path)
@@ -534,13 +532,11 @@ class GeotiffArchive(Datacube):
                 for item in current_obj["values"]
             }
         return
-
       # If not a "layer", traverse deeper into the object.
       for key, value in current_obj.items():
         if isinstance(value, dict):
           new_ref_path = ref_path + [key]
           _parse(value, new_ref_path)
-
     # Start parsing from the root object.
     for key, value in obj.items():
       if isinstance(value, dict):
