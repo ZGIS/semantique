@@ -27,7 +27,8 @@ class QueryRecipe(dict):
     obj = {} if results is None else results
     super(QueryRecipe, self).__init__(obj)
 
-  def execute(self, datacube, mapping, space, time, caching=False, **config):
+  def execute(self, datacube, mapping, space, time, run_preview = False,
+              cache_data = False, **config):
     """Execute a query recipe.
 
     This function initializes a :obj:`processor.core.QueryProcessor` instance
@@ -44,11 +45,16 @@ class QueryRecipe(dict):
         The spatial extent in which the query should be processed.
       time : TemporalExtent
         The temporal extent in which the query should be processed.
-      caching : :obj:`bool`
+      run_preview : :obj:`bool`
+        Should a preview run be performed before executing the query recipe as
+        specified? A preview run calls the query processor with reduced
+        resolution to test if the recipe execution succeeds.
+      cache_data : :obj:`bool`
         Should the query processor cache the data references as provided by the
         mapped concepts? Enabling caching increases the memory footprint while
-        reducing the I/O time to read data. Will be used only if query recipe
-        contains concepts referencing the same data layer multiple times.
+        reducing the I/O time to retrieve data. Will be used only if the same
+        data layer is referenced multiple times. Caching requires a preview run
+        and will automatically set the preview parameter to :obj:`True`.
       **config:
         Additional configuration parameters forwarded to
         :func:`QueryProcessor.parse <processor.core.QueryProcessor.parse>`.
@@ -77,20 +83,20 @@ class QueryRecipe(dict):
     >>> recipe.execute(dc, mapping, space, time, **config)
 
     """
-    if caching:
-      # preview-run to set up cache
+    if run_preview or cache_data:
+      # Preview run.
       preview_config = config
       preview_config["preview"] = True
       preview_config["cache"] = None
       qp = QueryProcessor.parse(self, datacube, mapping, space, time, **preview_config)
       _ = qp.optimize().execute()
-      # main run
+      # Main run.
       main_config = config
       main_config["preview"] = False
-      main_config["cache"] = qp.cache
+      main_config["cache"] = qp.cache if cache_data else None
       qp = QueryProcessor.parse(self, datacube, mapping, space, time, **main_config)
       return qp.optimize().execute()
     else:
-      # executing the query recipe
+      # Execute the query recipe without a preview run.
       qp = QueryProcessor.parse(self, datacube, mapping, space, time, **config)
       return qp.optimize().execute()
