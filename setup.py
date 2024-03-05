@@ -11,6 +11,7 @@ dependencies = [
   'geopandas>=0.11',
   'numpy>=1.21',
   'pandas>=2.0',
+  'planetary-computer',
   'pyproj>=3.0',
   'pytz',
   'pystac',
