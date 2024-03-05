@@ -308,6 +308,7 @@
 <li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.FIRST.html">semantique.reducers.FIRST</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_generated/semantique.reducers.LAST.html">semantique.reducers.LAST</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.core.QueryProcessor.html">semantique.processor.core.QueryProcessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.core.Cache.html">semantique.processor.core.Cache</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.arrays.Array.html">semantique.processor.arrays.Array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.arrays.Collection.html">semantique.processor.arrays.Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_generated/semantique.processor.values.Interval.html">semantique.processor.values.Interval</a></li>
@@ -621,6 +622,8 @@ document.write(`
 </li>
         <li><a href="_generated/semantique.processor.arrays.Collection.html#semantique.processor.arrays.Collection.__init__">(semantique.processor.arrays.Collection method)</a>
 </li>
+        <li><a href="_generated/semantique.processor.core.Cache.html#semantique.processor.core.Cache.__init__">(semantique.processor.core.Cache method)</a>
+</li>
         <li><a href="_generated/semantique.processor.core.QueryProcessor.html#semantique.processor.core.QueryProcessor.__init__">(semantique.processor.core.QueryProcessor method)</a>
 </li>
         <li><a href="_generated/semantique.processor.types.TypePromoter.html#semantique.processor.types.TypePromoter.__init__">(semantique.processor.types.TypePromoter method)</a>
@@ -728,12 +731,18 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.operators.before_.html#semantique.processor.operators.before_">before_() (in module semantique.processor.operators)</a>
 </li>
+      <li><a href="_generated/semantique.processor.core.Cache.build.html#semantique.processor.core.Cache.build">build() (semantique.processor.core.Cache method)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_generated/semantique.processor.core.Cache.html#semantique.processor.core.Cache">Cache (class in semantique.processor.core)</a>
+</li>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.cache.html#semantique.processor.core.QueryProcessor.cache">cache (semantique.processor.core.QueryProcessor property)</a>
+</li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.call_handler.html#semantique.processor.core.QueryProcessor.call_handler">call_handler() (semantique.processor.core.QueryProcessor method)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.call_verb.html#semantique.processor.core.QueryProcessor.call_verb">call_verb() (semantique.processor.core.QueryProcessor method)</a>
@@ -772,10 +781,10 @@ document.write(`
         <li><a href="_generated/semantique.datacube.STACCube.config.html#semantique.datacube.STACCube.config">(semantique.datacube.STACCube property)</a>
 </li>
       </ul></li>
-      <li><a href="_generated/semantique.datacube.Opendatacube.connection.html#semantique.datacube.Opendatacube.connection">connection (semantique.datacube.Opendatacube property)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_generated/semantique.datacube.Opendatacube.connection.html#semantique.datacube.Opendatacube.connection">connection (semantique.datacube.Opendatacube property)</a>
+</li>
       <li><a href="_generated/semantique.processor.utils.convert_datetime64.html#semantique.processor.utils.convert_datetime64">convert_datetime64() (in module semantique.processor.utils)</a>
 </li>
       <li><a href="_generated/semantique.operators.COSECANT.html#semantique.operators.COSECANT">COSECANT (in module semantique.operators)</a>
@@ -818,6 +827,8 @@ document.write(`
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_generated/semantique.processor.core.Cache.data.html#semantique.processor.core.Cache.data">data (semantique.processor.core.Cache property)</a>
+</li>
       <li><a href="_generated/semantique.datacube.Datacube.html#semantique.datacube.Datacube">Datacube (class in semantique.datacube)</a>
 </li>
       <li><a href="_generated/semantique.processor.core.QueryProcessor.datacube.html#semantique.processor.core.QueryProcessor.datacube">datacube (semantique.processor.core.QueryProcessor property)</a>
@@ -1150,13 +1161,15 @@ document.write(`
       </ul></li>
       <li><a href="_generated/semantique.operators.LESS.html#semantique.operators.LESS">LESS (in module semantique.operators)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.processor.operators.less_.html#semantique.processor.operators.less_">less_() (in module semantique.processor.operators)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.operators.LESS_EQUAL.html#semantique.operators.LESS_EQUAL">LESS_EQUAL (in module semantique.operators)</a>
 </li>
       <li><a href="_generated/semantique.processor.operators.less_equal_.html#semantique.processor.operators.less_equal_">less_equal_() (in module semantique.processor.operators)</a>
+</li>
+      <li><a href="_generated/semantique.processor.core.Cache.load.html#semantique.processor.core.Cache.load">load() (semantique.processor.core.Cache method)</a>
 </li>
       <li><a href="_generated/semantique.datacube.Datacube.lookup.html#semantique.datacube.Datacube.lookup">lookup() (semantique.datacube.Datacube method)</a>
 
@@ -1320,6 +1333,8 @@ document.write(`
 </li>
       <li><a href="_generated/semantique.processor.operators.power_.html#semantique.processor.operators.power_">power_() (in module semantique.processor.operators)</a>
 </li>
+      <li><a href="_generated/semantique.processor.core.QueryProcessor.preview.html#semantique.processor.core.QueryProcessor.preview">preview (semantique.processor.core.QueryProcessor property)</a>
+</li>
       <li><a href="_generated/semantique.reducers.PRODUCT.html#semantique.reducers.PRODUCT">PRODUCT (in module semantique.reducers)</a>
 </li>
       <li><a href="_generated/semantique.processor.reducers.product_.html#semantique.processor.reducers.product_">product_() (in module semantique.processor.reducers)</a>
@@ -1409,6 +1424,8 @@ document.write(`
       <li><a href="_generated/semantique.self.html#semantique.self">self() (in module semantique)</a>
 </li>
       <li><a href="_generated/semantique.mapping.Semantique.html#semantique.mapping.Semantique">Semantique (class in semantique.mapping)</a>
+</li>
+      <li><a href="_generated/semantique.processor.core.Cache.seq.html#semantique.processor.core.Cache.seq">seq (semantique.processor.core.Cache property)</a>
 </li>
       <li><a href="_generated/semantique.set.html#semantique.set">set() (in module semantique)</a>
 </li>
@@ -1586,10 +1603,10 @@ document.write(`
 </li>
       <li><a href="_generated/semantique.exceptions.UnknownOperatorError.html#semantique.exceptions.UnknownOperatorError">UnknownOperatorError</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.exceptions.UnknownReducerError.html#semantique.exceptions.UnknownReducerError">UnknownReducerError</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_generated/semantique.exceptions.UnknownResultError.html#semantique.exceptions.UnknownResultError">UnknownResultError</a>
 </li>
       <li><a href="_generated/semantique.exceptions.UnknownVerbError.html#semantique.exceptions.UnknownVerbError">UnknownVerbError</a>
@@ -1602,6 +1619,8 @@ document.write(`
         <li><a href="_generated/semantique.processor.arrays.Collection.unstack_spatial_dims.html#semantique.processor.arrays.Collection.unstack_spatial_dims">(semantique.processor.arrays.Collection method)</a>
 </li>
       </ul></li>
+      <li><a href="_generated/semantique.processor.core.Cache.update.html#semantique.processor.core.Cache.update">update() (semantique.processor.core.Cache method)</a>
+</li>
       <li><a href="_generated/semantique.processor.values.Interval.upper.html#semantique.processor.values.Interval.upper">upper (semantique.processor.values.Interval property)</a>
 </li>
   </ul></td>

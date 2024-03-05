@@ -346,6 +346,7 @@ Core
    :nosignatures:
 
    processor.core.QueryProcessor
+   processor.core.Cache
 
 Array objects
 --------------

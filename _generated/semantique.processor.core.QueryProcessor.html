@@ -45,7 +45,7 @@
     <link rel="icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="semantique.processor.arrays.Array" href="semantique.processor.arrays.Array.html" />
+    <link rel="next" title="semantique.processor.core.Cache" href="semantique.processor.core.Cache.html" />
     <link rel="prev" title="semantique.reducers.LAST" href="semantique.reducers.LAST.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -309,6 +309,7 @@
 <li class="toctree-l2"><a class="reference internal" href="semantique.reducers.FIRST.html">semantique.reducers.FIRST</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semantique.reducers.LAST.html">semantique.reducers.LAST</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">semantique.processor.core.QueryProcessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semantique.processor.core.Cache.html">semantique.processor.core.Cache</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semantique.processor.arrays.Array.html">semantique.processor.arrays.Array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semantique.processor.arrays.Collection.html">semantique.processor.arrays.Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semantique.processor.values.Interval.html">semantique.processor.values.Interval</a></li>
@@ -668,7 +669,7 @@ value types also means throwing errors whenever a value type is not
 supported by a specific process.</p></li>
 <li><p><strong>preview</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Run the query processor with reduced resolution to test the recipe execution.
 Preview-runs are necessary if cache should be used.</p></li>
-<li><p><strong>cache</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Cache</span></code>) – The cache object that is used to store data layers.</p></li>
+<li><p><strong>cache</strong> (<a class="reference internal" href="semantique.processor.core.Cache.html#semantique.processor.core.Cache" title="semantique.processor.core.Cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cache</span></code></a>) – The cache object that is used to store data layers.</p></li>
 </ul>
 </dd>
 </dl>
@@ -805,7 +806,7 @@ Preview-runs are necessary if cache should be used.</p></li>
 <p class="rubric">Attributes</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.cache.html#semantique.processor.core.QueryProcessor.cache" title="semantique.processor.core.QueryProcessor.cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code></a></p></td>
 <td><p>Cache of data layers for the query execution.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.crs.html#semantique.processor.core.QueryProcessor.crs" title="semantique.processor.core.QueryProcessor.crs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crs</span></code></a></p></td>
@@ -829,7 +830,7 @@ Preview-runs are necessary if cache should be used.</p></li>
 <tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.mapping.html#semantique.processor.core.QueryProcessor.mapping" title="semantique.processor.core.QueryProcessor.mapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapping</span></code></a></p></td>
 <td><p>The mapping instance to process the query against.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preview</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.preview.html#semantique.processor.core.QueryProcessor.preview" title="semantique.processor.core.QueryProcessor.preview"><code class="xref py py-obj docutils literal notranslate"><span class="pre">preview</span></code></a></p></td>
 <td><p>Is the query being processed in preview mode.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="semantique.processor.core.QueryProcessor.recipe.html#semantique.processor.core.QueryProcessor.recipe" title="semantique.processor.core.QueryProcessor.recipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recipe</span></code></a></p></td>
@@ -874,11 +875,11 @@ Preview-runs are necessary if cache should be used.</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="semantique.processor.arrays.Array.html"
+       href="semantique.processor.core.Cache.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">semantique.processor.arrays.Array</p>
+        <p class="prev-next-title">semantique.processor.core.Cache</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
