@@ -40,6 +40,7 @@ EO data cube
    datacube.Datacube
    datacube.Opendatacube
    datacube.GeotiffArchive
+   datacube.STACCube
 
 Spatio-temporal extent
 -----------------------

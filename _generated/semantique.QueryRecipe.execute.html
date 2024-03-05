@@ -18,12 +18,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="../_static/documentation_options.js?v=a1637f0b"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
@@ -57,7 +57,6 @@
   <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -97,20 +96,15 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <header>
   
-    <div class="bd-header navbar navbar-expand-lg bd-navbar">
-    </div>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
-  </header>
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -179,6 +173,7 @@
 <li class="toctree-l2"><a class="reference internal" href="semantique.datacube.Datacube.html">semantique.datacube.Datacube</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semantique.datacube.Opendatacube.html">semantique.datacube.Opendatacube</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semantique.datacube.GeotiffArchive.html">semantique.datacube.GeotiffArchive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semantique.datacube.STACCube.html">semantique.datacube.STACCube</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semantique.extent.SpatialExtent.html">semantique.extent.SpatialExtent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semantique.extent.TemporalExtent.html">semantique.extent.TemporalExtent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semantique.concept.html">semantique.concept</a></li>
@@ -642,7 +637,7 @@ document.write(`
 <h1>semantique.QueryRecipe.execute<a class="headerlink" href="#semantique-queryrecipe-execute" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="semantique.QueryRecipe.execute">
-<span class="sig-prename descclassname"><span class="pre">QueryRecipe.</span></span><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datacube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/recipe.py#L30-L76"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.QueryRecipe.execute" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">QueryRecipe.</span></span><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datacube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_preview</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/ZGIS/semantique/blob/main/semantique/recipe.py#L30-L102"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#semantique.QueryRecipe.execute" title="Link to this definition">#</a></dt>
 <dd><p>Execute a query recipe.</p>
 <p>This function initializes a <a class="reference internal" href="semantique.processor.core.QueryProcessor.html#semantique.processor.core.QueryProcessor" title="semantique.processor.core.QueryProcessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">processor.core.QueryProcessor</span></code></a> instance
 and uses it to process the query. It runs through all distinct phases of
@@ -654,12 +649,20 @@ query processing: parsing, optimization and execution.</p>
 <li><p><strong>mapping</strong> (<a class="reference internal" href="semantique.mapping.Mapping.html#semantique.mapping.Mapping" title="semantique.mapping.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>) – The mapping instance to process the query against.</p></li>
 <li><p><strong>space</strong> (<a class="reference internal" href="semantique.extent.SpatialExtent.html#semantique.extent.SpatialExtent" title="semantique.extent.SpatialExtent"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpatialExtent</span></code></a>) – The spatial extent in which the query should be processed.</p></li>
 <li><p><strong>time</strong> (<a class="reference internal" href="semantique.extent.TemporalExtent.html#semantique.extent.TemporalExtent" title="semantique.extent.TemporalExtent"><code class="xref py py-class docutils literal notranslate"><span class="pre">TemporalExtent</span></code></a>) – The temporal extent in which the query should be processed.</p></li>
+<li><p><strong>run_preview</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should a preview run be performed before executing the query recipe as
+specified? A preview run calls the query processor with reduced
+resolution to test if the recipe execution succeeds.</p></li>
+<li><p><strong>cache_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – Should the query processor cache the data references as provided by the
+mapped concepts? Enabling caching increases the memory footprint while
+reducing the I/O time to retrieve data. Will be used only if the same
+data layer is referenced multiple times. Caching requires a preview run
+and will automatically set the preview parameter to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
 <li><p><strong>**config</strong> – Additional configuration parameters forwarded to
 <a class="reference internal" href="semantique.processor.core.QueryProcessor.parse.html#semantique.processor.core.QueryProcessor.parse" title="semantique.processor.core.QueryProcessor.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">QueryProcessor.parse</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2023.12.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – The response of the query processor as a dictionary containing result
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2024.2.1.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a> – The response of the query processor as a dictionary containing result
 names as keys and result arrays as values.</p>
 </dd>
 </dl>
@@ -673,7 +676,7 @@ names as keys and result arrays as values.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">recipe</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">entity</span><span class="p">(</span><span class="s2">&quot;water&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="s2">&quot;space&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dc</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">datacube</span><span class="o">.</span><span class="n">GeotiffArchive</span><span class="p">(</span><span class="s2">&quot;files/layout.json&quot;</span><span class="p">,</span> <span class="n">src</span> <span class="o">=</span> <span class="s2">&quot;layers.zip&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dc</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">datacube</span><span class="o">.</span><span class="n">GeotiffArchive</span><span class="p">(</span><span class="s2">&quot;files/layout_gtiff.json&quot;</span><span class="p">,</span> <span class="n">src</span> <span class="o">=</span> <span class="s2">&quot;layers_gtiff.zip&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">mapping</span><span class="o">.</span><span class="n">Semantique</span><span class="p">(</span><span class="s2">&quot;files/mapping.json&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">space</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">SpatialExtent</span><span class="p">(</span><span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;files/footprint.geojson&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">TemporalExtent</span><span class="p">(</span><span class="s2">&quot;2019-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;2020-12-31&quot;</span><span class="p">)</span>
@@ -759,8 +762,8 @@ names as keys and result arrays as values.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

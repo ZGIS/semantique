@@ -18,12 +18,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
@@ -33,9 +33,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="../_static/documentation_options.js?v=a1637f0b"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
@@ -62,7 +62,6 @@
   <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -102,20 +101,15 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <header>
   
-    <div class="bd-header navbar navbar-expand-lg bd-navbar">
-    </div>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
-  </header>
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -184,6 +178,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.datacube.Datacube.html">semantique.datacube.Datacube</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.datacube.Opendatacube.html">semantique.datacube.Opendatacube</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.datacube.GeotiffArchive.html">semantique.datacube.GeotiffArchive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.datacube.STACCube.html">semantique.datacube.STACCube</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.extent.SpatialExtent.html">semantique.extent.SpatialExtent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.extent.TemporalExtent.html">semantique.extent.TemporalExtent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../_generated/semantique.concept.html">semantique.concept</a></li>
@@ -636,6 +631,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Structure">Structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-Opendatacube-configuration">The Opendatacube configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-Geotiffarchive-configuration">The Geotiffarchive configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-STACCube-configuration">The STACCube configuration</a></li>
 </ul>
             </nav>
         </div>
@@ -658,6 +654,7 @@ document.write(`
 <li><p><a class="reference internal" href="#Structure"><span class="std std-ref">Structure</span></a></p></li>
 <li><p><a class="reference internal" href="#The-Opendatacube-configuration"><span class="std std-ref">The Opendatacube configuration</span></a></p></li>
 <li><p><a class="reference internal" href="#The-Geotiffarchive-configuration"><span class="std std-ref">The Geotiffarchive configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#The-STACCube-configuration"><span class="std std-ref">The STACCube configuration</span></a></p></li>
 </ul>
 </section>
 <section id="Prepare">
@@ -759,8 +756,8 @@ True
 </section>
 <section id="The-Geotiffarchive-configuration">
 <h2>The Geotiffarchive configuration<a class="headerlink" href="#The-Geotiffarchive-configuration" title="Link to this heading">#</a></h2>
-<p>Besides the Opendatacube configuration, semantique contains a second built-in EO data cube configuration called <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.Geotiffarchive.html">Geotiffarchive</a>. This configuration is targeted at small data cubes that are nothing more than a zipped archive of multiple GeoTIFF files, each having two spatial and one temporal dimension. Given the nature of GeoTIFF, the time dimension will be recognized as “band dimension”, and therefore the time
-coordinates should be stored as band description for each band. Be aware that the Geotiffarchive configuration in semantique is mainly meant for demonstration purposes, and the retriever function is not optimized for performance (e.g. the full GeoTIFF is loaded into memory before subsetting in space and time).</p>
+<p>As a second built-in EO data cube configuration semantique contains the so-called <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.Geotiffarchive.html">Geotiffarchive</a>. This configuration is targeted at small data cubes that are nothing more than a zipped archive of multiple GeoTIFF files, each having two spatial and one temporal dimension. Given the nature of GeoTIFF, the time dimension will be recognized as “band dimension”, and therefore the time coordinates should be stored as band
+description for each band. Be aware that the Geotiffarchive configuration in semantique is mainly meant for demonstration purposes, and the retriever function is not optimized for performance (e.g. the full GeoTIFF is loaded into memory before subsetting in space and time).</p>
 <p>To initialize a representation of a Geotiffarchive data cube, you need to provide a valid layout dictionary and the filepath to the zipped archive of GeoTIFF files. A valid layout for this configuration means that the metadata objects for each data layer should contain at least the following keys and values:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">file</span></code>: The filename of the GeoTIFF file in which the values for the data layer are stored.</p></li>
@@ -768,13 +765,13 @@ coordinates should be stored as band description for each band. Be aware that th
 <li><p><code class="docutils literal notranslate"><span class="pre">values</span></code>: An overview of the values in the data layer. If the values are numerical, this should be a dictionary containing the keys “min”, “max” and “precision”. If the values are categorical, this should be a list of dictionaries, with each dictionary referring to single category and containing the keys “id”, “label” and “description”.</p></li>
 </ul>
 <p>When initializing the instance, you should also provide the timezone in which the temporal coordinates inside the data cube are stored. By default, semantique assumes this is <a class="reference external" href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>. Additionaly, you can provide several configuration parameters that tune the data retrieval process, see the <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.Geotiffarchive.html">documentation</a> of the Geotiffarchive class for details.</p>
-<p>Now we can initialize an instance of the Geotiffarchive class using the small demo data cube that is contained in semantique. The layout file we use looks like <a class="reference external" href="files/layout.json">this</a>.</p>
+<p>Now we can initialize an instance of the Geotiffarchive class using the small demo data cube that is contained in semantique. The layout file we use looks like <a class="reference external" href="files/layout_gtiff.json">this</a>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/layout.json&quot;, &quot;r&quot;) as file:
-    dc = sq.datacube.GeotiffArchive(json.load(file), src = &quot;files/layers.zip&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;files/layout_gtiff.json&quot;, &quot;r&quot;) as file:
+    dc = sq.datacube.GeotiffArchive(json.load(file), src = &quot;files/layers_gtiff.zip&quot;)
 </pre></div>
 </div>
 </div>
@@ -1224,11 +1221,11 @@ array([[[29., 29., 29., ..., 29., 29., 29.],
         [ 3., 27.,  3., ..., 27., 27., 27.],
         [27.,  3.,  7., ..., 27., 27., 27.]]])
 Coordinates:
+    spatial_ref    int32 0
   * x              (x) float64 4.53e+06 4.53e+06 ... 4.536e+06 4.536e+06
   * y              (y) float64 2.697e+06 2.697e+06 ... 2.691e+06 2.691e+06
-    spatial_ref    int64 0
+    temporal_ref   int32 0
   * time           (time) datetime64[ns] 2019-12-15T10:17:33.408715 ... 2020-...
-    temporal_ref   int64 0
     spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
 Attributes:
     AREA_OR_POINT:  Area
@@ -1236,7 +1233,7 @@ Attributes:
     add_offset:     0.0
     _FillValue:     1.7976931348623157e+308
     value_type:     ordinal
-    value_labels:   {1: &#x27;SVHNIR&#x27;, 2: &#x27;SVLNIR&#x27;, 3: &#x27;AVHNIR&#x27;, 4: &#x27;AVLNIR&#x27;, 5: &#x27;...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'colortype'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 3</li><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-b71f00ad-9e09-4e73-a8f6-16a331736ca0' class='xr-array-in' type='checkbox' checked><label for='section-b71f00ad-9e09-4e73-a8f6-16a331736ca0' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>29.0 29.0 29.0 29.0 29.0 29.0 29.0 ... 4.0 3.0 3.0 27.0 27.0 27.0 27.0</span></div><div class='xr-array-data'><pre>array([[[29., 29., 29., ..., 29., 29., 29.],
+    value_labels:   {1: &#x27;SVHNIR&#x27;, 2: &#x27;SVLNIR&#x27;, 3: &#x27;AVHNIR&#x27;, 4: &#x27;AVLNIR&#x27;, 5: &#x27;...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'colortype'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 3</li><li><span class='xr-has-index'>y</span>: 563</li><li><span class='xr-has-index'>x</span>: 576</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-d3d9ab8a-f69a-4324-91c2-213153ff1d05' class='xr-array-in' type='checkbox' checked><label for='section-d3d9ab8a-f69a-4324-91c2-213153ff1d05' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>29.0 29.0 29.0 29.0 29.0 29.0 29.0 ... 4.0 3.0 3.0 27.0 27.0 27.0 27.0</span></div><div class='xr-array-data'><pre>array([[[29., 29., 29., ..., 29., 29., 29.],
         [29., 29., 29., ..., 29., 29., 29.],
         [29., 29., 29., ...,  5., 29., 29.],
         ...,
@@ -1258,26 +1255,26 @@ Attributes:
         ...,
         [ 3.,  3.,  3., ...,  3., 27., 27.],
         [ 3., 27.,  3., ..., 27., 27., 27.],
-        [27.,  3.,  7., ..., 27., 27., 27.]]])</pre></div></div></li><li class='xr-section-item'><input id='section-94402d7b-23df-469a-bc10-c05d60f7fab2' class='xr-section-summary-in' type='checkbox'  checked><label for='section-94402d7b-23df-469a-bc10-c05d60f7fab2' class='xr-section-summary' >Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-54cf643c-cc23-4ef7-946d-bcf5b8192d3b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-54cf643c-cc23-4ef7-946d-bcf5b8192d3b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6c4d65d7-b8c5-40cf-991b-cdb338130544' class='xr-var-data-in' type='checkbox'><label for='data-6c4d65d7-b8c5-40cf-991b-cdb338130544' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x coordinate of projection</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>metre</dd><dt><span>resolution :</span></dt><dd>10</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-8222a5d2-28ce-4dae-b58b-0137bfac5656' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8222a5d2-28ce-4dae-b58b-0137bfac5656' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0d053680-70f2-468b-9346-cf7e1bb4589f' class='xr-var-data-in' type='checkbox'><label for='data-0d053680-70f2-468b-9346-cf7e1bb4589f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y coordinate of projection</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>metre</dd><dt><span>resolution :</span></dt><dd>-10</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-a805c35f-cf80-42ef-b21d-896bc5dd467a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a805c35f-cf80-42ef-b21d-896bc5dd467a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c813b220-c703-4923-a2b9-5ab7fc4a0974' class='xr-var-data-in' type='checkbox'><label for='data-c813b220-c703-4923-a2b9-5ab7fc4a0974' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-12-15T10:17:33.408715 ... 2...</div><input id='attrs-6ab5c4b8-12f6-4259-8051-3c9169272e37' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6ab5c4b8-12f6-4259-8051-3c9169272e37' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-67a0e85e-c85f-4e4f-9ea4-98204c39e160' class='xr-var-data-in' type='checkbox'><label for='data-67a0e85e-c85f-4e4f-9ea4-98204c39e160' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>datetime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-12-15T10:17:33.408715000&#x27;, &#x27;2020-09-05T10:17:43.167942000&#x27;,
-       &#x27;2020-12-19T10:17:34.610661000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-fdee1b25-3d8e-4737-887d-c4d3a6723bc8' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fdee1b25-3d8e-4737-887d-c4d3a6723bc8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ffe74255-a6b1-40ba-8035-dfd8fdd95c82' class='xr-var-data-in' type='checkbox'><label for='data-ffe74255-a6b1-40ba-8035-dfd8fdd95c82' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_feats</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-ca3b24b3-3cb2-4370-ad06-d1c3891c88f5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ca3b24b3-3cb2-4370-ad06-d1c3891c88f5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-635f60c9-a7da-452f-94eb-6c1f6c056709' class='xr-var-data-in' type='checkbox'><label for='data-635f60c9-a7da-452f-94eb-6c1f6c056709' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
+        [27.,  3.,  7., ..., 27., 27., 27.]]])</pre></div></div></li><li class='xr-section-item'><input id='section-1721c159-2de9-4523-b10d-0b197f9852cf' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1721c159-2de9-4523-b10d-0b197f9852cf' class='xr-section-summary' >Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-83124ddc-4afb-4d86-8f88-00946d5ab31f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-83124ddc-4afb-4d86-8f88-00946d5ab31f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-26e1263a-5866-4579-bf61-b3d4796a8921' class='xr-var-data-in' type='checkbox'><label for='data-26e1263a-5866-4579-bf61-b3d4796a8921' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89-extended / LAEA Europe</dd><dt><span>grid_mapping_name :</span></dt><dd>lambert_azimuthal_equal_area</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>52.0</dd><dt><span>longitude_of_projection_origin :</span></dt><dd>10.0</dd><dt><span>false_easting :</span></dt><dd>4321000.0</dd><dt><span>false_northing :</span></dt><dd>3210000.0</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89-extended / LAEA Europe&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Lambert_Azimuthal_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,52],PARAMETER[&quot;longitude_of_center&quot;,10],PARAMETER[&quot;false_easting&quot;,4321000],PARAMETER[&quot;false_northing&quot;,3210000],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Northing&quot;,NORTH],AXIS[&quot;Easting&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;3035&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>4530110.0 10.0 0.0 2696630.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.53e+06 4.53e+06 ... 4.536e+06</div><input id='attrs-28658936-4523-42ab-b67a-3f3693076676' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-28658936-4523-42ab-b67a-3f3693076676' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-37289490-03ae-4cdb-acc3-9158f7129aab' class='xr-var-data-in' type='checkbox'><label for='data-37289490-03ae-4cdb-acc3-9158f7129aab' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x coordinate of projection</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>metre</dd><dt><span>resolution :</span></dt><dd>10</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([4530115., 4530125., 4530135., ..., 4535845., 4535855., 4535865.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.697e+06 2.697e+06 ... 2.691e+06</div><input id='attrs-e4b05e11-5a18-47f6-9d59-9d62f22dd5e1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e4b05e11-5a18-47f6-9d59-9d62f22dd5e1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7227c0e9-7021-4d41-9e4c-e6a54d313445' class='xr-var-data-in' type='checkbox'><label for='data-7227c0e9-7021-4d41-9e4c-e6a54d313445' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y coordinate of projection</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>metre</dd><dt><span>resolution :</span></dt><dd>-10</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([2696625., 2696615., 2696605., ..., 2691025., 2691015., 2691005.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-b7483d80-767f-47f3-b3c0-92abc6a74aec' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b7483d80-767f-47f3-b3c0-92abc6a74aec' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-289ecec4-f060-4b4c-8c60-9e0e8d1b52b0' class='xr-var-data-in' type='checkbox'><label for='data-289ecec4-f060-4b4c-8c60-9e0e8d1b52b0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-12-15T10:17:33.408715 ... 2...</div><input id='attrs-e4fe3d19-0f71-496e-a69b-666edaff7d81' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e4fe3d19-0f71-496e-a69b-666edaff7d81' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-24b7123d-2ff7-4889-a647-d5a9c8db59fb' class='xr-var-data-in' type='checkbox'><label for='data-24b7123d-2ff7-4889-a647-d5a9c8db59fb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>datetime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-12-15T10:17:33.408715000&#x27;, &#x27;2020-09-05T10:17:43.167942000&#x27;,
+       &#x27;2020-12-19T10:17:34.610661000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_feats</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-657480e2-66ea-4979-876c-717df78ff85d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-657480e2-66ea-4979-876c-717df78ff85d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-551a210e-fe5d-4000-92a3-b908ed15d843' class='xr-var-data-in' type='checkbox'><label for='data-551a210e-fe5d-4000-92a3-b908ed15d843' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
        ...,
        [1., 1., 1., ..., 1., 1., 1.],
        [1., 1., 1., ..., 1., 1., 1.],
-       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6c2bd845-6442-4068-bbb1-d633fdac9112' class='xr-section-summary-in' type='checkbox'  ><label for='section-6c2bd845-6442-4068-bbb1-d633fdac9112' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-da2186ac-795c-4eae-820d-3dd3e79f7c83' class='xr-index-data-in' type='checkbox'/><label for='index-da2186ac-795c-4eae-820d-3dd3e79f7c83' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([4530115.0, 4530125.0, 4530135.0, 4530145.0, 4530155.0, 4530165.0,
+       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b0d610b6-d86c-4359-b7ad-b6d41b75ed92' class='xr-section-summary-in' type='checkbox'  ><label for='section-b0d610b6-d86c-4359-b7ad-b6d41b75ed92' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-f54283c9-9ba5-4da2-bb8c-000e1362a69a' class='xr-index-data-in' type='checkbox'/><label for='index-f54283c9-9ba5-4da2-bb8c-000e1362a69a' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([4530115.0, 4530125.0, 4530135.0, 4530145.0, 4530155.0, 4530165.0,
        4530175.0, 4530185.0, 4530195.0, 4530205.0,
        ...
        4535775.0, 4535785.0, 4535795.0, 4535805.0, 4535815.0, 4535825.0,
        4535835.0, 4535845.0, 4535855.0, 4535865.0],
-      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=576))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-64048294-dcc9-4098-9f1f-812ec944b9b5' class='xr-index-data-in' type='checkbox'/><label for='index-64048294-dcc9-4098-9f1f-812ec944b9b5' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([2696625.0, 2696615.0, 2696605.0, 2696595.0, 2696585.0, 2696575.0,
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=576))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-438af90f-092b-4d1b-a264-51c9a3b66054' class='xr-index-data-in' type='checkbox'/><label for='index-438af90f-092b-4d1b-a264-51c9a3b66054' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([2696625.0, 2696615.0, 2696605.0, 2696595.0, 2696585.0, 2696575.0,
        2696565.0, 2696555.0, 2696545.0, 2696535.0,
        ...
        2691095.0, 2691085.0, 2691075.0, 2691065.0, 2691055.0, 2691045.0,
        2691035.0, 2691025.0, 2691015.0, 2691005.0],
-      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=563))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-4a59ace0-f762-4a51-9775-bb9d3cec541c' class='xr-index-data-in' type='checkbox'/><label for='index-4a59ace0-f762-4a51-9775-bb9d3cec541c' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2019-12-15 10:17:33.408715&#x27;, &#x27;2020-09-05 10:17:43.167942&#x27;,
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=563))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-d4b1dae9-09a2-4c06-be38-56d4f98c9c02' class='xr-index-data-in' type='checkbox'/><label for='index-d4b1dae9-09a2-4c06-be38-56d4f98c9c02' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2019-12-15 10:17:33.408715&#x27;, &#x27;2020-09-05 10:17:43.167942&#x27;,
                &#x27;2020-12-19 10:17:34.610661&#x27;],
-              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cb2dde0b-e9d8-46b3-bbcb-bc8b7be44d3b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-cb2dde0b-e9d8-46b3-bbcb-bc8b7be44d3b' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>scale_factor :</span></dt><dd>1.0</dd><dt><span>add_offset :</span></dt><dd>0.0</dd><dt><span>_FillValue :</span></dt><dd>1.7976931348623157e+308</dd><dt><span>value_type :</span></dt><dd>ordinal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;SVHNIR&#x27;, 2: &#x27;SVLNIR&#x27;, 3: &#x27;AVHNIR&#x27;, 4: &#x27;AVLNIR&#x27;, 5: &#x27;WV&#x27;, 6: &#x27;SHV&#x27;, 7: &#x27;SHRBRHNIR&#x27;, 8: &#x27;SHRBRLNIR&#x27;, 9: &#x27;HRBCR&#x27;, 10: &#x27;WR&#x27;, 11: &#x27;PB&#x27;, 12: &#x27;GH&#x27;, 13: &#x27;VBBB&#x27;, 14: &#x27;BBB&#x27;, 15: &#x27;SBB&#x27;, 16: &#x27;ABB&#x27;, 17: &#x27;DBB&#x27;, 18: &#x27;WBBorSHB&#x27;, 19: &#x27;NIRPBB&#x27;, 20: &#x27;BA&#x27;, 21: &#x27;DPWASH&#x27;, 22: &#x27;SLWASH&#x27;, 23: &#x27;TWASH&#x27;, 24: &#x27;SASLWA&#x27;, 27: &#x27;TNCLV&#x27;, 28: &#x27;TNCLWA_BB&#x27;, 29: &#x27;SN&#x27;, 30: &#x27;SHSN&#x27;, 31: &#x27;SH&#x27;, 32: &#x27;FLAME&#x27;}</dd></dl></div></li></ul></div></div></div>
+              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-98f456f5-66a7-4772-949d-7277b950ed2b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-98f456f5-66a7-4772-949d-7277b950ed2b' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>scale_factor :</span></dt><dd>1.0</dd><dt><span>add_offset :</span></dt><dd>0.0</dd><dt><span>_FillValue :</span></dt><dd>1.7976931348623157e+308</dd><dt><span>value_type :</span></dt><dd>ordinal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;SVHNIR&#x27;, 2: &#x27;SVLNIR&#x27;, 3: &#x27;AVHNIR&#x27;, 4: &#x27;AVLNIR&#x27;, 5: &#x27;WV&#x27;, 6: &#x27;SHV&#x27;, 7: &#x27;SHRBRHNIR&#x27;, 8: &#x27;SHRBRLNIR&#x27;, 9: &#x27;HRBCR&#x27;, 10: &#x27;WR&#x27;, 11: &#x27;PB&#x27;, 12: &#x27;GH&#x27;, 13: &#x27;VBBB&#x27;, 14: &#x27;BBB&#x27;, 15: &#x27;SBB&#x27;, 16: &#x27;ABB&#x27;, 17: &#x27;DBB&#x27;, 18: &#x27;WBBorSHB&#x27;, 19: &#x27;NIRPBB&#x27;, 20: &#x27;BA&#x27;, 21: &#x27;DPWASH&#x27;, 22: &#x27;SLWASH&#x27;, 23: &#x27;TWASH&#x27;, 24: &#x27;SASLWA&#x27;, 27: &#x27;TNCLV&#x27;, 28: &#x27;TNCLWA_BB&#x27;, 29: &#x27;SN&#x27;, 30: &#x27;SHSN&#x27;, 31: &#x27;SH&#x27;, 32: &#x27;FLAME&#x27;}</dd></dl></div></li></ul></div></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -1338,7 +1335,7 @@ colortype.plot(x = &quot;x&quot;, y = &quot;y&quot;, col = &quot;time&quot;, lev
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;xarray.plot.facetgrid.FacetGrid at 0x7fece228ca50&gt;
+&lt;xarray.plot.facetgrid.FacetGrid at 0x1e7da91caf0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1346,6 +1343,842 @@ colortype.plot(x = &quot;x&quot;, y = &quot;y&quot;, col = &quot;time&quot;, lev
 </div>
 <div class="output_area docutils container">
 <img alt="../_images/_notebooks_datacube_21_1.png" src="../_images/_notebooks_datacube_21_1.png" />
+</div>
+</div>
+</section>
+<section id="The-STACCube-configuration">
+<h2>The STACCube configuration<a class="headerlink" href="#The-STACCube-configuration" title="Link to this heading">#</a></h2>
+<p>Semantique contains a third built-in EO data cube configuration called <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.STACCube.html">STACCube</a>. This configuration is targeted at ad-hoc data cubes built from the results of a <a class="reference external" href="https://stacspec.org/en/">STAC</a> metadata search. Contrary to the Opendatacube and the Geotiffarchive, it doesn’t require the pre-organising the data (e.g. to ingest the data into a database in case of the Opendatacube or to create a temporally stacked geotiff
+in case of the Geotiffarchive). Instead, the STACCube contains a retriever that knows how to fetch assets linked in STAC search results into a data cube. If the linked assets are provided in Cloud Optimizes GeoTiff format (CoGs), the STACCube offers a high-performance option for fetching and subsequently processing earth observation data only for the area and timespan of interest. To initialize a representation of such a data cube, you need to provide the STAC search results and valid layout
+dictionary. Semantique contains a third built-in EO data cube configuration called <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.STACCube.html">STACCube</a>. This configuration is targeted at ad-hoc data cubes built from the results of a <a class="reference external" href="https://stacspec.org/en/">STAC</a> metadata search. Contrary to the Opendatacube and the Geotiffarchive, it doesn’t require pre-organising the data (e.g. to ingest the data into a database in case of the Opendatacube or to create a temporally stacked
+geotiff in case of the Geotiffarchive). Instead, the STACCube contains a retriever that knows how to fetch assets linked in STAC search results into a data cube. If the linked assets are provided in Cloud Optimizes GeoTiff format (CoGs), the STACCube offers a high-performance option for fetching and subsequently processing earth observation data only for the area and timespan of interest. To initialize a representation of such a data cube, you need to provide the STAC search results and valid
+layout dictionary. The STAC search results can be provided as an <a class="reference external" href="https://pystac.readthedocs.io/en/stable/api/item_collection.html">pystac.item_collection.ItemCollection</a> or as an iterable of <a class="reference external" href="https://pystac.readthedocs.io/en/stable/api/item.html">pystac.item.Item</a>. It is important that the properties object for each item contains a datetime attribute that is non-null. Otherwise, the data can’t be indexed temporally. The spatial index will be created based upon the asset-specific
+proj:epsg, proj:bbox, proj:shape, proj:transform attributes.</p>
+<p>A valid layout for this configuration means that the metadata objects for each data layer should contain at least the following keys and values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The name of the data layer, called asset in STAC terminology.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: The value type of the values in the data layer. There are no limits to what the value type categorization should be. If it differs from the semantique value types, this needs to be mapped through a configuration parameter when initializing the instance, see below.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">values</span></code>: An overview of the values in the data layer. If the values are numerical, this should be a dictionary containing the keys “min”, “max” and “precision”. If the values are categorical, this should be a list of dictionaries, with each dictionary referring to single category and containing the keys “id”, “label” and “description”.</p></li>
+</ul>
+<p>Additionally, you can provide several configuration parameters that tune the data retrieval process, see the <a class="reference external" href="https://zgis.github.io/semantique/semantique.datacube.STACCube.html">documentation</a> of the STACCube class for details. Different to the Opendatacube and the Geotiffarchive, STACCube doesn’t require to specify the timezone in which the temporal coordinates inside the data cube are stored. By default, the timezone is inferred from the STAC search results and converted to
+<a class="reference external" href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>.</p>
+<p>We will demonstrate the initialization of an instance of the STACCube class using some Sentinel-2 data fetched from the <a class="reference external" href="https://registry.opendata.aws/sentinel-2-l2a-cogs/">registry of open data on AWS</a>. The layout file we use looks like <a class="reference external" href="files/layout_stac.json">this</a>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from pystac_client import Client
+from shapely.geometry import box
+
+# define temporal &amp; spatial range to perform STAC query
+xmin, ymin, xmax, ymax = -2.75, 47.25, -2.25, 47.75
+aoi = box(xmin, ymin, xmax, ymax)
+t_range = [&quot;2020-07-15&quot;, &quot;2020-08-01&quot;]
+
+# STAC-based metadata retrieval
+catalog = Client.open(&quot;https://earth-search.aws.element84.com/v1&quot;)
+query = catalog.search(
+    collections=&quot;sentinel-2-l2a&quot;,
+    datetime=t_range,
+    limit=100,
+    intersects=aoi
+)
+item_coll = query.item_collection()
+
+# list results - part I
+items = list(query.items())
+print(f&quot;Found: {len(items):d} items.&quot;)
+
+# list results - part II
+stac_json = query.item_collection_as_dict()
+gdf = gpd.GeoDataFrame.from_features(stac_json, &quot;epsg:4326&quot;)
+gdf
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Found: 8 items.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>created</th>
+      <th>platform</th>
+      <th>constellation</th>
+      <th>instruments</th>
+      <th>eo:cloud_cover</th>
+      <th>proj:epsg</th>
+      <th>mgrs:utm_zone</th>
+      <th>mgrs:latitude_band</th>
+      <th>mgrs:grid_square</th>
+      <th>...</th>
+      <th>s2:datastrip_id</th>
+      <th>s2:granule_id</th>
+      <th>s2:reflectance_conversion_factor</th>
+      <th>datetime</th>
+      <th>s2:sequence</th>
+      <th>earthsearch:s3_path</th>
+      <th>earthsearch:payload_id</th>
+      <th>earthsearch:boa_offset_applied</th>
+      <th>processing:software</th>
+      <th>updated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POLYGON ((-3.00025 47.85369, -3.00025 46.86571...</td>
+      <td>2023-09-09T07:24:43.535Z</td>
+      <td>sentinel-2b</td>
+      <td>sentinel-2</td>
+      <td>[msi]</td>
+      <td>0.000680</td>
+      <td>32630</td>
+      <td>30</td>
+      <td>T</td>
+      <td>WT</td>
+      <td>...</td>
+      <td>S2B_OPER_MSI_L2A_DS_S2RP_20230503T232911_S2020...</td>
+      <td>S2B_OPER_MSI_L2A_TL_S2RP_20230503T232911_A0177...</td>
+      <td>0.969660</td>
+      <td>2020-07-30T11:18:07.218000Z</td>
+      <td>1</td>
+      <td>s3://sentinel-cogs/sentinel-s2-l2a-cogs/30/T/W...</td>
+      <td>roda-sentinel2/workflow-sentinel2-to-stac/b2b3...</td>
+      <td>True</td>
+      <td>{'sentinel2-to-stac': '0.1.1'}</td>
+      <td>2023-09-09T07:24:43.535Z</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POLYGON ((-3.00025 47.85369, -1.53274 47.84432...</td>
+      <td>2022-11-06T09:10:59.398Z</td>
+      <td>sentinel-2b</td>
+      <td>sentinel-2</td>
+      <td>[msi]</td>
+      <td>0.044423</td>
+      <td>32630</td>
+      <td>30</td>
+      <td>T</td>
+      <td>WT</td>
+      <td>...</td>
+      <td>S2B_OPER_MSI_L2A_DS_EPAE_20200730T131922_S2020...</td>
+      <td>S2B_OPER_MSI_L2A_TL_EPAE_20200730T131922_A0177...</td>
+      <td>0.969660</td>
+      <td>2020-07-30T11:18:07.217000Z</td>
+      <td>0</td>
+      <td>s3://sentinel-cogs/sentinel-s2-l2a-cogs/30/T/W...</td>
+      <td>roda-sentinel2/workflow-sentinel2-to-stac/2aa2...</td>
+      <td>False</td>
+      <td>{'sentinel2-to-stac': '0.1.0'}</td>
+      <td>2022-11-06T09:10:59.398Z</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POLYGON ((-3.00025 47.85369, -3.00025 46.86571...</td>
+      <td>2023-07-18T00:30:34.159Z</td>
+      <td>sentinel-2a</td>
+      <td>sentinel-2</td>
+      <td>[msi]</td>
+      <td>82.378161</td>
+      <td>32630</td>
+      <td>30</td>
+      <td>T</td>
+      <td>WT</td>
+      <td>...</td>
+      <td>S2A_OPER_MSI_L2A_DS_S2RP_20230323T230825_S2020...</td>
+      <td>S2A_OPER_MSI_L2A_TL_S2RP_20230323T230825_A0265...</td>
+      <td>0.968747</td>
+      <td>2020-07-25T11:18:09.991000Z</td>
+      <td>1</td>
+      <td>s3://sentinel-cogs/sentinel-s2-l2a-cogs/30/T/W...</td>
+      <td>roda-sentinel2/workflow-sentinel2-to-stac/e73f...</td>
+      <td>True</td>
+      <td>{'sentinel2-to-stac': '0.1.1'}</td>
+      <td>2023-07-18T00:30:34.159Z</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>POLYGON ((-3.00025 47.85369, -1.53274 47.84432...</td>
+      <td>2022-11-06T09:16:29.219Z</td>
+      <td>sentinel-2a</td>
+      <td>sentinel-2</td>
+      <td>[msi]</td>
+      <td>76.555313</td>
+      <td>32630</td>
+      <td>30</td>
+      <td>T</td>
+      <td>WT</td>
+      <td>...</td>
+      <td>S2A_OPER_MSI_L2A_DS_MPS__20200725T120536_S2020...</td>
+      <td>S2A_OPER_MSI_L2A_TL_MPS__20200725T120536_A0265...</td>
+      <td>0.968747</td>
+      <td>2020-07-25T11:18:09.991000Z</td>
+      <td>0</td>
+      <td>s3://sentinel-cogs/sentinel-s2-l2a-cogs/30/T/W...</td>
+      <td>roda-sentinel2/workflow-sentinel2-to-stac/1ede...</td>
+      <td>False</td>
+      <td>{'sentinel2-to-stac': '0.1.0'}</td>
+      <td>2022-11-06T09:16:29.219Z</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>POLYGON ((-3.00025 47.85369, -3.00025 46.86571...</td>
+      <td>2023-09-09T03:08:50.038Z</td>
+      <td>sentinel-2b</td>
+      <td>sentinel-2</td>
+      <td>[msi]</td>
+      <td>25.680962</td>
+      <td>32630</td>
+      <td>30</td>
+      <td>T</td>
+      <td>WT</td>
+      <td>...</td>
+      <td>S2B_OPER_MSI_L2A_DS_S2RP_20230423T113853_S2020...</td>
+      <td>S2B_OPER_MSI_L2A_TL_S2RP_20230423T113853_A0176...</td>
+      <td>0.968061</td>
+      <td>2020-07-20T11:18:06.203000Z</td>
+      <td>1</td>
+      <td>s3://sentinel-cogs/sentinel-s2-l2a-cogs/30/T/W...</td>
+      <td>roda-sentinel2/workflow-sentinel2-to-stac/d045...</td>
+      <td>True</td>
+      <td>{'sentinel2-to-stac': '0.1.1'}</td>
+      <td>2023-09-09T03:08:50.038Z</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>POLYGON ((-3.00025 47.85369, -1.53274 47.84432...</td>
+      <td>2022-11-06T05:16:55.629Z</td>
+      <td>sentinel-2b</td>
+      <td>sentinel-2</td>
+      <td>[msi]</td>
+      <td>19.963404</td>
+      <td>32630</td>
+      <td>30</td>
+      <td>T</td>
+      <td>WT</td>
+      <td>...</td>
+      <td>S2B_OPER_MSI_L2A_DS_EPAE_20200720T131521_S2020...</td>
+      <td>S2B_OPER_MSI_L2A_TL_EPAE_20200720T131521_A0176...</td>
+      <td>0.968061</td>
+      <td>2020-07-20T11:18:06.202000Z</td>
+      <td>0</td>
+      <td>s3://sentinel-cogs/sentinel-s2-l2a-cogs/30/T/W...</td>
+      <td>roda-sentinel2/workflow-sentinel2-to-stac/ba8f...</td>
+      <td>False</td>
+      <td>{'sentinel2-to-stac': '0.1.0'}</td>
+      <td>2022-11-06T05:16:55.629Z</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>POLYGON ((-3.00025 47.85369, -3.00025 46.86571...</td>
+      <td>2023-09-09T09:10:47.384Z</td>
+      <td>sentinel-2a</td>
+      <td>sentinel-2</td>
+      <td>[msi]</td>
+      <td>85.173172</td>
+      <td>32630</td>
+      <td>30</td>
+      <td>T</td>
+      <td>WT</td>
+      <td>...</td>
+      <td>S2A_OPER_MSI_L2A_DS_S2RP_20230423T090139_S2020...</td>
+      <td>S2A_OPER_MSI_L2A_TL_S2RP_20230423T090139_A0264...</td>
+      <td>0.967606</td>
+      <td>2020-07-15T11:18:09.131000Z</td>
+      <td>1</td>
+      <td>s3://sentinel-cogs/sentinel-s2-l2a-cogs/30/T/W...</td>
+      <td>roda-sentinel2/workflow-sentinel2-to-stac/61a3...</td>
+      <td>True</td>
+      <td>{'sentinel2-to-stac': '0.1.1'}</td>
+      <td>2023-09-09T09:10:47.384Z</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>POLYGON ((-3.00025 47.85369, -1.53274 47.84432...</td>
+      <td>2022-11-06T05:17:10.863Z</td>
+      <td>sentinel-2a</td>
+      <td>sentinel-2</td>
+      <td>[msi]</td>
+      <td>81.696101</td>
+      <td>32630</td>
+      <td>30</td>
+      <td>T</td>
+      <td>WT</td>
+      <td>...</td>
+      <td>S2A_OPER_MSI_L2A_DS_SGS__20200715T140105_S2020...</td>
+      <td>S2A_OPER_MSI_L2A_TL_SGS__20200715T140105_A0264...</td>
+      <td>0.967606</td>
+      <td>2020-07-15T11:18:09.130000Z</td>
+      <td>0</td>
+      <td>s3://sentinel-cogs/sentinel-s2-l2a-cogs/30/T/W...</td>
+      <td>roda-sentinel2/workflow-sentinel2-to-stac/cbfa...</td>
+      <td>False</td>
+      <td>{'sentinel2-to-stac': '0.1.0'}</td>
+      <td>2022-11-06T05:17:10.863Z</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 42 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import warnings
+
+# define datacube
+with open(&quot;files/layout_stac.json&quot;, &quot;r&quot;) as file:
+    dc = sq.datacube.STACCube(
+        json.load(file),
+        src = item_coll,
+        dtype=&quot;int8&quot;,
+        na_value=0,
+        )
+
+# use same extents as for STAC query to set up the context for the datacube
+space = sq.SpatialExtent(gpd.GeoDataFrame(geometry=[aoi], crs = 4326))
+time = sq.TemporalExtent(*t_range)
+extent = parse_extent(space, time, spatial_resolution = [-0.001, 0.001], crs = 4326)
+
+# load the data
+with warnings.catch_warnings():
+    warnings.simplefilter(&quot;ignore&quot;, UserWarning)
+    data = dc.retrieve(&quot;appearance&quot;, &quot;scl&quot;, extent=extent)
+data
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;stackstac-e4a20ff0df5f8779104284b323af0f6b&#x27; (time: 4,
+                                                                y: 500, x: 500)&gt;
+array([[[9., 9., 9., ..., 9., 9., 9.],
+        [9., 9., 9., ..., 9., 9., 9.],
+        [9., 9., 9., ..., 9., 9., 9.],
+        ...,
+        [6., 6., 6., ..., 9., 9., 9.],
+        [6., 6., 6., ..., 9., 9., 9.],
+        [6., 6., 6., ..., 9., 9., 9.]],
+
+       [[9., 9., 8., ..., 4., 7., 8.],
+        [4., 4., 4., ..., 4., 3., 4.],
+        [4., 4., 4., ..., 4., 3., 7.],
+        ...,
+        [6., 6., 6., ..., 6., 6., 6.],
+        [6., 6., 6., ..., 6., 6., 8.],
+        [6., 6., 6., ..., 9., 9., 9.]],
+
+       [[9., 9., 8., ..., 9., 9., 9.],
+        [9., 9., 9., ..., 9., 9., 9.],
+        [9., 9., 9., ..., 9., 9., 9.],
+        ...,
+        [6., 6., 6., ..., 8., 8., 8.],
+        [6., 6., 6., ..., 8., 6., 8.],
+        [6., 6., 6., ..., 8., 8., 8.]],
+
+       [[4., 4., 4., ..., 4., 4., 4.],
+        [4., 4., 4., ..., 4., 4., 4.],
+        [4., 4., 4., ..., 4., 5., 4.],
+        ...,
+        [6., 6., 6., ..., 6., 6., 6.],
+        [6., 6., 6., ..., 6., 6., 6.],
+        [6., 6., 6., ..., 6., 6., 6.]]], dtype=float32)
+Coordinates:
+  * x              (x) float64 -2.75 -2.749 -2.748 ... -2.253 -2.252 -2.251
+  * y              (y) float64 47.75 47.75 47.75 47.75 ... 47.25 47.25 47.25
+    temporal_ref   int32 0
+  * time           (time) datetime64[ns] 2020-07-15 2020-07-20 ... 2020-07-30
+    spatial_feats  (y, x) float64 1.0 1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0 1.0
+Attributes:
+    spec:          RasterSpec(epsg=4326, bounds=(-2.75, 47.25, -2.25, 47.75),...
+    crs:           epsg:4326
+    transform:     | 0.00, 0.00,-2.75|\n| 0.00,-0.00, 47.75|\n| 0.00, 0.00, 1...
+    resolution:    0.001
+    value_type:    ordinal
+    value_labels:  {0: &#x27;mask&#x27;, 1: &#x27;saturated&#x27;, 2: &#x27;dark&#x27;, 3: &#x27;shadow&#x27;, 4: &#x27;ve...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'stackstac-e4a20ff0df5f8779104284b323af0f6b'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 4</li><li><span class='xr-has-index'>y</span>: 500</li><li><span class='xr-has-index'>x</span>: 500</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-c7a7416f-b751-4ada-8e63-d7f3018ed8b1' class='xr-array-in' type='checkbox' checked><label for='section-c7a7416f-b751-4ada-8e63-d7f3018ed8b1' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>9.0 9.0 9.0 9.0 9.0 9.0 9.0 9.0 ... 4.0 4.0 6.0 6.0 6.0 6.0 6.0 6.0</span></div><div class='xr-array-data'><pre>array([[[9., 9., 9., ..., 9., 9., 9.],
+        [9., 9., 9., ..., 9., 9., 9.],
+        [9., 9., 9., ..., 9., 9., 9.],
+        ...,
+        [6., 6., 6., ..., 9., 9., 9.],
+        [6., 6., 6., ..., 9., 9., 9.],
+        [6., 6., 6., ..., 9., 9., 9.]],
+
+       [[9., 9., 8., ..., 4., 7., 8.],
+        [4., 4., 4., ..., 4., 3., 4.],
+        [4., 4., 4., ..., 4., 3., 7.],
+        ...,
+        [6., 6., 6., ..., 6., 6., 6.],
+        [6., 6., 6., ..., 6., 6., 8.],
+        [6., 6., 6., ..., 9., 9., 9.]],
+
+       [[9., 9., 8., ..., 9., 9., 9.],
+        [9., 9., 9., ..., 9., 9., 9.],
+        [9., 9., 9., ..., 9., 9., 9.],
+        ...,
+        [6., 6., 6., ..., 8., 8., 8.],
+        [6., 6., 6., ..., 8., 6., 8.],
+        [6., 6., 6., ..., 8., 8., 8.]],
+
+       [[4., 4., 4., ..., 4., 4., 4.],
+        [4., 4., 4., ..., 4., 4., 4.],
+        [4., 4., 4., ..., 4., 5., 4.],
+        ...,
+        [6., 6., 6., ..., 6., 6., 6.],
+        [6., 6., 6., ..., 6., 6., 6.],
+        [6., 6., 6., ..., 6., 6., 6.]]], dtype=float32)</pre></div></div></li><li class='xr-section-item'><input id='section-942bcca6-f5ae-4d8b-84c6-f6b30601d5b8' class='xr-section-summary-in' type='checkbox'  checked><label for='section-942bcca6-f5ae-4d8b-84c6-f6b30601d5b8' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-2.75 -2.749 ... -2.252 -2.251</div><input id='attrs-9d90a983-9905-49ee-bb36-57025daed6c3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9d90a983-9905-49ee-bb36-57025daed6c3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5d41d9b6-6003-4b6b-8188-e32e536248a3' class='xr-var-data-in' type='checkbox'><label for='data-5d41d9b6-6003-4b6b-8188-e32e536248a3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>resolution :</span></dt><dd>0.001</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([-2.75 , -2.749, -2.748, ..., -2.253, -2.252, -2.251])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>47.75 47.75 47.75 ... 47.25 47.25</div><input id='attrs-4980d426-4780-48e8-88fb-deb1e8cd2fa7' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4980d426-4780-48e8-88fb-deb1e8cd2fa7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9d9b9971-8237-4006-81a0-5b602748767d' class='xr-var-data-in' type='checkbox'><label for='data-9d9b9971-8237-4006-81a0-5b602748767d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>resolution :</span></dt><dd>-0.001</dd><dt><span>value_type :</span></dt><dd>continuous</dd></dl></div><div class='xr-var-data'><pre>array([47.75 , 47.749, 47.748, ..., 47.253, 47.252, 47.251])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temporal_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-d0801bd6-832f-4920-9909-ab87c9e2f200' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d0801bd6-832f-4920-9909-ab87c9e2f200' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a8ba147d-ad10-466a-9b27-7f8320946e62' class='xr-var-data-in' type='checkbox'><label for='data-a8ba147d-ad10-466a-9b27-7f8320946e62' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>zone :</span></dt><dd>UTC</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2020-07-15 ... 2020-07-30</div><input id='attrs-077d2c28-bf17-4ec5-aa00-ea99aa76031d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-077d2c28-bf17-4ec5-aa00-ea99aa76031d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e43f3f33-8b0a-4369-8b49-32542ff9a5b1' class='xr-var-data-in' type='checkbox'><label for='data-e43f3f33-8b0a-4369-8b49-32542ff9a5b1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>datetime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2020-07-15T00:00:00.000000000&#x27;, &#x27;2020-07-20T00:00:00.000000000&#x27;,
+       &#x27;2020-07-25T00:00:00.000000000&#x27;, &#x27;2020-07-30T00:00:00.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_feats</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 1.0 1.0 1.0 1.0</div><input id='attrs-786973ea-899c-49f9-a47d-a25a2b6441e4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-786973ea-899c-49f9-a47d-a25a2b6441e4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b1c8867f-0472-48bc-a76c-cf1632f0b6e8' class='xr-var-data-in' type='checkbox'><label for='data-b1c8867f-0472-48bc-a76c-cf1632f0b6e8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>value_type :</span></dt><dd>nominal</dd><dt><span>value_labels :</span></dt><dd>{1: &#x27;feature_1&#x27;}</dd></dl></div><div class='xr-var-data'><pre>array([[1., 1., 1., ..., 1., 1., 1.],
+       [1., 1., 1., ..., 1., 1., 1.],
+       [1., 1., 1., ..., 1., 1., 1.],
+       ...,
+       [1., 1., 1., ..., 1., 1., 1.],
+       [1., 1., 1., ..., 1., 1., 1.],
+       [1., 1., 1., ..., 1., 1., 1.]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-2c4c3f8b-5507-4bb9-9e10-d84cd5edb2e8' class='xr-section-summary-in' type='checkbox'  ><label for='section-2c4c3f8b-5507-4bb9-9e10-d84cd5edb2e8' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-d9a77e5c-d6cb-4382-83ec-fafcad078696' class='xr-index-data-in' type='checkbox'/><label for='index-d9a77e5c-d6cb-4382-83ec-fafcad078696' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([              -2.75,              -2.749,              -2.748,
+                    -2.747,              -2.746,              -2.745,
+                    -2.744,              -2.743,              -2.742,
+                    -2.741,
+       ...
+                     -2.26,              -2.259,              -2.258,
+                    -2.257, -2.2560000000000002,              -2.255,
+                    -2.254,              -2.253,              -2.252,
+                    -2.251],
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=500))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-68f3bd75-18aa-461d-81c9-2215167803bd' class='xr-index-data-in' type='checkbox'/><label for='index-68f3bd75-18aa-461d-81c9-2215167803bd' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 47.75, 47.749, 47.748, 47.747, 47.746, 47.745, 47.744, 47.743, 47.742,
+       47.741,
+       ...
+        47.26, 47.259, 47.258, 47.257, 47.256, 47.255, 47.254, 47.253, 47.252,
+       47.251],
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=500))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-d0fbde1c-6071-44d2-a318-15ae93437834' class='xr-index-data-in' type='checkbox'/><label for='index-d0fbde1c-6071-44d2-a318-15ae93437834' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2020-07-15&#x27;, &#x27;2020-07-20&#x27;, &#x27;2020-07-25&#x27;, &#x27;2020-07-30&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d11422bd-bd4d-44eb-835f-05213d0143ad' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d11422bd-bd4d-44eb-835f-05213d0143ad' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>spec :</span></dt><dd>RasterSpec(epsg=4326, bounds=(-2.75, 47.25, -2.25, 47.75), resolutions_xy=(0.001, 0.001))</dd><dt><span>crs :</span></dt><dd>epsg:4326</dd><dt><span>transform :</span></dt><dd>| 0.00, 0.00,-2.75|
+| 0.00,-0.00, 47.75|
+| 0.00, 0.00, 1.00|</dd><dt><span>resolution :</span></dt><dd>0.001</dd><dt><span>value_type :</span></dt><dd>ordinal</dd><dt><span>value_labels :</span></dt><dd>{0: &#x27;mask&#x27;, 1: &#x27;saturated&#x27;, 2: &#x27;dark&#x27;, 3: &#x27;shadow&#x27;, 4: &#x27;vegetation&#x27;, 5: &#x27;bare&#x27;, 6: &#x27;water&#x27;, 7: &#x27;unknown&#x27;, 8: &#x27;cl_med&#x27;, 9: &#x27;cl_high&#x27;, 10: &#x27;cl_cirrus&#x27;, 11: &#x27;snow&#x27;}</dd></dl></div></li></ul></div></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+
+# plot results
+colors = {
+    &quot;no data&quot;: [0, 0, 0],
+    &quot;saturated/defective&quot;: [255, 0, 0],
+    &quot;dark areas&quot;: [64, 64, 64],
+    &quot;cloud shadows&quot;: [131, 60, 12],
+    &quot;vegetation&quot;: [0, 255, 0],
+    &quot;not vegetated&quot;: [255, 255, 0],
+    &quot;water&quot;: [0, 0, 204],
+    &quot;unclassified&quot;: [117, 113, 113],
+    &quot;cloud medium prob&quot;: [174, 170, 170],
+    &quot;cloud high prob&quot;: [255, 255, 255],
+    &quot;thin cirrus&quot;: [0, 204, 255],
+    &quot;snow&quot;: [255, 102, 255]
+}
+values = list(range(0, 12))
+levels = [x - 0.5 for x in values + [max(values) + 1]]
+colors = list([np.array(x)/255 for x in colors.values()])
+legend = {&quot;ticks&quot;: [], &quot;label&quot;: &quot;colortype&quot;}
+data.plot(x = &quot;x&quot;, y = &quot;y&quot;, col = &quot;time&quot;, levels = levels, colors = colors, cbar_kwargs = legend);
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/_notebooks_datacube_25_0.png" src="../_images/_notebooks_datacube_25_0.png" />
 </div>
 </div>
 </section>
@@ -1401,6 +2234,7 @@ colortype.plot(x = &quot;x&quot;, y = &quot;y&quot;, col = &quot;time&quot;, lev
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Structure">Structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-Opendatacube-configuration">The Opendatacube configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-Geotiffarchive-configuration">The Geotiffarchive configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-STACCube-configuration">The STACCube configuration</a></li>
 </ul>
   </nav></div>
 
@@ -1445,8 +2279,8 @@ colortype.plot(x = &quot;x&quot;, y = &quot;y&quot;, col = &quot;time&quot;, lev
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

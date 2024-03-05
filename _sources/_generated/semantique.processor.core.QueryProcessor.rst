@@ -62,6 +62,7 @@
 
    .. autosummary::
    
+      ~QueryProcessor.cache
       ~QueryProcessor.crs
       ~QueryProcessor.custom_operators
       ~QueryProcessor.custom_reducers
@@ -69,6 +70,7 @@
       ~QueryProcessor.datacube
       ~QueryProcessor.extent
       ~QueryProcessor.mapping
+      ~QueryProcessor.preview
       ~QueryProcessor.recipe
       ~QueryProcessor.response
       ~QueryProcessor.spatial_resolution
