@@ -414,21 +414,21 @@ class QueryProcessor():
       :obj:`xarray.DataArray`
 
     """
-    # get data
+    # Get data.
     layer_key = "_".join(block["reference"])
     if layer_key in self._cache.data:
-      logger.debug(f"Retrieving layer (from cache) {block['reference']}")
+      logger.debug(f"Loading layer {block['reference']} from cache")
       out = self._cache.load(layer_key)
     else:
-      logger.debug(f"Retrieving layer (from src) {block['reference']}")
+      logger.debug(f"Retrieving layer {block['reference']}")
       out = self._datacube.retrieve(
         *block["reference"],
         extent = self._extent
       )
     logger.debug(f"Retrieved layer {block['reference']}:\n{out}")
-    # update cache
+    # Update cache
     if self._preview:
-      self._cache.build(block['reference'])
+      self._cache.build(block["reference"])
     else:
       self._cache.update(layer_key, out)
       logger.debug("Cache updated")
@@ -1206,10 +1206,13 @@ class QueryProcessor():
     self._eval_obj.append(obj)
 
 class Cache:
-  """Cache that takes care of tracking the data references in their
-  order of evaluation and retaining data layers in RAM if they are still 
-  needed for the further execution of the semantic query.
+  """Cache of retrieved data layers.
+
+  The cache takes care of tracking the data references in their order of
+  evaluation and retaining data layers in RAM if they are still  needed for
+  the further execution of the semantic query.
   """
+
   def __init__(self):
     self._seq = []
     self._data = {}
