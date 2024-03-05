@@ -99,6 +99,7 @@ napoleon_type_aliases = {
     "SpatialExtent": "~semantique.extent.SpatialExtent",
     "TemporalExtent": "~semantique.extent.TemporalExtent",
     "QueryProcessor": "~semantique.processor.core.QueryProcessor",
+    "Cache": "~semantique.processor.core.Cache",
     "SemanticArray": ":obj:`SemanticArray <semantique.processor.arrays.SemanticArray>`",
     "Collection": ":obj:`Collection <semantique.processor.arrays.Collection>`",
 }

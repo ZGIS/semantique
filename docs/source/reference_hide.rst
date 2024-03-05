@@ -77,6 +77,8 @@
    processor.core.QueryProcessor.custom_operators
    processor.core.QueryProcessor.custom_reducers
    processor.core.QueryProcessor.track_types
+   processor.core.QueryProcessor.cache
+   processor.core.QueryProcessor.preview
    processor.core.QueryProcessor.parse
    processor.core.QueryProcessor.optimize
    processor.core.QueryProcessor.execute
@@ -116,6 +118,12 @@
    processor.core.QueryProcessor.get_operator
    processor.core.QueryProcessor.add_custom_reducer
    processor.core.QueryProcessor.get_reducer
+
+   processor.core.Cache.seq
+   processor.core.Cache.data
+   processor.core.Cache.build
+   processor.core.Cache.load
+   processor.core.Cache.update
 
    processor.arrays.Array.value_type
    processor.arrays.Array.value_labels
