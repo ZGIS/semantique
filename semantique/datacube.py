@@ -806,29 +806,30 @@ class STACCube(Datacube):
         self._layout = {} if value is None else self._parse_layout(value)
 
     def _parse_layout(self, obj):
-        # Makes the metadata objects of the data layers autocomplete friendly.
-        def _parse(obj, ref):
-            is_layer = False
-            while not is_layer:
-                if all([x in obj for x in ["type", "values"]]):
-                    obj["reference"] = copy.deepcopy(ref)
-                    if isinstance(obj["values"], list):
-                        obj["labels"] = {x["label"]: x["id"] for x in obj["values"]}
-                        obj["descriptions"] = {
-                            x["description"]: x["id"] for x in obj["values"]
-                        }
-                    del ref[-1]
-                    is_layer = True
-                else:
-                    ref.append(k)
-                    for k, v in obj.items():
-                        _parse(v, ref)
+        # Function to recursively parse and metadata objects to make them autocomplete friendly
+        def _parse(current_obj, ref_path):
+            if "type" in current_obj and "values" in current_obj:
+                current_obj["reference"] = copy.deepcopy(ref_path)
+                if isinstance(current_obj["values"], list):
+                    current_obj["labels"] = {
+                        item["label"]: item["id"] for item in current_obj["values"]
+                    }
+                    current_obj["descriptions"] = {
+                        item["description"]: item["id"]
+                        for item in current_obj["values"]
+                    }
+                return
 
-        for k, v in obj.items():
-            ref = [k]
-            for k, v in v.items():
-                ref.append(k)
-                _parse(v, ref)
+            # If not a "layer", traverse deeper into the object.
+            for key, value in current_obj.items():
+                if isinstance(value, dict):
+                    new_ref_path = ref_path + [key]
+                    _parse(value, new_ref_path)
+
+        # Start parsing from the root object.
+        for key, value in obj.items():
+            if isinstance(value, dict):
+                _parse(value, [key])
         return obj
 
     def retrieve(self, *reference, extent):
