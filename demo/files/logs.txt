@@ -60,6 +60,9 @@ Attributes:
     _FillValue:     1.7976931348623157e+308
     value_type:     ordinal
     value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
+Cache updated
+Sequence of layers: []
+Currently cached layers: []
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -166,6 +169,9 @@ Attributes:
     _FillValue:     1.7976931348623157e+308
     value_type:     ordinal
     value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
+Cache updated
+Sequence of layers: []
+Currently cached layers: []
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -272,6 +278,9 @@ Attributes:
     _FillValue:     1.7976931348623157e+308
     value_type:     ordinal
     value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
+Cache updated
+Sequence of layers: []
+Currently cached layers: []
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -373,6 +382,9 @@ Attributes:
     _FillValue:     1.7976931348623157e+308
     value_type:     ordinal
     value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
+Cache updated
+Sequence of layers: []
+Currently cached layers: []
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -474,6 +486,9 @@ Attributes:
     _FillValue:     1.7976931348623157e+308
     value_type:     ordinal
     value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
+Cache updated
+Sequence of layers: []
+Currently cached layers: []
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
@@ -574,6 +589,9 @@ Attributes:
     _FillValue:     1.7976931348623157e+308
     value_type:     ordinal
     value_labels:   {1: 'SVHNIR', 2: 'SVLNIR', 3: 'AVHNIR', 4: 'AVLNIR', 5: '...
+Cache updated
+Sequence of layers: []
+Currently cached layers: []
 Applied verb evaluate:
 <xarray.DataArray 'colortype' (time: 3, y: 4, x: 4)>
 array([[[0., 0., 0., 0.],
