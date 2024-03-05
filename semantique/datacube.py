@@ -939,25 +939,27 @@ class STACCube(Datacube):
         return data
 
     def _format(self, data, metadata, extent):
-        # Step I: Drop unnecessary dimensions & coordinates.
+        # Step I: Set band as array name.
+        data.name = str(data["band"][0].values)
         data = data.squeeze(dim="band", drop=True)
+        # Step II: Drop unnecessary dimensions & coordinates.
         keep_coords = ["time", data.rio.x_dim, data.rio.y_dim]
         drop_coords = [x for x in list(data.coords) if x not in keep_coords]
         data = data.drop_vars(drop_coords)
-        # Step II: Format temporal coordinates.
+        # Step III: Format temporal coordinates.
         # --> Make sure time dimension has the correct name.
         # --> Convert time coordinates back into the original timezone.
         data = data.sq.rename_dims({"time": TIME})
         data = data.sq.write_tz(self.tz)
         data = data.sq.tz_convert(extent.sq.tz)
-        # Step III: Format spatial coordinates.
+        # Step IV: Format spatial coordinates.
         # --> Make sure X and Y dims have the correct names.
         # --> Store resolution as an attribute of the spatial coordinate dimensions.
         # --> Add spatial feature indices as a non-dimension coordinate.
         data = data.sq.rename_dims({data.rio.y_dim: Y, data.rio.x_dim: X})
         data = data.sq.write_spatial_resolution(extent.sq.spatial_resolution)
         data.coords["spatial_feats"] = ([Y, X], extent["spatial_feats"].data)
-        # Step IV: Write semantique specific attributes.
+        # Step V: Write semantique specific attributes.
         # --> Value types for the data and all dimension coordinates.
         # --> Mapping from category labels to indices for all categorical data.
         data.sq.value_type = self.config["value_type_mapping"][metadata["type"]]
