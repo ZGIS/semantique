@@ -1,6 +1,5 @@
 import geopandas as gpd
 import numpy as np
-
 import copy
 import inspect
 import logging
@@ -45,12 +44,16 @@ class QueryProcessor():
       when applying processes, and promote them if necessary? Keeping track of
       value types also means throwing errors whenever a value type is not
       supported by a specific process.
-
+    preview : :obj:`bool`
+      Run the query processor with reduced resolution to test the recipe execution.
+      Preview-runs are necessary if cache should be used.
+    cache : :obj:`Cache`
+      The cache object that is used to store data layers.
   """
 
   def __init__(self, recipe, datacube, mapping, extent, custom_verbs = None,
                custom_operators = None, custom_reducers = None,
-               track_types = True):
+               track_types = True, preview = False, cache = None):
     self._eval_obj = [None]
     self._response = {}
     self.recipe = recipe
@@ -61,6 +64,11 @@ class QueryProcessor():
     self.custom_verbs = custom_verbs
     self.custom_operators = custom_operators
     self.custom_reducers = custom_reducers
+    self.preview = preview
+    if cache is None:
+        self.cache = Cache()
+    else:
+        self.cache = cache
 
   @property
   def response(self):
@@ -161,6 +169,24 @@ class QueryProcessor():
   def track_types(self, value):
     self._track_types = value
 
+  @property
+  def cache(self):
+    """:obj:`dict`: Cache of data layers for the query execution."""
+    return self._cache
+
+  @cache.setter
+  def cache(self, value):
+    self._cache = value
+
+  @property
+  def preview(self):
+    """:obj:`bool`: Is the query being processed in preview mode."""
+    return self._preview
+
+  @preview.setter
+  def preview(self, value):
+    self._preview = value
+
   @classmethod
   def parse(cls, recipe, datacube, mapping, space, time,
             spatial_resolution, crs = None, tz = None, **config):
@@ -222,9 +248,17 @@ class QueryProcessor():
       mapping. Such functionality is not implemented yet.
 
     """
-    logger.info("Started parsing the semantic query")
+    # Step 0: Retrieve resolution for coarse-scale preview analyses
+    if config.get("preview"):
+      logger.info("--- Preview mode (reduced resolution) ---")
+      output_shape = (5, 5)
+      bounds = space.features.to_crs(crs).total_bounds
+      x_res = (bounds[2] - bounds[0]) / output_shape[1]
+      y_res = (bounds[3] - bounds[1]) / output_shape[0]
+      spatial_resolution = [-y_res, x_res]
     # Step I: Parse the spatio-temporal extent.
     # It needs to be stored as a 2D array with dimensions space and time.
+    logger.info("Started parsing the semantic query")
     extent = utils.parse_extent(
       spatial_extent = space,
       temporal_extent = time,
@@ -357,6 +391,8 @@ class QueryProcessor():
       extent = self._extent,
       datacube = self._datacube,
       eval_obj = self._get_eval_obj(),
+      preview = self._preview,
+      cache = self._cache,
       custom_verbs = self._custom_verbs,
       custom_operators = self._custom_operators,
       custom_reducers = self._custom_reducers,
@@ -378,12 +414,26 @@ class QueryProcessor():
       :obj:`xarray.DataArray`
 
     """
-    logger.debug(f"Retrieving layer {block['reference']}")
-    out = self._datacube.retrieve(
-      *block["reference"],
-      extent = self._extent
-    )
+    # get data
+    layer_key = "_".join(block["reference"])
+    if layer_key in self._cache.data:
+      logger.debug(f"Retrieving layer (from cache) {block['reference']}")
+      out = self._cache.load(layer_key)
+    else:
+      logger.debug(f"Retrieving layer (from src) {block['reference']}")
+      out = self._datacube.retrieve(
+        *block["reference"],
+        extent = self._extent
+      )
     logger.debug(f"Retrieved layer {block['reference']}:\n{out}")
+    # update cache
+    if self._preview:
+      self._cache.build(block['reference'])
+    else:
+      self._cache.update(layer_key, out)
+      logger.debug("Cache updated")
+      logger.debug(f"Sequence of layers: {self._cache._seq}")
+      logger.debug(f"Currently cached layers: {list(self._cache._data.keys())}")
     return out
 
   def handle_result(self, block):
@@ -1154,3 +1204,57 @@ class QueryProcessor():
 
   def _set_eval_obj(self, obj):
     self._eval_obj.append(obj)
+
+class Cache:
+  """Cache that takes care of tracking the data references in their
+  order of evaluation and retaining data layers in RAM if they are still 
+  needed for the further execution of the semantic query.
+  """
+  def __init__(self):
+    self._seq = []
+    self._data = {}
+
+  @property
+  def seq(self):
+    """list: Sequence of references."""
+    return self._seq
+
+  @property
+  def data(self):
+    """dict: Data stored in the cache."""
+    return self._data
+
+  def build(self, ref):
+    """Build of the sequence of data references."""
+    self._add_to_seq(ref)
+
+  def load(self, key):
+    """Load data layer from cache."""
+    return self._data.get(key, None)
+
+  def update(self, key, data):
+    """Modify cache content during evaluation."""
+    if len(self._seq):
+      current = self._seq[0]
+      self._rm_from_seq(0)
+      if current in self._seq:
+        self._add_data(key, data)
+      else:
+        if key in self._data:
+          self._rm_data(key)
+
+  def _add_to_seq(self, ref):
+    """Update sequence of data references."""
+    self._seq.append(ref)
+
+  def _rm_from_seq(self, idx):
+    """Update sequence of data references."""
+    del self._seq[idx]
+
+  def _add_data(self, key, value):
+    """Add data layer to cache."""
+    self._data[key] = value
+
+  def _rm_data(self, key):
+    """Remove data layer from cache."""
+    del self._data[key]
