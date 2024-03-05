@@ -885,7 +885,7 @@ class STACCube(Datacube):
 
         # retrieve spatial bounds, resolution & epsg
         # note: round to avoid binary format <-> floating-point number inconsistencies
-        bounds = tuple(np.array(extent.rio.bounds()).round(8))
+        s_bounds = tuple(np.array(extent.rio.bounds()).round(8))
         res = tuple(np.abs(extent.rio.resolution()).round(8))
         epsg = int(str(extent.rio.crs)[5:])
 
@@ -893,12 +893,20 @@ class STACCube(Datacube):
         resampler_name = self.config["resamplers"][metadata["type"]]
         resampler_func = getattr(rasterio.enums.Resampling, resampler_name)
 
+        # subset temporally
+        times = [
+            np.datetime64(x.get_datetime().replace(tzinfo=None)) for x in self.src
+        ]
+        t_bounds = extent.sq.tz_convert(self.tz).time.values
+        keep = (times >= t_bounds[0]) & (times < t_bounds[1])
+        item_coll = [x for x, k in zip(self.src, keep) if k]
+
         # load data, i.e. fetch data from links in STAC results
         data = stackstac.stack(
-            self.src,
+            item_coll,
             assets=[metadata["name"]],
             resampling=resampler_func,
-            bounds=bounds,
+            bounds=s_bounds,
             epsg=epsg,
             resolution=res,
             fill_value=self.config["na_value"],
@@ -907,11 +915,6 @@ class STACCube(Datacube):
             snap_bounds=False
         )
         data = data.compute(**(self.config["dask_params"] or {}))
-
-        # subset temporally
-        bounds = extent.sq.tz_convert(self.tz).time.values
-        keep = ((data.time >= bounds[0]) & (data.time < bounds[1])).values
-        data = data.sel(time=keep)
 
         # mosaicking in case of temporal grouping
         # convert datetimes to daily granularity - resample by day
