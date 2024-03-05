@@ -3,6 +3,7 @@ from abc import abstractmethod
 from semantique import exceptions
 from semantique.processor.core import QueryProcessor
 from semantique.processor.arrays import Collection
+from semantique.processor import reducers
 
 class Mapping(dict):
   """Base class for mapping configurations.
@@ -148,7 +149,8 @@ class Semantique(Mapping):
       if len(properties) == 1:
         out = properties[0]
       else:
-        out = Collection(properties).merge("all")
+        func = getattr(reducers, "all_")
+        out = Collection(properties).merge(func)
     else:
       try:
         property = ruleset[property]
