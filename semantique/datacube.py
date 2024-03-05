@@ -5,8 +5,10 @@ import copy
 import datacube
 import datetime
 import os
+import planetary_computer as pc
 import pytz
 import pystac
+import pystac_client
 import rasterio
 import rioxarray
 import stackstac
@@ -17,6 +19,7 @@ from abc import abstractmethod
 
 from semantique import exceptions
 from semantique.dimensions import TIME, SPACE, X, Y
+from semantique.exceptions import EmptyDataError
 
 class Datacube():
   """Base class for EO data cube configurations.
@@ -893,28 +896,44 @@ class STACCube(Datacube):
         resampler_name = self.config["resamplers"][metadata["type"]]
         resampler_func = getattr(rasterio.enums.Resampling, resampler_name)
 
-        # subset temporally
-        times = [
-            np.datetime64(x.get_datetime().replace(tzinfo=None)) for x in self.src
-        ]
-        t_bounds = extent.sq.tz_convert(self.tz).time.values
-        keep = (times >= t_bounds[0]) & (times < t_bounds[1])
-        item_coll = [x for x, k in zip(self.src, keep) if k]
+        # actual data loading, i.e. fetch data from links in STAC results
+        retry, max_retries = 0, 1
+        while retry <= max_retries:
+            try:
+                # subset temporally
+                times = [
+                    np.datetime64(x.get_datetime().replace(tzinfo=None)) for x in self.src
+                ]
+                t_bounds = extent.sq.tz_convert(self.tz).time.values
+                keep = (times >= t_bounds[0]) & (times < t_bounds[1])
+                item_coll = [x for x, k in zip(self.src, keep) if k]
 
-        # load data, i.e. fetch data from links in STAC results
-        data = stackstac.stack(
-            item_coll,
-            assets=[metadata["name"]],
-            resampling=resampler_func,
-            bounds=s_bounds,
-            epsg=epsg,
-            resolution=res,
-            fill_value=self.config["na_value"],
-            dtype=self.config["dtype"],
-            xy_coords="center",
-            snap_bounds=False
-        )
-        data = data.compute(**(self.config["dask_params"] or {}))
+                # load data, i.e. fetch data from links in STAC results
+                data = stackstac.stack(
+                    item_coll,
+                    assets=[metadata["name"]],
+                    resampling=resampler_func,
+                    bounds=s_bounds,
+                    epsg=epsg,
+                    resolution=res,
+                    fill_value=self.config["na_value"],
+                    dtype=self.config["dtype"],
+                    xy_coords="center",
+                    snap_bounds=False
+                )
+                data = data.compute(**(self.config["dask_params"] or {}))
+                break
+
+            # re-authenticate data access
+            except Exception as e:
+                if isinstance(e, ValueError) and str(e) == "No items":
+                    raise EmptyDataError
+                else:
+                    if retry == 0:
+                        self.src = self._sign_metadata(self.src)
+                    retry += 1
+                    if retry > max_retries:
+                        raise
 
         # mosaicking in case of temporal grouping
         # convert datetimes to daily granularity - resample by day
@@ -987,3 +1006,35 @@ class STACCube(Datacube):
         # This is needed since data are initially loaded for the bbox of the extent.
         data = data.where(data["spatial_feats"].notnull())
         return data
+
+    def _sign_metadata(self, data):
+        # retrieve collections root & item ids
+        items = list(data)
+        item_ids = [x.id for x in items]
+        roots = [x.get_root_link().href for x in items]
+        # create dictionary grouped by collection
+        curr_colls = {}
+        for c, id, item in zip(roots, item_ids, items):
+            if c not in curr_colls:
+                curr_colls[c] = {"ids": [], "items": []}
+            curr_colls[c]["ids"].append(id)
+            curr_colls[c]["items"].append(item)
+        # define collections requiring authentication
+        # dict with collection and modifier
+        auth_colls = {}
+        auth_colls = {
+            "https://planetarycomputer.microsoft.com/api/stac/v1": pc.sign_inplace
+        }
+        # update signature for items
+        updated_items = []
+        for coll in curr_colls.keys():
+            if coll in auth_colls.keys():
+                # perform search again to renew authentification
+                client = pystac_client.Client.open(coll, modifier=auth_colls[coll])
+                item_search = client.search(ids=curr_colls[coll]["ids"])
+                updated_items.extend(list(item_search.items()))
+            else:
+                updated_items.extend(curr_colls[coll]["items"])
+        # return signed items
+        updated_coll = pystac.ItemCollection(updated_items)
+        return updated_coll
