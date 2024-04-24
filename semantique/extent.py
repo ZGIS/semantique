@@ -140,7 +140,7 @@ class SpatialExtent(dict):
     geodf = gpd.GeoDataFrame.from_features([geojs], **kwargs)
     return cls(geodf)
 
-  def rasterize(self, resolution, crs = None):
+  def rasterize(self, resolution, crs = None, **kwargs):
     """Rasterize the spatial extent into an array.
 
     Rasterizing the spatial extent creates a rectangular two-dimensional
@@ -168,6 +168,9 @@ class SpatialExtent(dict):
         :class:`pyproj.crs.CRS`. This includes :obj:`pyproj.crs.CRS` objects
         themselves, as well as EPSG codes and WKT strings. If :obj:`None`, the
         CRS of the extent itself is used.
+      **kwargs
+        Additional keyword arguments forwarded to
+        :meth:`geocube.rasterize.rasterize_image`.
 
     Returns
     -------
@@ -182,11 +185,13 @@ class SpatialExtent(dict):
     # Rasterize.
     vector_obj = self.features.reset_index()
     vector_obj["index"] = vector_obj["index"] + 1
+    raster_fun = lambda **x : geocube.rasterize.rasterize_image(**x, **kwargs)
     raster_obj = geocube.api.core.make_geocube(
       vector_data = vector_obj,
       measurements = ["index"],
       output_crs = crs,
-      resolution = tuple(resolution)
+      resolution = tuple(resolution),
+      rasterize_function = raster_fun
     )["index"]
     # Update spatial reference.
     # CRS information was already automatically included during rasterizing.
