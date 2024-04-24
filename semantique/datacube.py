@@ -14,12 +14,14 @@ import rioxarray
 import stackstac
 import warnings
 
-from datacube.utils import masking
 from abc import abstractmethod
+from datacube.utils import masking
+from pystac_client.stac_api_io import StacApiIO
+from rasterio.errors import RasterioIOError
+from urllib3 import Retry
 
 from semantique import exceptions
 from semantique.dimensions import TIME, SPACE, X, Y
-from semantique.exceptions import EmptyDataError
 
 class Datacube():
   """Base class for EO data cube configurations.
@@ -699,17 +701,13 @@ class STACCube(Datacube):
           resampled to the day level, using solar day to keep scenes together?
           Defaults to :obj:`True`.
 
-        * **dtype** (:obj:`str`): Dtype of the data source. Will be converted to
-        float32/float64 prior to passing it to the semantique processor.
-        Defaults to :obj:`float32`.
-
-        * **na_value** (:obj:`int`): NA value as encoded in the original data
-        Defaults to :obj:`np.nan`.
-
         * **dask_params** (:obj:`dict`): Parameters passed to the .compute() function
         when fetching data via the stackstac API. Can be used to control the parallelism
         in fetching data. Defaults to :obj:`None`, i.e. to use the threaded scheduler as
         set by dask as a default for arrays.
+
+        * **reauth_individual** (:obj:`bool`): Should the items be resigned/reauthenticated
+        before loading them? Defaults to False.
 
         * **value_type_mapping** (:obj:`dict`): How do value type encodings in
           the layout map to the value types used by semantique?
@@ -765,15 +763,14 @@ class STACCube(Datacube):
         if value is not None:
             assert np.all([isinstance(x, pystac.item.Item) for x in value])
         self._src = value
-
+   
     @property
     def _default_config(self):
         return {
             "trim": True,
             "group_by_solar_day": True,
-            "dtype": "float32",
-            "na_value": np.nan,
             "dask_params": None,
+            "reauth_individual": False,
             "value_type_mapping": {
                 "nominal": "nominal",
                 "ordinal": "ordinal",
@@ -868,7 +865,7 @@ class STACCube(Datacube):
         # Format loaded data.
         data = self._format(data, metadata, extent)
         # Mask invalid data.
-        data = self._mask(data)
+        data = self._mask(data, metadata)
         if data.sq.is_empty:
             warnings.warn(
                 f"All values for data layer '{reference}' are invalid within the "
@@ -901,44 +898,39 @@ class STACCube(Datacube):
         resampler_name = self.config["resamplers"][metadata["type"]]
         resampler_func = getattr(rasterio.enums.Resampling, resampler_name)
 
-        # actual data loading, i.e. fetch data from links in STAC results
-        retry, max_retries = 0, 1
-        while retry <= max_retries:
-            try:
-                # subset temporally
-                times = [
-                    np.datetime64(x.get_datetime().replace(tzinfo=None)) for x in self.src
-                ]
-                t_bounds = extent.sq.tz_convert(self.tz).time.values
-                keep = (times >= t_bounds[0]) & (times < t_bounds[1])
-                item_coll = [x for x, k in zip(self.src, keep) if k]
+        # retrieve layer specific information
+        lyr_dtype, lyr_na = self._get_dtype_na(metadata)
 
-                # load data, i.e. fetch data from links in STAC results
-                data = stackstac.stack(
-                    item_coll,
-                    assets=[metadata["name"]],
-                    resampling=resampler_func,
-                    bounds=s_bounds,
-                    epsg=epsg,
-                    resolution=res,
-                    fill_value=self.config["na_value"],
-                    dtype=self.config["dtype"],
-                    xy_coords="center",
-                    snap_bounds=False
-                )
-                data = data.compute(**(self.config["dask_params"] or {}))
-                break
+        # subset temporally
+        times = [np.datetime64(x.get_datetime().replace(tzinfo=None)) for x in self.src]
+        t_bounds = extent.sq.tz_convert(self.tz).time.values
+        keep = (times >= t_bounds[0]) & (times < t_bounds[1])
+        item_coll = [x for x, k in zip(self.src, keep) if k]
 
-            # re-authenticate data access
-            except Exception as e:
-                if isinstance(e, ValueError) and str(e) == "No items":
-                    raise EmptyDataError
-                else:
-                    if retry == 0:
-                        self.src = self._sign_metadata(self.src)
-                    retry += 1
-                    if retry > max_retries:
-                        raise
+        # return extent array as NaN in case of no data
+        if not len(item_coll):
+            empty_arr = xr.full_like(extent, np.NaN)
+            return empty_arr
+
+        # reauth
+        if self.config["reauth_individual"]:
+            item_coll = self._sign_metadata(item_coll)
+
+        data = stackstac.stack(
+            item_coll,
+            assets=[metadata["name"]],
+            resampling=resampler_func,
+            bounds=s_bounds,
+            epsg=epsg,
+            resolution=res,
+            fill_value=lyr_na,
+            dtype=lyr_dtype,
+            rescale=False,
+            errors_as_nodata=(RasterioIOError(".*"),),
+            xy_coords="center",
+            snap_bounds=False,
+        )
+        data = data.compute(**(self.config["dask_params"] or {}))
 
         # mosaicking in case of temporal grouping
         # convert datetimes to daily granularity - resample by day
@@ -948,19 +940,44 @@ class STACCube(Datacube):
             all_na = np.all(x == na_value, axis=axis)
             chosen = np.choose(max_idx, x)
             # where all values are na_value, fill with na_value, else use chosen value
-            return np.where(all_na, np.full(chosen.shape, na_value, dtype=x.dtype), chosen)
+            return np.where(
+                all_na, np.full(chosen.shape, na_value, dtype=x.dtype), chosen
+            )
 
         if self.config["group_by_solar_day"]:
             if len(data.time):
                 days = data.time.astype("datetime64[ns]").dt.floor("D")
                 if data.dtype.kind == "f":
-                    data = data.where(data != self.config["na_value"])
-                    data = data.groupby(days).first(skipna=True).rename({"floor": "time"})
+                    data = data.where(data != lyr_na)
+                    data = (
+                        data.groupby(days).first(skipna=True).rename({"floor": "time"})
+                    )
                 else:
-                    data = data.groupby(days).reduce(_mosaic_ints, na_value=self.config["na_value"]).rename({"floor": "time"})
+                    data = (
+                        data.groupby(days)
+                        .reduce(_mosaic_ints, na_value=lyr_na)
+                        .rename({"floor": "time"})
+                    )
                 data["time"] = data.time.values
 
         return data
+
+    def _get_dtype_na(self, metadata):
+        # retrieve dtype
+        try:
+            lyr_dtype = np.dtype(metadata["dtype"])
+        except:
+            lyr_dtype = "float32"
+        # retrieve na_value
+        try:
+            lyr_na = np.array([metadata["na_value"]], dtype=lyr_dtype)[0]
+        except:
+            if isinstance(np.array([1], dtype=lyr_dtype)[0], np.floating):
+                lyr_na = np.nan
+            else:
+                lyr_na = 0
+        # return both
+        return lyr_dtype, lyr_na
 
     def _format(self, data, metadata, extent):
         # Step I: Set band as array name.
@@ -1003,26 +1020,24 @@ class STACCube(Datacube):
         data["spatial_feats"].sq.value_labels = extent["spatial_feats"].sq.value_labels
         return data
 
-    def _mask(self, data):
+    def _mask(self, data, metadata):
         # Step I: Mask nodata values.
-        data = data.where(data != self.config["na_value"])
+        _, lyr_na = self._get_dtype_na(metadata)
+        data = data.where(data != lyr_na)
         data = data.where(data != data.rio.nodata)
         # Step II: Mask values outside of the spatial extent.
         # This is needed since data are initially loaded for the bbox of the extent.
         data = data.where(data["spatial_feats"].notnull())
         return data
 
-    def _sign_metadata(self, data):
+    def _sign_metadata(self, items):
         # retrieve collections root & item ids
-        items = list(data)
-        item_ids = [x.id for x in items]
         roots = [x.get_root_link().href for x in items]
         # create dictionary grouped by collection
         curr_colls = {}
-        for c, id, item in zip(roots, item_ids, items):
+        for c, item in zip(roots, items):
             if c not in curr_colls:
-                curr_colls[c] = {"ids": [], "items": []}
-            curr_colls[c]["ids"].append(id)
+                curr_colls[c] = {"items": []}
             curr_colls[c]["items"].append(item)
         # define collections requiring authentication
         # dict with collection and modifier
@@ -1035,11 +1050,29 @@ class STACCube(Datacube):
         for coll in curr_colls.keys():
             if coll in auth_colls.keys():
                 # perform search again to renew authentification
-                client = pystac_client.Client.open(coll, modifier=auth_colls[coll])
-                item_search = client.search(ids=curr_colls[coll]["ids"])
-                updated_items.extend(list(item_search.items()))
+                retry = Retry(
+                    total=5,
+                    backoff_factor=1,
+                    status_forcelist=[408, 502, 503, 504],
+                    allowed_methods=None,
+                )
+                client = pystac_client.Client.open(
+                    coll,
+                    modifier=auth_colls[coll],
+                    stac_io=StacApiIO(max_retries=retry, timeout=1800),
+                )
+                item_chunks = STACCube._divide_chunks(curr_colls[coll]["items"], 100)
+                for chunk in item_chunks:
+                    item_search = client.search(
+                        ids=[x.id for x in chunk],
+                        collections=[x.get_collection() for x in chunk],
+                    )
+                    updated_items.extend(list(item_search.items()))
             else:
                 updated_items.extend(curr_colls[coll]["items"])
         # return signed items
-        updated_coll = pystac.ItemCollection(updated_items)
-        return updated_coll
+        return pystac.ItemCollection(updated_items)
+
+    @staticmethod
+    def _divide_chunks(lst, k):
+        return [lst[i : i + k] for i in range(0, len(lst), k)]
