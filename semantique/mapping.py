@@ -4,6 +4,7 @@ from semantique import exceptions
 from semantique.processor.core import QueryProcessor
 from semantique.processor.arrays import Collection
 from semantique.processor import reducers
+from semantique.visualiser.visualise import show
 
 class Mapping(dict):
   """Base class for mapping configurations.
@@ -160,3 +161,13 @@ class Semantique(Mapping):
       out = processor.call_handler(property)
     out.name = reference[-1]
     return out
+
+  def visualise(self):
+    """Visualise the mapping rules in a web browser.
+
+    This method visualises the mapping rules of the mapping instance in a web
+    browser. The visualisation is based on Blockly, a web-based visual programming
+    editor. The mapping rules are converted into Blockly XML format and served
+    to the browser.
+    """
+    show(self)

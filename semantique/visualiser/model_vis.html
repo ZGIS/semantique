@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html style="height: 100%; margin: 0;">
+
+<head>
+    <title>Blockly Visualization</title>
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #blocklyDiv {
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+        }
+
+        #exportButton {
+            position: absolute;
+            z-index: 1;
+            top: 10px;
+            right: 10px;
+        }
+
+        #viewSelect {
+            position: absolute;
+            z-index: 1;
+            top: 40px;
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="blocklyDiv"></div>
+    <select id="viewSelect" onchange="applyView()">
+        <option value="default">Default view</option>
+        <option value="processing">Processing view</option>
+        <option value="semantic">Semantic view</option>
+    </select>
+    <button id="exportButton" onclick="exportAsPng()">Export as PNG</button>
+    <script>
+
+        // Initialize Blockly in a div with an empty toolbox
+        var workspace = Blockly.inject('blocklyDiv', {
+            toolbox: '<xml></xml>',
+            zoom: {
+                controls: true,
+                wheel: true,
+                startScale: 1.0,
+                maxScale: 3,
+                minScale: 0.5,
+                scaleSpeed: 1.2
+            },
+            move: {
+                scrollbars: true,
+                drag: true,
+                wheel: true
+            },
+            readOnly: true,
+        });
+        workspace.scrollbar.setVisible(false);
+
+        // Define a mutator to allow blocks to have a variable number of inputs
+        // see https://github.com/Sen2Cube-at/sen2cube.at/blob/main/frontend/web/app/components/kb-model-viewer.js
+        const MIXIN_LIST_MUTATOR = {
+            mutationToDom: function () {
+                var container = document.createElement('mutation');
+                var curLength = this.childBlocks_.length;
+                container.setAttribute('listlength', curLength);
+                return container;
+            },
+            domToMutation: function (xmlElement) {
+                var newLength = xmlElement.getAttribute("listlength");
+                // Add or remove Value Inputs
+                var curLength = this.childBlocks_.length;
+                if (curLength > newLength) {
+                    // TODO: remove inputs
+                    console.log("need to remove inputs...");
+                } else {
+                    for (var i = curLength; i < newLength; i++) {
+                        this.appendValueInput("item_" + (i + 1)).appendField("in." + (i + 1), "field_" + (i + 1));
+                    }
+                }
+            }
+        };
+
+        // Define the list blocks that should use the mutator
+        const LIST_BLOCKS = [
+            "collection",
+            "entity",
+            "set",
+            "verb_chain"
+        ];
+        Blockly.Extensions.registerMutator('list_mutator', MIXIN_LIST_MUTATOR);
+
+        // Define the color scheme for the views
+        // see: https://github.com/Sen2Cube-at/sen2cube.at/blob/main/frontend/web/app/services/settings-service.js
+        const views = {
+            "default": {
+                "blockStyles": {
+                    "all": "#215b77",
+                },
+                "blockStyleGroups": {
+                    "all": [
+                        "model_root",
+                        "model_root_a",
+                        "model_root_b",
+                        "entity",
+                        "entity_reference",
+                        "property",
+                        "property_reference",
+                        "result",
+                        "result_reference",
+                        "appearance",
+                        "artifacts",
+                        "atmosphere",
+                        "reflectance",
+                        "collection",
+                        "topography",
+                        "self_reference",
+                        "processing_chain",
+                        "verb_chain",
+                        "assign",
+                        "assign_at",
+                        "assign_time",
+                        "assign_space",
+                        "compose",
+                        "concatenate",
+                        "evaluate_univariate",
+                        "evaluate_bivariate",
+                        "extract",
+                        "extract_time",
+                        "extract_space",
+                        "filter",
+                        "filter_space",
+                        "filter_time",
+                        "groupby",
+                        "groupby_time",
+                        "groupby_space",
+                        "merge",
+                        "name",
+                        "reduce",
+                        "reduce_all",
+                        "reduce_spacetime",
+                        "shift",
+                        "shift_spacetime",
+                        "smooth",
+                        "smooth_spacetime",
+                        "trim",
+                        "trim_all",
+                        "trim_spacetime",
+                        "delineate",
+                        "fill",
+                        "fill_spacetime",
+                        "set",
+                        "interval",
+                        "boolean",
+                        "label_dropdown",
+                        "label_text",
+                        "character",
+                        "number",
+                        "time_instant",
+                        "time_interval",
+                        "comment"
+                    ]
+                },
+            },
+            "processing": {
+                "blockStyles": {
+                    "root": "#1d3d4e",
+                    "definitions": "#215b77",
+                    "properties": "#227aa2",
+                    "collectors": "#1b9bd0",
+                    "verbs": "#00beff",
+                    "references": "#bdbdbd",
+                    "values": "#bdbdbd",
+                    "documentation": "#cacaca"
+                },
+                "blockStyleGroups": {
+                    "root": [
+                        "model_root",
+                        "model_root_a",
+                        "model_root_b"
+                    ],
+                    "definitions": [
+                        "entity",
+                        "result"
+                    ],
+                    "properties": [
+                        "property"
+                    ],
+                    "collectors": [
+                        "processing_chain",
+                        "verb_chain",
+                        "collection"
+                    ],
+                    "verbs": [
+                        "assign",
+                        "assign_at",
+                        "assign_time",
+                        "assign_space",
+                        "compose",
+                        "concatenate",
+                        "evaluate_bivariate",
+                        "evaluate_univariate",
+                        "extract",
+                        "extract_time",
+                        "extract_space",
+                        "filter",
+                        "filter_space",
+                        "filter_time",
+                        "groupby",
+                        "groupby_space",
+                        "groupby_time",
+                        "merge",
+                        "name",
+                        "reduce",
+                        "reduce_all",
+                        "reduce_spacetime",
+                        "shift",
+                        "shift_spacetime",
+                        "smooth",
+                        "smooth_spacetime",
+                        "trim",
+                        "trim_all",
+                        "trim_spacetime",
+                        "delineate",
+                        "fill",
+                        "fill_spacetime",
+                    ],
+                    "references": [
+                        "entity_reference",
+                        "property_reference",
+                        "result_reference",
+                        "self_reference",
+                        "appearance",
+                        "artifacts",
+                        "atmosphere",
+                        "reflectance",
+                        "topography"
+                    ],
+                    "values": [
+                        "set",
+                        "interval",
+                        "boolean",
+                        "label_dropdown",
+                        "label_text",
+                        "character",
+                        "number",
+                        "time_instant",
+                        "time_interval"
+                    ],
+                    "documentation": [
+                        "comment"
+                    ]
+                },
+            },
+            "semantic": {
+                "blockStyles": {
+                    "root": "#808080",
+                    "concepts": "#e6a176",
+                    "results": "#5eccab",
+                    "data": "#984464",
+                    "collections": "#00678a",
+                    "self": "#56641a",
+                    "verbs": "#537eff",
+                    "values": "#c0affb",
+                    "documentation": "#cacaca"
+                },
+                "blockStyleGroups": {
+                    "root": [
+                        "model_root",
+                        "model_root_a",
+                        "model_root_b"
+                    ],
+                    "concepts": [
+                        "entity",
+                        "entity_reference",
+                        "property",
+                        "property_reference"
+                    ],
+                    "results": [
+                        "result",
+                        "result_reference",
+                    ],
+                    "data": [
+                        "appearance",
+                        "artifacts",
+                        "atmosphere",
+                        "reflectance",
+                        "topography"
+                    ],
+                    "collections": [
+                        "collection"
+                    ],
+                    "self": [
+                        "self_reference"
+                    ],
+                    "verbs": [
+                        "processing_chain",
+                        "verb_chain",
+                        "assign",
+                        "assign_at",
+                        "assign_time",
+                        "assign_space",
+                        "compose",
+                        "concatenate",
+                        "evaluate_univariate",
+                        "evaluate_bivariate",
+                        "extract",
+                        "extract_time",
+                        "extract_space",
+                        "filter",
+                        "filter_space",
+                        "filter_time",
+                        "groupby",
+                        "groupby_time",
+                        "groupby_space",
+                        "merge",
+                        "name",
+                        "reduce",
+                        "reduce_all",
+                        "reduce_spacetime",
+                        "shift",
+                        "shift_spacetime",
+                        "smooth",
+                        "smooth_spacetime",
+                        "trim",
+                        "trim_all",
+                        "trim_spacetime",
+                        "delineate",
+                        "fill",
+                        "fill_spacetime"
+                    ],
+                    "values": [
+                        "set",
+                        "interval",
+                        "boolean",
+                        "label_dropdown",
+                        "label_text",
+                        "character",
+                        "number",
+                        "time_instant",
+                        "time_interval"
+                    ],
+                    "documentation": [
+                        "comment"
+                    ]
+                },
+            }
+        };
+
+        function applyView() {
+            const view = document.getElementById('viewSelect').value;
+            const blockStyles = views[view].blockStyles;
+            const blockStyleGroups = views[view].blockStyleGroups;
+            const blocks = workspace.getAllBlocks();
+            blocks.forEach(block => {
+                let styleName = null;
+                // First check helpUrl as an attibute used for custom blocks
+                if (block.helpUrl) {
+                    for (const name in blockStyleGroups) {
+                        if (blockStyleGroups[name].includes(block.helpUrl)) {
+                            styleName = name;
+                            break;
+                        }
+                    }
+                }
+                // If helpUrl is not defined, check block type
+                if (!styleName) {
+                    for (const name in blockStyleGroups) {
+                        if (blockStyleGroups[name].includes(block.type)) {
+                            styleName = name;
+                            break;
+                        }
+                    }
+                }
+                if (styleName) {
+                    const style = blockStyles[styleName];
+                    if (style) {
+                        block.setColour(style);
+                    }
+                }
+            });
+        }
+
+        function exportAsPng() {
+            var blocklyDiv = document.getElementById('blocklyDiv');
+            var blocklyWorkspace = Blockly.getMainWorkspace();
+
+            // Temporary adjustments for export
+            blocklyWorkspace.setScale(3);
+            blocklyWorkspace.scroll(0, 0);
+            var metrics = blocklyWorkspace.getMetrics();
+            var contentWidth = metrics.contentWidth + 50;
+            var contentHeight = metrics.contentHeight + 50;
+            blocklyDiv.style.width = contentWidth + 'px';
+            blocklyDiv.style.height = contentHeight + 'px';
+            blocklyDiv.style.overflow = 'hidden';
+            Blockly.svgResize(blocklyWorkspace);
+
+            domtoimage.toPng(blocklyDiv)
+                .then(function (dataUrl) {
+                    // Trigger a download of the image
+                    var downloadLink = document.createElement('a');
+                    downloadLink.href = dataUrl;
+                    downloadLink.download = 'model_vis.png';
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                })
+                .finally(function () {
+                    // Restore defaults after export
+                    // blocklyWorkspace.options.scrollbars = true;
+                    blocklyDiv.style.width = '100vw';
+                    blocklyDiv.style.height = '100vh';
+                    Blockly.svgResize(blocklyWorkspace);
+                    blocklyWorkspace.setScale(1);
+                    blocklyWorkspace.scroll(0, 0);
+                });
+        }
+
+        // Handler for custom blocks, i.e. custom verbs & measurements/layer references
+        function createBlockDef(blockType, fieldName, numArgs) {
+            var blockDef = {
+                "type": blockType,
+                "output": null,
+                "color": 230,
+                "tooltip": "",
+                "helpUrl": "",
+                "viewType": blockType
+            };
+            var message = blockType;
+            var args = [];
+            if (fieldName === "measurement" && numArgs === 1) {
+                message += " %1";
+                args.push({
+                    "type": "field_input",
+                    "name": "measurement",
+                    "dimension": "< measurement >",
+                });
+                blockDef["helpUrl"] = "reflectance";
+            } else if (fieldName === "custom_props" && numArgs === 1) {
+                message += " %1";
+                args.push({
+                    "type": "field_input",
+                    "name": "custom_props",
+                    "text": "< custom_props >"
+                });
+                blockDef["helpUrl"] = "reduce";
+            } else {
+                console.warn(
+                    `Unknown block of...\n` +
+                    `type: ${blockType}\n` +
+                    `field name: ${fieldName}\n` +
+                    `number of args: ${numArgs}`);
+                blockDef["helpUrl"] = "comment";
+            }
+            blockDef["message0"] = message;
+            blockDef["args0"] = args;
+            return blockDef;
+        }
+
+        // Handler for custom reducers and operators
+        function supplementBlockDef(blockDef, fieldName, add_opt) {
+            // fetch current reducer options & supplement by custom one
+            const args0 = Array.from(blockDef.args0);
+            const reducerOptsIndex = args0.findIndex(arg => arg.name === fieldName);
+            const reducer_opts = args0[reducerOptsIndex].options;
+            reducer_opts.push([add_opt, add_opt]);
+            blockDef["args0"]["options"] = reducer_opts;
+            return blockDef;
+        }
+
+        async function loadBlocks(xmlFilePath) {
+            // Load custom block definitions
+            const response = await fetch('blockdefs.json');
+            const blockDefs = await response.json();
+
+            blockDefs.forEach(blockDef => {
+                if (LIST_BLOCKS.includes(blockDef.type)) {
+                    blockDef.mutator = 'list_mutator';
+                }
+            });
+
+            Blockly.defineBlocksWithJsonArray(blockDefs);
+
+            // Load the Blockly model XML
+            const xmlResponse = await fetch(xmlFilePath);
+            const xmlText = await xmlResponse.text();
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(xmlText, "text/xml");
+
+            // Handle undefined blocks
+            const allBlocks = xmlDoc.getElementsByTagName('block');
+            for (let i = 0; i < allBlocks.length; i++) {
+                const blockType = allBlocks[i].getAttribute('type');
+                // Check for custom reducers and operators
+                if (blockType.includes('reduce') || blockType.includes('evaluate')) {
+                    const fieldName = blockType.includes('reduce') ? 'reducer' : 'operator';
+                    const blockDef = blockDefs.find(blockDef => blockDef.type === blockType);
+                    const fields = Array.from(allBlocks[i].getElementsByTagName('field'));
+                    const fieldIndex = fields.findIndex(field => field.getAttribute('name') === fieldName);
+                    const fieldValue = fields[fieldIndex].textContent;
+                    const args0 = Array.from(blockDef.args0);
+                    const fieldOptsIndex = args0.findIndex(arg => arg.name === fieldName);
+                    const field_opts = args0[fieldOptsIndex].options;
+                    if (!field_opts.some(opt => opt[1] === fieldValue)) {
+                        const fallbackBlockDef = supplementBlockDef(blockDef, fieldName, fieldValue);
+                        Blockly.defineBlocksWithJsonArray([fallbackBlockDef]);
+                    }
+                }
+                // Check for custom verbs or measurements
+                if (!Blockly.Blocks[blockType]) {
+                    const fieldName = allBlocks[i].getElementsByTagName('field')[0].getAttribute('name');
+                    const numArgs = allBlocks[i].getElementsByTagName('field').length;
+                    const fallbackBlockDef = createBlockDef(blockType, fieldName, numArgs);
+                    Blockly.defineBlocksWithJsonArray([fallbackBlockDef]);
+                }
+            }
+            Blockly.Xml.domToWorkspace(xmlDoc.documentElement, workspace);
+
+            // Apply default view
+            applyView();
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const xmlFile = urlParams.get('xml');
+        loadBlocks(xmlFile).catch(console.error);
+
+    </script>
+</body>
+
+</html>
