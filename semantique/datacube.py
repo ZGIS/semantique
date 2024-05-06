@@ -907,6 +907,13 @@ class STACCube(Datacube):
         keep = (times >= t_bounds[0]) & (times < t_bounds[1])
         item_coll = [x for x, k in zip(self.src, keep) if k]
 
+        # subset according to layer key
+        keep = [
+          "_".join(x.properties['semantique:key']) == "_".join(metadata['reference'])
+          if x.properties.get('semantique:key') else True for x in item_coll
+        ]
+        item_coll = [x for x, k in zip(item_coll, keep) if k]
+
         # return extent array as NaN in case of no data
         if not len(item_coll):
             empty_arr = xr.full_like(extent, np.NaN)
