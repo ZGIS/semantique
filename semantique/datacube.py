@@ -908,11 +908,23 @@ class STACCube(Datacube):
         item_coll = [x for x, k in zip(self.src, keep) if k]
 
         # subset according to layer key
-        keep = [
-          "_".join(x.properties['semantique:key']) == "_".join(metadata['reference'])
-          if x.properties.get('semantique:key') else True for x in item_coll
-        ]
-        item_coll = [x for x, k in zip(item_coll, keep) if k]
+        filtered_items = []
+        for item in item_coll:
+            has_no_key = True
+            has_conformant_key = False
+            for asset_key, asset in item.assets.items():
+                if 'semantique:key' in asset.extra_fields:
+                    has_no_key = False
+                    asset_key = asset.extra_fields['semantique:key']
+                    ref_key = metadata['reference']
+                    if "_".join(asset_key) == "_".join(ref_key):
+                        has_conformant_key = True
+                        break
+                else:
+                    continue
+            if has_no_key or has_conformant_key:
+                filtered_items.append(item)
+        item_coll = filtered_items
 
         # return extent array as NaN in case of no data
         if not len(item_coll):
