@@ -955,13 +955,11 @@ class STACCube(Datacube):
         # convert datetimes to daily granularity - resample by day
         def _mosaic_ints(x, axis=0, na_value=np.nan):
             max_idx = np.argmax(x != na_value, axis=axis)
-            # handle cases where all values are na_value
+            grid_x, grid_y = np.ogrid[:x.shape[2], :x.shape[3]]
+            chosen = x[max_idx, 0, grid_x, grid_y]
+            na_array = np.full(chosen.shape, na_value, dtype=x.dtype)
             all_na = np.all(x == na_value, axis=axis)
-            chosen = np.choose(max_idx, x)
-            # where all values are na_value, fill with na_value, else use chosen value
-            return np.where(
-                all_na, np.full(chosen.shape, na_value, dtype=x.dtype), chosen
-            )
+            return np.where(all_na, na_array, chosen)
 
         if self.config["group_by_solar_day"]:
             if len(data.time):
