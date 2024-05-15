@@ -35,6 +35,9 @@ setup(
   author = "Lucas van der Meer",
   author_email = "lucas.vandermeer@sbg.ac.at",
   packages = find_packages(),
+  package_data={
+      "semantique.visualiser": ["*.html", "*.json"],
+  },
   python_requires = ">=3.9",
   install_requires = dependencies
 )
