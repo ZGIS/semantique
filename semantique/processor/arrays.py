@@ -447,7 +447,7 @@ class Array():
     if is_list:
       idx = pd.MultiIndex.from_arrays([x.data for x in grouper])
       dim = grouper[0].dims
-      partition = list(obj.groupby(xr.IndexVariable(dim, idx)))
+      partition = list(obj.groupby(xr.IndexVariable(dim, idx), squeeze=False))
       # Use value labels as group names if defined.
       if labels_as_names:
         labs = [x.sq.value_labels for x in grouper]
@@ -464,7 +464,7 @@ class Array():
       else:
         groups = [i[1].rename(i[0]) for i in partition]
     else:
-      partition = list(obj.groupby(grouper[0]))
+      partition = list(obj.groupby(grouper[0], squeeze=False))
       # Use value labels as group names if defined.
       if labels_as_names:
         labs = grouper[0].sq.value_labels
@@ -1605,7 +1605,7 @@ class Collection(list):
               return Collection(dups).sq.merge(reducers.first_)
             else:
               return obj
-          groups = list(raw.groupby(dimension))
+          groups = list(raw.groupby(dimension, squeeze=False))
           clean = xr.concat([_merge_dups(x[1]) for x in groups], dimension)
         else:
           clean = raw

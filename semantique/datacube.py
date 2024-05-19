@@ -950,11 +950,15 @@ class STACCube(Datacube):
                 if data.dtype.kind == "f":
                     data = data.where(data != lyr_na)
                     data = (
-                        data.groupby(days).first(skipna=True).rename({"floor": "time"})
+                        data
+                        .groupby(days, squeeze=False)
+                        .first(skipna=True)
+                        .rename({"floor": "time"})
                     )
                 else:
                     data = (
-                        data.groupby(days)
+                        data
+                        .groupby(days, squeeze=False)
                         .reduce(_mosaic_ints, na_value=lyr_na)
                         .rename({"floor": "time"})
                     )
