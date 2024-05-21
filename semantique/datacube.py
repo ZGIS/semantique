@@ -933,7 +933,7 @@ class STACCube(Datacube):
 
         # reauth
         if self.config["reauth_individual"]:
-            item_coll = self._sign_metadata(item_coll)
+            item_coll = STACCube._sign_metadata(item_coll)
 
         data = stackstac.stack(
             item_coll,
@@ -1047,7 +1047,12 @@ class STACCube(Datacube):
         data = data.where(data["spatial_feats"].notnull())
         return data
 
-    def _sign_metadata(self, items):
+    @staticmethod
+    def _divide_chunks(lst, k):
+        return [lst[i : i + k] for i in range(0, len(lst), k)]
+
+    @staticmethod
+    def _sign_metadata(items):
         # retrieve collections root & item ids
         roots = [x.get_root_link().href for x in items]
         # create dictionary grouped by collection
@@ -1089,7 +1094,3 @@ class STACCube(Datacube):
                 updated_items.extend(curr_colls[coll]["items"])
         # return signed items
         return pystac.ItemCollection(updated_items)
-
-    @staticmethod
-    def _divide_chunks(lst, k):
-        return [lst[i : i + k] for i in range(0, len(lst), k)]
