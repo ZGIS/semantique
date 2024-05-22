@@ -1089,7 +1089,18 @@ class STACCube(Datacube):
                         ids=[x.id for x in chunk],
                         collections=[x.get_collection() for x in chunk],
                     )
-                    updated_items.extend(list(item_search.items()))
+                    # filter the assets to include only those in the original item
+                    for item in item_search.items():
+                        original_item = next(
+                            (i for i in chunk if i.id == item.id), None
+                        )
+                        if original_item is not None:
+                            item.assets = {
+                                k: v
+                                for k, v in item.assets.items()
+                                if k in original_item.assets
+                            }
+                        updated_items.append(item)
             else:
                 updated_items.extend(curr_colls[coll]["items"])
         # return signed items
