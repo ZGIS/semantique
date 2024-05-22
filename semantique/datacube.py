@@ -18,6 +18,7 @@ from abc import abstractmethod
 from datacube.utils import masking
 from pystac_client.stac_api_io import StacApiIO
 from rasterio.errors import RasterioIOError
+from shapely.geometry import box, shape
 from urllib3 import Retry
 
 from semantique import exceptions
@@ -901,11 +902,12 @@ class STACCube(Datacube):
         # retrieve layer specific information
         lyr_dtype, lyr_na = self._get_dtype_na(metadata)
 
-        # subset temporally
-        times = [np.datetime64(x.get_datetime().replace(tzinfo=None)) for x in self.src]
+        # subset temporally and spatially
+        if "spatial_feats" in extent.coords:
+            extent = extent.drop_vars("spatial_feats")
+        bbox = extent.rio.reproject(4326).rio.bounds()
         t_bounds = extent.sq.tz_convert(self.tz).time.values
-        keep = (times >= t_bounds[0]) & (times < t_bounds[1])
-        item_coll = [x for x, k in zip(self.src, keep) if k]
+        item_coll = STACCube.filter_spatio_temporal(self.src, bbox, t_bounds[0], t_bounds[1])
 
         # subset according to layer key
         filtered_items = []
@@ -1050,6 +1052,30 @@ class STACCube(Datacube):
     @staticmethod
     def _divide_chunks(lst, k):
         return [lst[i : i + k] for i in range(0, len(lst), k)]
+
+    @staticmethod
+    def filter_spatio_temporal(item_collection, bbox, start_datetime, end_datetime):
+        """
+        Filter item collection by spatio-temporal extent.
+
+        Args:
+            item_collection (pystac.ItemCollection): The item collection to filter.
+            bbox (tuple): The bounding box in WGS84 coordinates to filter by.
+            start_datetime (np.datetime64): The start datetime to filter by.
+            end_datetime (np.datetime64): The end datetime to filter by.
+        """
+        min_lon, min_lat, max_lon, max_lat = bbox
+        spatial_filter = box(min_lon, min_lat, max_lon, max_lat)
+        filtered_items = []
+        for item in item_collection:
+            item_geom = shape(item.geometry)
+            item_datetime = np.datetime64(item.datetime)
+            if not spatial_filter.intersects(item_geom):
+                continue
+            if not (start_datetime <= item_datetime < end_datetime):
+                continue
+            filtered_items.append(item)
+        return filtered_items
 
     @staticmethod
     def _sign_metadata(items):
