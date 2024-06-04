@@ -1115,18 +1115,20 @@ class STACCube(Datacube):
                         ids=[x.id for x in chunk],
                         collections=[x.get_collection() for x in chunk],
                     )
-                    # filter the assets to include only those in the original item
                     for item in item_search.items():
                         original_item = next(
                             (i for i in chunk if i.id == item.id), None
                         )
                         if original_item is not None:
-                            item.assets = {
-                                k: v
-                                for k, v in item.assets.items()
-                                if k in original_item.assets
-                            }
-                        updated_items.append(item)
+                            # create a deep copy of the original item
+                            # aim: keep original attributes and assets
+                            new_item = original_item.clone()
+                            # imprinting of the updated hrefs with new tokens
+                            for asset_key in item.assets:
+                                if asset_key in new_item.assets:
+                                    new_href = item.assets[asset_key].href
+                                    new_item.assets[asset_key].href = new_href
+                            updated_items.append(new_item)
             else:
                 updated_items.extend(curr_colls[coll]["items"])
         # return signed items
