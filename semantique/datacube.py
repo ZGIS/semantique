@@ -6,6 +6,7 @@ import datacube
 import datetime
 import os
 import planetary_computer as pc
+import pyproj
 import pytz
 import pystac
 import pystac_client
@@ -19,6 +20,7 @@ from datacube.utils import masking
 from pystac_client.stac_api_io import StacApiIO
 from rasterio.errors import RasterioIOError
 from shapely.geometry import box, shape
+from shapely.ops import transform
 from urllib3 import Retry
 
 from semantique import exceptions
@@ -905,9 +907,14 @@ class STACCube(Datacube):
         # subset temporally and spatially
         if "spatial_feats" in extent.coords:
             extent = extent.drop_vars("spatial_feats")
-        bbox = extent.rio.reproject(4326).rio.bounds()
         t_bounds = extent.sq.tz_convert(self.tz).time.values
-        item_coll = STACCube.filter_spatio_temporal(self.src, bbox, t_bounds[0], t_bounds[1])
+        item_coll = STACCube.filter_spatio_temporal(
+          self.src,
+          extent.rio.bounds(),
+          epsg,
+          t_bounds[0],
+          t_bounds[1]
+        )
 
         # subset according to layer key
         filtered_items = []
@@ -969,11 +976,15 @@ class STACCube(Datacube):
                 if data.dtype.kind == "f":
                     data = data.where(data != lyr_na)
                     data = (
-                        data.groupby(days).first(skipna=True).rename({"floor": "time"})
+                        data
+                        .groupby(days, squeeze=False)
+                        .first(skipna=True)
+                        .rename({"floor": "time"})
                     )
                 else:
                     data = (
-                        data.groupby(days)
+                        data
+                        .groupby(days, squeeze=False)
                         .reduce(_mosaic_ints, na_value=lyr_na)
                         .rename({"floor": "time"})
                     )
@@ -1054,21 +1065,30 @@ class STACCube(Datacube):
         return [lst[i : i + k] for i in range(0, len(lst), k)]
 
     @staticmethod
-    def filter_spatio_temporal(item_collection, bbox, start_datetime, end_datetime):
+    def filter_spatio_temporal(item_collection, bbox, bbox_crs, start_datetime, end_datetime):
         """
         Filter item collection by spatio-temporal extent.
 
         Args:
-            item_collection (pystac.ItemCollection): The item collection to filter.
-            bbox (tuple): The bounding box in WGS84 coordinates to filter by.
-            start_datetime (np.datetime64): The start datetime to filter by.
-            end_datetime (np.datetime64): The end datetime to filter by.
+          item_collection (pystac.ItemCollection): The item collection to filter.
+          bbox (tuple): The bounding box in WGS84 coordinates to filter by.
+          bbox_crs (str): The CRS of the bounding box.
+          start_datetime (np.datetime64): The start datetime to filter by.
+          end_datetime (np.datetime64): The end datetime to filter by.
         """
         min_lon, min_lat, max_lon, max_lat = bbox
         spatial_filter = box(min_lon, min_lat, max_lon, max_lat)
+        source_crs = pyproj.CRS("EPSG:4326")
+        target_crs = pyproj.CRS(bbox_crs)
+        transformer = (
+            pyproj.Transformer
+            .from_crs(source_crs, target_crs, always_xy=True)
+            .transform
+        )
         filtered_items = []
         for item in item_collection:
             item_geom = shape(item.geometry)
+            item_geom = transform(transformer, item_geom)
             item_datetime = np.datetime64(item.datetime)
             if not spatial_filter.intersects(item_geom):
                 continue
