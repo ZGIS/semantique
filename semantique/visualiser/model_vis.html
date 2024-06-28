@@ -453,6 +453,9 @@
                     "text": "< custom_props >"
                 });
                 blockDef["helpUrl"] = "reduce";
+            } else if (fieldName === "custom_props" && numArgs === 0) {
+                blockDef["inputsInline"] = true;
+                blockDef["helpUrl"] = "trim_all";
             } else {
                 console.warn(
                     `Unknown block of...\n` +
@@ -517,8 +520,13 @@
                 }
                 // Check for custom verbs or measurements
                 if (!Blockly.Blocks[blockType]) {
-                    const fieldName = allBlocks[i].getElementsByTagName('field')[0].getAttribute('name');
-                    const numArgs = allBlocks[i].getElementsByTagName('field').length;
+                    let fieldName = "custom_props";
+                    let numArgs = 0;
+                    try {
+                        fieldName = allBlocks[i].getElementsByTagName('field')[0].getAttribute('name');
+                        numArgs = allBlocks[i].getElementsByTagName('field').length;
+                    } catch (error) {
+                    }
                     const fallbackBlockDef = createBlockDef(blockType, fieldName, numArgs);
                     Blockly.defineBlocksWithJsonArray([fallbackBlockDef]);
                 }
