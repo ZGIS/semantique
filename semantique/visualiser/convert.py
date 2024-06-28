@@ -81,11 +81,7 @@ class JsonToXmlConverter:
             ET.SubElement(prev_result, "field", name="name").text = key
             ET.SubElement(prev_result, "field", name="export").text = "true"
             instructs = ET.SubElement(prev_result, "value", name="instructions")
-            instructs_block = ET.SubElement(
-                instructs, "block", type=value["type"], id=self._gen_id()
-            )
-            self.handle_with(instructs_block, value["with"])
-            self.handle_do(instructs_block, value["do"])
+            self.find_handler(instructs, value)
 
     def find_handler(self, parent, obj):
         """Calls the dedicated handler for a building block."""
