@@ -1209,8 +1209,8 @@ class QueryProcessor():
 class FakeProcessor(QueryProcessor):
   """
   Worker that simulates the processing of a semantic query recipe.
-  It doesn't actually process the query, but used to translate concepts and 
-  retrieve data layer names.
+  It doesn't actually process the query, but can be used to translate concepts
+  and retrieve data layer names.
 
   Parameters
   ----------
@@ -1238,15 +1238,24 @@ class FakeProcessor(QueryProcessor):
       semantique. Built-in reducers with the same name will be overwritten.
     track_types : :obj:`bool`
       Should the query processor keep track of the value type of arrays
-      when applying processes, and promote them if necessary? Keeping track of
-      value types also means throwing errors whenever a value type is not
-      supported by a specific process.
+      when applying processes, and promote them if necessary? This option is
+      always disabled for the FakeProcessor since it doesn't evaualte processes
+      and therefore can't check the validity of the types of the arrays.
     preview : :obj:`bool`
       Run the query processor with reduced resolution to test the recipe execution.
       Preview-runs are necessary if cache should be used.
     cache : :obj:`Cache`
       The cache object that is used to store data layers.
   """
+  def __init__(self, recipe, datacube, mapping, extent, custom_verbs = None,
+               custom_operators = None, custom_reducers = None,
+               track_types = True, preview = False, cache = None):
+    super(FakeProcessor, self).__init__(
+      recipe, datacube, mapping, extent, custom_verbs=custom_verbs,
+      custom_operators=custom_operators, custom_reducers=custom_reducers,
+      track_types=track_types, preview=preview, cache=cache
+      )
+    self.track_types = False
 
   def call_verb(self, name, params):
     """Apply a verb to the active evaluation object.

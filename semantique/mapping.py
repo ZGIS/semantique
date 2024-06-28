@@ -153,7 +153,10 @@ class Semantique(Mapping):
       if len(properties) == 1:
         out = properties[0]
       else:
-        out = Collection(properties).merge(reducers.all_)
+        out = Collection(properties).merge(
+          reducers.all_,
+          track_types=processor.track_types
+        )
     else:
       try:
         property = ruleset[property]
