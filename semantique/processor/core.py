@@ -428,13 +428,10 @@ class QueryProcessor():
       )
     logger.debug(f"Retrieved layer {block['reference']}:\n{out}")
     # Update cache
-    if self._preview:
-      self._cache.build(block["reference"])
-    else:
-      self._cache.update(layer_key, out)
-      logger.debug("Cache updated")
-      logger.debug(f"Sequence of layers: {self._cache._seq}")
-      logger.debug(f"Currently cached layers: {list(self._cache._data.keys())}")
+    self._cache.update(layer_key, out)
+    logger.debug("Cache updated")
+    logger.debug(f"Sequence of layers: {self._cache._seq}")
+    logger.debug(f"Currently cached layers: {list(self._cache._data.keys())}")
     return out
 
   def handle_result(self, block):
@@ -1339,7 +1336,7 @@ class Cache:
   """Cache of retrieved data layers.
 
   The cache takes care of tracking the data references in their order of
-  evaluation and retaining data layers in RAM if they are still  needed for
+  evaluation and retaining data layers in RAM if they are still needed for
   the further execution of the semantic query.
   """
 
