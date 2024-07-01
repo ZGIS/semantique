@@ -493,7 +493,14 @@ class Array():
     out = Collection(groups)
     return out
 
-  def reduce(self, reducer, dimension = None, track_types = True, **kwargs):
+  def reduce(
+      self,
+      reducer,
+      dimension = None,
+      track_types = True,
+      keep_attrs = True,
+      **kwargs
+    ):
     """Apply the reduce verb to the array.
 
     The reduce verb reduces the dimensionality of an array.
@@ -508,6 +515,9 @@ class Array():
       track_types : :obj:`bool`
         Should the reducer promote the value type of the output object, based
         on the value type of the input object?
+      keep_attrs: :obj:`bool`
+        Should the variable's attributes (attrs) be copied from the
+        original object to the new one?
       **kwargs:
         Additional keyword arguments passed on to the reducer function. These
         should not include a keyword argument "dim", which is reserved for
@@ -539,7 +549,7 @@ class Array():
           )
       kwargs["dim"] = dimension
     # Reduce.
-    out = reducer(obj, track_types = track_types, **kwargs)
+    out = reducer(obj, track_types = track_types, keep_attrs = keep_attrs, **kwargs)
     return out
 
   def shift(self, dimension, steps, **kwargs):
