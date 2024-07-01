@@ -10,7 +10,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "copyright": "Contains modified Copernicus data."
         },
         "s2_band02": {
@@ -23,7 +23,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "role": "blue",
             "copyright": "Contains modified Copernicus data."
         },
@@ -37,7 +37,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "role": "green",
             "copyright": "Contains modified Copernicus data."
         },
@@ -51,7 +51,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "role": "red",
             "copyright": "Contains modified Copernicus data."
         },
@@ -65,7 +65,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "copyright": "Contains modified Copernicus data."
         },
         "s2_band06": {
@@ -78,7 +78,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "copyright": "Contains modified Copernicus data."
         },
         "s2_band07": {
@@ -91,7 +91,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "copyright": "Contains modified Copernicus data."
         },
         "s2_band08": {
@@ -104,7 +104,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "copyright": "Contains modified Copernicus data."
         },
         "s2_band08A": {
@@ -117,7 +117,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "copyright": "Contains modified Copernicus data."
         },
         "s2_band09": {
@@ -130,7 +130,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "copyright": "Contains modified Copernicus data."
         },
         "s2_band11": {
@@ -143,7 +143,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "copyright": "Contains modified Copernicus data."
         },
         "s2_band12": {
@@ -156,7 +156,7 @@
                 "precision": 1
             },
             "dtype": "float32",
-            "na_vals": "NA",
+            "na_value": "NA",
             "copyright": "Contains modified Copernicus data."
         }
     },
@@ -228,7 +228,7 @@
                 }
             ],
             "dtype": "int8",
-            "na_vals": 0
+            "na_value": 0
         }
     }
 }

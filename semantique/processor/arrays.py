@@ -447,7 +447,7 @@ class Array():
     if is_list:
       idx = pd.MultiIndex.from_arrays([x.data for x in grouper])
       dim = grouper[0].dims
-      partition = list(obj.groupby(xr.IndexVariable(dim, idx)))
+      partition = list(obj.groupby(xr.IndexVariable(dim, idx), squeeze=False))
       # Use value labels as group names if defined.
       if labels_as_names:
         labs = [x.sq.value_labels for x in grouper]
@@ -464,7 +464,7 @@ class Array():
       else:
         groups = [i[1].rename(i[0]) for i in partition]
     else:
-      partition = list(obj.groupby(grouper[0]))
+      partition = list(obj.groupby(grouper[0], squeeze=False))
       # Use value labels as group names if defined.
       if labels_as_names:
         labs = grouper[0].sq.value_labels
@@ -493,7 +493,14 @@ class Array():
     out = Collection(groups)
     return out
 
-  def reduce(self, reducer, dimension = None, track_types = True, **kwargs):
+  def reduce(
+      self,
+      reducer,
+      dimension = None,
+      track_types = True,
+      keep_attrs = True,
+      **kwargs
+    ):
     """Apply the reduce verb to the array.
 
     The reduce verb reduces the dimensionality of an array.
@@ -508,6 +515,9 @@ class Array():
       track_types : :obj:`bool`
         Should the reducer promote the value type of the output object, based
         on the value type of the input object?
+      keep_attrs: :obj:`bool`
+        Should the variable's attributes (attrs) be copied from the
+        original object to the new one?
       **kwargs:
         Additional keyword arguments passed on to the reducer function. These
         should not include a keyword argument "dim", which is reserved for
@@ -539,7 +549,7 @@ class Array():
           )
       kwargs["dim"] = dimension
     # Reduce.
-    out = reducer(obj, track_types = track_types, **kwargs)
+    out = reducer(obj, track_types = track_types, keep_attrs = keep_attrs, **kwargs)
     return out
 
   def shift(self, dimension, steps, **kwargs):
@@ -1605,7 +1615,7 @@ class Collection(list):
               return Collection(dups).sq.merge(reducers.first_)
             else:
               return obj
-          groups = list(raw.groupby(dimension))
+          groups = list(raw.groupby(dimension, squeeze=False))
           clean = xr.concat([_merge_dups(x[1]) for x in groups], dimension)
         else:
           clean = raw

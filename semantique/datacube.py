@@ -6,6 +6,7 @@ import datacube
 import datetime
 import os
 import planetary_computer as pc
+import pyproj
 import pytz
 import pystac
 import pystac_client
@@ -18,6 +19,8 @@ from abc import abstractmethod
 from datacube.utils import masking
 from pystac_client.stac_api_io import StacApiIO
 from rasterio.errors import RasterioIOError
+from shapely.geometry import box, shape
+from shapely.ops import transform
 from urllib3 import Retry
 
 from semantique import exceptions
@@ -901,11 +904,36 @@ class STACCube(Datacube):
         # retrieve layer specific information
         lyr_dtype, lyr_na = self._get_dtype_na(metadata)
 
-        # subset temporally
-        times = [np.datetime64(x.get_datetime().replace(tzinfo=None)) for x in self.src]
+        # subset temporally and spatially
+        if "spatial_feats" in extent.coords:
+            extent = extent.drop_vars("spatial_feats")
         t_bounds = extent.sq.tz_convert(self.tz).time.values
-        keep = (times >= t_bounds[0]) & (times < t_bounds[1])
-        item_coll = [x for x, k in zip(self.src, keep) if k]
+        item_coll = STACCube.filter_spatio_temporal(
+          self.src,
+          extent.rio.bounds(),
+          epsg,
+          t_bounds[0],
+          t_bounds[1]
+        )
+
+        # subset according to layer key
+        filtered_items = []
+        for item in item_coll:
+            has_no_key = True
+            has_conformant_key = False
+            for asset_key, asset in item.assets.items():
+                if 'semantique:key' in asset.extra_fields:
+                    has_no_key = False
+                    asset_key = asset.extra_fields['semantique:key']
+                    ref_key = metadata['reference']
+                    if "_".join(asset_key) == "_".join(ref_key):
+                        has_conformant_key = True
+                        break
+                else:
+                    continue
+            if has_no_key or has_conformant_key:
+                filtered_items.append(item)
+        item_coll = filtered_items
 
         # return extent array as NaN in case of no data
         if not len(item_coll):
@@ -914,7 +942,7 @@ class STACCube(Datacube):
 
         # reauth
         if self.config["reauth_individual"]:
-            item_coll = self._sign_metadata(item_coll)
+            item_coll = STACCube._sign_metadata(item_coll)
 
         data = stackstac.stack(
             item_coll,
@@ -936,13 +964,11 @@ class STACCube(Datacube):
         # convert datetimes to daily granularity - resample by day
         def _mosaic_ints(x, axis=0, na_value=np.nan):
             max_idx = np.argmax(x != na_value, axis=axis)
-            # handle cases where all values are na_value
+            grid_x, grid_y = np.ogrid[:x.shape[2], :x.shape[3]]
+            chosen = x[max_idx, 0, grid_x, grid_y]
+            na_array = np.full(chosen.shape, na_value, dtype=x.dtype)
             all_na = np.all(x == na_value, axis=axis)
-            chosen = np.choose(max_idx, x)
-            # where all values are na_value, fill with na_value, else use chosen value
-            return np.where(
-                all_na, np.full(chosen.shape, na_value, dtype=x.dtype), chosen
-            )
+            return np.where(all_na, na_array, chosen)
 
         if self.config["group_by_solar_day"]:
             if len(data.time):
@@ -950,11 +976,15 @@ class STACCube(Datacube):
                 if data.dtype.kind == "f":
                     data = data.where(data != lyr_na)
                     data = (
-                        data.groupby(days).first(skipna=True).rename({"floor": "time"})
+                        data
+                        .groupby(days, squeeze=False)
+                        .first(skipna=True)
+                        .rename({"floor": "time"})
                     )
                 else:
                     data = (
-                        data.groupby(days)
+                        data
+                        .groupby(days, squeeze=False)
                         .reduce(_mosaic_ints, na_value=lyr_na)
                         .rename({"floor": "time"})
                     )
@@ -1030,7 +1060,45 @@ class STACCube(Datacube):
         data = data.where(data["spatial_feats"].notnull())
         return data
 
-    def _sign_metadata(self, items):
+    @staticmethod
+    def _divide_chunks(lst, k):
+        return [lst[i : i + k] for i in range(0, len(lst), k)]
+
+    @staticmethod
+    def filter_spatio_temporal(item_collection, bbox, bbox_crs, start_datetime, end_datetime):
+        """
+        Filter item collection by spatio-temporal extent.
+
+        Args:
+          item_collection (pystac.ItemCollection): The item collection to filter.
+          bbox (tuple): The bounding box in WGS84 coordinates to filter by.
+          bbox_crs (str): The CRS of the bounding box.
+          start_datetime (np.datetime64): The start datetime to filter by.
+          end_datetime (np.datetime64): The end datetime to filter by.
+        """
+        min_lon, min_lat, max_lon, max_lat = bbox
+        spatial_filter = box(min_lon, min_lat, max_lon, max_lat)
+        source_crs = pyproj.CRS("EPSG:4326")
+        target_crs = pyproj.CRS(bbox_crs)
+        transformer = (
+            pyproj.Transformer
+            .from_crs(source_crs, target_crs, always_xy=True)
+            .transform
+        )
+        filtered_items = []
+        for item in item_collection:
+            item_geom = shape(item.geometry)
+            item_geom = transform(transformer, item_geom)
+            item_datetime = np.datetime64(item.datetime)
+            if not spatial_filter.intersects(item_geom):
+                continue
+            if not (start_datetime <= item_datetime < end_datetime):
+                continue
+            filtered_items.append(item)
+        return filtered_items
+
+    @staticmethod
+    def _sign_metadata(items):
         # retrieve collections root & item ids
         roots = [x.get_root_link().href for x in items]
         # create dictionary grouped by collection
@@ -1067,12 +1135,21 @@ class STACCube(Datacube):
                         ids=[x.id for x in chunk],
                         collections=[x.get_collection() for x in chunk],
                     )
-                    updated_items.extend(list(item_search.items()))
+                    for item in item_search.items():
+                        original_item = next(
+                            (i for i in chunk if i.id == item.id), None
+                        )
+                        if original_item is not None:
+                            # create a deep copy of the original item
+                            # aim: keep original attributes and assets
+                            new_item = original_item.clone()
+                            # imprinting of the updated hrefs with new tokens
+                            for asset_key in item.assets:
+                                if asset_key in new_item.assets:
+                                    new_href = item.assets[asset_key].href
+                                    new_item.assets[asset_key].href = new_href
+                            updated_items.append(new_item)
             else:
                 updated_items.extend(curr_colls[coll]["items"])
         # return signed items
         return pystac.ItemCollection(updated_items)
-
-    @staticmethod
-    def _divide_chunks(lst, k):
-        return [lst[i : i + k] for i in range(0, len(lst), k)]

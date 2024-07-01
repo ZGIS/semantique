@@ -6,6 +6,7 @@ import logging
 import pyproj
 import pytz
 import warnings
+import xarray as xr
 
 from semantique import exceptions
 from semantique.processor import arrays, operators, reducers, values, utils
@@ -427,13 +428,10 @@ class QueryProcessor():
       )
     logger.debug(f"Retrieved layer {block['reference']}:\n{out}")
     # Update cache
-    if self._preview:
-      self._cache.build(block["reference"])
-    else:
-      self._cache.update(layer_key, out)
-      logger.debug("Cache updated")
-      logger.debug(f"Sequence of layers: {self._cache._seq}")
-      logger.debug(f"Currently cached layers: {list(self._cache._data.keys())}")
+    self._cache.update(layer_key, out)
+    logger.debug("Cache updated")
+    logger.debug(f"Sequence of layers: {self._cache._seq}")
+    logger.debug(f"Currently cached layers: {list(self._cache._data.keys())}")
     return out
 
   def handle_result(self, block):
@@ -1205,11 +1203,140 @@ class QueryProcessor():
   def _set_eval_obj(self, obj):
     self._eval_obj.append(obj)
 
+class FakeProcessor(QueryProcessor):
+  """
+  Worker that simulates the processing of a semantic query recipe.
+  It doesn't actually process the query, but can be used to translate concepts
+  and retrieve data layer names.
+
+  Parameters
+  ----------
+    recipe : QueryRecipe
+      The query recipe to be processed.
+    datacube : Datacube
+      The datacube instance to process the query against.
+    mapping : Mapping
+      The mapping instance to process the query against.
+    extent : :obj:`xarray.DataArray`
+      The spatio-temporal extent in which the query should be processed. Should
+      be given as an array with a temporal dimension and two spatial dimensions
+      such as returned by
+      :func:`parse_extent <semantique.processor.utils.parse_extent>`.
+    custom_verbs : :obj:`dict`, optional
+      User-defined verbs that may be used when executing the query recipe in
+      addition to the built-in verbs in semantique.
+    custom_operators : :obj:`dict`, optional
+      User-defined operator functions that may be used when evaluating
+      expressions with the evaluate verb in addition to the built-in operators
+      in semantique. Built-in operators with the same name will be overwritten.
+    custom_reducers : :obj:`dict`, optional
+      User-defined reducer functions that may be used when reducing array
+      dimensions with the reduce verb in addition to the built-in reducers in
+      semantique. Built-in reducers with the same name will be overwritten.
+    track_types : :obj:`bool`
+      Should the query processor keep track of the value type of arrays
+      when applying processes, and promote them if necessary? This option is
+      always disabled for the FakeProcessor since it doesn't evaualte processes
+      and therefore can't check the validity of the types of the arrays.
+    preview : :obj:`bool`
+      Run the query processor with reduced resolution to test the recipe execution.
+      Preview-runs are necessary if cache should be used.
+    cache : :obj:`Cache`
+      The cache object that is used to store data layers.
+  """
+  def __init__(self, recipe, datacube, mapping, extent, custom_verbs = None,
+               custom_operators = None, custom_reducers = None,
+               track_types = True, preview = False, cache = None):
+    super(FakeProcessor, self).__init__(
+      recipe, datacube, mapping, extent, custom_verbs=custom_verbs,
+      custom_operators=custom_operators, custom_reducers=custom_reducers,
+      track_types=track_types, preview=preview, cache=cache
+      )
+    self.track_types = False
+
+  def call_verb(self, name, params):
+    """Apply a verb to the active evaluation object.
+
+    Parameters
+    -----------
+      name : :obj:`str`
+        Name of the verb.
+      params : :obj:`dict`
+        Parameters to be forwarded to the verb.
+
+    Returns
+    -------
+      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+    """
+    return self._get_eval_obj()
+
+  def handle_concept(self, block):
+    """Handler for semantic concept references.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "concept".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+
+    """
+    logger.debug(f"Translating concept {block['reference']}")
+    out = self._mapping.translate(
+      *block["reference"],
+      property = block["property"] if "property" in block else None,
+      extent = self._extent,
+      datacube = self._datacube,
+      eval_obj = self._get_eval_obj(),
+      processor = FakeProcessor,
+      preview = self._preview,
+      cache = self._cache,
+      custom_verbs = self._custom_verbs,
+      custom_operators = self._custom_operators,
+      custom_reducers = self._custom_reducers,
+      track_types = self._track_types,
+
+    )
+    logger.debug(f"Translated concept {block['reference']}:\n{out}")
+    return out
+
+  def handle_label(self, block):
+    """Handler for value labels.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "label".
+
+    Returns
+    -------
+      :obj:None
+    """
+    return None
+
+  def handle_layer(self, block):
+    """Handler for data layer references.
+
+    Parameters
+    ----------
+      block : :obj:`dict`
+        Textual representation of a building block of type "layer".
+
+    Returns
+    -------
+      :obj:`xarray.DataArray`
+    """
+    self._cache.build(block["reference"])
+    return xr.full_like(self._extent, np.nan)
+
+
 class Cache:
   """Cache of retrieved data layers.
 
   The cache takes care of tracking the data references in their order of
-  evaluation and retaining data layers in RAM if they are still  needed for
+  evaluation and retaining data layers in RAM if they are still needed for
   the further execution of the semantic query.
   """
 

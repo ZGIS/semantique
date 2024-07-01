@@ -1,7 +1,7 @@
 from abc import abstractmethod
 
 from semantique import exceptions
-from semantique.processor.core import QueryProcessor
+from semantique.processor.core import QueryProcessor, FakeProcessor
 from semantique.processor.arrays import Collection
 from semantique.processor import reducers
 from semantique.visualiser.visualise import show
@@ -106,7 +106,7 @@ class Semantique(Mapping):
     super(Semantique, self).__init__(rules)
 
   def translate(self, *reference, property = None, extent, datacube,
-                eval_obj = None, **config):
+                eval_obj = None, processor=QueryProcessor, **config):
     """Translate a semantic concept reference into a semantic array.
 
     Parameters
@@ -129,6 +129,10 @@ class Semantique(Mapping):
       eval_obj : :obj:`xarray.DataArray`
         The array to refer to when the mapping rules of the semantic concept
         contain processing chains that start with a self reference.
+      processor : :obj:`processor.core.QueryProcessor`
+        The processor class to be used for processing the query. By default
+        :obj:`processor.core.QueryProcessor` is used. Can be set to
+        :obj:`processor.core.FakeProcessor` to skip the processing.
       **config:
         Additional keyword arguments forwarded to the initializer of
         :obj:`processor.core.QueryProcessor`.
@@ -142,7 +146,7 @@ class Semantique(Mapping):
 
     """
     ruleset = self.lookup(*reference)
-    processor = QueryProcessor({}, datacube, self, extent, **config)
+    processor = processor({}, datacube, self, extent, **config)
     if eval_obj is not None:
       processor._set_eval_obj(eval_obj)
     if property is None:
@@ -150,7 +154,10 @@ class Semantique(Mapping):
       if len(properties) == 1:
         out = properties[0]
       else:
-        out = Collection(properties).merge(reducers.all_)
+        out = Collection(properties).merge(
+          reducers.all_,
+          track_types=processor.track_types
+        )
     else:
       try:
         property = ruleset[property]

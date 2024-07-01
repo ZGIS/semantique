@@ -1,4 +1,4 @@
-from semantique.processor.core import QueryProcessor
+from semantique.processor.core import QueryProcessor, FakeProcessor
 from semantique.visualiser.visualise import show
 
 class QueryRecipe(dict):
@@ -29,7 +29,7 @@ class QueryRecipe(dict):
     super(QueryRecipe, self).__init__(obj)
 
   def execute(self, datacube, mapping, space, time, run_preview = False,
-              cache_data = False, **config):
+              cache_data = True, **config):
     """Execute a query recipe.
 
     This function initializes a :obj:`processor.core.QueryProcessor` instance
@@ -47,15 +47,14 @@ class QueryRecipe(dict):
       time : TemporalExtent
         The temporal extent in which the query should be processed.
       run_preview : :obj:`bool`
-        Should a preview run be performed before executing the query recipe as
-        specified? A preview run calls the query processor with reduced
-        resolution to test if the recipe execution succeeds.
+        Should a preview run with reduced spatial resolution be performed?
+        A preview run enables to test if the recipe execution succeeds
+        and allows to inspect the results.
       cache_data : :obj:`bool`
         Should the query processor cache the data references as provided by the
         mapped concepts? Enabling caching increases the memory footprint while
-        reducing the I/O time to retrieve data. Will be used only if the same
-        data layer is referenced multiple times. Caching requires a preview run
-        and will automatically set the preview parameter to :obj:`True`.
+        reducing the I/O time to retrieve data if the same data layer is
+        referenced multiple times.
       **config:
         Additional configuration parameters forwarded to
         :func:`QueryProcessor.parse <processor.core.QueryProcessor.parse>`.
@@ -84,23 +83,24 @@ class QueryRecipe(dict):
     >>> recipe.execute(dc, mapping, space, time, **config)
 
     """
-    if run_preview or cache_data:
-      # Preview run.
-      preview_config = config
-      preview_config["preview"] = True
-      preview_config["cache"] = None
-      qp = QueryProcessor.parse(self, datacube, mapping, space, time, **preview_config)
-      _ = qp.optimize().execute()
-      # Main run.
-      main_config = config
-      main_config["preview"] = False
-      main_config["cache"] = qp.cache if cache_data else None
-      qp = QueryProcessor.parse(self, datacube, mapping, space, time, **main_config)
-      return qp.optimize().execute()
+    if cache_data:
+      fp = FakeProcessor.parse(self, datacube, mapping, space, time, **config)
+      _ = fp.optimize().execute()
+      cache = fp.cache
     else:
-      # Execute the query recipe without a preview run.
-      qp = QueryProcessor.parse(self, datacube, mapping, space, time, **config)
-      return qp.optimize().execute()
+      cache = None
+
+    qp = QueryProcessor.parse(
+      self,
+      datacube,
+      mapping,
+      space,
+      time,
+      preview=run_preview,
+      cache=cache,
+      **config
+    )
+    return qp.optimize().execute()
 
   def visualise(self):
     """Visualise the recipe in a web browser.
