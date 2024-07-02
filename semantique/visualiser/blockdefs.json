@@ -1,0 +1,2433 @@
+[
+  {
+    "type": "model_root",
+    "message0": "name %1 %2 concepts %3 application %4",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "name",
+        "text": "< model >"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "concepts",
+        "check": "concept_definition"
+      },
+      {
+        "type": "input_statement",
+        "name": "application",
+        "check": "result_definition"
+      }
+    ],
+    "inputsInline": true,
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "model_root_a",
+    "message0": "name %1 %2 concepts %3",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "name",
+        "text": "< model >"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "concepts",
+        "check": "concept_definition"
+      }
+    ],
+    "inputsInline": true,
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "model_root_b",
+    "message0": "name %1 %2 application %3",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "name",
+        "text": "< model >"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "application",
+        "check": "result_definition"
+      }
+    ],
+    "inputsInline": true,
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "entity",
+    "message0": "entity %1 name %2 %3 properties %4",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_input",
+        "name": "name",
+        "text": "< entity >"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "item_0",
+        "check": "property_definition"
+      }
+    ],
+    "previousStatement": [
+      "concept_definition",
+      "entity_definition",
+      "definition"
+    ],
+    "nextStatement": [
+      "concept_definition",
+      "entity_definition",
+      "definition"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "property",
+    "message0": "property %1 name %2 %3 rules %4",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_input",
+        "name": "name",
+        "text": "< property >"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "rules",
+        "check": "array"
+      }
+    ],
+    "output": [
+      "property_definition",
+      "definition"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "result",
+    "message0": "result %1 name %2 %3 instructions %4 export %5",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_input",
+        "name": "name",
+        "text": "< result >"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "instructions",
+        "check": "array"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "export",
+        "options": [
+          [
+            "yes",
+            "true"
+          ],
+          [
+            "no",
+            "false"
+          ]
+        ]
+      }
+    ],
+    "previousStatement": [
+      "result_definition",
+      "definition"
+    ],
+    "nextStatement": [
+      "result_definition",
+      "definition"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "entity_reference",
+    "message0": "entity %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "name",
+        "text": "< name >"
+      }
+    ],
+    "output": [
+      "entity",
+      "concept",
+      "reference",
+      "array"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "property_reference",
+    "message0": "entity %1 %2 property %3",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "entity_name",
+        "text": "< name >"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_input",
+        "name": "property_name",
+        "text": "< name >"
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "property",
+      "reference",
+      "array"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "result_reference",
+    "message0": "result %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "name",
+        "text": "< name >"
+      }
+    ],
+    "output": [
+      "result",
+      "reference",
+      "array"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "self_reference",
+    "message0": "self",
+    "output": [
+      "self",
+      "reference",
+      "array"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "appearance",
+    "message0": "appearance %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "measurement",
+        "dimension": "< measurement >"
+      }
+    ],
+    "output": [
+      "appearance",
+      "layer",
+      "reference",
+      "array"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "atmosphere",
+    "message0": "atmosphere %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "measurement",
+        "dimension": "< measurement >"
+      }
+    ],
+    "output": [
+      "atmosphere",
+      "layer",
+      "reference",
+      "array"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "artifacts",
+    "message0": "artifact %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "measurement",
+        "dimension": "< measurement >"
+      }
+    ],
+    "output": [
+      "artifacts",
+      "layer",
+      "reference",
+      "array"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "reflectance",
+    "message0": "reflectance %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "measurement",
+        "dimension": "< measurement >"
+      }
+    ],
+    "output": [
+      "reflectance",
+      "layer",
+      "reference",
+      "array"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "topography",
+    "message0": "topography %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "measurement",
+        "dimension": "< measurement >"
+      }
+    ],
+    "output": [
+      "topography",
+      "layer",
+      "reference",
+      "array"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "collection",
+    "message0": "collection %1 %2",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "item_0",
+        "check": "array"
+      }
+    ],
+    "output": "collection",
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "processing_chain",
+    "message0": "with %1 do %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "with",
+        "check": [
+          "array",
+          "collection"
+        ]
+      },
+      {
+        "type": "input_value",
+        "name": "do",
+        "check": [
+          "verb",
+          "verb_chain"
+        ]
+      }
+    ],
+    "inputsInline": false,
+    "output": [
+      "processing_chain",
+      "array"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "verb_chain",
+    "message0": "chain %1 %2",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "item_0",
+        "check": "verb"
+      }
+    ],
+    "inputsInline": false,
+    "output": "verb_chain",
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "evaluate_univariate",
+    "message0": "evaluate %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "operator",
+        "options": [
+          [
+            "not",
+            "not"
+          ],
+          [
+            "absolute",
+            "absolute"
+          ],
+          [
+            "floor",
+            "floor"
+          ],
+          [
+            "ceiling",
+            "ceiling"
+          ],
+          [
+            "natural logarithm",
+            "natural_logarithm"
+          ],
+          [
+            "exponential",
+            "exponential"
+          ],
+          [
+            "square root",
+            "square_root"
+          ],
+          [
+            "cube root",
+            "cube_root"
+          ],
+          [
+            "is missing",
+            "is_missing"
+          ],
+          [
+            "not missing",
+            "not_missing"
+          ],
+          [
+            "cosine",
+            "cosine"
+          ],
+          [
+            "sine",
+            "sine"
+          ],
+          [
+            "tangent",
+            "tangent"
+          ],
+          [
+            "secant",
+            "secant"
+          ],
+          [
+            "cosecant",
+            "cosecant"
+          ],
+          [
+            "cotangent",
+            "cotangent"
+          ],
+          [
+            "to degrees",
+            "to_degrees"
+          ],
+          [
+            "to radians",
+            "to_radians"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": false,
+    "output": [
+      "evaluate",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "evaluate_bivariate",
+    "message0": "evaluate %1 %2 %3",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "operator",
+        "options": [
+          [
+            "+",
+            "add"
+          ],
+          [
+            "-",
+            "subtract"
+          ],
+          [
+            "*",
+            "multiply"
+          ],
+          [
+            "/",
+            "divide"
+          ],
+          [
+            "^",
+            "power"
+          ],
+          [
+            "=",
+            "equal"
+          ],
+          [
+            "≠",
+            "not_equal"
+          ],
+          [
+            ">",
+            "greater"
+          ],
+          [
+            "<",
+            "less"
+          ],
+          [
+            "≥",
+            "greater_equal"
+          ],
+          [
+            "≤",
+            "less_equal"
+          ],
+          [
+            "in",
+            "in"
+          ],
+          [
+            "not in",
+            "not_in"
+          ],
+          [
+            "and",
+            "and"
+          ],
+          [
+            "or",
+            "or"
+          ],
+          [
+            "exclusive or",
+            "exclusive_or"
+          ],
+          [
+            "intersects",
+            "intersects"
+          ],
+          [
+            "after",
+            "after"
+          ],
+          [
+            "before",
+            "before"
+          ],
+          [
+            "during",
+            "during"
+          ],
+          [
+            "normalized difference",
+            "normalized_difference"
+          ]
+        ]
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "y",
+        "check": [
+          "array",
+          "value",
+          "set",
+          "interval"
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "evaluate",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "extract",
+    "message0": "extract %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "dimension",
+        "text": "< dimension >"
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "extract",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "extract_time",
+    "message0": "extract time %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "component",
+        "options": [
+          [
+            "year",
+            "year"
+          ],
+          [
+            "season",
+            "season"
+          ],
+          [
+            "quarter",
+            "quarter"
+          ],
+          [
+            "month",
+            "month"
+          ],
+          [
+            "week",
+            "week"
+          ],
+          [
+            "day",
+            "day"
+          ],
+          [
+            "day of the year",
+            "day_of_year"
+          ],
+          [
+            "day of the week",
+            "day_of_week"
+          ],
+          [
+            "hour",
+            "hour"
+          ],
+          [
+            "minute",
+            "minute"
+          ],
+          [
+            "second",
+            "second"
+          ],
+          [
+            "datetime",
+            "null"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "extract",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "extract_space",
+    "message0": "extract space %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "component",
+        "options": [
+          [
+            "feature",
+            "feature"
+          ],
+          [
+            "x",
+            "x"
+          ],
+          [
+            "y",
+            "y"
+          ],
+          [
+            "(x, y)",
+            "null"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "extract",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "filter",
+    "message0": "filter %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "filterer",
+        "check": "array"
+      }
+    ],
+    "inputsInline": false,
+    "output": [
+      "filter",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "filter_time",
+    "message0": "filter time %1 %2 %3 %4",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "component",
+        "options": [
+          [
+            "year",
+            "year"
+          ],
+          [
+            "season",
+            "season"
+          ],
+          [
+            "quarter",
+            "quarter"
+          ],
+          [
+            "month",
+            "month"
+          ],
+          [
+            "week",
+            "week"
+          ],
+          [
+            "day",
+            "day"
+          ],
+          [
+            "day of the year",
+            "day_of_year"
+          ],
+          [
+            "day of the week",
+            "day_of_week"
+          ],
+          [
+            "hour",
+            "hour"
+          ],
+          [
+            "minute",
+            "minute"
+          ],
+          [
+            "second",
+            "second"
+          ],
+          [
+            "datetime",
+            "null"
+          ]
+        ]
+      },
+      {
+        "type": "field_dropdown",
+        "name": "operator",
+        "options": [
+          [
+            "=",
+            "equal"
+          ],
+          [
+            "≠",
+            "not_equal"
+          ],
+          [
+            ">",
+            "greater"
+          ],
+          [
+            "<",
+            "less"
+          ],
+          [
+            "≥",
+            "greater_equal"
+          ],
+          [
+            "≤",
+            "less_equal"
+          ],
+          [
+            "in",
+            "in"
+          ],
+          [
+            "after",
+            "after"
+          ],
+          [
+            "before",
+            "before"
+          ],
+          [
+            "during",
+            "during"
+          ]
+        ]
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "y",
+        "check": [
+          "value",
+          "value_list",
+          "value_range"
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "filter",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "filter_space",
+    "message0": "filter space %1 %2 %3 %4",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "component",
+        "options": [
+          [
+            "feature",
+            "feature"
+          ],
+          [
+            "x",
+            "x"
+          ],
+          [
+            "y",
+            "y"
+          ],
+          [
+            "(x, y)",
+            "null"
+          ]
+        ]
+      },
+      {
+        "type": "field_dropdown",
+        "name": "operator",
+        "options": [
+          [
+            "=",
+            "equal"
+          ],
+          [
+            "≠",
+            "not_equal"
+          ],
+          [
+            ">",
+            "greater"
+          ],
+          [
+            "<",
+            "less"
+          ],
+          [
+            "≥",
+            "greater_equal"
+          ],
+          [
+            "≤",
+            "less_equal"
+          ],
+          [
+            "in",
+            "in"
+          ],
+          [
+            "intersects",
+            "intersects"
+          ]
+        ]
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "y",
+        "check": [
+          "value",
+          "value_list",
+          "value_range"
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "filter",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "assign",
+    "message0": "assign %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "y",
+        "check": [
+          "array",
+          "value"
+        ]
+      }
+    ],
+    "inputsInline": false,
+    "output": [
+      "assign",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "assign_time",
+    "message0": "assign time %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "component",
+        "options": [
+          [
+            "year",
+            "year"
+          ],
+          [
+            "season",
+            "season"
+          ],
+          [
+            "quarter",
+            "quarter"
+          ],
+          [
+            "month",
+            "month"
+          ],
+          [
+            "week",
+            "week"
+          ],
+          [
+            "day",
+            "day"
+          ],
+          [
+            "day of the year",
+            "day_of_year"
+          ],
+          [
+            "day of the week",
+            "day_of_week"
+          ],
+          [
+            "hour",
+            "hour"
+          ],
+          [
+            "minute",
+            "minute"
+          ],
+          [
+            "second",
+            "second"
+          ],
+          [
+            "datetime",
+            "null"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "assign",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "assign_space",
+    "message0": "assign space %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "component",
+        "options": [
+          [
+            "feature",
+            "feature"
+          ],
+          [
+            "x",
+            "x"
+          ],
+          [
+            "y",
+            "y"
+          ],
+          [
+            "(x, y)",
+            "null"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "assign",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "assign_at",
+    "message0": "assign %1 at %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "y",
+        "check": [
+          "array",
+          "value"
+        ]
+      },
+      {
+        "type": "input_value",
+        "name": "at",
+        "check": "array"
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "assign",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "groupby",
+    "message0": "group by %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "grouper",
+        "check": [
+          "array",
+          "collection"
+        ]
+      }
+    ],
+    "inputsInline": false,
+    "output": [
+      "groupby",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "groupby_time",
+    "message0": "group by time %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "component",
+        "options": [
+          [
+            "year",
+            "year"
+          ],
+          [
+            "season",
+            "season"
+          ],
+          [
+            "quarter",
+            "quarter"
+          ],
+          [
+            "month",
+            "month"
+          ],
+          [
+            "week",
+            "week"
+          ],
+          [
+            "day",
+            "day"
+          ],
+          [
+            "day of the year",
+            "day_of_year"
+          ],
+          [
+            "day of the week",
+            "day_of_week"
+          ],
+          [
+            "hour",
+            "hour"
+          ],
+          [
+            "minute",
+            "minute"
+          ],
+          [
+            "second",
+            "second"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "groupby",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "groupby_space",
+    "message0": "group by space %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "component",
+        "options": [
+          [
+            "feature",
+            "feature"
+          ],
+          [
+            "x",
+            "x"
+          ],
+          [
+            "y",
+            "y"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "groupby",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "reduce",
+    "message0": "reduce over %1 %2 using %3",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "dimension",
+        "text": "< dimension >"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "reducer",
+        "options": [
+          [
+            "all",
+            "all"
+          ],
+          [
+            "any",
+            "any"
+          ],
+          [
+            "none",
+            "none"
+          ],
+          [
+            "count",
+            "count"
+          ],
+          [
+            "percentage",
+            "percentage"
+          ],
+          [
+            "min",
+            "min"
+          ],
+          [
+            "max",
+            "max"
+          ],
+          [
+            "mean",
+            "mean"
+          ],
+          [
+            "median",
+            "median"
+          ],
+          [
+            "mode",
+            "mode"
+          ],
+          [
+            "product",
+            "product"
+          ],
+          [
+            "sum",
+            "sum"
+          ],
+          [
+            "n",
+            "n"
+          ],
+          [
+            "range",
+            "range"
+          ],
+          [
+            "standard deviation",
+            "standard_deviation"
+          ],
+          [
+            "variance",
+            "variance"
+          ],
+          [
+            "first",
+            "first"
+          ],
+          [
+            "last",
+            "last"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "reduce",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "reduce_spacetime",
+    "message0": "reduce over %1 %2 using %3",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "dimension",
+        "options": [
+          [
+            "time",
+            "TIME"
+          ],
+          [
+            "space",
+            "SPACE"
+          ],
+          [
+            "x",
+            "X"
+          ],
+          [
+            "y",
+            "Y"
+          ]
+        ]
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "reducer",
+        "options": [
+          [
+            "all",
+            "all"
+          ],
+          [
+            "any",
+            "any"
+          ],
+          [
+            "none",
+            "none"
+          ],
+          [
+            "count",
+            "count"
+          ],
+          [
+            "percentage",
+            "percentage"
+          ],
+          [
+            "min",
+            "min"
+          ],
+          [
+            "max",
+            "max"
+          ],
+          [
+            "mean",
+            "mean"
+          ],
+          [
+            "median",
+            "median"
+          ],
+          [
+            "mode",
+            "mode"
+          ],
+          [
+            "product",
+            "product"
+          ],
+          [
+            "sum",
+            "sum"
+          ],
+          [
+            "n",
+            "n"
+          ],
+          [
+            "range",
+            "range"
+          ],
+          [
+            "standard deviation",
+            "standard_deviation"
+          ],
+          [
+            "variance",
+            "variance"
+          ],
+          [
+            "first",
+            "first"
+          ],
+          [
+            "last",
+            "last"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "reduce",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "reduce_all",
+    "message0": "reduce using %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "reducer",
+        "options": [
+          [
+            "all",
+            "all"
+          ],
+          [
+            "any",
+            "any"
+          ],
+          [
+            "none",
+            "none"
+          ],
+          [
+            "count",
+            "count"
+          ],
+          [
+            "percentage",
+            "percentage"
+          ],
+          [
+            "min",
+            "min"
+          ],
+          [
+            "max",
+            "max"
+          ],
+          [
+            "mean",
+            "mean"
+          ],
+          [
+            "median",
+            "median"
+          ],
+          [
+            "mode",
+            "mode"
+          ],
+          [
+            "product",
+            "product"
+          ],
+          [
+            "sum",
+            "sum"
+          ],
+          [
+            "n",
+            "n"
+          ],
+          [
+            "range",
+            "range"
+          ],
+          [
+            "standard deviation",
+            "standard_deviation"
+          ],
+          [
+            "variance",
+            "variance"
+          ],
+          [
+            "first",
+            "first"
+          ],
+          [
+            "last",
+            "last"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "reduce",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "shift",
+    "message0": "shift %1 steps along %2",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "steps",
+        "value": 1
+      },
+      {
+        "type": "field_input",
+        "name": "dimension",
+        "text": "< dimension >"
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "shift",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "shift_spacetime",
+    "message0": "shift %1 %2 steps along %3",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "steps",
+        "value": 1
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "dimension",
+        "options": [
+          [
+            "time",
+            "TIME"
+          ],
+          [
+            "space",
+            "SPACE"
+          ],
+          [
+            "x",
+            "X"
+          ],
+          [
+            "y",
+            "Y"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "shift",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "smooth",
+    "message0": "smooth %1 %2 using %3 %4 on size %5",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "dimension",
+        "text": "< dimension >"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "reducer",
+        "options": [
+          [
+            "all",
+            "all"
+          ],
+          [
+            "any",
+            "any"
+          ],
+          [
+            "none",
+            "none"
+          ],
+          [
+            "count",
+            "count"
+          ],
+          [
+            "percentage",
+            "percentage"
+          ],
+          [
+            "min",
+            "min"
+          ],
+          [
+            "max",
+            "max"
+          ],
+          [
+            "mean",
+            "mean"
+          ],
+          [
+            "median",
+            "median"
+          ],
+          [
+            "mode",
+            "mode"
+          ],
+          [
+            "product",
+            "product"
+          ],
+          [
+            "sum",
+            "sum"
+          ],
+          [
+            "n",
+            "n"
+          ],
+          [
+            "range",
+            "range"
+          ],
+          [
+            "standard deviation",
+            "standard_deviation"
+          ],
+          [
+            "variance",
+            "variance"
+          ],
+          [
+            "first",
+            "first"
+          ],
+          [
+            "last",
+            "last"
+          ]
+        ]
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_number",
+        "name": "size",
+        "value": 1,
+        "min": 0
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "smooth",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "smooth_spacetime",
+    "message0": "smooth %1 %2 using %3 %4 on size %5",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "dimension",
+        "options": [
+          [
+            "time",
+            "TIME"
+          ],
+          [
+            "space",
+            "SPACE"
+          ],
+          [
+            "x",
+            "X"
+          ],
+          [
+            "y",
+            "Y"
+          ]
+        ]
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "reducer",
+        "options": [
+          [
+            "all",
+            "all"
+          ],
+          [
+            "any",
+            "any"
+          ],
+          [
+            "none",
+            "none"
+          ],
+          [
+            "count",
+            "count"
+          ],
+          [
+            "percentage",
+            "percentage"
+          ],
+          [
+            "min",
+            "min"
+          ],
+          [
+            "max",
+            "max"
+          ],
+          [
+            "mean",
+            "mean"
+          ],
+          [
+            "median",
+            "median"
+          ],
+          [
+            "mode",
+            "mode"
+          ],
+          [
+            "product",
+            "product"
+          ],
+          [
+            "sum",
+            "sum"
+          ],
+          [
+            "n",
+            "n"
+          ],
+          [
+            "range",
+            "range"
+          ],
+          [
+            "standard deviation",
+            "standard_deviation"
+          ],
+          [
+            "variance",
+            "variance"
+          ],
+          [
+            "first",
+            "first"
+          ],
+          [
+            "last",
+            "last"
+          ]
+        ]
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_number",
+        "name": "size",
+        "value": 1,
+        "min": 0
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "smooth",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "trim",
+    "message0": "trim %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "dimension",
+        "text": "< dimension >"
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "trim",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "trim_spacetime",
+    "message0": "trim %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "dimension",
+        "options": [
+          [
+            "time",
+            "TIME"
+          ],
+          [
+            "space",
+            "SPACE"
+          ],
+          [
+            "x",
+            "X"
+          ],
+          [
+            "y",
+            "Y"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "trim",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "trim_all",
+    "message0": "trim",
+    "inputsInline": true,
+    "output": [
+      "trim",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "delineate",
+    "message0": "delineate",
+    "inputsInline": true,
+    "output": [
+      "delineate",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "compose",
+    "message0": "compose",
+    "output": [
+      "compose",
+      "collection_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "concatenate",
+    "message0": "concatenate along %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "dimension",
+        "text": "< dimension >"
+      }
+    ],
+    "inputsInline": false,
+    "output": [
+      "concatenate",
+      "collection_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "merge",
+    "message0": "merge using %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "reducer",
+        "options": [
+          [
+            "all",
+            "all"
+          ],
+          [
+            "any",
+            "any"
+          ],
+          [
+            "none",
+            "none"
+          ],
+          [
+            "count",
+            "count"
+          ],
+          [
+            "percentage",
+            "percentage"
+          ],
+          [
+            "min",
+            "min"
+          ],
+          [
+            "max",
+            "max"
+          ],
+          [
+            "mean",
+            "mean"
+          ],
+          [
+            "median",
+            "median"
+          ],
+          [
+            "mode",
+            "mode"
+          ],
+          [
+            "product",
+            "product"
+          ],
+          [
+            "sum",
+            "sum"
+          ],
+          [
+            "n",
+            "n"
+          ],
+          [
+            "range",
+            "range"
+          ],
+          [
+            "standard deviation",
+            "standard_deviation"
+          ],
+          [
+            "variance",
+            "variance"
+          ],
+          [
+            "first",
+            "first"
+          ],
+          [
+            "last",
+            "last"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "merge",
+      "collection_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "name",
+    "message0": "name as %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "value",
+        "text": "< newname >"
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "name",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "set",
+    "message0": "set %1 %2",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "item_0",
+        "check": "value"
+      }
+    ],
+    "output": "set",
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "interval",
+    "message0": "interval from %1 to %2",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "a",
+        "value": 0,
+        "precision": 0.01
+      },
+      {
+        "type": "field_number",
+        "name": "b",
+        "value": 1,
+        "precision": 0.01
+      }
+    ],
+    "output": [
+      "interval",
+      "set"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "label_dropdown",
+    "message0": "label %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "label",
+        "dimension": "< label >"
+      }
+    ],
+    "output": [
+      "label_dropdown",
+      "label",
+      "value"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "label_text",
+    "message0": "label %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "x",
+        "text": "< label >"
+      }
+    ],
+    "output": [
+      "label_text",
+      "label",
+      "value"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "character",
+    "message0": "character %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "value",
+        "text": "< text >"
+      }
+    ],
+    "output": [
+      "character",
+      "value"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "number",
+    "message0": "number %1",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "x",
+        "value": 0,
+        "precision": 0.01
+      }
+    ],
+    "output": [
+      "number",
+      "value"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "boolean",
+    "message0": "boolean %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "value",
+        "options": [
+          [
+            "true",
+            "true"
+          ],
+          [
+            "false",
+            "false"
+          ]
+        ]
+      }
+    ],
+    "output": [
+      "boolean",
+      "value"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "time_instant",
+    "message0": "time instant %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "x",
+        "text": "< time >"
+      }
+    ],
+    "output": [
+      "time_instant",
+      "time",
+      "value"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "time_interval",
+    "message0": "time interval %1 %2",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "a",
+        "text": "< from >"
+      },
+      {
+        "type": "field_input",
+        "name": "b",
+        "text": "< to >"
+      }
+    ],
+    "output": [
+      "time_interval",
+      "time",
+      "value"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "comment",
+    "message0": "# %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "comment",
+        "text": "< comment >"
+      }
+    ],
+    "inputsInline": true,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 230,
+    "tooltip": "Use this block for adding a comment",
+    "helpUrl": ""
+  },
+  {
+    "type": "fill",
+    "message0": "fill along %1 %2 using %3",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "dimension",
+        "text": "< dimension >"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "method",
+        "options": [
+          [
+            "nearest",
+            "nearest"
+          ],
+          [
+            "linear",
+            "linear"
+          ],
+          [
+            "cubic",
+            "cubic"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "fill",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "fill_spacetime",
+    "message0": "fill along %1 %2 using %3",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "dimension",
+        "options": [
+          [
+            "time",
+            "TIME"
+          ],
+          [
+            "space",
+            "SPACE"
+          ],
+          [
+            "x",
+            "X"
+          ],
+          [
+            "y",
+            "Y"
+          ]
+        ]
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "method",
+        "options": [
+          [
+            "nearest",
+            "nearest"
+          ],
+          [
+            "linear",
+            "linear"
+          ],
+          [
+            "cubic",
+            "cubic"
+          ]
+        ]
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "fill",
+      "single_verb",
+      "verb"
+    ],
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  }
+]

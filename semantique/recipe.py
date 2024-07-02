@@ -1,4 +1,5 @@
 from semantique.processor.core import QueryProcessor, FakeProcessor
+from semantique.visualiser.visualise import show
 
 class QueryRecipe(dict):
   """Dict-like container to store instructions of a query recipe.
@@ -100,3 +101,13 @@ class QueryRecipe(dict):
       **config
     )
     return qp.optimize().execute()
+
+  def visualise(self):
+    """Visualise the recipe in a web browser.
+
+    This method visualises the recipe in a web browser. 
+    The visualisation is based on Blockly, a web-based visual programming
+    editor. The recipe is converted into Blockly XML format and served
+    to the browser.
+    """
+    show(self)
