@@ -398,6 +398,7 @@ class Array():
         dimensions.
 
     """
+    # Tbd: Is grouper vault forwarded?
     # Get dimensions of the input.
     obj = self._obj
     odims = obj.dims
@@ -1656,8 +1657,16 @@ class MetaArray(Array):
           out.sqm.vault = self._merge_arrays_vaults(list(operands))
         else:
           out = self._obj
+      # replace all non-NaN values with 1
+      out.values = np.where(~np.isnan(out.values), 1, np.nan)
     else:
-      out = self._obj
+      if operator.__name__ in ["is_missing_", "not_missing_"]:
+        out = operator(*operands, track_types = track_types, meta = True, **kwargs)
+        out.sqm.active = self.active
+        out.sqm.locked = self.locked
+        out.sqm.vault = self.vault
+      else:
+        out = self._obj
     return out
 
 
@@ -1804,6 +1813,7 @@ class MetaArray(Array):
     """
     # Xarray treats null values as True but they should not pass the filter.
     filterer.values = utils.null_as_zero(filterer)
+    # Tbd: What if after locking intersection with another layer (full extent) is made?
     # Apply filter only if not locked.
     if any([self.locked, filterer.sqm.locked]):
       out = self._obj
@@ -2141,9 +2151,7 @@ class MetaArray(Array):
     return out
 
   def trim(self, dimension = None, **kwargs):
-    """Apply the trim verb to the array. This method is structured the same way 
-    as it is structured for Array objects but effectively muted,
-    i.e. the current object is simply handed back.
+    """Apply the trim verb to the array.
 
     The trim verb trims the dimensions of an array, meaning that all dimension
     coordinates for which all values are missing are removed from the array.
@@ -2160,8 +2168,34 @@ class MetaArray(Array):
     -------
       :obj:`xarray.DataArray`
 
+    Raises
+    ------
+      :obj:`exceptions.UnknownDimensionError`
+        If a dimension with the given name is not present in the array.
+
     """
-    return self._obj
+    obj = self._obj
+    dims = obj.dims
+    if dimension is None:
+      if X in dims and Y in dims:
+        regular_dims = [d for d in dims if d not in [X, Y]]
+        out = self._trim_space(self._trim(obj, regular_dims))
+      else:
+        out = self._trim(obj, dims)
+    else:
+      if dimension == SPACE:
+        if X not in dims or Y not in dims:
+          raise exceptions.UnknownDimensionError(
+            f"Spatial dimensions '{X}' and '{Y}' are not present in the array"
+          )
+        out = self._trim_space(obj)
+      else:
+        if dimension not in obj.dims:
+          raise exceptions.UnknownDimensionError(
+            f"Dimension '{dimension}' is not present in the array"
+          )
+        out = self._trim(obj, [dimension])
+    return out
 
   def delineate(self, track_types = False, **kwargs):
     """Apply the delineate verb to the array. This method is structured the same way 
@@ -2926,7 +2960,13 @@ class MetaCollection(Collection):
       :obj:`xarray.DataArray`
 
     """
-    out = self.sqm.merge(reducers.any_, track_types=track_types)
+    out = super(MetaCollection, self).compose(
+      track_types=track_types,
+      **kwargs
+    )
+    out.sqm.active = self.active
+    out.sqm.locked = self.locked
+    out.sqm.vault = self.vault
     return out
 
   def concatenate(self, dimension, track_types = False,
