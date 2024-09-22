@@ -1470,60 +1470,88 @@ class FilterProcessor(QueryProcessor):
     _ = self.fp.optimize().execute()
     lyrs = [list(x) for x in set(tuple(x) for x in self.fp.cache.seq)]
     self._response = {"_".join(x): {} for x in lyrs}
+
     if self._contains_filter(self.recipe):
-      # Execute instructions for each layer & result in the recipe.
-      for lyr in lyrs:
-        self.watch_layer = "_".join(lyr)
-        logger.info(f"Evaluate temporal filter for layer: '{lyr}'")
-        for x in self._recipe:
-          logger.info(f"Started executing result: '{x}'")
-          result = self.call_handler(self._recipe[x])
-          result.name = x
-          self._response[self.watch_layer][x] = result
-          logger.info(f"Finished executing result: '{x}'")
-      logger.info("Finished executing the semantic query")
-      # Omit non-active results.
-      for lyr,arr_dict in self._response.items():
-        self._response[lyr] = {
-          k: v for k, v in arr_dict.items() if v.sqm.active
-        }
-      # Combine temporal extents of Collections.
-      for lyr,arr_dict in self._response.items():
-        for k,v in arr_dict.items():
-          if type(v.sqm).__name__ == 'MetaCollection':
-            self._response[lyr][k] = v.sqm.merge(reducers.any_, track_types=False)
-      # Retrieve valid temporal indices per layer and result.
-      # Valid indices are those that are not null.
-      for lyr,arr_dict in self._response.items():
-        for res,arr in arr_dict.items():
-          # Create empty response obj.
-          out = []
-          # Reduce arrays to at most 3 dimensions.
-          if arr.ndim > 3:
-            dim = [x for x in arr.dims if x not in ["time", "x", "y"]]
-            assert len(dim) == 1, "Only one dimension can be reduced"
-            arr = arr.sqm.reduce(reducers.any_, dim[0], track_types=False)
-          # Extract temporal indices from array itself.
-          if "time" in arr.dims:
-            reduce_dims = [x for x in arr.dims if x != "time"]
-            out.append(arr.time[arr.isnull().sum(reduce_dims) == 0])
-          # Extract saved results from vault.
-          if arr.sqm.vault is not None:
-            out.append(arr.sqm.vault)
-          # Combine results from array and vault.
-          if len(out) > 1:
-            out = xr.DataArray(np.unique(np.concatenate(out)), dims="time", name="time")
-          else:
-            out = out[0]
-          self._response[lyr][res] = out
-      # Create temporal extents' union over results for each layer.
-      for lyr,arr_dict in self._response.items():
-        time_coords = [arr_dict[key].values for key in arr_dict]
-        merged_time = np.unique(np.concatenate(time_coords))
-        merged_time.sort()
-        self._response[lyr] = pd.to_datetime(merged_time)
+      # Recipe contains temporal filter.
+      skip_filter = False
+      try:
+        # Execute instructions for each layer & result in the recipe.
+        for lyr in lyrs:
+          self.watch_layer = "_".join(lyr)
+          logger.info(f"Evaluate temporal filter for layer: '{lyr}'")
+          for x in self._recipe:
+            logger.info(f"Started executing result: '{x}'")
+            result = self.call_handler(self._recipe[x])
+            result.name = x
+            self._response[self.watch_layer][x] = result
+            logger.info(f"Finished executing result: '{x}'")
+        logger.info("Finished executing the semantic query")
+        # Omit non-active results.
+        for lyr,arr_dict in self._response.items():
+          self._response[lyr] = {
+            k: v for k, v in arr_dict.items() if v.sqm.active
+          }
+        # Post-processing to arrive at set of arrays as results.
+        # Combine temporal extents of Collections.
+        for lyr,arr_dict in self._response.items():
+          for k,v in arr_dict.items():
+            if type(v.sqm).__name__ == 'MetaCollection':
+              # Fill datetime arrays with ones.
+              for i,arr in enumerate(v):
+                if np.issubdtype(arr.dtype, np.datetime64):
+                  v[i] = xr.ones_like(arr, dtype="int32")
+            if type(v.sqm).__name__ == 'MetaCollection':
+              self._response[lyr][k] = v.sqm.merge(reducers.any_, track_types=False)
+        # Retrieve valid temporal indices per layer and result.
+        # Valid indices are those that are not null.
+        response = copy.deepcopy(self._response)
+        for lyr,arr_dict in self._response.items():
+          for res,arr in arr_dict.items():
+            # Create empty response obj.
+            out = []
+            # Reduce arrays to at most 3 dimensions.
+            if arr.ndim > 3:
+              dim = [x for x in arr.dims if x not in ["time", "x", "y"]]
+              assert len(dim) == 1, "Only one dimension can be reduced"
+              arr = arr.sqm.reduce(reducers.any_, dim[0], track_types=False)
+            # Extract temporal indices from array itself.
+            if "time" in arr.dims:
+              reduce_dims = [x for x in arr.dims if x != "time"]
+              out.append(arr.time[arr.isnull().sum(reduce_dims) == 0])
+            # Extract saved results from vault.
+            if arr.sqm.vault is not None:
+              out.append(arr.sqm.vault)
+            # Combine results from array and vault.
+            if len(out):
+              if len(out) > 1:
+                out = xr.DataArray(np.unique(np.concatenate(out)), dims="time", name="time")
+              else:
+                out = out[0]
+              response[lyr][res] = out
+            else:
+              # If no valid temporal indices are found, remove result.
+              # Occurs if result are extracted spatial coordinates.
+              response[lyr].pop(res)
+        self._response = response
+        # Omit empty layer results.
+        self._response = {k:v for k,v in self._response.items() if v}
+        if len(self._response):
+          # Create temporal extents' union over results for each layer.
+          for lyr,arr_dict in self._response.items():
+            time_coords = [arr_dict[key].values for key in arr_dict]
+            merged_time = np.unique(np.concatenate(time_coords))
+            merged_time.sort()
+            self._response[lyr] = pd.to_datetime(merged_time)
+        else:
+          skip_filter = True
+      except Exception as e:
+        skip_filter = True
+        logger.error(f"An error occurred during FilterProcessor execution: {e}")
+        logger.error("FilterProcessor evaluation is skipped.")
     else:
-      # Shortcut if no temporal filter is present.
+      skip_filter = True
+    # Shortcut if no temporal filter is present.
+    if skip_filter:
       for lyr in lyrs:
         self._response["_".join(lyr)] = pd.to_datetime(self.meta_timestamps)
     # Return result.

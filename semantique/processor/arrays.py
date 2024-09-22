@@ -398,7 +398,6 @@ class Array():
         dimensions.
 
     """
-    # Tbd: Is grouper vault forwarded?
     # Get dimensions of the input.
     obj = self._obj
     odims = obj.dims
@@ -1657,9 +1656,11 @@ class MetaArray(Array):
           out.sqm.vault = self._merge_arrays_vaults(list(operands))
         else:
           out = self._obj
-      # replace all non-NaN values with 1
+      # Only NaN values should be passed through the filter.
+      # Others are result of content-based ops and should be reset to 1.
       out.values = np.where(~np.isnan(out.values), 1, np.nan)
     else:
+      # Missing ops invert the filter result and should be evaluated.
       if operator.__name__ in ["is_missing_", "not_missing_"]:
         out = operator(*operands, track_types = track_types, meta = True, **kwargs)
         out.sqm.active = self.active
@@ -1813,7 +1814,6 @@ class MetaArray(Array):
     """
     # Xarray treats null values as True but they should not pass the filter.
     filterer.values = utils.null_as_zero(filterer)
-    # Tbd: What if after locking intersection with another layer (full extent) is made?
     # Apply filter only if not locked.
     if any([self.locked, filterer.sqm.locked]):
       out = self._obj
@@ -2064,7 +2064,8 @@ class MetaArray(Array):
       else:
           obj_to_save = obj
       # Extract valid temporal indices & set as attrs.
-      t_idxs = obj_to_save.time[obj_to_save.isnull().sum((X, Y)) == 0]
+      reduce_dims = [x for x in obj_to_save.dims if x != TIME]
+      t_idxs = obj_to_save.time[obj_to_save.isnull().sum(reduce_dims) == 0]
       obj.sqm.vault = t_idxs
     # Reduce.
     out = reducer(
@@ -2848,12 +2849,12 @@ class MetaCollection(Collection):
         if arr.sqm.active:
           # Reduce arrays to 3 dimensions.
           if arr.ndim > 3:
-            dim = [x for x in arr.dims if x not in ["time", "x", "y"]]
+            dim = [x for x in arr.dims if x not in [TIME, "x", "y"]]
             assert len(dim) == 1, "Only one dimension can be reduced"
             arr = arr.sqm.reduce(reducers.any_, dim[0], track_types=False)
           # Extract temporal indices from array itself.
-          if "time" in arr.dims:
-            reduce_dims = [x for x in arr.dims if x != "time"]
+          if TIME in arr.dims:
+            reduce_dims = [x for x in arr.dims if x != TIME]
             tidxs.append(arr.time[arr.isnull().sum(reduce_dims) == 0])
           # Extract saved results from vault.
           if arr.sqm.vault is not None:
@@ -2861,19 +2862,21 @@ class MetaCollection(Collection):
       # Combine results.
       if len(tidxs) > 1:
         tidxs = np.concatenate(tidxs)
-      tidxs = xr.DataArray(np.unique(tidxs), dims="time", name="time")
+      tidxs = xr.DataArray(np.unique(tidxs), dims=TIME, name=TIME)
       # Broadcast to equal time dimension.
       if (
-        any(["time" in x.dims for x in list_obj]) and 
-        not all(["time" in x.dims for x in list_obj])
+        any([TIME in x.dims for x in list_obj]) and 
+        not all([TIME in x.dims for x in list_obj])
       ):
         for i,arr in enumerate(list_obj):
-          if "time" not in arr.dims:
+          if TIME not in arr.dims:
             list_obj[i] = arr.expand_dims({'time': tidxs})
       # Fill inactive arrays with ones at coords where tidxs are given, else NaN.
-      for x in list_obj:
-        if not x.sqm.active:
-          x.values = xr.where(x.time.isin(tidxs), xr.ones_like(x), xr.full_like(x, np.NaN))
+      if any([TIME in x.dims for x in list_obj]):
+        for x in list_obj:
+          if not x.sqm.active:
+            cond = x.time.isin(tidxs).broadcast_like(x)
+            x.values = xr.where(cond, xr.ones_like(x), xr.full_like(x, np.NaN))
       # Create response object.
       super(MetaCollection, self).__init__(list_obj)
       self._active = True
@@ -3275,7 +3278,7 @@ class MetaCollection(Collection):
     if any([x.sqm.active and x.sqm.vault is not None for x in arrays]):
       vaults = [x.sqm.vault for x in arrays if (x.sqm.active and x.sqm.vault is not None)]
       vault = np.unique(np.concatenate(vaults))
-      out = xr.DataArray(vault, dims="time", name="time")
+      out = xr.DataArray(vault, dims=TIME, name=TIME)
     else:
       out = None
     return out
