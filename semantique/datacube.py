@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import xarray as xr
 
 import copy
@@ -14,17 +15,20 @@ import rasterio
 import rioxarray
 import stackstac
 import warnings
+import zipfile
 
 from abc import abstractmethod
 from datacube.utils import masking
 from pystac_client.stac_api_io import StacApiIO
 from rasterio.errors import RasterioIOError
+from rasterio.io import MemoryFile
 from shapely.geometry import box, shape
 from shapely.ops import transform
 from urllib3 import Retry
 
 from semantique import exceptions
 from semantique.dimensions import TIME, SPACE, X, Y
+from semantique.processor import utils
 
 class Datacube():
   """Base class for EO data cube configurations.
@@ -105,6 +109,10 @@ class Opendatacube(Datacube):
       EO data cube is constructed.
     connection : :obj:`datacube.Datacube`
       Opendatacube interface object allowing to read from the data cube.
+    data_dict : :obj:`dict`
+      Dictionary with layer references as keys and dataset UUIDs to be loaded
+      as values. Allows to restrict the data when performing a database lookup.
+      If :obj:`None`, all datasets within the OpenDataCube are accessible.
     tz
       Timezone of the temporal coordinates in the EO data cube. Can be given as
       :obj:`str` referring to the name of a timezone in the tz database, or
@@ -158,9 +166,17 @@ class Opendatacube(Datacube):
 
   """
 
-  def __init__(self, layout = None, connection = None, tz = "UTC", **config):
+  def __init__(
+      self,
+      layout = None,
+      connection = None,
+      data_dict = None,
+      tz = "UTC",
+      **config
+    ):
     super(Opendatacube, self).__init__(layout)
     self.connection = connection
+    self.data_dict = data_dict
     self.tz = tz
     # Update default configuration parameters with provided ones.
     params = self._default_config
@@ -178,6 +194,17 @@ class Opendatacube(Datacube):
     if value is not None:
       assert isinstance(value, datacube.Datacube)
     self._connection = value
+
+  @property
+  def data_dict(self):
+    """:obj:`dict`: Dict with product Ids by the Opendatacube as values."""
+    return self._data_dict
+
+  @data_dict.setter
+  def data_dict(self, value):
+    if value is not None:
+      assert isinstance(value, dict)
+    self._data_dict = value
 
   @property
   def tz(self):
@@ -311,6 +338,78 @@ class Opendatacube(Datacube):
     data = data.astype("float")
     return data
 
+  def retrieve_metadata(self, *reference, extent):
+    """Retrieve metadata for a data layer from the EO data cube.
+    Metadata contains the timestamp & spatial bounding box, both in the
+    extent objects spatio-temporal reference systems (tz and crs).
+
+    Parameters
+    ----------
+      *reference:
+        The index of the data layer in the layout of the EO data cube.
+      extent : :obj:`xarray.DataArray`
+        Spatio-temporal extent in which the data should be retrieved. Should be
+        given as an array with a temporal dimension and two spatial dimensions,
+        such as returned by
+        :func:`parse_extent <semantique.processor.utils.parse_extent>`.
+        The retrieved subset of the EO data cube will have the same extent.
+
+    Returns
+    -------
+      :obj:`pd.DataFrame`
+        The metadata for the data layer.
+
+    """
+    # Solve the reference by obtaining the corresponding metadata object.
+    metadata = self.lookup(*reference)
+    # Check if extent is valid.
+    if TIME not in extent.dims:
+      raise exceptions.MissingDimensionError(
+        "Cannot retrieve data in an extent without a temporal dimension"
+      )
+    if X not in extent.dims or Y not in extent.dims:
+      raise exceptions.MissingDimensionError(
+        "Cannot retrieve data in an extent without spatial dimensions"
+      )
+    # Create a template for the metadata to be loaded.
+    names = {Y: "y", X: "x", TIME: "time"}
+    like = extent.sq.tz_convert(self.tz).sq.rename_dims(names).to_dataset()
+    # Compose metadata query.
+    query = datacube.api.query.Query(
+        product = metadata["product"],
+        like = like,
+        group_by = "solar_day" if self.config["group_by_solar_day"] else None
+        )
+    # Execute metadata search.
+    ds = self.connection.find_datasets(**query.search_terms)
+    # Prepare lists to collect metadata items.
+    ids = []
+    times = []
+    bboxes = []
+    # Create transformers for CRS.
+    dst_crs = pyproj.CRS(extent.rio.crs)
+    src_crs = [x.crs for x in ds]
+    src_crs_unique = [pyproj.CRS(x) for x in set(src_crs)]
+    src_crs_names = [str(x) for x in set(src_crs)]
+    transformers = [
+        pyproj.Transformer.from_crs(src, dst_crs, always_xy=True)
+        for src in src_crs_unique
+    ]
+    transformers = {n:t for n,t in zip(src_crs_names, transformers)}
+    # Collect results in a loop.
+    for i, x in enumerate(ds):
+        ids.append(x.id)
+        # Get datetime in destination tz
+        dt = np.datetime64(x.center_time.replace(tzinfo=None))
+        dt = utils.convert_datetime64(dt, self.tz, extent.sq.tz)
+        times.append(dt)
+        # Get bbox in destination crs
+        bbox = box(*transformers[x.crs].transform_bounds(*x.bounds))
+        bboxes.append(bbox)
+    # Return metadata dataframe
+    df = pd.DataFrame({"id": ids, "time": times, "bbox": bboxes})
+    return df
+
   def _load(self, metadata, extent):
     # Check if extent is valid.
     if TIME not in extent.dims:
@@ -330,13 +429,21 @@ class Opendatacube(Datacube):
     # ODC takes care of spatial transformations internally.
     names = {Y: "y", X: "x", TIME: "time"}
     like = extent.sq.tz_convert(self.tz).sq.rename_dims(names).to_dataset()
+    # Define predicate function.
+    def filter_id(dataset):
+      if self._data_dict is not None:
+        lyr = "_".join(metadata['reference'])
+        return dataset.id in self._data_dict[lyr]
+      else:
+        return True
     # Call ODC load function to load data as xarray dataset.
     data = self.connection.load(
       product = metadata["product"],
       measurements = [metadata["name"]],
       like = like,
       resampling = self.config["resamplers"][metadata["type"]],
-      group_by = "solar_day" if self.config["group_by_solar_day"] else None
+      group_by = "solar_day" if self.config["group_by_solar_day"] else None,
+      dataset_predicate = filter_id
     )
     # Return as xarray dataarray.
     try:
@@ -600,6 +707,74 @@ class GeotiffArchive(Datacube):
     data = data.astype("float")
     return data
 
+
+  def retrieve_metadata(self, *reference, extent):
+    """Retrieve metadata for a data layer from the EO data cube.
+    Metadata contains the timestamp & spatial bounding box, both in the
+    extent objects spatio-temporal reference systems (tz and crs).
+
+    Parameters
+    ----------
+      *reference:
+        The index of the data layer in the layout of the EO data cube.
+      extent : :obj:`xarray.DataArray`
+        Spatio-temporal extent in which the data should be retrieved. Should be
+        given as an array with a temporal dimension and two spatial dimensions,
+        such as returned by
+        :func:`parse_extent <semantique.processor.utils.parse_extent>`.
+        The retrieved subset of the EO data cube will have the same extent.
+
+    Returns
+    -------
+      :obj:`pd.DataFrame`
+        The metadata for the data layer.
+    """
+    # Solve the reference by obtaining the corresponding metadata object.
+    metadata = self.lookup(*reference)
+    # Check if extent is valid
+    if TIME not in extent.dims:
+      raise exceptions.MissingDimensionError(
+        "Cannot retrieve data in an extent without a temporal dimension"
+      )
+    if X not in extent.dims or Y not in extent.dims:
+      raise exceptions.MissingDimensionError(
+        "Cannot retrieve data in an extent without spatial dimensions"
+      )
+    # Initialize lists to collect metadata items
+    ids = []
+    times = []
+    bboxes = []
+    # Open the zip file
+    with zipfile.ZipFile(self.src, 'r') as z:
+      # Open the specific file inside the zip using rasterio MemoryFile
+      with z.open(metadata["file"]) as file:
+        with MemoryFile(file) as memfile:
+          with memfile.open() as src:
+            # Get bounding box in destination CRS
+            dst_crs = pyproj.CRS(extent.rio.crs)
+            transformer = pyproj.Transformer.from_crs(
+              pyproj.CRS(src.crs),
+              dst_crs,
+              always_xy=True
+            )
+            transformed_bounds = transformer.transform_bounds(*src.bounds)
+            bbox = box(*transformed_bounds)
+            # Subset spatially.
+            if box(*extent.rio.bounds()).intersects(bbox):
+              for i, idx in enumerate(src.indexes):
+                # Get datetime in destination tz
+                dt = np.datetime64(src.descriptions[i])
+                dt = utils.convert_datetime64(dt, self.tz, extent.sq.tz)
+                # Subset temporally.
+                bounds = extent[TIME].values
+                if dt >= bounds[0] and dt <= bounds[1]:
+                  ids.append(idx)
+                  times.append(dt)
+                  bboxes.append(bbox)
+    # Return metadata dataframe
+    df = pd.DataFrame({"id": ids, "time": times, "bbox": bboxes})
+    return df
+
   def _load(self, metadata, extent):
     # Check if extent is valid.
     if TIME not in extent.dims:
@@ -766,7 +941,7 @@ class STACCube(Datacube):
         if value is not None:
             assert np.all([isinstance(x, pystac.item.Item) for x in value])
         self._src = value
-   
+
     @property
     def _default_config(self):
         return {
@@ -880,6 +1055,96 @@ class STACCube(Datacube):
             data = data.sq.trim()
         return data
 
+    def retrieve_metadata(self, *reference, extent):
+        """Retrieve metadata for a data layer from the EO data cube.
+        Metadata contains the timestamp & spatial bounding box, both in the
+        extent objects spatio-temporal reference systems (tz and crs).
+
+        Parameters
+        ----------
+          *reference:
+            The index of the data layer in the layout of the EO data cube.
+          extent : :obj:`xarray.DataArray`
+            Spatio-temporal extent in which the data should be retrieved. Should be
+            given as an array with a temporal dimension and two spatial dimensions,
+            such as returned by
+            :func:`parse_extent <semantique.processor.utils.parse_extent>`.
+            The retrieved subset of the EO data cube will have the same extent.
+
+        Returns
+        -------
+            :obj:`pd.DataFrame`
+            The metadata for the data layer.
+        """
+        # Solve the reference by obtaining the corresponding metadata object.
+        metadata = self.lookup(*reference)
+        # Check if extent is valid
+        if TIME not in extent.dims:
+            raise exceptions.MissingDimensionError(
+              "Cannot retrieve data in an extent without a temporal dimension"
+            )
+        if X not in extent.dims or Y not in extent.dims:
+            raise exceptions.MissingDimensionError(
+              "Cannot retrieve data in an extent without spatial dimensions"
+            )
+        # Subset temporally and spatially
+        if "spatial_feats" in extent.coords:
+            extent = extent.drop_vars("spatial_feats")
+        epsg = int(str(extent.rio.crs)[5:])
+        t_bounds = extent.sq.tz_convert(self.tz).time.values
+        item_coll = STACCube._filter_spatio_temporal(
+            self.src,
+            extent.rio.bounds(),
+            epsg,
+            t_bounds[0],
+            t_bounds[1]
+        )
+        # Subset by layer key
+        filtered_items = []
+        for item in item_coll:
+            for asset_name, asset in item.assets.items():
+                if asset_name == metadata["name"]:
+                    if 'semantique:key' in asset.extra_fields:
+                        asset_key = asset.extra_fields['semantique:key']
+                        if "_".join(asset_key) == "_".join(reference):
+                            keep = True
+                            break
+                        else:
+                            keep = False
+                    else:
+                        if any([
+                          'semantique:key' in x.extra_fields
+                          for x in item.assets.values()
+                        ]):
+                            keep = False
+                        else:
+                            keep = True
+                            break
+                else:
+                    keep = False
+            if keep:
+                filtered_items.append(item)
+        item_coll = filtered_items
+        # STAC Item ID is not globally unique (only within a collection)
+        coll_ids = [x.get_collection().id for x in item_coll]
+        item_ids = [x.id for x in item_coll]
+        ids = [(id1, id2) for id1, id2 in zip(coll_ids, item_ids)]
+        # Retrieve timestamps in destination tz
+        times = [x.get_datetime().replace(tzinfo=None) for x in item_coll]
+        times = [utils.convert_datetime64(x, self.tz, extent.sq.tz) for x in times]
+        # Retrieve bounding boxes in destination CRS
+        dst_crs = pyproj.CRS(extent.rio.crs)
+        transformer = pyproj.Transformer.from_crs(
+            pyproj.CRS("EPSG:4326"),
+            dst_crs,
+            always_xy=True
+        )
+        bboxes = [transformer.transform_bounds(*x.bbox) for x in item_coll]
+        bboxes = [box(*x) for x in bboxes]
+        # Return metadata dataframe
+        df = pd.DataFrame({"id": ids, "time": times, "bbox": bboxes})
+        return df
+
     def _load(self, metadata, extent):
         # check if extent is valid
         if TIME not in extent.dims:
@@ -908,7 +1173,7 @@ class STACCube(Datacube):
         if "spatial_feats" in extent.coords:
             extent = extent.drop_vars("spatial_feats")
         t_bounds = extent.sq.tz_convert(self.tz).time.values
-        item_coll = STACCube.filter_spatio_temporal(
+        item_coll = STACCube._filter_spatio_temporal(
           self.src,
           extent.rio.bounds(),
           epsg,
@@ -916,12 +1181,14 @@ class STACCube(Datacube):
           t_bounds[1]
         )
 
-        # subset according to layer key
+        # subset according to matching layer key
+        # semantique:key as it may be specified in the asset properties of an
+        # item is matched with the layer reference as given by the layout file
         filtered_items = []
         for item in item_coll:
             has_no_key = True
             has_conformant_key = False
-            for asset_key, asset in item.assets.items():
+            for asset in item.assets.values():
                 if 'semantique:key' in asset.extra_fields:
                     has_no_key = False
                     asset_key = asset.extra_fields['semantique:key']
@@ -1065,7 +1332,7 @@ class STACCube(Datacube):
         return [lst[i : i + k] for i in range(0, len(lst), k)]
 
     @staticmethod
-    def filter_spatio_temporal(item_collection, bbox, bbox_crs, start_datetime, end_datetime):
+    def _filter_spatio_temporal(item_collection, bbox, bbox_crs, start_datetime, end_datetime):
         """
         Filter item collection by spatio-temporal extent.
 

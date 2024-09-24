@@ -4,12 +4,14 @@ import pandas as pd
 import copy
 import inspect
 import logging
+import pystac
 import pyproj
 import pytz
 import warnings
 import xarray as xr
 
 from datetime import datetime
+from semantique import datacube
 from semantique import exceptions
 from semantique.dimensions import TIME, SPACE, X, Y
 from semantique.processor import arrays, operators, reducers, values, utils
@@ -1375,16 +1377,19 @@ class FilterProcessor(QueryProcessor):
       The cache object that is used to store data layers.
     watch_layer : :obj:`str`
       The layer that is currently being focussed on. All temporal filter operations
-      are analyzed regarding the effect they are having on this layer.
+      are analyzed regarding the effect they are having on this layer. Doesn't need
+      to be set by the user but will be set dynamically upon calling .execute().
     meta_timestamps : :obj:`DatetimeIndex` or :obj:`Series`
-      The timestamps that are used as a starting point to determine the final
-      temporal extent. The timestamps will be filtered by the temporal filters.
-      If not provided, a default range from 1960 to the current time in hourly
-      intervals is used to evaluate the temporal filters.
+      The timestamps that are used as a starting point to determine the final temporal
+      extent. The timestamps will be filtered by the temporal filters. If left to `None`,
+      the timestamps will be retrieved dynamically from the referenced data layers upon
+      calling .execute(). Only for test purposes meta_timestamps should be provided by
+      the user.
   """
   def __init__(self, recipe, datacube, mapping, extent, custom_verbs = None,
                custom_operators = None, custom_reducers = None, track_types = True,
-               preview = False, cache = None, watch_layer = None, meta_timestamps = None):
+               preview = False, cache = None, watch_layer = None,
+               meta_timestamps = None):
     super(FilterProcessor, self).__init__(
       recipe, datacube, mapping, extent, custom_verbs=custom_verbs,
       custom_operators=custom_operators, custom_reducers=custom_reducers,
@@ -1392,15 +1397,7 @@ class FilterProcessor(QueryProcessor):
       )
     self.track_types = False
     self.watch_layer = watch_layer
-    if meta_timestamps is not None:
-      self.meta_timestamps = meta_timestamps
-    else:
-      self.meta_timestamps = pd.date_range(
-        start = '1960-01-01',
-        end = datetime.now(),
-        freq = 'h'
-      )
-    self.meta_timestamps = pd.to_datetime(self.meta_timestamps).sort_values()
+    self.meta_timestamps = meta_timestamps
 
   @property
   def crs(self):
@@ -1454,8 +1451,9 @@ class FilterProcessor(QueryProcessor):
 
     """
     logger.info("Started executing the semantic query")
-    # Run fake processor to get a dict of all layers to init response object
-    self.fp = FakeProcessor(
+
+    # Step 1: Run fake processor to get a dict of all layers.
+    self.fap = FakeProcessor(
       recipe=self.recipe,
       datacube=self.datacube,
       mapping=self.mapping,
@@ -1467,95 +1465,182 @@ class FilterProcessor(QueryProcessor):
       preview=self.preview,
       cache=self.cache
     )
-    _ = self.fp.optimize().execute()
-    lyrs = [list(x) for x in set(tuple(x) for x in self.fp.cache.seq)]
+    _ = self.fap.optimize().execute()
+    lyrs = [list(x) for x in set(tuple(x) for x in self.fap.cache.seq)]
     self._response = {"_".join(x): {} for x in lyrs}
 
+    # Step 2.a: Temporal filter evaluation.
     if self._contains_filter(self.recipe):
-      # Recipe contains temporal filter.
       skip_filter = False
       try:
-        # Execute instructions for each layer & result in the recipe.
-        for lyr in lyrs:
-          self.watch_layer = "_".join(lyr)
-          logger.info(f"Evaluate temporal filter for layer: '{lyr}'")
-          for x in self._recipe:
-            logger.info(f"Started executing result: '{x}'")
-            result = self.call_handler(self._recipe[x])
-            result.name = x
-            self._response[self.watch_layer][x] = result
-            logger.info(f"Finished executing result: '{x}'")
-        logger.info("Finished executing the semantic query")
-        # Omit non-active results.
-        for lyr,arr_dict in self._response.items():
-          self._response[lyr] = {
-            k: v for k, v in arr_dict.items() if v.sqm.active
-          }
-        # Post-processing to arrive at set of arrays as results.
-        # Combine temporal extents of Collections.
-        for lyr,arr_dict in self._response.items():
-          for k,v in arr_dict.items():
-            if type(v.sqm).__name__ == 'MetaCollection':
-              # Fill datetime arrays with ones.
-              for i,arr in enumerate(v):
-                if np.issubdtype(arr.dtype, np.datetime64):
-                  v[i] = xr.ones_like(arr, dtype="int32")
-            if type(v.sqm).__name__ == 'MetaCollection':
-              self._response[lyr][k] = v.sqm.merge(reducers.any_, track_types=False)
-        # Retrieve valid temporal indices per layer and result.
-        # Valid indices are those that are not null.
-        response = copy.deepcopy(self._response)
-        for lyr,arr_dict in self._response.items():
-          for res,arr in arr_dict.items():
-            # Create empty response obj.
-            out = []
-            # Reduce arrays to at most 3 dimensions.
-            if arr.ndim > 3:
-              dim = [x for x in arr.dims if x not in ["time", "x", "y"]]
-              assert len(dim) == 1, "Only one dimension can be reduced"
-              arr = arr.sqm.reduce(reducers.any_, dim[0], track_types=False)
-            # Extract temporal indices from array itself.
-            if "time" in arr.dims:
-              reduce_dims = [x for x in arr.dims if x != "time"]
-              out.append(arr.time[arr.isnull().sum(reduce_dims) == 0])
-            # Extract saved results from vault.
-            if arr.sqm.vault is not None:
-              out.append(arr.sqm.vault)
-            # Combine results from array and vault.
-            if len(out):
-              if len(out) > 1:
-                out = xr.DataArray(np.unique(np.concatenate(out)), dims="time", name="time")
-              else:
-                out = out[0]
-              response[lyr][res] = out
-            else:
-              # If no valid temporal indices are found, remove result.
-              # Occurs if result are extracted spatial coordinates.
-              response[lyr].pop(res)
-        self._response = response
-        # Omit empty layer results.
-        self._response = {k:v for k,v in self._response.items() if v}
-        if len(self._response):
-          # Create temporal extents' union over results for each layer.
-          for lyr,arr_dict in self._response.items():
-            time_coords = [arr_dict[key].values for key in arr_dict]
-            merged_time = np.unique(np.concatenate(time_coords))
-            merged_time.sort()
-            self._response[lyr] = pd.to_datetime(merged_time)
+        # Step 2.1.1: Retrieve timestamps of data layers to be filtered.
+        if self.meta_timestamps is None:
+          meta_retrieved = True
+          if type(self.datacube) == datacube.Opendatacube:
+            # Retrieve products to look up.
+            lyr_prods_lut = {}
+            for ref in self.fap.cache.seq:
+              lyr_prods_lut[ref] = self.datacube.lookup(*ref)["product"]
+            # Retrieve timestamps of prods.
+            meta_dfs = []
+            prods = list(set(lyr_prods_lut.values()))
+            for prod in prods:
+              ref_idx = list(lyr_prods_lut.values()).index(prod)
+              lyr = list(lyr_prods_lut.keys())[ref_idx]
+              df = self.datacube.retrieve_metadata(*lyr, extent=self._extent)
+              df.insert(0, "prod", prod)
+              meta_dfs.append(df)
+            _meta_df = pd.concat(meta_dfs).reset_index(drop=True)
+            # Expand meta df for lyr information.
+            meta_dfs = []
+            for lyr,prod in lyr_prods_lut.items():
+              df = _meta_df[_meta_df['prod'] == prod].copy()
+              df.insert(0, "lyr", "_".join(lyr))
+              meta_dfs.append(df)
+            meta_df = pd.concat(meta_dfs).reset_index(drop=True)
+            meta_df.drop(columns=["prod"], inplace=True)
+          elif type(self.datacube) == datacube.STACCube:
+            # Retrieve timestamps of references.
+            # Note: Contrary to ODC, .retrieve_metadata() can be called immediately
+            # since the metadata is already stored in the STACCube. Hence, no performance
+            # advantage by resolving products (=items instead of assets) first.
+            meta_dfs = []
+            for ref in self.fap.cache.seq:
+              df = self.datacube.retrieve_metadata(*ref, extent=self._extent)
+              df.insert(0, "lyr", "_".join(ref))
+              meta_dfs.append(df)
+            meta_df = pd.concat(meta_dfs).reset_index(drop=True)
+          elif type(self.datacube) == datacube.GeotiffArchive:
+            raise ValueError("FilterProcessor doesn't support GeotiffArchive.")
+          else:
+            raise ValueError(f"Datacube type {self.datacube} not supported.")
+          # Set meta timestamps to be analysed.
+          self.meta_timestamps = meta_df.time.unique()
         else:
-          skip_filter = True
+          meta_retrieved = False
+
+        if len(self.meta_timestamps):
+          # Step 2.1.2: Execute instructions for each layer & result in the recipe.
+          for lyr in lyrs:
+            self.watch_layer = "_".join(lyr)
+            logger.info(f"Evaluate temporal filter for layer: '{lyr}'")
+            for x in self._recipe:
+              logger.info(f"Started executing result: '{x}'")
+              result = self.call_handler(self._recipe[x])
+              result.name = x
+              self._response[self.watch_layer][x] = result
+              logger.info(f"Finished executing result: '{x}'")
+          logger.info("Finished executing the semantic query")
+
+          # Step 2.1.3: Postprocessing of results.
+          # Omit non-active results.
+          for lyr,arr_dict in self._response.items():
+            self._response[lyr] = {
+              k: v for k, v in arr_dict.items() if v.sqm.active
+            }
+          # Combine temporal extents of Collections.
+          # Arrive at set of arrays as results.
+          for lyr,arr_dict in self._response.items():
+            for k,v in arr_dict.items():
+              if type(v.sqm).__name__ == 'MetaCollection':
+                # Fill datetime arrays with ones.
+                for i,arr in enumerate(v):
+                  if np.issubdtype(arr.dtype, np.datetime64):
+                    v[i] = xr.ones_like(arr, dtype="int32")
+              if type(v.sqm).__name__ == 'MetaCollection':
+                self._response[lyr][k] = v.sqm.merge(reducers.any_, track_types=False)
+          # Retrieve valid temporal indices per layer and result.
+          # Valid indices are those that are not null.
+          response = copy.deepcopy(self._response)
+          for lyr,arr_dict in self._response.items():
+            for res,arr in arr_dict.items():
+              # Create empty response obj.
+              out = []
+              # Reduce arrays to at most 3 dimensions.
+              if arr.ndim > 3:
+                dim = [x for x in arr.dims if x not in ["time", "x", "y"]]
+                assert len(dim) == 1, "Only one dimension can be reduced"
+                arr = arr.sqm.reduce(reducers.any_, dim[0], track_types=False)
+              # Extract temporal indices from array itself.
+              if "time" in arr.dims:
+                reduce_dims = [x for x in arr.dims if x != "time"]
+                out.append(arr.time[arr.isnull().sum(reduce_dims) == 0])
+              # Extract saved results from vault.
+              if arr.sqm.vault is not None:
+                out.append(arr.sqm.vault)
+              # Combine results from array and vault.
+              if len(out):
+                if len(out) > 1:
+                  out = xr.DataArray(np.unique(np.concatenate(out)), dims="time", name="time")
+                else:
+                  out = out[0]
+                response[lyr][res] = out
+              else:
+                # If no valid temporal indices are found, remove result.
+                # Occurs if result are extracted spatial coordinates.
+                response[lyr].pop(res)
+          self._response = response
+          # Omit empty layer results.
+          self._response = {k:v for k,v in self._response.items() if v}
+          if len(self._response):
+            # Create temporal extents' union over results for each layer.
+            for lyr,arr_dict in self._response.items():
+              time_coords = [arr_dict[key].values for key in arr_dict]
+              merged_time = np.unique(np.concatenate(time_coords))
+              merged_time.sort()
+              self._response[lyr] = pd.to_datetime(merged_time)
+            # Sort response items.
+            self._response = {k: v for k, v in sorted(self._response.items())}
+          else:
+            skip_filter = True
       except Exception as e:
         skip_filter = True
-        logger.error(f"An error occurred during FilterProcessor execution: {e}")
-        logger.error("FilterProcessor evaluation is skipped.")
+        raise e
+        # logger.error(f"An error occurred during FilterProcessor execution: {e}")
+        # logger.error("FilterProcessor evaluation is skipped.")
     else:
       skip_filter = True
-    # Shortcut if no temporal filter is present.
+      meta_retrieved = False
+
+    # Step 2.b: Shortcut if no temporal filter is present.
+    # Keep all initial timestamps.
     if skip_filter:
       for lyr in lyrs:
         self._response["_".join(lyr)] = pd.to_datetime(self.meta_timestamps)
-    # Return result.
     self._response = {k: v for k, v in sorted(self._response.items())}
+
+    # Step 3: Update datacube dataset according to valid timestamps.
+    if meta_retrieved:
+      # Copy datacube to update.
+      _datacube = copy.deepcopy(self.datacube)
+      if type(self.datacube) == datacube.Opendatacube:
+        # Extract valid dataset ids corresponding to timestamps.
+        id_dict = {}
+        for k,v in self._response.items():
+          ids = meta_df[meta_df.lyr == k][meta_df.time.isin(pd.Series(v))].id
+          id_dict[k] = list(ids)
+        _datacube.data_dict = id_dict
+        self.datacube = _datacube
+      elif type(self.datacube) == datacube.STACCube:
+        _datacube.src = pystac.ItemCollection(self.datacube.src)
+        # Extract valid collection_item_Ids corresponding to timestamps.
+        id_list = []
+        for k,v in self._response.items():
+          ids = meta_df[meta_df.lyr == k][meta_df.time.isin(pd.Series(v))].id
+          id_list.extend(list(ids))
+        id_list = list(set(id_list))
+        # Subset item as input to datacube correspondigly.
+        if len(id_list):
+          filtered_items = []
+          for item in _datacube.src:
+            if (item.get_collection().id, item.id) in id_list:
+              filtered_items.append(item)
+          _datacube.src = filtered_items
+        else:
+          _datacube.src = []
+        self.datacube = _datacube
+
+    # Step 4: Return result.
     out = self._response
     logger.debug(f"Responding:\n{out}")
     return out
