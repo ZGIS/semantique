@@ -1450,9 +1450,10 @@ class FilterProcessor(QueryProcessor):
         containing the resulting timestamps that are processed in the recipe.
 
     """
-    logger.info("Started executing the semantic query")
+    logger.info("Started query processing for temporal filter evaluation.")
 
     # Step 1: Run fake processor to get a dict of all layers.
+    logger.info("Started fake query processing to resolve layer references.")
     self.fap = FakeProcessor(
       recipe=self.recipe,
       datacube=self.datacube,
@@ -1468,6 +1469,8 @@ class FilterProcessor(QueryProcessor):
     _ = self.fap.optimize().execute()
     lyrs = [list(x) for x in set(tuple(x) for x in self.fap.cache.seq)]
     self._response = {"_".join(x): {} for x in lyrs}
+    logger.info("Finished fake query processing to resolve layer references.")
+    logger.debug(f"Resolved layers: {lyrs}")
 
     # Step 2.a: Temporal filter evaluation.
     if self._contains_filter(self.recipe):
@@ -1497,6 +1500,8 @@ class FilterProcessor(QueryProcessor):
               df = _meta_df[_meta_df['prod'] == prod].copy()
               df.insert(0, "lyr", "_".join(lyr))
               meta_dfs.append(df)
+              logger.debug(f"Retrieved meta information for layer {lyr}:\n {df}")
+              logger.debug(f"Unique timestamps: {len(df.drop_duplicates(['time']))}")
             meta_df = pd.concat(meta_dfs).reset_index(drop=True)
             meta_df.drop(columns=["prod"], inplace=True)
           elif type(self.datacube) == datacube.STACCube:
@@ -1505,14 +1510,18 @@ class FilterProcessor(QueryProcessor):
             # since the metadata is already stored in the STACCube. Hence, no performance
             # advantage by resolving products (=items instead of assets) first.
             meta_dfs = []
-            for ref in self.fap.cache.seq:
-              df = self.datacube.retrieve_metadata(*ref, extent=self._extent)
-              df.insert(0, "lyr", "_".join(ref))
+            for lyr in list(set(self.fap.cache.seq)):
+              df = self.datacube.retrieve_metadata(*lyr, extent=self._extent)
+              df.insert(0, "lyr", "_".join(lyr))
               meta_dfs.append(df)
+              logger.debug(f"Retrieved meta information for layer {lyr}:\n {df}")
+              logger.debug(f"Unique timestamps: {len(df.drop_duplicates(['time']))}")
             meta_df = pd.concat(meta_dfs).reset_index(drop=True)
           elif type(self.datacube) == datacube.GeotiffArchive:
+            meta_retrieved = False
             raise ValueError("FilterProcessor doesn't support GeotiffArchive.")
           else:
+            meta_retrieved = False
             raise ValueError(f"Datacube type {self.datacube} not supported.")
           # Set meta timestamps to be analysed.
           self.meta_timestamps = meta_df.time.unique()
@@ -1530,7 +1539,6 @@ class FilterProcessor(QueryProcessor):
               result.name = x
               self._response[self.watch_layer][x] = result
               logger.info(f"Finished executing result: '{x}'")
-          logger.info("Finished executing the semantic query")
 
           # Step 2.1.3: Postprocessing of results.
           # Omit non-active results.
@@ -1595,9 +1603,8 @@ class FilterProcessor(QueryProcessor):
             skip_filter = True
       except Exception as e:
         skip_filter = True
-        raise e
-        # logger.error(f"An error occurred during FilterProcessor execution: {e}")
-        # logger.error("FilterProcessor evaluation is skipped.")
+        logger.error(f"An error occurred during FilterProcessor execution: {e}")
+        logger.error("FilterProcessor evaluation is skipped.")
     else:
       skip_filter = True
       meta_retrieved = False
@@ -1643,6 +1650,7 @@ class FilterProcessor(QueryProcessor):
     # Step 4: Return result.
     out = self._response
     logger.debug(f"Responding:\n{out}")
+    logger.info("Finished query processing for temporal filter evaluation.")
     return out
 
   def call_verb(self, name, params):
