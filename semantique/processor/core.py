@@ -1624,6 +1624,7 @@ class FilterProcessor(QueryProcessor):
         self.datacube.connection = None
         _datacube = copy.deepcopy(self.datacube)
         _datacube.connection = dc_con
+        self.datacube.connection = dc_con
         # Extract valid dataset ids corresponding to timestamps.
         id_dict = {}
         for k,v in self._response.items():
