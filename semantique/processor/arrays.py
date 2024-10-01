@@ -1812,13 +1812,17 @@ class MetaArray(Array):
       :obj:`xarray.DataArray`
 
     """
-    # Xarray treats null values as True but they should not pass the filter.
-    filterer.values = utils.null_as_zero(filterer)
     # Apply filter only if not locked.
     if any([self.locked, filterer.sqm.locked]):
       out = self._obj
     else:
-      out = self._obj.where(filterer.sqm.align_with(self._obj))
+      # Align/Broadcast
+      filterer = filterer.sqm.align_with(self._obj)
+      # Xarray treats null values as True but they should not pass the filter.
+      # Note: This also applies to the all NaN restored due to align_with.
+      # Consequence: Null as zero called after align_with.
+      filterer.values = utils.null_as_zero(filterer)
+      out = self._obj.where(filterer)
       out.sqm.active = any([self.active, filterer.sqm.active])
       out.sqm.locked = False
       out.sqm.vault = self._merge_arrays_vaults([self._obj, filterer])
