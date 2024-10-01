@@ -10,7 +10,6 @@ import pytz
 import warnings
 import xarray as xr
 
-from datetime import datetime
 from semantique import datacube
 from semantique import exceptions
 from semantique.dimensions import TIME, SPACE, X, Y
@@ -1301,8 +1300,7 @@ class FakeProcessor(QueryProcessor):
       custom_verbs = self._custom_verbs,
       custom_operators = self._custom_operators,
       custom_reducers = self._custom_reducers,
-      track_types = self._track_types,
-
+      track_types = self._track_types
     )
     logger.debug(f"Translated concept {block['reference']}:\n{out}")
     return out
@@ -1473,7 +1471,8 @@ class FilterProcessor(QueryProcessor):
     logger.debug(f"Resolved layers: {lyrs}")
 
     # Step 2.a: Temporal filter evaluation.
-    if self._contains_filter(self.recipe):
+    concepts = self._find_and_resolve_concepts(self.recipe)
+    if any([self._contains_filter(x) for x in [*concepts, self.recipe]]):
       skip_filter = False
       try:
         # Step 2.1.1: Retrieve timestamps of data layers to be filtered.
@@ -1626,6 +1625,9 @@ class FilterProcessor(QueryProcessor):
         for k,v in self._response.items():
           ids = meta_df[meta_df.lyr == k][meta_df.time.isin(pd.Series(v))].id
           id_dict[k] = list(ids)
+          logger.debug(f"Temporally filtered results for layer {k}")
+          logger.debug(f"- unique timestamps: {len(np.unique(v))}")
+          logger.debug(f"- unique datasets: {len(ids)}")
         _datacube.data_dict = id_dict
         self.datacube = _datacube
       elif type(self.datacube) == datacube.STACCube:
@@ -1635,6 +1637,9 @@ class FilterProcessor(QueryProcessor):
         for k,v in self._response.items():
           ids = meta_df[meta_df.lyr == k][meta_df.time.isin(pd.Series(v))].id
           id_list.extend(list(ids))
+          logger.debug(f"Temporally filtered results for layer {k}")
+          logger.debug(f"- unique timestamps: {len(np.unique(v))}")
+          logger.debug(f"- unique items: {len(ids)}")
         id_list = list(set(id_list))
         # Subset item as input to datacube correspondigly.
         if len(id_list):
@@ -1649,7 +1654,6 @@ class FilterProcessor(QueryProcessor):
 
     # Step 4: Return result.
     out = self._response
-    logger.debug(f"Responding:\n{out}")
     logger.info("Finished query processing for temporal filter evaluation.")
     return out
 
@@ -1882,6 +1886,48 @@ class FilterProcessor(QueryProcessor):
         if self._contains_extract_time(item):
           return True
     return False
+
+  def _find_and_resolve_concepts(self, recipe):
+    """Searches recursively for and resolve 'concept' references in a recipe.
+
+    Parameters
+    ----------
+      recipe : :obj:`dict` or :obj:`list`
+        The recipe (or pieces of it) which is to be checked for references.
+
+    Returns
+    -------
+      :obj:`list`
+        List of concept defitions that are referenced in the recipe.
+    """
+    results = []
+    if isinstance(recipe, dict):
+      # Check if this dict contains a concept reference
+      if (
+        recipe.get('type') == 'concept' and
+        isinstance(recipe.get('reference'), tuple) and
+        recipe['reference'][0] == 'entity'
+      ):
+        # Resolve reference
+        ref = recipe['reference']
+        property = recipe.get('property')
+        ruleset = self._mapping.lookup(*ref)
+        if property is None:
+          results.append(ruleset)
+        else:
+          try:
+            results.append(ruleset[property])
+          except KeyError:
+            raise KeyError(f"Property '{property}' is not defined for concept '{ref}'")
+      else:
+        # Recur into the dictionary to search for nested occurrences
+        for key, value in recipe.items():
+          results.extend(self._find_and_resolve_concepts(value))
+    elif isinstance(recipe, list):
+      # Recur into lists to search for nested dictionaries
+      for item in recipe:
+        results.extend(self._find_and_resolve_concepts(item))
+    return results
 
 class Cache:
   """Cache of retrieved data layers.
