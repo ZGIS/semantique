@@ -1627,7 +1627,7 @@ class MetaArray(Array):
     # the active status of the array.
     elif y is not None and hasattr(y, "sqm"):
       # Currently only some operators are operating in two ways.
-      # Two-way operation mode -> Filtering (= passing of NaNs) regardless if y is active.
+      # Two-way => Filtering (= passing of NaNs) regardless if y is active.
       twoway_ops = [
         "add_",
         "subtract_",
@@ -2371,7 +2371,9 @@ class MetaArray(Array):
   def _merge_arrays_vaults(self, arrays):
     """Merge vaults of arrays by taking the union of their elements."""
     if any([x.sqm.active and x.sqm.vault is not None for x in arrays]):
-      vaults = [x.sqm.vault for x in arrays if (x.sqm.active and x.sqm.vault is not None)]
+      vaults = [
+        x.sqm.vault for x in arrays if (x.sqm.active and x.sqm.vault is not None)
+      ]
       vault = np.unique(np.concatenate(vaults))
       out = xr.DataArray(vault, dims=TIME, name=TIME)
     else:
@@ -3280,7 +3282,9 @@ class MetaCollection(Collection):
   def _merge_arrays_vaults(self, arrays):
     """Merge vaults of arrays by taking the union of their elements."""
     if any([x.sqm.active and x.sqm.vault is not None for x in arrays]):
-      vaults = [x.sqm.vault for x in arrays if (x.sqm.active and x.sqm.vault is not None)]
+      vaults = [
+        x.sqm.vault for x in arrays if (x.sqm.active and x.sqm.vault is not None)
+      ]
       vault = np.unique(np.concatenate(vaults))
       out = xr.DataArray(vault, dims=TIME, name=TIME)
     else:

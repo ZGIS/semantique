@@ -448,7 +448,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     Raises
     ------
@@ -486,7 +487,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     out = self._get_eval_obj()
@@ -522,7 +524,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     obj = self.call_handler(block["with"])
@@ -542,7 +545,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     out = self.call_handler(block, key = "name")
@@ -561,7 +565,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -595,7 +600,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     return self.call_verb("extract", block["params"])
@@ -611,7 +617,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -634,7 +641,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -694,7 +702,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -717,7 +726,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     return self.call_verb("shift", block["params"])
@@ -733,7 +743,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -756,7 +767,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     return self.call_verb("trim", block["params"])
@@ -772,7 +784,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get and update function parameters.
@@ -792,7 +805,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -813,7 +827,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     return self.call_verb("name", block["params"])
@@ -829,7 +844,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get function parameters.
@@ -1081,7 +1097,8 @@ class QueryProcessor():
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or
+      :obj:`Collection <semantique.processor.arrays.Collection>`
 
     """
     # Get the object to apply the verb to.
@@ -1270,7 +1287,8 @@ class FakeProcessor(QueryProcessor):
 
     Returns
     -------
-      :obj:`xarray.DataArray` or :obj:`Collection <semantique.processor.arrays.Collection>`
+      :obj:`xarray.DataArray` or 
+      :obj:`Collection <semantique.processor.arrays.Collection>`
     """
     return self._get_eval_obj()
 
@@ -1555,7 +1573,10 @@ class FilterProcessor(QueryProcessor):
                   if np.issubdtype(arr.dtype, np.datetime64):
                     v[i] = xr.ones_like(arr, dtype="int32")
               if type(v.sqm).__name__ == 'MetaCollection':
-                self._response[lyr][k] = v.sqm.merge(reducers.any_, track_types=False)
+                self._response[lyr][k] = v.sqm.merge(
+                  reducers.any_, 
+                  track_types=False
+                )
           # Retrieve valid temporal indices per layer and result.
           # Valid indices are those that are not null.
           response = copy.deepcopy(self._response)
@@ -1578,7 +1599,11 @@ class FilterProcessor(QueryProcessor):
               # Combine results from array and vault.
               if len(out):
                 if len(out) > 1:
-                  out = xr.DataArray(np.unique(np.concatenate(out)), dims="time", name="time")
+                  out = xr.DataArray(
+                    np.unique(np.concatenate(out)),
+                    dims="time",
+                    name="time"
+                  )
                 else:
                   out = out[0]
                 response[lyr][res] = out
