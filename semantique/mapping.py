@@ -1,8 +1,8 @@
 from abc import abstractmethod
 
 from semantique import exceptions
-from semantique.processor.core import QueryProcessor, FakeProcessor
-from semantique.processor.arrays import Collection
+from semantique.processor.core import QueryProcessor, FakeProcessor, FilterProcessor
+from semantique.processor.arrays import Collection, MetaCollection
 from semantique.processor import reducers
 from semantique.visualiser.visualise import show
 
@@ -154,10 +154,16 @@ class Semantique(Mapping):
       if len(properties) == 1:
         out = properties[0]
       else:
-        out = Collection(properties).merge(
-          reducers.all_,
-          track_types=processor.track_types
-        )
+        if type(processor) == FilterProcessor:
+          out = MetaCollection(properties).merge(
+            reducers.all_,
+            track_types=processor.track_types
+          )
+        else:
+          out = Collection(properties).merge(
+            reducers.all_,
+            track_types=processor.track_types
+          )
     else:
       try:
         property = ruleset[property]
