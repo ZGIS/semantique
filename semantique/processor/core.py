@@ -1618,8 +1618,12 @@ class FilterProcessor(QueryProcessor):
     # Step 3: Update datacube dataset according to valid timestamps.
     if meta_retrieved:
       # Copy datacube to update.
-      _datacube = copy.deepcopy(self.datacube)
       if type(self.datacube) == datacube.Opendatacube:
+        # Copy datacube.
+        dc_con = self.datacube.connection
+        self.datacube.connection = None
+        _datacube = copy.deepcopy(self.datacube)
+        _datacube.connection = dc_con
         # Extract valid dataset ids corresponding to timestamps.
         id_dict = {}
         for k,v in self._response.items():
@@ -1631,6 +1635,8 @@ class FilterProcessor(QueryProcessor):
         _datacube.data_dict = id_dict
         self.datacube = _datacube
       elif type(self.datacube) == datacube.STACCube:
+        # Copy datacube.
+        _datacube = copy.deepcopy(self.datacube)
         _datacube.src = pystac.ItemCollection(self.datacube.src)
         # Extract valid collection_item_Ids corresponding to timestamps.
         id_list = []
