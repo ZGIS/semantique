@@ -1526,11 +1526,15 @@ class FilterProcessor(QueryProcessor):
             # Note: Contrary to ODC, .retrieve_metadata() can be called immediately
             # since the metadata is already stored in the STACCube. Hence, no performance
             # advantage by resolving products (=items instead of assets) first.
+            # What we need instead though is an LuT to map layer names back to
+            # the respective references.
             meta_dfs = []
+            lyr_ref_lut = {}
             for lyr in list(set(self.fap.cache.seq)):
               df = self.datacube.retrieve_metadata(*lyr, extent=self._extent)
               df.insert(0, "lyr", "_".join(lyr))
               meta_dfs.append(df)
+              lyr_ref_lut["_".join(lyr)] = lyr
               logger.debug(f"Retrieved meta information for layer {lyr}:\n {df}")
               logger.debug(f"Unique timestamps: {len(df.drop_duplicates(['time']))}")
             meta_df = pd.concat(meta_dfs).reset_index(drop=True)
@@ -1574,7 +1578,7 @@ class FilterProcessor(QueryProcessor):
                     v[i] = xr.ones_like(arr, dtype="int32")
               if type(v.sqm).__name__ == 'MetaCollection':
                 self._response[lyr][k] = v.sqm.merge(
-                  reducers.any_, 
+                  reducers.any_,
                   track_types=False
                 )
           # Retrieve valid temporal indices per layer and result.
@@ -1653,7 +1657,7 @@ class FilterProcessor(QueryProcessor):
         # Extract valid dataset ids corresponding to timestamps.
         id_dict = {}
         for k,v in self._response.items():
-          ids = meta_df[meta_df.lyr == k][meta_df.time.isin(pd.Series(v))].id
+          ids = meta_df[(meta_df.lyr == k) & (meta_df.time.isin(pd.Series(v)))].id
           id_dict[k] = list(ids)
           logger.debug(f"Temporally filtered results for layer {k}")
           logger.debug(f"- unique timestamps: {len(np.unique(v))}")
@@ -1665,19 +1669,26 @@ class FilterProcessor(QueryProcessor):
         _datacube = copy.deepcopy(self.datacube)
         _datacube.src = pystac.ItemCollection(self.datacube.src)
         # Extract valid collection_item_Ids corresponding to timestamps.
-        id_list = []
+        id_df = pd.DataFrame()
         for k,v in self._response.items():
-          ids = meta_df[meta_df.lyr == k][meta_df.time.isin(pd.Series(v))].id
-          id_list.extend(list(ids))
+          lyr_name = self.datacube.lookup(*lyr_ref_lut[k])["name"]
+          ids = meta_df[(meta_df.lyr == k) & (meta_df.time.isin(pd.Series(v)))].id
+          id_df = pd.concat([id_df, pd.DataFrame({"prod": ids, "lyr" : lyr_name})])
           logger.debug(f"Temporally filtered results for layer {k}")
           logger.debug(f"- unique timestamps: {len(np.unique(v))}")
           logger.debug(f"- unique items: {len(ids)}")
-        id_list = list(set(id_list))
-        # Subset item as input to datacube correspondigly.
-        if len(id_list):
+        id_df = id_df.groupby("prod").lyr.unique().reset_index()
+        # Subset items & assets as input to datacube correspondingly.
+        if len(id_df):
           filtered_items = []
           for item in _datacube.src:
-            if (item.get_collection().id, item.id) in id_list:
+            item_id = (item.get_collection().id, item.id)
+            df_subset = id_df[id_df["prod"].isin([item_id])]
+            if len(df_subset):
+              asset_dict = {}
+              for asset in df_subset["lyr"]:
+                asset_dict[asset[0]] = item.assets[asset[0]]
+              item.assets = asset_dict
               filtered_items.append(item)
           _datacube.src = filtered_items
         else:
