@@ -1686,8 +1686,8 @@ class FilterProcessor(QueryProcessor):
             df_subset = id_df[id_df["prod"].isin([item_id])]
             if len(df_subset):
               asset_dict = {}
-              for asset in df_subset["lyr"]:
-                asset_dict[asset[0]] = item.assets[asset[0]]
+              for asset in df_subset["lyr"].iloc[0]:
+                asset_dict[asset] = item.assets[asset]
               item.assets = asset_dict
               filtered_items.append(item)
           _datacube.src = filtered_items
