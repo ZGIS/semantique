@@ -20,6 +20,6 @@ dependencies:
   - pip:
     - hvplot
     - planetary-computer
-    - pystack-client
+    - pystac-client
     - stackstac
     - .
