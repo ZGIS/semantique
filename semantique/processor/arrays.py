@@ -2882,7 +2882,7 @@ class MetaCollection(Collection):
         for x in list_obj:
           if not x.sqm.active:
             cond = x.time.isin(tidxs).broadcast_like(x)
-            x.values = xr.where(cond, xr.ones_like(x), xr.full_like(x, np.NaN))
+            x.values = xr.where(cond, xr.ones_like(x), xr.full_like(x, np.nan))
       # Create response object.
       super(MetaCollection, self).__init__(list_obj)
       self._active = True
