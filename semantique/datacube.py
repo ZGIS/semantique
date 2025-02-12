@@ -937,7 +937,7 @@ class STACCube(Datacube):
 
         # return extent array as NaN in case of no data
         if not len(item_coll):
-            empty_arr = xr.full_like(extent, np.NaN)
+            empty_arr = xr.full_like(extent, np.nan)
             return empty_arr
 
         # reauth
