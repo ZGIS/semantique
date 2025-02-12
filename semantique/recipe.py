@@ -1,4 +1,4 @@
-from semantique.processor.core import QueryProcessor, FakeProcessor
+from semantique.processor.core import QueryProcessor, FakeProcessor, FilterProcessor
 from semantique.visualiser.visualise import show
 
 class QueryRecipe(dict):
@@ -28,8 +28,17 @@ class QueryRecipe(dict):
     obj = {} if results is None else results
     super(QueryRecipe, self).__init__(obj)
 
-  def execute(self, datacube, mapping, space, time, run_preview = False,
-              cache_data = True, **config):
+  def execute(
+      self,
+      datacube,
+      mapping,
+      space,
+      time,
+      filter_check = True,
+      run_preview = False,
+      cache_data = True,
+      **config
+    ):
     """Execute a query recipe.
 
     This function initializes a :obj:`processor.core.QueryProcessor` instance
@@ -46,6 +55,11 @@ class QueryRecipe(dict):
         The spatial extent in which the query should be processed.
       time : TemporalExtent
         The temporal extent in which the query should be processed.
+      filter_check : :obj:`bool`
+        Should the query processor evaluate possible temporal filter operations
+        upfront? This can reduce the amount of data to be processed in the
+        subsequent evaluation process. If the recipe doesn't contain any
+        temporal filter operations, this flag has no effect.
       run_preview : :obj:`bool`
         Should a preview run with reduced spatial resolution be performed?
         A preview run enables to test if the recipe execution succeeds
@@ -83,12 +97,25 @@ class QueryRecipe(dict):
     >>> recipe.execute(dc, mapping, space, time, **config)
 
     """
-    if cache_data:
-      fp = FakeProcessor.parse(self, datacube, mapping, space, time, **config)
-      _ = fp.optimize().execute()
-      cache = fp.cache
+    if filter_check:
+      # Use FilterProcessor to retrieve required minimum set of data IDs
+      fip = FilterProcessor.parse(self, datacube, mapping, space, time, **config)
+      _ = fip.optimize().execute()
+      # Update datacube according to FilterProcessor
+      datacube = fip.datacube
+      # Retrieve cache from fake processor instance as part of the filter processor
+      if cache_data:
+        cache = fip.fap.cache
+      else:
+        cache = None
     else:
-      cache = None
+      # Retrieve cache from standalone fake processor instance
+      if cache_data:
+        fap = FakeProcessor.parse(self, datacube, mapping, space, time, **config)
+        _ = fap.optimize().execute()
+        cache = fap.cache
+      else:
+        cache = None
 
     qp = QueryProcessor.parse(
       self,
