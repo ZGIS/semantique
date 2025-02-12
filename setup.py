@@ -8,7 +8,7 @@ with open("README.md", encoding = "utf-8") as file:
 dependencies = [
   'datacube>=1.8',
   'geocube>=0.4.1',
-  'geopandas>=0.11',
+  'geopandas>=0.11,<1',
   'numpy>=1.21',
   'pandas>=2.0',
   'planetary-computer',
