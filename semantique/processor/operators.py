@@ -7,6 +7,23 @@ from semantique.processor.types import TypePromoter
 from semantique.processor.values import Interval
 from semantique.dimensions import SPACE
 
+def get_accessor(data, meta = False):
+    """Get the appropriate accessor for the data object.
+
+    Parameters
+    ----------
+      data : :obj:`xarray.DataArray`
+        The data object to get the accessor for.
+      meta : :obj:`bool`
+        Should the meta accessor be used? If False, the standard accessor is
+        used. The meta accessor is used to access MetaArray and MetaCollection
+        instead of Array and Collection objects.
+    """
+    if meta:
+        return data.sqm
+    else:
+        return data.sq
+
 #
 # UNIVARIATE OPERATORS
 #
@@ -839,7 +856,7 @@ def to_radians_(x, track_types = True, **kwargs):
 # ALGEBRAIC OPERATORS
 #
 
-def add_(x, y, track_types = True, **kwargs):
+def add_(x, y, track_types = True, meta = False, **kwargs):
   """Add y to x.
 
   Parameters
@@ -857,6 +874,8 @@ def add_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the MetaArray accessor be used?
     **kwargs:
       Ignored.
 
@@ -887,13 +906,13 @@ def add_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "add")
     promoter.check()
   f = lambda x, y: np.add(x, y)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def divide_(x, y, track_types = True, **kwargs):
+def divide_(x, y, track_types = True, meta = False, **kwargs):
   """Divide x by y.
 
   Parameters
@@ -911,6 +930,8 @@ def divide_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -941,13 +962,13 @@ def divide_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "divide")
     promoter.check()
   f = lambda x, y: np.divide(x, np.where(np.equal(y, 0), np.nan, y))
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def multiply_(x, y, track_types = True, **kwargs):
+def multiply_(x, y, track_types = True, meta = False, **kwargs):
   """Multiply x by y.
 
   Parameters
@@ -965,6 +986,8 @@ def multiply_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -995,13 +1018,13 @@ def multiply_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "multiply")
     promoter.check()
   f = lambda x, y: np.multiply(x, y)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def power_(x, y, track_types = True, **kwargs):
+def power_(x, y, track_types = True, meta = False, **kwargs):
   """Raise x to the yth power.
 
   Parameters
@@ -1019,6 +1042,8 @@ def power_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1049,13 +1074,13 @@ def power_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "power")
     promoter.check()
   f = lambda x, y: np.power(x, y)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def subtract_(x, y, track_types = True, **kwargs):
+def subtract_(x, y, track_types = True, meta = False, **kwargs):
   """Subtract y from x.
 
   Parameters
@@ -1073,6 +1098,8 @@ def subtract_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1103,13 +1130,13 @@ def subtract_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "subtract")
     promoter.check()
   f = lambda x, y: np.subtract(x, y)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def normalized_difference_(x, y, track_types = True, **kwargs):
+def normalized_difference_(x, y, track_types = True, meta = False, **kwargs):
   """Compute the normalized difference between x and y.
 
   The normalized difference is used to calculate common indices in remote
@@ -1131,6 +1158,8 @@ def normalized_difference_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1161,7 +1190,7 @@ def normalized_difference_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "normalized_difference")
     promoter.check()
   f = lambda x, y: np.divide(np.subtract(x, y), np.add(x, y))
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
@@ -1171,7 +1200,7 @@ def normalized_difference_(x, y, track_types = True, **kwargs):
 # BOOLEAN OPERATORS
 #
 
-def and_(x, y, track_types = True, **kwargs):
+def and_(x, y, track_types = True, meta = False, **kwargs):
   """Test if both x and y are true.
 
   Parameters
@@ -1189,6 +1218,8 @@ def and_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1221,13 +1252,13 @@ def and_(x, y, track_types = True, **kwargs):
   def f(x, y):
     y = utils.null_as_zero(y)
     return np.where(pd.notnull(x), np.logical_and(x, y), np.nan)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def or_(x, y, track_types = True, **kwargs):
+def or_(x, y, track_types = True, meta = False, **kwargs):
   """Test if at least one of x and y are true.
 
   Parameters
@@ -1245,6 +1276,8 @@ def or_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1284,13 +1317,13 @@ def or_(x, y, track_types = True, **kwargs):
   def f(x, y):
     y = utils.null_as_zero(y)
     return np.where(pd.notnull(x), np.logical_or(x, y), np.nan)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def exclusive_or_(x, y, track_types = True, **kwargs):
+def exclusive_or_(x, y, track_types = True, meta = False, **kwargs):
   """Test if either x or y is true but not both.
 
   Parameters
@@ -1308,6 +1341,8 @@ def exclusive_or_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1347,7 +1382,7 @@ def exclusive_or_(x, y, track_types = True, **kwargs):
   def f(x, y):
     y = utils.null_as_zero(y)
     return np.where(pd.notnull(x), np.logical_xor(x, y), np.nan)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
@@ -1357,7 +1392,7 @@ def exclusive_or_(x, y, track_types = True, **kwargs):
 # EQUALITY OPERATORS
 #
 
-def equal_(x, y, track_types = True, **kwargs):
+def equal_(x, y, track_types = True, meta = False, **kwargs):
   """Test if x is equal to y.
 
   Parameters
@@ -1375,6 +1410,8 @@ def equal_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1405,7 +1442,7 @@ def equal_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "equal")
     promoter.check()
   f = lambda x, y: np.where(pd.notnull(x), np.equal(x, y), np.nan)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
@@ -1466,7 +1503,7 @@ def in_(x, y, track_types = True, **kwargs):
     out = promoter.promote(out)
   return out
 
-def not_equal_(x, y, track_types = True, **kwargs):
+def not_equal_(x, y, track_types = True, meta = False, **kwargs):
   """Test if x is not equal to y.
 
   Parameters
@@ -1484,6 +1521,8 @@ def not_equal_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1514,7 +1553,7 @@ def not_equal_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "not_equal")
     promoter.check()
   f = lambda x, y: np.where(pd.notnull(x), np.not_equal(x, y), np.nan)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
@@ -1579,7 +1618,7 @@ def not_in_(x, y, track_types = True, **kwargs):
 # REGULAR RELATIONAL OPERATORS
 #
 
-def greater_(x, y, track_types = True, **kwargs):
+def greater_(x, y, track_types = True, meta = False, **kwargs):
   """Test if x is greater than y.
 
   Parameters
@@ -1597,6 +1636,8 @@ def greater_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1627,13 +1668,13 @@ def greater_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "greater")
     promoter.check()
   f = lambda x, y: np.where(pd.notnull(x), np.greater(x, y), np.nan)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def greater_equal_(x, y, track_types = True, **kwargs):
+def greater_equal_(x, y, track_types = True, meta = False, **kwargs):
   """Test if x is greater than or equal to y.
 
   Parameters
@@ -1651,6 +1692,8 @@ def greater_equal_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1681,13 +1724,13 @@ def greater_equal_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "greater_equal")
     promoter.check()
   f = lambda x, y: np.where(pd.notnull(x), np.greater_equal(x, y), np.nan)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def less_(x, y, track_types = True, **kwargs):
+def less_(x, y, track_types = True, meta = False, **kwargs):
   """Test if x is less than y.
 
   Parameters
@@ -1705,6 +1748,8 @@ def less_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1735,13 +1780,13 @@ def less_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "less")
     promoter.check()
   f = lambda x, y: np.where(pd.notnull(x), np.less(x, y), np.nan)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def less_equal_(x, y, track_types = True, **kwargs):
+def less_equal_(x, y, track_types = True, meta = False, **kwargs):
   """Test if x is less than or equal to y.
 
   Parameters
@@ -1759,6 +1804,8 @@ def less_equal_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1789,7 +1836,7 @@ def less_equal_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "less_equal")
     promoter.check()
   f = lambda x, y: np.where(pd.notnull(x), np.less_equal(x, y), np.nan)
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
@@ -1799,7 +1846,7 @@ def less_equal_(x, y, track_types = True, **kwargs):
 # SPATIAL RELATIONAL OPERATORS
 #
 
-def intersects_(x, y, track_types = True, **kwargs):
+def intersects_(x, y, track_types = True, meta = False, **kwargs):
   """Test if x spatially intersects with y.
 
   This is a specific spatial relational operator meant to be evaluated with
@@ -1822,6 +1869,8 @@ def intersects_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -1858,10 +1907,10 @@ def intersects_(x, y, track_types = True, **kwargs):
   try:
     y = y.unary_union
   except AttributeError:
-    y = y.sq.trim().sq.grid_points.envelope.unary_union
-  values = x.sq.grid_points.intersects(y).astype(int)
-  coords = x.sq.stack_spatial_dims()[SPACE].coords
-  out = xr.DataArray(values, coords = coords).sq.unstack_spatial_dims()
+    y = get_accessor(get_accessor(y, meta).trim(), meta).grid_points.envelope.unary_union
+  values = get_accessor(x, meta).grid_points.intersects(y).astype(int)
+  coords = get_accessor(x, meta).stack_spatial_dims()[SPACE].coords
+  out = get_accessor(xr.DataArray(values, coords = coords), meta).unstack_spatial_dims()
   if track_types:
     out = promoter.promote(out)
   return out
@@ -2065,7 +2114,7 @@ def during_(x, y, track_types = True, **kwargs):
 
 # Note: These are used by the assign verb.
 
-def assign_(x, y, track_types = True, **kwargs):
+def assign_(x, y, track_types = True, meta = False, **kwargs):
   """Replace x by y.
 
   Parameters
@@ -2083,6 +2132,8 @@ def assign_(x, y, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -2113,13 +2164,13 @@ def assign_(x, y, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "assign")
     promoter.check()
   f = lambda x, y: np.where(pd.notnull(x), y, utils.get_null(y))
-  y = xr.DataArray(y).sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
   return out
 
-def assign_at_(x, y, z, track_types = True, **kwargs):
+def assign_at_(x, y, z, track_types = True, meta = False, **kwargs):
   """Replace x by y where z is true.
 
   Parameters
@@ -2141,6 +2192,8 @@ def assign_at_(x, y, z, track_types = True, **kwargs):
     track_types : :obj:`bool`
       Should the operator promote the value type of the output object, based
       on the value type of the input objects?
+    meta : :obj:`bool`
+      Should the meta accessor be used?
     **kwargs:
       Ignored.
 
@@ -2171,8 +2224,8 @@ def assign_at_(x, y, z, track_types = True, **kwargs):
     promoter = TypePromoter(x, y, function = "assign_at")
     promoter.check()
   f = lambda x, y, z: np.where(np.logical_and(pd.notnull(z), z), y, x)
-  y = xr.DataArray(y).sq.align_with(x)
-  z = z.sq.align_with(x)
+  y = get_accessor(xr.DataArray(y), meta).align_with(x)
+  z = get_accessor(z, meta).align_with(x)
   out = xr.apply_ufunc(f, x, y, z, keep_attrs = True)
   if track_types:
     out = promoter.promote(out)
