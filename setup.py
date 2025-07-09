@@ -6,7 +6,6 @@ with open("README.md", encoding = "utf-8") as file:
 
 # List dependencies.
 dependencies = [
-  'datacube>=1.8',
   'geocube>=0.4.1',
   'geopandas>=0.11,<1',
   'numpy>=1.21',
@@ -24,6 +23,10 @@ dependencies = [
   'xarray>=0.20'
 ]
 
+odcdb_dependencies = [
+  'datacube>=1.8'
+]
+
 # Setup.
 setup(
   name = "semantique",
@@ -39,5 +42,6 @@ setup(
       "semantique.visualiser": ["*.html", "*.json"],
   },
   python_requires = ">=3.9",
-  install_requires = dependencies
+  install_requires = dependencies,
+  extras_require = {"odcdb": odcdb_dependencies},
 )
