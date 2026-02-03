@@ -2,7 +2,6 @@ import numpy as np
 import xarray as xr
 
 import copy
-import datacube
 import datetime
 import os
 import planetary_computer as pc
@@ -16,12 +15,21 @@ import stackstac
 import warnings
 
 from abc import abstractmethod
-from datacube.utils import masking
+
 from pystac_client.stac_api_io import StacApiIO
 from rasterio.errors import RasterioIOError
 from shapely.geometry import box, shape
 from shapely.ops import transform
 from urllib3 import Retry
+
+ODC_ENABLED = False
+try:
+  import datacube
+  from datacube.utils import masking
+  ODC_ENABLED = True
+except:
+  # Ignore error
+  pass
 
 from semantique import exceptions
 from semantique.dimensions import TIME, SPACE, X, Y
@@ -159,6 +167,10 @@ class Opendatacube(Datacube):
   """
 
   def __init__(self, layout = None, connection = None, tz = "UTC", **config):
+    if not ODC_ENABLED:
+       raise ImportError("OpenDataCube dependencies have not been installed. To use this class," \
+       "reinstall the package with `semantique[odcdb]`.")
+
     super(Opendatacube, self).__init__(layout)
     self.connection = connection
     self.tz = tz
@@ -386,6 +398,7 @@ class Opendatacube(Datacube):
     # This is needed since data are initially loaded for the bbox of the extent.
     data = data.where(data["spatial_feats"].notnull())
     return data
+         
 
 class GeotiffArchive(Datacube):
   """EO data cube configuration for zipped GeoTIFF files.
