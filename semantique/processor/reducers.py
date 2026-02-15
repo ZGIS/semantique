@@ -769,12 +769,29 @@ def percentage_(x, track_types = True, **kwargs):
   if track_types:
     promoter = TypePromoter(x, function = "percentage")
     promoter.check()
-  def f(x, axis = None):
-    part = np.count_nonzero(utils.null_as_zero(x), axis)
-    part = np.where(utils.allnull(x, axis), np.nan, part)
-    whole = np.sum(pd.notnull(x), axis)
-    return np.multiply(np.divide(part, whole), 100)
+  def f(x, axis=None):
+    # TODO: Tidy this up.
+    # All operations stay as dask/numpy arrays - no compute() calls
+    part = np.count_nonzero(utils.null_as_zero(x), axis=axis)
+    
+    # Check if all values are null along axis
+    all_null_mask = utils.allnull(x, axis=axis)
+    part = np.where(all_null_mask, np.nan, part)
+    
+    # Replace pd.notnull with numpy equivalent
+    whole = np.sum(~np.isnan(x), axis=axis)
+    
+    # Avoid division by zero - set to nan where whole == 0
+    with np.errstate(divide='ignore', invalid='ignore'):
+        result = np.divide(part, whole)
+        result = np.multiply(result, 100)
+    
+    return result
+  # print(f"percentage_ args: {kwargs}")
   out = x.reduce(f, **kwargs)
+  # print(f"percentage_ out: {out}")
+  # print("percentage_ done.")
+
   if track_types:
     out = promoter.promote(out)
   return out

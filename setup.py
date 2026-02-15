@@ -9,6 +9,7 @@ dependencies = [
   'geocube>=0.4.1',
   'geopandas>=0.11,<1',
   'numpy>=1.21',
+  'odc-stac>=0.3.9',
   'pandas>=2.0',
   'planetary-computer',
   'pyproj>=3.0',

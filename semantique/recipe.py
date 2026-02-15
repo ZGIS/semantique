@@ -1,5 +1,11 @@
+import logging
+
+from semantique.datacube import DaskCube
+from semantique.processor.utils import ComputeTracer, set_global_dask_lazy
 from semantique.processor.core import QueryProcessor, FakeProcessor
 from semantique.visualiser.visualise import show
+
+logger = logging.getLogger(__name__)
 
 class QueryRecipe(dict):
   """Dict-like container to store instructions of a query recipe.
@@ -100,7 +106,20 @@ class QueryRecipe(dict):
       cache=cache,
       **config
     )
-    return qp.optimize().execute()
+    
+    dask_lazy = isinstance(datacube, DaskCube)
+    if dask_lazy:
+      set_global_dask_lazy(True)
+    else:
+      set_global_dask_lazy(False)
+
+    if dask_lazy and logger.isEnabledFor(logging.DEBUG):
+      with ComputeTracer():
+        result = qp.optimize().execute()
+    else:
+      result = qp.optimize().execute()
+
+    return result
 
   def visualise(self):
     """Visualise the recipe in a web browser.

@@ -768,7 +768,7 @@ class Array():
 
     """
     # Get and check array.
-    obj = xr.apply_ufunc(utils.null_as_zero, self._obj)
+    obj = utils.apply_ufunc(utils.null_as_zero, self._obj)
     if track_types:
       vtype = obj.sq.value_type
       if vtype is not None and vtype != "binary":
@@ -816,7 +816,7 @@ class Array():
         f"and/or '{SPACE}', not: {list(dims)}"
       )
     # Delineate.
-    out = xr.apply_ufunc(lambda x, y: ndimage.label(x, y)[0], obj, nb)
+    out = utils.apply_ufunc(lambda x, y: ndimage.label(x, y)[0], obj, nb)
     # Post-process.
     out = out.where(pd.notnull(self._obj)) # Preserve nan.
     if track_types:

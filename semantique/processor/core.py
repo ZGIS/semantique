@@ -1086,14 +1086,15 @@ class QueryProcessor():
     verb = getattr(obj.sq, name)
     out = verb(**params)
     # Warn when output array is empty.
-    try:
-      is_empty = out.sq.is_empty
-    except AttributeError:
-      is_empty = out.is_empty
-    if is_empty:
-      warnings.warn(
-        f"Verb '{name}' returned an empty array"
-      )
+    # Removed for Dask. TODO: Put behind config flag.
+    # try:
+    #   is_empty = out.sq.is_empty
+    # except AttributeError:
+    #   is_empty = out.is_empty
+    # if is_empty:
+    #   warnings.warn(
+    #     f"Verb '{name}' returned an empty array"
+    #   )
     logger.debug(f"Applied verb {name}:\n{out}")
     return out
 
