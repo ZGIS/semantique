@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "semantique"
+version = "0.1.0"
+description = "Semantic querying of Earth Observation data"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [
+  { name = "Lucas van der Meer", email = "lucas.vandermeer@sbg.ac.at" },
+]
+urls = { Homepage = "https://github.com/ZGIS/semantique" }
+dependencies = [
+  "geocube>=0.4.1",
+  "geopandas>=0.11,<1",
+  "numpy>=1.21",
+  "pandas>=2.0",
+  "planetary-computer",
+  "pyproj>=3.0",
+  "pytz",
+  "pystac",
+  "pystac-client",
+  "rasterio",
+  "rioxarray>=0.14",
+  "scipy>=1.11",
+  "setuptools",
+  "stackstac>=0.5.0",
+  "xarray>=0.20",
+]
+
+[project.optional-dependencies]
+odcdb = ["datacube>=1.8"]
+
+[tool.setuptools.packages.find]
+include = ["semantique*"]
+
+[tool.setuptools.package-data]
+"semantique.visualiser" = ["*.html", "*.json"]
